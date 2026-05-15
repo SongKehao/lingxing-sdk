@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from ._base import BaseEndpoint
 
+
 class MultiplatformOtherEndpoints(BaseEndpoint):
     """领星多平台其他 API (3个接口)."""
 

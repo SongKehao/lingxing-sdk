@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from ._base import BaseEndpoint
 
+
 class VCEndpoints(BaseEndpoint):
     """领星VC卖家 API (10个接口)."""
 

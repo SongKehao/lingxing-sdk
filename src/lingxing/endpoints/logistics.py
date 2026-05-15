@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from ._base import BaseEndpoint
 
+
 class LogisticsEndpoints(BaseEndpoint):
     """领星物流 API (5个接口)."""
 

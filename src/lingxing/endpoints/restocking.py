@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from ._base import BaseEndpoint
 
+
 class RestockingEndpoints(BaseEndpoint):
     """领星FBA补货建议 API (13个接口)."""
 

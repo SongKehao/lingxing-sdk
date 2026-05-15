@@ -1,5 +1,5 @@
 """Auto-generated request models for {category} APIs."""
-from typing import Any, List, Optional
+from typing import List, Optional
 
 from ..common import LingXingModel
 

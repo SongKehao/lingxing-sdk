@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from ._base import BaseEndpoint
 
+
 class AmazonSourceEndpoints(BaseEndpoint):
     """领星亚马逊原始数据 API (20个接口)."""
 

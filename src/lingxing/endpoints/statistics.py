@@ -1,8 +1,9 @@
 """统计报表 API endpoints."""
 from __future__ import annotations
 
-from ._base import BaseEndpoint
 from ..models.statistics import MonthRefundItem
+from ._base import BaseEndpoint
+
 
 class StatisticsEndpoints(BaseEndpoint):
     """领星统计报表 API (30个接口)."""

@@ -132,7 +132,7 @@ class MultiPlatformAdvertisementTiktokGmvAdvertiserReportList5Request(LingXingMo
     orderField: Optional[str] = None  # 排序字段名称，如：cost, orders, roi
     orderType: Optional[str] = None  # 排序方式，枚举值：ASC-升序, DESC-降序
     ownerBcIds: Optional[list] = None  # 广告主账号ID列表，Long数组，业务负责人的BC ID列表
-    status: Optional[list] = None  # 广告账号状态编码列表，String数组，枚举值：STATUS_ENABLE-已启用, SYSTEM_STATUS_IN_REVIEW-审核中, SYSTEM_STATUS_NOT_PASS-未通过, 
+    status: Optional[list] = None  # 广告账号状态编码列表，String数组，枚举值：STATUS_ENABLE-已启用, SYSTEM_STATUS_IN_REVIEW-审核中, SYSTEM_STATUS_NOT_PASS-未通过,
     storeIds: Optional[list] = None  # 店铺ID列表，Long数组，用于筛选特定店铺的数据
     summaryCurrency: Optional[str] = None  # 汇总币种编码，默认USD，用于统一汇总不同币种的数据
 
@@ -273,7 +273,7 @@ class MultiPlatformAdvertisementWalmartReportadgroupsblist15Request(LingXingMode
     POST /basicOpen/multiplatform/ads/reportAdGroupSbList
     """
     advertiserIds: Optional[list] = None  # 广告账号ID列表，BigInteger数组，必填，必须至少选择一个店铺
-    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告), 
+    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告),
     endDate: Optional[str] = None  # 结束日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     startDate: Optional[str] = None  # 开始日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     campaignIds: Optional[list] = None  # 广告活动ID列表，Long数组，按广告活动ID筛选广告组
@@ -294,7 +294,7 @@ class MultiPlatformAdvertisementWalmartReportaditemsblist16Request(LingXingModel
     POST /basicOpen/multiplatform/ads/reportAdItemSbList
     """
     advertiserIds: Optional[list] = None  # 广告账号ID列表，BigInteger数组，必填，必须至少选择一个店铺
-    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告), 
+    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告),
     endDate: Optional[str] = None  # 结束日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     startDate: Optional[str] = None  # 开始日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     adGroupIds: Optional[list] = None  # 广告组ID列表，Long数组，按广告组ID筛选
@@ -316,7 +316,7 @@ class MultiPlatformAdvertisementWalmartReportaditemsplist17Request(LingXingModel
     POST /basicOpen/multiplatform/ads/reportAdItemSpList
     """
     advertiserIds: Optional[list] = None  # 广告账号ID列表，BigInteger数组，必填，必须至少选择一个店铺
-    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告), 
+    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告),
     endDate: Optional[str] = None  # 结束日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     startDate: Optional[str] = None  # 开始日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     adGroupIds: Optional[list] = None  # 广告组ID列表，Long数组，按广告组ID筛选
@@ -338,7 +338,7 @@ class MultiPlatformAdvertisementWalmartReportaditemsvlist18Request(LingXingModel
     POST /basicOpen/multiplatform/ads/reportAdItemSvList
     """
     advertiserIds: Optional[list] = None  # 广告账号ID列表，BigInteger数组，必填，必须至少选择一个店铺
-    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告), 
+    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告),
     endDate: Optional[str] = None  # 结束日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     startDate: Optional[str] = None  # 开始日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     adGroupIds: Optional[list] = None  # 广告组ID列表，Long数组，按广告组ID筛选
@@ -360,7 +360,7 @@ class MultiPlatformAdvertisementWalmartReportcampaignsblist19Request(LingXingMod
     POST /basicOpen/multiplatform/ads/reportCampaignSbList
     """
     advertiserIds: Optional[list] = None  # 广告账号ID列表，BigInteger数组，必填，必须至少选择一个店铺
-    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告), 
+    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告),
     endDate: Optional[str] = None  # 结束日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     startDate: Optional[str] = None  # 开始日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     campaignIds: Optional[list] = None  # 广告活动ID列表，Long数组，按广告活动ID筛选
@@ -381,7 +381,7 @@ class MultiPlatformAdvertisementWalmartReportcampaignsvlist20Request(LingXingMod
     POST /basicOpen/multiplatform/ads/reportCampaignSvList
     """
     advertiserIds: Optional[list] = None  # 广告账号ID列表，BigInteger数组，必填，必须至少选择一个店铺
-    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告), 
+    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告),
     day: Optional[int] = None  # 归因天数，必填，数据归因天数，枚举值：3, 14, 30
     endDate: Optional[str] = None  # 结束日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     operationSourceType: Optional[str] = None  # 操作来源，必填，openapi调用必传gateway，前端传web
@@ -402,7 +402,7 @@ class MultiPlatformAdvertisementWalmartReportkeywordsblist21Request(LingXingMode
     POST /basicOpen/multiplatform/ads/reportKeywordSbList
     """
     advertiserIds: Optional[list] = None  # 广告账号ID列表，BigInteger数组，必填，必须至少选择一个店铺
-    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告), 
+    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告),
     endDate: Optional[str] = None  # 结束日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     startDate: Optional[str] = None  # 开始日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     adGroupIds: Optional[list] = None  # 广告组ID列表，Integer数组，按广告组ID筛选
@@ -423,7 +423,7 @@ class MultiPlatformAdvertisementWalmartReportkeywordsplist22Request(LingXingMode
     POST /basicOpen/multiplatform/ads/reportKeywordSpList
     """
     advertiserIds: Optional[list] = None  # 广告账号ID列表，BigInteger数组，必填，必须至少选择一个店铺
-    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告), 
+    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告),
     endDate: Optional[str] = None  # 结束日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     startDate: Optional[str] = None  # 开始日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     adGroupIds: Optional[list] = None  # 广告组ID列表，Integer数组，按广告组ID筛选
@@ -444,7 +444,7 @@ class MultiPlatformAdvertisementWalmartReportkeywordsvlist23Request(LingXingMode
     POST /basicOpen/multiplatform/ads/reportKeywordSvList
     """
     advertiserIds: Optional[list] = None  # 广告账号ID列表，BigInteger数组，必填，必须至少选择一个店铺
-    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告), 
+    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告),
     endDate: Optional[str] = None  # 结束日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     startDate: Optional[str] = None  # 开始日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     adGroupIds: Optional[list] = None  # 广告组ID列表，Integer数组，按广告组ID筛选
@@ -465,7 +465,7 @@ class MultiPlatformAdvertisementWalmartReportpagetypesblist24Request(LingXingMod
     POST /basicOpen/multiplatform/ads/reportPageTypeSbList
     """
     advertiserIds: Optional[list] = None  # 广告账号ID列表，BigInteger数组，必填，必须至少选择一个店铺
-    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告), 
+    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告),
     endDate: Optional[str] = None  # 结束日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     startDate: Optional[str] = None  # 开始日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     adGroupIds: Optional[list] = None  # 广告组ID列表，Long数组，按广告组ID筛选
@@ -488,7 +488,7 @@ class MultiPlatformAdvertisementWalmartReportPageTypeSvList11Request(LingXingMod
     POST /basicOpen/multiplatform/ads/queryReportPageTypeSvList
     """
     advertiserIds: Optional[list] = None  # 广告账号ID列表，BigInteger数组，必填，必须至少选择一个店铺
-    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告), 
+    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告),
     endDate: Optional[str] = None  # 结束日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     startDate: Optional[str] = None  # 开始日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     adGroupIds: Optional[list] = None  # 广告组ID列表，Long数组，按广告组ID筛选
@@ -513,7 +513,7 @@ class MultiPlatformAdvertisementWalmartReportplatformsblist25Request(LingXingMod
     POST /basicOpen/multiplatform/ads/reportPlatformSbList
     """
     advertiserIds: Optional[list] = None  # 广告账号ID列表，BigInteger数组，必填，必须至少选择一个店铺
-    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告), 
+    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告),
     endDate: Optional[str] = None  # 结束日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     startDate: Optional[str] = None  # 开始日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     adGroupIds: Optional[list] = None  # 广告组ID列表，Long数组，按广告组ID筛选
@@ -535,7 +535,7 @@ class MultiPlatformAdvertisementWalmartReportplatformsplist26Request(LingXingMod
     POST /basicOpen/multiplatform/ads/reportPlatformSpList
     """
     advertiserIds: Optional[list] = None  # 广告账号ID列表，BigInteger数组，必填，必须至少选择一个店铺
-    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告), 
+    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告),
     endDate: Optional[str] = None  # 结束日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     startDate: Optional[str] = None  # 开始日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     adGroupIds: Optional[list] = None  # 广告组ID列表，Long数组，按广告组ID筛选
@@ -557,7 +557,7 @@ class MultiPlatformAdvertisementWalmartReportplatformsvlist27Request(LingXingMod
     POST /basicOpen/multiplatform/ads/reportPlatformSvList
     """
     advertiserIds: Optional[list] = None  # 广告账号ID列表，BigInteger数组，必填，必须至少选择一个店铺
-    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告), 
+    campaignType: Optional[list] = None  # 广告活动类型列表，String数组，必填，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告),
     endDate: Optional[str] = None  # 结束日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     startDate: Optional[str] = None  # 开始日期，必填，格式：yyyy-MM-dd，且 startDate 和 endDate 间隔不能超过31天
     adGroupIds: Optional[list] = None  # 广告组ID列表，Long数组，按广告组ID筛选
@@ -945,7 +945,7 @@ class MultiPlatformV2StoreInfoV2Request(LingXingModel):
     """
     offset: Optional[int] = None  # 分页偏移量
     length: Optional[int] = None  # 分页长度，上限200
-    platform_code: Optional[list] = None  # 平台code： 10001 AMAZON 10002 Shopify 10003 eBay 10004 Wish 10005 AliExpress 10006 Shopee 10007 Lazada 
+    platform_code: Optional[list] = None  # 平台code： 10001 AMAZON 10002 Shopify 10003 eBay 10004 Wish 10005 AliExpress 10006 Shopee 10007 Lazada
     is_sync: Optional[int] = None  # 店铺同步状态： 1 启用 0 停用
     status: Optional[int] = None  # 店铺授权状态： 1 正常授权 0 授权失败
 
@@ -961,12 +961,12 @@ class MultiPlatformV2MultiPlatOrderV2Request(LingXingModel):
     start_time: Optional[int] = None  # 开始时间，时间戳格式【单位：秒】，双开区间 **当且仅当传入平台单号或平台单名称查询时可不必传，查询时间跨度不能超过31天**
     end_time: Optional[int] = None  # 结束时间，时间戳格式【单位：秒】，双开区间 **当且仅当传入平台单号或平台单名称查询时可不必传，查询时间跨度不能超过31天**
     store_id: Optional[list] = None  # 店铺id，取值等同于查询多平台店铺信息返回结果的store_id
-    platform_code: Optional[list] = None  # 平台code： 10001 AMAZON 10002 Shopify 10003 eBay 10004 Wish 10005 AliExpress 10006 Shopee 10007 Lazada 
+    platform_code: Optional[list] = None  # 平台code： 10001 AMAZON 10002 Shopify 10003 eBay 10004 Wish 10005 AliExpress 10006 Shopee 10007 Lazada
     platform_order_nos: Optional[list] = None  # 平台单号列表 ，元素不超过200个 **以下平台不可用，需要用platform_order_names查询：** **10003-ebay 10014-newegg 10020-coupang 100
     platform_order_names: Optional[list] = None  # 特定平台单号列表 ，元素不超过200个 **10003-ebay 10014-newegg 10020-coupang 10002-shopify 10012-美客多 10016-shopline，使
     order_status: Optional[int] = None  # 订单状态： 1 同步中 2 已同步 3 待付款 4 待审核 5 待发货 6 已发货 7 已取消/不发货 8 不显示 9 平台发货
     platform_shipping_status: Optional[list] = None  # 平台单发货状态 **Shopify**状态枚举值: fulfilled：已发货，并且全部发货 null：未发货 partial：部分发货 restocked：已退货
-    platform_payment_status: Optional[list] = None  # 平台单支付状态 **Shopify**状态枚举值: pending：待支付 authorized：买家信用卡支付，并且已经确认授权，但是卖家并未收款 partially_paid：已完成部分款项支付 
+    platform_payment_status: Optional[list] = None  # 平台单支付状态 **Shopify**状态枚举值: pending：待支付 authorized：买家信用卡支付，并且已经确认授权，但是卖家并未收款 partially_paid：已完成部分款项支付
     include_delete: Optional[bool] = None  # 是否包含已删除订单 true 包含 false 不包含
 
 

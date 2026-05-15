@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from ._base import BaseEndpoint
 
+
 class FinanceEndpoints(BaseEndpoint):
     """领星财务 API (19个接口)."""
 

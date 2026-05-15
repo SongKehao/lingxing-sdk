@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from ._base import BaseEndpoint
 
+
 class MultiplatformPlatformsEndpoints(BaseEndpoint):
     """领星多平台商品 API (33个接口)."""
 

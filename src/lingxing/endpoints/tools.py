@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from ._base import BaseEndpoint
 
+
 class ToolsEndpoints(BaseEndpoint):
     """领星工具 API (4个接口)."""
 

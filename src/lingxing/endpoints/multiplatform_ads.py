@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from ._base import BaseEndpoint
 
+
 class MultiplatformAdsEndpoints(BaseEndpoint):
     """领星多平台广告 API (38个接口)."""
 

@@ -253,7 +253,7 @@ class FinanceFianceProfitMskuRequest(LingXingModel):
     """
     offset: int  # 分页偏移量，默认0
     length: int  # 分页长度，默认20
-    currency_type: int  # 币种 :  1 CNY  2 USD  3 EUR  4 JPY  5 AUD  6 CAD  7 MXN  8 GBP  9 INR  10 AED  11 SGD  12 SAR  13 BRL 
+    currency_type: int  # 币种 :  1 CNY  2 USD  3 EUR  4 JPY  5 AUD  6 CAD  7 MXN  8 GBP  9 INR  10 AED  11 SGD  12 SAR  13 BRL
     sids: str  # 店铺id，多个使用英文逗号分隔 ，对应查询亚马逊店铺列表接口对应字段【sid】
     month: str  # 月份
 
@@ -265,7 +265,7 @@ class FinanceProfitasinRequest(LingXingModel):
     """
     month: str  # 月份
     sids: str  # 店铺id，多个使用英文逗号分隔 ，对应查询亚马逊店铺列表接口对应字段【sid】
-    currency_type: str  # 币种： 1 CNY 2 USD 3 EUR 4 JPY 5 AUD 6 CAD 7 MXN 8 GBP 9 INR 10 AED 11 SGD 12 SAR 13 BRL 14 SEK 15 PLN 
+    currency_type: str  # 币种： 1 CNY 2 USD 3 EUR 4 JPY 5 AUD 6 CAD 7 MXN 8 GBP 9 INR 10 AED 11 SGD 12 SAR 13 BRL 14 SEK 15 PLN
     offset: int  # 分页偏移量
     length: int  # 分页长度
 
@@ -277,7 +277,7 @@ class FinanceProfitasinsonRequest(LingXingModel):
     """
     month: str  # 月份
     sids: str  # 店铺id，多个使用英文逗号分隔 ，对应查询亚马逊店铺列表接口对应字段【sid】
-    currency_type: str  # 币种： 1 CNY 2 USD 3 EUR 4 JPY 5 AUD 6 CAD 7 MXN 8 GBP 9 INR 10 AED 11 SGD 12 SAR 13 BRL 14 SEK 15 PLN 
+    currency_type: str  # 币种： 1 CNY 2 USD 3 EUR 4 JPY 5 AUD 6 CAD 7 MXN 8 GBP 9 INR 10 AED 11 SGD 12 SAR 13 BRL 14 SEK 15 PLN
     asin: str  # 父级展开查询子级列表时的参数，取值 父级asin
     version: str  # 版本号，没有则传空
     offset: int  # 分页偏移量
@@ -618,7 +618,7 @@ class FinanceReportlistdetailRequest(LingXingModel):
     sid: int  # 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】
     currencyCode: str  # 币种code
     settleMonth: str  # 结算月
-    searchField: Optional[str] = None  # 搜索值类型： fid 结算编号  settlementId settlementId  sellerSku Msku  localSku sku localName 品名  abstractName 
+    searchField: Optional[str] = None  # 搜索值类型： fid 结算编号  settlementId settlementId  sellerSku Msku  localSku sku localName 品名  abstractName
     searchValue: Optional[str] = None  # 搜索值
     offset: Optional[int] = None  # 偏移量
     length: Optional[int] = None  # 分页长度，默认20

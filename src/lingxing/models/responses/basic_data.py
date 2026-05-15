@@ -1,5 +1,5 @@
 """Auto-generated response models for BasicData."""
-from typing import Any, List, Optional
+from typing import List, Optional
 
 from pydantic import Field
 

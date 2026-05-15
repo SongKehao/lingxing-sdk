@@ -1,8 +1,15 @@
 """FBA发货 API endpoints."""
 from __future__ import annotations
 
+from ..models.fba import (
+    GetFbaProductListItem,
+    GetHeadLogisticsFeeTypesItem,
+    GetInboundShipmentListItem,
+    GetSeaTrackSupplierCarriersItem,
+    ShipmentPlanListsItem,
+)
 from ._base import BaseEndpoint
-from ..models.fba import GetFbaProductListItem, GetHeadLogisticsFeeTypesItem, GetInboundShipmentListItem, GetSeaTrackSupplierCarriersItem, ShipFromAddressListItem, ShipmentPlanListsItem
+
 
 class FBAEndpoints(BaseEndpoint):
     """领星FBA发货 API (31个接口)."""

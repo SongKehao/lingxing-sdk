@@ -7,8 +7,8 @@ from typing import TYPE_CHECKING, Any, AsyncIterator, TypeVar
 
 from pydantic import BaseModel, ValidationError
 
-from ..errors import ApiError, RateLimitError
 from ..core.resp_schema import ResponseResult
+from ..errors import ApiError, RateLimitError
 
 if TYPE_CHECKING:
     from ..core.openapi import OpenApiBase

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 领星ERP客户端高级封装
 

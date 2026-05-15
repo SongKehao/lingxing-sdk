@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from ._base import BaseEndpoint
 
+
 class NewAdEndpoints(BaseEndpoint):
     """领星新版广告 API (4个接口)."""
 

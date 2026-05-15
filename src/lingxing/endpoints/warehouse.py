@@ -1,8 +1,25 @@
 """仓库/库存 API endpoints."""
 from __future__ import annotations
 
+from ..models.warehouse import (
+    GetProcessOrderListsItem,
+    GetStorageAdjustOrderListItem,
+    InboundGetCustomTypesItem,
+    InboundgetOrdersItem,
+    InventoryBinDetailsItem,
+    InventoryDetailsItem,
+    OutboundGetCustomTypesItem,
+    OutboundgetOrdersItem,
+    PurchaseReceiptOrderListItem,
+    RemovalInboundListItem,
+    WareHouseBinStatementItem,
+    WarehouseListsItem,
+    WarehouseStatementItem,
+    WarehouseStatementNewItem,
+    WmsOrderListItem,
+)
 from ._base import BaseEndpoint
-from ..models.warehouse import GetBatchDetailListItem, GetBatchStatementListItem, GetProcessOrderListsItem, GetStorageAdjustOrderListItem, InboundGetCustomTypesItem, InboundgetOrdersItem, InventoryBinDetailsItem, InventoryDetailsItem, OutboundGetCustomTypesItem, OutboundgetOrdersItem, PurchaseReceiptOrderListItem, RemovalInboundListItem, WareHouseBinStatementItem, WarehouseListsItem, WarehouseStatementItem, WarehouseStatementNewItem, WmsOrderListItem
+
 
 class WarehouseEndpoints(BaseEndpoint):
     """领星仓库/库存 API (76个接口)."""

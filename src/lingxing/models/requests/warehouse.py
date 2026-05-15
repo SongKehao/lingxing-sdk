@@ -364,8 +364,8 @@ class WarehouseGetBatchDetailListRequest(LingXingModel):
     length: Optional[int] = None  # 分页长度，默认20，上限400
     show_zero_stock: Optional[int] = None  # 是否显示0库存信息：0 不显示，1 显示
     wids: Optional[str] = None  # 仓库id，多个使用英文逗号分隔
-    stock_in_type_list: Optional[str] = None  # 入库类型，多个使用英文逗号分隔： 19 其他入库 22 采购入库 24 调拨入库 23 委外入库 25 盘盈入库 16 换标入库 17 加工入库 18 拆分入库 26 退货入库 27 移除入库 45 
-    search_field: Optional[str] = None  # 搜索字段： sku SKU msku MSKU fnsku FNSKU order_sn 单据号 product_name 品名 batch_number 批次号 receipt_order 收货单 
+    stock_in_type_list: Optional[str] = None  # 入库类型，多个使用英文逗号分隔： 19 其他入库 22 采购入库 24 调拨入库 23 委外入库 25 盘盈入库 16 换标入库 17 加工入库 18 拆分入库 26 退货入库 27 移除入库 45
+    search_field: Optional[str] = None  # 搜索字段： sku SKU msku MSKU fnsku FNSKU order_sn 单据号 product_name 品名 batch_number 批次号 receipt_order 收货单
     search_value: Optional[str] = None  # 搜索值
 
 
@@ -374,7 +374,7 @@ class WarehouseGetBatchStatementListRequest(LingXingModel):
     
     POST /erp/sc/routing/data/local_inventory/getBatchStatementList
     """
-    statement_type_list: Optional[str] = None  # 批次流水主类型id，多个使用英文逗号分隔： 19 其他入库 22 采购入库 24 调拨入库 23 委外入库 25 盘盈入库 16 换标入库 17 加工入库 18 拆分入库 47 VC-PO出库 48 
+    statement_type_list: Optional[str] = None  # 批次流水主类型id，多个使用英文逗号分隔： 19 其他入库 22 采购入库 24 调拨入库 23 委外入库 25 盘盈入库 16 换标入库 17 加工入库 18 拆分入库 47 VC-PO出库 48
     search_field: Optional[str] = None  # 搜索字段： sku SKU msku MSKU fnsku FNSKU product_name 品名 purchase_plan 采购计划 purchase_order 采购单 receipt_or
     search_value: Optional[str] = None  # 搜索值
     wid_list: Optional[str] = None  # 仓库id，多个使用英文逗号分隔
@@ -402,7 +402,7 @@ class WarehouseWarehouseStatementNewRequest(LingXingModel):
     """
     wids: Optional[str] = None  # 仓库id，多个使用英文逗号分隔
     types: Optional[str] = None  # 流水类型，多个使用英文逗号分隔：【不填默认全部类型】 19 其他入库 22 采购入库 24 调拨入库 23 委外入库 25 盘盈入库 15 FBM退货  16 换标入库 17 加工入库 18 拆分入库
-    sub_types: Optional[str] = None  # 子类流水类型，多个使用英文逗号分隔：【不填默认全部类型】 1901 其他入库 手工其他入库 1902 其他入库 用户初始化 1903 其他入库 系统初始化 2201 采购入库 手工采购入库 2202 
+    sub_types: Optional[str] = None  # 子类流水类型，多个使用英文逗号分隔：【不填默认全部类型】 1901 其他入库 手工其他入库 1902 其他入库 用户初始化 1903 其他入库 系统初始化 2201 采购入库 手工采购入库 2202
     start_date: Optional[str] = None  # 操作开始时间，格式：Y-m-d，闭区间，联合结束时间使用
     end_date: Optional[str] = None  # 操作结束时间，格式：Y-m-d，开区间，联合开始时间使用
     offset: int  # 分页偏移量，默认0

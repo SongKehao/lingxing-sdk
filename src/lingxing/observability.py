@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """领星SDK可观测性模块 — Prometheus指标收集"""
 
 import logging

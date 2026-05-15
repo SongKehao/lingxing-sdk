@@ -1,6 +1,6 @@
 """Request models for VC APIs (auto-generated from API docs)."""
 
-from typing import Any, List, Optional
+from typing import List, Optional
 
 from ..common import LingXingModel
 

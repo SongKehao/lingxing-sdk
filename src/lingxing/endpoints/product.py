@@ -1,8 +1,9 @@
 """产品 API endpoints."""
 from __future__ import annotations
 
-from ._base import BaseEndpoint
 from ..models.product import AttributeListItem, BrandItem, CategoryItem, ProductListsItem, UpcListItem
+from ._base import BaseEndpoint
+
 
 class ProductEndpoints(BaseEndpoint):
     """领星产品 API (23个接口)."""

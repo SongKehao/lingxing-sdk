@@ -30,7 +30,6 @@ from .core.rate_limiter import (
     get_rate_limiter,
 )
 from .core.resp_schema import AccessTokenDto, ResponseResult
-from .endpoints._base import BaseEndpoint
 from .endpoints import (
     AmazonSourceEndpoints,
     BasicEndpoints,
@@ -52,6 +51,7 @@ from .endpoints import (
     VCEndpoints,
     WarehouseEndpoints,
 )
+from .endpoints._base import BaseEndpoint
 from .errors import ApiError, AuthenticationError, LingXingError, RateLimitError, ValidationError
 from .integration_base import (
     BaseIntegration,

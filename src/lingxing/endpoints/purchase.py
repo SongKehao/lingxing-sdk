@@ -1,8 +1,9 @@
 """采购 API endpoints."""
 from __future__ import annotations
 
-from ._base import BaseEndpoint
 from ..models.purchase import GetPurchasePlansItem, PurchaseOrderListItem, PurchaserListsItem, SupplierItem
+from ._base import BaseEndpoint
+
 
 class PurchaseEndpoints(BaseEndpoint):
     """领星采购 API (19个接口)."""

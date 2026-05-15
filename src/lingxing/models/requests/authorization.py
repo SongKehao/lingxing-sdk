@@ -1,6 +1,5 @@
 """Request models for Authorization APIs (auto-generated from API docs)."""
 
-from typing import Any, List, Optional
 
 from ..common import LingXingModel
 

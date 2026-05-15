@@ -1,9 +1,9 @@
 """LingXing API Endpoints Package."""
 
+from .amazon_source import AmazonSourceEndpoints
 from .basic import BasicEndpoints
+from .customer_service import CustomerServiceEndpoints
 from .fba import FBAEndpoints
-from .restocking_limit import RestockingLimitEndpoints
-from .restocking import RestockingEndpoints
 from .finance import FinanceEndpoints
 from .logistics import LogisticsEndpoints
 from .multiplatform_ads import MultiplatformAdsEndpoints
@@ -12,9 +12,9 @@ from .multiplatform_platforms import MultiplatformPlatformsEndpoints
 from .new_ad import NewAdEndpoints
 from .product import ProductEndpoints
 from .purchase import PurchaseEndpoints
+from .restocking import RestockingEndpoints
+from .restocking_limit import RestockingLimitEndpoints
 from .sale import SaleEndpoints
-from .customer_service import CustomerServiceEndpoints
-from .amazon_source import AmazonSourceEndpoints
 from .statistics import StatisticsEndpoints
 from .tools import ToolsEndpoints
 from .vc import VCEndpoints

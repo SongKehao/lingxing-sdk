@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from ._base import BaseEndpoint
 
+
 class SaleEndpoints(BaseEndpoint):
     """领星销售/订单/Listing API (44个接口)."""
 

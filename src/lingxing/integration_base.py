@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """LingXing Integration Base Classes — standalone, no dependencies on integrations.base."""
 
 from dataclasses import dataclass

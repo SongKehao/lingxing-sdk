@@ -1,6 +1,6 @@
 """Request models for FBA APIs (auto-generated from API docs)."""
 
-from typing import Any, List, Optional
+from typing import List, Optional
 
 from pydantic import Field
 
@@ -905,7 +905,7 @@ class FBAPrintfnskulabelsRequest(LingXingModel):
     
     POST /erp/sc/storage/shipment/printFnskuLabels
     """
-    page_type: str  # 标签页面类型： SINGLE_COL_50_30 热敏纸【50X30】单排 SINGLE_COL_70_30 热敏纸【70X30】单排 DOUBLE_COL_100_30 热敏纸【100X30】双排 
+    page_type: str  # 标签页面类型： SINGLE_COL_50_30 热敏纸【50X30】单排 SINGLE_COL_70_30 热敏纸【70X30】单排 DOUBLE_COL_100_30 热敏纸【100X30】双排
     print_content: Optional[str] = None  # 是否打印：【默认yes】 yes 是 no 否
     content_type: Optional[str] = None  # 打印SKU/品名：【默认sku】 sku SKU sku_name 品名
     print_custom: Optional[str] = None  # 是否打印自定义内容：【默认yes】 yes 是 no 否

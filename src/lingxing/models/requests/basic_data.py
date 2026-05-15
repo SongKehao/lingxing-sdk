@@ -1,6 +1,6 @@
 """Request models for BasicData APIs (auto-generated from API docs)."""
 
-from typing import Any, List, Optional
+from typing import List
 
 from ..common import LingXingModel
 

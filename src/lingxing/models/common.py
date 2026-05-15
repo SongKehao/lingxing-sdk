@@ -1,6 +1,7 @@
 """Common shared models."""
 from __future__ import annotations
-from pydantic import BaseModel, ConfigDict, Field
+
+from pydantic import BaseModel, ConfigDict
 
 
 class LingXingModel(BaseModel):

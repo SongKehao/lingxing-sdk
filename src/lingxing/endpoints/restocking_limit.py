@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from ._base import BaseEndpoint
 
+
 class RestockingLimitEndpoints(BaseEndpoint):
     """领星FBA库存限制 API (2个接口)."""
 
