@@ -1,45 +1,41 @@
-"""
-LingXing API Endpoints Package
+"""LingXing API Endpoints Package - Generated from official docs."""
 
-Provides modular endpoint classes for different LingXing API categories.
-"""
-
-from .ads_compat import AdsEndpoints
 from .amazon_source import AmazonSourceEndpoints
 from .basic import BasicEndpoints
 from .customer_service import CustomerServiceEndpoints
 from .fba import FBAEndpoints
-from .finance_compat import FinanceEndpoints
-from .goal import GoalEndpoints
-from .inventory_alerts import InventoryAlertsEndpoints
+from .finance import FinanceEndpoints
 from .logistics import LogisticsEndpoints
-from .multiplatform import MultiPlatformEndpoints
-from .order import OrderEndpoints
+from .multiplatform_ads import MultiplatformAdsEndpoints
+from .multiplatform_other import MultiplatformOtherEndpoints
+from .multiplatform_platforms import MultiplatformPlatformsEndpoints
+from .new_ad import NewAdEndpoints
 from .product import ProductEndpoints
 from .purchase import PurchaseEndpoints
 from .restocking import RestockingEndpoints
 from .restocking_limit import RestockingLimitEndpoints
-from .statistics_compat import StatisticsEndpoints
+from .sale import SaleEndpoints
+from .statistics import StatisticsEndpoints
 from .tools import ToolsEndpoints
 from .vc import VCEndpoints
 from .warehouse import WarehouseEndpoints
 
 __all__ = [
-    "AdsEndpoints",
     "AmazonSourceEndpoints",
     "BasicEndpoints",
     "CustomerServiceEndpoints",
     "FBAEndpoints",
     "FinanceEndpoints",
-    "GoalEndpoints",
-    "InventoryAlertsEndpoints",
     "LogisticsEndpoints",
-    "MultiPlatformEndpoints",
-    "OrderEndpoints",
+    "MultiplatformAdsEndpoints",
+    "MultiplatformOtherEndpoints",
+    "MultiplatformPlatformsEndpoints",
+    "NewAdEndpoints",
     "ProductEndpoints",
     "PurchaseEndpoints",
     "RestockingEndpoints",
     "RestockingLimitEndpoints",
+    "SaleEndpoints",
     "StatisticsEndpoints",
     "ToolsEndpoints",
     "VCEndpoints",

@@ -1,576 +1,773 @@
-"""领星ERP仓库物流API端点封装"""
-
-import logging
-from typing import Any
-
-logger = logging.getLogger(__name__)
+"""Auto-generated WarehouseEndpoints endpoints from official lingxing docs."""
+from __future__ import annotations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from ...core.openapi import OpenApiBase
 
 
 class WarehouseEndpoints:
+    """领星API - WarehouseEndpoints (76个接口)."""
 
-    def __init__(self, openapi_client):
-        self._openapi = openapi_client
+    def __init__(self, openapi: "OpenApiBase"):
+        self._request_with_token = openapi.request_with_auto_token
 
-    async def get_warehouses(
-        self,
-        access_token: str,
-        offset: int = 0,
-        length: int = 100,
-        **kwargs
-    ) -> list[dict[str, Any]]:
+    async def add_allocation_order(self, **kwargs) -> dict:
+        """AddAllocationOrder.
+        
+        POST /erp/sc/routing/inventoryReceipt/StorageAllocation/addAllocationOrder
         """
-        查询仓库列表
-
-        API: POST /erp/sc/routing/data/local_inventory/warehouseLists
-
-        Args:
-            access_token: 访问令牌
-            offset: 偏移量（默认0）
-            length: 返回数量（默认100，最大100）
-            **kwargs: 其他查询参数
-
-        Returns:
-            List[Dict[str, Any]]: 仓库列表
-
-        Example:
-            warehouses = await endpoint.get_warehouses(token, offset=0, length=50)
-        """
-        logger.debug("Fetching warehouses: offset=%s, length=%s", offset, length)
-
-        response = await self._openapi.request(
-            access_token=access_token,
-            route_name="/erp/sc/routing/data/local_inventory/warehouseLists",
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/inventoryReceipt/StorageAllocation/addAllocationOrder",
             method="POST",
-            req_body={
-                "offset": offset,
-                "length": length,
-                **kwargs
-            }
+            req_body={k: v for k, v in kwargs.items() if v is not None}
         )
-
-        if response.code not in [200, "200"]:
-            logger.error("Failed to fetch warehouses: %s", response.message)
-            raise Exception(f"API error: {response.message}")
-
-        # 解析响应数据
-        data = response.data or {}
-        if isinstance(data, list):
-            return data
-        if isinstance(data, dict):
-            return data.get("list", data.get("data", []))
-        return []
-
-    async def get_warehouse_inventory(
-        self,
-        access_token: str,
-        warehouse_id: int | None = None,
-        offset: int = 0,
-        length: int = 100,
-        **kwargs
-    ) -> dict[str, Any]:
+    async def adjust_order_confirm(self, **kwargs) -> dict:
+        """AdjustOrderConfirm.
+        
+        POST /basicOpen/adjustOrder/adjust/setAdjust
         """
-        查询仓库库存
-
-        API: POST /erp/sc/routing/data/local_inventory/warehouseInventory
-
-        Args:
-            access_token: 访问令牌
-            warehouse_id: 仓库ID（可选，不传则查询所有仓库）
-            offset: 偏移量（默认0）
-            length: 返回数量（默认100，最大100）
-            **kwargs: 其他查询参数
-
-        Returns:
-            Dict[str, Any]: 包含list（库存列表）和total（总数）的字典
-
-        Example:
-            inventory = await endpoint.get_warehouse_inventory(token, warehouse_id=123)
-        """
-        logger.debug("Fetching warehouse inventory: warehouse_id=%s, offset=%s, length=%s", warehouse_id, offset, length)
-
-        req_body = {
-            "offset": offset,
-            "length": length,
-            **kwargs
-        }
-        if warehouse_id is not None:
-            req_body["wid"] = warehouse_id
-
-        response = await self._openapi.request(
-            access_token=access_token,
-            route_name="/erp/sc/routing/data/local_inventory/warehouseInventory",
+        return await self._request_with_token(
+            route_name="/basicOpen/adjustOrder/adjust/setAdjust",
             method="POST",
-            req_body=req_body
+            req_body={k: v for k, v in kwargs.items() if v is not None}
         )
-
-        if response.code not in [200, "200"]:
-            logger.error("Failed to fetch warehouse inventory: %s", response.message)
-            raise Exception(f"API error: {response.message}")
-
-        # 返回完整响应数据（包含list和total）
-        data = response.data or {}
-        if isinstance(data, dict):
-            return {
-                "list": data.get("list", data.get("data", [])),
-                "total": data.get("total", 0)
-            }
-        return {"list": data if isinstance(data, list) else [], "total": 0}
-
-    async def get_batch_statement(
-        self,
-        access_token: str,
-        offset: int = 0,
-        length: int = 100,
-        **kwargs
-    ) -> list[dict[str, Any]]:
+    async def cancel_storage_allocation_list(self, **kwargs) -> dict:
+        """CancelStorageAllocationList.
+        
+        POST /basicOpen/storageAllocationList/cancel
         """
-        查询库存流水
-
-        API: POST /erp/sc/routing/data/local_inventory/getBatchStatementList
-
-        Args:
-            access_token: 访问令牌
-            offset: 偏移量（默认0）
-            length: 返回数量（默认100，最大100）
-            **kwargs: 其他查询参数（如start_date, end_date, wid等）
-
-        Returns:
-            List[Dict[str, Any]]: 库存流水列表
-
-        Example:
-            statements = await endpoint.get_batch_statement(
-                token,
-                start_date="2026-01-01",
-                end_date="2026-01-31"
-            )
-        """
-        logger.debug("Fetching batch statement: offset=%s, length=%s", offset, length)
-
-        response = await self._openapi.request(
-            access_token=access_token,
-            route_name="/erp/sc/routing/data/local_inventory/getBatchStatementList",
+        return await self._request_with_token(
+            route_name="/basicOpen/storageAllocationList/cancel",
             method="POST",
-            req_body={
-                "offset": offset,
-                "length": length,
-                **kwargs
-            }
+            req_body={k: v for k, v in kwargs.items() if v is not None}
         )
-
-        if response.code not in [200, "200"]:
-            logger.error("Failed to fetch batch statement: %s", response.message)
-            raise Exception(f"API error: {response.message}")
-
-        # 解析响应数据
-        data = response.data or {}
-        if isinstance(data, list):
-            return data
-        if isinstance(data, dict):
-            return data.get("list", data.get("data", []))
-        return []
-
-    async def get_receipt_dispatch_lists(
-        self,
-        access_token: str,
-        offset: int = 0,
-        length: int = 100,
-        **kwargs
-    ) -> list[dict[str, Any]]:
+    async def create_inbound(self, **kwargs) -> dict:
+        """CreateInbound.
+        
+        POST /erp/sc/routing/owms/inbound/createInbound
         """
-        查询出入库单
-
-        API: POST /erp/sc/routing/data/local_inventory/receiptDispatchLists
-
-        Args:
-            access_token: 访问令牌
-            offset: 偏移量（默认0）
-            length: 返回数量（默认100，最大100）
-            **kwargs: 其他查询参数（如start_date, end_date, wid, type等）
-
-        Returns:
-            List[Dict[str, Any]]: 出入库单列表
-
-        Example:
-            # 查询入库单
-            receipts = await endpoint.get_receipt_dispatch_lists(token, type="receipt")
-            # 查询出库单
-            dispatches = await endpoint.get_receipt_dispatch_lists(token, type="dispatch")
-        """
-        logger.debug("Fetching receipt/dispatch lists: offset=%s, length=%s", offset, length)
-
-        response = await self._openapi.request(
-            access_token=access_token,
-            route_name="/erp/sc/routing/data/local_inventory/receiptDispatchLists",
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/owms/inbound/createInbound",
             method="POST",
-            req_body={
-                "offset": offset,
-                "length": length,
-                **kwargs
-            }
+            req_body={k: v for k, v in kwargs.items() if v is not None}
         )
-
-        if response.code not in [200, "200"]:
-            logger.error("Failed to fetch receipt/dispatch lists: %s", response.message)
-            raise Exception(f"API error: {response.message}")
-
-        # 解析响应数据
-        data = response.data or {}
-        if isinstance(data, list):
-            return data
-        if isinstance(data, dict):
-            return data.get("list", data.get("data", []))
-        return []
-
-    async def get_allocation_lists(
-        self,
-        access_token: str,
-        offset: int = 0,
-        length: int = 100,
-        **kwargs
-    ) -> list[dict[str, Any]]:
+    async def delete_fba_shipment_list(self, **kwargs) -> dict:
+        """DeleteFbaShipmentList.
+        
+        POST /basicOpen/openapi/fbaShipment/deleteShipmentList
         """
-        查询调拨单
-
-        API: POST /erp/sc/routing/data/local_inventory/allocationLists
-
-        Args:
-            access_token: 访问令牌
-            offset: 偏移量（默认0）
-            length: 返回数量（默认100，最大100）
-            **kwargs: 其他查询参数（如start_date, end_date, status等）
-
-        Returns:
-            List[Dict[str, Any]]: 调拨单列表
-
-        Example:
-            allocations = await endpoint.get_allocation_lists(
-                token,
-                start_date="2026-01-01",
-                end_date="2026-01-31",
-                status=1  # 状态筛选
-            )
-        """
-        logger.debug("Fetching allocation lists: offset=%s, length=%s", offset, length)
-
-        response = await self._openapi.request(
-            access_token=access_token,
-            route_name="/erp/sc/routing/data/local_inventory/allocationLists",
+        return await self._request_with_token(
+            route_name="/basicOpen/openapi/fbaShipment/deleteShipmentList",
             method="POST",
-            req_body={
-                "offset": offset,
-                "length": length,
-                **kwargs
-            }
+            req_body={k: v for k, v in kwargs.items() if v is not None}
         )
-
-        if response.code not in [200, "200"]:
-            logger.error("Failed to fetch allocation lists: %s", response.message)
-            raise Exception(f"API error: {response.message}")
-
-        # 解析响应数据
-        data = response.data or {}
-        if isinstance(data, list):
-            return data
-        if isinstance(data, dict):
-            return data.get("list", data.get("data", []))
-        return []
-
-    # ========== FBA管理 ==========
-
-    async def get_fba_inventory(
-        self,
-        access_token: str,
-        sid: int,
-        offset: int = 0,
-        length: int = 100,
-        **kwargs
-    ) -> list[dict[str, Any]]:
+    async def delete_over_sea_stock_order(self, **kwargs) -> dict:
+        """DeleteOverSeaStockOrder.
+        
+        POST /basicOpen/overSeaWarehouse/stockOrder/delete
         """
-        查询FBA库存
-
-        API: POST /erp/sc/routing/data/local_inventory/fbaInventory
-
-        Args:
-            access_token: 访问令牌
-            sid: 店铺ID（必填）
-            offset: 偏移量（默认0）
-            length: 返回数量（默认100，最大100）
-            **kwargs: 其他查询参数
-
-        Returns:
-            List[Dict[str, Any]]: FBA库存列表
-
-        Example:
-            fba_inventory = await endpoint.get_fba_inventory(token, sid=123456)
-        """
-        logger.debug("Fetching FBA inventory: sid=%s, offset=%s, length=%s", sid, offset, length)
-
-        response = await self._openapi.request(
-            access_token=access_token,
-            route_name="/erp/sc/routing/data/local_inventory/fbaInventory",
+        return await self._request_with_token(
+            route_name="/basicOpen/overSeaWarehouse/stockOrder/delete",
             method="POST",
-            req_body={
-                "sid": sid,
-                "offset": offset,
-                "length": length,
-                **kwargs
-            }
+            req_body={k: v for k, v in kwargs.items() if v is not None}
         )
-
-        if response.code not in [200, "200"]:
-            logger.error("Failed to fetch FBA inventory: %s", response.message)
-            raise Exception(f"API error: {response.message}")
-
-        # 解析响应数据
-        data = response.data or {}
-        if isinstance(data, list):
-            return data
-        if isinstance(data, dict):
-            return data.get("list", data.get("data", []))
-        return []
-
-    async def get_shipment_plans(
-        self,
-        access_token: str,
-        page: int = 1,
-        page_size: int = 100,
-        **kwargs
-    ) -> dict[str, Any]:
+    async def delete_storage_allocation_list(self, **kwargs) -> dict:
+        """DeleteStorageAllocationList.
+        
+        POST /basicOpen/storageAllocationList/delete
         """
-        查询FBA发货计划
-
-        API: POST /erp/sc/data/fba_report/shipmentPlanLists
-
-        注意: 此接口使用page/page_size分页，而非offset/length
-
-        Args:
-            access_token: 访问令牌
-            page: 页码（默认1）
-            page_size: 每页数量（默认100）
-            **kwargs: 其他查询参数（如sid, status等）
-
-        Returns:
-            Dict[str, Any]: 包含list（发货计划列表）和total（总数）的字典
-
-        Example:
-            plans = await endpoint.get_shipment_plans(token, page=1, page_size=50)
-        """
-        logger.debug("Fetching shipment plans: page=%s, page_size=%s", page, page_size)
-
-        response = await self._openapi.request(
-            access_token=access_token,
-            route_name="/erp/sc/data/fba_report/shipmentPlanLists",
+        return await self._request_with_token(
+            route_name="/basicOpen/storageAllocationList/delete",
             method="POST",
-            req_body={
-                "page": page,
-                "page_size": page_size,
-                **kwargs
-            }
+            req_body={k: v for k, v in kwargs.items() if v is not None}
         )
-
-        if response.code not in [200, "200"]:
-            logger.error("Failed to fetch shipment plans: %s", response.message)
-            raise Exception(f"API error: {response.message}")
-
-        # 返回完整响应数据（包含list和total）
-        data = response.data or {}
-        if isinstance(data, dict):
-            return {
-                "list": data.get("list", data.get("data", [])),
-                "total": data.get("total", 0)
-            }
-        return {"list": data if isinstance(data, list) else [], "total": 0}
-
-    async def get_replenish_suggestions(
-        self,
-        access_token: str,
-        data_type: int = 2,
-        offset: int = 0,
-        length: int = 100,
-        **kwargs
-    ) -> list[dict[str, Any]]:
+    async def edit_warehouse(self, **kwargs) -> dict:
+        """EditWarehouse.
+        
+        POST /erp/sc/storage/wareHouse/edit
         """
-        查询补货建议
-
-        API: POST /erp/sc/routing/restocking/analysis/getSummaryList
-
-        Args:
-            access_token: 访问令牌
-            data_type: 数据类型（1=asin维度, 2=msku维度，默认2）
-            offset: 偏移量（默认0）
-            length: 返回数量（默认100，最大100）
-            **kwargs: 其他查询参数（如sid等）
-
-        Returns:
-            List[Dict[str, Any]]: 补货建议列表
-
-        Example:
-            # MSKU维度
-            suggestions = await endpoint.get_replenish_suggestions(token, data_type=2)
-            # ASIN维度
-            suggestions = await endpoint.get_replenish_suggestions(token, data_type=1)
-        """
-        logger.debug("Fetching replenish suggestions: data_type=%s, offset=%s, length=%s", data_type, offset, length)
-
-        response = await self._openapi.request(
-            access_token=access_token,
-            route_name="/erp/sc/routing/restocking/analysis/getSummaryList",
+        return await self._request_with_token(
+            route_name="/erp/sc/storage/wareHouse/edit",
             method="POST",
-            req_body={
-                "data_type": data_type,
-                "offset": offset,
-                "length": length,
-                **kwargs
-            }
+            req_body={k: v for k, v in kwargs.items() if v is not None}
         )
-
-        if response.code not in [200, "200"]:
-            logger.error("Failed to fetch replenish suggestions: %s", response.message)
-            raise Exception(f"API error: {response.message}")
-
-        # 解析响应数据
-        data = response.data or {}
-        if isinstance(data, list):
-            return data
-        if isinstance(data, dict):
-            return data.get("list", data.get("data", []))
-        return []
-
-    async def get_inbound_shipments(
-        self,
-        access_token: str,
-        start_date: str,
-        end_date: str,
-        page: int = 1,
-        page_size: int = 100,
-        **kwargs
-    ) -> dict[str, Any]:
+    async def fbastock(self, **kwargs) -> dict:
+        """FBAStock.
+        
+        POST /erp/sc/routing/fba/fbaStock/fbaList
         """
-        查询入库货件列表
-
-        API: POST /erp/sc/routing/storage/shipment/getInboundShipmentList
-
-        Args:
-            access_token: 访问令牌
-            start_date: 开始日期（格式：YYYY-MM-DD）
-            end_date: 结束日期（格式：YYYY-MM-DD）
-            page: 页码（默认1）
-            page_size: 每页数量（默认100）
-            **kwargs: 其他查询参数（如sid, shipment_status等）
-
-        Returns:
-            Dict[str, Any]: 包含list（入库货件列表）和total（总数）的字典
-
-        Example:
-            shipments = await endpoint.get_inbound_shipments(
-                token,
-                start_date="2026-01-01",
-                end_date="2026-01-31"
-            )
-        """
-        logger.debug("Fetching inbound shipments: start=%s, end=%s, page=%s", start_date, end_date, page)
-
-        response = await self._openapi.request(
-            access_token=access_token,
-            route_name="/erp/sc/routing/storage/shipment/getInboundShipmentList",
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/fba/fbaStock/fbaList",
             method="POST",
-            req_body={
-                "start_date": start_date,
-                "end_date": end_date,
-                "page": page,
-                "page_size": page_size,
-                **kwargs
-            }
+            req_body={k: v for k, v in kwargs.items() if v is not None}
         )
-
-        if response.code not in [200, "200"]:
-            logger.error("Failed to fetch inbound shipments: %s", response.message)
-            raise Exception(f"API error: {response.message}")
-
-        # 返回完整响应数据（包含list和total）
-        data = response.data or {}
-        if isinstance(data, dict):
-            return {
-                "list": data.get("list", data.get("data", [])),
-                "total": data.get("total", 0)
-            }
-        return {"list": data if isinstance(data, list) else [], "total": 0}
-
-    async def get_fba_warehouse_detail(
-        self,
-        access_token: str,
-        offset: int = 0,
-        length: int = 100,
-        sid: int | None = None,
-        **kwargs
-    ) -> dict[str, Any]:
+    async def fbastock_v2(self, **kwargs) -> dict:
+        """FBAStock_v2.
+        
+        POST /basicOpen/openapi/storage/fbaWarehouseDetail
         """
-        查询FBA库存明细
-
-        API: POST /basicOpen/openapi/storage/fbaWarehouseDetail
-
-        对应系统【仓库】>【FBA库存明细】数据,数量维度展示
-
-        Args:
-            access_token: 访问令牌
-            offset: 分页偏移量（默认0）
-            length: 分页长度（默认100，取值范围[20,200]）
-            sid: 店铺ID（可选）
-            **kwargs: 其他查询参数（如search_field, search_value, cid, bid等）
-
-        Returns:
-            Dict[str, Any]: 包含list（FBA库存列表）和total（总数）的字典
-
-        Example:
-            # 查询所有FBA库存
-            inventory = await endpoint.get_fba_warehouse_detail(token)
-
-            # 按店铺查询
-            inventory = await endpoint.get_fba_warehouse_detail(token, sid=123)
-
-            # 按SKU搜索
-            inventory = await endpoint.get_fba_warehouse_detail(
-                token,
-                search_field="seller_sku",
-                search_value="MSKUFDA5E30"
-            )
-        """
-        logger.debug("Fetching FBA warehouse detail: offset=%s, length=%s, sid=%s", offset, length, sid)
-
-        req_body = {
-            "offset": offset,
-            "length": length,
-            **kwargs
-        }
-        if sid is not None:
-            req_body["sid"] = sid
-
-        response = await self._openapi.request(
-            access_token=access_token,
+        return await self._request_with_token(
             route_name="/basicOpen/openapi/storage/fbaWarehouseDetail",
             method="POST",
-            req_body=req_body
+            req_body={k: v for k, v in kwargs.items() if v is not None}
         )
-
-        if response.code not in [0, 200, "0", "200"]:
-            logger.error("Failed to fetch FBA warehouse detail: %s", response.message)
-            raise Exception(f"API error: {response.message}")
-
-        # 返回完整响应数据（包含list和total）
-        data = response.data or {}
-        if isinstance(data, list):
-            return {
-                "list": data,
-                "total": response.data.get("total", len(data)) if isinstance(response.data, dict) else len(data)
-            }
-        if isinstance(data, dict):
-            return {
-                "list": data.get("data", data.get("list", [])),
-                "total": data.get("total", 0)
-            }
-        return {"list": [], "total": 0}
-
-
-__all__ = [
-    "WarehouseEndpoints",
-]
+    async def fast_receive(self, **kwargs) -> dict:
+        """FastReceive.
+        
+        POST /erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/fastReceive
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/fastReceive",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def get_adjust_order_confirm_result(self, **kwargs) -> dict:
+        """GetAdjustOrderConfirmResult.
+        
+        POST /basicOpen/adjustOrder/adjust/getAdjustStatus
+        """
+        return await self._request_with_token(
+            route_name="/basicOpen/adjustOrder/adjust/getAdjustStatus",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def get_batch_detail_list(self, **kwargs) -> dict:
+        """GetBatchDetailList.
+        
+        POST /erp/sc/routing/data/local_inventory/getBatchDetailList
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/data/local_inventory/getBatchDetailList",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def get_batch_statement_list(self, **kwargs) -> dict:
+        """GetBatchStatementList.
+        
+        POST /erp/sc/routing/data/local_inventory/getBatchStatementList
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/data/local_inventory/getBatchStatementList",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def get_receive_good_records(self, **kwargs) -> dict:
+        """GetReceiveGoodRecords.
+        
+        POST /erp/sc/routing/owms/inbound/getReceiveGoodRecords
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/owms/inbound/getReceiveGoodRecords",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def inbound_order_confirm(self, **kwargs) -> dict:
+        """InboundOrderConfirm.
+        
+        POST /basicOpen/inboundOrder/inbound/setInbound
+        """
+        return await self._request_with_token(
+            route_name="/basicOpen/inboundOrder/inbound/setInbound",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def inventory_details(self, **kwargs) -> dict:
+        """InventoryDetails.
+        
+        POST /erp/sc/routing/data/local_inventory/inventoryDetails
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/data/local_inventory/inventoryDetails",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def order_add(self, **kwargs) -> dict:
+        """OrderAdd.
+        
+        POST /erp/sc/routing/storage/storage/orderAdd
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/storage/storage/orderAdd",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def order_add_out(self, **kwargs) -> dict:
+        """OrderAddOut.
+        
+        POST /erp/sc/routing/storage/storage/orderAddOut
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/storage/storage/orderAddOut",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def outbound_order_confirm(self, **kwargs) -> dict:
+        """OutboundOrderConfirm.
+        
+        POST /basicOpen/outboundOrder/outbound/setOutbound
+        """
+        return await self._request_with_token(
+            route_name="/basicOpen/outboundOrder/outbound/setOutbound",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def over_seas_stock_detail(self, **kwargs) -> dict:
+        """OverSeasStockDetail.
+        
+        POST /basicOpen/overSeaWarehouse/stockOrder/detail
+        """
+        return await self._request_with_token(
+            route_name="/basicOpen/overSeaWarehouse/stockOrder/detail",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def oversea_warehouse_match_list(self, **kwargs) -> dict:
+        """OverseaWarehouseMatchList.
+        
+        POST /basicOpen/overseaWarehouseSetting/matchList
+        """
+        return await self._request_with_token(
+            route_name="/basicOpen/overseaWarehouseSetting/matchList",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def oversea_warehouse_product_match(self, **kwargs) -> dict:
+        """OverseaWarehouseProductMatch.
+        
+        POST /basicOpen/overseaWarehouseSetting/productMatch
+        """
+        return await self._request_with_token(
+            route_name="/basicOpen/overseaWarehouseSetting/productMatch",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def oversea_warehouse_product_un_match(self, **kwargs) -> dict:
+        """OverseaWarehouseProductUnMatch.
+        
+        POST /basicOpen/overseaWarehouseSetting/productUnMatch
+        """
+        return await self._request_with_token(
+            route_name="/basicOpen/overseaWarehouseSetting/productUnMatch",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def purchase_receipt_order_list(self, **kwargs) -> dict:
+        """PurchaseReceiptOrderList.
+        
+        POST /erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/getOrderList
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/getOrderList",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def receive(self, **kwargs) -> dict:
+        """Receive.
+        
+        POST /erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/receive
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/receive",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def send_inbound(self, **kwargs) -> dict:
+        """SendInbound.
+        
+        POST /erp/sc/routing/owms/inbound/sendInbound
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/owms/inbound/sendInbound",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def set_inbound_order_revoke(self, **kwargs) -> dict:
+        """SetInboundOrderRevoke.
+        
+        POST /basicOpen/inboundOrder/inbound/setOrderRevoke
+        """
+        return await self._request_with_token(
+            route_name="/basicOpen/inboundOrder/inbound/setOrderRevoke",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def set_outbound_order_revoke(self, **kwargs) -> dict:
+        """SetOutboundOrderRevoke.
+        
+        POST /basicOpen/outboundOrder/outbound/setOrderRevoke
+        """
+        return await self._request_with_token(
+            route_name="/basicOpen/outboundOrder/outbound/setOrderRevoke",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def update_logistics(self, **kwargs) -> dict:
+        """UpdateLogistics.
+        
+        POST /erp/sc/routing/owms/inbound/updateLogistics
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/owms/inbound/updateLogistics",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def warehouse_lists(self, **kwargs) -> dict:
+        """WarehouseLists.
+        
+        POST /erp/sc/data/local_inventory/warehouse
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/data/local_inventory/warehouse",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def warehouse_statement(self, **kwargs) -> dict:
+        """WarehouseStatement.
+        
+        POST /erp/sc/routing/data/local_inventory/wareHouseStatement
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/data/local_inventory/wareHouseStatement",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def warehouse_statement_new(self, **kwargs) -> dict:
+        """WarehouseStatementNew.
+        
+        POST /erp/sc/routing/inventoryLog/WareHouseInventory/wareHouseCenterStatement
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/inventoryLog/WareHouseInventory/wareHouseCenterStatement",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def wms_order_detail(self, **kwargs) -> dict:
+        """WmsOrderDetail.
+        
+        POST /basicOpen/wmsOrder/getWmsOrdersByOrderNumbers
+        """
+        return await self._request_with_token(
+            route_name="/basicOpen/wmsOrder/getWmsOrdersByOrderNumbers",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def wms_order_list(self, **kwargs) -> dict:
+        """WmsOrderList.
+        
+        POST /erp/sc/routing/wms/order/wmsOrderList
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/wms/order/wmsOrderList",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def add_adjustment_order(self, **kwargs) -> dict:
+        """addAdjustmentOrder.
+        
+        POST /erp/sc/routing/inventoryReceipt/StorageAdjustment/addAdjustmentOrder
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/inventoryReceipt/StorageAdjustment/addAdjustmentOrder",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def add_rebrand_adjustment_order(self, **kwargs) -> dict:
+        """addRebrandAdjustmentOrder.
+        
+        POST /erp/sc/routing/inventoryReceipt/StorageAdjustment/addRebrandAdjustmentOrder
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/inventoryReceipt/StorageAdjustment/addRebrandAdjustmentOrder",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def add_sku_adjustment_order(self, **kwargs) -> dict:
+        """addSkuAdjustmentOrder.
+        
+        POST /erp/sc/routing/inventoryReceipt/StorageAdjustment/addSkuAdjustmentOrder
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/inventoryReceipt/StorageAdjustment/addSkuAdjustmentOrder",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def add_storage_process_order(self, **kwargs) -> dict:
+        """addStorageProcessOrder.
+        
+        POST /erp/sc/routing/inventoryReceipt/StorageProcess/addStorageProcessOrder
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/inventoryReceipt/StorageProcess/addStorageProcessOrder",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def bin_create(self, **kwargs) -> dict:
+        """binCreate.
+        
+        POST /erp/sc/routing/storage/wareHouseBin/create
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/storage/wareHouseBin/create",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def cancel_wms_order(self, **kwargs) -> dict:
+        """cancelWmsOrder.
+        
+        POST /basicOpen/wmsOrder/cancel
+        """
+        return await self._request_with_token(
+            route_name="/basicOpen/wmsOrder/cancel",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def check_add_order(self, **kwargs) -> dict:
+        """checkAddOrder.
+        
+        POST /erp/sc/routing/inventoryReceipt/InventoryCheck/addOrder
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/inventoryReceipt/InventoryCheck/addOrder",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def check_get_order_detail(self, **kwargs) -> dict:
+        """checkGetOrderDetail.
+        
+        POST /erp/sc/routing/inventoryReceipt/InventoryCheck/getOrderDetail
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/inventoryReceipt/InventoryCheck/getOrderDetail",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def check_get_order_list(self, **kwargs) -> dict:
+        """checkGetOrderList.
+        
+        POST /erp/sc/routing/inventoryReceipt/InventoryCheck/getOrderList
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/inventoryReceipt/InventoryCheck/getOrderList",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def create_receipt_order(self, **kwargs) -> dict:
+        """createReceiptOrder.
+        
+        POST /erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/createReceiptOrder
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/createReceiptOrder",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def finish_receive_allocation_order(self, **kwargs) -> dict:
+        """finishReceiveAllocationOrder.
+        
+        POST /erp/sc/routing/inventoryReceipt/StorageAllocation/finishReceiveAllocationOrder
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/inventoryReceipt/StorageAllocation/finishReceiveAllocationOrder",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def get_packing_data(self, **kwargs) -> dict:
+        """getPackingData.
+        
+        POST /erp/sc/routing/owms/inbound/getPackingData
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/owms/inbound/getPackingData",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def get_process_order_lists(self, **kwargs) -> dict:
+        """getProcessOrderLists.
+        
+        POST /erp/sc/routing/inventoryReceipt/StorageProcess/getOrderLists
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/inventoryReceipt/StorageProcess/getOrderLists",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def get_storage_adjust_order_list(self, **kwargs) -> dict:
+        """getStorageAdjustOrderList.
+        
+        POST /erp/sc/routing/inventoryReceipt/StorageAdjustment/getStorageAdjustOrderList
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/inventoryReceipt/StorageAdjustment/getStorageAdjustOrderList",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def get_storage_allocation_list(self, **kwargs) -> dict:
+        """getStorageAllocationList.
+        
+        POST /erp/sc/routing/inventoryReceipt/StorageAllocation/getStorageAllocationList
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/inventoryReceipt/StorageAllocation/getStorageAllocationList",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def inbound_batches_receipt(self, **kwargs) -> dict:
+        """inboundBatchesReceipt.
+        
+        POST /erp/sc/routing/owms/inbound/batchesReceipt
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/owms/inbound/batchesReceipt",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def inbound_complete_receipt(self, **kwargs) -> dict:
+        """inboundCompleteReceipt.
+        
+        POST /erp/sc/routing/owms/inbound/completeReceipt
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/owms/inbound/completeReceipt",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def inbound_get_custom_types(self, **kwargs) -> dict:
+        """inboundGetCustomTypes.
+        
+        POST /erp/sc/routing/storage/inbound/getCustomTypes
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/storage/inbound/getCustomTypes",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def inboundget_orders(self, **kwargs) -> dict:
+        """inboundgetOrders.
+        
+        POST /erp/sc/routing/storage/inbound/getOrders
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/storage/inbound/getOrders",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def inventory_bin_details(self, **kwargs) -> dict:
+        """inventoryBinDetails.
+        
+        POST /erp/sc/routing/data/local_inventory/inventoryBinDetails
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/data/local_inventory/inventoryBinDetails",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def list_inbound(self, **kwargs) -> dict:
+        """listInbound.
+        
+        POST /erp/sc/routing/owms/inbound/listInbound
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/owms/inbound/listInbound",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def list_order_nos(self, **kwargs) -> dict:
+        """listOrderNos.
+        
+        POST /erp/sc/routing/owms/inbound/listOrderNos
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/owms/inbound/listOrderNos",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def match_sku_list(self, **kwargs) -> dict:
+        """matchSkuList.
+        
+        POST /erp/sc/routing/owms/inbound/matchSkuList
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/owms/inbound/matchSkuList",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def outbound_get_custom_types(self, **kwargs) -> dict:
+        """outboundGetCustomTypes.
+        
+        POST /erp/sc/routing/storage/outbound/getCustomTypes
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/storage/outbound/getCustomTypes",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def outbound_order_delete(self, **kwargs) -> dict:
+        """outboundOrderDelete.
+        
+        POST /basicOpen/outboundOrder/outbound/delete
+        """
+        return await self._request_with_token(
+            route_name="/basicOpen/outboundOrder/outbound/delete",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def outboundget_orders(self, **kwargs) -> dict:
+        """outboundgetOrders.
+        
+        POST /erp/sc/routing/storage/outbound/getOrders
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/storage/outbound/getOrders",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def oversea_stock_order_allocate(self, **kwargs) -> dict:
+        """overseaStockOrderAllocate.
+        
+        POST /basicOpen/overSeaWarehouse/stockOrder/allocate
+        """
+        return await self._request_with_token(
+            route_name="/basicOpen/overSeaWarehouse/stockOrder/allocate",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def package_label(self, **kwargs) -> dict:
+        """packageLabel.
+        
+        POST /erp/sc/routing/owms/inbound/packageLabel
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/owms/inbound/packageLabel",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def packing(self, **kwargs) -> dict:
+        """packing.
+        
+        POST /erp/sc/routing/owms/inbound/packing
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/owms/inbound/packing",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def partly_receive_allocation_order(self, **kwargs) -> dict:
+        """partlyReceiveAllocationOrder.
+        
+        POST /erp/sc/routing/inventoryReceipt/StorageAllocation/partlyReceiveAllocationOrder
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/inventoryReceipt/StorageAllocation/partlyReceiveAllocationOrder",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def product_label(self, **kwargs) -> dict:
+        """productLabel.
+        
+        POST /erp/sc/routing/owms/inbound/productLabel
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/owms/inbound/productLabel",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def quality_inspection_order_detail(self, **kwargs) -> dict:
+        """qualityInspectionOrderDetail.
+        
+        POST /basicOpen/qualityInspectionOrder/detail
+        """
+        return await self._request_with_token(
+            route_name="/basicOpen/qualityInspectionOrder/detail",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def receive_allocation_order(self, **kwargs) -> dict:
+        """receiveAllocationOrder.
+        
+        POST /erp/sc/routing/inventoryReceipt/StorageAllocation/receiveAllocationOrder
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/inventoryReceipt/StorageAllocation/receiveAllocationOrder",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def removal_inbound_list(self, **kwargs) -> dict:
+        """removalInboundList.
+        
+        POST /erp/sc/routing/owms/removalInbound/list
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/owms/removalInbound/list",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def set_tracking_no(self, **kwargs) -> dict:
+        """setTrackingNo.
+        
+        POST /basicOpen/logisticsOrdering/setTrackingNo
+        """
+        return await self._request_with_token(
+            route_name="/basicOpen/logisticsOrdering/setTrackingNo",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def submit_allocation_order(self, **kwargs) -> dict:
+        """submitAllocationOrder.
+        
+        POST /erp/sc/routing/inventoryReceipt/StorageAllocation/submitAllocationOrder
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/inventoryReceipt/StorageAllocation/submitAllocationOrder",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def switch_status(self, **kwargs) -> dict:
+        """switchStatus.
+        
+        POST /erp/sc/routing/storage/wareHouseBin/switchStatus
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/storage/wareHouseBin/switchStatus",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def update_inbound(self, **kwargs) -> dict:
+        """updateInbound.
+        
+        POST /erp/sc/routing/owms/inbound/updateInbound
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/owms/inbound/updateInbound",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def ware_house_bin_statement(self, **kwargs) -> dict:
+        """wareHouseBinStatement.
+        
+        POST /erp/sc/routing/data/local_inventory/wareHouseBinStatement
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/data/local_inventory/wareHouseBinStatement",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def warehouse_bin(self, **kwargs) -> dict:
+        """warehouseBin.
+        
+        POST /erp/sc/routing/data/local_inventory/warehouseBin
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/data/local_inventory/warehouseBin",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
+    async def wms_order_get_wms_logistics_labels(self, **kwargs) -> dict:
+        """wmsOrderGetWmsLogisticsLabels.
+        
+        POST /erp/sc/routing/wms/order/getWmsLogisticsLabels
+        """
+        return await self._request_with_token(
+            route_name="/erp/sc/routing/wms/order/getWmsLogisticsLabels",
+            method="POST",
+            req_body={k: v for k, v in kwargs.items() if v is not None}
+        )
