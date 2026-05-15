@@ -1,5 +1,28 @@
 # Changelog
 
+## v0.4.0 (2026-05-16)
+
+### Major Changes
+- **All `**kwargs` eliminated** — 396 endpoint methods now have typed parameters
+- **795 Pydantic Request models** auto-generated from official API docs (19 files)
+- **465 Pydantic Response models** auto-generated from API docs (18 files)
+- **395 Chinese docstrings** injected from API docs (title + param descriptions)
+
+### New Features
+- **Auto-retry** — exponential backoff on rate limit (code 3001008) and network errors
+- **Pagination iterator** — `_iter_pages()` and `_collect_all()` for automatic page traversal
+- **RateLimitError** — dedicated exception for rate limit exhaustion after max retries
+- **Package exports** — 57 public APIs in `lingxing.__all__`, 19 endpoint classes
+- **`from __future__ import annotations`** — Python 3.10+ union syntax throughout
+
+### Test Coverage
+- **135 tests passing** (up from 115)
+  - 20 new tests: auto-retry (5), pagination (7), response models (3), request models (1), exports (4)
+  - All 115 existing tests continue passing
+
+### Version
+- Bumped to 0.4.0
+
 ## v0.3.0 (2026-05-16)
 
 ### Breaking Changes

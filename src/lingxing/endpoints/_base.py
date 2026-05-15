@@ -1,12 +1,13 @@
 """Base endpoint mixin - provides typed request/response handling."""
 from __future__ import annotations
 
+import asyncio
 import logging
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import TYPE_CHECKING, Any, AsyncIterator, TypeVar
 
 from pydantic import BaseModel, ValidationError
 
-from ..errors import ApiError
+from ..errors import ApiError, RateLimitError
 from ..core.resp_schema import ResponseResult
 
 if TYPE_CHECKING:
@@ -16,6 +17,11 @@ logger = logging.getLogger(__name__)
 
 T = TypeVar("T", bound=BaseModel)
 
+# Default retry configuration
+DEFAULT_MAX_RETRIES = 3
+DEFAULT_RETRY_DELAY = 1.0  # seconds
+RATE_LIMIT_ERROR_CODE = 3001008
+
 
 class BaseEndpoint:
     """Base class for all endpoint groups.
@@ -24,27 +30,59 @@ class BaseEndpoint:
     1. Send request via OpenApiBase
     2. Check response code
     3. Parse response data into typed Pydantic models (with fallback)
+    4. Auto-retry on rate limit errors
     """
+
+    # Retry configuration - can be overridden per subclass
+    max_retries: int = DEFAULT_MAX_RETRIES
+    retry_delay: float = DEFAULT_RETRY_DELAY
 
     def __init__(self, openapi: OpenApiBase):
         self._openapi = openapi
 
-    async def _post(self, route: str, body: dict | None = None) -> ResponseResult:
-        """Send POST request and check for errors."""
-        resp = await self._openapi.request_with_auto_token(
-            route_name=route,
-            method="POST",
-            req_body=body or {},
-        )
-        self._check_response(resp, route)
-        return resp
+    async def _post(
+        self, route: str, body: dict | None = None, *, _retry_count: int = 0,
+    ) -> ResponseResult:
+        """Send POST request with automatic retry on rate limit errors."""
+        try:
+            resp = await self._openapi.request_with_auto_token(
+                route_name=route, method="POST", req_body=body or {},
+            )
+            # Check for rate limit in response
+            if resp.code == RATE_LIMIT_ERROR_CODE:
+                if _retry_count < self.max_retries:
+                    delay = self.retry_delay * (2 ** _retry_count)
+                    logger.warning(
+                        "Rate limited on %s, retrying in %.1fs (attempt %d/%d)",
+                        route, delay, _retry_count + 1, self.max_retries,
+                    )
+                    await asyncio.sleep(delay)
+                    return await self._post(route, body, _retry_count=_retry_count + 1)
+                raise RateLimitError(
+                    f"Rate limit exceeded for {route} after {self.max_retries} retries"
+                )
+            self._check_response(resp, route)
+            return resp
+        except RateLimitError:
+            raise
+        except ApiError:
+            raise
+        except Exception as e:
+            # Retry on transient network errors
+            if _retry_count < self.max_retries:
+                delay = self.retry_delay * (2 ** _retry_count)
+                logger.warning(
+                    "Request failed for %s (%s), retrying in %.1fs (attempt %d/%d)",
+                    route, str(e)[:100], delay, _retry_count + 1, self.max_retries,
+                )
+                await asyncio.sleep(delay)
+                return await self._post(route, body, _retry_count=_retry_count + 1)
+            raise
 
     async def _get(self, route: str, params: dict | None = None) -> ResponseResult:
         """Send GET request and check for errors."""
         resp = await self._openapi.request_with_auto_token(
-            route_name=route,
-            method="GET",
-            req_params=params,
+            route_name=route, method="GET", req_params=params,
         )
         self._check_response(resp, route)
         return resp
@@ -67,27 +105,27 @@ class BaseEndpoint:
         if data is None:
             return []
         if isinstance(data, list):
-            results = []
+            results: list = []
             for item in data:
                 if not isinstance(item, dict):
                     continue
                 try:
                     results.append(model(**item))
                 except (ValidationError, Exception):
-                    results.append(item)  # type: ignore
-            return results  # type: ignore
+                    results.append(item)
+            return results
         if isinstance(data, dict):
             items = data.get("list") or data.get("data") or []
             if isinstance(items, list):
-                results = []
+                results: list = []
                 for item in items:
                     if not isinstance(item, dict):
                         continue
                     try:
                         results.append(model(**item))
                     except (ValidationError, Exception):
-                        results.append(item)  # type: ignore
-                return results  # type: ignore
+                        results.append(item)
+                return results
         return []
 
     def _parse_one(self, data: Any, model: type[T]) -> T | None:
@@ -112,13 +150,92 @@ class BaseEndpoint:
             total = data.get("total", 0) or 0
             items_raw = data.get("list") or data.get("data") or []
             if isinstance(items_raw, list):
-                items = []
+                items: list = []
                 for item in items_raw:
                     if not isinstance(item, dict):
                         continue
                     try:
                         items.append(model(**item))
                     except (ValidationError, Exception):
-                        items.append(item)  # type: ignore
+                        items.append(item)
                 return items, total
         return [], 0
+
+    async def _iter_pages(
+        self,
+        route: str,
+        model: type[T],
+        page_size: int = 100,
+        base_params: dict | None = None,
+        offset_field: str = "offset",
+        length_field: str = "length",
+        max_pages: int | None = None,
+    ) -> AsyncIterator[list[T]]:
+        """Iterate over all pages of a paginated API endpoint.
+
+        Yields lists of parsed model instances, one page at a time.
+
+        Args:
+            route: API route path.
+            model: Pydantic model class to parse items.
+            page_size: Number of items per page.
+            base_params: Additional request parameters.
+            offset_field: Name of the offset parameter.
+            length_field: Name of the length parameter.
+            max_pages: Maximum number of pages to fetch (None = unlimited).
+
+        Yields:
+            List of parsed model instances for each page.
+        """
+        offset = 0
+        pages_fetched = 0
+
+        while True:
+            if max_pages is not None and pages_fetched >= max_pages:
+                break
+
+            params = dict(base_params or {})
+            params[offset_field] = offset
+            params[length_field] = page_size
+
+            resp = await self._post(route, params)
+            items, total = self._parse_page(resp.data, model)
+
+            if not items:
+                break
+
+            yield items
+            pages_fetched += 1
+            offset += page_size
+
+            if total > 0 and offset >= total:
+                break
+
+    async def _collect_all(
+        self,
+        route: str,
+        model: type[T],
+        page_size: int = 100,
+        base_params: dict | None = None,
+        max_items: int | None = None,
+    ) -> list[T]:
+        """Collect all items from a paginated API endpoint.
+
+        Convenience method that collects all pages into a single list.
+
+        Args:
+            route: API route path.
+            model: Pydantic model class to parse items.
+            page_size: Number of items per page.
+            base_params: Additional request parameters.
+            max_items: Maximum number of items to collect (None = unlimited).
+
+        Returns:
+            List of all parsed model instances.
+        """
+        all_items: list[T] = []
+        async for page_items in self._iter_pages(route, model, page_size, base_params):
+            all_items.extend(page_items)
+            if max_items is not None and len(all_items) >= max_items:
+                return all_items[:max_items]
+        return all_items

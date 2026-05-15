@@ -8,123 +8,364 @@ class ProductEndpoints(BaseEndpoint):
     """领星产品 API (23个接口)."""
 
     async def add_commodity_code(self, **kwargs) -> dict:
-        """写操作 AddCommodityCode. POST /listing/publish/api/upc/addCommodityCode"""
+        """创建UPC编码.
+
+POST /listing/publish/api/upc/addCommodityCode
+
+Args:
+    commodity_codes: 编码-最多支持两百个 (required), array.
+    code_type: 编码类型：支持UPC、EAN、ISBN (required), string."""
         resp = await self._post("/listing/publish/api/upc/addCommodityCode", kwargs if kwargs else None)
         return resp.data or {}
     async def brand(self, **kwargs) -> list[BrandItem]:
-        """Brand. POST /erp/sc/data/local_inventory/brand"""
+        """查询产品品牌列表.
+
+POST /erp/sc/data/local_inventory/brand
+
+Args:
+    offset: 分页偏移量，默认0, int.
+    length: 分页长度，默认1000，上限1000, int."""
         resp = await self._post("/erp/sc/data/local_inventory/brand", kwargs if kwargs else None)
         return self._parse_list(resp.data, BrandItem)
     async def category(self, **kwargs) -> list[CategoryItem]:
-        """Category. POST /erp/sc/routing/data/local_inventory/category"""
+        """查询产品分类列表.
+
+POST /erp/sc/routing/data/local_inventory/category
+
+Args:
+    offset: 分页偏移量，默认0, int.
+    length: 分页长度，默认1000，上限1000, int."""
         resp = await self._post("/erp/sc/routing/data/local_inventory/category", kwargs if kwargs else None)
         return self._parse_list(resp.data, CategoryItem)
     async def get_paging_log_lists(self, **kwargs) -> list | dict:
-        """GetPagingLogLists. POST /basicOpen/product/getPagingLogLists"""
+        """查询操作日志.
+
+POST /basicOpen/product/getPagingLogLists
+
+Args:
+    businessId: businessId，对应查询本地产品列表data>>id字段, long.
+    endTime: 结束时间, string.
+    startTime: 开始时间, string.
+    page: 页码, int.
+    size: 每页大小, int."""
         resp = await self._post("/basicOpen/product/getPagingLogLists", kwargs if kwargs else None)
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
     async def product_details(self, **kwargs) -> list | dict:
-        """ProductDetails. POST /erp/sc/routing/data/local_inventory/productInfo"""
+        """查询本地产品详情.
+
+POST /erp/sc/routing/data/local_inventory/productInfo
+
+Args:
+    id: 产品id【产品id、 产品SKU 、SKU识别码 三选一必填】, int.
+    sku: 产品SKU【产品id、 产品SKU 、SKU识别码 三选一必填】, string.
+    sku_identifier: SKU识别码【产品id、 产品SKU 、SKU识别码 三选一必填】, string."""
         resp = await self._post("/erp/sc/routing/data/local_inventory/productInfo", kwargs if kwargs else None)
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
     async def product_lists(self, **kwargs) -> list[ProductListsItem]:
-        """ProductLists. POST /erp/sc/routing/data/local_inventory/productList"""
+        """查询本地产品列表.
+
+POST /erp/sc/routing/data/local_inventory/productList
+
+Args:
+    offset: 分页偏移量，默认0, int.
+    length: 分页长度，默认1000，上限1000, int.
+    update_time_start: 更新时间-开始时间【时间戳，单位：秒，左闭右开】, int.
+    update_time_end: 更新时间-结束时间【时间戳，单位：秒，左闭右开】, int.
+    create_time_start: 创建时间-开始时间【时间戳，单位：秒，左闭右开】, int.
+    create_time_end: 创建时间-结束时间【时间戳，单位：秒，左闭右开】, int.
+    sku_list: 本地产品sku, array.
+    sku_identifier_list: sku识别码列表, array."""
         resp = await self._post("/erp/sc/routing/data/local_inventory/productList", kwargs if kwargs else None)
         return self._parse_list(resp.data, ProductListsItem)
     async def set_brand(self, **kwargs) -> list | dict:
-        """SetBrand. POST /erp/sc/storage/brand/set"""
+        """添加/编辑产品品牌.
+
+POST /erp/sc/storage/brand/set
+
+Args:
+    data: 请求数据 (required), array."""
         resp = await self._post("/erp/sc/storage/brand/set", kwargs if kwargs else None)
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
     async def set_bundled(self, **kwargs) -> list | dict:
-        """SetBundled. POST /erp/sc/routing/storage/product/setBundled"""
+        """添加 / 编辑捆绑产品.
+
+POST /erp/sc/routing/storage/product/setBundled
+
+Args:
+    sku: SKU（添加时必填） (required), string.
+    product_name: 品名（添加时必填） (required), string.
+    picture_list: 产品图片信息, array.
+    model: 型号, string.
+    unit: 单位（商品单位：套、个、台）, string.
+    status: 状态【默认1】：0 停售，1 在售，2 开发中，3 清仓, int.
+    category_id: 分类id,与分类同时存在时，优先取分类id, int.
+    category: 分类, string.
+    brand_id: 品牌id，与品牌同时存在时，优先取品牌id, int.
+    brand: 品牌, string.
+    product_developer: 开发者名称, string.
+    product_developer_uid: 开发者id，与开发者名称同时填写时，以开发者id为准, int.
+    product_duty_uids: 负责人id, array.
+    is_append_product_duty: 负责人是否追加创建人：0 否，1 是；默认1，该字段只有编辑SKU时该才生效, int.
+    product_creator_uid: 创建人ERP id，默认 api 用户id, int.
+    description: 商品描述, string.
+    group_list: 组合商品列表，捆绑产品子产品的总数量要大于1, array."""
         resp = await self._post("/erp/sc/routing/storage/product/setBundled", kwargs if kwargs else None)
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
     async def set_category(self, **kwargs) -> list | dict:
-        """SetCategory. POST /erp/sc/routing/storage/category/set"""
+        """添加 / 编辑产品分类.
+
+POST /erp/sc/routing/storage/category/set
+
+Args:
+    data: 请求数据 (required), array."""
         resp = await self._post("/erp/sc/routing/storage/category/set", kwargs if kwargs else None)
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
     async def set_product(self, **kwargs) -> list | dict:
-        """SetProduct. POST /erp/sc/routing/storage/product/set"""
+        """添加/编辑本地产品.
+
+POST /erp/sc/routing/storage/product/set
+
+Args:
+    sku: SKU (required), string.
+    product_name: 品名【添加时必填】 (required), string.
+    sku_identifier: SKU识别码, string.
+    picture_list: 产品图片信息, array.
+    unit_process_fee: 单位加工费, int.
+    unit: 单位（商品单位：套、个、台）, string.
+    category_id: 分类id，与分类同时存在时，优先取分类id, int.
+    category: 分类, string.
+    model: 型号, string.
+    brand_id: 品牌id，与品牌同时存在时，优先取品牌id, int.
+    brand: 品牌, string.
+    open_status: 开启状态：0 停用，1 启用, int.
+    status: 状态【默认1】：0 停售，1 在售，2 开发中，3 清仓, int.
+    description: 商品描述, string.
+    group_list: 组合商品列表, array.
+    cg_opt_uid: 采购：采购员id，与采购员名同时填写时，以采购员id为准, int.
+    cg_opt_username: 采购：采购员名, string.
+    product_developer_uid: 开发者id，与开发者名称同时填写时，以开发者id为准, int.
+    product_developer: 开发者名称, string.
+    product_creator_uid: 创建人id，默认API账号id, int.
+    product_duty_uids: 负责人id, array.
+    is_append_product_duty: 负责人是否追加创建人：0 否，1 是；默认1，只有编辑SKU时才生效, int.
+    purchase_remark: 采购备注, string.
+    cg_price: 采购：采购成本（RMB）, string.
+    is_related: 是否关联单品成本：0 否，1 是, int.
+    cg_delivery: 采购：采购交期, int.
+    cg_product_material: 采购：商品材质, string.
+    cg_product_length: 采购：单品规格-长（CM）, string.
+    cg_product_width: 采购：单品规格-宽（CM）, string.
+    cg_product_height: 采购：单品规格-高（CM）, string.
+    cg_product_net_weight: 采购：单品净重（G）, string.
+    cg_product_gross_weight: 采购：单品毛重（G）, string.
+    cg_package_length: 采购：包装规格-长（CM）, string.
+    cg_package_width: 采购：包装规格-宽（CM）, string.
+    cg_package_height: 采购：包装规格-高（CM）, string.
+    cg_box_length: 采购：外箱规格-长（CM）, string.
+    cg_box_width: 采购：外箱规格-宽（CM）, string.
+    cg_box_height: 采购：外箱规格-高（CM）, string.
+    cg_box_weight: 采购：单箱重量（KG）, string.
+    cg_box_pcs: 采购：单箱数量（包装数量）, int.
+    bg_customs_export_name: 报关：申报品名(中文), string.
+    bg_export_hs_code: 报关：HS Code(中国), string.
+    bg_customs_import_name: 报关：申报品名(英文), string.
+    currency: 报关：申报金额的币种, string.
+    bg_customs_import_price: 报关：申报金额, string.
+    qc_standard: 质检标准, object.
+    product_logistics_list: 报关清关费用信息 支持国家：US、CA、MX、JP、UK、DE、FR、ES、IT、NL、AU、SG、IN、AE、SA、BR、SE、PL、BE、TR、UA、HU、PK、LB、AT、CH、CZ、DK、IE、LU、NO、PT、SK、RU、KZ、BY、CL、KR, object.
+    supplier_quote: 供应商报价信息（该参数传空值则清空产品供应商报价）, array.
+    special_attr: 产品特殊属性：1 含电，2 纯电，3 液体，4 粉末，5 膏体，6 带磁，7 纺织品，8普货（普货于其他选项互斥）, array.
+    declaration: 报关数据, object.
+    clearance: 清关数据, object.
+    aux_relation_list: 辅料列表, array.
+    spec_pack_list: 采购：更多箱规（非默认箱规）, array.
+    custom_fields: [array], 自定义字段."""
         resp = await self._post("/erp/sc/routing/storage/product/set", kwargs if kwargs else None)
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
     async def upc_list(self, **kwargs) -> tuple[list[UpcListItem], int]:
-        """UpcList（分页）. POST /listing/publish/api/upc/upcList"""
+        """获取UPC编码列表.
+
+POST /listing/publish/api/upc/upcList
+
+Args:
+    offset: 分页偏移量，默认0, int.
+    length: 分页长度，默认20, int."""
         resp = await self._post("/listing/publish/api/upc/upcList", kwargs if kwargs else None)
         return self._parse_page(resp.data, UpcListItem)
     async def upload_pictures(self, **kwargs) -> list | dict:
-        """UploadPictures. POST /erp/sc/routing/storage/product/uploadPictures"""
+        """上传本地产品图片.
+
+POST /erp/sc/routing/storage/product/uploadPictures
+
+Args:
+    sku: 本地产品SKU (required), string.
+    picture_list: 产品图片信息 (required), array."""
         resp = await self._post("/erp/sc/routing/storage/product/uploadPictures", kwargs if kwargs else None)
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
     async def attribute_list(self, **kwargs) -> tuple[list[AttributeListItem], int]:
-        """attributeList（分页）. POST /erp/sc/routing/storage/attribute/attributeList"""
+        """查询产品属性列表.
+
+POST /erp/sc/routing/storage/attribute/attributeList
+
+Args:
+    offset: 分页偏移量 (required), int.
+    length: 分页长度，上限200 (required), int."""
         resp = await self._post("/erp/sc/routing/storage/attribute/attributeList", kwargs if kwargs else None)
         return self._parse_page(resp.data, AttributeListItem)
     async def attribute_set(self, **kwargs) -> list | dict:
-        """attributeSet. POST /erp/sc/routing/storage/attribute/set"""
+        """添加 / 编辑产品属性.
+
+POST /erp/sc/routing/storage/attribute/set
+
+Args:
+    pa_id: 领星属性id, int.
+    attr_name: 属性名 (required), string.
+    attr_values: 属性值数组 (required), array."""
         resp = await self._post("/erp/sc/routing/storage/attribute/set", kwargs if kwargs else None)
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
     async def batch_get_product_info(self, **kwargs) -> dict:
-        """写操作 batchGetProductInfo. POST /erp/sc/routing/data/local_inventory/batchGetProductInfo"""
+        """批量查询本地产品详情.
+
+POST /erp/sc/routing/data/local_inventory/batchGetProductInfo
+
+Args:
+    productIds: 产品id，上限100个【产品id 、 产品sku 、SKU识别码 三选一必填】, array.
+    skus: 产品SKU，上限100个【产品id 、 产品sku 、SKU识别码 三选一必填】, array.
+    sku_identifiers: SKU识别码，上限100个上限100个【产品id 、 产品sku 、SKU识别码 三选一必填】, array."""
         resp = await self._post("/erp/sc/routing/data/local_inventory/batchGetProductInfo", kwargs if kwargs else None)
         return resp.data or {}
     async def bundled_product_list(self, **kwargs) -> list | dict:
-        """bundledProductList. POST /erp/sc/routing/data/local_inventory/bundledProductList"""
+        """查询捆绑产品关系列表.
+
+POST /erp/sc/routing/data/local_inventory/bundledProductList
+
+Args:
+    offset: 分页偏移量，默认0, int.
+    length: 分页长度，默认1000，上限1000, int."""
         resp = await self._post("/erp/sc/routing/data/local_inventory/bundledProductList", kwargs if kwargs else None)
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
     async def get_transparency_product_list(self, **kwargs) -> list | dict:
-        """getTransparencyProductList. POST /basicOpen/product/getTransparencyProductList"""
+        """产品管理-查询透明计划商品列表.
+
+POST /basicOpen/product/getTransparencyProductList
+
+Args:
+    isRelateMsku: 是否关联MSKU，枚举值：1-是, 2-否, int.
+    length: 分页长度，默认20，最大200, int.
+    offset: 分页偏移量，默认0, int.
+    productStatus: 产品状态，枚举值：all-全部, Enrolled-已注册, In OPR-OPR中, Protected-受保护, NoStatus-无状态, string.
+    searchField: 搜索字段，指定搜索的字段名, string.
+    searchValue: 搜索值，用于模糊搜索, string."""
         resp = await self._post("/basicOpen/product/getTransparencyProductList", kwargs if kwargs else None)
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
     async def product_aux_list(self, **kwargs) -> list | dict:
-        """productAuxList. POST /erp/sc/routing/data/local_inventory/productAuxList"""
+        """查询产品辅料列表.
+
+POST /erp/sc/routing/data/local_inventory/productAuxList
+
+Args:
+    offset: 分页偏移量，默认0, int.
+    length: 分页长度，默认1000，上限1000, int."""
         resp = await self._post("/erp/sc/routing/data/local_inventory/productAuxList", kwargs if kwargs else None)
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
     async def product_operate_batch(self, **kwargs) -> dict:
-        """写操作 productOperateBatch. POST /basicOpen/product/productManager/product/operate/batch"""
+        """产品启用、禁用.
+
+POST /basicOpen/product/productManager/product/operate/batch
+
+Args:
+    product_ids: 产品id, array.
+    batch_status: 状态: Enable 启用 Disable 禁用 (required), string."""
         resp = await self._post("/basicOpen/product/productManager/product/operate/batch", kwargs if kwargs else None)
         return resp.data or {}
     async def set_aux(self, **kwargs) -> list | dict:
-        """setAux. POST /erp/sc/routing/storage/product/setAux"""
+        """添加 / 编辑辅料.
+
+POST /erp/sc/routing/storage/product/setAux
+
+Args:
+    sku: SKU (required), string.
+    product_name: 品名 (required), string.
+    cg_price: 采购：采购成本（人民币）, number.
+    cg_product_length: 采购：单品规格-长（CM）, number.
+    cg_product_width: 采购：单品规格-宽（CM）, number.
+    cg_product_height: 采购：单品规格-高（CM）, number.
+    cg_product_net_weight: 采购：单品净重（G）, number.
+    supplier_quote: 供应商报价信息（不传该参数则清空产品供应商报价）, array.
+    remark: 辅料描述 (required), string."""
         resp = await self._post("/erp/sc/routing/storage/product/setAux", kwargs if kwargs else None)
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
     async def spu_info(self, **kwargs) -> list | dict:
-        """spuInfo. POST /erp/sc/routing/storage/spu/info"""
+        """查询多属性产品详情.
+
+POST /erp/sc/routing/storage/spu/info
+
+Args:
+    ps_id: SPU唯一id【ps_id 与 spu二选一必填 (required), int.
+    spu: SPU (required), string."""
         resp = await self._post("/erp/sc/routing/storage/spu/info", kwargs if kwargs else None)
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
     async def spu_list(self, **kwargs) -> list | dict:
-        """spuList. POST /erp/sc/routing/storage/spu/spuList"""
+        """查询多属性产品列表.
+
+POST /erp/sc/routing/storage/spu/spuList
+
+Args:
+    offset: 分页偏移量 (required), int.
+    length: 分页长度，上限200 (required), int."""
         resp = await self._post("/erp/sc/routing/storage/spu/spuList", kwargs if kwargs else None)
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
     async def spu_set(self, **kwargs) -> list | dict:
-        """spuSet. POST /erp/sc/routing/storage/spu/set"""
+        """添加/编辑多属性产品.
+
+POST /erp/sc/routing/storage/spu/set
+
+Args:
+    spu: SPU（添加时必填） (required), string.
+    spu_name: 款名（添加时必填） (required), string.
+    model: 型号, string.
+    unit: 单位, string.
+    status: 状态【默认1】：0 停售，1 在售，2 开发中，3 清仓, int.
+    cid: 分类id, int.
+    bid: 品牌id, int.
+    create_uid: 创建人id, int.
+    developer_uid: 开发人id, int.
+    product_duty_uids: 产品负责人id, array.
+    description: 产品描述, string.
+    use_spu_template: 是否应用SPU信息至新生成的SKU：0 否，1 是, int.
+    sku_list: 产品列表【提交的sku不存在时系统会自动创建】 (required), array.
+    purchase_info: 采购相关信息, object.
+    logistics: 物流报关相关信息, object.
+    aux_relation_list: 辅料列表, array.
+    attribute_skc_list: skc列表, array."""
         resp = await self._post("/erp/sc/routing/storage/spu/set", kwargs if kwargs else None)
         if isinstance(resp.data, list):
             return resp.data

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """领星ERP配置管理模块"""
+from __future__ import annotations
 
 import os
 

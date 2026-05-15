@@ -1,6 +1,6 @@
 [project]
 name = "lingxing-sdk"
-version = "0.3.0"
+version = "0.4.0"
 description = "领星 ERP OpenAPI Python SDK - Typed, async, Pydantic models"
 readme = "README.md"
 license = {text = "MIT"}
