@@ -31,7 +31,7 @@ class VCEndpoints(BaseEndpoint):
             return resp.data
         return resp.data or {}
     async def vc_order_df_confirm_shipment(self, **kwargs) -> dict:
-        """vcOrderDfConfirmShipment. POST /basicOpen/platformOrder/vcOrderDf/confirmShipment"""
+        """写操作 vcOrderDfConfirmShipment. POST /basicOpen/platformOrder/vcOrderDf/confirmShipment"""
         resp = await self._post("/basicOpen/platformOrder/vcOrderDf/confirmShipment", kwargs if kwargs else None)
         return resp.data or {}
     async def vc_order_df_detail(self, **kwargs) -> list | dict:
@@ -47,7 +47,7 @@ class VCEndpoints(BaseEndpoint):
             return resp.data
         return resp.data or {}
     async def vc_order_df_submit_shipping_label(self, **kwargs) -> dict:
-        """vcOrderDfSubmitShippingLabel. POST /basicOpen/platformOrder/vcOrderDf/submitShippingLabel"""
+        """写操作 vcOrderDfSubmitShippingLabel. POST /basicOpen/platformOrder/vcOrderDf/submitShippingLabel"""
         resp = await self._post("/basicOpen/platformOrder/vcOrderDf/submitShippingLabel", kwargs if kwargs else None)
         return resp.data or {}
     async def vc_order_page_list(self, **kwargs) -> list | dict:

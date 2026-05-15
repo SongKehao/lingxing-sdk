@@ -1,13 +1,11 @@
-"""Auto-generated Pydantic models from API fixtures."""
-
+"""Pydantic models for FBA APIs."""
 from typing import Optional
-from pydantic import Field
 
 from .common import LingXingModel
 
 
 class GetFbaProductListItem(LingXingModel):
-    """FBA/GetFbaProductList 响应数据项."""
+    """Response item for GetFbaProductList."""
 
     asin: Optional[str] = None
     asin_url: Optional[str] = None
@@ -16,21 +14,21 @@ class GetFbaProductListItem(LingXingModel):
     local_name: Optional[str] = None
     msku: Optional[str] = None
     parent_asin: Optional[str] = None
-    product_id: Optional[str] = None
-    sid: Optional[str] = None
+    product_id: Optional[int] = None
+    sid: Optional[int] = None
     sku: Optional[str] = None
     title: Optional[str] = None
 
 class GetHeadLogisticsFeeTypesItem(LingXingModel):
-    """FBA/GetHeadLogisticsFeeTypes 响应数据项."""
+    """Response item for GetHeadLogisticsFeeTypes."""
 
     created_at: Optional[str] = None
-    fee_type_id: Optional[str] = None
+    fee_type_id: Optional[int] = None
     name: Optional[str] = None
     remark: Optional[str] = None
 
 class GetInboundShipmentListItem(LingXingModel):
-    """FBA/GetInboundShipmentList 响应数据项."""
+    """Response item for GetInboundShipmentList."""
 
     actual_shipment_time: Optional[str] = None
     audit_status: Optional[int] = None
@@ -86,14 +84,14 @@ class GetInboundShipmentListItem(LingXingModel):
     wname: Optional[str] = None
 
 class GetSeaTrackSupplierCarriersItem(LingXingModel):
-    """FBA/GetSeaTrackSupplierCarriers 响应数据项."""
+    """Response item for GetSeaTrackSupplierCarriers."""
 
     home_page: Optional[str] = None
     name: Optional[str] = None
     shippers: Optional[str] = None
 
 class ShipFromAddressListItem(LingXingModel):
-    """FBA/ShipFromAddressList 响应数据项."""
+    """Response item for ShipFromAddressList."""
 
     alias_name: Optional[str] = None
     city: Optional[str] = None
@@ -103,7 +101,7 @@ class ShipFromAddressListItem(LingXingModel):
     email: Optional[str] = None
     id: Optional[int] = None
     is_default: Optional[int] = None
-    phone: Optional[str] = None
+    phone: Optional[int] = None
     province: Optional[str] = None
     region: Optional[str] = None
     seller_country_name: Optional[str] = None
@@ -113,10 +111,10 @@ class ShipFromAddressListItem(LingXingModel):
     street_detail1: Optional[str] = None
     street_detail2: Optional[str] = None
     type: Optional[int] = None
-    zip_code: Optional[str] = None
+    zip_code: Optional[int] = None
 
 class ShipmentPlanListsItem(LingXingModel):
-    """FBA/ShipmentPlanLists 响应数据项."""
+    """Response item for ShipmentPlanLists."""
 
     create_time: Optional[str] = None
     create_user: Optional[str] = None

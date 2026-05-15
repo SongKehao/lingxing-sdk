@@ -14,7 +14,7 @@ from typing import Any
 
 from .config import LingXingConfig, get_config
 from .integration_base import BaseIntegration, IntegrationHealth, IntegrationStatus
-from .models_legacy import (
+from .models.business import (
     AllocationOrderInfo,
     FBAShipment,
     # 头程物流相关

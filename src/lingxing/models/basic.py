@@ -1,13 +1,11 @@
-"""Auto-generated Pydantic models from API fixtures."""
-
+"""Pydantic models for BasicData APIs."""
 from typing import Optional
-from pydantic import Field
 
 from .common import LingXingModel
 
 
 class AccoutListsItem(LingXingModel):
-    """BasicData/AccoutLists 响应数据项."""
+    """Response item for AccoutLists."""
 
     create_time: Optional[str] = None
     email: Optional[str] = None
@@ -25,7 +23,7 @@ class AccoutListsItem(LingXingModel):
     zid: Optional[int] = None
 
 class AllMarketplaceItem(LingXingModel):
-    """BasicData/AllMarketplace 响应数据项."""
+    """Response item for AllMarketplace."""
 
     aws_region: Optional[str] = None
     code: Optional[str] = None
@@ -35,7 +33,7 @@ class AllMarketplaceItem(LingXingModel):
     region: Optional[str] = None
 
 class ConceptSellerListsItem(LingXingModel):
-    """BasicData/ConceptSellerLists 响应数据项."""
+    """Response item for ConceptSellerLists."""
 
     country: Optional[str] = None
     id: Optional[int] = None
@@ -48,7 +46,7 @@ class ConceptSellerListsItem(LingXingModel):
     status: Optional[int] = None
 
 class SellerListsItem(LingXingModel):
-    """BasicData/SellerLists 响应数据项."""
+    """Response item for SellerLists."""
 
     account_name: Optional[str] = None
     country: Optional[str] = None

@@ -6,14 +6,12 @@ from ._base import BaseEndpoint
 class SaleEndpoints(BaseEndpoint):
     """领星销售/订单/Listing API (44个接口)."""
 
-    async def add_goods_tag(self, **kwargs) -> list | dict:
-        """AddGoodsTag. POST /basicOpen/listingManage/bindListingAndTag"""
+    async def add_goods_tag(self, **kwargs) -> dict:
+        """写操作 AddGoodsTag. POST /basicOpen/listingManage/bindListingAndTag"""
         resp = await self._post("/basicOpen/listingManage/bindListingAndTag", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
         return resp.data or {}
     async def delete_goods_tag(self, **kwargs) -> dict:
-        """DeleteGoodsTag. POST /basicOpen/listingManage/removeListingAndTag"""
+        """写操作 DeleteGoodsTag. POST /basicOpen/listingManage/removeListingAndTag"""
         resp = await self._post("/basicOpen/listingManage/removeListingAndTag", kwargs if kwargs else None)
         return resp.data or {}
     async def fbm_order_detail(self, **kwargs) -> list | dict:
@@ -125,11 +123,11 @@ class SaleEndpoints(BaseEndpoint):
             return resp.data
         return resp.data or {}
     async def update_fbm_inventory(self, **kwargs) -> dict:
-        """UpdateFbmInventory. POST /basicOpen/FbmManagement/modifyFbmInventory"""
+        """写操作 UpdateFbmInventory. POST /basicOpen/FbmManagement/modifyFbmInventory"""
         resp = await self._post("/basicOpen/FbmManagement/modifyFbmInventory", kwargs if kwargs else None)
         return resp.data or {}
     async def update_principal(self, **kwargs) -> dict:
-        """UpdatePrincipal. POST /listing/listing/open/api/asin/updatePrincipal"""
+        """写操作 UpdatePrincipal. POST /listing/listing/open/api/asin/updatePrincipal"""
         resp = await self._post("/listing/listing/open/api/asin/updatePrincipal", kwargs if kwargs else None)
         return resp.data or {}
     async def upload_tracking(self, **kwargs) -> list | dict:
@@ -168,11 +166,9 @@ class SaleEndpoints(BaseEndpoint):
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def global_tag_add_tag(self, **kwargs) -> list | dict:
-        """globalTagAddTag. POST /basicOpen/globalTag/listing/addTag"""
+    async def global_tag_add_tag(self, **kwargs) -> dict:
+        """写操作 globalTagAddTag. POST /basicOpen/globalTag/listing/addTag"""
         resp = await self._post("/basicOpen/globalTag/listing/addTag", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
         return resp.data or {}
     async def global_tag_page_list(self, **kwargs) -> list | dict:
         """globalTagPageList. POST /basicOpen/globalTag/listing/page/list"""
@@ -180,11 +176,9 @@ class SaleEndpoints(BaseEndpoint):
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def global_tag_remove_tag(self, **kwargs) -> list | dict:
-        """globalTagRemoveTag. POST /basicOpen/globalTag/listing/removeTag"""
+    async def global_tag_remove_tag(self, **kwargs) -> dict:
+        """写操作 globalTagRemoveTag. POST /basicOpen/globalTag/listing/removeTag"""
         resp = await self._post("/basicOpen/globalTag/listing/removeTag", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
         return resp.data or {}
     async def listing_operate_log_page_list(self, **kwargs) -> list | dict:
         """listingOperateLogPageList. POST /basicOpen/listingManage/listingOperateLog/pageList"""
@@ -193,14 +187,12 @@ class SaleEndpoints(BaseEndpoint):
             return resp.data
         return resp.data or {}
     async def pricing_submit(self, **kwargs) -> dict:
-        """pricingSubmit. POST /erp/sc/listing/ProductPricing/pricingSubmit"""
+        """写操作 pricingSubmit. POST /erp/sc/listing/ProductPricing/pricingSubmit"""
         resp = await self._post("/erp/sc/listing/ProductPricing/pricingSubmit", kwargs if kwargs else None)
         return resp.data or {}
-    async def product_relationbatch_link(self, **kwargs) -> list | dict:
-        """productRelationbatchLink. POST /basicOpen/vcservice/productRelation/batchLink"""
+    async def product_relationbatch_link(self, **kwargs) -> dict:
+        """写操作 productRelationbatchLink. POST /basicOpen/vcservice/productRelation/batchLink"""
         resp = await self._post("/basicOpen/vcservice/productRelation/batchLink", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
         return resp.data or {}
     async def promotion_listing_detail_coupon(self, **kwargs) -> list | dict:
         """promotionListingDetailCoupon. POST /basicOpen/promotion/listingDetailCoupon"""

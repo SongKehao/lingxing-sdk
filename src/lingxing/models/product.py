@@ -1,20 +1,18 @@
-"""Auto-generated Pydantic models from API fixtures."""
-
+"""Pydantic models for Product APIs."""
 from typing import Optional
-from pydantic import Field
 
 from .common import LingXingModel
 
 
 class BrandItem(LingXingModel):
-    """Product/Brand 响应数据项."""
+    """Response item for Brand."""
 
     bid: Optional[int] = None
     brand_code: Optional[str] = None
     title: Optional[str] = None
 
 class CategoryItem(LingXingModel):
-    """Product/Category 响应数据项."""
+    """Response item for Category."""
 
     category_code: Optional[str] = None
     cid: Optional[int] = None
@@ -22,7 +20,7 @@ class CategoryItem(LingXingModel):
     title: Optional[str] = None
 
 class ProductListsItem(LingXingModel):
-    """Product/ProductLists 响应数据项."""
+    """Response item for ProductLists."""
 
     attribute: Optional[list] = None
     aux_relation_list: Optional[list] = None
@@ -32,8 +30,8 @@ class ProductListsItem(LingXingModel):
     cg_delivery: Optional[int] = None
     cg_opt_uid: Optional[int] = None
     cg_opt_username: Optional[str] = None
-    cg_price: Optional[str] = None
-    cg_transport_costs: Optional[str] = None
+    cg_price: Optional[float] = None
+    cg_transport_costs: Optional[float] = None
     cid: Optional[int] = None
     create_time: Optional[int] = None
     custom_fields: Optional[list] = None
@@ -55,14 +53,14 @@ class ProductListsItem(LingXingModel):
     supplier_quote: Optional[list] = None
     update_time: Optional[int] = None
 
-class UpcListData(LingXingModel):
-    """Product/UpcList 响应数据项."""
+class UpcListItem(LingXingModel):
+    """Response item for UpcList."""
 
     list: Optional[list] = None
     total: Optional[int] = None
 
-class AttributeListData(LingXingModel):
-    """Product/attributeList 响应数据项."""
+class AttributeListItem(LingXingModel):
+    """Response item for attributeList."""
 
     list: Optional[list] = None
     total: Optional[int] = None

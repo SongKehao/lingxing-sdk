@@ -2,42 +2,41 @@
 from __future__ import annotations
 
 from ._base import BaseEndpoint
+from ..models.warehouse import GetBatchDetailListItem, GetBatchStatementListItem, GetProcessOrderListsItem, GetStorageAdjustOrderListItem, InboundGetCustomTypesItem, InboundgetOrdersItem, InventoryBinDetailsItem, InventoryDetailsItem, OutboundGetCustomTypesItem, OutboundgetOrdersItem, PurchaseReceiptOrderListItem, RemovalInboundListItem, WareHouseBinStatementItem, WarehouseListsItem, WarehouseStatementItem, WarehouseStatementNewItem, WmsOrderListItem
 
 class WarehouseEndpoints(BaseEndpoint):
     """领星仓库/库存 API (76个接口)."""
 
-    async def add_allocation_order(self, **kwargs) -> list | dict:
-        """AddAllocationOrder. POST /erp/sc/routing/inventoryReceipt/StorageAllocation/addAllocationOrder"""
+    async def add_allocation_order(self, **kwargs) -> dict:
+        """写操作 AddAllocationOrder. POST /erp/sc/routing/inventoryReceipt/StorageAllocation/addAllocationOrder"""
         resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAllocation/addAllocationOrder", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
         return resp.data or {}
     async def adjust_order_confirm(self, **kwargs) -> dict:
-        """AdjustOrderConfirm. POST /basicOpen/adjustOrder/adjust/setAdjust"""
+        """写操作 AdjustOrderConfirm. POST /basicOpen/adjustOrder/adjust/setAdjust"""
         resp = await self._post("/basicOpen/adjustOrder/adjust/setAdjust", kwargs if kwargs else None)
         return resp.data or {}
     async def cancel_storage_allocation_list(self, **kwargs) -> dict:
-        """CancelStorageAllocationList. POST /basicOpen/storageAllocationList/cancel"""
+        """写操作 CancelStorageAllocationList. POST /basicOpen/storageAllocationList/cancel"""
         resp = await self._post("/basicOpen/storageAllocationList/cancel", kwargs if kwargs else None)
         return resp.data or {}
     async def create_inbound(self, **kwargs) -> dict:
-        """CreateInbound. POST /erp/sc/routing/owms/inbound/createInbound"""
+        """写操作 CreateInbound. POST /erp/sc/routing/owms/inbound/createInbound"""
         resp = await self._post("/erp/sc/routing/owms/inbound/createInbound", kwargs if kwargs else None)
         return resp.data or {}
     async def delete_fba_shipment_list(self, **kwargs) -> dict:
-        """DeleteFbaShipmentList. POST /basicOpen/openapi/fbaShipment/deleteShipmentList"""
+        """写操作 DeleteFbaShipmentList. POST /basicOpen/openapi/fbaShipment/deleteShipmentList"""
         resp = await self._post("/basicOpen/openapi/fbaShipment/deleteShipmentList", kwargs if kwargs else None)
         return resp.data or {}
     async def delete_over_sea_stock_order(self, **kwargs) -> dict:
-        """DeleteOverSeaStockOrder. POST /basicOpen/overSeaWarehouse/stockOrder/delete"""
+        """写操作 DeleteOverSeaStockOrder. POST /basicOpen/overSeaWarehouse/stockOrder/delete"""
         resp = await self._post("/basicOpen/overSeaWarehouse/stockOrder/delete", kwargs if kwargs else None)
         return resp.data or {}
     async def delete_storage_allocation_list(self, **kwargs) -> dict:
-        """DeleteStorageAllocationList. POST /basicOpen/storageAllocationList/delete"""
+        """写操作 DeleteStorageAllocationList. POST /basicOpen/storageAllocationList/delete"""
         resp = await self._post("/basicOpen/storageAllocationList/delete", kwargs if kwargs else None)
         return resp.data or {}
     async def edit_warehouse(self, **kwargs) -> dict:
-        """EditWarehouse. POST /erp/sc/storage/wareHouse/edit"""
+        """写操作 EditWarehouse. POST /erp/sc/storage/wareHouse/edit"""
         resp = await self._post("/erp/sc/storage/wareHouse/edit", kwargs if kwargs else None)
         return resp.data or {}
     async def fba_stock(self, **kwargs) -> list | dict:
@@ -53,53 +52,43 @@ class WarehouseEndpoints(BaseEndpoint):
             return resp.data
         return resp.data or {}
     async def fast_receive(self, **kwargs) -> dict:
-        """FastReceive. POST /erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/fastReceive"""
+        """写操作 FastReceive. POST /erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/fastReceive"""
         resp = await self._post("/erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/fastReceive", kwargs if kwargs else None)
         return resp.data or {}
     async def get_adjust_order_confirm_result(self, **kwargs) -> dict:
-        """GetAdjustOrderConfirmResult. POST /basicOpen/adjustOrder/adjust/getAdjustStatus"""
+        """写操作 GetAdjustOrderConfirmResult. POST /basicOpen/adjustOrder/adjust/getAdjustStatus"""
         resp = await self._post("/basicOpen/adjustOrder/adjust/getAdjustStatus", kwargs if kwargs else None)
         return resp.data or {}
-    async def get_batch_detail_list(self, **kwargs) -> list | dict:
-        """GetBatchDetailList. POST /erp/sc/routing/data/local_inventory/getBatchDetailList"""
+    async def get_batch_detail_list(self, **kwargs) -> dict:
+        """写操作 GetBatchDetailList. POST /erp/sc/routing/data/local_inventory/getBatchDetailList"""
         resp = await self._post("/erp/sc/routing/data/local_inventory/getBatchDetailList", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
         return resp.data or {}
-    async def get_batch_statement_list(self, **kwargs) -> list | dict:
-        """GetBatchStatementList. POST /erp/sc/routing/data/local_inventory/getBatchStatementList"""
+    async def get_batch_statement_list(self, **kwargs) -> dict:
+        """写操作 GetBatchStatementList. POST /erp/sc/routing/data/local_inventory/getBatchStatementList"""
         resp = await self._post("/erp/sc/routing/data/local_inventory/getBatchStatementList", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
         return resp.data or {}
     async def get_receive_good_records(self, **kwargs) -> dict:
-        """GetReceiveGoodRecords. POST /erp/sc/routing/owms/inbound/getReceiveGoodRecords"""
+        """写操作 GetReceiveGoodRecords. POST /erp/sc/routing/owms/inbound/getReceiveGoodRecords"""
         resp = await self._post("/erp/sc/routing/owms/inbound/getReceiveGoodRecords", kwargs if kwargs else None)
         return resp.data or {}
     async def inbound_order_confirm(self, **kwargs) -> dict:
-        """InboundOrderConfirm. POST /basicOpen/inboundOrder/inbound/setInbound"""
+        """写操作 InboundOrderConfirm. POST /basicOpen/inboundOrder/inbound/setInbound"""
         resp = await self._post("/basicOpen/inboundOrder/inbound/setInbound", kwargs if kwargs else None)
         return resp.data or {}
-    async def inventory_details(self, **kwargs) -> list | dict:
+    async def inventory_details(self, **kwargs) -> list[InventoryDetailsItem]:
         """InventoryDetails. POST /erp/sc/routing/data/local_inventory/inventoryDetails"""
         resp = await self._post("/erp/sc/routing/data/local_inventory/inventoryDetails", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def order_add(self, **kwargs) -> list | dict:
-        """OrderAdd. POST /erp/sc/routing/storage/storage/orderAdd"""
+        return self._parse_list(resp.data, InventoryDetailsItem)
+    async def order_add(self, **kwargs) -> dict:
+        """写操作 OrderAdd. POST /erp/sc/routing/storage/storage/orderAdd"""
         resp = await self._post("/erp/sc/routing/storage/storage/orderAdd", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
         return resp.data or {}
-    async def order_add_out(self, **kwargs) -> list | dict:
-        """OrderAddOut. POST /erp/sc/routing/storage/storage/orderAddOut"""
+    async def order_add_out(self, **kwargs) -> dict:
+        """写操作 OrderAddOut. POST /erp/sc/routing/storage/storage/orderAddOut"""
         resp = await self._post("/erp/sc/routing/storage/storage/orderAddOut", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
         return resp.data or {}
     async def outbound_order_confirm(self, **kwargs) -> dict:
-        """OutboundOrderConfirm. POST /basicOpen/outboundOrder/outbound/setOutbound"""
+        """写操作 OutboundOrderConfirm. POST /basicOpen/outboundOrder/outbound/setOutbound"""
         resp = await self._post("/basicOpen/outboundOrder/outbound/setOutbound", kwargs if kwargs else None)
         return resp.data or {}
     async def over_seas_stock_detail(self, **kwargs) -> list | dict:
@@ -126,18 +115,16 @@ class WarehouseEndpoints(BaseEndpoint):
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def purchase_receipt_order_list(self, **kwargs) -> list | dict:
-        """PurchaseReceiptOrderList. POST /erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/getOrderList"""
+    async def purchase_receipt_order_list(self, **kwargs) -> tuple[list[PurchaseReceiptOrderListItem], int]:
+        """PurchaseReceiptOrderList（分页）. POST /erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/getOrderList"""
         resp = await self._post("/erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/getOrderList", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
+        return self._parse_page(resp.data, PurchaseReceiptOrderListItem)
     async def receive(self, **kwargs) -> dict:
-        """Receive. POST /erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/receive"""
+        """写操作 Receive. POST /erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/receive"""
         resp = await self._post("/erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/receive", kwargs if kwargs else None)
         return resp.data or {}
     async def send_inbound(self, **kwargs) -> dict:
-        """SendInbound. POST /erp/sc/routing/owms/inbound/sendInbound"""
+        """写操作 SendInbound. POST /erp/sc/routing/owms/inbound/sendInbound"""
         resp = await self._post("/erp/sc/routing/owms/inbound/sendInbound", kwargs if kwargs else None)
         return resp.data or {}
     async def set_inbound_order_revoke(self, **kwargs) -> list | dict:
@@ -153,76 +140,58 @@ class WarehouseEndpoints(BaseEndpoint):
             return resp.data
         return resp.data or {}
     async def update_logistics(self, **kwargs) -> dict:
-        """UpdateLogistics. POST /erp/sc/routing/owms/inbound/updateLogistics"""
+        """写操作 UpdateLogistics. POST /erp/sc/routing/owms/inbound/updateLogistics"""
         resp = await self._post("/erp/sc/routing/owms/inbound/updateLogistics", kwargs if kwargs else None)
         return resp.data or {}
-    async def warehouse_lists(self, **kwargs) -> list | dict:
+    async def warehouse_lists(self, **kwargs) -> list[WarehouseListsItem]:
         """WarehouseLists. POST /erp/sc/data/local_inventory/warehouse"""
         resp = await self._post("/erp/sc/data/local_inventory/warehouse", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def warehouse_statement(self, **kwargs) -> list | dict:
+        return self._parse_list(resp.data, WarehouseListsItem)
+    async def warehouse_statement(self, **kwargs) -> list[WarehouseStatementItem]:
         """WarehouseStatement. POST /erp/sc/routing/data/local_inventory/wareHouseStatement"""
         resp = await self._post("/erp/sc/routing/data/local_inventory/wareHouseStatement", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def warehouse_statement_new(self, **kwargs) -> list | dict:
+        return self._parse_list(resp.data, WarehouseStatementItem)
+    async def warehouse_statement_new(self, **kwargs) -> list[WarehouseStatementNewItem]:
         """WarehouseStatementNew. POST /erp/sc/routing/inventoryLog/WareHouseInventory/wareHouseCenterStatement"""
         resp = await self._post("/erp/sc/routing/inventoryLog/WareHouseInventory/wareHouseCenterStatement", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
+        return self._parse_list(resp.data, WarehouseStatementNewItem)
     async def wms_order_detail(self, **kwargs) -> list | dict:
         """WmsOrderDetail. POST /basicOpen/wmsOrder/getWmsOrdersByOrderNumbers"""
         resp = await self._post("/basicOpen/wmsOrder/getWmsOrdersByOrderNumbers", kwargs if kwargs else None)
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def wms_order_list(self, **kwargs) -> list | dict:
+    async def wms_order_list(self, **kwargs) -> list[WmsOrderListItem]:
         """WmsOrderList. POST /erp/sc/routing/wms/order/wmsOrderList"""
         resp = await self._post("/erp/sc/routing/wms/order/wmsOrderList", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def add_adjustment_order(self, **kwargs) -> list | dict:
-        """addAdjustmentOrder. POST /erp/sc/routing/inventoryReceipt/StorageAdjustment/addAdjustmentOrder"""
+        return self._parse_list(resp.data, WmsOrderListItem)
+    async def add_adjustment_order(self, **kwargs) -> dict:
+        """写操作 addAdjustmentOrder. POST /erp/sc/routing/inventoryReceipt/StorageAdjustment/addAdjustmentOrder"""
         resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAdjustment/addAdjustmentOrder", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
         return resp.data or {}
-    async def add_rebrand_adjustment_order(self, **kwargs) -> list | dict:
-        """addRebrandAdjustmentOrder. POST /erp/sc/routing/inventoryReceipt/StorageAdjustment/addRebrandAdjustmentOrder"""
+    async def add_rebrand_adjustment_order(self, **kwargs) -> dict:
+        """写操作 addRebrandAdjustmentOrder. POST /erp/sc/routing/inventoryReceipt/StorageAdjustment/addRebrandAdjustmentOrder"""
         resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAdjustment/addRebrandAdjustmentOrder", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
         return resp.data or {}
-    async def add_sku_adjustment_order(self, **kwargs) -> list | dict:
-        """addSkuAdjustmentOrder. POST /erp/sc/routing/inventoryReceipt/StorageAdjustment/addSkuAdjustmentOrder"""
+    async def add_sku_adjustment_order(self, **kwargs) -> dict:
+        """写操作 addSkuAdjustmentOrder. POST /erp/sc/routing/inventoryReceipt/StorageAdjustment/addSkuAdjustmentOrder"""
         resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAdjustment/addSkuAdjustmentOrder", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
         return resp.data or {}
-    async def add_storage_process_order(self, **kwargs) -> list | dict:
-        """addStorageProcessOrder. POST /erp/sc/routing/inventoryReceipt/StorageProcess/addStorageProcessOrder"""
+    async def add_storage_process_order(self, **kwargs) -> dict:
+        """写操作 addStorageProcessOrder. POST /erp/sc/routing/inventoryReceipt/StorageProcess/addStorageProcessOrder"""
         resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageProcess/addStorageProcessOrder", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
         return resp.data or {}
     async def bin_create(self, **kwargs) -> dict:
-        """binCreate. POST /erp/sc/routing/storage/wareHouseBin/create"""
+        """写操作 binCreate. POST /erp/sc/routing/storage/wareHouseBin/create"""
         resp = await self._post("/erp/sc/routing/storage/wareHouseBin/create", kwargs if kwargs else None)
         return resp.data or {}
     async def cancel_wms_order(self, **kwargs) -> dict:
-        """cancelWmsOrder. POST /basicOpen/wmsOrder/cancel"""
+        """写操作 cancelWmsOrder. POST /basicOpen/wmsOrder/cancel"""
         resp = await self._post("/basicOpen/wmsOrder/cancel", kwargs if kwargs else None)
         return resp.data or {}
-    async def check_add_order(self, **kwargs) -> list | dict:
-        """checkAddOrder. POST /erp/sc/routing/inventoryReceipt/InventoryCheck/addOrder"""
+    async def check_add_order(self, **kwargs) -> dict:
+        """写操作 checkAddOrder. POST /erp/sc/routing/inventoryReceipt/InventoryCheck/addOrder"""
         resp = await self._post("/erp/sc/routing/inventoryReceipt/InventoryCheck/addOrder", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
         return resp.data or {}
     async def check_get_order_detail(self, **kwargs) -> list | dict:
         """checkGetOrderDetail. POST /erp/sc/routing/inventoryReceipt/InventoryCheck/getOrderDetail"""
@@ -237,11 +206,11 @@ class WarehouseEndpoints(BaseEndpoint):
             return resp.data
         return resp.data or {}
     async def create_receipt_order(self, **kwargs) -> dict:
-        """createReceiptOrder. POST /erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/createReceiptOrder"""
+        """写操作 createReceiptOrder. POST /erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/createReceiptOrder"""
         resp = await self._post("/erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/createReceiptOrder", kwargs if kwargs else None)
         return resp.data or {}
     async def finish_receive_allocation_order(self, **kwargs) -> dict:
-        """finishReceiveAllocationOrder. POST /erp/sc/routing/inventoryReceipt/StorageAllocation/finishReceiveAllocationOrder"""
+        """写操作 finishReceiveAllocationOrder. POST /erp/sc/routing/inventoryReceipt/StorageAllocation/finishReceiveAllocationOrder"""
         resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAllocation/finishReceiveAllocationOrder", kwargs if kwargs else None)
         return resp.data or {}
     async def get_packing_data(self, **kwargs) -> list | dict:
@@ -250,29 +219,23 @@ class WarehouseEndpoints(BaseEndpoint):
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def get_process_order_lists(self, **kwargs) -> list | dict:
+    async def get_process_order_lists(self, **kwargs) -> list[GetProcessOrderListsItem]:
         """getProcessOrderLists. POST /erp/sc/routing/inventoryReceipt/StorageProcess/getOrderLists"""
         resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageProcess/getOrderLists", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def get_storage_adjust_order_list(self, **kwargs) -> list | dict:
+        return self._parse_list(resp.data, GetProcessOrderListsItem)
+    async def get_storage_adjust_order_list(self, **kwargs) -> list[GetStorageAdjustOrderListItem]:
         """getStorageAdjustOrderList. POST /erp/sc/routing/inventoryReceipt/StorageAdjustment/getStorageAdjustOrderList"""
         resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAdjustment/getStorageAdjustOrderList", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
+        return self._parse_list(resp.data, GetStorageAdjustOrderListItem)
     async def get_storage_allocation_list(self, **kwargs) -> list | dict:
         """getStorageAllocationList. POST /erp/sc/routing/inventoryReceipt/StorageAllocation/getStorageAllocationList"""
         resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAllocation/getStorageAllocationList", kwargs if kwargs else None)
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def inbound_batches_receipt(self, **kwargs) -> list | dict:
-        """inboundBatchesReceipt. POST /erp/sc/routing/owms/inbound/batchesReceipt"""
+    async def inbound_batches_receipt(self, **kwargs) -> dict:
+        """写操作 inboundBatchesReceipt. POST /erp/sc/routing/owms/inbound/batchesReceipt"""
         resp = await self._post("/erp/sc/routing/owms/inbound/batchesReceipt", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
         return resp.data or {}
     async def inbound_complete_receipt(self, **kwargs) -> list | dict:
         """inboundCompleteReceipt. POST /erp/sc/routing/owms/inbound/completeReceipt"""
@@ -280,24 +243,18 @@ class WarehouseEndpoints(BaseEndpoint):
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def inbound_get_custom_types(self, **kwargs) -> list | dict:
-        """inboundGetCustomTypes. POST /erp/sc/routing/storage/inbound/getCustomTypes"""
+    async def inbound_get_custom_types(self, **kwargs) -> tuple[list[InboundGetCustomTypesItem], int]:
+        """inboundGetCustomTypes（分页）. POST /erp/sc/routing/storage/inbound/getCustomTypes"""
         resp = await self._post("/erp/sc/routing/storage/inbound/getCustomTypes", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def inboundget_orders(self, **kwargs) -> list | dict:
+        return self._parse_page(resp.data, InboundGetCustomTypesItem)
+    async def inboundget_orders(self, **kwargs) -> list[InboundgetOrdersItem]:
         """inboundgetOrders. POST /erp/sc/routing/storage/inbound/getOrders"""
         resp = await self._post("/erp/sc/routing/storage/inbound/getOrders", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def inventory_bin_details(self, **kwargs) -> list | dict:
+        return self._parse_list(resp.data, InboundgetOrdersItem)
+    async def inventory_bin_details(self, **kwargs) -> list[InventoryBinDetailsItem]:
         """inventoryBinDetails. POST /erp/sc/routing/data/local_inventory/inventoryBinDetails"""
         resp = await self._post("/erp/sc/routing/data/local_inventory/inventoryBinDetails", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
+        return self._parse_list(resp.data, InventoryBinDetailsItem)
     async def list_inbound(self, **kwargs) -> list | dict:
         """listInbound. POST /erp/sc/routing/owms/inbound/listInbound"""
         resp = await self._post("/erp/sc/routing/owms/inbound/listInbound", kwargs if kwargs else None)
@@ -316,24 +273,20 @@ class WarehouseEndpoints(BaseEndpoint):
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def outbound_get_custom_types(self, **kwargs) -> list | dict:
-        """outboundGetCustomTypes. POST /erp/sc/routing/storage/outbound/getCustomTypes"""
+    async def outbound_get_custom_types(self, **kwargs) -> tuple[list[OutboundGetCustomTypesItem], int]:
+        """outboundGetCustomTypes（分页）. POST /erp/sc/routing/storage/outbound/getCustomTypes"""
         resp = await self._post("/erp/sc/routing/storage/outbound/getCustomTypes", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
+        return self._parse_page(resp.data, OutboundGetCustomTypesItem)
     async def outbound_order_delete(self, **kwargs) -> dict:
-        """outboundOrderDelete. POST /basicOpen/outboundOrder/outbound/delete"""
+        """写操作 outboundOrderDelete. POST /basicOpen/outboundOrder/outbound/delete"""
         resp = await self._post("/basicOpen/outboundOrder/outbound/delete", kwargs if kwargs else None)
         return resp.data or {}
-    async def outboundget_orders(self, **kwargs) -> list | dict:
+    async def outboundget_orders(self, **kwargs) -> list[OutboundgetOrdersItem]:
         """outboundgetOrders. POST /erp/sc/routing/storage/outbound/getOrders"""
         resp = await self._post("/erp/sc/routing/storage/outbound/getOrders", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
+        return self._parse_list(resp.data, OutboundgetOrdersItem)
     async def oversea_stock_order_allocate(self, **kwargs) -> dict:
-        """overseaStockOrderAllocate. POST /basicOpen/overSeaWarehouse/stockOrder/allocate"""
+        """写操作 overseaStockOrderAllocate. POST /basicOpen/overSeaWarehouse/stockOrder/allocate"""
         resp = await self._post("/basicOpen/overSeaWarehouse/stockOrder/allocate", kwargs if kwargs else None)
         return resp.data or {}
     async def package_label(self, **kwargs) -> list | dict:
@@ -349,7 +302,7 @@ class WarehouseEndpoints(BaseEndpoint):
             return resp.data
         return resp.data or {}
     async def partly_receive_allocation_order(self, **kwargs) -> dict:
-        """partlyReceiveAllocationOrder. POST /erp/sc/routing/inventoryReceipt/StorageAllocation/partlyReceiveAllocationOrder"""
+        """写操作 partlyReceiveAllocationOrder. POST /erp/sc/routing/inventoryReceipt/StorageAllocation/partlyReceiveAllocationOrder"""
         resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAllocation/partlyReceiveAllocationOrder", kwargs if kwargs else None)
         return resp.data or {}
     async def product_label(self, **kwargs) -> list | dict:
@@ -365,37 +318,33 @@ class WarehouseEndpoints(BaseEndpoint):
             return resp.data
         return resp.data or {}
     async def receive_allocation_order(self, **kwargs) -> dict:
-        """receiveAllocationOrder. POST /erp/sc/routing/inventoryReceipt/StorageAllocation/receiveAllocationOrder"""
+        """写操作 receiveAllocationOrder. POST /erp/sc/routing/inventoryReceipt/StorageAllocation/receiveAllocationOrder"""
         resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAllocation/receiveAllocationOrder", kwargs if kwargs else None)
         return resp.data or {}
-    async def removal_inbound_list(self, **kwargs) -> list | dict:
+    async def removal_inbound_list(self, **kwargs) -> list[RemovalInboundListItem]:
         """removalInboundList. POST /erp/sc/routing/owms/removalInbound/list"""
         resp = await self._post("/erp/sc/routing/owms/removalInbound/list", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
+        return self._parse_list(resp.data, RemovalInboundListItem)
     async def set_tracking_no(self, **kwargs) -> dict:
-        """setTrackingNo. POST /basicOpen/logisticsOrdering/setTrackingNo"""
+        """写操作 setTrackingNo. POST /basicOpen/logisticsOrdering/setTrackingNo"""
         resp = await self._post("/basicOpen/logisticsOrdering/setTrackingNo", kwargs if kwargs else None)
         return resp.data or {}
     async def submit_allocation_order(self, **kwargs) -> dict:
-        """submitAllocationOrder. POST /erp/sc/routing/inventoryReceipt/StorageAllocation/submitAllocationOrder"""
+        """写操作 submitAllocationOrder. POST /erp/sc/routing/inventoryReceipt/StorageAllocation/submitAllocationOrder"""
         resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAllocation/submitAllocationOrder", kwargs if kwargs else None)
         return resp.data or {}
     async def switch_status(self, **kwargs) -> dict:
-        """switchStatus. POST /erp/sc/routing/storage/wareHouseBin/switchStatus"""
+        """写操作 switchStatus. POST /erp/sc/routing/storage/wareHouseBin/switchStatus"""
         resp = await self._post("/erp/sc/routing/storage/wareHouseBin/switchStatus", kwargs if kwargs else None)
         return resp.data or {}
     async def update_inbound(self, **kwargs) -> dict:
-        """updateInbound. POST /erp/sc/routing/owms/inbound/updateInbound"""
+        """写操作 updateInbound. POST /erp/sc/routing/owms/inbound/updateInbound"""
         resp = await self._post("/erp/sc/routing/owms/inbound/updateInbound", kwargs if kwargs else None)
         return resp.data or {}
-    async def ware_house_bin_statement(self, **kwargs) -> list | dict:
+    async def ware_house_bin_statement(self, **kwargs) -> list[WareHouseBinStatementItem]:
         """wareHouseBinStatement. POST /erp/sc/routing/data/local_inventory/wareHouseBinStatement"""
         resp = await self._post("/erp/sc/routing/data/local_inventory/wareHouseBinStatement", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
+        return self._parse_list(resp.data, WareHouseBinStatementItem)
     async def warehouse_bin(self, **kwargs) -> list | dict:
         """warehouseBin. POST /erp/sc/routing/data/local_inventory/warehouseBin"""
         resp = await self._post("/erp/sc/routing/data/local_inventory/warehouseBin", kwargs if kwargs else None)

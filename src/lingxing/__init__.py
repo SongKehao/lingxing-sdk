@@ -1,6 +1,6 @@
 """领星 ERP OpenAPI Python SDK"""
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 
 from .client import LingXingClient
 from .config import LingXingConfig, get_config, set_config
@@ -24,7 +24,7 @@ from .integration_base import (
     IntegrationHealth,
     IntegrationStatus,
 )
-from .models_legacy import (
+from .models.business import (
     FBAShipment,
     InventoryInfo,
     LingXingResponse,

@@ -4,7 +4,7 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING, Any, TypeVar
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ValidationError
 
 from ..errors import ApiError
 from ..core.resp_schema import ResponseResult
@@ -23,7 +23,7 @@ class BaseEndpoint:
     Provides typed _post / _get helpers that:
     1. Send request via OpenApiBase
     2. Check response code
-    3. Parse response data into typed Pydantic models
+    3. Parse response data into typed Pydantic models (with fallback)
     """
 
     def __init__(self, openapi: OpenApiBase):
@@ -60,16 +60,34 @@ class BaseEndpoint:
             )
 
     def _parse_list(self, data: Any, model: type[T]) -> list[T]:
-        """Parse a list of dicts into a list of Pydantic models."""
+        """Parse a list of dicts into a list of Pydantic models.
+
+        Falls back to raw dicts if model validation fails for any item.
+        """
         if data is None:
             return []
         if isinstance(data, list):
-            return [model(**item) for item in data if isinstance(item, dict)]
+            results = []
+            for item in data:
+                if not isinstance(item, dict):
+                    continue
+                try:
+                    results.append(model(**item))
+                except (ValidationError, Exception):
+                    results.append(item)  # type: ignore
+            return results  # type: ignore
         if isinstance(data, dict):
-            # Some APIs return {"list": [...], "total": N}
             items = data.get("list") or data.get("data") or []
             if isinstance(items, list):
-                return [model(**item) for item in items if isinstance(item, dict)]
+                results = []
+                for item in items:
+                    if not isinstance(item, dict):
+                        continue
+                    try:
+                        results.append(model(**item))
+                    except (ValidationError, Exception):
+                        results.append(item)  # type: ignore
+                return results  # type: ignore
         return []
 
     def _parse_one(self, data: Any, model: type[T]) -> T | None:
@@ -77,7 +95,10 @@ class BaseEndpoint:
         if data is None:
             return None
         if isinstance(data, dict):
-            return model(**data)
+            try:
+                return model(**data)
+            except (ValidationError, Exception):
+                return None
         return None
 
     def _parse_page(self, data: Any, model: type[T]) -> tuple[list[T], int]:
@@ -85,12 +106,19 @@ class BaseEndpoint:
         if data is None:
             return [], 0
         if isinstance(data, list):
-            items = [model(**item) for item in data if isinstance(item, dict)]
+            items = self._parse_list(data, model)
             return items, len(items)
         if isinstance(data, dict):
-            total = data.get("total", 0)
+            total = data.get("total", 0) or 0
             items_raw = data.get("list") or data.get("data") or []
             if isinstance(items_raw, list):
-                items = [model(**item) for item in items_raw if isinstance(item, dict)]
+                items = []
+                for item in items_raw:
+                    if not isinstance(item, dict):
+                        continue
+                    try:
+                        items.append(model(**item))
+                    except (ValidationError, Exception):
+                        items.append(item)  # type: ignore
                 return items, total
         return [], 0

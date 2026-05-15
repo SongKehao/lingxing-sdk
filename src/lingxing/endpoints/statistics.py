@@ -2,15 +2,14 @@
 from __future__ import annotations
 
 from ._base import BaseEndpoint
+from ..models.statistics import MonthRefundItem
 
 class StatisticsEndpoints(BaseEndpoint):
     """领星统计报表 API (30个接口)."""
 
-    async def amazon_report_export_task(self, **kwargs) -> list | dict:
-        """AmazonReportExportTask. POST /basicOpen/report/amazonReportExportTask"""
+    async def amazon_report_export_task(self, **kwargs) -> dict:
+        """写操作 AmazonReportExportTask. POST /basicOpen/report/amazonReportExportTask"""
         resp = await self._post("/basicOpen/report/amazonReportExportTask", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
         return resp.data or {}
     async def asin_daily_lists(self, **kwargs) -> list | dict:
         """AsinDailyLists. POST /erp/sc/data/sales_report/asinDailyLists"""
@@ -25,7 +24,7 @@ class StatisticsEndpoints(BaseEndpoint):
             return resp.data
         return resp.data or {}
     async def create_removal_order(self, **kwargs) -> dict:
-        """CreateRemovalOrder. POST /erp/sc/statistic/removalOrder/createAndCommit"""
+        """写操作 CreateRemovalOrder. POST /erp/sc/statistic/removalOrder/createAndCommit"""
         resp = await self._post("/erp/sc/statistic/removalOrder/createAndCommit", kwargs if kwargs else None)
         return resp.data or {}
     async def fba_storage_fee_long_term(self, **kwargs) -> list | dict:
@@ -58,12 +57,10 @@ class StatisticsEndpoints(BaseEndpoint):
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def month_refund(self, **kwargs) -> list | dict:
-        """MonthRefund. POST /erp/sc/routing/finance/Refund/profitMonthRefund"""
+    async def month_refund(self, **kwargs) -> tuple[list[MonthRefundItem], int]:
+        """MonthRefund（分页）. POST /erp/sc/routing/finance/Refund/profitMonthRefund"""
         resp = await self._post("/erp/sc/routing/finance/Refund/profitMonthRefund", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
+        return self._parse_page(resp.data, MonthRefundItem)
     async def overseas_aggregate_list(self, **kwargs) -> list | dict:
         """OverseasAggregateList. POST /erp/sc/routing/inventoryLog/WareHouseReport/getOverSeaSummaryList"""
         resp = await self._post("/erp/sc/routing/inventoryLog/WareHouseReport/getOverSeaSummaryList", kwargs if kwargs else None)
@@ -143,14 +140,12 @@ class StatisticsEndpoints(BaseEndpoint):
             return resp.data
         return resp.data or {}
     async def report_create_report_export_task(self, **kwargs) -> dict:
-        """reportCreateReportExportTask. POST /basicOpen/report/create/reportExportTask"""
+        """写操作 reportCreateReportExportTask. POST /basicOpen/report/create/reportExportTask"""
         resp = await self._post("/basicOpen/report/create/reportExportTask", kwargs if kwargs else None)
         return resp.data or {}
-    async def report_query_report_export_task(self, **kwargs) -> list | dict:
-        """reportQueryReportExportTask. POST /basicOpen/report/query/reportExportTask"""
+    async def report_query_report_export_task(self, **kwargs) -> dict:
+        """写操作 reportQueryReportExportTask. POST /basicOpen/report/query/reportExportTask"""
         resp = await self._post("/basicOpen/report/query/reportExportTask", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
         return resp.data or {}
     async def vc_inventory_list(self, **kwargs) -> list | dict:
         """vcInventoryList. POST /basicOpen/vc/report/inventory/list"""

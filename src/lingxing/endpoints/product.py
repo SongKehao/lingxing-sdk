@@ -2,28 +2,23 @@
 from __future__ import annotations
 
 from ._base import BaseEndpoint
+from ..models.product import AttributeListItem, BrandItem, CategoryItem, ProductListsItem, UpcListItem
 
 class ProductEndpoints(BaseEndpoint):
     """领星产品 API (23个接口)."""
 
-    async def add_commodity_code(self, **kwargs) -> list | dict:
-        """AddCommodityCode. POST /listing/publish/api/upc/addCommodityCode"""
+    async def add_commodity_code(self, **kwargs) -> dict:
+        """写操作 AddCommodityCode. POST /listing/publish/api/upc/addCommodityCode"""
         resp = await self._post("/listing/publish/api/upc/addCommodityCode", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
         return resp.data or {}
-    async def brand(self, **kwargs) -> list | dict:
+    async def brand(self, **kwargs) -> list[BrandItem]:
         """Brand. POST /erp/sc/data/local_inventory/brand"""
         resp = await self._post("/erp/sc/data/local_inventory/brand", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def category(self, **kwargs) -> list | dict:
+        return self._parse_list(resp.data, BrandItem)
+    async def category(self, **kwargs) -> list[CategoryItem]:
         """Category. POST /erp/sc/routing/data/local_inventory/category"""
         resp = await self._post("/erp/sc/routing/data/local_inventory/category", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
+        return self._parse_list(resp.data, CategoryItem)
     async def get_paging_log_lists(self, **kwargs) -> list | dict:
         """GetPagingLogLists. POST /basicOpen/product/getPagingLogLists"""
         resp = await self._post("/basicOpen/product/getPagingLogLists", kwargs if kwargs else None)
@@ -36,12 +31,10 @@ class ProductEndpoints(BaseEndpoint):
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def product_lists(self, **kwargs) -> list | dict:
+    async def product_lists(self, **kwargs) -> list[ProductListsItem]:
         """ProductLists. POST /erp/sc/routing/data/local_inventory/productList"""
         resp = await self._post("/erp/sc/routing/data/local_inventory/productList", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
+        return self._parse_list(resp.data, ProductListsItem)
     async def set_brand(self, **kwargs) -> list | dict:
         """SetBrand. POST /erp/sc/storage/brand/set"""
         resp = await self._post("/erp/sc/storage/brand/set", kwargs if kwargs else None)
@@ -66,35 +59,29 @@ class ProductEndpoints(BaseEndpoint):
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def upc_list(self, **kwargs) -> list | dict:
-        """UpcList. POST /listing/publish/api/upc/upcList"""
+    async def upc_list(self, **kwargs) -> tuple[list[UpcListItem], int]:
+        """UpcList（分页）. POST /listing/publish/api/upc/upcList"""
         resp = await self._post("/listing/publish/api/upc/upcList", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
+        return self._parse_page(resp.data, UpcListItem)
     async def upload_pictures(self, **kwargs) -> list | dict:
         """UploadPictures. POST /erp/sc/routing/storage/product/uploadPictures"""
         resp = await self._post("/erp/sc/routing/storage/product/uploadPictures", kwargs if kwargs else None)
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def attribute_list(self, **kwargs) -> list | dict:
-        """attributeList. POST /erp/sc/routing/storage/attribute/attributeList"""
+    async def attribute_list(self, **kwargs) -> tuple[list[AttributeListItem], int]:
+        """attributeList（分页）. POST /erp/sc/routing/storage/attribute/attributeList"""
         resp = await self._post("/erp/sc/routing/storage/attribute/attributeList", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
+        return self._parse_page(resp.data, AttributeListItem)
     async def attribute_set(self, **kwargs) -> list | dict:
         """attributeSet. POST /erp/sc/routing/storage/attribute/set"""
         resp = await self._post("/erp/sc/routing/storage/attribute/set", kwargs if kwargs else None)
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def batch_get_product_info(self, **kwargs) -> list | dict:
-        """batchGetProductInfo. POST /erp/sc/routing/data/local_inventory/batchGetProductInfo"""
+    async def batch_get_product_info(self, **kwargs) -> dict:
+        """写操作 batchGetProductInfo. POST /erp/sc/routing/data/local_inventory/batchGetProductInfo"""
         resp = await self._post("/erp/sc/routing/data/local_inventory/batchGetProductInfo", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
         return resp.data or {}
     async def bundled_product_list(self, **kwargs) -> list | dict:
         """bundledProductList. POST /erp/sc/routing/data/local_inventory/bundledProductList"""
@@ -114,11 +101,9 @@ class ProductEndpoints(BaseEndpoint):
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def product_operate_batch(self, **kwargs) -> list | dict:
-        """productOperateBatch. POST /basicOpen/product/productManager/product/operate/batch"""
+    async def product_operate_batch(self, **kwargs) -> dict:
+        """写操作 productOperateBatch. POST /basicOpen/product/productManager/product/operate/batch"""
         resp = await self._post("/basicOpen/product/productManager/product/operate/batch", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
         return resp.data or {}
     async def set_aux(self, **kwargs) -> list | dict:
         """setAux. POST /erp/sc/routing/storage/product/setAux"""

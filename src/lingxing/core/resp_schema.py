@@ -1,41 +1,40 @@
-#!/usr/bin/python3
 """openapi接口响应 schema"""
 import logging
-from typing import Any
+from typing import Any, Optional
 
-from pydantic import BaseModel, root_validator
+from pydantic import BaseModel, model_validator
 
 logger = logging.getLogger(__name__)
 
 
-def reset_msg_and_trace_id(cls, values: dict):
-    """重置异常信息"""
-    try:
-        values['message'] = values.get('message') or values.get('msg', '')
-        values['request_id'] = values.get('request_id') or values.get('traceId', '')
-        # 修复：API返回的code可能是字符串，需要转换为整数
-        if 'code' in values and isinstance(values['code'], str):
-            values['code'] = int(values['code'])
-    except Exception:
-        logger.debug("Failed to reset message and trace_id in response schema")
-    return values
-
-
 class ResponseResult(BaseModel):
-    code: int | None                     # 响应码
-    message: str | None                  # 响应信息
-    data: Any                               # 接口响应数据
-    error_details: Any | None = None     # 异常信息
-    request_id: str | None = None        # 标记本次请求唯一ID
-    response_time: str | None = None     # 响应时间
-    total: int | None = None
+    """领星API响应结果."""
+    code: Optional[int] = None
+    message: Optional[str] = None
+    data: Any = None
+    error_details: Any = None
+    request_id: Optional[str] = None
+    response_time: Optional[str] = None
+    total: Optional[int] = None
 
-    _reset_msg_and_trace_id = root_validator(allow_reuse=True, pre=True)(
-        reset_msg_and_trace_id
-    )
+    @model_validator(mode='before')
+    @classmethod
+    def _normalize_fields(cls, values: dict) -> dict:
+        """统一字段名和类型."""
+        if not isinstance(values, dict):
+            return values
+        try:
+            values['message'] = values.get('message') or values.get('msg', '')
+            values['request_id'] = values.get('request_id') or values.get('traceId', '')
+            if 'code' in values and isinstance(values['code'], str):
+                values['code'] = int(values['code'])
+        except Exception:
+            logger.debug("Failed to normalize response fields")
+        return values
 
 
 class AccessTokenDto(BaseModel):
-    access_token: str           # 接口访问认证信息
-    refresh_token: str          # RefreshToken用于续费AccessToken，只能使用一次
-    expires_in: int             # AccessToken的有效期, TTL
+    """领星API访问令牌."""
+    access_token: str
+    refresh_token: str
+    expires_in: int

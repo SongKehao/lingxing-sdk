@@ -1,27 +1,25 @@
-"""Auto-generated Pydantic models from API fixtures."""
-
+"""Pydantic models for Warehouse APIs."""
 from typing import Optional
-from pydantic import Field
 
 from .common import LingXingModel
 
 
 class GetBatchDetailListItem(LingXingModel):
-    """Warehouse/GetBatchDetailList 响应数据项."""
+    """Response item for GetBatchDetailList."""
 
-    amount: Optional[str] = None
+    amount: Optional[float] = None
     bad_num: Optional[int] = None
     bad_transit_num: Optional[int] = None
     balance_num: Optional[int] = None
     batch_no: Optional[str] = None
     batch_time: Optional[str] = None
     delivery_order_sns: Optional[list] = None
-    fee: Optional[str] = None
+    fee: Optional[float] = None
     fnsku: Optional[str] = None
     good_num: Optional[int] = None
     good_transit_num: Optional[int] = None
-    head_stock_cost: Optional[str] = None
-    inventory_age: Optional[str] = None
+    head_stock_cost: Optional[float] = None
+    inventory_age: Optional[int] = None
     msku: Optional[str] = None
     order_sn: Optional[str] = None
     plan_sn: Optional[list] = None
@@ -32,8 +30,8 @@ class GetBatchDetailListItem(LingXingModel):
     qc_num: Optional[int] = None
     sku: Optional[str] = None
     source_batch_no: Optional[list] = None
-    stock_cost: Optional[str] = None
-    store_id: Optional[str] = None
+    stock_cost: Optional[float] = None
+    store_id: Optional[int] = None
     store_name: Optional[str] = None
     supplier_ids: Optional[list] = None
     supplier_names: Optional[list] = None
@@ -46,20 +44,20 @@ class GetBatchDetailListItem(LingXingModel):
     wid: Optional[int] = None
 
 class GetBatchStatementListItem(LingXingModel):
-    """Warehouse/GetBatchStatementList 响应数据项."""
+    """Response item for GetBatchStatementList."""
 
-    amount: Optional[str] = None
+    amount: Optional[float] = None
     bad_num: Optional[int] = None
     bad_transit_num: Optional[int] = None
     balance_num: Optional[int] = None
     batch_no: Optional[str] = None
     batch_state_id: Optional[str] = None
     delivery_order_sns: Optional[list] = None
-    fee: Optional[str] = None
+    fee: Optional[float] = None
     fnsku: Optional[str] = None
     good_num: Optional[int] = None
     good_transit_num: Optional[int] = None
-    head_stock_cost: Optional[str] = None
+    head_stock_cost: Optional[float] = None
     msku: Optional[str] = None
     order_sn: Optional[str] = None
     plan_sn: Optional[list] = None
@@ -70,27 +68,27 @@ class GetBatchStatementListItem(LingXingModel):
     sku: Optional[str] = None
     source_batch_no: Optional[list] = None
     source_order_sn: Optional[list] = None
-    stock_cost: Optional[str] = None
-    store_id: Optional[str] = None
+    stock_cost: Optional[float] = None
+    store_id: Optional[int] = None
     store_name: Optional[str] = None
     supplier_ids: Optional[list] = None
     supplier_names: Optional[list] = None
     transit_balance_num: Optional[int] = None
-    type: Optional[str] = None
+    type: Optional[int] = None
     type_name: Optional[str] = None
     wh_name: Optional[str] = None
     wid: Optional[int] = None
 
 class InventoryDetailsItem(LingXingModel):
-    """Warehouse/InventoryDetails 响应数据项."""
+    """Response item for InventoryDetails."""
 
     available_inventory_box_qty: Optional[int] = None
     average_age: Optional[int] = None
     bad_lock_num: Optional[int] = None
     fnsku: Optional[str] = None
     good_lock_num: Optional[int] = None
-    head_stock_price: Optional[str] = None
-    price: Optional[str] = None
+    head_stock_price: Optional[float] = None
+    price: Optional[float] = None
     product_bad_num: Optional[int] = None
     product_id: Optional[int] = None
     product_lock_num: Optional[int] = None
@@ -98,20 +96,20 @@ class InventoryDetailsItem(LingXingModel):
     product_qc_num: Optional[int] = None
     product_total: Optional[int] = None
     product_valid_num: Optional[int] = None
-    purchase_price: Optional[str] = None
-    quantity_receive: Optional[str] = None
-    seller_id: Optional[str] = None
+    purchase_price: Optional[float] = None
+    quantity_receive: Optional[int] = None
+    seller_id: Optional[int] = None
     sku: Optional[str] = None
     stock_age_list: Optional[list] = None
-    stock_cost: Optional[str] = None
-    stock_cost_total: Optional[str] = None
-    stock_price: Optional[str] = None
+    stock_cost: Optional[float] = None
+    stock_cost_total: Optional[float] = None
+    stock_price: Optional[float] = None
     third_inventory: Optional[dict] = None
-    transit_head_cost: Optional[str] = None
+    transit_head_cost: Optional[float] = None
     wid: Optional[int] = None
 
 class PurchaseReceiptOrderListItem(LingXingModel):
-    """Warehouse/PurchaseReceiptOrderList 响应数据项."""
+    """Response item for PurchaseReceiptOrderList."""
 
     business_order_sn: Optional[str] = None
     create_realname: Optional[str] = None
@@ -125,15 +123,15 @@ class PurchaseReceiptOrderListItem(LingXingModel):
     opt_realname: Optional[str] = None
     opt_uid: Optional[int] = None
     order_sn: Optional[str] = None
-    order_type: Optional[str] = None
+    order_type: Optional[int] = None
     other_currency: Optional[str] = None
-    other_fee: Optional[str] = None
+    other_fee: Optional[float] = None
     qc_type: Optional[int] = None
     receive_realname: Optional[str] = None
     receive_time: Optional[str] = None
     receive_uid: Optional[int] = None
     remark: Optional[str] = None
-    shipping_cost: Optional[str] = None
+    shipping_cost: Optional[float] = None
     shipping_currency: Optional[str] = None
     status: Optional[int] = None
     supplier_id: Optional[int] = None
@@ -141,7 +139,7 @@ class PurchaseReceiptOrderListItem(LingXingModel):
     wid: Optional[int] = None
 
 class WarehouseListsItem(LingXingModel):
-    """Warehouse/WarehouseLists 响应数据项."""
+    """Response item for WarehouseLists."""
 
     country_code: Optional[str] = None
     is_delete: Optional[int] = None
@@ -157,20 +155,20 @@ class WarehouseListsItem(LingXingModel):
     wp_name: Optional[str] = None
 
 class WarehouseStatementItem(LingXingModel):
-    """Warehouse/WarehouseStatement 响应数据项."""
+    """Response item for WarehouseStatement."""
 
-    amount: Optional[str] = None
+    amount: Optional[float] = None
     bid: Optional[int] = None
     brand_name: Optional[str] = None
     cancel_time: Optional[str] = None
-    fee_cost: Optional[str] = None
+    fee_cost: Optional[float] = None
     fnsku: Optional[str] = None
     opt_realname: Optional[str] = None
     opt_time: Optional[str] = None
     opt_uid: Optional[int] = None
     order_sn: Optional[str] = None
-    price: Optional[str] = None
-    product_amounts: Optional[str] = None
+    price: Optional[float] = None
+    product_amounts: Optional[float] = None
     product_bad_num: Optional[int] = None
     product_good_num: Optional[int] = None
     product_id: Optional[int] = None
@@ -180,18 +178,18 @@ class WarehouseStatementItem(LingXingModel):
     product_total: Optional[int] = None
     ref_order_sn: Optional[str] = None
     remark: Optional[str] = None
-    seller_id: Optional[str] = None
-    single_cg_price: Optional[str] = None
-    single_fee_cost: Optional[str] = None
+    seller_id: Optional[int] = None
+    single_cg_price: Optional[float] = None
+    single_fee_cost: Optional[float] = None
     sku: Optional[str] = None
-    statement_id: Optional[str] = None
+    statement_id: Optional[int] = None
     type: Optional[int] = None
     type_text: Optional[str] = None
     ware_house_name: Optional[str] = None
     wid: Optional[int] = None
 
 class WarehouseStatementNewItem(LingXingModel):
-    """Warehouse/WarehouseStatementNew 响应数据项."""
+    """Response item for WarehouseStatementNew."""
 
     bad_balance_num: Optional[int] = None
     bad_lock_balance_num: Optional[int] = None
@@ -199,19 +197,19 @@ class WarehouseStatementNewItem(LingXingModel):
     bad_transit_num: Optional[int] = None
     bid: Optional[int] = None
     brand_name: Optional[str] = None
-    fee_cost: Optional[str] = None
+    fee_cost: Optional[float] = None
     fnsku: Optional[str] = None
     good_balance_num: Optional[int] = None
     good_lock_balance_num: Optional[int] = None
     good_transit_balance_num: Optional[int] = None
     good_transit_num: Optional[int] = None
-    head_stock_cost: Optional[str] = None
-    head_stock_price: Optional[str] = None
+    head_stock_cost: Optional[float] = None
+    head_stock_price: Optional[float] = None
     opt_real_name: Optional[str] = None
     opt_time: Optional[str] = None
     opt_uid: Optional[int] = None
     order_sn: Optional[str] = None
-    product_amounts: Optional[str] = None
+    product_amounts: Optional[float] = None
     product_bad_num: Optional[int] = None
     product_good_num: Optional[int] = None
     product_id: Optional[int] = None
@@ -223,14 +221,14 @@ class WarehouseStatementNewItem(LingXingModel):
     qc_balance_num: Optional[int] = None
     ref_order_sn: Optional[str] = None
     remark: Optional[str] = None
-    seller_id: Optional[str] = None
-    single_cg_price: Optional[str] = None
-    single_fee_cost: Optional[str] = None
-    single_stock_price: Optional[str] = None
+    seller_id: Optional[int] = None
+    single_cg_price: Optional[float] = None
+    single_fee_cost: Optional[float] = None
+    single_stock_price: Optional[float] = None
     sku: Optional[str] = None
-    statement_id: Optional[str] = None
-    stock_cost: Optional[str] = None
-    sub_type: Optional[str] = None
+    statement_id: Optional[int] = None
+    stock_cost: Optional[float] = None
+    sub_type: Optional[int] = None
     sub_type_text: Optional[str] = None
     type: Optional[int] = None
     type_text: Optional[str] = None
@@ -238,7 +236,7 @@ class WarehouseStatementNewItem(LingXingModel):
     wid: Optional[int] = None
 
 class WmsOrderListItem(LingXingModel):
-    """Warehouse/WmsOrderList 响应数据项."""
+    """Response item for WmsOrderList."""
 
     actual_carrier: Optional[str] = None
     apportion_message: Optional[str] = None
@@ -272,9 +270,9 @@ class WmsOrderListItem(LingXingModel):
     is_order_print: Optional[int] = None
     is_surface_print: Optional[int] = None
     is_weigh: Optional[int] = None
-    logistics_estimated_freight: Optional[str] = None
+    logistics_estimated_freight: Optional[float] = None
     logistics_estimated_freight_currency_code: Optional[str] = None
-    logistics_freight: Optional[str] = None
+    logistics_freight: Optional[float] = None
     logistics_freight_currency_code: Optional[str] = None
     logistics_message: Optional[str] = None
     logistics_provider_id: Optional[int] = None
@@ -294,8 +292,8 @@ class WmsOrderListItem(LingXingModel):
     order_currency_code: Optional[str] = None
     order_customer_service_notes: Optional[str] = None
     order_from: Optional[str] = None
-    order_number: Optional[str] = None
-    order_origin_amount: Optional[str] = None
+    order_number: Optional[int] = None
+    order_origin_amount: Optional[float] = None
     order_print_time: Optional[str] = None
     order_sns: Optional[list] = None
     order_tags: Optional[list] = None
@@ -306,17 +304,17 @@ class WmsOrderListItem(LingXingModel):
     payment_time: Optional[str] = None
     pick_index: Optional[int] = None
     picker: Optional[str] = None
-    pkg_fee_weight: Optional[str] = None
+    pkg_fee_weight: Optional[float] = None
     pkg_fee_weight_unit: Optional[str] = None
-    pkg_height: Optional[str] = None
-    pkg_length: Optional[str] = None
-    pkg_real_weight: Optional[str] = None
+    pkg_height: Optional[float] = None
+    pkg_length: Optional[float] = None
+    pkg_real_weight: Optional[float] = None
     pkg_real_weight_unit: Optional[str] = None
     pkg_size_unit: Optional[str] = None
-    pkg_volume: Optional[str] = None
-    pkg_weight: Optional[str] = None
+    pkg_volume: Optional[float] = None
+    pkg_weight: Optional[float] = None
     pkg_weight_unit: Optional[str] = None
-    pkg_width: Optional[str] = None
+    pkg_width: Optional[float] = None
     platform_name: Optional[str] = None
     platform_order_no: Optional[list] = None
     platform_payment_time: Optional[str] = None
@@ -356,7 +354,7 @@ class WmsOrderListItem(LingXingModel):
     wo_number: Optional[str] = None
 
 class GetProcessOrderListsItem(LingXingModel):
-    """Warehouse/getProcessOrderLists 响应数据项."""
+    """Response item for getProcessOrderLists."""
 
     create_by: Optional[int] = None
     create_realname: Optional[str] = None
@@ -374,7 +372,7 @@ class GetProcessOrderListsItem(LingXingModel):
     wid: Optional[int] = None
 
 class GetStorageAdjustOrderListItem(LingXingModel):
-    """Warehouse/getStorageAdjustOrderList 响应数据项."""
+    """Response item for getStorageAdjustOrderList."""
 
     adjustment_realname: Optional[str] = None
     adjustment_time: Optional[str] = None
@@ -400,14 +398,14 @@ class GetStorageAdjustOrderListItem(LingXingModel):
     ware_house_name: Optional[str] = None
     wid: Optional[int] = None
 
-class InboundGetCustomTypesData(LingXingModel):
-    """Warehouse/inboundGetCustomTypes 响应数据项."""
+class InboundGetCustomTypesItem(LingXingModel):
+    """Response item for inboundGetCustomTypes."""
 
     list: Optional[list] = None
     total: Optional[int] = None
 
 class InboundgetOrdersItem(LingXingModel):
-    """Warehouse/inboundgetOrders 响应数据项."""
+    """Response item for inboundgetOrders."""
 
     cg_realname: Optional[str] = None
     cg_uid: Optional[int] = None
@@ -430,16 +428,16 @@ class InboundgetOrdersItem(LingXingModel):
     opt_realname: Optional[str] = None
     opt_time: Optional[str] = None
     opt_uid: Optional[int] = None
-    order_amount: Optional[str] = None
+    order_amount: Optional[float] = None
     order_sn: Optional[str] = None
-    origin_purchase_rate: Optional[str] = None
+    origin_purchase_rate: Optional[float] = None
     origin_shipping_currency: Optional[str] = None
-    origin_shipping_fee: Optional[str] = None
-    other_fee: Optional[str] = None
+    origin_shipping_fee: Optional[float] = None
+    other_fee: Optional[float] = None
     purchase_order_sn: Optional[str] = None
     receipt_order_sn: Optional[str] = None
     remark: Optional[str] = None
-    return_price: Optional[str] = None
+    return_price: Optional[float] = None
     revoke_realname: Optional[str] = None
     revoke_time: Optional[str] = None
     revoke_uid: Optional[int] = None
@@ -454,7 +452,7 @@ class InboundgetOrdersItem(LingXingModel):
     wid: Optional[int] = None
 
 class InventoryBinDetailsItem(LingXingModel):
-    """Warehouse/inventoryBinDetails 响应数据项."""
+    """Response item for inventoryBinDetails."""
 
     fnsku: Optional[str] = None
     lockNum: Optional[int] = None
@@ -462,7 +460,7 @@ class InventoryBinDetailsItem(LingXingModel):
     product_id: Optional[int] = None
     product_name: Optional[str] = None
     sku: Optional[str] = None
-    store_id: Optional[str] = None
+    store_id: Optional[int] = None
     third_inventory: Optional[dict] = None
     total: Optional[int] = None
     validNum: Optional[int] = None
@@ -473,14 +471,14 @@ class InventoryBinDetailsItem(LingXingModel):
     whb_type_name: Optional[str] = None
     wid: Optional[int] = None
 
-class OutboundGetCustomTypesData(LingXingModel):
-    """Warehouse/outboundGetCustomTypes 响应数据项."""
+class OutboundGetCustomTypesItem(LingXingModel):
+    """Response item for outboundGetCustomTypes."""
 
     list: Optional[list] = None
     total: Optional[int] = None
 
 class OutboundgetOrdersItem(LingXingModel):
-    """Warehouse/outboundgetOrders 响应数据项."""
+    """Response item for outboundgetOrders."""
 
     cg_realname: Optional[str] = None
     cg_uid: Optional[int] = None
@@ -502,13 +500,13 @@ class OutboundgetOrdersItem(LingXingModel):
     opt_realname: Optional[str] = None
     opt_time: Optional[str] = None
     opt_uid: Optional[int] = None
-    order_amount: Optional[str] = None
+    order_amount: Optional[float] = None
     order_sn: Optional[str] = None
-    other_fee: Optional[str] = None
+    other_fee: Optional[float] = None
     outbound_time: Optional[str] = None
     purchase_order_sn: Optional[str] = None
     remark: Optional[str] = None
-    return_price: Optional[str] = None
+    return_price: Optional[float] = None
     revoke_realname: Optional[str] = None
     revoke_time: Optional[str] = None
     revoke_uid: Optional[int] = None
@@ -525,7 +523,7 @@ class OutboundgetOrdersItem(LingXingModel):
     wid: Optional[int] = None
 
 class RemovalInboundListItem(LingXingModel):
-    """Warehouse/removalInboundList 响应数据项."""
+    """Response item for removalInboundList."""
 
     address: Optional[dict] = None
     delivery_no: Optional[str] = None
@@ -549,7 +547,7 @@ class RemovalInboundListItem(LingXingModel):
     wid_name: Optional[str] = None
 
 class WareHouseBinStatementItem(LingXingModel):
-    """Warehouse/wareHouseBinStatement 响应数据项."""
+    """Response item for wareHouseBinStatement."""
 
     fnsku: Optional[str] = None
     num: Optional[int] = None
@@ -560,7 +558,7 @@ class WareHouseBinStatementItem(LingXingModel):
     product_id: Optional[int] = None
     product_name: Optional[str] = None
     remark: Optional[str] = None
-    seller_id: Optional[str] = None
+    seller_id: Optional[int] = None
     sku: Optional[str] = None
     type: Optional[int] = None
     type_text: Optional[str] = None

@@ -12,11 +12,9 @@ class MultiplatformPlatformsEndpoints(BaseEndpoint):
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def batch_temu_address_decrypt(self, **kwargs) -> list | dict:
-        """BatchTemuAddressDecrypt. POST /basicOpen/temu/temuAddressDecrypt"""
+    async def batch_temu_address_decrypt(self, **kwargs) -> dict:
+        """写操作 BatchTemuAddressDecrypt. POST /basicOpen/temu/temuAddressDecrypt"""
         resp = await self._post("/basicOpen/temu/temuAddressDecrypt", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
         return resp.data or {}
     async def coupang_stock_list(self, **kwargs) -> list | dict:
         """CoupangStockList. POST /basicOpen/multiplatform/coupang/stockSearch"""
@@ -25,7 +23,7 @@ class MultiplatformPlatformsEndpoints(BaseEndpoint):
             return resp.data
         return resp.data or {}
     async def delete_cargo_storage(self, **kwargs) -> dict:
-        """DeleteCargoStorage. POST /basicOpen/multiplatform/deleteCargoStorage"""
+        """写操作 DeleteCargoStorage. POST /basicOpen/multiplatform/deleteCargoStorage"""
         resp = await self._post("/basicOpen/multiplatform/deleteCargoStorage", kwargs if kwargs else None)
         return resp.data or {}
     async def fbs_stock_list(self, **kwargs) -> list | dict:
@@ -100,17 +98,13 @@ class MultiplatformPlatformsEndpoints(BaseEndpoint):
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def add_cargo_goods_list(self, **kwargs) -> list | dict:
-        """addCargoGoodsList. POST /basicOpen/multiplatform/cargo/addCargoGoods/list"""
+    async def add_cargo_goods_list(self, **kwargs) -> dict:
+        """写操作 addCargoGoodsList. POST /basicOpen/multiplatform/cargo/addCargoGoods/list"""
         resp = await self._post("/basicOpen/multiplatform/cargo/addCargoGoods/list", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
         return resp.data or {}
-    async def address_return_address_list(self, **kwargs) -> list | dict:
-        """addressReturnAddressList. POST /basicOpen/multiplatform/address/returnAddressList"""
+    async def address_return_address_list(self, **kwargs) -> dict:
+        """写操作 addressReturnAddressList. POST /basicOpen/multiplatform/address/returnAddressList"""
         resp = await self._post("/basicOpen/multiplatform/address/returnAddressList", kwargs if kwargs else None)
-        if isinstance(resp.data, list):
-            return resp.data
         return resp.data or {}
     async def aliexpress_list(self, **kwargs) -> list | dict:
         """aliexpressList. POST /basicOpen/multiplatform/aliExpress/list"""
@@ -173,7 +167,7 @@ class MultiplatformPlatformsEndpoints(BaseEndpoint):
             return resp.data
         return resp.data or {}
     async def shipping_order_allocate(self, **kwargs) -> dict:
-        """shippingOrderAllocate. POST /basicOpen/multiplatform/allocate/stock"""
+        """写操作 shippingOrderAllocate. POST /basicOpen/multiplatform/allocate/stock"""
         resp = await self._post("/basicOpen/multiplatform/allocate/stock", kwargs if kwargs else None)
         return resp.data or {}
     async def shipping_order_delivery(self, **kwargs) -> list | dict:
