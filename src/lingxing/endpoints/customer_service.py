@@ -1,173 +1,104 @@
-"""Auto-generated CustomerServiceEndpoints endpoints from official lingxing docs."""
+"""客服 API endpoints."""
 from __future__ import annotations
-from typing import TYPE_CHECKING
-if TYPE_CHECKING:
-    from ...core.openapi import OpenApiBase
 
+from ._base import BaseEndpoint
 
-class CustomerServiceEndpoints:
-    """领星API - CustomerServiceEndpoints (16个接口)."""
+class CustomerServiceEndpoints(BaseEndpoint):
+    """领星客服 API (16个接口)."""
 
-    def __init__(self, openapi: "OpenApiBase"):
-        self._request_with_token = openapi.request_with_auto_token
-
-    async def feedback_list(self, **kwargs) -> dict:
-        """FeedbackList.
-        
-        POST /erp/sc/cs/feedback/list
-        """
-        return await self._request_with_token(
-            route_name="/erp/sc/cs/feedback/list",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def feedback_list_mws(self, **kwargs) -> dict:
-        """FeedbackListMws.
-        
-        POST /erp/sc/cs/feedback/listMws
-        """
-        return await self._request_with_token(
-            route_name="/erp/sc/cs/feedback/listMws",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def performance_notice_detail(self, **kwargs) -> dict:
-        """PerformanceNoticeDetail.
-        
-        POST /basicOpen/customerService/storeTarget/detail
-        """
-        return await self._request_with_token(
-            route_name="/basicOpen/customerService/storeTarget/detail",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def performance_notice_list(self, **kwargs) -> dict:
-        """PerformanceNoticeList.
-        
-        POST /basicOpen/customerService/performanceNotice/list
-        """
-        return await self._request_with_token(
-            route_name="/basicOpen/customerService/performanceNotice/list",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def customer_service_crmcustomer_index(self, **kwargs) -> dict:
-        """customerServiceCrmcustomerIndex.
-        
-        POST /basicOpen/customerService/crm/customer/index
-        """
-        return await self._request_with_token(
-            route_name="/basicOpen/customerService/crm/customer/index",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def customer_service_rma_manage_list(self, **kwargs) -> dict:
-        """customerServiceRmaManageList.
-        
-        POST /basicOpen/customerService/rmaManage/list
-        """
-        return await self._request_with_token(
-            route_name="/basicOpen/customerService/rmaManage/list",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def detail(self, **kwargs) -> dict:
-        """detail.
-        
-        POST /erp/sc/data/mail/detail
-        """
-        return await self._request_with_token(
-            route_name="/erp/sc/data/mail/detail",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def feedback_detail(self, **kwargs) -> dict:
-        """feedbackDetail.
-        
-        POST /erp/sc/cs/feedbackReport/detail
-        """
-        return await self._request_with_token(
-            route_name="/erp/sc/cs/feedbackReport/detail",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def feedback_lists(self, **kwargs) -> dict:
-        """feedbackLists.
-        
-        POST /erp/sc/cs/feedbackReport/lists
-        """
-        return await self._request_with_token(
-            route_name="/erp/sc/cs/feedbackReport/lists",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def lists(self, **kwargs) -> dict:
-        """lists.
-        
-        POST /erp/sc/data/mail/lists
-        """
-        return await self._request_with_token(
-            route_name="/erp/sc/data/mail/lists",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def review(self, **kwargs) -> dict:
-        """review.
-        
-        POST /erp/sc/v2/data/mws/reviews
-        """
-        return await self._request_with_token(
-            route_name="/erp/sc/v2/data/mws/reviews",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def review_detail(self, **kwargs) -> dict:
-        """reviewDetail.
-        
-        POST /erp/sc/cs/reviewReport/detail
-        """
-        return await self._request_with_token(
-            route_name="/erp/sc/cs/reviewReport/detail",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def review_lists(self, **kwargs) -> dict:
-        """reviewLists.
-        
-        POST /erp/sc/v2/cs/reviewReport/lists
-        """
-        return await self._request_with_token(
-            route_name="/erp/sc/v2/cs/reviewReport/lists",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def review_v2(self, **kwargs) -> dict:
-        """reviewV2.
-        
-        POST /basicOpen/openapi/service/v3/data/mws/reviews
-        """
-        return await self._request_with_token(
-            route_name="/basicOpen/openapi/service/v3/data/mws/reviews",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def store_performance_list(self, **kwargs) -> dict:
-        """storePerformanceList.
-        
-        POST /basicOpen/customerService/storeTarget/list
-        """
-        return await self._request_with_token(
-            route_name="/basicOpen/customerService/storeTarget/list",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def voice_of_buyer_list(self, **kwargs) -> dict:
-        """voiceOfBuyerList.
-        
-        POST /basicOpen/customerService/voiceOfBuyer/list
-        """
-        return await self._request_with_token(
-            route_name="/basicOpen/customerService/voiceOfBuyer/list",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
+    async def feedback_list(self, **kwargs) -> list | dict:
+        """FeedbackList. POST /erp/sc/cs/feedback/list"""
+        resp = await self._post("/erp/sc/cs/feedback/list", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def feedback_list_mws(self, **kwargs) -> list | dict:
+        """FeedbackListMws. POST /erp/sc/cs/feedback/listMws"""
+        resp = await self._post("/erp/sc/cs/feedback/listMws", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def performance_notice_detail(self, **kwargs) -> list | dict:
+        """PerformanceNoticeDetail. POST /basicOpen/customerService/storeTarget/detail"""
+        resp = await self._post("/basicOpen/customerService/storeTarget/detail", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def performance_notice_list(self, **kwargs) -> list | dict:
+        """PerformanceNoticeList. POST /basicOpen/customerService/performanceNotice/list"""
+        resp = await self._post("/basicOpen/customerService/performanceNotice/list", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def customer_service_crmcustomer_index(self, **kwargs) -> list | dict:
+        """customerServiceCrmcustomerIndex. POST /basicOpen/customerService/crm/customer/index"""
+        resp = await self._post("/basicOpen/customerService/crm/customer/index", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def customer_service_rma_manage_list(self, **kwargs) -> list | dict:
+        """customerServiceRmaManageList. POST /basicOpen/customerService/rmaManage/list"""
+        resp = await self._post("/basicOpen/customerService/rmaManage/list", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def detail(self, **kwargs) -> list | dict:
+        """detail. POST /erp/sc/data/mail/detail"""
+        resp = await self._post("/erp/sc/data/mail/detail", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def feedback_detail(self, **kwargs) -> list | dict:
+        """feedbackDetail. POST /erp/sc/cs/feedbackReport/detail"""
+        resp = await self._post("/erp/sc/cs/feedbackReport/detail", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def feedback_lists(self, **kwargs) -> list | dict:
+        """feedbackLists. POST /erp/sc/cs/feedbackReport/lists"""
+        resp = await self._post("/erp/sc/cs/feedbackReport/lists", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def lists(self, **kwargs) -> list | dict:
+        """lists. POST /erp/sc/data/mail/lists"""
+        resp = await self._post("/erp/sc/data/mail/lists", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def review(self, **kwargs) -> list | dict:
+        """review. POST /erp/sc/v2/data/mws/reviews"""
+        resp = await self._post("/erp/sc/v2/data/mws/reviews", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def review_detail(self, **kwargs) -> list | dict:
+        """reviewDetail. POST /erp/sc/cs/reviewReport/detail"""
+        resp = await self._post("/erp/sc/cs/reviewReport/detail", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def review_lists(self, **kwargs) -> list | dict:
+        """reviewLists. POST /erp/sc/v2/cs/reviewReport/lists"""
+        resp = await self._post("/erp/sc/v2/cs/reviewReport/lists", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def review_v2(self, **kwargs) -> list | dict:
+        """reviewV2. POST /basicOpen/openapi/service/v3/data/mws/reviews"""
+        resp = await self._post("/basicOpen/openapi/service/v3/data/mws/reviews", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def store_performance_list(self, **kwargs) -> list | dict:
+        """storePerformanceList. POST /basicOpen/customerService/storeTarget/list"""
+        resp = await self._post("/basicOpen/customerService/storeTarget/list", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def voice_of_buyer_list(self, **kwargs) -> list | dict:
+        """voiceOfBuyerList. POST /basicOpen/customerService/voiceOfBuyer/list"""
+        resp = await self._post("/basicOpen/customerService/voiceOfBuyer/list", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}

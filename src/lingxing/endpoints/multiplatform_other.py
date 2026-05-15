@@ -1,43 +1,26 @@
-"""Auto-generated MultiplatformOtherEndpoints endpoints from official lingxing docs."""
+"""多平台其他 API endpoints."""
 from __future__ import annotations
-from typing import TYPE_CHECKING
-if TYPE_CHECKING:
-    from ...core.openapi import OpenApiBase
 
+from ._base import BaseEndpoint
 
-class MultiplatformOtherEndpoints:
-    """领星API - MultiplatformOtherEndpoints (3个接口)."""
+class MultiplatformOtherEndpoints(BaseEndpoint):
+    """领星多平台其他 API (3个接口)."""
 
-    def __init__(self, openapi: "OpenApiBase"):
-        self._request_with_token = openapi.request_with_auto_token
-
-    async def batch_review(self, **kwargs) -> dict:
-        """BatchReview.
-        
-        POST /basicOpen/openapi/multiplatform/order/review
-        """
-        return await self._request_with_token(
-            route_name="/basicOpen/openapi/multiplatform/order/review",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def pre_shipment(self, **kwargs) -> dict:
-        """PreShipment.
-        
-        POST /basicOpen/openapi/multiplatform/order/preShipment
-        """
-        return await self._request_with_token(
-            route_name="/basicOpen/openapi/multiplatform/order/preShipment",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def walmart_comment_list(self, **kwargs) -> dict:
-        """WalmartCommentList.
-        
-        POST /basicOpen/multiplatform/walmart/queryCommentList
-        """
-        return await self._request_with_token(
-            route_name="/basicOpen/multiplatform/walmart/queryCommentList",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
+    async def batch_review(self, **kwargs) -> list | dict:
+        """BatchReview. POST /basicOpen/openapi/multiplatform/order/review"""
+        resp = await self._post("/basicOpen/openapi/multiplatform/order/review", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def pre_shipment(self, **kwargs) -> list | dict:
+        """PreShipment. POST /basicOpen/openapi/multiplatform/order/preShipment"""
+        resp = await self._post("/basicOpen/openapi/multiplatform/order/preShipment", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def walmart_comment_list(self, **kwargs) -> list | dict:
+        """WalmartCommentList. POST /basicOpen/multiplatform/walmart/queryCommentList"""
+        resp = await self._post("/basicOpen/multiplatform/walmart/queryCommentList", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}

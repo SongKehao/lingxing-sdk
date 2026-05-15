@@ -6,3 +6,4 @@ build/
 .eggs/
 .omc/
 .env
+tests/fixtures/api_responses.json

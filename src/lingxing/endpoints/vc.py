@@ -1,113 +1,64 @@
-"""Auto-generated VCEndpoints endpoints from official lingxing docs."""
+"""VC卖家 API endpoints."""
 from __future__ import annotations
-from typing import TYPE_CHECKING
-if TYPE_CHECKING:
-    from ...core.openapi import OpenApiBase
 
+from ._base import BaseEndpoint
 
-class VCEndpoints:
-    """领星API - VCEndpoints (10个接口)."""
+class VCEndpoints(BaseEndpoint):
+    """领星VC卖家 API (10个接口)."""
 
-    def __init__(self, openapi: "OpenApiBase"):
-        self._request_with_token = openapi.request_with_auto_token
-
-    async def listing_manage_vc_listing_page_list(self, **kwargs) -> dict:
-        """listingManageVcListingPageList.
-        
-        POST /basicOpen/listingManage/vcListing/pageList
-        """
-        return await self._request_with_token(
-            route_name="/basicOpen/listingManage/vcListing/pageList",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def platform_auth_vc_seller_page_list(self, **kwargs) -> dict:
-        """platformAuthVcSellerPageList.
-        
-        POST /basicOpen/platformAuth/vcSeller/pageList
-        """
-        return await self._request_with_token(
-            route_name="/basicOpen/platformAuth/vcSeller/pageList",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def vc_deliver_detail(self, **kwargs) -> dict:
-        """vcDeliverDetail.
-        
-        POST /basicOpen/openapi/getInvoice/detail
-        """
-        return await self._request_with_token(
-            route_name="/basicOpen/openapi/getInvoice/detail",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def vc_deliver_page_list(self, **kwargs) -> dict:
-        """vcDeliverPageList.
-        
-        POST /basicOpen/openapi/getInvoice/page/list
-        """
-        return await self._request_with_token(
-            route_name="/basicOpen/openapi/getInvoice/page/list",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
+    async def listing_manage_vc_listing_page_list(self, **kwargs) -> list | dict:
+        """listingManageVcListingPageList. POST /basicOpen/listingManage/vcListing/pageList"""
+        resp = await self._post("/basicOpen/listingManage/vcListing/pageList", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def platform_auth_vc_seller_page_list(self, **kwargs) -> list | dict:
+        """platformAuthVcSellerPageList. POST /basicOpen/platformAuth/vcSeller/pageList"""
+        resp = await self._post("/basicOpen/platformAuth/vcSeller/pageList", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def vc_deliver_detail(self, **kwargs) -> list | dict:
+        """vcDeliverDetail. POST /basicOpen/openapi/getInvoice/detail"""
+        resp = await self._post("/basicOpen/openapi/getInvoice/detail", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def vc_deliver_page_list(self, **kwargs) -> list | dict:
+        """vcDeliverPageList. POST /basicOpen/openapi/getInvoice/page/list"""
+        resp = await self._post("/basicOpen/openapi/getInvoice/page/list", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
     async def vc_order_df_confirm_shipment(self, **kwargs) -> dict:
-        """vcOrderDfConfirmShipment.
-        
-        POST /basicOpen/platformOrder/vcOrderDf/confirmShipment
-        """
-        return await self._request_with_token(
-            route_name="/basicOpen/platformOrder/vcOrderDf/confirmShipment",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def vc_order_df_detail(self, **kwargs) -> dict:
-        """vcOrderDfDetail.
-        
-        POST /basicOpen/platformOrder/vcOrderDf/detail
-        """
-        return await self._request_with_token(
-            route_name="/basicOpen/platformOrder/vcOrderDf/detail",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def vc_order_df_get_shipping_label(self, **kwargs) -> dict:
-        """vcOrderDfGetShippingLabel.
-        
-        POST /basicOpen/platformOrder/vcOrderDf/getShippingLabel
-        """
-        return await self._request_with_token(
-            route_name="/basicOpen/platformOrder/vcOrderDf/getShippingLabel",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
+        """vcOrderDfConfirmShipment. POST /basicOpen/platformOrder/vcOrderDf/confirmShipment"""
+        resp = await self._post("/basicOpen/platformOrder/vcOrderDf/confirmShipment", kwargs if kwargs else None)
+        return resp.data or {}
+    async def vc_order_df_detail(self, **kwargs) -> list | dict:
+        """vcOrderDfDetail. POST /basicOpen/platformOrder/vcOrderDf/detail"""
+        resp = await self._post("/basicOpen/platformOrder/vcOrderDf/detail", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def vc_order_df_get_shipping_label(self, **kwargs) -> list | dict:
+        """vcOrderDfGetShippingLabel. POST /basicOpen/platformOrder/vcOrderDf/getShippingLabel"""
+        resp = await self._post("/basicOpen/platformOrder/vcOrderDf/getShippingLabel", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
     async def vc_order_df_submit_shipping_label(self, **kwargs) -> dict:
-        """vcOrderDfSubmitShippingLabel.
-        
-        POST /basicOpen/platformOrder/vcOrderDf/submitShippingLabel
-        """
-        return await self._request_with_token(
-            route_name="/basicOpen/platformOrder/vcOrderDf/submitShippingLabel",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def vc_order_page_list(self, **kwargs) -> dict:
-        """vcOrderPageList.
-        
-        POST /basicOpen/platformOrder/vcOrder/pageList
-        """
-        return await self._request_with_token(
-            route_name="/basicOpen/platformOrder/vcOrder/pageList",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def vc_order_po_detail(self, **kwargs) -> dict:
-        """vcOrderPoDetail.
-        
-        POST /basicOpen/platformOrder/vcOrderPo/detail
-        """
-        return await self._request_with_token(
-            route_name="/basicOpen/platformOrder/vcOrderPo/detail",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
+        """vcOrderDfSubmitShippingLabel. POST /basicOpen/platformOrder/vcOrderDf/submitShippingLabel"""
+        resp = await self._post("/basicOpen/platformOrder/vcOrderDf/submitShippingLabel", kwargs if kwargs else None)
+        return resp.data or {}
+    async def vc_order_page_list(self, **kwargs) -> list | dict:
+        """vcOrderPageList. POST /basicOpen/platformOrder/vcOrder/pageList"""
+        resp = await self._post("/basicOpen/platformOrder/vcOrder/pageList", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def vc_order_po_detail(self, **kwargs) -> list | dict:
+        """vcOrderPoDetail. POST /basicOpen/platformOrder/vcOrderPo/detail"""
+        resp = await self._post("/basicOpen/platformOrder/vcOrderPo/detail", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}

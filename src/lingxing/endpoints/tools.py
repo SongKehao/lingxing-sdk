@@ -1,53 +1,32 @@
-"""Auto-generated ToolsEndpoints endpoints from official lingxing docs."""
+"""工具 API endpoints."""
 from __future__ import annotations
-from typing import TYPE_CHECKING
-if TYPE_CHECKING:
-    from ...core.openapi import OpenApiBase
 
+from ._base import BaseEndpoint
 
-class ToolsEndpoints:
-    """领星API - ToolsEndpoints (4个接口)."""
+class ToolsEndpoints(BaseEndpoint):
+    """领星工具 API (4个接口)."""
 
-    def __init__(self, openapi: "OpenApiBase"):
-        self._request_with_token = openapi.request_with_auto_token
-
-    async def competitive_monitor_list(self, **kwargs) -> dict:
-        """CompetitiveMonitorList.
-        
-        POST /basicOpen/tool/competitiveMonitor/list
-        """
-        return await self._request_with_token(
-            route_name="/basicOpen/tool/competitiveMonitor/list",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def get_keyword_list(self, **kwargs) -> dict:
-        """GetKeywordList.
-        
-        POST /erp/sc/routing/tool/toolKeywordRank/getKeywordList
-        """
-        return await self._request_with_token(
-            route_name="/erp/sc/routing/tool/toolKeywordRank/getKeywordList",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def warning_message_goods_list(self, **kwargs) -> dict:
-        """warningMessageGoodsList.
-        
-        POST /basicOpen/settings/warningMessage/goodsList
-        """
-        return await self._request_with_token(
-            route_name="/basicOpen/settings/warningMessage/goodsList",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
-    async def warning_message_inventory_list(self, **kwargs) -> dict:
-        """warningMessageInventoryList.
-        
-        POST /basicOpen/settings/warningMessage/inventoryList
-        """
-        return await self._request_with_token(
-            route_name="/basicOpen/settings/warningMessage/inventoryList",
-            method="POST",
-            req_body={k: v for k, v in kwargs.items() if v is not None}
-        )
+    async def competitive_monitor_list(self, **kwargs) -> list | dict:
+        """CompetitiveMonitorList. POST /basicOpen/tool/competitiveMonitor/list"""
+        resp = await self._post("/basicOpen/tool/competitiveMonitor/list", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def get_keyword_list(self, **kwargs) -> list | dict:
+        """GetKeywordList. POST /erp/sc/routing/tool/toolKeywordRank/getKeywordList"""
+        resp = await self._post("/erp/sc/routing/tool/toolKeywordRank/getKeywordList", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def warning_message_goods_list(self, **kwargs) -> list | dict:
+        """warningMessageGoodsList. POST /basicOpen/settings/warningMessage/goodsList"""
+        resp = await self._post("/basicOpen/settings/warningMessage/goodsList", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def warning_message_inventory_list(self, **kwargs) -> list | dict:
+        """warningMessageInventoryList. POST /basicOpen/settings/warningMessage/inventoryList"""
+        resp = await self._post("/basicOpen/settings/warningMessage/inventoryList", kwargs if kwargs else None)
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
