@@ -2,7 +2,7 @@
 
 领星 ERP OpenAPI Python SDK — 类型安全、异步、Pydantic 模型
 
-[![PyPI](https://img.shields.io/badge/version-0.4.0-blue)](https://pypi.org/project/lingxing-sdk/)
+[![PyPI](https://img.shields.io/badge/version-0.5.0-blue)](https://pypi.org/project/lingxing-sdk/)
 [![Python](https://img.shields.io/badge/python-3.11+-green)](https://www.python.org/)
 [![Tests](https://img.shields.io/badge/tests-135%20passing-brightgreen)](./tests/)
 [![License](https://img.shields.io/badge/license-MIT-yellow)](./LICENSE)

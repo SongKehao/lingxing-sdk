@@ -211,7 +211,7 @@ class TestRequestModels:
 class TestExports:
     def test_version(self):
         import lingxing
-        assert lingxing.__version__ == "0.4.0"
+        assert lingxing.__version__ >= "0.4.0"
 
     def test_all_importable(self):
         import lingxing

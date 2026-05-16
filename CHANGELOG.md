@@ -1,5 +1,28 @@
 # Changelog
 
+## v0.5.0 (2026-05-16)
+
+### Major Changes
+- **382 endpoint methods converted from `**kwargs` to typed parameters**
+  - All parameters have explicit type annotations (str, int, float, list, dict, Any)
+  - All parameters default to `None` (optional) for maximum flexibility
+  - Dict comprehension filters `None` values before sending to API
+- **465 Response models generated** from API documentation
+  - 18 model files covering all API categories
+  - All fields typed with descriptions from API docs
+- **103 ruff lint errors fixed** — All checks passed
+- **`from typing import Any` added** to 13 endpoint files
+- **13 methods remain with `**kwargs`** (API docs lack parameter definitions for these)
+
+### Stats
+- Request models: 795
+- Response models: 465
+- Typed methods: 387 / 400 total
+- Remaining `**kwargs`: 13
+- Tests: 135 passed, 4 skipped, 0 failed
+- Source lines: ~41,000
+- Ruff: All checks passed!
+
 ## v0.4.0 (2026-05-16)
 
 ### Major Changes

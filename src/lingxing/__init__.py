@@ -12,7 +12,7 @@ Basic usage:
     listings = await sale.listing(sid=123, offset=0, length=20)
 """
 
-__version__ = "0.4.0"
+__version__ = "0.5.0"
 
 from .client import LingXingClient
 from .config import LingXingConfig, get_config, set_config
