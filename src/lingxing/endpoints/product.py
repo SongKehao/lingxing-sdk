@@ -1,6 +1,8 @@
 """产品 API endpoints."""
 from __future__ import annotations
 
+from typing import Any
+
 from ..models.product import AttributeListItem, BrandItem, CategoryItem, ProductListsItem, UpcListItem
 from ._base import BaseEndpoint
 
@@ -8,7 +10,7 @@ from ._base import BaseEndpoint
 class ProductEndpoints(BaseEndpoint):
     """领星产品 API (23个接口)."""
 
-    async def add_commodity_code(self, **kwargs) -> dict:
+    async def add_commodity_code(self, commodity_codes: Any = None, code_type: str = None) -> dict:
         """创建UPC编码.
 
 POST /listing/publish/api/upc/addCommodityCode
@@ -16,9 +18,9 @@ POST /listing/publish/api/upc/addCommodityCode
 Args:
     commodity_codes: 编码-最多支持两百个 (required), array.
     code_type: 编码类型：支持UPC、EAN、ISBN (required), string."""
-        resp = await self._post("/listing/publish/api/upc/addCommodityCode", kwargs if kwargs else None)
+        resp = await self._post("/listing/publish/api/upc/addCommodityCode", {k: v for k, v in {"commodity_codes": commodity_codes, "code_type": code_type}.items() if v is not None})
         return resp.data or {}
-    async def brand(self, **kwargs) -> list[BrandItem]:
+    async def brand(self, offset: int = None, length: int = None) -> list[BrandItem]:
         """查询产品品牌列表.
 
 POST /erp/sc/data/local_inventory/brand
@@ -26,9 +28,9 @@ POST /erp/sc/data/local_inventory/brand
 Args:
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认1000，上限1000, int."""
-        resp = await self._post("/erp/sc/data/local_inventory/brand", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/data/local_inventory/brand", {k: v for k, v in {"offset": offset, "length": length}.items() if v is not None})
         return self._parse_list(resp.data, BrandItem)
-    async def category(self, **kwargs) -> list[CategoryItem]:
+    async def category(self, offset: int = None, length: int = None, data: Any = None) -> list[CategoryItem]:
         """查询产品分类列表.
 
 POST /erp/sc/routing/data/local_inventory/category
@@ -36,9 +38,9 @@ POST /erp/sc/routing/data/local_inventory/category
 Args:
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认1000，上限1000, int."""
-        resp = await self._post("/erp/sc/routing/data/local_inventory/category", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/data/local_inventory/category", {k: v for k, v in {"offset": offset, "length": length, "data": data}.items() if v is not None})
         return self._parse_list(resp.data, CategoryItem)
-    async def get_paging_log_lists(self, **kwargs) -> list | dict:
+    async def get_paging_log_lists(self, businessId: int = None, endTime: str = None, startTime: str = None, page: int = None, size: int = None) -> list | dict:
         """查询操作日志.
 
 POST /basicOpen/product/getPagingLogLists
@@ -49,11 +51,11 @@ Args:
     startTime: 开始时间, string.
     page: 页码, int.
     size: 每页大小, int."""
-        resp = await self._post("/basicOpen/product/getPagingLogLists", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/product/getPagingLogLists", {k: v for k, v in {"businessId": businessId, "endTime": endTime, "startTime": startTime, "page": page, "size": size}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def product_details(self, **kwargs) -> list | dict:
+    async def product_details(self, id: int = None, sku: str = None, sku_identifier: str = None) -> list | dict:
         """查询本地产品详情.
 
 POST /erp/sc/routing/data/local_inventory/productInfo
@@ -62,11 +64,11 @@ Args:
     id: 产品id【产品id、 产品SKU 、SKU识别码 三选一必填】, int.
     sku: 产品SKU【产品id、 产品SKU 、SKU识别码 三选一必填】, string.
     sku_identifier: SKU识别码【产品id、 产品SKU 、SKU识别码 三选一必填】, string."""
-        resp = await self._post("/erp/sc/routing/data/local_inventory/productInfo", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/data/local_inventory/productInfo", {k: v for k, v in {"id": id, "sku": sku, "sku_identifier": sku_identifier}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def product_lists(self, **kwargs) -> list[ProductListsItem]:
+    async def product_lists(self, offset: int = None, length: int = None, update_time_start: int = None, update_time_end: int = None, create_time_start: int = None, create_time_end: int = None, sku_list: list = None, sku_identifier_list: list = None) -> list[ProductListsItem]:
         """查询本地产品列表.
 
 POST /erp/sc/routing/data/local_inventory/productList
@@ -80,20 +82,20 @@ Args:
     create_time_end: 创建时间-结束时间【时间戳，单位：秒，左闭右开】, int.
     sku_list: 本地产品sku, array.
     sku_identifier_list: sku识别码列表, array."""
-        resp = await self._post("/erp/sc/routing/data/local_inventory/productList", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/data/local_inventory/productList", {k: v for k, v in {"offset": offset, "length": length, "update_time_start": update_time_start, "update_time_end": update_time_end, "create_time_start": create_time_start, "create_time_end": create_time_end, "sku_list": sku_list, "sku_identifier_list": sku_identifier_list}.items() if v is not None})
         return self._parse_list(resp.data, ProductListsItem)
-    async def set_brand(self, **kwargs) -> list | dict:
+    async def set_brand(self, data: list = None) -> list | dict:
         """添加/编辑产品品牌.
 
 POST /erp/sc/storage/brand/set
 
 Args:
     data: 请求数据 (required), array."""
-        resp = await self._post("/erp/sc/storage/brand/set", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/storage/brand/set", {k: v for k, v in {"data": data}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def set_bundled(self, **kwargs) -> list | dict:
+    async def set_bundled(self, sku: str = None, product_name: str = None, model: str = None, unit: str = None, status: int = None, category_id: int = None, category: str = None, brand_id: int = None, brand: str = None, product_developer: str = None, product_developer_uid: int = None, product_duty_uids: list = None, is_append_product_duty: int = None, product_creator_uid: int = None, description: str = None, picture_list: list = None, group_list: list = None) -> list | dict:
         """添加 / 编辑捆绑产品.
 
 POST /erp/sc/routing/storage/product/setBundled
@@ -116,22 +118,22 @@ Args:
     product_creator_uid: 创建人ERP id，默认 api 用户id, int.
     description: 商品描述, string.
     group_list: 组合商品列表，捆绑产品子产品的总数量要大于1, array."""
-        resp = await self._post("/erp/sc/routing/storage/product/setBundled", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/storage/product/setBundled", {k: v for k, v in {"sku": sku, "product_name": product_name, "model": model, "unit": unit, "status": status, "category_id": category_id, "category": category, "brand_id": brand_id, "brand": brand, "product_developer": product_developer, "product_developer_uid": product_developer_uid, "product_duty_uids": product_duty_uids, "is_append_product_duty": is_append_product_duty, "product_creator_uid": product_creator_uid, "description": description, "picture_list": picture_list, "group_list": group_list}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def set_category(self, **kwargs) -> list | dict:
+    async def set_category(self, data: list = None) -> list | dict:
         """添加 / 编辑产品分类.
 
 POST /erp/sc/routing/storage/category/set
 
 Args:
     data: 请求数据 (required), array."""
-        resp = await self._post("/erp/sc/routing/storage/category/set", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/storage/category/set", {k: v for k, v in {"data": data}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def set_product(self, **kwargs) -> list | dict:
+    async def set_product(self, sku: str = None, product_name: str = None, sku_identifier: str = None, unit_process_fee: int = None, unit: str = None, category_id: int = None, category: str = None, model: str = None, brand_id: int = None, brand: str = None, open_status: int = None, status: int = None, description: str = None, cg_opt_uid: int = None, cg_opt_username: str = None, product_developer_uid: int = None, product_developer: str = None, product_creator_uid: int = None, product_duty_uids: list = None, is_append_product_duty: int = None, purchase_remark: str = None, cg_price: str = None, is_related: int = None, cg_delivery: int = None, cg_product_material: str = None, cg_product_length: str = None, cg_product_width: str = None, cg_product_height: str = None, cg_product_net_weight: str = None, cg_product_gross_weight: str = None, cg_package_length: str = None, cg_package_width: str = None, cg_package_height: str = None, cg_box_length: str = None, cg_box_width: str = None, cg_box_height: str = None, cg_box_weight: str = None, cg_box_pcs: int = None, bg_customs_export_name: str = None, bg_export_hs_code: str = None, bg_customs_import_name: str = None, currency: str = None, bg_customs_import_price: str = None, special_attr: list = None, picture_list: list = None, group_list: list = None, qc_standard: Any = None, product_logistics_list: Any = None, supplier_quote: list = None, declaration: Any = None, clearance: Any = None, aux_relation_list: list = None, spec_pack_list: list = None, custom_fields: Any = None) -> list | dict:
         """添加/编辑本地产品.
 
 POST /erp/sc/routing/storage/product/set
@@ -191,11 +193,11 @@ Args:
     aux_relation_list: 辅料列表, array.
     spec_pack_list: 采购：更多箱规（非默认箱规）, array.
     custom_fields: [array], 自定义字段."""
-        resp = await self._post("/erp/sc/routing/storage/product/set", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/storage/product/set", {k: v for k, v in {"sku": sku, "product_name": product_name, "sku_identifier": sku_identifier, "unit_process_fee": unit_process_fee, "unit": unit, "category_id": category_id, "category": category, "model": model, "brand_id": brand_id, "brand": brand, "open_status": open_status, "status": status, "description": description, "cg_opt_uid": cg_opt_uid, "cg_opt_username": cg_opt_username, "product_developer_uid": product_developer_uid, "product_developer": product_developer, "product_creator_uid": product_creator_uid, "product_duty_uids": product_duty_uids, "is_append_product_duty": is_append_product_duty, "purchase_remark": purchase_remark, "cg_price": cg_price, "is_related": is_related, "cg_delivery": cg_delivery, "cg_product_material": cg_product_material, "cg_product_length": cg_product_length, "cg_product_width": cg_product_width, "cg_product_height": cg_product_height, "cg_product_net_weight": cg_product_net_weight, "cg_product_gross_weight": cg_product_gross_weight, "cg_package_length": cg_package_length, "cg_package_width": cg_package_width, "cg_package_height": cg_package_height, "cg_box_length": cg_box_length, "cg_box_width": cg_box_width, "cg_box_height": cg_box_height, "cg_box_weight": cg_box_weight, "cg_box_pcs": cg_box_pcs, "bg_customs_export_name": bg_customs_export_name, "bg_export_hs_code": bg_export_hs_code, "bg_customs_import_name": bg_customs_import_name, "currency": currency, "bg_customs_import_price": bg_customs_import_price, "special_attr": special_attr, "picture_list": picture_list, "group_list": group_list, "qc_standard": qc_standard, "product_logistics_list": product_logistics_list, "supplier_quote": supplier_quote, "declaration": declaration, "clearance": clearance, "aux_relation_list": aux_relation_list, "spec_pack_list": spec_pack_list, "custom_fields": custom_fields}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def upc_list(self, **kwargs) -> tuple[list[UpcListItem], int]:
+    async def upc_list(self, offset: int = None, length: int = None) -> tuple[list[UpcListItem], int]:
         """获取UPC编码列表.
 
 POST /listing/publish/api/upc/upcList
@@ -203,9 +205,9 @@ POST /listing/publish/api/upc/upcList
 Args:
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认20, int."""
-        resp = await self._post("/listing/publish/api/upc/upcList", kwargs if kwargs else None)
+        resp = await self._post("/listing/publish/api/upc/upcList", {k: v for k, v in {"offset": offset, "length": length}.items() if v is not None})
         return self._parse_page(resp.data, UpcListItem)
-    async def upload_pictures(self, **kwargs) -> list | dict:
+    async def upload_pictures(self, sku: str = None, picture_list: list = None) -> list | dict:
         """上传本地产品图片.
 
 POST /erp/sc/routing/storage/product/uploadPictures
@@ -213,11 +215,11 @@ POST /erp/sc/routing/storage/product/uploadPictures
 Args:
     sku: 本地产品SKU (required), string.
     picture_list: 产品图片信息 (required), array."""
-        resp = await self._post("/erp/sc/routing/storage/product/uploadPictures", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/storage/product/uploadPictures", {k: v for k, v in {"sku": sku, "picture_list": picture_list}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def attribute_list(self, **kwargs) -> tuple[list[AttributeListItem], int]:
+    async def attribute_list(self, offset: int = None, length: int = None) -> tuple[list[AttributeListItem], int]:
         """查询产品属性列表.
 
 POST /erp/sc/routing/storage/attribute/attributeList
@@ -225,9 +227,9 @@ POST /erp/sc/routing/storage/attribute/attributeList
 Args:
     offset: 分页偏移量 (required), int.
     length: 分页长度，上限200 (required), int."""
-        resp = await self._post("/erp/sc/routing/storage/attribute/attributeList", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/storage/attribute/attributeList", {k: v for k, v in {"offset": offset, "length": length}.items() if v is not None})
         return self._parse_page(resp.data, AttributeListItem)
-    async def attribute_set(self, **kwargs) -> list | dict:
+    async def attribute_set(self, pa_id: int = None, attr_name: str = None, attr_values: list = None) -> list | dict:
         """添加 / 编辑产品属性.
 
 POST /erp/sc/routing/storage/attribute/set
@@ -236,11 +238,11 @@ Args:
     pa_id: 领星属性id, int.
     attr_name: 属性名 (required), string.
     attr_values: 属性值数组 (required), array."""
-        resp = await self._post("/erp/sc/routing/storage/attribute/set", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/storage/attribute/set", {k: v for k, v in {"pa_id": pa_id, "attr_name": attr_name, "attr_values": attr_values}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def batch_get_product_info(self, **kwargs) -> dict:
+    async def batch_get_product_info(self, productIds: list = None, skus: list = None, sku_identifiers: list = None) -> dict:
         """批量查询本地产品详情.
 
 POST /erp/sc/routing/data/local_inventory/batchGetProductInfo
@@ -249,9 +251,9 @@ Args:
     productIds: 产品id，上限100个【产品id 、 产品sku 、SKU识别码 三选一必填】, array.
     skus: 产品SKU，上限100个【产品id 、 产品sku 、SKU识别码 三选一必填】, array.
     sku_identifiers: SKU识别码，上限100个上限100个【产品id 、 产品sku 、SKU识别码 三选一必填】, array."""
-        resp = await self._post("/erp/sc/routing/data/local_inventory/batchGetProductInfo", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/data/local_inventory/batchGetProductInfo", {k: v for k, v in {"productIds": productIds, "skus": skus, "sku_identifiers": sku_identifiers}.items() if v is not None})
         return resp.data or {}
-    async def bundled_product_list(self, **kwargs) -> list | dict:
+    async def bundled_product_list(self, offset: int = None, length: int = None) -> list | dict:
         """查询捆绑产品关系列表.
 
 POST /erp/sc/routing/data/local_inventory/bundledProductList
@@ -259,11 +261,11 @@ POST /erp/sc/routing/data/local_inventory/bundledProductList
 Args:
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认1000，上限1000, int."""
-        resp = await self._post("/erp/sc/routing/data/local_inventory/bundledProductList", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/data/local_inventory/bundledProductList", {k: v for k, v in {"offset": offset, "length": length}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def get_transparency_product_list(self, **kwargs) -> list | dict:
+    async def get_transparency_product_list(self, isRelateMsku: int = None, length: int = None, offset: int = None, productStatus: str = None, searchField: str = None, searchValue: str = None) -> list | dict:
         """产品管理-查询透明计划商品列表.
 
 POST /basicOpen/product/getTransparencyProductList
@@ -275,11 +277,11 @@ Args:
     productStatus: 产品状态，枚举值：all-全部, Enrolled-已注册, In OPR-OPR中, Protected-受保护, NoStatus-无状态, string.
     searchField: 搜索字段，指定搜索的字段名, string.
     searchValue: 搜索值，用于模糊搜索, string."""
-        resp = await self._post("/basicOpen/product/getTransparencyProductList", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/product/getTransparencyProductList", {k: v for k, v in {"isRelateMsku": isRelateMsku, "length": length, "offset": offset, "productStatus": productStatus, "searchField": searchField, "searchValue": searchValue}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def product_aux_list(self, **kwargs) -> list | dict:
+    async def product_aux_list(self, offset: int = None, length: int = None) -> list | dict:
         """查询产品辅料列表.
 
 POST /erp/sc/routing/data/local_inventory/productAuxList
@@ -287,11 +289,11 @@ POST /erp/sc/routing/data/local_inventory/productAuxList
 Args:
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认1000，上限1000, int."""
-        resp = await self._post("/erp/sc/routing/data/local_inventory/productAuxList", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/data/local_inventory/productAuxList", {k: v for k, v in {"offset": offset, "length": length}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def product_operate_batch(self, **kwargs) -> dict:
+    async def product_operate_batch(self, product_ids: list = None, batch_status: str = None) -> dict:
         """产品启用、禁用.
 
 POST /basicOpen/product/productManager/product/operate/batch
@@ -299,9 +301,9 @@ POST /basicOpen/product/productManager/product/operate/batch
 Args:
     product_ids: 产品id, array.
     batch_status: 状态: Enable 启用 Disable 禁用 (required), string."""
-        resp = await self._post("/basicOpen/product/productManager/product/operate/batch", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/product/productManager/product/operate/batch", {k: v for k, v in {"product_ids": product_ids, "batch_status": batch_status}.items() if v is not None})
         return resp.data or {}
-    async def set_aux(self, **kwargs) -> list | dict:
+    async def set_aux(self, sku: str = None, product_name: str = None, cg_price: float = None, cg_product_length: float = None, cg_product_width: float = None, cg_product_height: float = None, cg_product_net_weight: float = None, remark: str = None, supplier_quote: list = None) -> list | dict:
         """添加 / 编辑辅料.
 
 POST /erp/sc/routing/storage/product/setAux
@@ -316,11 +318,11 @@ Args:
     cg_product_net_weight: 采购：单品净重（G）, number.
     supplier_quote: 供应商报价信息（不传该参数则清空产品供应商报价）, array.
     remark: 辅料描述 (required), string."""
-        resp = await self._post("/erp/sc/routing/storage/product/setAux", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/storage/product/setAux", {k: v for k, v in {"sku": sku, "product_name": product_name, "cg_price": cg_price, "cg_product_length": cg_product_length, "cg_product_width": cg_product_width, "cg_product_height": cg_product_height, "cg_product_net_weight": cg_product_net_weight, "remark": remark, "supplier_quote": supplier_quote}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def spu_info(self, **kwargs) -> list | dict:
+    async def spu_info(self, ps_id: int = None, spu: str = None) -> list | dict:
         """查询多属性产品详情.
 
 POST /erp/sc/routing/storage/spu/info
@@ -328,11 +330,11 @@ POST /erp/sc/routing/storage/spu/info
 Args:
     ps_id: SPU唯一id【ps_id 与 spu二选一必填 (required), int.
     spu: SPU (required), string."""
-        resp = await self._post("/erp/sc/routing/storage/spu/info", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/storage/spu/info", {k: v for k, v in {"ps_id": ps_id, "spu": spu}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def spu_list(self, **kwargs) -> list | dict:
+    async def spu_list(self, offset: int = None, length: int = None) -> list | dict:
         """查询多属性产品列表.
 
 POST /erp/sc/routing/storage/spu/spuList
@@ -340,11 +342,11 @@ POST /erp/sc/routing/storage/spu/spuList
 Args:
     offset: 分页偏移量 (required), int.
     length: 分页长度，上限200 (required), int."""
-        resp = await self._post("/erp/sc/routing/storage/spu/spuList", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/storage/spu/spuList", {k: v for k, v in {"offset": offset, "length": length}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def spu_set(self, **kwargs) -> list | dict:
+    async def spu_set(self, spu: str = None, spu_name: str = None, model: str = None, unit: str = None, status: int = None, cid: int = None, bid: int = None, create_uid: int = None, developer_uid: int = None, product_duty_uids: list = None, description: str = None, use_spu_template: int = None, sku_list: list = None, sku_lis: Any = None, purchase_info: Any = None, logistics: Any = None, aux_relation_list: list = None, attribute_skc_list: list = None) -> list | dict:
         """添加/编辑多属性产品.
 
 POST /erp/sc/routing/storage/spu/set
@@ -367,7 +369,7 @@ Args:
     logistics: 物流报关相关信息, object.
     aux_relation_list: 辅料列表, array.
     attribute_skc_list: skc列表, array."""
-        resp = await self._post("/erp/sc/routing/storage/spu/set", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/storage/spu/set", {k: v for k, v in {"spu": spu, "spu_name": spu_name, "model": model, "unit": unit, "status": status, "cid": cid, "bid": bid, "create_uid": create_uid, "developer_uid": developer_uid, "product_duty_uids": product_duty_uids, "description": description, "use_spu_template": use_spu_template, "sku_list": sku_list, "sku_lis": sku_lis, "purchase_info": purchase_info, "logistics": logistics, "aux_relation_list": aux_relation_list, "attribute_skc_list": attribute_skc_list}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}

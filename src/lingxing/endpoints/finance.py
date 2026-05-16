@@ -7,7 +7,7 @@ from ._base import BaseEndpoint
 class FinanceEndpoints(BaseEndpoint):
     """领星财务 API (19个接口)."""
 
-    async def fiance_profit_msku(self, **kwargs) -> list | dict:
+    async def fiance_profit_msku(self, offset: int = None, length: int = None, currency_type: int = None, sids: str = None, month: str = None) -> list | dict:
         """查询利润报表（旧） - MSKU.
 
 POST /erp/sc/routing/finance/ProfitState/profitMsku
@@ -18,11 +18,11 @@ Args:
     currency_type: 币种 :  1 CNY  2 USD  3 EUR  4 JPY  5 AUD  6 CAD  7 MXN  8 GBP  9 INR  10 AED  11 SGD  12 SAR  13 BRL  14 SEK  15 PLN  16 TRY (required), int.
     sids: 店铺id，多个使用英文逗号分隔 ，对应查询亚马逊店铺列表接口对应字段【sid】 (required), string.
     month: 月份 (required), string."""
-        resp = await self._post("/erp/sc/routing/finance/ProfitState/profitMsku", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/finance/ProfitState/profitMsku", {k: v for k, v in {"offset": offset, "length": length, "currency_type": currency_type, "sids": sids, "month": month}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def order_profit_list_msku(self, **kwargs) -> list | dict:
+    async def order_profit_list_msku(self, offset: int = None, length: int = None, sids: list = None, startDate: str = None, endDate: str = None, searchField: str = None, searchValue: list = None, currencyCode: str = None) -> list | dict:
         """查询订单利润-MSKU.
 
 POST /basicOpen/finance/mreport/OrderProfit
@@ -36,11 +36,11 @@ Args:
     searchField: 搜索值类型, 可选值:seller_sku,asin,local_name, local_sku, string.
     searchValue: 搜索的值, array.
     currencyCode: 币种code【默认原币种】, 可选值：原币种,CNY,USD,EUR,JPY,AUD,CAD,MXN,GBP,INR,AED,SGD,SAR,BRL,SEK,PLN,TRY,HKD, string."""
-        resp = await self._post("/basicOpen/finance/mreport/OrderProfit", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/finance/mreport/OrderProfit", {k: v for k, v in {"offset": offset, "length": length, "sids": sids, "startDate": startDate, "endDate": endDate, "searchField": searchField, "searchValue": searchValue, "currencyCode": currencyCode}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def query_receipt_funds_list(self, **kwargs) -> list | dict:
+    async def query_receipt_funds_list(self, endDate: str = None, length: int = None, offset: int = None, searchField: str = None, searchFieldTime: str = None, searchValue: str = None, seniorSearchList: str = None, startDate: str = None, status: list = None) -> list | dict:
         """查询收款单列表.
 
 POST /basicOpen/finance/queryReceiptFundsList
@@ -55,11 +55,11 @@ Args:
     seniorSearchList: 高级筛选，JSON字符串格式, string.
     startDate: 开始日期，必填，格式：yyyy-MM-dd, string.
     status: 状态筛选，String数组，枚举值：1-待收款, 2-已完成, 3-已作废, 121-待审批, 122-已驳回, 124-已作废, array."""
-        resp = await self._post("/basicOpen/finance/queryReceiptFundsList", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/finance/queryReceiptFundsList", {k: v for k, v in {"endDate": endDate, "length": length, "offset": offset, "searchField": searchField, "searchFieldTime": searchFieldTime, "searchValue": searchValue, "seniorSearchList": seniorSearchList, "startDate": startDate, "status": status}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def request_funds_order_list(self, **kwargs) -> list | dict:
+    async def request_funds_order_list(self, offset: int = None, length: int = None, status: int = None, search_field_time: str = None, start_date: str = None, end_date: str = None, search_field: str = None, search_value: str = None) -> list | dict:
         """查询请款单列表.
 
 POST /basicOpen/finance/requestFunds/order/list
@@ -73,11 +73,11 @@ Args:
     end_date: 结束时间【时间间隔最长不得超过90天】，闭区间，格式：Y-m-d, string.
     search_field: 搜索字段：purchase_order_sn 关联单据，order_sn  请款单号, string.
     search_value: 搜索值, string."""
-        resp = await self._post("/basicOpen/finance/requestFunds/order/list", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/finance/requestFunds/order/list", {k: v for k, v in {"offset": offset, "length": length, "status": status, "search_field_time": search_field_time, "start_date": start_date, "end_date": end_date, "search_field": search_field, "search_value": search_value}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def lazada_payout_list(self, **kwargs) -> list | dict:
+    async def lazada_payout_list(self, compareLogic: str = None, currencyCode: str = None, endDate: str = None, envKey: str = None, exportFields: list = None, fieldCompares: list = None, hasDifference: bool = None, length: float = None, offset: float = None, paid: float = None, platformCode: str = None, searchExactly: bool = None, searchMultiValue: list = None, searchSingleValue: str = None, searchType: float = None, sids: list = None, sites: list = None, sortField: str = None, sortType: str = None, startDate: str = None, storeTypes: list = None, timeType: float = None) -> list | dict:
         """回款明细-LazadaPayout.
 
 POST /basicOpen/finance/lazada/payout/list
@@ -105,11 +105,11 @@ Args:
     startDate: 开始时间，支持 `yyyy-MM-dd` 或 `yyyy-MM-dd HH:mm:ss` 格式，仅日期时自动补充 `00:00:00`, string.
     storeTypes: 店铺类型数组： `1` 跨境店 `2` 本土店, array.
     timeType: 时间类型： `1` 回款时间 `2` 结算周期 默认 `1`, number."""
-        resp = await self._post("/basicOpen/finance/lazada/payout/list", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/finance/lazada/payout/list", {k: v for k, v in {"compareLogic": compareLogic, "currencyCode": currencyCode, "endDate": endDate, "envKey": envKey, "exportFields": exportFields, "fieldCompares": fieldCompares, "hasDifference": hasDifference, "length": length, "offset": offset, "paid": paid, "platformCode": platformCode, "searchExactly": searchExactly, "searchMultiValue": searchMultiValue, "searchSingleValue": searchSingleValue, "searchType": searchType, "sids": sids, "sites": sites, "sortField": sortField, "sortType": sortType, "startDate": startDate, "storeTypes": storeTypes, "timeType": timeType}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def lazada_settlement_list(self, **kwargs) -> list | dict:
+    async def lazada_settlement_list(self, compareLogic: str = None, currencyCode: str = None, endDate: str = None, envKey: str = None, exportFields: list = None, feeNames: list = None, fieldCompares: list = None, isInSettlement: float = None, length: float = None, offset: float = None, paidStatuses: list = None, platformCode: str = None, searchExactly: bool = None, searchExactly1: bool = None, searchMultiValue: list = None, searchMultiValue1: list = None, searchSingleValue: str = None, searchSingleValue1: str = None, searchType: float = None, searchType1: float = None, sids: list = None, sites: list = None, sortField: str = None, sortType: str = None, startDate: str = None, storeTypes: list = None, timeType: float = None, transactionTypes: list = None) -> list | dict:
         """账单明细-LazadaSettlement.
 
 POST /basicOpen/finance/lazada/settlement/list
@@ -143,11 +143,11 @@ Args:
     storeTypes: 店铺类型数组： `1` 跨境店 `2` 本土店, array.
     timeType: 时间类型： `1` 结算日期 `2` 结算周期 默认 `1`, number.
     transactionTypes: 交易类型数组, array."""
-        resp = await self._post("/basicOpen/finance/lazada/settlement/list", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/finance/lazada/settlement/list", {k: v for k, v in {"compareLogic": compareLogic, "currencyCode": currencyCode, "endDate": endDate, "envKey": envKey, "exportFields": exportFields, "feeNames": feeNames, "fieldCompares": fieldCompares, "isInSettlement": isInSettlement, "length": length, "offset": offset, "paidStatuses": paidStatuses, "platformCode": platformCode, "searchExactly": searchExactly, "searchExactly1": searchExactly1, "searchMultiValue": searchMultiValue, "searchMultiValue1": searchMultiValue1, "searchSingleValue": searchSingleValue, "searchSingleValue1": searchSingleValue1, "searchType": searchType, "searchType1": searchType1, "sids": sids, "sites": sites, "sortField": sortField, "sortType": sortType, "startDate": startDate, "storeTypes": storeTypes, "timeType": timeType, "transactionTypes": transactionTypes}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def profit_asin(self, **kwargs) -> list | dict:
+    async def profit_asin(self, month: str = None, sids: str = None, currency_type: str = None, offset: int = None, length: int = None) -> list | dict:
         """查询利润报表（旧） - ASIN（父级）.
 
 POST /erp/sc/routing/finance/ProfitState/profitAsin
@@ -158,11 +158,11 @@ Args:
     currency_type: 币种： 1 CNY 2 USD 3 EUR 4 JPY 5 AUD 6 CAD 7 MXN 8 GBP 9 INR 10 AED 11 SGD 12 SAR 13 BRL 14 SEK 15 PLN 16 TRY (required), string.
     offset: 分页偏移量 (required), int.
     length: 分页长度 (required), int."""
-        resp = await self._post("/erp/sc/routing/finance/ProfitState/profitAsin", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/finance/ProfitState/profitAsin", {k: v for k, v in {"month": month, "sids": sids, "currency_type": currency_type, "offset": offset, "length": length}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def profit_asin_son(self, **kwargs) -> list | dict:
+    async def profit_asin_son(self, month: str = None, sids: str = None, currency_type: str = None, asin: str = None, version: str = None, offset: int = None, length: int = None) -> list | dict:
         """查询利润报表（旧） - ASIN（子级）.
 
 POST /erp/sc/routing/finance/ProfitState/profitAsinSon
@@ -175,11 +175,11 @@ Args:
     version: 版本号，没有则传空 (required), string.
     offset: 分页偏移量 (required), int.
     length: 分页长度 (required), int."""
-        resp = await self._post("/erp/sc/routing/finance/ProfitState/profitAsinSon", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/finance/ProfitState/profitAsinSon", {k: v for k, v in {"month": month, "sids": sids, "currency_type": currency_type, "asin": asin, "version": version, "offset": offset, "length": length}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def profit_report_order_transcation_list(self, **kwargs) -> list | dict:
+    async def profit_report_order_transcation_list(self, offset: int = None, length: int = None, mids: list = None, sids: list = None, searchDateField: str = None, startDate: str = None, endDate: str = None, gmtModifiedStartDate: str = None, gmtModifiedEndDate: str = None, currencyCode: str = None, searchField: str = None, searchValue: list = None, sortField: str = None, sortType: str = None, settlementStatus: list = None, fundTransferStatus: list = None, accountType: list = None, eventSource: list = None, fulfillment: list = None, principalUids: list = None, productDeveloperUids: list = None, orderStatus: str = None) -> list | dict:
         """查询利润报表 - 订单维度transaction视图.
 
 POST /basicOpen/finance/profitReport/order/transcation/list
@@ -207,11 +207,11 @@ Args:
     principalUids: listing负责人, array.
     productDeveloperUids: 开发负责人, array.
     orderStatus: 交易状态 Deferred 已推迟（结束时间必须要今天才能获取已推迟数据） Disbursed 已发放【默认】 DisbursedAndPreSettled 已发放（含`预结`算） All 全部, string."""
-        resp = await self._post("/basicOpen/finance/profitReport/order/transcation/list", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/finance/profitReport/order/transcation/list", {k: v for k, v in {"offset": offset, "length": length, "mids": mids, "sids": sids, "searchDateField": searchDateField, "startDate": startDate, "endDate": endDate, "gmtModifiedStartDate": gmtModifiedStartDate, "gmtModifiedEndDate": gmtModifiedEndDate, "currencyCode": currencyCode, "searchField": searchField, "searchValue": searchValue, "sortField": sortField, "sortType": sortType, "settlementStatus": settlementStatus, "fundTransferStatus": fundTransferStatus, "accountType": accountType, "eventSource": eventSource, "fulfillment": fulfillment, "principalUids": principalUids, "productDeveloperUids": productDeveloperUids, "orderStatus": orderStatus}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def profit_settlement(self, **kwargs) -> list | dict:
+    async def profit_settlement(self, sids: str = None, start_date: str = None, end_date: str = None, currency_type: int = None, send_date_start: str = None, send_date_end: str = None, offset: int = None, length: int = None) -> list | dict:
         """查询利润报表（旧）-结算明细.
 
 POST /erp/sc/routing/finance/ProfitState/profitSettlement
@@ -225,11 +225,11 @@ Args:
     send_date_end: 发货日期结束筛选时间，小于等于结算结束时间, string.
     offset: 分页偏移量 (required), int.
     length: 分页长度 (required), int."""
-        resp = await self._post("/erp/sc/routing/finance/ProfitState/profitSettlement", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/finance/ProfitState/profitSettlement", {k: v for k, v in {"sids": sids, "start_date": start_date, "end_date": end_date, "currency_type": currency_type, "send_date_start": send_date_start, "send_date_end": send_date_end, "offset": offset, "length": length}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def request_funds_pool_custom_fee_list(self, **kwargs) -> list | dict:
+    async def request_funds_pool_custom_fee_list(self, offset: int = None, length: int = None, pay_status: str = None, search_field_time: str = None, start_time: str = None, end_time: str = None, search_field: str = None, search_value: str = None) -> list | dict:
         """查询请款池-其他应付款.
 
 POST /basicOpen/finance/requestFundsPool/customFee/list
@@ -243,11 +243,11 @@ Args:
     end_time: 结束时间【时间间隔最长不得超过90天】，闭区间，格式：Y-m-d, string.
     search_field: 搜索类型： business_sn   费用单号 custom_fee_sn   其他应付单号, string.
     search_value: 搜索值, string."""
-        resp = await self._post("/basicOpen/finance/requestFundsPool/customFee/list", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/finance/requestFundsPool/customFee/list", {k: v for k, v in {"offset": offset, "length": length, "pay_status": pay_status, "search_field_time": search_field_time, "start_time": start_time, "end_time": end_time, "search_field": search_field, "search_value": search_value}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def request_funds_pool_inbound_list(self, **kwargs) -> list | dict:
+    async def request_funds_pool_inbound_list(self, pay_status: str = None, time_field: str = None, start_time: str = None, end_time: str = None, search_field: str = None, search_value: str = None, offset: int = None, length: int = None) -> list | dict:
         """查询请款池 - 货款月结.
 
 POST /basicOpen/finance/requestFundsPool/inbound/list
@@ -261,11 +261,11 @@ Args:
     search_value: 搜索值, string.
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认20，上限200, int."""
-        resp = await self._post("/basicOpen/finance/requestFundsPool/inbound/list", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/finance/requestFundsPool/inbound/list", {k: v for k, v in {"pay_status": pay_status, "time_field": time_field, "start_time": start_time, "end_time": end_time, "search_field": search_field, "search_value": search_value, "offset": offset, "length": length}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def request_funds_pool_logistics_list(self, **kwargs) -> list | dict:
+    async def request_funds_pool_logistics_list(self, offset: int = None, length: int = None, search_field_time: str = None, start_time: str = None, end_time: str = None, search_field: str = None, search_value: str = None) -> list | dict:
         """查询请款池-物流请款.
 
 POST /basicOpen/finance/requestFundsPool/logistics/list
@@ -278,11 +278,11 @@ Args:
     end_time: 结束时间【时间间隔最长不得超过90天】，闭区间，格式：Y-m-d, string.
     search_field: 搜索类型： order_sn  发货单号  logistics_center_code  物流中心编码, string.
     search_value: 搜索值, string."""
-        resp = await self._post("/basicOpen/finance/requestFundsPool/logistics/list", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/finance/requestFundsPool/logistics/list", {k: v for k, v in {"offset": offset, "length": length, "search_field_time": search_field_time, "start_time": start_time, "end_time": end_time, "search_field": search_field, "search_value": search_value}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def request_funds_pool_other_fee_list(self, **kwargs) -> list | dict:
+    async def request_funds_pool_other_fee_list(self, endTime: str = None, startTime: str = None, length: int = None, offset: int = None, purchaserIds: list = None, searchField: str = None, searchFieldTime: str = None, searchValue: str = None, status: int = None, supplierIds: list = None) -> list | dict:
         """查询请款池-其他费用.
 
 POST /basicOpen/finance/requestFundsPool/otherFee/list
@@ -298,11 +298,11 @@ Args:
     searchValue: 搜索值，根据searchField字段进行搜索，支持模糊查询, string.
     status: 付款状态，枚举值：0-查询未付清, 1-查询已付清，不传默认查询全部, int.
     supplierIds: 应付对象ID列表，筛选指定供应商的其他费用, array."""
-        resp = await self._post("/basicOpen/finance/requestFundsPool/otherFee/list", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/finance/requestFundsPool/otherFee/list", {k: v for k, v in {"endTime": endTime, "startTime": startTime, "length": length, "offset": offset, "purchaserIds": purchaserIds, "searchField": searchField, "searchFieldTime": searchFieldTime, "searchValue": searchValue, "status": status, "supplierIds": supplierIds}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def request_funds_pool_prepay_list(self, **kwargs) -> list | dict:
+    async def request_funds_pool_prepay_list(self, offset: int = None, length: int = None, pay_status: str = None, start_time: str = None, end_time: str = None, time_field: str = None, search_field: str = None, search_value: str = None) -> list | dict:
         """查询请款池 - 货款预付款.
 
 POST /basicOpen/finance/requestFundsPool/prepay/list
@@ -316,11 +316,11 @@ Args:
     time_field: 时间搜索类型： create_time  创建时间, string.
     search_field: 搜索类型： purchase_order_sn  采购单号 order_sn  预付款单号, string.
     search_value: 搜索值, string."""
-        resp = await self._post("/basicOpen/finance/requestFundsPool/prepay/list", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/finance/requestFundsPool/prepay/list", {k: v for k, v in {"offset": offset, "length": length, "pay_status": pay_status, "start_time": start_time, "end_time": end_time, "time_field": time_field, "search_field": search_field, "search_value": search_value}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def request_funds_pool_purchase_list(self, **kwargs) -> list | dict:
+    async def request_funds_pool_purchase_list(self, pay_status: str = None, time_field: str = None, start_time: str = None, end_time: str = None, search_field: str = None, search_value: str = None, offset: int = None, length: int = None) -> list | dict:
         """查询请款池 - 货款现结.
 
 POST /basicOpen/finance/requestFundsPool/purchase/list
@@ -334,11 +334,11 @@ Args:
     search_value: 查询值, string.
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认20，上限200, int."""
-        resp = await self._post("/basicOpen/finance/requestFundsPool/purchase/list", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/finance/requestFundsPool/purchase/list", {k: v for k, v in {"pay_status": pay_status, "time_field": time_field, "start_time": start_time, "end_time": end_time, "search_field": search_field, "search_value": search_value, "offset": offset, "length": length}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def shopee_adjustment_list(self, **kwargs) -> list | dict:
+    async def shopee_adjustment_list(self, adjDimensions: list = None, adjTypes: list = None, compareLogic: str = None, currencyCode: str = None, endDate: str = None, envKey: str = None, exportFields: list = None, fieldCompares: list = None, length: float = None, offset: float = None, platformCode: str = None, searchExactly: bool = None, searchMultiValue: list = None, searchSingleValue: str = None, searchType: float = None, sids: list = None, sites: list = None, sortField: str = None, sortType: str = None, startDate: str = None, storeTypes: list = None) -> list | dict:
         """账单明细-ShopeeAdjustment.
 
 POST /basicOpen/finance/shopee/adjustment/list
@@ -365,11 +365,11 @@ Args:
     sortType: 排序方向： `1` 升序/ASC `0` 降序/DESC 默认 `0`, string.
     startDate: 开始时间（结算时间），格式 `yyyy-MM-dd`，默认当前月份第一天, string.
     storeTypes: 店铺类型数组： `1` 跨境店(CB) `2` 本土店(Local), array."""
-        resp = await self._post("/basicOpen/finance/shopee/adjustment/list", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/finance/shopee/adjustment/list", {k: v for k, v in {"adjDimensions": adjDimensions, "adjTypes": adjTypes, "compareLogic": compareLogic, "currencyCode": currencyCode, "endDate": endDate, "envKey": envKey, "exportFields": exportFields, "fieldCompares": fieldCompares, "length": length, "offset": offset, "platformCode": platformCode, "searchExactly": searchExactly, "searchMultiValue": searchMultiValue, "searchSingleValue": searchSingleValue, "searchType": searchType, "sids": sids, "sites": sites, "sortField": sortField, "sortType": sortType, "startDate": startDate, "storeTypes": storeTypes}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def shopee_income_list(self, **kwargs) -> list | dict:
+    async def shopee_income_list(self, compareLogic: str = None, currencyCode: str = None, endDate: str = None, envKey: str = None, expandChildren: bool = None, exportFields: list = None, fieldCompares: list = None, length: float = None, offset: float = None, platformCode: str = None, searchExactly: bool = None, searchExactly1: bool = None, searchMultiValue: list = None, searchMultiValue1: list = None, searchSingleValue: str = None, searchSingleValue1: str = None, searchType: float = None, searchType1: float = None, sids: list = None, sites: list = None, sortField: str = None, sortType: str = None, startDate: str = None, storeTypes: list = None) -> list | dict:
         """账单明细-ShopeeIncome.
 
 POST /basicOpen/finance/shopee/income/list
@@ -399,11 +399,11 @@ Args:
     sortType: 排序方向： `1` 升序/ASC `0` 降序/DESC 默认 `0`, string.
     startDate: 开始时间（结算时间），格式 `yyyy-MM-dd`，默认当前月份第一天, string.
     storeTypes: 店铺类型数组： `1` 跨境店(CB) `2` 本土店(Local), array."""
-        resp = await self._post("/basicOpen/finance/shopee/income/list", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/finance/shopee/income/list", {k: v for k, v in {"compareLogic": compareLogic, "currencyCode": currencyCode, "endDate": endDate, "envKey": envKey, "expandChildren": expandChildren, "exportFields": exportFields, "fieldCompares": fieldCompares, "length": length, "offset": offset, "platformCode": platformCode, "searchExactly": searchExactly, "searchExactly1": searchExactly1, "searchMultiValue": searchMultiValue, "searchMultiValue1": searchMultiValue1, "searchSingleValue": searchSingleValue, "searchSingleValue1": searchSingleValue1, "searchType": searchType, "searchType1": searchType1, "sids": sids, "sites": sites, "sortField": sortField, "sortType": sortType, "startDate": startDate, "storeTypes": storeTypes}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def shopee_payout_list(self, **kwargs) -> list | dict:
+    async def shopee_payout_list(self, compareLogic: str = None, currencyCode: str = None, endDate: str = None, envKey: str = None, exportFields: list = None, fieldCompares: list = None, length: float = None, offset: float = None, platformCode: str = None, searchExactly: bool = None, searchMultiValue: list = None, searchSingleValue: str = None, searchType: str = None, sids: list = None, sites: list = None, sortField: str = None, sortType: str = None, startDate: str = None, storeType: float = None) -> list | dict:
         """回款明细-ShopeePayout.
 
 POST /basicOpen/finance/shopee/payout/list
@@ -428,7 +428,7 @@ Args:
     sortType: 排序方向： `1` 升序/ASC `0` 降序/DESC 默认 `0`, string.
     startDate: 开始时间（拨款时间），格式 `yyyy-MM-dd`，默认当前月份第一天, string.
     storeType: 店铺类型： `1` 跨境店(CB), number."""
-        resp = await self._post("/basicOpen/finance/shopee/payout/list", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/finance/shopee/payout/list", {k: v for k, v in {"compareLogic": compareLogic, "currencyCode": currencyCode, "endDate": endDate, "envKey": envKey, "exportFields": exportFields, "fieldCompares": fieldCompares, "length": length, "offset": offset, "platformCode": platformCode, "searchExactly": searchExactly, "searchMultiValue": searchMultiValue, "searchSingleValue": searchSingleValue, "searchType": searchType, "sids": sids, "sites": sites, "sortField": sortField, "sortType": sortType, "startDate": startDate, "storeType": storeType}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}

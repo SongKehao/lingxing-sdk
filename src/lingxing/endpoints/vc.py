@@ -1,13 +1,15 @@
 """VC卖家 API endpoints."""
 from __future__ import annotations
 
+from typing import Any
+
 from ._base import BaseEndpoint
 
 
 class VCEndpoints(BaseEndpoint):
     """领星VC卖家 API (10个接口)."""
 
-    async def listing_manage_vc_listing_page_list(self, **kwargs) -> list | dict:
+    async def listing_manage_vc_listing_page_list(self, offset: int = None, length: int = None, vc_store_ids: list = None) -> list | dict:
         """查询Listing列表.
 
 POST /basicOpen/listingManage/vcListing/pageList
@@ -16,11 +18,11 @@ Args:
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认20，上限200, int.
     vc_store_ids: vc店铺id，查询VC店铺列表 接口对应字段【vc_store_id】, array."""
-        resp = await self._post("/basicOpen/listingManage/vcListing/pageList", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/listingManage/vcListing/pageList", {k: v for k, v in {"offset": offset, "length": length, "vc_store_ids": vc_store_ids}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def platform_auth_vc_seller_page_list(self, **kwargs) -> list | dict:
+    async def platform_auth_vc_seller_page_list(self, offset: int = None, length: int = None) -> list | dict:
         """查询VC店铺列表.
 
 POST /basicOpen/platformAuth/vcSeller/pageList
@@ -28,22 +30,22 @@ POST /basicOpen/platformAuth/vcSeller/pageList
 Args:
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认20，上限200, int."""
-        resp = await self._post("/basicOpen/platformAuth/vcSeller/pageList", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/platformAuth/vcSeller/pageList", {k: v for k, v in {"offset": offset, "length": length}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def vc_deliver_detail(self, **kwargs) -> list | dict:
+    async def vc_deliver_detail(self, orderNo: str = None) -> list | dict:
         """查询VC发货单详情.
 
 POST /basicOpen/openapi/getInvoice/detail
 
 Args:
     orderNo: 订单号 (required), string."""
-        resp = await self._post("/basicOpen/openapi/getInvoice/detail", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/openapi/getInvoice/detail", {k: v for k, v in {"orderNo": orderNo}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def vc_deliver_page_list(self, **kwargs) -> list | dict:
+    async def vc_deliver_page_list(self, offset: float = None, length: float = None, sids: list = None, wid: list = None, shipmentType: str = None, status: float = None, createTimeStartTime: str = None, createTimeEndTime: str = None, shipmentTimeStartTime: str = None, shipmentTimeEndTime: str = None) -> list | dict:
         """查询VC发货单列表.
 
 POST /basicOpen/openapi/getInvoice/page/list
@@ -59,20 +61,20 @@ Args:
     createTimeEndTime: 创建日期-结束, string.
     shipmentTimeStartTime: 出库日期-开始, string.
     shipmentTimeEndTime: 出库日期-结束, string."""
-        resp = await self._post("/basicOpen/openapi/getInvoice/page/list", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/openapi/getInvoice/page/list", {k: v for k, v in {"offset": offset, "length": length, "sids": sids, "wid": wid, "shipmentType": shipmentType, "status": status, "createTimeStartTime": createTimeStartTime, "createTimeEndTime": createTimeEndTime, "shipmentTimeStartTime": shipmentTimeStartTime, "shipmentTimeEndTime": shipmentTimeEndTime}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def vc_order_df_confirm_shipment(self, **kwargs) -> dict:
+    async def vc_order_df_confirm_shipment(self, ids: Any = None) -> dict:
         """VC订单-确认发货【DF】.
 
 POST /basicOpen/platformOrder/vcOrderDf/confirmShipment
 
 Args:
     ids: 订单ID，查询VC订单列表接口对应字段【id】 (required), array."""
-        resp = await self._post("/basicOpen/platformOrder/vcOrderDf/confirmShipment", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/platformOrder/vcOrderDf/confirmShipment", {k: v for k, v in {"ids": ids}.items() if v is not None})
         return resp.data or {}
-    async def vc_order_df_detail(self, **kwargs) -> list | dict:
+    async def vc_order_df_detail(self, vc_store_id: str = None, purchase_order_number: str = None) -> list | dict:
         """查询VC订单详情【DF】.
 
 POST /basicOpen/platformOrder/vcOrderDf/detail
@@ -80,31 +82,31 @@ POST /basicOpen/platformOrder/vcOrderDf/detail
 Args:
     vc_store_id: vc店铺id，查询VC店铺列表 接口对应字段【vc_store_id】 (required), string.
     purchase_order_number: 订单编号 (required), string."""
-        resp = await self._post("/basicOpen/platformOrder/vcOrderDf/detail", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/platformOrder/vcOrderDf/detail", {k: v for k, v in {"vc_store_id": vc_store_id, "purchase_order_number": purchase_order_number}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def vc_order_df_get_shipping_label(self, **kwargs) -> list | dict:
+    async def vc_order_df_get_shipping_label(self, ids: Any = None) -> list | dict:
         """VC订单-打印标签【DF】.
 
 POST /basicOpen/platformOrder/vcOrderDf/getShippingLabel
 
 Args:
     ids: 订单ID，查询VC订单列表接口对应字段【id】 (required), array."""
-        resp = await self._post("/basicOpen/platformOrder/vcOrderDf/getShippingLabel", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/platformOrder/vcOrderDf/getShippingLabel", {k: v for k, v in {"ids": ids}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def vc_order_df_submit_shipping_label(self, **kwargs) -> dict:
+    async def vc_order_df_submit_shipping_label(self, ids: Any = None) -> dict:
         """VC订单-请求标签【DF】.
 
 POST /basicOpen/platformOrder/vcOrderDf/submitShippingLabel
 
 Args:
     ids: 订单ID，查询VC订单列表接口对应字段【id】 (required), array."""
-        resp = await self._post("/basicOpen/platformOrder/vcOrderDf/submitShippingLabel", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/platformOrder/vcOrderDf/submitShippingLabel", {k: v for k, v in {"ids": ids}.items() if v is not None})
         return resp.data or {}
-    async def vc_order_page_list(self, **kwargs) -> list | dict:
+    async def vc_order_page_list(self, purchase_order_type: Any = None, offset: int = None, length: int = None, vc_store_ids: list = None, search_field_time: str = None, start_date: str = None, end_date: str = None, search_field: str = None, search_value: list = None) -> list | dict:
         """查询VC订单列表.
 
 POST /basicOpen/platformOrder/vcOrder/pageList
@@ -119,18 +121,18 @@ Args:
     end_date: 结束时间，闭区间，格式：Y-m-d，时间间隔最长不超过90天, string.
     search_field: 搜索类型： purchase_order_number 订单号 asin ASIN local_name 品名  customer_order_number 客户订单号【DF类型订单】 vendor_product_id 商品编码, string.
     search_value: 搜索值, array."""
-        resp = await self._post("/basicOpen/platformOrder/vcOrder/pageList", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/platformOrder/vcOrder/pageList", {k: v for k, v in {"purchase_order_type": purchase_order_type, "offset": offset, "length": length, "vc_store_ids": vc_store_ids, "search_field_time": search_field_time, "start_date": start_date, "end_date": end_date, "search_field": search_field, "search_value": search_value}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def vc_order_po_detail(self, **kwargs) -> list | dict:
+    async def vc_order_po_detail(self, local_po_number: str = None) -> list | dict:
         """查询VC订单详情【PO】.
 
 POST /basicOpen/platformOrder/vcOrderPo/detail
 
 Args:
     local_po_number: 本地po号，查询VC订单列表 接口字段【local_po_number】 (required), string."""
-        resp = await self._post("/basicOpen/platformOrder/vcOrderPo/detail", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/platformOrder/vcOrderPo/detail", {k: v for k, v in {"local_po_number": local_po_number}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}

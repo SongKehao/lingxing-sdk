@@ -1,6 +1,8 @@
 """仓库/库存 API endpoints."""
 from __future__ import annotations
 
+from typing import Any
+
 from ..models.warehouse import (
     GetProcessOrderListsItem,
     GetStorageAdjustOrderListItem,
@@ -24,7 +26,7 @@ from ._base import BaseEndpoint
 class WarehouseEndpoints(BaseEndpoint):
     """领星仓库/库存 API (76个接口)."""
 
-    async def add_allocation_order(self, **kwargs) -> dict:
+    async def add_allocation_order(self, wid: int = None, sys_wid: int = None, to_wid: int = None, sys_to_wid: int = None, freight_fee: str = None, other_fee: str = None, fee_part_type: int = None, remark: str = None, type: int = None, predict_time: str = None, out_bin_type: str = None, product_list: Any = None, out_available_bin: list = None, out_inferior_bin: list = None, to_available_bin: list = None, to_inferior_bin: list = None) -> dict:
         """创建待收货/已完成的调拨单.
 
 POST /erp/sc/routing/inventoryReceipt/StorageAllocation/addAllocationOrder
@@ -45,27 +47,27 @@ Args:
     to_available_bin: 入库可用仓位列表, array.
     to_inferior_bin: 入库次品仓位列表, array.
     out_bin_type: 0 默认  1 出库仓位不为空时，必传, string."""
-        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAllocation/addAllocationOrder", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAllocation/addAllocationOrder", {k: v for k, v in {"wid": wid, "sys_wid": sys_wid, "to_wid": to_wid, "sys_to_wid": sys_to_wid, "freight_fee": freight_fee, "other_fee": other_fee, "fee_part_type": fee_part_type, "remark": remark, "type": type, "predict_time": predict_time, "out_bin_type": out_bin_type, "product_list": product_list, "out_available_bin": out_available_bin, "out_inferior_bin": out_inferior_bin, "to_available_bin": to_available_bin, "to_inferior_bin": to_inferior_bin}.items() if v is not None})
         return resp.data or {}
-    async def adjust_order_confirm(self, **kwargs) -> dict:
+    async def adjust_order_confirm(self, orderSn: list = None) -> dict:
         """调整单确认调整.
 
 POST /basicOpen/adjustOrder/adjust/setAdjust
 
 Args:
     orderSn: 调整单单号, array."""
-        resp = await self._post("/basicOpen/adjustOrder/adjust/setAdjust", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/adjustOrder/adjust/setAdjust", {k: v for k, v in {"orderSn": orderSn}.items() if v is not None})
         return resp.data or {}
-    async def cancel_storage_allocation_list(self, **kwargs) -> dict:
+    async def cancel_storage_allocation_list(self, order_sn: str = None) -> dict:
         """撤销调拨单.
 
 POST /basicOpen/storageAllocationList/cancel
 
 Args:
     order_sn: 调拨单号 对应查询调拨单列表data>>order_sn字段 (required), string."""
-        resp = await self._post("/basicOpen/storageAllocationList/cancel", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/storageAllocationList/cancel", {k: v for k, v in {"order_sn": order_sn}.items() if v is not None})
         return resp.data or {}
-    async def create_inbound(self, **kwargs) -> dict:
+    async def create_inbound(self, inbound_order_no: str = None, custom_s_wid: str = None, s_wid: int = None, r_wid: int = None, logistics_id: int = None, status: int = None, estimated_time: str = None, arrival_time: str = None, share_id: int = None, remark: str = None, file_id: str = None, overseas_type: int = None, real_delivery_time: str = None, logistics_list_type: int = None, method_id: str = None, custom_fields: dict = None, logistics_list: list = None, product_list: list = None, head_logistics_list: Any = None) -> dict:
         """创建待发货/待收货/已完成的备货单.
 
 POST /erp/sc/routing/owms/inbound/createInbound
@@ -90,36 +92,36 @@ Args:
     head_logistics_list: 新版头程物流信息（当logistics_list_type 为1时才有意义） (required), object.
     method_id: 运输方式 查询运输方式列表接口对应字段【method_id】, string.
     custom_fields: 自定义字段, object."""
-        resp = await self._post("/erp/sc/routing/owms/inbound/createInbound", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/owms/inbound/createInbound", {k: v for k, v in {"inbound_order_no": inbound_order_no, "custom_s_wid": custom_s_wid, "s_wid": s_wid, "r_wid": r_wid, "logistics_id": logistics_id, "status": status, "estimated_time": estimated_time, "arrival_time": arrival_time, "share_id": share_id, "remark": remark, "file_id": file_id, "overseas_type": overseas_type, "real_delivery_time": real_delivery_time, "logistics_list_type": logistics_list_type, "method_id": method_id, "custom_fields": custom_fields, "logistics_list": logistics_list, "product_list": product_list, "head_logistics_list": head_logistics_list}.items() if v is not None})
         return resp.data or {}
-    async def delete_fba_shipment_list(self, **kwargs) -> dict:
+    async def delete_fba_shipment_list(self, shipment_nos: Any = None) -> dict:
         """删除发货单.
 
 POST /basicOpen/openapi/fbaShipment/deleteShipmentList
 
 Args:
     shipment_nos: 发货单单号，对应查询FBA发货单列表接口字段【shipment_sn】 (required), array."""
-        resp = await self._post("/basicOpen/openapi/fbaShipment/deleteShipmentList", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/openapi/fbaShipment/deleteShipmentList", {k: v for k, v in {"shipment_nos": shipment_nos}.items() if v is not None})
         return resp.data or {}
-    async def delete_over_sea_stock_order(self, **kwargs) -> dict:
+    async def delete_over_sea_stock_order(self, overseas_order_nos: Any = None) -> dict:
         """删除备货单.
 
 POST /basicOpen/overSeaWarehouse/stockOrder/delete
 
 Args:
     overseas_order_nos: 备货单单号，对应获取备货单号接口字段【overseas_order_no】 (required), array."""
-        resp = await self._post("/basicOpen/overSeaWarehouse/stockOrder/delete", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/overSeaWarehouse/stockOrder/delete", {k: v for k, v in {"overseas_order_nos": overseas_order_nos}.items() if v is not None})
         return resp.data or {}
-    async def delete_storage_allocation_list(self, **kwargs) -> dict:
+    async def delete_storage_allocation_list(self, orderSn: Any = None) -> dict:
         """删除调拨单.
 
 POST /basicOpen/storageAllocationList/delete
 
 Args:
     orderSn: 调拨单单号，对应查询调拨单列表接口字段【order_sn】 (required), array."""
-        resp = await self._post("/basicOpen/storageAllocationList/delete", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/storageAllocationList/delete", {k: v for k, v in {"orderSn": orderSn}.items() if v is not None})
         return resp.data or {}
-    async def edit_warehouse(self, **kwargs) -> dict:
+    async def edit_warehouse(self, sys_wid: int = None, wid: str = None, name: str = None, contact: str = None, telephone: str = None, address: str = None, remark: str = None, type: int = None) -> dict:
         """添加/修改仓库.
 
 POST /erp/sc/storage/wareHouse/edit
@@ -133,9 +135,9 @@ Args:
     address: 仓库地址, string.
     remark: 备注, string.
     type: 仓库属性：1 -本地仓 3 -海外自建仓，不传默认 1, int."""
-        resp = await self._post("/erp/sc/storage/wareHouse/edit", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/storage/wareHouse/edit", {k: v for k, v in {"sys_wid": sys_wid, "wid": wid, "name": name, "contact": contact, "telephone": telephone, "address": address, "remark": remark, "type": type}.items() if v is not None})
         return resp.data or {}
-    async def fba_stock(self, **kwargs) -> list | dict:
+    async def fba_stock(self, sid: str = None, offset: int = None, length: int = None) -> list | dict:
         """查询FBA库存列表.
 
 POST /erp/sc/routing/fba/fbaStock/fbaList
@@ -144,11 +146,11 @@ Args:
     sid: 店铺id，多个使用英文逗号分隔 ，对应查询亚马逊店铺列表接口对应字段【sid】 (required), string.
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认15, int."""
-        resp = await self._post("/erp/sc/routing/fba/fbaStock/fbaList", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/fba/fbaStock/fbaList", {k: v for k, v in {"sid": sid, "offset": offset, "length": length}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def fba_stock_v2(self, **kwargs) -> list | dict:
+    async def fba_stock_v2(self, offset: int = None, length: int = None, search_field: str = None, search_value: str = None, cid: str = None, sid: str = None, bid: str = None, attribute: str = None, asin_principal: str = None, status: str = None, senior_search_list: str = None, fulfillment_channel_type: str = None, is_hide_zero_stock: str = None, is_parant_asin_merge: str = None, is_contain_del_ls: str = None, query_fba_storage_quantity_list: bool = None) -> list | dict:
         """查询FBA库存列表-v2.
 
 POST /basicOpen/openapi/storage/fbaWarehouseDetail
@@ -170,11 +172,11 @@ Args:
     is_parant_asin_merge: 是否合并父ASIN: 0 不合并父ASIN 1 合并父ASIN, string.
     is_contain_del_ls: 是否显示已删除Listing: 0 不显示已删除Listing 1 显示已删除Listing, string.
     query_fba_storage_quantity_list: true 是、false 否；默认false，如果传入true,则出参数据中的欧洲共享仓会将出参字段-fba_storage_quantity_list的值返回, Boolean."""
-        resp = await self._post("/basicOpen/openapi/storage/fbaWarehouseDetail", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/openapi/storage/fbaWarehouseDetail", {k: v for k, v in {"offset": offset, "length": length, "search_field": search_field, "search_value": search_value, "cid": cid, "sid": sid, "bid": bid, "attribute": attribute, "asin_principal": asin_principal, "status": status, "senior_search_list": senior_search_list, "fulfillment_channel_type": fulfillment_channel_type, "is_hide_zero_stock": is_hide_zero_stock, "is_parant_asin_merge": is_parant_asin_merge, "is_contain_del_ls": is_contain_del_ls, "query_fba_storage_quantity_list": query_fba_storage_quantity_list}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def fast_receive(self, **kwargs) -> dict:
+    async def fast_receive(self, order_sn: str = None, expect_arrival_time: str = None, custom_receive_time: str = None, logistics_company: str = None, logistics_order_no: str = None, shipping_cost: float = None, other_fee: float = None, remark: str = None, item_list: list = None) -> dict:
         """收货单快捷入库.
 
 POST /erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/fastReceive
@@ -189,18 +191,18 @@ Args:
     other_fee: 其他费用，仅支持2位小数，不传时默认取自收货单, number.
     remark: 备注，最大支持255个字符，不传时默认取自收货单, string.
     item_list: 收货明细 (required), array."""
-        resp = await self._post("/erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/fastReceive", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/fastReceive", {k: v for k, v in {"order_sn": order_sn, "expect_arrival_time": expect_arrival_time, "custom_receive_time": custom_receive_time, "logistics_company": logistics_company, "logistics_order_no": logistics_order_no, "shipping_cost": shipping_cost, "other_fee": other_fee, "remark": remark, "item_list": item_list}.items() if v is not None})
         return resp.data or {}
-    async def get_adjust_order_confirm_result(self, **kwargs) -> dict:
+    async def get_adjust_order_confirm_result(self, taskNo: str = None) -> dict:
         """查询调整单确认调整异步结果.
 
 POST /basicOpen/adjustOrder/adjust/getAdjustStatus
 
 Args:
     taskNo: 异步任务编号, string."""
-        resp = await self._post("/basicOpen/adjustOrder/adjust/getAdjustStatus", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/adjustOrder/adjust/getAdjustStatus", {k: v for k, v in {"taskNo": taskNo}.items() if v is not None})
         return resp.data or {}
-    async def get_batch_detail_list(self, **kwargs) -> dict:
+    async def get_batch_detail_list(self, offset: int = None, length: int = None, show_zero_stock: int = None, wids: str = None, stock_in_type_list: str = None, search_field: str = None, search_value: str = None) -> dict:
         """查询批次明细.
 
 POST /erp/sc/routing/data/local_inventory/getBatchDetailList
@@ -213,9 +215,9 @@ Args:
     stock_in_type_list: 入库类型，多个使用英文逗号分隔： 19 其他入库 22 采购入库 24 调拨入库 23 委外入库 25 盘盈入库 16 换标入库 17 加工入库 18 拆分入库 26 退货入库 27 移除入库 45 赠品入库, string.
     search_field: 搜索字段： sku SKU msku MSKU fnsku FNSKU order_sn 单据号 product_name 品名 batch_number 批次号 receipt_order 收货单 purchase_order 采购单 purchase_plan 采购计划 source_batch_number 源头批次号, string.
     search_value: 搜索值, string."""
-        resp = await self._post("/erp/sc/routing/data/local_inventory/getBatchDetailList", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/data/local_inventory/getBatchDetailList", {k: v for k, v in {"offset": offset, "length": length, "show_zero_stock": show_zero_stock, "wids": wids, "stock_in_type_list": stock_in_type_list, "search_field": search_field, "search_value": search_value}.items() if v is not None})
         return resp.data or {}
-    async def get_batch_statement_list(self, **kwargs) -> dict:
+    async def get_batch_statement_list(self, statement_type_list: str = None, search_field: str = None, search_value: str = None, wid_list: str = None, offset: int = None, length: int = None) -> dict:
         """查询批次流水.
 
 POST /erp/sc/routing/data/local_inventory/getBatchStatementList
@@ -227,9 +229,9 @@ Args:
     wid_list: 仓库id，多个使用英文逗号分隔, string.
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认20，上限400, int."""
-        resp = await self._post("/erp/sc/routing/data/local_inventory/getBatchStatementList", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/data/local_inventory/getBatchStatementList", {k: v for k, v in {"statement_type_list": statement_type_list, "search_field": search_field, "search_value": search_value, "wid_list": wid_list, "offset": offset, "length": length}.items() if v is not None})
         return resp.data or {}
-    async def get_receive_good_records(self, **kwargs) -> dict:
+    async def get_receive_good_records(self, overseas_order_no: str = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> dict:
         """查询备货单收货记录.
 
 POST /erp/sc/routing/owms/inbound/getReceiveGoodRecords
@@ -240,18 +242,18 @@ Args:
     end_date: 收货结束时间，开区间，格式：Y-m-d, string.
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认500, int."""
-        resp = await self._post("/erp/sc/routing/owms/inbound/getReceiveGoodRecords", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/owms/inbound/getReceiveGoodRecords", {k: v for k, v in {"overseas_order_no": overseas_order_no, "start_date": start_date, "end_date": end_date, "offset": offset, "length": length}.items() if v is not None})
         return resp.data or {}
-    async def inbound_order_confirm(self, **kwargs) -> dict:
+    async def inbound_order_confirm(self, orderSn: list = None) -> dict:
         """入库单确认入库.
 
 POST /basicOpen/inboundOrder/inbound/setInbound
 
 Args:
     orderSn: 入库单单号, array."""
-        resp = await self._post("/basicOpen/inboundOrder/inbound/setInbound", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/inboundOrder/inbound/setInbound", {k: v for k, v in {"orderSn": orderSn}.items() if v is not None})
         return resp.data or {}
-    async def inventory_details(self, **kwargs) -> list[InventoryDetailsItem]:
+    async def inventory_details(self, wid: str = None, offset: int = None, length: int = None, sku: str = None) -> list[InventoryDetailsItem]:
         """查询仓库库存明细.
 
 POST /erp/sc/routing/data/local_inventory/inventoryDetails
@@ -261,9 +263,9 @@ Args:
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认20，上限800, int.
     sku: SKU，单个,（模糊搜索）, string."""
-        resp = await self._post("/erp/sc/routing/data/local_inventory/inventoryDetails", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/data/local_inventory/inventoryDetails", {k: v for k, v in {"wid": wid, "offset": offset, "length": length, "sku": sku}.items() if v is not None})
         return self._parse_list(resp.data, InventoryDetailsItem)
-    async def order_add(self, **kwargs) -> dict:
+    async def order_add(self, wid: str = None, sys_wid: int = None, type: int = None, supplier_id: str = None, sys_supplier_id: int = None, order_sn: str = None, remark: str = None, ship_fee: str = None, other_fee: str = None, fee_part_type: int = None, inbound_time: str = None, inbound_idempotent_code: str = None, product_list: list = None) -> dict:
         """添加入库单.
 
 POST /erp/sc/routing/storage/storage/orderAdd
@@ -282,9 +284,9 @@ Args:
     inbound_time: 自定义入库时间，格式：Y-m-d, string.
     inbound_idempotent_code: （入库单）客户参考号, 该字段校验唯一不可重复, string.
     product_list: 产品明细 (required), array."""
-        resp = await self._post("/erp/sc/routing/storage/storage/orderAdd", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/storage/storage/orderAdd", {k: v for k, v in {"wid": wid, "sys_wid": sys_wid, "type": type, "supplier_id": supplier_id, "sys_supplier_id": sys_supplier_id, "order_sn": order_sn, "remark": remark, "ship_fee": ship_fee, "other_fee": other_fee, "fee_part_type": fee_part_type, "inbound_time": inbound_time, "inbound_idempotent_code": inbound_idempotent_code, "product_list": product_list}.items() if v is not None})
         return resp.data or {}
-    async def order_add_out(self, **kwargs) -> dict:
+    async def order_add_out(self, wid: str = None, sys_wid: int = None, type: int = None, status: int = None, sys_supplier_id: int = None, supplier_id: str = None, idempotent_code: str = None, remark: str = None, return_price: float = None, other_fee: float = None, sys_to_wid: int = None, to_wid: str = None, outbound_time: str = None, bin_type: int = None, product_list: list = None) -> dict:
         """添加出库单.
 
 POST /erp/sc/routing/storage/storage/orderAddOut
@@ -305,29 +307,29 @@ Args:
     outbound_time: 自定义出库时间，格式：Y-m-d, string.
     bin_type: 出库仓位指定方式： 0 系统指定仓位【默认值】 1 手动指定仓位, int.
     product_list: 产品明细 (required), array."""
-        resp = await self._post("/erp/sc/routing/storage/storage/orderAddOut", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/storage/storage/orderAddOut", {k: v for k, v in {"wid": wid, "sys_wid": sys_wid, "type": type, "status": status, "sys_supplier_id": sys_supplier_id, "supplier_id": supplier_id, "idempotent_code": idempotent_code, "remark": remark, "return_price": return_price, "other_fee": other_fee, "sys_to_wid": sys_to_wid, "to_wid": to_wid, "outbound_time": outbound_time, "bin_type": bin_type, "product_list": product_list}.items() if v is not None})
         return resp.data or {}
-    async def outbound_order_confirm(self, **kwargs) -> dict:
+    async def outbound_order_confirm(self, orderSn: list = None) -> dict:
         """出库单确认出库.
 
 POST /basicOpen/outboundOrder/outbound/setOutbound
 
 Args:
     orderSn: 出库单单号, array."""
-        resp = await self._post("/basicOpen/outboundOrder/outbound/setOutbound", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/outboundOrder/outbound/setOutbound", {k: v for k, v in {"orderSn": orderSn}.items() if v is not None})
         return resp.data or {}
-    async def over_seas_stock_detail(self, **kwargs) -> list | dict:
+    async def over_seas_stock_detail(self, overseas_order_no: str = None) -> list | dict:
         """查询备货单详情.
 
 POST /basicOpen/overSeaWarehouse/stockOrder/detail
 
 Args:
     overseas_order_no: 备货单号 (required), string."""
-        resp = await self._post("/basicOpen/overSeaWarehouse/stockOrder/detail", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/overSeaWarehouse/stockOrder/detail", {k: v for k, v in {"overseas_order_no": overseas_order_no}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def oversea_warehouse_match_list(self, **kwargs) -> list | dict:
+    async def oversea_warehouse_match_list(self, wpId: int = None, twIds: str = None, offset: int = None, length: int = None, isMatched: int = None, keyword: str = None) -> list | dict:
         """查询海外仓sku配对列表.
 
 POST /basicOpen/overseaWarehouseSetting/matchList
@@ -339,11 +341,11 @@ Args:
     length: 分页大小，默认20，上限200, int.
     isMatched: 是否配对，0否，1是, int.
     keyword: 关键词，搜索sku / 品名 / 第三方产品名 / 产品编码, string."""
-        resp = await self._post("/basicOpen/overseaWarehouseSetting/matchList", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/overseaWarehouseSetting/matchList", {k: v for k, v in {"wpId": wpId, "twIds": twIds, "offset": offset, "length": length, "isMatched": isMatched, "keyword": keyword}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def oversea_warehouse_product_match(self, **kwargs) -> list | dict:
+    async def oversea_warehouse_product_match(self, twId: int = None, twpId: int = None, wpId: int = None, productId: int = None, matchNum: int = None, matchAll: int = None, fnsku: str = None, sellerId: str = None) -> list | dict:
         """海外仓sku配对.
 
 POST /basicOpen/overseaWarehouseSetting/productMatch
@@ -357,11 +359,11 @@ Args:
     matchAll: 是否配对海外仓所有仓库，0否；1是，默认0, int.
     fnsku: fnsku, string.
     sellerId: 店铺id, string."""
-        resp = await self._post("/basicOpen/overseaWarehouseSetting/productMatch", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/overseaWarehouseSetting/productMatch", {k: v for k, v in {"twId": twId, "twpId": twpId, "wpId": wpId, "productId": productId, "matchNum": matchNum, "matchAll": matchAll, "fnsku": fnsku, "sellerId": sellerId}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def oversea_warehouse_product_un_match(self, **kwargs) -> list | dict:
+    async def oversea_warehouse_product_un_match(self, wpId: str = None, wpmId: str = None) -> list | dict:
         """海外仓sku取消配对.
 
 POST /basicOpen/overseaWarehouseSetting/productUnMatch
@@ -369,11 +371,11 @@ POST /basicOpen/overseaWarehouseSetting/productUnMatch
 Args:
     wpId: 三方服务商id (required), string.
     wpmId: 配对id (required), string."""
-        resp = await self._post("/basicOpen/overseaWarehouseSetting/productUnMatch", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/overseaWarehouseSetting/productUnMatch", {k: v for k, v in {"wpId": wpId, "wpmId": wpmId}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def purchase_receipt_order_list(self, **kwargs) -> tuple[list[PurchaseReceiptOrderListItem], int]:
+    async def purchase_receipt_order_list(self, date_type: int = None, start_date: str = None, end_date: str = None, order_sns: str = None, status: int = None, wid: str = None, order_type: int = None, qc_status: str = None, offset: int = None, length: int = None) -> tuple[list[PurchaseReceiptOrderListItem], int]:
         """查询收货单列表.
 
 POST /erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/getOrderList
@@ -389,9 +391,9 @@ Args:
     qc_status: 质检状态，多个使用英文逗号分隔：0 未质检，1 部分质检，2 完成质检, string.
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认200，上限500, int."""
-        resp = await self._post("/erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/getOrderList", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/getOrderList", {k: v for k, v in {"date_type": date_type, "start_date": start_date, "end_date": end_date, "order_sns": order_sns, "status": status, "wid": wid, "order_type": order_type, "qc_status": qc_status, "offset": offset, "length": length}.items() if v is not None})
         return self._parse_page(resp.data, PurchaseReceiptOrderListItem)
-    async def receive(self, **kwargs) -> dict:
+    async def receive(self, order_sn: str = None, expect_arrival_time: str = None, custom_receive_time: str = None, logistics_company: str = None, logistics_order_no: str = None, shipping_cost: float = None, other_fee: float = None, remark: str = None, item_list: list = None) -> dict:
         """收货单到货.
 
 POST /erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/receive
@@ -406,18 +408,18 @@ Args:
     other_fee: 其他费用，仅支持2位小数，不传时默认取自收货单, number.
     remark: 备注，最大支持255个字符，不传时默认取自收货单, string.
     item_list: 收货明细 (required), array."""
-        resp = await self._post("/erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/receive", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/receive", {k: v for k, v in {"order_sn": order_sn, "expect_arrival_time": expect_arrival_time, "custom_receive_time": custom_receive_time, "logistics_company": logistics_company, "logistics_order_no": logistics_order_no, "shipping_cost": shipping_cost, "other_fee": other_fee, "remark": remark, "item_list": item_list}.items() if v is not None})
         return resp.data or {}
-    async def send_inbound(self, **kwargs) -> dict:
+    async def send_inbound(self, overseas_order_no: str = None) -> dict:
         """海外仓备货单发货.
 
 POST /erp/sc/routing/owms/inbound/sendInbound
 
 Args:
     overseas_order_no: 备货单号 (required), string."""
-        resp = await self._post("/erp/sc/routing/owms/inbound/sendInbound", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/owms/inbound/sendInbound", {k: v for k, v in {"overseas_order_no": overseas_order_no}.items() if v is not None})
         return resp.data or {}
-    async def set_inbound_order_revoke(self, **kwargs) -> list | dict:
+    async def set_inbound_order_revoke(self, order_sn: str = None, delete_receipt_order: int = None) -> list | dict:
         """撤销入库单.
 
 POST /basicOpen/inboundOrder/inbound/setOrderRevoke
@@ -425,22 +427,22 @@ POST /basicOpen/inboundOrder/inbound/setOrderRevoke
 Args:
     order_sn: 入库单号 对应查询入库单列表data>>order_sn字段 (required), string.
     delete_receipt_order: 是否同步删除收货单  删除则传值 1，否则不传值, int."""
-        resp = await self._post("/basicOpen/inboundOrder/inbound/setOrderRevoke", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/inboundOrder/inbound/setOrderRevoke", {k: v for k, v in {"order_sn": order_sn, "delete_receipt_order": delete_receipt_order}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def set_outbound_order_revoke(self, **kwargs) -> list | dict:
+    async def set_outbound_order_revoke(self, order_sn: str = None) -> list | dict:
         """撤销出库单.
 
 POST /basicOpen/outboundOrder/outbound/setOrderRevoke
 
 Args:
     order_sn: 出库单号 对应查询出库单列表data>>order_sn字段 (required), string."""
-        resp = await self._post("/basicOpen/outboundOrder/outbound/setOrderRevoke", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/outboundOrder/outbound/setOrderRevoke", {k: v for k, v in {"order_sn": order_sn}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def update_logistics(self, **kwargs) -> dict:
+    async def update_logistics(self, overseas_order_no: str = None, logistics_list_type: int = None, logistics_list: list = None, head_logistics_list: Any = None) -> dict:
         """更新备货单物流信息.
 
 POST /erp/sc/routing/owms/inbound/updateLogistics
@@ -450,9 +452,9 @@ Args:
     logistics_list: 物流信息 (required), array.
     logistics_list_type: 物流信息版本： 0：旧版，即将下线 1：新版 (required), int.
     head_logistics_list: 新版头程物流信息（当logistics_list_type 为1时才有意义） (required), object."""
-        resp = await self._post("/erp/sc/routing/owms/inbound/updateLogistics", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/owms/inbound/updateLogistics", {k: v for k, v in {"overseas_order_no": overseas_order_no, "logistics_list_type": logistics_list_type, "logistics_list": logistics_list, "head_logistics_list": head_logistics_list}.items() if v is not None})
         return resp.data or {}
-    async def warehouse_lists(self, **kwargs) -> list[WarehouseListsItem]:
+    async def warehouse_lists(self, type: int = None, sub_type: int = None, is_delete: str = None, offset: int = None, length: int = None) -> list[WarehouseListsItem]:
         """查询仓库列表.
 
 POST /erp/sc/data/local_inventory/warehouse
@@ -463,9 +465,9 @@ Args:
     is_delete: 是否删除，多个使用英文逗号分隔： 0 未删除【默认值】 1 已删除, string.
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认1000条, int."""
-        resp = await self._post("/erp/sc/data/local_inventory/warehouse", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/data/local_inventory/warehouse", {k: v for k, v in {"type": type, "sub_type": sub_type, "is_delete": is_delete, "offset": offset, "length": length}.items() if v is not None})
         return self._parse_list(resp.data, WarehouseListsItem)
-    async def warehouse_statement(self, **kwargs) -> list[WarehouseStatementItem]:
+    async def warehouse_statement(self, wid: str = None, type: str = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list[WarehouseStatementItem]:
         """查询库存流水（旧）.
 
 POST /erp/sc/routing/data/local_inventory/wareHouseStatement
@@ -477,9 +479,9 @@ Args:
     end_date: 操作结束时间，格式：Y-m-d，开区间，联合开始时间使用, string.
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认20, int."""
-        resp = await self._post("/erp/sc/routing/data/local_inventory/wareHouseStatement", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/data/local_inventory/wareHouseStatement", {k: v for k, v in {"wid": wid, "type": type, "start_date": start_date, "end_date": end_date, "offset": offset, "length": length}.items() if v is not None})
         return self._parse_list(resp.data, WarehouseStatementItem)
-    async def warehouse_statement_new(self, **kwargs) -> list[WarehouseStatementNewItem]:
+    async def warehouse_statement_new(self, wids: str = None, types: str = None, sub_types: str = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list[WarehouseStatementNewItem]:
         """查询库存流水（新）.
 
 POST /erp/sc/routing/inventoryLog/WareHouseInventory/wareHouseCenterStatement
@@ -492,9 +494,9 @@ Args:
     end_date: 操作结束时间，格式：Y-m-d，开区间，联合开始时间使用, string.
     offset: 分页偏移量，默认0 (required), int.
     length: 分页长度，默认20 (required), int."""
-        resp = await self._post("/erp/sc/routing/inventoryLog/WareHouseInventory/wareHouseCenterStatement", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/inventoryLog/WareHouseInventory/wareHouseCenterStatement", {k: v for k, v in {"wids": wids, "types": types, "sub_types": sub_types, "start_date": start_date, "end_date": end_date, "offset": offset, "length": length}.items() if v is not None})
         return self._parse_list(resp.data, WarehouseStatementNewItem)
-    async def wms_order_detail(self, **kwargs) -> list | dict:
+    async def wms_order_detail(self, isPrintCenter: int = None, orderNumbers: str = None) -> list | dict:
         """查询销售出库单详情.
 
 POST /basicOpen/wmsOrder/getWmsOrdersByOrderNumbers
@@ -502,11 +504,11 @@ POST /basicOpen/wmsOrder/getWmsOrdersByOrderNumbers
 Args:
     isPrintCenter: 是否需要拣货信息，枚举值：1-是, 0-否, int.
     orderNumbers: 系统单号，必填，多个以逗号连接, string."""
-        resp = await self._post("/basicOpen/wmsOrder/getWmsOrdersByOrderNumbers", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/wmsOrder/getWmsOrdersByOrderNumbers", {k: v for k, v in {"isPrintCenter": isPrintCenter, "orderNumbers": orderNumbers}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def wms_order_list(self, **kwargs) -> list[WmsOrderListItem]:
+    async def wms_order_list(self, page: int = None, page_size: int = None, sid_arr: list = None, status_arr: list = None, logistics_status_arr: list = None, platform_order_no_arr: list = None, order_number_arr: list = None, wo_number_arr: list = None, time_type: str = None, start_date: str = None, end_date: str = None) -> list[WmsOrderListItem]:
         """查询销售出库单列表.
 
 POST /erp/sc/routing/wms/order/wmsOrderList
@@ -523,9 +525,9 @@ Args:
     time_type: 时间类型： 创建时间 create_at  出库时间【单据操作】 delivered_at 流水出库时间 stock_delivered_at 变更时间 update_at, string.
     start_date: 开始日期，格式：Y-m-d，默认为最近1个月, string.
     end_date: 结束日期，格式：Y-m-d，默认为最近1个月, string."""
-        resp = await self._post("/erp/sc/routing/wms/order/wmsOrderList", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/wms/order/wmsOrderList", {k: v for k, v in {"page": page, "page_size": page_size, "sid_arr": sid_arr, "status_arr": status_arr, "logistics_status_arr": logistics_status_arr, "platform_order_no_arr": platform_order_no_arr, "order_number_arr": order_number_arr, "wo_number_arr": wo_number_arr, "time_type": time_type, "start_date": start_date, "end_date": end_date}.items() if v is not None})
         return self._parse_list(resp.data, WmsOrderListItem)
-    async def add_adjustment_order(self, **kwargs) -> dict:
+    async def add_adjustment_order(self, wid: int = None, remark: str = None, product_list: list = None) -> dict:
         """创建已完成的数量调整单.
 
 POST /erp/sc/routing/inventoryReceipt/StorageAdjustment/addAdjustmentOrder
@@ -534,9 +536,9 @@ Args:
     wid: 系统仓库id (required), int.
     remark: 单据备注, string.
     product_list: 调整的产品明细数据 (required), array."""
-        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAdjustment/addAdjustmentOrder", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAdjustment/addAdjustmentOrder", {k: v for k, v in {"wid": wid, "remark": remark, "product_list": product_list}.items() if v is not None})
         return resp.data or {}
-    async def add_rebrand_adjustment_order(self, **kwargs) -> dict:
+    async def add_rebrand_adjustment_order(self, wid: int = None, remark: str = None, bin_type: int = None, product_list: list = None) -> dict:
         """创建已完成的换标调整单.
 
 POST /erp/sc/routing/inventoryReceipt/StorageAdjustment/addRebrandAdjustmentOrder
@@ -546,9 +548,9 @@ Args:
     remark: 单据备注, string.
     bin_type: 出库仓位方式：【默认1】 1 系统自定选择 2 指定出库仓位, int.
     product_list: 调整的产品明细数据 (required), array."""
-        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAdjustment/addRebrandAdjustmentOrder", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAdjustment/addRebrandAdjustmentOrder", {k: v for k, v in {"wid": wid, "remark": remark, "bin_type": bin_type, "product_list": product_list}.items() if v is not None})
         return resp.data or {}
-    async def add_sku_adjustment_order(self, **kwargs) -> dict:
+    async def add_sku_adjustment_order(self, wid: int = None, remark: str = None, bin_type: int = None, product_list: list = None) -> dict:
         """创建已完成的SKU调整单.
 
 POST /erp/sc/routing/inventoryReceipt/StorageAdjustment/addSkuAdjustmentOrder
@@ -558,9 +560,9 @@ Args:
     remark: 单据备注, string.
     bin_type: 出库仓位方式：【默认1】 1 系统自定选择 2 指定出库仓位, int.
     product_list: 调整的产品明细数据 (required), array."""
-        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAdjustment/addSkuAdjustmentOrder", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAdjustment/addSkuAdjustmentOrder", {k: v for k, v in {"wid": wid, "remark": remark, "bin_type": bin_type, "product_list": product_list}.items() if v is not None})
         return resp.data or {}
-    async def add_storage_process_order(self, **kwargs) -> dict:
+    async def add_storage_process_order(self, type: int = None, wid: int = None, remark: str = None, product_list: list = None) -> dict:
         """创建加工单 / 拆分单.
 
 POST /erp/sc/routing/inventoryReceipt/StorageProcess/addStorageProcessOrder
@@ -570,9 +572,9 @@ Args:
     wid: 系统仓库id (required), int.
     remark: 备注, string.
     product_list: 产品信息 (required), array."""
-        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageProcess/addStorageProcessOrder", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageProcess/addStorageProcessOrder", {k: v for k, v in {"type": type, "wid": wid, "remark": remark, "product_list": product_list}.items() if v is not None})
         return resp.data or {}
-    async def bin_create(self, **kwargs) -> dict:
+    async def bin_create(self, wid: int = None, code: str = None, type: int = None) -> dict:
         """添加仓位.
 
 POST /erp/sc/routing/storage/wareHouseBin/create
@@ -581,9 +583,9 @@ Args:
     wid: 仓库id (required), int.
     code: 仓位名称 (required), string.
     type: 仓位类型： 5 可用 6 次品 (required), int."""
-        resp = await self._post("/erp/sc/routing/storage/wareHouseBin/create", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/storage/wareHouseBin/create", {k: v for k, v in {"wid": wid, "code": code, "type": type}.items() if v is not None})
         return resp.data or {}
-    async def cancel_wms_order(self, **kwargs) -> dict:
+    async def cancel_wms_order(self, orderNumbers: Any = None, tagType: str = None, orderComment: str = None) -> dict:
         """销售出库单截单.
 
 POST /basicOpen/wmsOrder/cancel
@@ -592,9 +594,9 @@ Args:
     orderNumbers: 系统单号 对应查询销售出库单列表data>>order_number字段 (required), array.
     tagType: 截单标签，3-5：待人工审核；3-17：其他 (required), string.
     orderComment: 截单备注, string."""
-        resp = await self._post("/basicOpen/wmsOrder/cancel", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/wmsOrder/cancel", {k: v for k, v in {"orderNumbers": orderNumbers, "tagType": tagType, "orderComment": orderComment}.items() if v is not None})
         return resp.data or {}
-    async def check_add_order(self, **kwargs) -> dict:
+    async def check_add_order(self, wid: int = None, is_display_check: int = None, check_uid: int = None, remark: str = None, product_list: list = None) -> dict:
         """创建已完成的盘点单.
 
 POST /erp/sc/routing/inventoryReceipt/InventoryCheck/addOrder
@@ -605,9 +607,9 @@ Args:
     check_uid: 盘点人id (required), int.
     remark: 单据备注, string.
     product_list: 盘点明细 (required), array."""
-        resp = await self._post("/erp/sc/routing/inventoryReceipt/InventoryCheck/addOrder", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/inventoryReceipt/InventoryCheck/addOrder", {k: v for k, v in {"wid": wid, "is_display_check": is_display_check, "check_uid": check_uid, "remark": remark, "product_list": product_list}.items() if v is not None})
         return resp.data or {}
-    async def check_get_order_detail(self, **kwargs) -> list | dict:
+    async def check_get_order_detail(self, order_sn: str = None, search_field: str = None, search_value: str = None, sort_field: str = None, sort_type: str = None, page: int = None, page_size: int = None) -> list | dict:
         """查询盘点单详情.
 
 POST /erp/sc/routing/inventoryReceipt/InventoryCheck/getOrderDetail
@@ -620,11 +622,11 @@ Args:
     sort_type: 排序规则：desc 降序【默认】，asc 升序, string.
     page: 分页页码，默认1【控制 product_list 返回数目】, int.
     page_size: 分页长度，默认20【控制 product_list 返回数目】, int."""
-        resp = await self._post("/erp/sc/routing/inventoryReceipt/InventoryCheck/getOrderDetail", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/inventoryReceipt/InventoryCheck/getOrderDetail", {k: v for k, v in {"order_sn": order_sn, "search_field": search_field, "search_value": search_value, "sort_field": sort_field, "sort_type": sort_type, "page": page, "page_size": page_size}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def check_get_order_list(self, **kwargs) -> list | dict:
+    async def check_get_order_list(self, wid: str = None, check_type: str = None, date_field: str = None, start_date: str = None, end_date: str = None, search_field: str = None, search_value: str = None, status: int = None, page: int = None, page_size: int = None) -> list | dict:
         """查询盘点单列表.
 
 POST /erp/sc/routing/inventoryReceipt/InventoryCheck/getOrderList
@@ -640,7 +642,7 @@ Args:
     status: 盘点状态： 10 待盘点 20 预锁 30 盘点中 40 已盘点 121 待审核 122 已驳回 123 通过 124 作废, int.
     page: 分页页码，默认1, int.
     page_size: 分页长度，默认20, int."""
-        resp = await self._post("/erp/sc/routing/inventoryReceipt/InventoryCheck/getOrderList", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/inventoryReceipt/InventoryCheck/getOrderList", {k: v for k, v in {"wid": wid, "check_type": check_type, "date_field": date_field, "start_date": start_date, "end_date": end_date, "search_field": search_field, "search_value": search_value, "status": status, "page": page, "page_size": page_size}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
@@ -652,18 +654,18 @@ Args:
         """写操作 finishReceiveAllocationOrder. POST /erp/sc/routing/inventoryReceipt/StorageAllocation/finishReceiveAllocationOrder"""
         resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAllocation/finishReceiveAllocationOrder", kwargs if kwargs else None)
         return resp.data or {}
-    async def get_packing_data(self, **kwargs) -> list | dict:
+    async def get_packing_data(self, overseas_order_no: str = None) -> list | dict:
         """查询备货单装箱信息.
 
 POST /erp/sc/routing/owms/inbound/getPackingData
 
 Args:
     overseas_order_no: 备货单号 (required), string."""
-        resp = await self._post("/erp/sc/routing/owms/inbound/getPackingData", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/owms/inbound/getPackingData", {k: v for k, v in {"overseas_order_no": overseas_order_no}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def get_process_order_lists(self, **kwargs) -> list[GetProcessOrderListsItem]:
+    async def get_process_order_lists(self, type: Any = None, wid: Any = None, process_sn: Any = None, status: Any = None, search_field_time: Any = None, start_date: Any = None, end_date: Any = None, offset: Any = None, length: Any = None) -> list[GetProcessOrderListsItem]:
         """加工单列表.
 
 POST /erp/sc/routing/inventoryReceipt/StorageProcess/getOrderLists
@@ -678,9 +680,9 @@ Args:
     end_date: 结束时间，格式：Y-m-d, 否.
     offset: 分页偏移量，默认0, 是.
     length: 分页长度，默认500, 是."""
-        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageProcess/getOrderLists", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageProcess/getOrderLists", {k: v for k, v in {"type": type, "wid": wid, "process_sn": process_sn, "status": status, "search_field_time": search_field_time, "start_date": start_date, "end_date": end_date, "offset": offset, "length": length}.items() if v is not None})
         return self._parse_list(resp.data, GetProcessOrderListsItem)
-    async def get_storage_adjust_order_list(self, **kwargs) -> list[GetStorageAdjustOrderListItem]:
+    async def get_storage_adjust_order_list(self, search_date_type: int = None, start_date: str = None, end_date: str = None, order_sn: str = None, adjust_status: int = None, wid: str = None, type: int = None, page: int = None, page_size: int = None) -> list[GetStorageAdjustOrderListItem]:
         """查询调整单列表.
 
 POST /erp/sc/routing/inventoryReceipt/StorageAdjustment/getStorageAdjustOrderList
@@ -695,9 +697,9 @@ Args:
     type: 调整类型： 0 数量调整 1 换标调整 2 sku调整, int.
     page: 当前页码，默认1, int.
     page_size: 分页条数，默认20, int."""
-        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAdjustment/getStorageAdjustOrderList", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAdjustment/getStorageAdjustOrderList", {k: v for k, v in {"search_date_type": search_date_type, "start_date": start_date, "end_date": end_date, "order_sn": order_sn, "adjust_status": adjust_status, "wid": wid, "type": type, "page": page, "page_size": page_size}.items() if v is not None})
         return self._parse_list(resp.data, GetStorageAdjustOrderListItem)
-    async def get_storage_allocation_list(self, **kwargs) -> list | dict:
+    async def get_storage_allocation_list(self, wid: str = None, to_wid: str = None, search_date_type: int = None, start_date: str = None, end_date: str = None, page: int = None, page_size: int = None) -> list | dict:
         """查询调拨单列表.
 
 POST /erp/sc/routing/inventoryReceipt/StorageAllocation/getStorageAllocationList
@@ -710,11 +712,11 @@ Args:
     end_date: 结束日期，格式：Y-m-d，只有和开始日期同时有值才会生效, string.
     page: 当前页码，默认1, int.
     page_size: 分页条数，默认15, int."""
-        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAllocation/getStorageAllocationList", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAllocation/getStorageAllocationList", {k: v for k, v in {"wid": wid, "to_wid": to_wid, "search_date_type": search_date_type, "start_date": start_date, "end_date": end_date, "page": page, "page_size": page_size}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def inbound_batches_receipt(self, **kwargs) -> dict:
+    async def inbound_batches_receipt(self, overseas_order_no: str = None, product_list: list = None) -> dict:
         """备货单分批收货.
 
 POST /erp/sc/routing/owms/inbound/batchesReceipt
@@ -722,16 +724,16 @@ POST /erp/sc/routing/owms/inbound/batchesReceipt
 Args:
     overseas_order_no: 备货单号 (required), string.
     product_list: 产品信息 (required), array."""
-        resp = await self._post("/erp/sc/routing/owms/inbound/batchesReceipt", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/owms/inbound/batchesReceipt", {k: v for k, v in {"overseas_order_no": overseas_order_no, "product_list": product_list}.items() if v is not None})
         return resp.data or {}
-    async def inbound_complete_receipt(self, **kwargs) -> list | dict:
+    async def inbound_complete_receipt(self, overseas_order_no: str = None) -> list | dict:
         """备货单结束到货.
 
 POST /erp/sc/routing/owms/inbound/completeReceipt
 
 Args:
     overseas_order_no: 备货单号 (required), string."""
-        resp = await self._post("/erp/sc/routing/owms/inbound/completeReceipt", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/owms/inbound/completeReceipt", {k: v for k, v in {"overseas_order_no": overseas_order_no}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
@@ -741,7 +743,7 @@ Args:
 POST /erp/sc/routing/storage/inbound/getCustomTypes"""
         resp = await self._post("/erp/sc/routing/storage/inbound/getCustomTypes", kwargs if kwargs else None)
         return self._parse_page(resp.data, InboundGetCustomTypesItem)
-    async def inboundget_orders(self, **kwargs) -> list[InboundgetOrdersItem]:
+    async def inboundget_orders(self, offset: int = None, length: int = None, wid: int = None, search_field_time: str = None, start_date: str = None, end_date: str = None, order_sn: str = None, inbound_idempotent_code: str = None, status: int = None, type: int = None) -> list[InboundgetOrdersItem]:
         """查询入库单列表.
 
 POST /erp/sc/routing/storage/inbound/getOrders
@@ -757,9 +759,9 @@ Args:
     inbound_idempotent_code: 客户参考单号，多个使用英文逗号分隔, string.
     status: 入库单状态： 10 待提交 20 待入库 40 已完成 50 已撤销 121 待审批 122 已驳回, int.
     type: 入库类型： -1 其他入库（含所有自定义类型）  1 其他入库（非自定义类型） 2 采购入库 3 调拨入库 4 赠品入库 26 退货入库 27 移除入库, int."""
-        resp = await self._post("/erp/sc/routing/storage/inbound/getOrders", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/storage/inbound/getOrders", {k: v for k, v in {"offset": offset, "length": length, "wid": wid, "search_field_time": search_field_time, "start_date": start_date, "end_date": end_date, "order_sn": order_sn, "inbound_idempotent_code": inbound_idempotent_code, "status": status, "type": type}.items() if v is not None})
         return self._parse_list(resp.data, InboundgetOrdersItem)
-    async def inventory_bin_details(self, **kwargs) -> list[InventoryBinDetailsItem]:
+    async def inventory_bin_details(self, wid: str = None, bin_type_list: str = None, offset: int = None, length: int = None) -> list[InventoryBinDetailsItem]:
         """查询仓位库存明细.
 
 POST /erp/sc/routing/data/local_inventory/inventoryBinDetails
@@ -769,9 +771,9 @@ Args:
     bin_type_list: 仓位类型，多个类型用英文逗号分隔： 1 待检暂存 2 可用暂存 3 次品暂存 4 拣货暂存 5 可用 6 次品, string.
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认20 ，上限500, int."""
-        resp = await self._post("/erp/sc/routing/data/local_inventory/inventoryBinDetails", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/data/local_inventory/inventoryBinDetails", {k: v for k, v in {"wid": wid, "bin_type_list": bin_type_list, "offset": offset, "length": length}.items() if v is not None})
         return self._parse_list(resp.data, InventoryBinDetailsItem)
-    async def list_inbound(self, **kwargs) -> list | dict:
+    async def list_inbound(self, status: int = None, sub_status: int = None, s_wid: list = None, r_wid: list = None, overseas_order_no: str = None, create_time_from: str = None, create_time_to: str = None, page_size: int = None, page: int = None, date_type: str = None, is_delete: int = None) -> list | dict:
         """查询海外仓备货单列表.
 
 POST /erp/sc/routing/owms/inbound/listInbound
@@ -788,22 +790,22 @@ Args:
     page: 当前页码，默认1, int.
     date_type: 备货单时间查询类型：【默认create_time】 delivery_time 发货时间 create_time 创建时间 receive_time 收货时间 update_time 更新时间, string.
     is_delete: 订单是否删除： 0 未删除【默认】 1 已删除 2 全部, int."""
-        resp = await self._post("/erp/sc/routing/owms/inbound/listInbound", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/owms/inbound/listInbound", {k: v for k, v in {"status": status, "sub_status": sub_status, "s_wid": s_wid, "r_wid": r_wid, "overseas_order_no": overseas_order_no, "create_time_from": create_time_from, "create_time_to": create_time_to, "page_size": page_size, "page": page, "date_type": date_type, "is_delete": is_delete}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def list_order_nos(self, **kwargs) -> list | dict:
+    async def list_order_nos(self, inbound_order_no: list = None) -> list | dict:
         """获取备货单号.
 
 POST /erp/sc/routing/owms/inbound/listOrderNos
 
 Args:
     inbound_order_no: 客户参考号 数组, array."""
-        resp = await self._post("/erp/sc/routing/owms/inbound/listOrderNos", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/owms/inbound/listOrderNos", {k: v for k, v in {"inbound_order_no": inbound_order_no}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def match_sku_list(self, **kwargs) -> list | dict:
+    async def match_sku_list(self, wid: str = None, is_matched: int = None, offset: int = None, length: int = None) -> list | dict:
         """查询系统产品与第三方海外仓产品映射列表.
 
 POST /erp/sc/routing/owms/inbound/matchSkuList
@@ -813,7 +815,7 @@ Args:
     is_matched: 是否配对：【空表示都返回】 0 未配对 1 配对, int.
     offset: 分页偏移量, int.
     length: 分页长度，默认20, int."""
-        resp = await self._post("/erp/sc/routing/owms/inbound/matchSkuList", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/owms/inbound/matchSkuList", {k: v for k, v in {"wid": wid, "is_matched": is_matched, "offset": offset, "length": length}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
@@ -823,16 +825,16 @@ Args:
 POST /erp/sc/routing/storage/outbound/getCustomTypes"""
         resp = await self._post("/erp/sc/routing/storage/outbound/getCustomTypes", kwargs if kwargs else None)
         return self._parse_page(resp.data, OutboundGetCustomTypesItem)
-    async def outbound_order_delete(self, **kwargs) -> dict:
+    async def outbound_order_delete(self, orderSn: list = None) -> dict:
         """删除出库单.
 
 POST /basicOpen/outboundOrder/outbound/delete
 
 Args:
     orderSn: 出库单单号, array."""
-        resp = await self._post("/basicOpen/outboundOrder/outbound/delete", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/outboundOrder/outbound/delete", {k: v for k, v in {"orderSn": orderSn}.items() if v is not None})
         return resp.data or {}
-    async def outboundget_orders(self, **kwargs) -> list[OutboundgetOrdersItem]:
+    async def outboundget_orders(self, offset: int = None, length: int = None, wid: str = None, search_field_time: str = None, start_date: str = None, end_date: str = None, order_sn: str = None, idempotent_code: str = None, status: int = None, type: int = None) -> list[OutboundgetOrdersItem]:
         """查询出库单列表.
 
 POST /erp/sc/routing/storage/outbound/getOrders
@@ -848,18 +850,18 @@ Args:
     idempotent_code: 客户参考号，多个使用英文逗号分隔, string.
     status: 出库单状态： 10 待提交 30 待出库 40 已完成 50 已撤销 121 待审批 122 已驳回, int.
     type: 出库类型： 11 其他出库 12 FBA出库 14 退货出库 15 调拨出库 16 WFS出库 17 Temu出库 18 销毁出库, int."""
-        resp = await self._post("/erp/sc/routing/storage/outbound/getOrders", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/storage/outbound/getOrders", {k: v for k, v in {"offset": offset, "length": length, "wid": wid, "search_field_time": search_field_time, "start_date": start_date, "end_date": end_date, "order_sn": order_sn, "idempotent_code": idempotent_code, "status": status, "type": type}.items() if v is not None})
         return self._parse_list(resp.data, OutboundgetOrdersItem)
-    async def oversea_stock_order_allocate(self, **kwargs) -> dict:
+    async def oversea_stock_order_allocate(self, orderNo: str = None) -> dict:
         """备货单分配库存.
 
 POST /basicOpen/overSeaWarehouse/stockOrder/allocate
 
 Args:
     orderNo: 备货单号 (required), string."""
-        resp = await self._post("/basicOpen/overSeaWarehouse/stockOrder/allocate", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/overSeaWarehouse/stockOrder/allocate", {k: v for k, v in {"orderNo": orderNo}.items() if v is not None})
         return resp.data or {}
-    async def package_label(self, **kwargs) -> list | dict:
+    async def package_label(self, size: int = None, overseas_order_no: str = None) -> list | dict:
         """获取第三方箱唛.
 
 POST /erp/sc/routing/owms/inbound/packageLabel
@@ -867,11 +869,11 @@ POST /erp/sc/routing/owms/inbound/packageLabel
 Args:
     size: 尺寸映射： 1=西邮尺寸专属 2=谷仓A4 3=谷仓100x100 4=谷仓100x150 5=谷仓100x60 11=易仓A4(按SKU) 12=易仓A4(按箱) 13=易仓100x100(无产品名称) 14=易仓100x150(无产品名称) 15=易仓100x100(有产品名称) 16=易仓100x150(有产品名称) 17=易仓100x100(二维码) 18=易仓70x30(显示条码) 19=易仓70x30(无条码) (required), int.
     overseas_order_no: 备货单号 (required), string."""
-        resp = await self._post("/erp/sc/routing/owms/inbound/packageLabel", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/owms/inbound/packageLabel", {k: v for k, v in {"size": size, "overseas_order_no": overseas_order_no}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def packing(self, **kwargs) -> list | dict:
+    async def packing(self, overseas_order_no: str = None, packaging_type: int = None, box_count: int = None, box_list: list = None) -> list | dict:
         """上传备货单装箱信息.
 
 POST /erp/sc/routing/owms/inbound/packing
@@ -881,7 +883,7 @@ Args:
     packaging_type: 装箱类型：1 每箱多个sku，2 每箱一个sku (required), int.
     box_count: 总箱数 (required), int.
     box_list: 装箱数据 (required), array."""
-        resp = await self._post("/erp/sc/routing/owms/inbound/packing", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/owms/inbound/packing", {k: v for k, v in {"overseas_order_no": overseas_order_no, "packaging_type": packaging_type, "box_count": box_count, "box_list": box_list}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
@@ -905,16 +907,16 @@ POST /basicOpen/qualityInspectionOrder/detail"""
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def receive_allocation_order(self, **kwargs) -> dict:
+    async def receive_allocation_order(self, orderSnMany: str = None) -> dict:
         """调拨单全部收货.
 
 POST /erp/sc/routing/inventoryReceipt/StorageAllocation/receiveAllocationOrder
 
 Args:
     orderSnMany: 调拨单号，支持多个，英文逗号分隔 (required), string."""
-        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAllocation/receiveAllocationOrder", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAllocation/receiveAllocationOrder", {k: v for k, v in {"orderSnMany": orderSnMany}.items() if v is not None})
         return resp.data or {}
-    async def removal_inbound_list(self, **kwargs) -> list[RemovalInboundListItem]:
+    async def removal_inbound_list(self, status: int = None, start_date: str = None, end_date: str = None, order_no: list = None, offset: int = None, length: int = None) -> list[RemovalInboundListItem]:
         """查询移除入库单列表.
 
 POST /erp/sc/routing/owms/removalInbound/list
@@ -926,9 +928,9 @@ Args:
     order_no: 移除入库单号, array.
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认20，上限1000, int."""
-        resp = await self._post("/erp/sc/routing/owms/removalInbound/list", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/owms/removalInbound/list", {k: v for k, v in {"status": status, "start_date": start_date, "end_date": end_date, "order_no": order_no, "offset": offset, "length": length}.items() if v is not None})
         return self._parse_list(resp.data, RemovalInboundListItem)
-    async def set_tracking_no(self, **kwargs) -> dict:
+    async def set_tracking_no(self, waybill_no: str = None, wo_number: str = None, tracking_no: str = None, logistics_freight: str = None, logistics_freight_currency_code: str = None, pkg_fee_weight: str = None, pkg_fee_weight_unit: str = None) -> dict:
         """物流下单 - 编辑运单号/跟踪号.
 
 POST /basicOpen/logisticsOrdering/setTrackingNo
@@ -941,9 +943,9 @@ Args:
     logistics_freight_currency_code: 物流运费币种： CNY USD EUR JPY AUD CAD MXN GBP INR AED SGD SAR BRL SEK PLN TRY HKD, string.
     pkg_fee_weight: 计费重, string.
     pkg_fee_weight_unit: 计费重单位： g kg, string."""
-        resp = await self._post("/basicOpen/logisticsOrdering/setTrackingNo", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/logisticsOrdering/setTrackingNo", {k: v for k, v in {"waybill_no": waybill_no, "wo_number": wo_number, "tracking_no": tracking_no, "logistics_freight": logistics_freight, "logistics_freight_currency_code": logistics_freight_currency_code, "pkg_fee_weight": pkg_fee_weight, "pkg_fee_weight_unit": pkg_fee_weight_unit}.items() if v is not None})
         return resp.data or {}
-    async def submit_allocation_order(self, **kwargs) -> dict:
+    async def submit_allocation_order(self, sys_wid: int = None, sys_to_wid: int = None, freight_fee: str = None, other_fee: str = None, fee_part_type: int = None, remark: str = None, predict_time: str = None, type: str = None, out_bin_type: str = None, product_list: list = None) -> dict:
         """创建待调拨的调拨单.
 
 POST /erp/sc/routing/inventoryReceipt/StorageAllocation/submitAllocationOrder
@@ -959,9 +961,9 @@ Args:
     type: 默认为2-标准调拨, string.
     out_bin_type: 默认0 出库仓位不为空时必传1 (required), string.
     product_list: 产品明细 (required), array."""
-        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAllocation/submitAllocationOrder", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAllocation/submitAllocationOrder", {k: v for k, v in {"sys_wid": sys_wid, "sys_to_wid": sys_to_wid, "freight_fee": freight_fee, "other_fee": other_fee, "fee_part_type": fee_part_type, "remark": remark, "predict_time": predict_time, "type": type, "out_bin_type": out_bin_type, "product_list": product_list}.items() if v is not None})
         return resp.data or {}
-    async def switch_status(self, **kwargs) -> dict:
+    async def switch_status(self, wid: str = None, whbCode: str = None, status: int = None) -> dict:
         """启用、禁用仓位.
 
 POST /erp/sc/routing/storage/wareHouseBin/switchStatus
@@ -970,9 +972,9 @@ Args:
     wid: 仓库id (required), string.
     whbCode: 仓位名称 (required), string.
     status: 仓位状态：0 禁用，1 启用 (required), int."""
-        resp = await self._post("/erp/sc/routing/storage/wareHouseBin/switchStatus", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/storage/wareHouseBin/switchStatus", {k: v for k, v in {"wid": wid, "whbCode": whbCode, "status": status}.items() if v is not None})
         return resp.data or {}
-    async def update_inbound(self, **kwargs) -> dict:
+    async def update_inbound(self, overseas_order_no: str = None, logistics_id: int = None, estimated_time: str = None, arrival_time: str = None, share_id: int = None, remark: str = None, file_id: str = None, overseas_type: int = None, real_delivery_time: str = None, logistics_list_type: int = None, product_list: list = None, head_logistics_list: Any = None, logistics_list: list = None) -> dict:
         """更新备货单.
 
 POST /erp/sc/routing/owms/inbound/updateInbound
@@ -991,9 +993,9 @@ Args:
     logistics_list_type: 物流信息版本：0或者不传：默认旧版物流信息 1：新版物流信息 (required), int.
     head_logistics_list: 新版头程物流信息（当logistics_list_type 为1时才有意义） (required), object.
     logistics_list: 旧版物流信息，即将下线, array."""
-        resp = await self._post("/erp/sc/routing/owms/inbound/updateInbound", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/owms/inbound/updateInbound", {k: v for k, v in {"overseas_order_no": overseas_order_no, "logistics_id": logistics_id, "estimated_time": estimated_time, "arrival_time": arrival_time, "share_id": share_id, "remark": remark, "file_id": file_id, "overseas_type": overseas_type, "real_delivery_time": real_delivery_time, "logistics_list_type": logistics_list_type, "product_list": product_list, "head_logistics_list": head_logistics_list, "logistics_list": logistics_list}.items() if v is not None})
         return resp.data or {}
-    async def ware_house_bin_statement(self, **kwargs) -> list[WareHouseBinStatementItem]:
+    async def ware_house_bin_statement(self, wid: str = None, type: str = None, bin_type_list: str = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list[WareHouseBinStatementItem]:
         """查询仓位流水.
 
 POST /erp/sc/routing/data/local_inventory/wareHouseBinStatement
@@ -1006,9 +1008,9 @@ Args:
     end_date: 操作结束时间，Y-m-d，开区间，联合开始时间使用, string.
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认20, int."""
-        resp = await self._post("/erp/sc/routing/data/local_inventory/wareHouseBinStatement", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/data/local_inventory/wareHouseBinStatement", {k: v for k, v in {"wid": wid, "type": type, "bin_type_list": bin_type_list, "start_date": start_date, "end_date": end_date, "offset": offset, "length": length}.items() if v is not None})
         return self._parse_list(resp.data, WareHouseBinStatementItem)
-    async def warehouse_bin(self, **kwargs) -> list | dict:
+    async def warehouse_bin(self, wid: str = None, id: str = None, status: str = None, type: str = None, offset: int = None, limit: int = None) -> list | dict:
         """查询本地仓位列表.
 
 POST /erp/sc/routing/data/local_inventory/warehouseBin
@@ -1020,11 +1022,11 @@ Args:
     type: 仓位类型： 5 可用 6 次品, string.
     offset: 分页偏移量，默认为0, int.
     limit: 限制条数，默认20条, int."""
-        resp = await self._post("/erp/sc/routing/data/local_inventory/warehouseBin", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/data/local_inventory/warehouseBin", {k: v for k, v in {"wid": wid, "id": id, "status": status, "type": type, "offset": offset, "limit": limit}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def wms_order_get_wms_logistics_labels(self, **kwargs) -> list | dict:
+    async def wms_order_get_wms_logistics_labels(self, wo_number_arr: list = None, order_number_arr: list = None) -> list | dict:
         """查询销售出库单物流面单.
 
 POST /erp/sc/routing/wms/order/getWmsLogisticsLabels
@@ -1032,7 +1034,7 @@ POST /erp/sc/routing/wms/order/getWmsLogisticsLabels
 Args:
     wo_number_arr: 销售出库单号,上限50【销售出库单号与系统单号二选一必填】, array.
     order_number_arr: 系统单号,上限50【销售出库单号与系统单号二选一必填】, array."""
-        resp = await self._post("/erp/sc/routing/wms/order/getWmsLogisticsLabels", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/wms/order/getWmsLogisticsLabels", {k: v for k, v in {"wo_number_arr": wo_number_arr, "order_number_arr": order_number_arr}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}

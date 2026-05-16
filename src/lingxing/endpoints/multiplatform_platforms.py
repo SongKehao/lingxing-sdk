@@ -1,13 +1,15 @@
 """多平台商品 API endpoints."""
 from __future__ import annotations
 
+from typing import Any
+
 from ._base import BaseEndpoint
 
 
 class MultiplatformPlatformsEndpoints(BaseEndpoint):
     """领星多平台商品 API (33个接口)."""
 
-    async def aliexpress_list_v2(self, **kwargs) -> list | dict:
+    async def aliexpress_list_v2(self, isParent: int = None, length: int = None, brandIds: list = None, categoryIds: list = None, end: str = None, offset: int = None, pairingStatus: int = None, platformCodeList: list = None, price: int = None, priceCondition: int = None, principalUids: list = None, productTypeList: list = None, productUniqueId: int = None, productUniqueIdList: list = None, quantity: int = None, quantityCondition: int = None, searchField: int = None, searchSingleValue: str = None, searchValues: list = None, sortField: str = None, sortType: str = None, start: str = None, statusList: list = None, storeIds: list = None, storeType: int = None) -> list | dict:
         """查询AliExpress在线商品 - 托管模式.
 
 POST /basicOpen/multiplatform/aliexpress/list/v2
@@ -38,20 +40,20 @@ Args:
     statusList: 状态列表，枚举值：S1-待售, S2-可售, array.
     storeIds: 店铺ID列表, array.
     storeType: 店铺类型，枚举值：半托管, 全托管, 海外托管, int."""
-        resp = await self._post("/basicOpen/multiplatform/aliexpress/list/v2", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/aliexpress/list/v2", {k: v for k, v in {"isParent": isParent, "length": length, "brandIds": brandIds, "categoryIds": categoryIds, "end": end, "offset": offset, "pairingStatus": pairingStatus, "platformCodeList": platformCodeList, "price": price, "priceCondition": priceCondition, "principalUids": principalUids, "productTypeList": productTypeList, "productUniqueId": productUniqueId, "productUniqueIdList": productUniqueIdList, "quantity": quantity, "quantityCondition": quantityCondition, "searchField": searchField, "searchSingleValue": searchSingleValue, "searchValues": searchValues, "sortField": sortField, "sortType": sortType, "start": start, "statusList": statusList, "storeIds": storeIds, "storeType": storeType}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def batch_temu_address_decrypt(self, **kwargs) -> dict:
+    async def batch_temu_address_decrypt(self, decryptSnList: Any = None) -> dict:
         """批量TEMU地址解密.
 
 POST /basicOpen/temu/temuAddressDecrypt
 
 Args:
     decryptSnList: 系统单号数组 (required), array."""
-        resp = await self._post("/basicOpen/temu/temuAddressDecrypt", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/temu/temuAddressDecrypt", {k: v for k, v in {"decryptSnList": decryptSnList}.items() if v is not None})
         return resp.data or {}
-    async def coupang_stock_list(self, **kwargs) -> list | dict:
+    async def coupang_stock_list(self, length: int = None, offset: int = None, storeIds: list = None) -> list | dict:
         """多平台-查询Coupang库存.
 
 POST /basicOpen/multiplatform/coupang/stockSearch
@@ -60,20 +62,20 @@ Args:
     length: 每页条数，必填, int.
     offset: 偏移量，必填, int.
     storeIds: 店铺ID列表，必填，对应查询多平台店铺信息接口对应字段【store_id】, array."""
-        resp = await self._post("/basicOpen/multiplatform/coupang/stockSearch", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/coupang/stockSearch", {k: v for k, v in {"length": length, "offset": offset, "storeIds": storeIds}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def delete_cargo_storage(self, **kwargs) -> dict:
+    async def delete_cargo_storage(self, id: str = None) -> dict:
         """删除暂存货件.
 
 POST /basicOpen/multiplatform/deleteCargoStorage
 
 Args:
     id: WFS货件id，查询WFS货件列表 接口对应字段【id】 (required), string."""
-        resp = await self._post("/basicOpen/multiplatform/deleteCargoStorage", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/deleteCargoStorage", {k: v for k, v in {"id": id}.items() if v is not None})
         return resp.data or {}
-    async def fbs_stock_list(self, **kwargs) -> list | dict:
+    async def fbs_stock_list(self, length: int = None, offset: int = None, storeIds: list = None, hideZeroStorage: int = None, whsIdList: list = None) -> list | dict:
         """多平台-查询FBS库存.
 
 POST /basicOpen/multiplatform/fbs/stockSearch
@@ -84,11 +86,11 @@ Args:
     storeIds: 店铺ID列表，必填，对应查询多平台店铺信息接口对应字段【store_id】, array.
     hideZeroStorage: 是否隐藏0库存，默认0，枚举值：0-不隐藏，1-隐藏, long.
     whsIdList: 仓库ID列表, array."""
-        resp = await self._post("/basicOpen/multiplatform/fbs/stockSearch", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/fbs/stockSearch", {k: v for k, v in {"length": length, "offset": offset, "storeIds": storeIds, "hideZeroStorage": hideZeroStorage, "whsIdList": whsIdList}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def fbt_stock_list(self, **kwargs) -> list | dict:
+    async def fbt_stock_list(self, length: int = None, offset: int = None, storeIds: list = None) -> list | dict:
         """多平台-查询FBT库存.
 
 POST /basicOpen/multiplatform/fbt/stockSearch/v2
@@ -97,11 +99,11 @@ Args:
     length: 每页条数，必填，最大200, int.
     offset: 偏移量，必填，最小0, int.
     storeIds: 店铺ID列表，必填，对应查询多平台店铺信息接口对应字段【store_id】, array."""
-        resp = await self._post("/basicOpen/multiplatform/fbt/stockSearch/v2", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/fbt/stockSearch/v2", {k: v for k, v in {"length": length, "offset": offset, "storeIds": storeIds}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def fbt_stock_search(self, **kwargs) -> list | dict:
+    async def fbt_stock_search(self, length: int = None, offset: int = None, storeIdList: Any = None) -> list | dict:
         """查询Temu库存.
 
 POST /basicOpen/multiplatform/fbt/stockSearch
@@ -110,11 +112,11 @@ Args:
     length: 每页条数, long.
     offset: 偏移量, long.
     storeIdList: 店铺Id集合 (required), array."""
-        resp = await self._post("/basicOpen/multiplatform/fbt/stockSearch", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/fbt/stockSearch", {k: v for k, v in {"length": length, "offset": offset, "storeIdList": storeIdList}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def full_list(self, **kwargs) -> list | dict:
+    async def full_list(self, length: int = None, offset: int = None, selectTypeEnum: str = None, hideZeroStorage: int = None, storeIdList: list = None, custom: Any = None) -> list | dict:
         """查询FULL库存.
 
 POST /basicOpen/multiplatform/full/stockSearch
@@ -126,11 +128,11 @@ Args:
     custom: 自定义搜索参数, object.
     hideZeroStorage: 是否隐藏0库存，0不隐藏，1隐藏, int.
     storeIdList: 店铺ID列表, array."""
-        resp = await self._post("/basicOpen/multiplatform/full/stockSearch", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/full/stockSearch", {k: v for k, v in {"length": length, "offset": offset, "selectTypeEnum": selectTypeEnum, "hideZeroStorage": hideZeroStorage, "storeIdList": storeIdList, "custom": custom}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def line_list(self, **kwargs) -> list | dict:
+    async def line_list(self, isParent: int = None, availableNumber: str = None, availableNumberCondition: int = None, brandIds: list = None, categoryIds: list = None, length: int = None, offset: int = None, pairingStatus: int = None, parentUniqueIds: list = None, price: str = None, priceCondition: int = None, principalUids: list = None, productUniqueId: int = None, searchField: str = None, searchSingleValue: str = None, searchValues: list = None, sortField: str = None, sortType: str = None, statusList: list = None, storeIds: list = None) -> list | dict:
         """多平台-查询Line在线商品.
 
 POST /basicOpen/multiplatform/line/list
@@ -156,11 +158,11 @@ Args:
     sortType: 排序类型，枚举值：asc-升序, desc-降序, string.
     statusList: 状态列表，枚举值：0-正常, 1-已删除, array.
     storeIds: 店铺ID列表, array."""
-        resp = await self._post("/basicOpen/multiplatform/line/list", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/line/list", {k: v for k, v in {"isParent": isParent, "availableNumber": availableNumber, "availableNumberCondition": availableNumberCondition, "brandIds": brandIds, "categoryIds": categoryIds, "length": length, "offset": offset, "pairingStatus": pairingStatus, "parentUniqueIds": parentUniqueIds, "price": price, "priceCondition": priceCondition, "principalUids": principalUids, "productUniqueId": productUniqueId, "searchField": searchField, "searchSingleValue": searchSingleValue, "searchValues": searchValues, "sortField": sortField, "sortType": sortType, "statusList": statusList, "storeIds": storeIds}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def query_shipping_list_v2(self, **kwargs) -> list | dict:
+    async def query_shipping_list_v2(self, platformCodes: Any = None, offset: int = None, length: int = None, timeField: int = None, startTime: str = None, endTime: str = None, pickingStatus: str = None, shippingListStatus: int = None, searchField: int = None, searchSingleValue: str = None, storeIds: list = None, updateStartTime: str = None, updateEndTime: str = None, isDelete: int = None) -> list | dict:
         """查询平台仓发货单列表v2.
 
 POST /basicOpen/multiplatform/query/shippingList
@@ -180,11 +182,11 @@ Args:
     updateStartTime: 修改开始时间, string.
     updateEndTime: 修改结束时间, string.
     isDelete: 是否删除 0 未删除（默认） 1 已删除, int."""
-        resp = await self._post("/basicOpen/multiplatform/query/shippingList", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/query/shippingList", {k: v for k, v in {"platformCodes": platformCodes, "offset": offset, "length": length, "timeField": timeField, "startTime": startTime, "endTime": endTime, "pickingStatus": pickingStatus, "shippingListStatus": shippingListStatus, "searchField": searchField, "searchSingleValue": searchSingleValue, "storeIds": storeIds, "updateStartTime": updateStartTime, "updateEndTime": updateEndTime, "isDelete": isDelete}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def shein_list(self, **kwargs) -> list | dict:
+    async def shein_list(self, brandIds: list = None, categoryIds: list = None, offset: int = None, length: int = None, pairingStatus: int = None, searchField: str = None, status: int = None, storeIds: list = None, searchSingleValue: str = None, searchValues: list = None) -> list | dict:
         """查询Shein在线商品.
 
 POST /basicOpen/multiplatform/shein/list
@@ -200,11 +202,11 @@ Args:
     storeIds: 店铺ID列表, array.
     searchSingleValue: 单一值搜索, string.
     searchValues: 精确搜索值列表, array."""
-        resp = await self._post("/basicOpen/multiplatform/shein/list", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/shein/list", {k: v for k, v in {"brandIds": brandIds, "categoryIds": categoryIds, "offset": offset, "length": length, "pairingStatus": pairingStatus, "searchField": searchField, "status": status, "storeIds": storeIds, "searchSingleValue": searchSingleValue, "searchValues": searchValues}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def shopify_variant_list(self, **kwargs) -> list | dict:
+    async def shopify_variant_list(self, store_ids: list = None, status: list = None, inventory_policy: list = None, type_id: list = None, offset: int = None, length: int = None, search_field: int = None, search_single_value: str = None, search_values: list = None, quantity: str = None, quantity_condition: int = None, price: int = None, price_condition: int = None, listing_time_field: int = None, listing_start_time: str = None, listing_end_time: str = None) -> list | dict:
         """查询Shopify在线商品.
 
 POST /basicOpen/multiplatform/shopify/variantList
@@ -226,11 +228,11 @@ Args:
     listing_time_field: 时间维度, int.
     listing_start_time: 开始时间, string.
     listing_end_time: 结束时间, string."""
-        resp = await self._post("/basicOpen/multiplatform/shopify/variantList", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/shopify/variantList", {k: v for k, v in {"store_ids": store_ids, "status": status, "inventory_policy": inventory_policy, "type_id": type_id, "offset": offset, "length": length, "search_field": search_field, "search_single_value": search_single_value, "search_values": search_values, "quantity": quantity, "quantity_condition": quantity_condition, "price": price, "price_condition": price_condition, "listing_time_field": listing_time_field, "listing_start_time": listing_start_time, "listing_end_time": listing_end_time}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def temu_cargo(self, **kwargs) -> list | dict:
+    async def temu_cargo(self, endTime: str = None, length: int = None, offset: int = None, startTime: str = None, statusList: Any = None, timeType: int = None) -> list | dict:
         """查询Temu货件.
 
 POST /basicOpen/multiplatform/temu/cargo
@@ -242,11 +244,11 @@ Args:
     startTime: yyyy-MM-dd (required), date.
     statusList: 待发货：0 ；待收货：1 ；已收货：2 ；已入库：3 ；已退货：4 ；已取消：5 ；部分收货：6 ;待申报（本地状态）7 (required), array.
     timeType: 1:创建时间  2：发货时间 3：收货时间  4：入库时间 (required), int."""
-        resp = await self._post("/basicOpen/multiplatform/temu/cargo", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/temu/cargo", {k: v for k, v in {"endTime": endTime, "length": length, "offset": offset, "startTime": startTime, "statusList": statusList, "timeType": timeType}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def temu_list(self, **kwargs) -> list | dict:
+    async def temu_list(self, brandIds: list = None, categoryIds: list = None, offset: int = None, length: int = None, pairingStatus: int = None, searchField: str = None, status: int = None, storeIds: list = None, searchValues: list = None, searchSingleValue: str = None) -> list | dict:
         """查询Temu在线商品.
 
 POST /basicOpen/multiplatform/temu/list
@@ -262,11 +264,11 @@ Args:
     storeIds: 店铺id列表, array.
     searchValues: 精确搜索值列表, array.
     searchSingleValue: 模糊搜索值, string."""
-        resp = await self._post("/basicOpen/multiplatform/temu/list", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/temu/list", {k: v for k, v in {"brandIds": brandIds, "categoryIds": categoryIds, "offset": offset, "length": length, "pairingStatus": pairingStatus, "searchField": searchField, "status": status, "storeIds": storeIds, "searchValues": searchValues, "searchSingleValue": searchSingleValue}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def tik_tok_list(self, **kwargs) -> list | dict:
+    async def tik_tok_list(self, brandIds: list = None, categoryIds: list = None, offset: int = None, length: int = None, pairingStatus: int = None, searchField: str = None, platformStatus: list = None, storeIds: list = None, searchSingleValue: str = None, searchValues: list = None) -> list | dict:
         """查询TikTok在线商品.
 
 POST /basicOpen/multiplatform/tiktok/list
@@ -282,11 +284,11 @@ Args:
     storeIds: 店铺id列表, array.
     searchSingleValue: 搜索值, string.
     searchValues: 搜索值列表, array."""
-        resp = await self._post("/basicOpen/multiplatform/tiktok/list", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/tiktok/list", {k: v for k, v in {"brandIds": brandIds, "categoryIds": categoryIds, "offset": offset, "length": length, "pairingStatus": pairingStatus, "searchField": searchField, "platformStatus": platformStatus, "storeIds": storeIds, "searchSingleValue": searchSingleValue, "searchValues": searchValues}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def wayfair_stock_list(self, **kwargs) -> list | dict:
+    async def wayfair_stock_list(self, length: int = None, offset: int = None, storeIds: list = None, warehouseIds: list = None) -> list | dict:
         """多平台-查询wayfair库存.
 
 POST /basicOpen/multiplatform/wayfair/stockSearch
@@ -296,11 +298,11 @@ Args:
     offset: 偏移量，必填，表示从第几条开始，最小为0, int.
     storeIds: 店铺ID列表，必填，对应查询多平台店铺信息接口对应字段【store_id】, array.
     warehouseIds: 仓库ID列表, array."""
-        resp = await self._post("/basicOpen/multiplatform/wayfair/stockSearch", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/wayfair/stockSearch", {k: v for k, v in {"length": length, "offset": offset, "storeIds": storeIds, "warehouseIds": warehouseIds}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def add_cargo_goods_list(self, **kwargs) -> dict:
+    async def add_cargo_goods_list(self, store_id: str = None, offset: int = None, length: int = None) -> dict:
         """查询WFS货件可添加商品列表.
 
 POST /basicOpen/multiplatform/cargo/addCargoGoods/list
@@ -309,18 +311,18 @@ Args:
     store_id: 店铺id (required), string.
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认20，上限200, int."""
-        resp = await self._post("/basicOpen/multiplatform/cargo/addCargoGoods/list", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/cargo/addCargoGoods/list", {k: v for k, v in {"store_id": store_id, "offset": offset, "length": length}.items() if v is not None})
         return resp.data or {}
-    async def address_return_address_list(self, **kwargs) -> dict:
+    async def address_return_address_list(self, store_id: str = None) -> dict:
         """查询退件地址列表.
 
 POST /basicOpen/multiplatform/address/returnAddressList
 
 Args:
     store_id: 店铺id (required), string."""
-        resp = await self._post("/basicOpen/multiplatform/address/returnAddressList", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/address/returnAddressList", {k: v for k, v in {"store_id": store_id}.items() if v is not None})
         return resp.data or {}
-    async def aliexpress_list(self, **kwargs) -> list | dict:
+    async def aliexpress_list(self, offset: int = None, length: int = None, store_ids: list = None, status: list = None, listing_time_field: int = None, listing_start_time: str = None, listing_end_time: str = None, search_field: int = None, search_single_value: str = None) -> list | dict:
         """查询AliExpress在线商品 - 自运营.
 
 POST /basicOpen/multiplatform/aliExpress/list
@@ -335,11 +337,11 @@ Args:
     listing_end_time: 结束日期，Y-m-d，闭区间【开始结束时间不超过31天】, string.
     search_field: 搜索字段类型： 1 MSKU 2 商品ID 3 SKU 4 标题, int.
     search_single_value: 搜索值(字符串,单个模糊搜索）, string."""
-        resp = await self._post("/basicOpen/multiplatform/aliExpress/list", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/aliExpress/list", {k: v for k, v in {"offset": offset, "length": length, "store_ids": store_ids, "status": status, "listing_time_field": listing_time_field, "listing_start_time": listing_start_time, "listing_end_time": listing_end_time, "search_field": search_field, "search_single_value": search_single_value}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def e_bay_list(self, **kwargs) -> list | dict:
+    async def e_bay_list(self, offset: int = None, length: int = None, store_ids: list = None, site_code: list = None, listing_status: list = None, auto_restocks: list = None, listing_type: list = None, search_field: int = None, search_single_value: str = None, listing_time_field: int = None, listing_start_time: str = None, listing_end_time: str = None) -> list | dict:
         """查询eBay在线商品列表.
 
 POST /basicOpen/multiplatform/ebay/list
@@ -357,11 +359,11 @@ Args:
     listing_time_field: 查询时间类型： 1 创建时间 2 结束时间, int.
     listing_start_time: 开始时间(站点时间)，Y-m-d，闭区间【开始结束时间不超过31天】, string.
     listing_end_time: 结束时间(站点时间)，Y-m-d，闭区间【开始结束时间不超过31天】, string."""
-        resp = await self._post("/basicOpen/multiplatform/ebay/list", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/ebay/list", {k: v for k, v in {"offset": offset, "length": length, "store_ids": store_ids, "site_code": site_code, "listing_status": listing_status, "auto_restocks": auto_restocks, "listing_type": listing_type, "search_field": search_field, "search_single_value": search_single_value, "listing_time_field": listing_time_field, "listing_start_time": listing_start_time, "listing_end_time": listing_end_time}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def multiplatform_cargo_storage(self, **kwargs) -> list | dict:
+    async def multiplatform_cargo_storage(self, store_id: str = None, cargo_remark: str = None, inbound_order_id: str = None, cargo_goods_list: list = None, return_address: Any = None) -> list | dict:
         """WFS货件暂存.
 
 POST /basicOpen/multiplatform/cargo/storage
@@ -372,11 +374,11 @@ Args:
     cargo_remark: 货件备注, string.
     inbound_order_id: 入库订单id, string.
     return_address: 退件地址，查询退件地址列表 接口获取 (required), object."""
-        resp = await self._post("/basicOpen/multiplatform/cargo/storage", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/cargo/storage", {k: v for k, v in {"store_id": store_id, "cargo_remark": cargo_remark, "inbound_order_id": inbound_order_id, "cargo_goods_list": cargo_goods_list, "return_address": return_address}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def profit_report_msku(self, **kwargs) -> list | dict:
+    async def profit_report_msku(self, offset: float = None, length: float = None, platformCodeS: list = None, mids: str = None, sids: str = None, currencyCode: str = None, startDate: str = None, endDate: str = None, searchField: str = None, searchValue: str = None, developers: list = None, cids: list = None, bids: list = None) -> list | dict:
         """查询结算利润（利润报表）-msku.
 
 POST /basicOpen/multiplatform/profit/report/msku
@@ -395,11 +397,11 @@ Args:
     developers: 开发人, array.
     cids: 分类, array.
     bids: 品牌, array."""
-        resp = await self._post("/basicOpen/multiplatform/profit/report/msku", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/profit/report/msku", {k: v for k, v in {"offset": offset, "length": length, "platformCodeS": platformCodeS, "mids": mids, "sids": sids, "currencyCode": currencyCode, "startDate": startDate, "endDate": endDate, "searchField": searchField, "searchValue": searchValue, "developers": developers, "cids": cids, "bids": bids}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def profit_report_order(self, **kwargs) -> list | dict:
+    async def profit_report_order(self, offset: float = None, length: float = None, platformCodeS: list = None, mids: str = None, sids: str = None, transactionTypeS: list = None, currencyCode: str = None, searchDateType: str = None, startDate: str = None, endDate: str = None, searchField: str = None, searchValue: str = None) -> list | dict:
         """查询结算利润（利润报表）-订单.
 
 POST /basicOpen/multiplatform/profit/report/order
@@ -417,11 +419,11 @@ Args:
     endDate: 结束时间【结算日期】，闭区间，格式：Y-m-d (required), string.
     searchField: 搜索值类型：msku MSKU，local_sku SKU，product_name，品名，platform_order_no 平台单号, string.
     searchValue: 搜索值, string."""
-        resp = await self._post("/basicOpen/multiplatform/profit/report/order", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/profit/report/order", {k: v for k, v in {"offset": offset, "length": length, "platformCodeS": platformCodeS, "mids": mids, "sids": sids, "transactionTypeS": transactionTypeS, "currencyCode": currencyCode, "searchDateType": searchDateType, "startDate": startDate, "endDate": endDate, "searchField": searchField, "searchValue": searchValue}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def profit_report_seller(self, **kwargs) -> list | dict:
+    async def profit_report_seller(self, offset: float = None, length: float = None, platformCodeS: list = None, mids: str = None, sids: str = None, currencyCode: str = None, startDate: str = None, endDate: str = None) -> list | dict:
         """查询结算利润（利润报表）-店铺.
 
 POST /basicOpen/multiplatform/profit/report/seller
@@ -435,11 +437,11 @@ Args:
     currencyCode: 币种code： 原币种 USD EUR GBP CNY, string.
     startDate: 开始时间【结算日期】，闭区间，格式：Y-m-d (required), string.
     endDate: 结束时间【结算日期】，闭区间，格式：Y-m-d (required), string."""
-        resp = await self._post("/basicOpen/multiplatform/profit/report/seller", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/profit/report/seller", {k: v for k, v in {"offset": offset, "length": length, "platformCodeS": platformCodeS, "mids": mids, "sids": sids, "currencyCode": currencyCode, "startDate": startDate, "endDate": endDate}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def profit_report_sku(self, **kwargs) -> list | dict:
+    async def profit_report_sku(self, offset: float = None, length: float = None, platformCodeS: list = None, mids: str = None, sids: str = None, currencyCode: str = None, startDate: str = None, endDate: str = None, searchField: str = None, searchValue: str = None, developers: list = None, cids: list = None, bids: list = None) -> list | dict:
         """查询结算利润（利润报表）-sku.
 
 POST /basicOpen/multiplatform/profit/report/sku
@@ -458,22 +460,22 @@ Args:
     developers: 开发人, array.
     cids: 分类, array.
     bids: 品牌, array."""
-        resp = await self._post("/basicOpen/multiplatform/profit/report/sku", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/profit/report/sku", {k: v for k, v in {"offset": offset, "length": length, "platformCodeS": platformCodeS, "mids": mids, "sids": sids, "currencyCode": currencyCode, "startDate": startDate, "endDate": endDate, "searchField": searchField, "searchValue": searchValue, "developers": developers, "cids": cids, "bids": bids}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def self_shipment_order_delivery_goods(self, **kwargs) -> list | dict:
+    async def self_shipment_order_delivery_goods(self, order_number_list: str = None) -> list | dict:
         """订单发货.
 
 POST /basicOpen/selfShipmentOrder/deliveryGoods
 
 Args:
     order_number_list: 系统单号列表，多个使用英文逗号分隔，上限100 (required), string."""
-        resp = await self._post("/basicOpen/selfShipmentOrder/deliveryGoods", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/selfShipmentOrder/deliveryGoods", {k: v for k, v in {"order_number_list": order_number_list}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def set_order_weighed(self, **kwargs) -> list | dict:
+    async def set_order_weighed(self, order_number: str = None, wo_number: str = None, pkg_real_weight: str = None, pkg_real_weight_unit: str = None, sync_product_gross_weight: str = None) -> list | dict:
         """订单称重.
 
 POST /erp/sc/routing/wms/order/setOrderWeighed
@@ -484,53 +486,53 @@ Args:
     pkg_real_weight: 重量 (required), string.
     pkg_real_weight_unit: 单位 支持 g,kg,oz,lb (required), string.
     sync_product_gross_weight: 一单一件同步重量到产品模块 0:否,1:是  默认否, string."""
-        resp = await self._post("/erp/sc/routing/wms/order/setOrderWeighed", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/wms/order/setOrderWeighed", {k: v for k, v in {"order_number": order_number, "wo_number": wo_number, "pkg_real_weight": pkg_real_weight, "pkg_real_weight_unit": pkg_real_weight_unit, "sync_product_gross_weight": sync_product_gross_weight}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def shipping_detail_by_code(self, **kwargs) -> list | dict:
+    async def shipping_detail_by_code(self, shippingListCode: str = None) -> list | dict:
         """查询平台仓发货单详情.
 
 POST /basicOpen/multiplatform/query/shippingDetail
 
 Args:
     shippingListCode: 发货单编号 (required), string."""
-        resp = await self._post("/basicOpen/multiplatform/query/shippingDetail", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/query/shippingDetail", {k: v for k, v in {"shippingListCode": shippingListCode}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def shipping_order_allocate(self, **kwargs) -> dict:
+    async def shipping_order_allocate(self, shippingIdList: list = None) -> dict:
         """平台仓发货单分配库存.
 
 POST /basicOpen/multiplatform/allocate/stock
 
 Args:
     shippingIdList: 发货单ID列表，对应查询平台仓发货单列表v2接口出参id, array."""
-        resp = await self._post("/basicOpen/multiplatform/allocate/stock", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/allocate/stock", {k: v for k, v in {"shippingIdList": shippingIdList}.items() if v is not None})
         return resp.data or {}
-    async def shipping_order_delivery(self, **kwargs) -> list | dict:
+    async def shipping_order_delivery(self, shippingIdList: list = None) -> list | dict:
         """平台仓发货单发货.
 
 POST /basicOpen/multiplatform/shippingList/delivery
 
 Args:
     shippingIdList: 发货单ID列表，对应查询平台仓发货单列表v2接口出参id, array."""
-        resp = await self._post("/basicOpen/multiplatform/shippingList/delivery", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/shippingList/delivery", {k: v for k, v in {"shippingIdList": shippingIdList}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def shipping_order_picking(self, **kwargs) -> list | dict:
+    async def shipping_order_picking(self, shippingIdList: list = None) -> list | dict:
         """平台仓发货单拣货.
 
 POST /basicOpen/multiplatform/shippingList/picking
 
 Args:
     shippingIdList: 发货单ID列表，对应查询平台仓发货单列表v2接口出参id, array."""
-        resp = await self._post("/basicOpen/multiplatform/shippingList/picking", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/shippingList/picking", {k: v for k, v in {"shippingIdList": shippingIdList}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def temu_stock_order_query_page(self, **kwargs) -> list | dict:
+    async def temu_stock_order_query_page(self, length: float = None, offset: float = None, current: float = None, storeIdList: list = None, statusList: list = None, bizStatusList: list = None, settlementType: float = None, urgencyType: float = None, timeType: float = None, startTime: str = None, endTime: str = None, searchType: float = None, fuzzySearchValue: str = None, searchValueList: list = None, receivingWarehouseList: list = None, joinPlatformStatus: float = None, isGenerateCargo: float = None, isJitOrder: float = None, isFirst: bool = None, ids: list = None) -> list | dict:
         """查询Temu平台仓备货单列表.
 
 POST /basicOpen/stockOrder/temu/queryPage
@@ -556,11 +558,11 @@ Args:
     isJitOrder: 是否 JIT 订单。 0 否 1 是, number.
     isFirst: 是否首单, boolean.
     ids: ID 列表筛选, array."""
-        resp = await self._post("/basicOpen/stockOrder/temu/queryPage", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/stockOrder/temu/queryPage", {k: v for k, v in {"length": length, "offset": offset, "current": current, "storeIdList": storeIdList, "statusList": statusList, "bizStatusList": bizStatusList, "settlementType": settlementType, "urgencyType": urgencyType, "timeType": timeType, "startTime": startTime, "endTime": endTime, "searchType": searchType, "fuzzySearchValue": fuzzySearchValue, "searchValueList": searchValueList, "receivingWarehouseList": receivingWarehouseList, "joinPlatformStatus": joinPlatformStatus, "isGenerateCargo": isGenerateCargo, "isJitOrder": isJitOrder, "isFirst": isFirst, "ids": ids}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def walmart_list(self, **kwargs) -> list | dict:
+    async def walmart_list(self, offset: int = None, length: int = None, store_ids: list = None, status: list = None, fulfillment_types: list = None, listing_time_field: int = None, listing_start_time: str = None, listing_end_time: str = None, search_field: int = None, search_single_value: str = None) -> list | dict:
         """查询Walmart在线商品.
 
 POST /basicOpen/multiplatform/walmart/list
@@ -576,7 +578,7 @@ Args:
     listing_end_time: 结束日期，Y-m-d，闭区间【开始结束时间不超过31天】, string.
     search_field: 搜索字段类型： 1 MSKU 2 商品ID 3 SKU 4 标题, int.
     search_single_value: 搜索值(字符串,单个模糊搜索), string."""
-        resp = await self._post("/basicOpen/multiplatform/walmart/list", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/multiplatform/walmart/list", {k: v for k, v in {"offset": offset, "length": length, "store_ids": store_ids, "status": status, "fulfillment_types": fulfillment_types, "listing_time_field": listing_time_field, "listing_start_time": listing_start_time, "listing_end_time": listing_end_time, "search_field": search_field, "search_single_value": search_single_value}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}

@@ -7,7 +7,7 @@ from ._base import BaseEndpoint
 class ToolsEndpoints(BaseEndpoint):
     """领星工具 API (4个接口)."""
 
-    async def competitive_monitor_list(self, **kwargs) -> list | dict:
+    async def competitive_monitor_list(self, levels: list = None, update_time_start: str = None, update_time_end: str = None, search_field: str = None, search_value: str = None, offset: int = None, length: int = None) -> list | dict:
         """查询竞品监控列表.
 
 POST /basicOpen/tool/competitiveMonitor/list
@@ -20,11 +20,11 @@ Args:
     search_value: 搜索值：多个使用英文逗号分隔，上限200, string.
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认20，上限200, int."""
-        resp = await self._post("/basicOpen/tool/competitiveMonitor/list", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/tool/competitiveMonitor/list", {k: v for k, v in {"levels": levels, "update_time_start": update_time_start, "update_time_end": update_time_end, "search_field": search_field, "search_value": search_value, "offset": offset, "length": length}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def get_keyword_list(self, **kwargs) -> list | dict:
+    async def get_keyword_list(self, mid: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list | dict:
         """关键词列表.
 
 POST /erp/sc/routing/tool/toolKeywordRank/getKeywordList
@@ -35,11 +35,11 @@ Args:
     end_date: 结束日期，格式：Y-m-d, string.
     offset: 分页偏移量，默认0 (required), int.
     length: 分页长度，默认20，最大值为2000 (required), int."""
-        resp = await self._post("/erp/sc/routing/tool/toolKeywordRank/getKeywordList", kwargs if kwargs else None)
+        resp = await self._post("/erp/sc/routing/tool/toolKeywordRank/getKeywordList", {k: v for k, v in {"mid": mid, "start_date": start_date, "end_date": end_date, "offset": offset, "length": length}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def warning_message_goods_list(self, **kwargs) -> list | dict:
+    async def warning_message_goods_list(self, offset: int = None, length: int = None, model_id_list: list = None, sids: list = None, start_date: str = None, end_date: str = None, search_field: str = None, search_value: str = None, show_status: int = None) -> list | dict:
         """查询预警消息列表-商品.
 
 POST /basicOpen/settings/warningMessage/goodsList
@@ -54,11 +54,11 @@ Args:
     search_field: 搜索类型： rule_name   规则名称 asin  ASIN msku  MSKU, string.
     search_value: 搜索值, string.
     show_status: 处理状态： 0  待处理 1  全部 (required), int."""
-        resp = await self._post("/basicOpen/settings/warningMessage/goodsList", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/settings/warningMessage/goodsList", {k: v for k, v in {"offset": offset, "length": length, "model_id_list": model_id_list, "sids": sids, "start_date": start_date, "end_date": end_date, "search_field": search_field, "search_value": search_value, "show_status": show_status}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def warning_message_inventory_list(self, **kwargs) -> list | dict:
+    async def warning_message_inventory_list(self, offset: int = None, length: int = None, model_id_list: list = None, product_type_list: list = None, start_date: str = None, end_date: str = None, show_status: int = None) -> list | dict:
         """查询预警消息列表-库存.
 
 POST /basicOpen/settings/warningMessage/inventoryList
@@ -71,7 +71,7 @@ Args:
     start_date: 开始日期【提醒时间】，闭区间，格式：Y-m-d，时间间隔最长不超过90天 (required), string.
     end_date: 结束日期【提醒时间】，闭区间，格式：Y-m-d，时间间隔最长不超过90天 (required), string.
     show_status: 处理状态： 0   待处理  1    全部 (required), int."""
-        resp = await self._post("/basicOpen/settings/warningMessage/inventoryList", kwargs if kwargs else None)
+        resp = await self._post("/basicOpen/settings/warningMessage/inventoryList", {k: v for k, v in {"offset": offset, "length": length, "model_id_list": model_id_list, "product_type_list": product_type_list, "start_date": start_date, "end_date": end_date, "show_status": show_status}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}

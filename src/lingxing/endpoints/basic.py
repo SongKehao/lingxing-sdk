@@ -51,7 +51,7 @@ class BasicEndpoints(BaseEndpoint):
         resp = await self._post("/erp/sc/data/seller/allMarketplace")
         return self._parse_list(resp.data, AllMarketplaceItem)
 
-    async def list_world_states(self, **kwargs) -> list:
+    async def list_world_states(self, country_code: str = None) -> list:
         """
         查询亚马逊国家下地区列表.
 
@@ -60,10 +60,10 @@ class BasicEndpoints(BaseEndpoint):
         Args:
             country_code: 国家code，查询亚马逊市场列表 接口对应字段【code】 (required), string.
         """
-        resp = await self._post("/erp/sc/data/worldState/lists", kwargs)
+        resp = await self._post("/erp/sc/data/worldState/lists", {k: v for k, v in {"country_code": country_code}.items() if v is not None})
         return self._parse_list(resp.data, dict)
 
-    async def get_currency_rate(self, **kwargs) -> dict:
+    async def get_currency_rate(self, date: str = None) -> dict:
         """
         查询汇率.
 
@@ -72,10 +72,10 @@ class BasicEndpoints(BaseEndpoint):
         Args:
             date: 汇率月份 (required), string.
         """
-        resp = await self._post("/erp/sc/routing/finance/currency/currencyMonth", kwargs)
+        resp = await self._post("/erp/sc/routing/finance/currency/currencyMonth", {k: v for k, v in {"date": date}.items() if v is not None})
         return resp.data or {}
 
-    async def get_profit_state_list(self, **kwargs) -> list:
+    async def get_profit_state_list(self, countryCode: str = None) -> list:
         """
         获取国家下的州、省编码.
 
@@ -84,7 +84,7 @@ class BasicEndpoints(BaseEndpoint):
         Args:
             countryCode: 国家编码，二字码 (required), string.
         """
-        resp = await self._post("/basicOpen/multiplatform/profit/report/stateList", kwargs)
+        resp = await self._post("/basicOpen/multiplatform/profit/report/stateList", {k: v for k, v in {"countryCode": countryCode}.items() if v is not None})
         return self._parse_list(resp.data, dict)
 
     # ── 写操作（慎用）──
@@ -101,7 +101,7 @@ class BasicEndpoints(BaseEndpoint):
         resp = await self._post("/erp/sc/data/seller/batchEditSellerName", {"sellers": sellers})
         return resp.data or {}
 
-    async def update_exchange_rate(self, **kwargs) -> dict:
+    async def update_exchange_rate(self, my_rate: str = None, date: str = None, code: str = None) -> dict:
         """
         修改我的汇率.
 
@@ -112,10 +112,10 @@ class BasicEndpoints(BaseEndpoint):
             date: 汇率年月，查询汇率列表 接口对应字段【date】 (required), string.
             code: 币种，查询汇率列表 接口对应字段【code】 (required), string.
         """
-        resp = await self._post("/basicOpen/settings/exchangeRate/update", kwargs)
+        resp = await self._post("/basicOpen/settings/exchangeRate/update", {k: v for k, v in {"my_rate": my_rate, "date": date, "code": code}.items() if v is not None})
         return resp.data or {}
 
-    async def download_attachment(self, **kwargs) -> dict:
+    async def download_attachment(self, file_id: int = None) -> dict:
         """
         下载附件.
 
@@ -124,5 +124,5 @@ class BasicEndpoints(BaseEndpoint):
         Args:
             file_id: 附件id【取对应功能接口返回结果中的附件id值】 (required), int.
         """
-        resp = await self._post("/erp/sc/routing/common/file/download", kwargs)
+        resp = await self._post("/erp/sc/routing/common/file/download", {k: v for k, v in {"file_id": file_id}.items() if v is not None})
         return resp.data or {}
