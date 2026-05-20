@@ -150,14 +150,14 @@ Args:
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def fba_stock_v2(self, offset: int = 0, length: int = 20, search_field: str = None, search_value: str = None, cid: str = None, sid: str = None, bid: str = None, attribute: int = None, asin_principal: str = None, status: str = None, senior_search_list: str = None, fulfillment_channel_type: str = None, is_hide_zero_stock: int = None, is_parant_asin_merge: int = None, is_contain_del_ls: int = None, query_fba_storage_quantity_list: bool = None, is_cost_page: int = None, sort_field: str = None, sort_type: str = None) -> list | dict:
+    async def fba_stock_v2(self, offset: int = 0, length: int = 20, search_field: str = None, search_value: str = None, cid: str = None, sid: str = None, bid: str = None, attribute: int = None, asin_principal: str = None, status: str = None, senior_search_list: str = None, fulfillment_channel_type: str = None, is_hide_zero_stock: int = 0, is_parant_asin_merge: int = 0, is_contain_del_ls: int = 0, query_fba_storage_quantity_list: bool = None, is_cost_page: int = 0, sort_field: str = "sku", sort_type: str = "asc") -> list | dict:
         """查询FBA库存列表-v2.
 
 POST /basicOpen/openapi/storage/fbaWarehouseDetail
 
 Args:
     offset: 分页偏移量，默认0, int.
-    length: 分页长度，默认20,取值范围[20,200], int.
+    length: 分页长度，默认20,取值范围[20,50,100,200], int.
     search_field: 搜索维度: sku product_name seller_sku fnsku asin parent_asin spu spu_name, string.
     search_value: 搜索值, string.
     cid: 分类, string.
