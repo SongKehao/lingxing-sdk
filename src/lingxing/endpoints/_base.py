@@ -168,7 +168,7 @@ class BaseEndpoint(metaclass=SyncWrapperMeta):
                     results.append(item)
             return results
         if isinstance(data, dict):
-            items = data.get("list") or data.get("data") or []
+            items = data.get("list") or data.get("data") or data.get("records") or []
             if isinstance(items, list):
                 results: list = []
                 for item in items:
@@ -201,7 +201,7 @@ class BaseEndpoint(metaclass=SyncWrapperMeta):
             return items, len(items)
         if isinstance(data, dict):
             total = data.get("total", 0) or 0
-            items_raw = data.get("list") or data.get("data") or []
+            items_raw = data.get("list") or data.get("data") or data.get("records") or []
             if isinstance(items_raw, list):
                 items: list = []
                 for item in items_raw:
@@ -351,7 +351,7 @@ class BaseEndpoint(metaclass=SyncWrapperMeta):
                 items = data
                 total = len(data)
             elif isinstance(data, dict):
-                items = data.get("list") or data.get("data") or []
+                items = data.get("list") or data.get("data") or data.get("records") or []
                 total = data.get("total", 0) or 0
             if not items:
                 break

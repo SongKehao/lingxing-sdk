@@ -150,7 +150,7 @@ Args:
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def fba_stock_v2(self, offset: int = None, length: int = None, search_field: str = None, search_value: str = None, cid: str = None, sid: str = None, bid: str = None, attribute: str = None, asin_principal: str = None, status: str = None, senior_search_list: str = None, fulfillment_channel_type: str = None, is_hide_zero_stock: str = None, is_parant_asin_merge: str = None, is_contain_del_ls: str = None, query_fba_storage_quantity_list: bool = None, is_cost_page: int = None) -> list | dict:
+    async def fba_stock_v2(self, offset: int = 0, length: int = 20, search_field: str = None, search_value: str = None, cid: str = None, sid: str = None, bid: str = None, attribute: int = None, asin_principal: str = None, status: str = None, senior_search_list: str = None, fulfillment_channel_type: str = None, is_hide_zero_stock: int = None, is_parant_asin_merge: int = None, is_contain_del_ls: int = None, query_fba_storage_quantity_list: bool = None, is_cost_page: int = None, sort_field: str = None, sort_type: str = None) -> list | dict:
         """查询FBA库存列表-v2.
 
 POST /basicOpen/openapi/storage/fbaWarehouseDetail
@@ -168,12 +168,14 @@ Args:
     status: 在售状态: 0 停售 1 在售, string.
     senior_search_list: 高级搜索列表，详情见附加说明, string.
     fulfillment_channel_type: 配送方式: FBA FBM, string.
-    is_hide_zero_stock: 是否隐藏零库存行: 0 不隐藏零库存行 1 隐藏零库存行, string.
-    is_parant_asin_merge: 是否合并父ASIN: 0 不合并父ASIN 1 合并父ASIN, string.
-    is_contain_del_ls: 是否显示已删除Listing: 0 不显示已删除Listing 1 显示已删除Listing, string.
+    is_hide_zero_stock: 是否隐藏零库存行: 0 不隐藏零库存行 1 隐藏零库存行, int.
+    is_parant_asin_merge: 是否合并父ASIN: 0 不合并父ASIN 1 合并父ASIN, int.
+    is_contain_del_ls: 是否显示已删除Listing: 0 不显示已删除Listing 1 显示已删除Listing, int.
     query_fba_storage_quantity_list: true 是、false 否；默认false，如果传入true,则出参数据中的欧洲共享仓会将出参字段-fba_storage_quantity_list的值返回, Boolean.
-    is_cost_page: 是否查询成本页面: 1 是，返回cg_price字段, int."""
-        resp = await self._post("/basicOpen/openapi/storage/fbaWarehouseDetail", {k: v for k, v in {"offset": offset, "length": length, "search_field": search_field, "search_value": search_value, "cid": cid, "sid": sid, "bid": bid, "attribute": attribute, "asin_principal": asin_principal, "status": status, "senior_search_list": senior_search_list, "fulfillment_channel_type": fulfillment_channel_type, "is_hide_zero_stock": is_hide_zero_stock, "is_parant_asin_merge": is_parant_asin_merge, "is_contain_del_ls": is_contain_del_ls, "query_fba_storage_quantity_list": query_fba_storage_quantity_list, "is_cost_page": is_cost_page}.items() if v is not None})
+    is_cost_page: 是否查询成本页面: 1 是，返回cg_price字段, int.
+    sort_field: 排序字段, 如 sku, string.
+    sort_type: 排序方式: asc/desc, string."""
+        resp = await self._post("/basicOpen/openapi/storage/fbaWarehouseDetail", {k: v for k, v in {"offset": offset, "length": length, "search_field": search_field, "search_value": search_value, "cid": cid, "sid": sid, "bid": bid, "attribute": attribute, "asin_principal": asin_principal, "status": status, "senior_search_list": senior_search_list, "fulfillment_channel_type": fulfillment_channel_type, "is_hide_zero_stock": is_hide_zero_stock, "is_parant_asin_merge": is_parant_asin_merge, "is_contain_del_ls": is_contain_del_ls, "query_fba_storage_quantity_list": query_fba_storage_quantity_list, "is_cost_page": is_cost_page, "sort_field": sort_field, "sort_type": sort_type}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
