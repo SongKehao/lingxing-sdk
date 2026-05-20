@@ -1,6 +1,6 @@
 """领星 ERP OpenAPI Python SDK
 
-一个功能完整的领星ERP API Python SDK，支持所有580+个API端点。
+一个功能完整的领星ERP API Python SDK，支持480+个API端点。
 
 Basic usage:
     from lingxing import LingXingConfig, OpenApiBase
@@ -12,7 +12,7 @@ Basic usage:
     listings = await sale.listing(sid=123, offset=0, length=20)
 """
 
-__version__ = "0.5.0"
+__version__ = "0.6.0"
 
 from .client import LingXingClient
 from .config import LingXingConfig, get_config, set_config
@@ -53,12 +53,6 @@ from .endpoints import (
 )
 from .endpoints._base import BaseEndpoint
 from .errors import ApiError, AuthenticationError, LingXingError, RateLimitError, ValidationError
-from .integration_base import (
-    BaseIntegration,
-    HTTPIntegration,
-    IntegrationHealth,
-    IntegrationStatus,
-)
 from .models.business import (
     FBAShipment,
     InventoryInfo,
@@ -121,11 +115,6 @@ __all__ = [
     "StoreInfo",
     "SyncStatus",
     "SyncTask",
-    # Integration
-    "BaseIntegration",
-    "HTTPIntegration",
-    "IntegrationHealth",
-    "IntegrationStatus",
     # Utilities
     "APIParamBuilder",
     "DEFAULT_SIDS",

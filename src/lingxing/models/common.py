@@ -4,9 +4,23 @@ from __future__ import annotations
 from pydantic import BaseModel, ConfigDict
 
 
+def _to_camel(name: str) -> str:
+    """Convert snake_case to camelCase for API field aliasing."""
+    parts = name.split("_")
+    return parts[0] + "".join(word.capitalize() for word in parts[1:])
+
+
 class LingXingModel(BaseModel):
-    """Base model for all LingXing data models."""
-    model_config = ConfigDict(extra="allow", populate_by_name=True)
+    """Base model for all LingXing data models.
+
+    Supports both camelCase (from API) and snake_case (Python) field names.
+    API responses use camelCase which gets automatically mapped to snake_case.
+    """
+    model_config = ConfigDict(
+        extra="allow",
+        populate_by_name=True,
+        alias_generator=_to_camel,
+    )
 
 
 class PageResult(LingXingModel):

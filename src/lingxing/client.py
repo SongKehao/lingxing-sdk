@@ -1,22 +1,19 @@
 """
 领星ERP客户端高级封装
 
-提供领星API的高级访问接口，复用基础SDK
+提供领星API的高级访问接口，委托 OpenApiBase 进行 token 管理和请求发送。
 Author: AI Platform Team
 Date: 2026-02-17
 """
 
-import asyncio
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Any
 
 from .config import LingXingConfig, get_config
-from .integration_base import BaseIntegration, IntegrationHealth, IntegrationStatus
 from .models.business import (
     AllocationOrderInfo,
     FBAShipment,
-    # 头程物流相关
     InboundShipmentInfo,
     InventoryInfo,
     LingXingResponse,
@@ -24,10 +21,8 @@ from .models.business import (
     LogisticsProviderInfo,
     MSKUProfitInfo,
     OrderInfo,
-    # 财务相关
     OrderProfitInfo,
     ProductInfo,
-    # 采购相关
     PurchaseOrderInfo,
     PurchasePlanInfo,
     PurchaseReturnInfo,
@@ -40,21 +35,19 @@ from .models.business import (
     WarehouseInventoryInfo,
     WarehouseStatementInfo,
 )
-from .observability import track_request
 
 logger = logging.getLogger(__name__)
 
-# 导入基础SDK - 从 core 模块
 from .core.openapi import OpenApiBase  # noqa: E402
 from .core.param_builder import APIParamBuilder  # noqa: E402
-from .core.resp_schema import AccessTokenDto  # noqa: E402
 
 
-class LingXingClient(BaseIntegration):
+class LingXingClient:
     """
     领星ERP客户端
 
-    提供统一的领星API访问接口，自动处理token管理和请求重试
+    提供统一的领星API访问接口，自动处理token管理和请求重试。
+    Token管理完全委托给 OpenApiBase，不再重复维护。
     """
 
     def __init__(self, config: LingXingConfig | None = None):
@@ -64,29 +57,14 @@ class LingXingClient(BaseIntegration):
         Args:
             config: 领星配置，如果为None则使用默认配置
         """
-        super().__init__(name="lingxing", config=config or {})
         self.config = config or get_config()
 
-        # 创建OpenAPI基础客户端
-        self._openapi: OpenApiBase | None = None
-
-        # Token管理
-        # 安全说明: Token以明文形式存储在内存中。
-        # 这是因为:
-        # 1. Token需要在内存中快速访问用于API请求
-        # 2. Token有有效期（通常1-2小时），会自动过期
-        # 3. 进程退出时Token会被自动清除
-        # 注意: 请勿将client对象序列化或导出，避免token泄露
-        self._access_token: str | None = None
-        self._refresh_token: str | None = None
-        self._token_expires_at: datetime | None = None
-
-        # Token刷新重试计数器
-        self._token_refresh_attempts: int = 0
-        self._max_token_refresh_attempts: int = 3
-
-        # 并发锁
-        self._token_lock = asyncio.Lock()
+        # 创建OpenAPI基础客户端（负责token管理、限流、请求发送）
+        self._openapi = OpenApiBase(
+            host=self.config.host,
+            app_id=self.config.app_id,
+            app_secret=self.config.app_secret,
+        )
 
         # 参数构建器
         self._param_builder = APIParamBuilder()
@@ -100,63 +78,49 @@ class LingXingClient(BaseIntegration):
         """
         self._param_builder = APIParamBuilder(default_sids=sids)
 
+    @property
+    def openapi(self) -> OpenApiBase:
+        """直接访问底层 OpenApiBase 实例，用于 endpoint 模式。"""
+        return self._openapi
+
     async def connect(self) -> bool:
         """
-        建立连接并获取访问令牌
+        建立连接并验证访问令牌
 
         Returns:
             bool: 连接是否成功
         """
         try:
             logger.info("Connecting to LingXing ERP: %s", self.config.host)
-
-            # 创建OpenAPI客户端
-            self._openapi = OpenApiBase(
-                host=self.config.host,
-                app_id=self.config.app_id,
-                app_secret=self.config.app_secret,
-            )
-
-            # 获取访问令牌
-            await self._ensure_token()
-
-            self._status = IntegrationStatus.CONNECTED
+            # 触发 token 获取，验证凭据有效
+            await self._openapi.get_valid_token()
             logger.info("Connected to LingXing ERP successfully")
-
         except Exception:
             logger.exception("Failed to connect to LingXing ERP")
-            self._status = IntegrationStatus.ERROR
             return False
         else:
             return True
 
     async def disconnect(self) -> None:
-        """断开连接"""
-        self._access_token = None
-        self._refresh_token = None
-        self._token_expires_at = None
-        self._openapi = None
-        self._status = IntegrationStatus.DISCONNECTED
+        """断开连接，清除缓存的token"""
+        self._openapi._access_token = None
+        self._openapi._refresh_token = None
+        self._openapi._token_expires_at = None
         logger.info("Disconnected from LingXing ERP")
 
-    async def health_check(self) -> IntegrationHealth:
+    async def health_check(self) -> bool:
         """
         检查连接健康状态
 
         Returns:
-            IntegrationHealth: 健康状态
+            bool: 是否健康
         """
-        if not self.is_connected:
-            return IntegrationHealth.UNKNOWN
-
         try:
-            # 尝试获取店铺列表作为健康检查
             await self.get_stores(limit=1)
+            return True
         except Exception as e:
             logger.debug("Health check failed: %s", e)
-            return IntegrationHealth.UNHEALTHY
-        else:
-            return IntegrationHealth.HEALTHY
+            return False
 
     async def execute(
         self,
@@ -186,136 +150,6 @@ class LingXingClient(BaseIntegration):
         msg = f"Unknown operation: {operation}"
         raise ValueError(msg)
 
-    # ==================== Token管理 ====================
-
-    async def _ensure_token(self) -> str:
-        """
-        确保有有效的访问令牌
-
-        Returns:
-            str: 访问令牌
-        """
-        async with self._token_lock:
-            # 检查是否需要刷新token
-            if await self._should_refresh_token():
-                await self._refresh_access_token()
-
-            if not self._access_token:
-                await self._get_access_token()
-
-            return self._access_token
-
-    async def _should_refresh_token(self) -> bool:
-        """
-        检查是否需要刷新token
-
-        Returns:
-            bool: 是否需要刷新
-        """
-        if not self._access_token or not self._token_expires_at:
-            return True
-
-        # 在token过期前提前刷新
-        threshold = timedelta(seconds=self.config.token_refresh_threshold_seconds)
-        return datetime.now() >= (self._token_expires_at - threshold)
-
-    async def _get_access_token(self) -> AccessTokenDto:
-        """
-        获取新的访问令牌
-
-        Returns:
-            AccessTokenDto: 访问令牌DTO
-        """
-        logger.debug("Getting new access token")
-
-        token_dto = await self._openapi.generate_access_token()
-
-        self._access_token = token_dto.access_token
-        self._refresh_token = token_dto.refresh_token
-        self._token_expires_at = datetime.now() + timedelta(
-            seconds=token_dto.expires_in
-        )
-
-        logger.debug("Access token obtained, expires at: %s", self._token_expires_at)
-        return token_dto
-
-    async def _refresh_access_token(self) -> AccessTokenDto:
-        """
-        刷新访问令牌
-
-        Returns:
-            AccessTokenDto: 访问令牌DTO
-
-        Raises:
-            Exception: Token刷新失败且达到最大重试次数时抛出异常
-        """
-        logger.debug("Refreshing access token")
-
-        # 检查重试次数
-        self._token_refresh_attempts += 1
-        if self._token_refresh_attempts > self._max_token_refresh_attempts:
-            self._token_refresh_attempts = 0  # 重置计数器
-            msg = (
-                f"Token refresh failed after {self._max_token_refresh_attempts} attempts. "
-                "Please check your credentials and try again."
-            )
-            raise Exception(
-                msg
-            )
-
-        # 如果没有refresh_token，直接获取新token
-        if not self._refresh_token:
-            self._token_refresh_attempts = 0  # 重置计数器
-            return await self._get_access_token()
-
-        try:
-            # 添加延迟避免瞬间重试
-            if self._token_refresh_attempts > 1:
-                delay = 2 ** (self._token_refresh_attempts - 1)  # 指数退避
-                logger.debug("Token refresh attempt %s, waiting %ss", self._token_refresh_attempts, delay)
-                await asyncio.sleep(delay)
-
-            token_dto = await self._openapi.refresh_token(self._refresh_token)
-
-            # 验证新token是否有效
-            if not token_dto or not token_dto.access_token:
-                msg = "Invalid token received from refresh API"
-                raise Exception(msg)
-
-            # 验证token过期时间是否合理
-            if token_dto.expires_in <= 0:
-                msg = f"Invalid token expires_in: {token_dto.expires_in}"
-                raise Exception(msg)
-
-            # 设置新token
-            self._access_token = token_dto.access_token
-            self._refresh_token = token_dto.refresh_token
-            self._token_expires_at = datetime.now() + timedelta(
-                seconds=token_dto.expires_in
-            )
-
-            # 验证token：发起一个简单的API请求（获取店铺列表）
-            try:
-                await self.get_stores(limit=1)
-                logger.debug("Token validation successful")
-            except Exception as validation_error:
-                logger.warning("Token validation failed: %s", validation_error)
-                # 如果验证失败，清除token并重新获取
-                self._access_token = None
-                msg = "Refreshed token validation failed"
-                raise Exception(msg) from validation_error
-
-            # 重置重试计数器
-            self._token_refresh_attempts = 0
-
-            logger.debug("Access token refreshed and validated, expires at: %s", self._token_expires_at)
-        except Exception as e:
-            logger.warning("Failed to refresh token (attempt %s): %s", self._token_refresh_attempts, e)
-            # 尝试获取新token
-            return await self._get_access_token()
-        else:
-            return token_dto
-
     # ==================== API请求封装 ====================
 
     async def _request(
@@ -327,7 +161,7 @@ class LingXingClient(BaseIntegration):
         **kwargs
     ) -> LingXingResponse:
         """
-        发起API请求
+        发起API请求 — 委托 OpenApiBase 处理token和限流
 
         Args:
             route_name: API路由名称
@@ -339,22 +173,13 @@ class LingXingClient(BaseIntegration):
         Returns:
             LingXingResponse: API响应
         """
-        # 确保有有效的token
-        access_token = await self._ensure_token()
+        resp_result = await self._openapi.request_with_auto_token(
+            route_name=route_name,
+            method=method,
+            req_params=req_params,
+            req_body=req_body,
+        )
 
-        # 发起请求（带监控）
-        async with track_request(route_name, method):
-            resp_result = await self._openapi.request(
-                access_token=access_token,
-                route_name=route_name,
-                method=method,
-                req_params=req_params,
-                req_body=req_body,
-                timeout=self.config.request_timeout,
-                **kwargs
-            )
-
-        # 转换为响应对象
         return LingXingResponse(
             code=resp_result.code,
             message=resp_result.message,

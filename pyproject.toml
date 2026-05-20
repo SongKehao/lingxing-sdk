@@ -1,6 +1,6 @@
 [project]
 name = "lingxing-sdk"
-version = "0.5.0"
+version = "0.6.0"
 description = "领星 ERP OpenAPI Python SDK - Typed, async, Pydantic models"
 readme = "README.md"
 license = {text = "MIT"}
@@ -15,11 +15,11 @@ dependencies = [
     "pycryptodome>=3.20.0",
     "orjson>=3.9.0",
     "python-dotenv>=1.0.0",
-    "prometheus-client>=0.20.0",
 ]
 
 [project.optional-dependencies]
 sync = ["nest-asyncio>=1.5.0"]
+metrics = ["prometheus-client>=0.20.0"]
 dev = [
     "pytest>=8.0",
     "pytest-asyncio>=0.23",
