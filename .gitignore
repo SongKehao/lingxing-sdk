@@ -70,3 +70,4 @@ Thumbs.db
 # Project specific
 tests/fixtures/api_responses.json
 .omc/
+接口文档网址/
