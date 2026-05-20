@@ -8,7 +8,7 @@ from ._base import BaseEndpoint
 
 
 class StatisticsEndpoints(BaseEndpoint):
-    """领星统计报表 API (30个接口)."""
+    """领星统计报表 API (31个接口)."""
 
     async def amazon_report_export_task(self, region: str = None, seller_id: str = None, report_document_id: str = None) -> dict:
         """报告导出 - 报告下载链接续期.
@@ -478,6 +478,34 @@ Args:
     length: 长度，最大200 (required), int.
     asinList: 指定asin列表, array."""
         resp = await self._post("/basicOpen/vc/report/traffic/list", {k: v for k, v in {"sid": sid, "startDate": startDate, "endDate": endDate, "offset": offset, "length": length, "asinList": asinList}.items() if v is not None})
+        if isinstance(resp.data, list):
+            return resp.data
+        return resp.data or {}
+    async def product_performance(self, offset: int, length: int, sort_field: str, sort_type: str, sid: Any, start_date: str, end_date: str, summary_field: str, search_field: str = None, search_value: list = None, mid: int = None, currency_code: str = None, is_recently_enum: bool = None, purchase_status: int = None, extend_search: Any = None) -> list | dict:
+        """查询产品表现.
+
+POST /bd/productPerformance/openApi/asinList
+
+Args:
+    offset: 分页偏移量, int.
+    length: 分页长度，最大10000, int.
+    sort_field: 排序字段，默认volume, str.
+    sort_type: 排序方式：desc/asc, str.
+    sid: 店铺id，单店铺传字符串，多店铺传数组, Any.
+    start_date: 开始日期 YYYY-MM-DD, str.
+    end_date: 结束日期 YYYY-MM-DD, str.
+    summary_field: 汇总维度：asin/parent_asin/msku/sku, str.
+    search_field: 搜索字段：asin/parent_asin/msku/local_sku/item_name, str.
+    search_value: 搜索值，最多50个, list.
+    mid: 站点id, int.
+    currency_code: 货币类型，不传原币种，支持USD/CNY, str.
+    is_recently_enum: 是否仅查询活跃商品, bool.
+    purchase_status: 退货退款统计方式：0按发生时间/1按下单时间, int.
+    extend_search: 扩展筛选条件, Any.
+
+Note:
+    时间范围不能超过92天。单店铺间隔1s，多店铺间隔10s。"""
+        resp = await self._post("/bd/productPerformance/openApi/asinList", {k: v for k, v in {"offset": offset, "length": length, "sort_field": sort_field, "sort_type": sort_type, "sid": sid, "start_date": start_date, "end_date": end_date, "summary_field": summary_field, "search_field": search_field, "search_value": search_value, "mid": mid, "currency_code": currency_code, "is_recently_enum": is_recently_enum, "purchase_status": purchase_status, "extend_search": extend_search}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}

@@ -23,7 +23,60 @@ DEFAULT_RETRY_DELAY = 1.0  # seconds
 RATE_LIMIT_ERROR_CODE = 3001008
 
 
-class BaseEndpoint:
+def _run_async(coro):
+    """Run an async coroutine synchronously, handling event loop edge cases."""
+    try:
+        loop = asyncio.get_running_loop()
+    except RuntimeError:
+        loop = None
+
+    if loop is None or not loop.is_running():
+        return asyncio.run(coro)
+
+    # Loop is already running (Jupyter, etc.)
+    try:
+        import nest_asyncio
+        nest_asyncio.apply()
+        return loop.run_until_complete(coro)
+    except ImportError:
+        raise RuntimeError(
+            "Cannot call *_sync methods from a running event loop (e.g., Jupyter). "
+            "Install nest-asyncio: pip install nest-asyncio, then call nest_asyncio.apply()"
+        )
+
+
+def _make_sync_wrapper(method_name):
+    def sync_wrapper(self, *args, **kwargs):
+        async_method = getattr(self, method_name)
+        return _run_async(async_method(*args, **kwargs))
+    return sync_wrapper
+
+
+class SyncWrapperMeta(type):
+    """Metaclass that auto-generates *_sync() mirror methods for public async methods."""
+
+    def __new__(mcs, name, bases, namespace):
+        cls = super().__new__(mcs, name, bases, namespace)
+        if name == "BaseEndpoint":
+            return cls
+        for attr_name in dir(cls):
+            if attr_name.startswith("_"):
+                continue
+            sync_name = f"{attr_name}_sync"
+            if hasattr(cls, sync_name):
+                continue
+            method = getattr(cls, attr_name)
+            if not asyncio.iscoroutinefunction(method):
+                continue
+            wrapper = _make_sync_wrapper(attr_name)
+            wrapper.__name__ = sync_name
+            wrapper.__qualname__ = f"{name}.{sync_name}"
+            wrapper.__doc__ = f"(Sync) {method.__doc__}" if method.__doc__ else None
+            setattr(cls, sync_name, wrapper)
+        return cls
+
+
+class BaseEndpoint(metaclass=SyncWrapperMeta):
     """Base class for all endpoint groups.
 
     Provides typed _post / _get helpers that:
@@ -238,4 +291,75 @@ class BaseEndpoint:
             all_items.extend(page_items)
             if max_items is not None and len(all_items) >= max_items:
                 return all_items[:max_items]
+        return all_items
+
+    # ==================== Public pagination helpers ====================
+
+    async def collect_all(
+        self,
+        route: str,
+        model: type[T],
+        page_size: int = 100,
+        base_params: dict | None = None,
+        max_items: int | None = None,
+    ) -> list[T]:
+        """Public alias for _collect_all. Collect all items from a paginated endpoint."""
+        return await self._collect_all(route, model, page_size, base_params, max_items)
+
+    async def iter_pages(
+        self,
+        route: str,
+        model: type[T],
+        page_size: int = 100,
+        base_params: dict | None = None,
+        offset_field: str = "offset",
+        length_field: str = "length",
+        max_pages: int | None = None,
+    ) -> AsyncIterator[list[T]]:
+        """Public alias for _iter_pages. Iterate over pages of a paginated endpoint."""
+        async for page in self._iter_pages(route, model, page_size, base_params, offset_field, length_field, max_pages):
+            yield page
+
+    async def collect_all_raw(
+        self,
+        route: str,
+        page_size: int = 100,
+        base_params: dict | None = None,
+        offset_field: str = "offset",
+        length_field: str = "length",
+        max_pages: int | None = None,
+    ) -> list[dict]:
+        """Collect all pages from a paginated endpoint, returning raw dicts.
+
+        Unlike collect_all(), this does not require a Pydantic model.
+        It auto-detects the pagination structure from response data.
+        """
+        all_items: list[dict] = []
+        offset = 0
+        pages = 0
+        while True:
+            if max_pages is not None and pages >= max_pages:
+                break
+            params = dict(base_params or {})
+            params[offset_field] = offset
+            params[length_field] = page_size
+            resp = await self._post(route, params)
+            data = resp.data
+            items: list = []
+            total = 0
+            if isinstance(data, list):
+                items = data
+                total = len(data)
+            elif isinstance(data, dict):
+                items = data.get("list") or data.get("data") or []
+                total = data.get("total", 0) or 0
+            if not items:
+                break
+            all_items.extend(items)
+            pages += 1
+            offset += page_size
+            if total > 0 and offset >= total:
+                break
+            if len(items) < page_size:
+                break
         return all_items

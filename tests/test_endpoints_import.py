@@ -1,4 +1,5 @@
 """Import verification test - ensure all 400 endpoint methods load correctly."""
+import asyncio
 import pytest
 
 
@@ -38,14 +39,41 @@ def test_all_endpoints_import():
 
 
 def test_total_method_count():
-    """Total endpoint methods should be 400."""
+    """Total async endpoint methods should be 400."""
     from lingxing import endpoints as ep
     total = 0
     for name in ep.__all__:
         cls = getattr(ep, name)
-        methods = [m for m in dir(cls) if not m.startswith('_') and callable(getattr(cls, m))]
+        methods = [
+            m for m in dir(cls)
+            if not m.startswith('_')
+            and asyncio.iscoroutinefunction(getattr(cls, m))
+        ]
         total += len(methods)
-    assert total == 400, f"Expected 400 methods, got {total}"
+    assert total == 492, f"Expected 492 async methods (400 original + 53 Amazon ads + 1 product_performance + 38 inherited pagination), got {total}"
+
+
+def test_sync_wrappers_generated():
+    """Every public async method should have a *_sync counterpart."""
+    from lingxing import endpoints as ep
+    for name in ep.__all__:
+        cls = getattr(ep, name)
+        async_methods = [
+            m for m in dir(cls)
+            if not m.startswith('_')
+            and asyncio.iscoroutinefunction(getattr(cls, m))
+        ]
+        for method_name in async_methods:
+            sync_name = f"{method_name}_sync"
+            assert hasattr(cls, sync_name), f"{name}.{sync_name} missing"
+            assert not asyncio.iscoroutinefunction(getattr(cls, sync_name)), f"{name}.{sync_name} should be sync"
+
+
+def test_sync_wrappers_exclude_private():
+    """Private methods should NOT get sync wrappers."""
+    from lingxing.endpoints._base import BaseEndpoint
+    assert not hasattr(BaseEndpoint, '_post_sync')
+    assert not hasattr(BaseEndpoint, '_collect_all_sync')
 
 
 def test_key_routes_correct():
