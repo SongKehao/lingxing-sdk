@@ -148,7 +148,7 @@ class TestWarehouseModuleDetailed:
     @pytest.mark.asyncio
     async def test_warehouse_lists(self):
         """Test warehouse lists with model parsing."""
-        from lingxing.models.warehouse import WarehouseListsItem
+        from lingxing.models.responses.warehouse import WarehouseListsItem
         self.api._default_response = MockResponseResult(
             code=0,
             data=[{"wid": 1, "name": "深圳仓", "type": 1}],
@@ -167,7 +167,7 @@ class TestWarehouseModuleDetailed:
     @pytest.mark.asyncio
     async def test_inventory_details(self):
         """Test inventory details parsing."""
-        from lingxing.models.warehouse import InventoryDetailsItem
+        from lingxing.models.responses.warehouse import InventoryDetailsItem
         self.api._default_response = MockResponseResult(
             code=0,
             data=[{"sku": "TEST-SKU", "wid": 1, "available_num": 100}],
@@ -189,7 +189,7 @@ class TestFBAModuleDetailed:
     @pytest.mark.asyncio
     async def test_fba_product_list(self):
         """Test FBA product list with typed model."""
-        from lingxing.models.fba import GetFbaProductListItem
+        from lingxing.models.responses.fba import GetFbaProductListItem
         self.api._default_response = MockResponseResult(
             code=0,
             data=[{"msku": "TEST-MSKU", "asin": "B0TEST", "fnsku": "X00TEST"}],
@@ -202,7 +202,7 @@ class TestFBAModuleDetailed:
     @pytest.mark.asyncio
     async def test_shipment_plan_lists(self):
         """Test shipment plan lists."""
-        from lingxing.models.fba import ShipmentPlanListsItem
+        from lingxing.models.responses.fba import ShipmentPlanListsItem
         self.api._default_response = MockResponseResult(
             code=0,
             data=[{"shipment_id": "SHP123", "status": 0}],
@@ -222,7 +222,7 @@ class TestProductModuleDetailed:
     @pytest.mark.asyncio
     async def test_product_lists(self):
         """Test product lists with typed model."""
-        from lingxing.models.product import ProductListsItem
+        from lingxing.models.responses.product import ProductListsItem
         self.api._default_response = MockResponseResult(
             code=0,
             data=[{"pid": 1, "name": "Test Product", "sku": "TEST-SKU"}],
@@ -234,7 +234,7 @@ class TestProductModuleDetailed:
     @pytest.mark.asyncio
     async def test_brand_list(self):
         """Test brand list."""
-        from lingxing.models.product import BrandItem
+        from lingxing.models.responses.product import BrandItem
         self.api._default_response = MockResponseResult(
             code=0,
             data=[{"brand_id": 1, "brand_name": "TestBrand"}],

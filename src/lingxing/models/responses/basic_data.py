@@ -157,3 +157,7 @@ class CommonFileDownloadResponse(LingXingModel):
     file_name: Optional[str] = Field(None, description="文件名")
     mime_type: Optional[str] = Field(None, description="文件类型")
     content: Optional[str] = Field(None, description="base64 编码的文件内容")
+
+
+class SettingsExchangerateUpdateResponse(LingXingModel):
+    """修改我的汇率."""

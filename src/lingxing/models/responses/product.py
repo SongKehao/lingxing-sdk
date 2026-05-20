@@ -35,7 +35,6 @@ class ProductGettransparencyproductlistPagelist(LingXingModel):
 class ProductGettransparencyproductlistResponse(LingXingModel):
     """产品管理-查询透明计划商品列表."""
     page_list: Optional[List[ProductGettransparencyproductlistPagelist]] = Field(None, description="分页列表")
-    total: Optional[int] = Field(None, description="合计，总记录数")
     total: Optional[int] = Field(None, description="总记录数")
 
 
@@ -434,7 +433,7 @@ class LocalInventoryProductlistResponse(LingXingModel):
     cg_transport_costs: Optional[float] = Field(None, description="采购：运输成本")
     purchase_remark: Optional[str] = Field(None, description="采购备注")
     cg_price: Optional[float] = Field(None, description="采购：采购成本（人民币）")
-    open_status: Optional[int] = Field(None, description="产品是否启用：0 停用，1 启用")
+
     status: Optional[int] = Field(None, description="状态：0 停售，1 在售，2 开发中，3 清仓")
     status_text: Optional[str] = Field(None, description="状态文本")
     is_combo: Optional[int] = Field(None, description="是否为组合产品：0 否，1 是")
@@ -537,8 +536,6 @@ class StorageSpuInfoAuxRelationList(LingXingModel):
     cg_price: Optional[str] = Field(None, description="单位成本")
     quantity: Optional[int] = Field(None, description="数量")
     remark: Optional[str] = Field(None, description="备注")
-    aux_sku: Optional[str] = Field(None, description="辅料sku")
-    aux_name: Optional[str] = Field(None, description="辅料名称")
     sku_qty: Optional[str] = Field(None, description="辅料比例（主料）")
     aux_qty: Optional[str] = Field(None, description="辅料比例（辅料）")
 
@@ -583,7 +580,6 @@ class StorageSpuInfoResponse(LingXingModel):
     aux_relation_list: Optional[List[StorageSpuInfoAuxRelationList]] = Field(None, description="关联辅料")
     logistics: Optional[List[StorageSpuInfoLogistics]] = Field(None, description="物流报关清关")
     sku_list: Optional[List[StorageSpuInfoSkuList]] = Field(None, description="产品列表")
-    aux_relation_list: Optional[List[StorageSpuInfoAuxRelationList]] = Field(None, description="辅料列表")
     attribute_skc_list: Optional[List[StorageSpuInfoAttributeSkcList]] = Field(None, description="属性skc列表")
 
 
@@ -660,3 +656,78 @@ class PublishUpcUpclistResponse(LingXingModel):
     """获取UPC编码列表."""
     total: Optional[int] = Field(None, description="商品编码总数")
     list: Optional[List[PublishUpcUpclistList]] = Field(None, description="商品编码数据列表")
+
+
+class PublishUpcAddcommoditycodeResponse(LingXingModel):
+    """创建UPC编码."""
+
+
+class ProductOperateBatchResponse(LingXingModel):
+    """产品启用、禁用."""
+
+
+# Migrated from old models/
+class AttributeListItem(LingXingModel):
+    """Response item for attributeList."""
+
+    list: Optional[list] = None
+    total: Optional[int] = None
+
+
+class BrandItem(LingXingModel):
+    """Response item for Brand."""
+
+    bid: Optional[int] = None
+    brand_code: Optional[str] = None
+    title: Optional[str] = None
+
+
+class CategoryItem(LingXingModel):
+    """Response item for Category."""
+
+    category_code: Optional[str] = None
+    cid: Optional[int] = None
+    parent_cid: Optional[int] = None
+    title: Optional[str] = None
+
+
+class ProductListsItem(LingXingModel):
+    """Response item for ProductLists."""
+
+    attribute: Optional[list] = None
+    aux_relation_list: Optional[list] = None
+    bid: Optional[int] = None
+    brand_name: Optional[str] = None
+    category_name: Optional[str] = None
+    cg_delivery: Optional[int] = None
+    cg_opt_uid: Optional[int] = None
+    cg_opt_username: Optional[str] = None
+    cg_price: Optional[float] = None
+    cg_transport_costs: Optional[float] = None
+    cid: Optional[int] = None
+    create_time: Optional[int] = None
+    custom_fields: Optional[list] = None
+    global_tags: Optional[list] = None
+    id: Optional[int] = None
+    is_combo: Optional[int] = None
+    open_status: Optional[int] = None
+    pic_url: Optional[str] = None
+    product_developer: Optional[str] = None
+    product_developer_uid: Optional[int] = None
+    product_name: Optional[str] = None
+    ps_id: Optional[int] = None
+    purchase_remark: Optional[str] = None
+    sku: Optional[str] = None
+    sku_identifier: Optional[str] = None
+    spu: Optional[str] = None
+    status: Optional[int] = None
+    status_text: Optional[str] = None
+    supplier_quote: Optional[list] = None
+    update_time: Optional[int] = None
+
+
+class UpcListItem(LingXingModel):
+    """Response item for UpcList."""
+
+    list: Optional[list] = None
+    total: Optional[int] = None

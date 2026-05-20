@@ -3,12 +3,29 @@ from __future__ import annotations
 
 from typing import Any
 
-from ..models.fba import (
-    GetFbaProductListItem,
-    GetHeadLogisticsFeeTypesItem,
-    GetInboundShipmentListItem,
-    GetSeaTrackSupplierCarriersItem,
-    ShipmentPlanListsItem,
+from ..models.responses.fba import GetFbaProductListItem, GetHeadLogisticsFeeTypesItem, GetInboundShipmentListItem, GetSeaTrackSupplierCarriersItem, ShipmentPlanListsItem
+from ..models.responses.fba import (
+    FbaReportReceivedinventoryResponse,
+    FbaReportShipmentlistResponse,
+    FbaReportShipmentplanlistsResponse,
+    FbaShipmentBoxinfoResponse,
+    FbaShipmentCreateshipfromaddressResponse,
+    FbaShipmentGetfbaproductlistResponse,
+    FbaShipmentGetheadlogisticsfeetypesResponse,
+    FbaShipmentGetseatracksuppliercarriersResponse,
+    FbaShipmentShipfromaddresslistResponse,
+    FbaShipmentSyncshipmentResponse,
+    GetinvoiceInvoiceBatchsendgoodsResponse,
+    OpenapiFbashipmentShoppingaddressResponse,
+    StorageShipmentCreatereadysendorderResponse,
+    StorageShipmentCreatesendedorderResponse,
+    StorageShipmentCreateshipmentplanResponse,
+    StorageShipmentGetinboundshipmentlistResponse,
+    StorageShipmentGetinboundshipmentlistmwsdetailResponse,
+    StorageShipmentGetinboundshipmentlistmwsdetaillistResponse,
+    StorageShipmentPrintfbalabelsResponse,
+    StorageShipmentPrintfnskulabelsResponse,
+    StorageShipmentSearchprocessresultResponse,
 )
 from ._base import BaseEndpoint
 
@@ -16,7 +33,7 @@ from ._base import BaseEndpoint
 class FBAEndpoints(BaseEndpoint):
     """领星FBA发货 API (31个接口)."""
 
-    async def box_info(self, sid: int = None, shipment_id: str = None) -> list | dict:
+    async def box_info(self, sid: int = None, shipment_id: str = None) -> list[FbaShipmentBoxinfoResponse]:
         """查询货件装箱信息.
 
 POST /erp/sc/routing/fba/shipment/boxInfo
@@ -25,10 +42,8 @@ Args:
     sid: 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】 (required), int.
     shipment_id: 货件编号 (required), string."""
         resp = await self._post("/erp/sc/routing/fba/shipment/boxInfo", {k: v for k, v in {"sid": sid, "shipment_id": shipment_id}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def create_sended_order(self, wid: int = None, sys_wid: int = None, expected_arrival_date: str = None, etd_date: str = None, eta_date: str = None, delivery_date: str = None, actual_shipment_time: str = None, head_fee_type: int = None, tax_fee_type: int = None, is_points_behind: int = None, points_behind_coeffient: int = None, logistics_channel_id: int = None, is_related: int = None, request_flag: str = None, ship_mode: int = None, hand_pick_purchase: int = None, remark: str = None, box_type: str = None, box_remark: str = None, logistics_list_type: int = None, list_field: Any = None, box_list: list = None, head_logistics_list: Any = None, logistics_list: list = None) -> dict:
+        return self._parse_list(resp.data, FbaShipmentBoxinfoResponse)
+    async def create_sended_order(self, wid: int = None, sys_wid: int = None, expected_arrival_date: str = None, etd_date: str = None, eta_date: str = None, delivery_date: str = None, actual_shipment_time: str = None, head_fee_type: int = None, tax_fee_type: int = None, is_points_behind: int = None, points_behind_coeffient: int = None, logistics_channel_id: int = None, is_related: int = None, request_flag: str = None, ship_mode: int = None, hand_pick_purchase: int = None, remark: str = None, box_type: str = None, box_remark: str = None, logistics_list_type: int = None, list_field: Any = None, box_list: list = None, head_logistics_list: Any = None, logistics_list: list = None) -> StorageShipmentCreatesendedorderResponse | None:
         """生成已发货的发货单.
 
 POST /erp/sc/storage/shipment/createSendedOrder
@@ -58,8 +73,8 @@ Args:
     head_logistics_list: 新版头程物流信息 (required), object.
     logistics_list: 旧版物流信息，即将下线, array."""
         resp = await self._post("/erp/sc/storage/shipment/createSendedOrder", {k: v for k, v in {"wid": wid, "sys_wid": sys_wid, "expected_arrival_date": expected_arrival_date, "etd_date": etd_date, "eta_date": eta_date, "delivery_date": delivery_date, "actual_shipment_time": actual_shipment_time, "head_fee_type": head_fee_type, "tax_fee_type": tax_fee_type, "is_points_behind": is_points_behind, "points_behind_coeffient": points_behind_coeffient, "logistics_channel_id": logistics_channel_id, "is_related": is_related, "request_flag": request_flag, "ship_mode": ship_mode, "hand_pick_purchase": hand_pick_purchase, "remark": remark, "box_type": box_type, "box_remark": box_remark, "logistics_list_type": logistics_list_type, "list_field": list_field, "box_list": box_list, "head_logistics_list": head_logistics_list, "logistics_list": logistics_list}.items() if v is not None})
-        return resp.data or {}
-    async def create_ship_from_address(self, sid: int = None, alias_name: str = None, country_name: str = None, sender_name: str = None, street_detail1: str = None, street_detail2: str = None, city: str = None, region: str = None, province: str = None, zip_code: str = None, phone: str = None) -> dict:
+        return self._parse_one(resp.data, StorageShipmentCreatesendedorderResponse)
+    async def create_ship_from_address(self, sid: int = None, alias_name: str = None, country_name: str = None, sender_name: str = None, street_detail1: str = None, street_detail2: str = None, city: str = None, region: str = None, province: str = None, zip_code: str = None, phone: str = None) -> FbaShipmentCreateshipfromaddressResponse | None:
         """地址簿-发货地址创建.
 
 POST /erp/sc/routing/fba/shipment/createShipFromAddress
@@ -77,8 +92,8 @@ Args:
     zip_code: 邮政编码 (required), string.
     phone: 电话号码, string."""
         resp = await self._post("/erp/sc/routing/fba/shipment/createShipFromAddress", {k: v for k, v in {"sid": sid, "alias_name": alias_name, "country_name": country_name, "sender_name": sender_name, "street_detail1": street_detail1, "street_detail2": street_detail2, "city": city, "region": region, "province": province, "zip_code": zip_code, "phone": phone}.items() if v is not None})
-        return resp.data or {}
-    async def create_shipment_plan(self, remark: str = None, product_list: list = None) -> dict:
+        return self._parse_one(resp.data, FbaShipmentCreateshipfromaddressResponse)
+    async def create_shipment_plan(self, remark: str = None, product_list: list = None) -> StorageShipmentCreateshipmentplanResponse | None:
         """创建FBA发货计划.
 
 POST /erp/sc/routing/storage/shipment/createShipmentPlan
@@ -87,8 +102,8 @@ Args:
     remark: 批次信息备注, string.
     product_list: 商品信息 (required), array."""
         resp = await self._post("/erp/sc/routing/storage/shipment/createShipmentPlan", {k: v for k, v in {"remark": remark, "product_list": product_list}.items() if v is not None})
-        return resp.data or {}
-    async def fba_received_inventory(self, sid: int = None, event_date: str = None, fba_shipment_id: list = None, offset: int = None, length: int = None) -> dict:
+        return self._parse_one(resp.data, StorageShipmentCreateshipmentplanResponse)
+    async def fba_received_inventory(self, sid: int = None, event_date: str = None, fba_shipment_id: list = None, offset: int = None, length: int = None) -> FbaReportReceivedinventoryResponse | None:
         """查询FBA到货接收明细.
 
 POST /erp/sc/data/fba_report/receivedInventory
@@ -100,8 +115,8 @@ Args:
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认1000, int."""
         resp = await self._post("/erp/sc/data/fba_report/receivedInventory", {k: v for k, v in {"sid": sid, "event_date": event_date, "fba_shipment_id": fba_shipment_id, "offset": offset, "length": length}.items() if v is not None})
-        return resp.data or {}
-    async def fba_shipment_list(self, sid: str = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None, shipment_id: str = None, shipment_status: str = None, extra_date_field: str = None, start_extra_date: str = None, end_extra_date: str = None) -> list | dict:
+        return self._parse_one(resp.data, FbaReportReceivedinventoryResponse)
+    async def fba_shipment_list(self, sid: str = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None, shipment_id: str = None, shipment_status: str = None, extra_date_field: str = None, start_extra_date: str = None, end_extra_date: str = None) -> list[FbaReportShipmentlistResponse]:
         """查询货件列表.
 
 POST /erp/sc/data/fba_report/shipmentList
@@ -118,10 +133,8 @@ Args:
     start_extra_date: 开始日期，格式：Y-m-d，左闭右开, string.
     end_extra_date: 结束日期，格式：Y-m-d，左闭右开, string."""
         resp = await self._post("/erp/sc/data/fba_report/shipmentList", {k: v for k, v in {"sid": sid, "start_date": start_date, "end_date": end_date, "offset": offset, "length": length, "shipment_id": shipment_id, "shipment_status": shipment_status, "extra_date_field": extra_date_field, "start_extra_date": start_extra_date, "end_extra_date": end_extra_date}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def get_fba_product_list(self, sids: list = None, search_field: str = None, search_value: str = None, offset: int = None, length: int = None) -> list[GetFbaProductListItem]:
+        return self._parse_list(resp.data, FbaReportShipmentlistResponse)
+    async def get_fba_product_list(self, sids: list = None, search_field: str = None, search_value: str = None, offset: int = None, length: int = None) -> list[FbaShipmentGetfbaproductlistResponse]:
         """查询FBA商品信息列表.
 
 POST /erp/sc/routing/fba/shipment/getFbaProductList
@@ -134,13 +147,13 @@ Args:
     length: 分页长度，默认20 (required), int."""
         resp = await self._post("/erp/sc/routing/fba/shipment/getFbaProductList", {k: v for k, v in {"sids": sids, "search_field": search_field, "search_value": search_value, "offset": offset, "length": length}.items() if v is not None})
         return self._parse_list(resp.data, GetFbaProductListItem)
-    async def get_head_logistics_fee_types(self, **kwargs) -> list[GetHeadLogisticsFeeTypesItem]:
+    async def get_head_logistics_fee_types(self, **kwargs) -> list[FbaShipmentGetheadlogisticsfeetypesResponse]:
         """获取发货单头程物流信息-其他费类型.
 
 POST /erp/sc/routing/fba/shipment/getHeadLogisticsFeeTypes"""
         resp = await self._post("/erp/sc/routing/fba/shipment/getHeadLogisticsFeeTypes", kwargs if kwargs else None)
         return self._parse_list(resp.data, GetHeadLogisticsFeeTypesItem)
-    async def get_inbound_shipment_list(self, search_value: str = None, search_field: str = None, sids: str = None, mids: str = None, wid: str = None, logistics_type: list = None, status: int = None, print_status: str = None, pick_status: str = None, time_type: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None, is_delete: float = None, senior_search_list: list = None) -> tuple[list[GetInboundShipmentListItem], int]:
+    async def get_inbound_shipment_list(self, search_value: str = None, search_field: str = None, sids: str = None, mids: str = None, wid: str = None, logistics_type: list = None, status: int = None, print_status: str = None, pick_status: str = None, time_type: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None, is_delete: float = None, senior_search_list: list = None) -> tuple[list[StorageShipmentGetinboundshipmentlistResponse], int]:
         """查询发货单列表.
 
 POST /erp/sc/routing/storage/shipment/getInboundShipmentList
@@ -164,7 +177,7 @@ Args:
     senior_search_list: 精准搜索, array."""
         resp = await self._post("/erp/sc/routing/storage/shipment/getInboundShipmentList", {k: v for k, v in {"search_value": search_value, "search_field": search_field, "sids": sids, "mids": mids, "wid": wid, "logistics_type": logistics_type, "status": status, "print_status": print_status, "pick_status": pick_status, "time_type": time_type, "start_date": start_date, "end_date": end_date, "offset": offset, "length": length, "is_delete": is_delete, "senior_search_list": senior_search_list}.items() if v is not None})
         return self._parse_page(resp.data, GetInboundShipmentListItem)
-    async def get_inbound_shipment_list_mws_detail_list(self, shipment_sn_arr: Any = None, return_deleted: bool = None) -> list | dict:
+    async def get_inbound_shipment_list_mws_detail_list(self, shipment_sn_arr: Any = None, return_deleted: bool = None) -> list[StorageShipmentGetinboundshipmentlistmwsdetaillistResponse]:
         """批量查询发货单详情.
 
 POST /erp/sc/routing/storage/shipment/getInboundShipmentListMwsDetailList
@@ -173,10 +186,8 @@ Args:
     shipment_sn_arr: 发货单号数组，上限50 (required), array.
     return_deleted: 是否返回已删除数据: false-否(默认)，true-是, boolean."""
         resp = await self._post("/erp/sc/routing/storage/shipment/getInboundShipmentListMwsDetailList", {k: v for k, v in {"shipment_sn_arr": shipment_sn_arr, "return_deleted": return_deleted}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def get_sea_track_supplier_carriers(self, vehicle_type: str = None) -> list[GetSeaTrackSupplierCarriersItem]:
+        return self._parse_list(resp.data, StorageShipmentGetinboundshipmentlistmwsdetaillistResponse)
+    async def get_sea_track_supplier_carriers(self, vehicle_type: str = None) -> list[FbaShipmentGetseatracksuppliercarriersResponse]:
         """获取发货单头程物流信息-承运商信息.
 
 POST /erp/sc/routing/fba/shipment/getSeaTrackSupplierCarriers
@@ -208,7 +219,7 @@ Args:
     shipment_nos: 发货单号列表 (required), array."""
         resp = await self._post("/erp/sc/storage/shipment/sendGoods", {k: v for k, v in {"shipment_nos": shipment_nos}.items() if v is not None})
         return resp.data or {}
-    async def ship_from_address_list(self, sid: list = None, search_field: str = None, search_value: str = None, offset: int = None, length: int = None) -> dict:
+    async def ship_from_address_list(self, sid: list = None, search_field: str = None, search_value: str = None, offset: int = None, length: int = None) -> list[FbaShipmentShipfromaddresslistResponse]:
         """地址簿-发货地址列表.
 
 POST /erp/sc/routing/fba/shipment/shipFromAddressList
@@ -220,7 +231,7 @@ Args:
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认20, int."""
         resp = await self._post("/erp/sc/routing/fba/shipment/shipFromAddressList", {k: v for k, v in {"sid": sid, "search_field": search_field, "search_value": search_value, "offset": offset, "length": length}.items() if v is not None})
-        return resp.data or {}
+        return self._parse_list(resp.data, FbaShipmentShipfromaddresslistResponse)
     async def shipment_lock_stock(self, shipment_nos: Any = None, is_auto_batch: int = None) -> list | dict:
         """发货单分配库存.
 
@@ -233,7 +244,7 @@ Args:
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def shipment_plan_lists(self, sids: str = None, wid: str = None, packing_type: str = None, search_field_time: str = None, search_field: str = None, search_value: str = None, status: str = None, mids: str = None, offset: int = None, length: int = None, start_date: str = None, end_date: str = None) -> list[ShipmentPlanListsItem]:
+    async def shipment_plan_lists(self, sids: str = None, wid: str = None, packing_type: str = None, search_field_time: str = None, search_field: str = None, search_value: str = None, status: str = None, mids: str = None, offset: int = None, length: int = None, start_date: str = None, end_date: str = None) -> list[FbaReportShipmentplanlistsResponse]:
         """查询FBA发货计划.
 
 POST /erp/sc/data/fba_report/shipmentPlanLists
@@ -253,7 +264,7 @@ Args:
     end_date: 结束日期 如:2021-09-08, string."""
         resp = await self._post("/erp/sc/data/fba_report/shipmentPlanLists", {k: v for k, v in {"sids": sids, "wid": wid, "packing_type": packing_type, "search_field_time": search_field_time, "search_field": search_field, "search_value": search_value, "status": status, "mids": mids, "offset": offset, "length": length, "start_date": start_date, "end_date": end_date}.items() if v is not None})
         return self._parse_list(resp.data, ShipmentPlanListsItem)
-    async def shopping_address(self, id: int = None) -> dict:
+    async def shopping_address(self, id: int = None) -> OpenapiFbashipmentShoppingaddressResponse | None:
         """地址簿-配送地址详情.
 
 POST /basicOpen/openapi/fbaShipment/shoppingAddress
@@ -261,8 +272,8 @@ POST /basicOpen/openapi/fbaShipment/shoppingAddress
 Args:
     id: 唯一记录id，查询FBA列表接口对应字段【id】 (required), int."""
         resp = await self._post("/basicOpen/openapi/fbaShipment/shoppingAddress", {k: v for k, v in {"id": id}.items() if v is not None})
-        return resp.data or {}
-    async def sync_shipment(self, sid: int = None, shipment_ids: Any = None, sync_anyway: int = None) -> dict:
+        return self._parse_one(resp.data, OpenapiFbashipmentShoppingaddressResponse)
+    async def sync_shipment(self, sid: int = None, shipment_ids: Any = None, sync_anyway: int = None) -> FbaShipmentSyncshipmentResponse | None:
         """同步亚马逊货件到ERP.
 
 POST /erp/sc/routing/fba/shipment/syncShipment
@@ -272,7 +283,7 @@ Args:
     shipment_ids: 货件编号 (required), array.
     sync_anyway: 报错是否继续：0 否【默认】，1 是 当系统检测到货件归属国家与店铺不符时，会提示报错，此时传1则按照店铺进行同步, int."""
         resp = await self._post("/erp/sc/routing/fba/shipment/syncShipment", {k: v for k, v in {"sid": sid, "shipment_ids": shipment_ids, "sync_anyway": sync_anyway}.items() if v is not None})
-        return resp.data or {}
+        return self._parse_one(resp.data, FbaShipmentSyncshipmentResponse)
     async def update_custom_cost(self, shipment_sn: str = None, is_custom_cost: int = None, list_field: list = None) -> dict:
         """更新发货单自定义成本.
 
@@ -341,7 +352,7 @@ Args:
     list: 货件信息 (required), array."""
         resp = await self._post("/erp/sc/routing/storage/shipment/updateShipmentActualStatus", {k: v for k, v in {"is_closed": is_closed, "list_field": list_field}.items() if v is not None})
         return resp.data or {}
-    async def vc_batch_send_goods(self, orderNoList: list = None) -> dict:
+    async def vc_batch_send_goods(self, orderNoList: list = None) -> GetinvoiceInvoiceBatchsendgoodsResponse | None:
         """VC发货单-确认发货.
 
 POST /basicOpen/openapi/getInvoice/invoice/batchSendGoods
@@ -349,8 +360,8 @@ POST /basicOpen/openapi/getInvoice/invoice/batchSendGoods
 Args:
     orderNoList: orderNo列表, array."""
         resp = await self._post("/basicOpen/openapi/getInvoice/invoice/batchSendGoods", {k: v for k, v in {"orderNoList": orderNoList}.items() if v is not None})
-        return resp.data or {}
-    async def create_ready_send_order(self, wid: int = None, sys_wid: int = None, expected_arrival_date: str = None, etd_date: str = None, eta_date: str = None, delivery_date: str = None, actual_shipment_time: str = None, head_fee_type: int = None, tax_fee_type: int = None, is_points_behind: int = None, points_behind_coeffient: int = None, logistics_channel_id: int = None, is_related: int = None, vat_code: str = None, is_pick: int = None, remark: str = None, ship_mode: int = None, hand_pick_purchase: int = None, box_type: str = None, box_remark: str = None, logistics_list_type: int = None, list_field: Any = None, box_list: list = None, head_logistics_list: Any = None, logistics_list: list = None) -> dict:
+        return self._parse_one(resp.data, GetinvoiceInvoiceBatchsendgoodsResponse)
+    async def create_ready_send_order(self, wid: int = None, sys_wid: int = None, expected_arrival_date: str = None, etd_date: str = None, eta_date: str = None, delivery_date: str = None, actual_shipment_time: str = None, head_fee_type: int = None, tax_fee_type: int = None, is_points_behind: int = None, points_behind_coeffient: int = None, logistics_channel_id: int = None, is_related: int = None, vat_code: str = None, is_pick: int = None, remark: str = None, ship_mode: int = None, hand_pick_purchase: int = None, box_type: str = None, box_remark: str = None, logistics_list_type: int = None, list_field: Any = None, box_list: list = None, head_logistics_list: Any = None, logistics_list: list = None) -> StorageShipmentCreatereadysendorderResponse | None:
         """生成待发货的发货单.
 
 POST /erp/sc/routing/storage/shipment/createReadySendOrder
@@ -381,8 +392,8 @@ Args:
     head_logistics_list: 新版头程物流信息 (required), object.
     logistics_list: 旧版物流信息，即将下线, array."""
         resp = await self._post("/erp/sc/routing/storage/shipment/createReadySendOrder", {k: v for k, v in {"wid": wid, "sys_wid": sys_wid, "expected_arrival_date": expected_arrival_date, "etd_date": etd_date, "eta_date": eta_date, "delivery_date": delivery_date, "actual_shipment_time": actual_shipment_time, "head_fee_type": head_fee_type, "tax_fee_type": tax_fee_type, "is_points_behind": is_points_behind, "points_behind_coeffient": points_behind_coeffient, "logistics_channel_id": logistics_channel_id, "is_related": is_related, "vat_code": vat_code, "is_pick": is_pick, "remark": remark, "ship_mode": ship_mode, "hand_pick_purchase": hand_pick_purchase, "box_type": box_type, "box_remark": box_remark, "logistics_list_type": logistics_list_type, "list_field": list_field, "box_list": box_list, "head_logistics_list": head_logistics_list, "logistics_list": logistics_list}.items() if v is not None})
-        return resp.data or {}
-    async def get_inbound_shipment_list_mws_detail(self, shipment_sn: str = None, return_deleted: bool = None) -> list | dict:
+        return self._parse_one(resp.data, StorageShipmentCreatereadysendorderResponse)
+    async def get_inbound_shipment_list_mws_detail(self, shipment_sn: str = None, return_deleted: bool = None) -> list[StorageShipmentGetinboundshipmentlistmwsdetailResponse]:
         """查询发货单详情.
 
 POST /erp/sc/routing/storage/shipment/getInboundShipmentListMwsDetail
@@ -391,9 +402,7 @@ Args:
     shipment_sn: 发货单号 (required), string.
     return_deleted: 是否返回已删除数据: false-否(默认)，true-是, boolean."""
         resp = await self._post("/erp/sc/routing/storage/shipment/getInboundShipmentListMwsDetail", {k: v for k, v in {"shipment_sn": shipment_sn, "return_deleted": return_deleted}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
+        return self._parse_list(resp.data, StorageShipmentGetinboundshipmentlistmwsdetailResponse)
     async def outbound_order_release_stock(self, shipment_nos: Any = None) -> dict:
         """发货单释放库存.
 
@@ -403,7 +412,7 @@ Args:
     shipment_nos: 发货单号 (required), array."""
         resp = await self._post("/erp/sc/routing/storage/shipment/releaseStock", {k: v for k, v in {"shipment_nos": shipment_nos}.items() if v is not None})
         return resp.data or {}
-    async def print_fba_labels(self, hide_ship_from_company_name: int = None, hide_ship_to_company_name: int = None, print_sta_name_page: int = None, sort_label: int = None, type: str = None, data: list = None) -> dict:
+    async def print_fba_labels(self, hide_ship_from_company_name: int = None, hide_ship_to_company_name: int = None, print_sta_name_page: int = None, sort_label: int = None, type: str = None, data: list = None) -> StorageShipmentPrintfbalabelsResponse | None:
         """查询FBA货件箱子、卡板标签.
 
 POST /erp/sc/storage/shipment/printFbaLabels
@@ -416,8 +425,8 @@ Args:
     sort_label: 传值1为按箱子顺序重排,默认不按箱子顺序重排,仅打印box箱子子标签时生效(说明:不按箱子顺序重排时,打印文件, int.
     type: 打印类型：box 箱子标签，card 卡板标签 (required), string."""
         resp = await self._post("/erp/sc/storage/shipment/printFbaLabels", {k: v for k, v in {"hide_ship_from_company_name": hide_ship_from_company_name, "hide_ship_to_company_name": hide_ship_to_company_name, "print_sta_name_page": print_sta_name_page, "sort_label": sort_label, "type": type, "data": data}.items() if v is not None})
-        return resp.data or {}
-    async def print_fnsku_labels(self, page_type: str = None, print_content: str = None, content_type: str = None, print_custom: str = None, custom_content: str = None, new_tag: str = None, data: Any = None) -> dict:
+        return self._parse_one(resp.data, StorageShipmentPrintfbalabelsResponse)
+    async def print_fnsku_labels(self, page_type: str = None, print_content: str = None, content_type: str = None, print_custom: str = None, custom_content: str = None, new_tag: str = None, data: Any = None) -> StorageShipmentPrintfnskulabelsResponse | None:
         """查询FBA货件商品FNSKU标签.
 
 POST /erp/sc/storage/shipment/printFnskuLabels
@@ -430,8 +439,8 @@ Args:
     custom_content: 自定义内容，默认MADE IN CHINA, string.
     new_tag: 标签中是否显示‘new’字样：【默认yes】 yes 是 no 否, string."""
         resp = await self._post("/erp/sc/storage/shipment/printFnskuLabels", {k: v for k, v in {"page_type": page_type, "print_content": print_content, "content_type": content_type, "print_custom": print_custom, "custom_content": custom_content, "new_tag": new_tag, "data": data}.items() if v is not None})
-        return resp.data or {}
-    async def search_process_result(self, request_flag: str = None) -> list | dict:
+        return self._parse_one(resp.data, StorageShipmentPrintfnskulabelsResponse)
+    async def search_process_result(self, request_flag: str = None) -> list[StorageShipmentSearchprocessresultResponse]:
         """发货单创建接口结果查询.
 
 POST /erp/sc/routing/storage/shipment/searchProcessResult
@@ -439,9 +448,7 @@ POST /erp/sc/routing/storage/shipment/searchProcessResult
 Args:
     request_flag: 生成单据时传的请求标识 (required), string."""
         resp = await self._post("/erp/sc/routing/storage/shipment/searchProcessResult", {k: v for k, v in {"request_flag": request_flag}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
+        return self._parse_list(resp.data, StorageShipmentSearchprocessresultResponse)
     async def update_inbound_shipment_list_mws(self, shipment_sn: str = None, remark: str = None, box_type: str = None, items: list = None, box_list: list = None) -> dict:
         """编辑发货单.
 

@@ -1,6 +1,25 @@
 """客服 API endpoints."""
 from __future__ import annotations
 
+from ..models.responses.service import (
+    CrmCustomerIndexResponse,
+    CsFeedbackListResponse,
+    CsFeedbackListmwsResponse,
+    CsFeedbackreportDetailResponse,
+    CsFeedbackreportListsResponse,
+    CsReviewreportDetailResponse,
+    CsReviewreportListsResponse,
+    CustomerservicePerformancenoticeListResponse,
+    CustomerserviceRmamanageListResponse,
+    CustomerserviceStoretargetDetailResponse,
+    CustomerserviceStoretargetListResponse,
+    CustomerserviceVoiceofbuyerListResponse,
+    MailDetailResponse,
+    MailListsResponse,
+    V2MwsReviewsResponse,
+    V3MwsReviewsResponse,
+)
+
 from typing import Any
 
 from ._base import BaseEndpoint
@@ -9,7 +28,7 @@ from ._base import BaseEndpoint
 class CustomerServiceEndpoints(BaseEndpoint):
     """领星客服 API (16个接口)."""
 
-    async def feedback_list(self, sid: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list | dict:
+    async def feedback_list(self, sid: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list[CsFeedbackListResponse]:
         """查询评价管理 4-5星Feedback列表.
 
 POST /erp/sc/cs/feedback/list
@@ -21,10 +40,8 @@ Args:
     offset: 分页偏移量，默认0 (required), int.
     length: 分页长度，默认20 (required), int."""
         resp = await self._post("/erp/sc/cs/feedback/list", {k: v for k, v in {"sid": sid, "start_date": start_date, "end_date": end_date, "offset": offset, "length": length}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def feedback_list_mws(self, sid: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list | dict:
+        return self._parse_list(resp.data, CsFeedbackListResponse)
+    async def feedback_list_mws(self, sid: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list[CsFeedbackListmwsResponse]:
         """查询评价管理 1-3星Feedback列表.
 
 POST /erp/sc/cs/feedback/listMws
@@ -36,10 +53,8 @@ Args:
     offset: 分页偏移量，默认0 (required), int.
     length: 分页长度，默认20 (required), int."""
         resp = await self._post("/erp/sc/cs/feedback/listMws", {k: v for k, v in {"sid": sid, "start_date": start_date, "end_date": end_date, "offset": offset, "length": length}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def performance_notice_detail(self, pullDate: str = None, sid: int = None) -> list | dict:
+        return self._parse_list(resp.data, CsFeedbackListmwsResponse)
+    async def performance_notice_detail(self, pullDate: str = None, sid: int = None) -> list[CustomerserviceStoretargetDetailResponse]:
         """查询店铺绩效详情.
 
 POST /basicOpen/customerService/storeTarget/detail
@@ -48,10 +63,8 @@ Args:
     pullDate: 报表更新日期，必填，日期格式：yyyy-MM-dd, string.
     sid: 店铺ID，必填, long."""
         resp = await self._post("/basicOpen/customerService/storeTarget/detail", {k: v for k, v in {"pullDate": pullDate, "sid": sid}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def performance_notice_list(self, sid: float = None, status: list = None, startDate: str = None, endDate: str = None, searchField: str = None, searchValue: str = None, mailTagIds: list = None, isRead: float = None, offset: float = None, length: float = None) -> list | dict:
+        return self._parse_list(resp.data, CustomerserviceStoretargetDetailResponse)
+    async def performance_notice_list(self, sid: float = None, status: list = None, startDate: str = None, endDate: str = None, searchField: str = None, searchValue: str = None, mailTagIds: list = None, isRead: float = None, offset: float = None, length: float = None) -> list[CustomerservicePerformancenoticeListResponse]:
         """查询业绩通知列表.
 
 POST /basicOpen/customerService/performanceNotice/list
@@ -68,10 +81,8 @@ Args:
     offset: 偏移量, number.
     length: 分页长度, number."""
         resp = await self._post("/basicOpen/customerService/performanceNotice/list", {k: v for k, v in {"sid": sid, "status": status, "startDate": startDate, "endDate": endDate, "searchField": searchField, "searchValue": searchValue, "mailTagIds": mailTagIds, "isRead": isRead, "offset": offset, "length": length}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def customer_service_crmcustomer_index(self, sort_field: str = None, sort_type: str = None, date_field: str = None, start_date: str = None, end_date: str = None, currency_type: float = None, search_field: str = None, offset: float = None, length: float = None, search_value: str = None, sids: str = None) -> list | dict:
+        return self._parse_list(resp.data, CustomerservicePerformancenoticeListResponse)
+    async def customer_service_crmcustomer_index(self, sort_field: str = None, sort_type: str = None, date_field: str = None, start_date: str = None, end_date: str = None, currency_type: float = None, search_field: str = None, offset: float = None, length: float = None, search_value: str = None, sids: str = None) -> list[CrmCustomerIndexResponse]:
         """查询客户列表（新）.
 
 POST /basicOpen/customerService/crm/customer/index
@@ -89,10 +100,8 @@ Args:
     search_value: 搜索值, string.
     sids: 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】, string."""
         resp = await self._post("/basicOpen/customerService/crm/customer/index", {k: v for k, v in {"sort_field": sort_field, "sort_type": sort_type, "date_field": date_field, "start_date": start_date, "end_date": end_date, "currency_type": currency_type, "search_field": search_field, "offset": offset, "length": length, "search_value": search_value, "sids": sids}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def customer_service_rma_manage_list(self, sid: Any = None, searchTimeFiled: str = None, startTime: str = None, endTime: str = None, searchValue: Any = None, searchField: str = None, sortColumn: str = None, sortType: str = None, pageNum: float = None, pageSize: float = None) -> list | dict:
+        return self._parse_list(resp.data, CrmCustomerIndexResponse)
+    async def customer_service_rma_manage_list(self, sid: Any = None, searchTimeFiled: str = None, startTime: str = None, endTime: str = None, searchValue: Any = None, searchField: str = None, sortColumn: str = None, sortType: str = None, pageNum: float = None, pageSize: float = None) -> list[CustomerserviceRmamanageListResponse]:
         """查询RMA管理.
 
 POST /basicOpen/customerService/rmaManage/list
@@ -109,10 +118,8 @@ Args:
     pageNum: 页码 (required), number.
     pageSize: 每页数量 (required), number."""
         resp = await self._post("/basicOpen/customerService/rmaManage/list", {k: v for k, v in {"sid": sid, "searchTimeFiled": searchTimeFiled, "startTime": startTime, "endTime": endTime, "searchValue": searchValue, "searchField": searchField, "sortColumn": sortColumn, "sortType": sortType, "pageNum": pageNum, "pageSize": pageSize}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def detail(self, webmail_uuid: str = None) -> list | dict:
+        return self._parse_list(resp.data, CustomerserviceRmamanageListResponse)
+    async def detail(self, webmail_uuid: str = None) -> list[MailDetailResponse]:
         """查询邮件详情.
 
 POST /erp/sc/data/mail/detail
@@ -120,10 +127,8 @@ POST /erp/sc/data/mail/detail
 Args:
     webmail_uuid: 邮件唯一标识 (required), string."""
         resp = await self._post("/erp/sc/data/mail/detail", {k: v for k, v in {"webmail_uuid": webmail_uuid}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def feedback_detail(self, sid: int = None, start_date: str = None, end_date: str = None) -> list | dict:
+        return self._parse_list(resp.data, MailDetailResponse)
+    async def feedback_detail(self, sid: int = None, start_date: str = None, end_date: str = None) -> list[CsFeedbackreportDetailResponse]:
         """查询评价统计-Feedback每日新增数.
 
 POST /erp/sc/cs/feedbackReport/detail
@@ -133,10 +138,8 @@ Args:
     start_date: 开始时间【时间间隔不超过1年】 (required), string.
     end_date: 结束时间【时间间隔不超过1年】 (required), string."""
         resp = await self._post("/erp/sc/cs/feedbackReport/detail", {k: v for k, v in {"sid": sid, "start_date": start_date, "end_date": end_date}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def feedback_lists(self, offset: int = None, length: int = None, start_date: str = None, end_date: str = None) -> list | dict:
+        return self._parse_list(resp.data, CsFeedbackreportDetailResponse)
+    async def feedback_lists(self, offset: int = None, length: int = None, start_date: str = None, end_date: str = None) -> list[CsFeedbackreportListsResponse]:
         """查询评价统计-Feedback列表.
 
 POST /erp/sc/cs/feedbackReport/lists
@@ -147,10 +150,8 @@ Args:
     start_date: 开始时间【时间间隔不超过1年】，格式：Y-m-d (required), string.
     end_date: 结束时间【时间间隔不超过1年】，格式：Y-m-d (required), string."""
         resp = await self._post("/erp/sc/cs/feedbackReport/lists", {k: v for k, v in {"offset": offset, "length": length, "start_date": start_date, "end_date": end_date}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def lists(self, flag: str = None, email: str = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list | dict:
+        return self._parse_list(resp.data, CsFeedbackreportListsResponse)
+    async def lists(self, flag: str = None, email: str = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list[MailListsResponse]:
         """查询邮件列表.
 
 POST /erp/sc/data/mail/lists
@@ -163,10 +164,8 @@ Args:
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认20, int."""
         resp = await self._post("/erp/sc/data/mail/lists", {k: v for k, v in {"flag": flag, "email": email, "start_date": start_date, "end_date": end_date, "offset": offset, "length": length}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def review(self, sid: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None, date_field: str = None) -> list | dict:
+        return self._parse_list(resp.data, MailListsResponse)
+    async def review(self, sid: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None, date_field: str = None) -> list[V2MwsReviewsResponse]:
         """查询评价管理-Review.
 
 POST /erp/sc/v2/data/mws/reviews
@@ -179,10 +178,8 @@ Args:
     length: 分页长度 (required), int.
     date_field: 时间类型: review_date 评价时间【默认值】 create_time 创建时间, string."""
         resp = await self._post("/erp/sc/v2/data/mws/reviews", {k: v for k, v in {"sid": sid, "start_date": start_date, "end_date": end_date, "offset": offset, "length": length, "date_field": date_field}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def review_detail(self, mid: int = None, asin: str = None, start_date: str = None, end_date: str = None) -> list | dict:
+        return self._parse_list(resp.data, V2MwsReviewsResponse)
+    async def review_detail(self, mid: int = None, asin: str = None, start_date: str = None, end_date: str = None) -> list[CsReviewreportDetailResponse]:
         """查询评价统计-Review每日新增数.
 
 POST /erp/sc/cs/reviewReport/detail
@@ -193,10 +190,8 @@ Args:
     start_date: 开始时间【时间间隔不超过1年】 (required), string.
     end_date: 结束时间【时间间隔不超过1年】 (required), string."""
         resp = await self._post("/erp/sc/cs/reviewReport/detail", {k: v for k, v in {"mid": mid, "asin": asin, "start_date": start_date, "end_date": end_date}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def review_lists(self, start_date: str = None, end_date: str = None, sid: list = None, offset: int = None, length: int = None) -> list | dict:
+        return self._parse_list(resp.data, CsReviewreportDetailResponse)
+    async def review_lists(self, start_date: str = None, end_date: str = None, sid: list = None, offset: int = None, length: int = None) -> list[CsReviewreportListsResponse]:
         """查询评价统计-Review列表.
 
 POST /erp/sc/v2/cs/reviewReport/lists
@@ -208,10 +203,8 @@ Args:
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认20, int."""
         resp = await self._post("/erp/sc/v2/cs/reviewReport/lists", {k: v for k, v in {"start_date": start_date, "end_date": end_date, "sid": sid, "offset": offset, "length": length}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def review_v2(self, sort_field: str = None, sort_type: str = None, sids: str = None, mids: str = None, principal_uids: str = None, search_field: str = None, search_value: str = None, date_field: str = None, start_date: str = None, end_date: str = None, status: str = None, star: str = None, review_modified_status: str = None, mark: str = None, cs_principal_uids: str = None, offset: int = None, length: int = None, cids: str = None, global_tag_ids: str = None, match_types: str = None) -> list | dict:
+        return self._parse_list(resp.data, CsReviewreportListsResponse)
+    async def review_v2(self, sort_field: str = None, sort_type: str = None, sids: str = None, mids: str = None, principal_uids: str = None, search_field: str = None, search_value: str = None, date_field: str = None, start_date: str = None, end_date: str = None, status: str = None, star: str = None, review_modified_status: str = None, mark: str = None, cs_principal_uids: str = None, offset: int = None, length: int = None, cids: str = None, global_tag_ids: str = None, match_types: str = None) -> list[V3MwsReviewsResponse]:
         """查询评论管理 - Review(新).
 
 POST /basicOpen/openapi/service/v3/data/mws/reviews
@@ -238,10 +231,8 @@ Args:
     global_tag_ids: 标签id，多个用逗号分隔, string.
     match_types: 匹配类型，多个用逗号分隔，默认传空字符串, string."""
         resp = await self._post("/basicOpen/openapi/service/v3/data/mws/reviews", {k: v for k, v in {"sort_field": sort_field, "sort_type": sort_type, "sids": sids, "mids": mids, "principal_uids": principal_uids, "search_field": search_field, "search_value": search_value, "date_field": date_field, "start_date": start_date, "end_date": end_date, "status": status, "star": star, "review_modified_status": review_modified_status, "mark": mark, "cs_principal_uids": cs_principal_uids, "offset": offset, "length": length, "cids": cids, "global_tag_ids": global_tag_ids, "match_types": match_types}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def store_performance_list(self, offset: int = None, length: int = None, search_field_time: str = None, search_time: str = None, sids: str = None, anomaly_indicator: list = None) -> list | dict:
+        return self._parse_list(resp.data, V3MwsReviewsResponse)
+    async def store_performance_list(self, offset: int = None, length: int = None, search_field_time: str = None, search_time: str = None, sids: str = None, anomaly_indicator: list = None) -> list[CustomerserviceStoretargetListResponse]:
         """查询店铺绩效列表.
 
 POST /basicOpen/customerService/storeTarget/list
@@ -254,10 +245,8 @@ Args:
     sids: 店铺id，多个使用英文逗号分隔 ，对应查询亚马逊店铺列表接口对应字段【sid】, string.
     anomaly_indicator: 异常指标： commodity_policy_compliance 商品政策合规性 on_time_delivery 准时交货率 valid_tracking 有效追踪率 pre_fulfillment_cancellation 预配送取消率 late_shipment 迟发率  invoice_defect 发票缺陷率 fba_order_with_defect FBA订单缺陷率 order_with_defect FBM订单缺陷率, array."""
         resp = await self._post("/basicOpen/customerService/storeTarget/list", {k: v for k, v in {"offset": offset, "length": length, "search_field_time": search_field_time, "search_time": search_time, "sids": sids, "anomaly_indicator": anomaly_indicator}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def voice_of_buyer_list(self, offset: int = None, length: int = None, fulfillment_channel: str = None, sids: list = None, pxc_health: list = None, search_field: str = None, search_value: list = None, return_badge: list = None) -> list | dict:
+        return self._parse_list(resp.data, CustomerserviceStoretargetListResponse)
+    async def voice_of_buyer_list(self, offset: int = None, length: int = None, fulfillment_channel: str = None, sids: list = None, pxc_health: list = None, search_field: str = None, search_value: list = None, return_badge: list = None) -> list[CustomerserviceVoiceofbuyerListResponse]:
         """查询买家之声列表.
 
 POST /basicOpen/customerService/voiceOfBuyer/list
@@ -272,6 +261,4 @@ Args:
     search_value: 搜索值, array.
     return_badge: 退货标记， Yes No At_Risk, array."""
         resp = await self._post("/basicOpen/customerService/voiceOfBuyer/list", {k: v for k, v in {"offset": offset, "length": length, "fulfillment_channel": fulfillment_channel, "sids": sids, "pxc_health": pxc_health, "search_field": search_field, "search_value": search_value, "return_badge": return_badge}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
+        return self._parse_list(resp.data, CustomerserviceVoiceofbuyerListResponse)

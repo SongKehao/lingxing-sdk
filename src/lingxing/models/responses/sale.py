@@ -1272,3 +1272,65 @@ class PromotionapiPromotionSeckillalldetailbatchResponse(LingXingModel):
     sec_kill: Optional[List[PromotionapiPromotionSeckillalldetailbatchSeckill]] = Field(None, description="秒杀信息")
     listing_page: Optional[List[PromotionapiPromotionSeckillalldetailbatchListingpage]] = Field(None, description="秒杀涉及的Listing信息")
     order_page: Optional[List[PromotionapiPromotionSeckillalldetailbatchOrderpage]] = Field(None, description="秒杀涉及的订单信息")
+
+
+class ListingmanageBindlistingandtagResponse(LingXingModel):
+    """Listing新增商品标签."""
+    total: Optional[int] = Field(None, description="总数")
+
+
+class ListingmanageRemovelistingandtagResponse(LingXingModel):
+    """Listing删除商品标签."""
+    total: Optional[int] = Field(None, description="总数")
+
+
+class SalesorderRefundorderResponse(LingXingModel):
+    """订单退款."""
+    total: Optional[int] = Field(None, description="总数")
+
+
+class PlatformorderScorderSetremarkResponse(LingXingModel):
+    """SC订单-设置订单备注."""
+    total: Optional[int] = Field(None, description="总数")
+
+
+class ListingmanageUnlinklistingpairsResponse(LingXingModel):
+    """解除Listing配对."""
+    total: Optional[int] = Field(None, description="总数")
+
+
+class SelfshipmentorderImportlabelResponse(LingXingModel):
+    """导入面单."""
+    total: Optional[int] = Field(None, description="总数")
+
+
+class AmzodOrderAftersalelistResponse(LingXingModel):
+    """查询售后订单列表."""
+    total: Optional[int] = Field(None, description="总数")
+
+
+class GlobaltagListingAddtagResponse(LingXingModel):
+    """添加Listing标签."""
+    global_tag_id: Optional[str] = Field(None, description="标签id")
+    tag_name: Optional[str] = Field(None, description="标签名称")
+
+
+class GlobaltagListingRemovetagResponse(LingXingModel):
+    """删除Listing标签."""
+    total: Optional[int] = Field(None, description="总数")
+
+
+class VcserviceProductrelationBatchlinkResponse(LingXingModel):
+    """配对/批量配对."""
+    total: Optional[int] = Field(None, description="总数")
+    success: Optional[int] = Field(None, description="成功数")
+    error: Optional[int] = Field(None, description="失败数")
+
+
+class ListingmanageQuerylistingrelationtaglistResponse(LingXingModel):
+    """查询Listing关联标签列表."""
+    global_tag_id: Optional[str] = Field(None, description="标签id")
+    tag_name: Optional[str] = Field(None, description="标签名称")
+    color: Optional[str] = Field(None, description="标签颜色")
+    type: Optional[str] = Field(None, description="标签类型")
+    relation_count: Optional[int] = Field(None, description="关联数量")

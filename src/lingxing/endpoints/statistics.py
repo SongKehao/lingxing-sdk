@@ -1,16 +1,49 @@
 """统计报表 API endpoints."""
 from __future__ import annotations
 
+from ..models.responses.statistics import (
+    FbaReportStoragefeelongtermResponse,
+    FbaReportStoragefeemonthResponse,
+    FbaStockReportGetlistResponse,
+    FinanceProfitstatisProfitmskuResponse,
+    FinanceRefundProfitmonthrefundResponse,
+    InventorylogWarehousereportGetlocalwarehousedetaillistResponse,
+    InventorylogWarehousereportGetlocalwarehousesummarylistResponse,
+    InventorylogWarehousereportGetoverseadetaillistResponse,
+    InventorylogWarehousereportGetoverseasummarylistResponse,
+    OpenapiMwsreportReimbursementlistResponse,
+    OperatemanageOperatelogListResponse,
+    Platformstatisticsv2SalestatPagelistResponse,
+    ProductperformanceOpenapiAsinlistResponse,
+    PurchaseBuyerListResponse,
+    PurchaseProductListResponse,
+    PurchaseSupplierListResponse,
+    ReportAmazonreportexporttaskResponse,
+    ReportCreateReportexporttaskResponse,
+    ReportInventoryListResponse,
+    ReportNppmListResponse,
+    ReportQueryReportexporttaskResponse,
+    ReportRealtimesalesListResponse,
+    ReportSalesListResponse,
+    ReportTrafficListResponse,
+    SalesReportAsindailylistsResponse,
+    SalesReportAsinlistResponse,
+    SalesReportSalesResponse,
+    SalesanalysisProductperformancePerformancetrendbyhourResponse,
+    SalesanalysisReturnorderAnalysislistsResponse,
+    StatisticRemovalOrderCreateResponse,
+)
+
 from typing import Any
 
-from ..models.statistics import MonthRefundItem
+from ..models.responses.statistics import MonthRefundItem
 from ._base import BaseEndpoint
 
 
 class StatisticsEndpoints(BaseEndpoint):
     """领星统计报表 API (31个接口)."""
 
-    async def amazon_report_export_task(self, region: str = None, seller_id: str = None, report_document_id: str = None) -> dict:
+    async def amazon_report_export_task(self, region: str = None, seller_id: str = None, report_document_id: str = None) -> ReportAmazonreportexporttaskResponse | None:
         """报告导出 - 报告下载链接续期.
 
 POST /basicOpen/report/amazonReportExportTask
@@ -20,8 +53,8 @@ Args:
     seller_id: 亚马逊店铺id，查询亚马逊店铺列表接口对应字段【seller_id】 (required), string.
     report_document_id: 报告文档Id,报告导出-查询导出任务结果接口对应字段【data>>report_document_id】 (required), string."""
         resp = await self._post("/basicOpen/report/amazonReportExportTask", {k: v for k, v in {"region": region, "seller_id": seller_id, "report_document_id": report_document_id}.items() if v is not None})
-        return resp.data or {}
-    async def asin_daily_lists(self, sid: int = None, event_date: str = None, asin_type: int = None, type: int = None, offset: int = None, length: int = None) -> list | dict:
+        return self._parse_one(resp.data, ReportAmazonreportexporttaskResponse)
+    async def asin_daily_lists(self, sid: int = None, event_date: str = None, asin_type: int = None, type: int = None, offset: int = None, length: int = None) -> list[SalesReportAsindailylistsResponse]:
         """查询亚马逊销量统计.
 
 POST /erp/sc/data/sales_report/asinDailyLists
@@ -34,10 +67,8 @@ Args:
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认1000, int."""
         resp = await self._post("/erp/sc/data/sales_report/asinDailyLists", {k: v for k, v in {"sid": sid, "event_date": event_date, "asin_type": asin_type, "type": type, "offset": offset, "length": length}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def asin_list(self, sid: int = None, asin_type: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list | dict:
+        return self._parse_list(resp.data, SalesReportAsindailylistsResponse)
+    async def asin_list(self, sid: int = None, asin_type: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list[SalesReportAsinlistResponse]:
         """查询产品表现（旧）.
 
 POST /erp/sc/data/sales_report/asinList
@@ -50,10 +81,8 @@ Args:
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认1000, int."""
         resp = await self._post("/erp/sc/data/sales_report/asinList", {k: v for k, v in {"sid": sid, "asin_type": asin_type, "start_date": start_date, "end_date": end_date, "offset": offset, "length": length}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def create_removal_order(self, lists: list = None) -> dict:
+        return self._parse_list(resp.data, SalesReportAsinlistResponse)
+    async def create_removal_order(self, lists: list = None) -> StatisticRemovalOrderCreateResponse | None:
         """创建移除订单.
 
 POST /erp/sc/statistic/removalOrder/createAndCommit
@@ -61,8 +90,8 @@ POST /erp/sc/statistic/removalOrder/createAndCommit
 Args:
     lists: 提交数据，支持批量，上限100个 (required), array."""
         resp = await self._post("/erp/sc/statistic/removalOrder/createAndCommit", {k: v for k, v in {"lists": lists}.items() if v is not None})
-        return resp.data or {}
-    async def fba_storage_fee_long_term(self, sid: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list | dict:
+        return self._parse_one(resp.data, StatisticRemovalOrderCreateResponse)
+    async def fba_storage_fee_long_term(self, sid: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list[FbaReportStoragefeelongtermResponse]:
         """查询FBA长期仓储费.
 
 POST /erp/sc/data/fba_report/storageFeeLongTerm
@@ -74,10 +103,8 @@ Args:
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认1000, int."""
         resp = await self._post("/erp/sc/data/fba_report/storageFeeLongTerm", {k: v for k, v in {"sid": sid, "start_date": start_date, "end_date": end_date, "offset": offset, "length": length}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def fba_storage_fee_month(self, sid: int = None, month: str = None, offset: int = None, length: int = None) -> list | dict:
+        return self._parse_list(resp.data, FbaReportStoragefeelongtermResponse)
+    async def fba_storage_fee_month(self, sid: int = None, month: str = None, offset: int = None, length: int = None) -> list[FbaReportStoragefeemonthResponse]:
         """查询FBA月仓储费.
 
 POST /erp/sc/data/fba_report/storageFeeMonth
@@ -88,10 +115,8 @@ Args:
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认1000, int."""
         resp = await self._post("/erp/sc/data/fba_report/storageFeeMonth", {k: v for k, v in {"sid": sid, "month": month, "offset": offset, "length": length}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def fba_stock_report_list(self, start_month: str = None, end_month: str = None, seller_id: str = None, dimention: int = None, offset: int = None, length: int = None, attribute: int = None) -> list | dict:
+        return self._parse_list(resp.data, FbaReportStoragefeemonthResponse)
+    async def fba_stock_report_list(self, start_month: str = None, end_month: str = None, seller_id: str = None, dimention: int = None, offset: int = None, length: int = None, attribute: int = None) -> list[FbaStockReportGetlistResponse]:
         """库存报表-FBA-历史报表-汇总-明细.
 
 POST /erp/sc/routing/fba/fbaStockReport/getList
@@ -105,10 +130,8 @@ Args:
     length: 分页长度【dimention=2 明细维度生效】，默认20，上限5000, int.
     attribute: 可售状态：【dimention=2 明细维度生效】 0 不可售 1 可售 2 全部【默认值】, int."""
         resp = await self._post("/erp/sc/routing/fba/fbaStockReport/getList", {k: v for k, v in {"start_month": start_month, "end_month": end_month, "seller_id": seller_id, "dimention": dimention, "offset": offset, "length": length, "attribute": attribute}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def local_aggregate_list(self, sys_wid: int = None, start_date: str = None, end_date: str = None) -> list | dict:
+        return self._parse_list(resp.data, FbaStockReportGetlistResponse)
+    async def local_aggregate_list(self, sys_wid: int = None, start_date: str = None, end_date: str = None) -> list[InventorylogWarehousereportGetlocalwarehousesummarylistResponse]:
         """库存报表-本地仓-历史报表-汇总.
 
 POST /erp/sc/routing/inventoryLog/WareHouseReport/getLocalWareHouseSummaryList
@@ -118,10 +141,8 @@ Args:
     start_date: 开始时间，格式：Y-m-d (required), string.
     end_date: 结束时间，格式：Y-m-d (required), string."""
         resp = await self._post("/erp/sc/routing/inventoryLog/WareHouseReport/getLocalWareHouseSummaryList", {k: v for k, v in {"sys_wid": sys_wid, "start_date": start_date, "end_date": end_date}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def local_detail_list(self, sys_wid: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list | dict:
+        return self._parse_list(resp.data, InventorylogWarehousereportGetlocalwarehousesummarylistResponse)
+    async def local_detail_list(self, sys_wid: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list[InventorylogWarehousereportGetlocalwarehousedetaillistResponse]:
         """库存报表-本地仓-历史报表-明细.
 
 POST /erp/sc/routing/inventoryLog/WareHouseReport/getLocalWareHouseDetailList
@@ -133,10 +154,8 @@ Args:
     offset: 分页偏移量，默认0 (required), int.
     length: 分页长度，默认15 (required), int."""
         resp = await self._post("/erp/sc/routing/inventoryLog/WareHouseReport/getLocalWareHouseDetailList", {k: v for k, v in {"sys_wid": sys_wid, "start_date": start_date, "end_date": end_date, "offset": offset, "length": length}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def month_refund(self, asin_type: str = None, offset: int = None, length: int = None, start_date: str = None, end_date: str = None, sid: int = None, sort_field: str = None, sort_type: str = None) -> tuple[list[MonthRefundItem], int]:
+        return self._parse_list(resp.data, InventorylogWarehousereportGetlocalwarehousedetaillistResponse)
+    async def month_refund(self, asin_type: str = None, offset: int = None, length: int = None, start_date: str = None, end_date: str = None, sid: int = None, sort_field: str = None, sort_type: str = None) -> tuple[list[FinanceRefundProfitmonthrefundResponse], int]:
         """查询退款量（旧）.
 
 POST /erp/sc/routing/finance/Refund/profitMonthRefund
@@ -152,7 +171,7 @@ Args:
     sort_type: desc 倒序 asc 顺序, string."""
         resp = await self._post("/erp/sc/routing/finance/Refund/profitMonthRefund", {k: v for k, v in {"asin_type": asin_type, "offset": offset, "length": length, "start_date": start_date, "end_date": end_date, "sid": sid, "sort_field": sort_field, "sort_type": sort_type}.items() if v is not None})
         return self._parse_page(resp.data, MonthRefundItem)
-    async def overseas_aggregate_list(self, sys_wid: int = None, start_date: str = None, end_date: str = None) -> list | dict:
+    async def overseas_aggregate_list(self, sys_wid: int = None, start_date: str = None, end_date: str = None) -> list[InventorylogWarehousereportGetoverseasummarylistResponse]:
         """库存报表-海外仓-历史报表-汇总.
 
 POST /erp/sc/routing/inventoryLog/WareHouseReport/getOverSeaSummaryList
@@ -162,10 +181,8 @@ Args:
     start_date: 开始时间 (required), string.
     end_date: 结束时间 (required), string."""
         resp = await self._post("/erp/sc/routing/inventoryLog/WareHouseReport/getOverSeaSummaryList", {k: v for k, v in {"sys_wid": sys_wid, "start_date": start_date, "end_date": end_date}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def overseas_detail_list(self, sys_wid: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list | dict:
+        return self._parse_list(resp.data, InventorylogWarehousereportGetoverseasummarylistResponse)
+    async def overseas_detail_list(self, sys_wid: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list[InventorylogWarehousereportGetoverseadetaillistResponse]:
         """库存报表-海外仓-历史报表-明细.
 
 POST /erp/sc/routing/inventoryLog/WareHouseReport/getOverSeaDetailList
@@ -177,10 +194,8 @@ Args:
     offset: 分页偏移量，默认0 (required), int.
     length: 每页条数，默认15 (required), int."""
         resp = await self._post("/erp/sc/routing/inventoryLog/WareHouseReport/getOverSeaDetailList", {k: v for k, v in {"sys_wid": sys_wid, "start_date": start_date, "end_date": end_date, "offset": offset, "length": length}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def platform_statistics_sale_stat_page_list_v2(self, start_date: str = None, end_date: str = None, result_type: str = None, date_unit: str = None, page: int = None, length: int = None, data_type: str = None, sids: list = None) -> list | dict:
+        return self._parse_list(resp.data, InventorylogWarehousereportGetoverseadetaillistResponse)
+    async def platform_statistics_sale_stat_page_list_v2(self, start_date: str = None, end_date: str = None, result_type: str = None, date_unit: str = None, page: int = None, length: int = None, data_type: str = None, sids: list = None) -> list[Platformstatisticsv2SalestatPagelistResponse]:
         """查询销量统计列表v2.
 
 POST /basicOpen/platformStatisticsV2/saleStat/pageList
@@ -195,10 +210,8 @@ Args:
     data_type: 统计数据维度：  1 ASIN  2 父体  3 MSKU  4 SKU  5 SPU  6 店铺 (required), string.
     sids: 店铺id，多个使用英文逗号分隔。 如果id属于亚马逊店铺id，则对应查询亚马逊店铺列表接口对应字段【sid】  如果id属于多平台店铺id，则对应查询多平台店铺信息接口对应字段【store_id】, array."""
         resp = await self._post("/basicOpen/platformStatisticsV2/saleStat/pageList", {k: v for k, v in {"start_date": start_date, "end_date": end_date, "result_type": result_type, "date_unit": date_unit, "page": page, "length": length, "data_type": data_type, "sids": sids}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def profit_msku(self, start_date: str = None, end_date: str = None, offset: int = None, length: int = None, sids: str = None, currency_type: str = None, sort_field: str = None, sort_type: str = None) -> list | dict:
+        return self._parse_list(resp.data, Platformstatisticsv2SalestatPagelistResponse)
+    async def profit_msku(self, start_date: str = None, end_date: str = None, offset: int = None, length: int = None, sids: str = None, currency_type: str = None, sort_field: str = None, sort_type: str = None) -> list[FinanceProfitstatisProfitmskuResponse]:
         """查询利润统计（旧）-MSKU.
 
 POST /erp/sc/routing/finance/ProfitStatis/profitMsku
@@ -213,10 +226,8 @@ Args:
     sort_field: 排序字段：asin, string.
     sort_type: desc:倒序   asc:顺序, string."""
         resp = await self._post("/erp/sc/routing/finance/ProfitStatis/profitMsku", {k: v for k, v in {"start_date": start_date, "end_date": end_date, "offset": offset, "length": length, "sids": sids, "currency_type": currency_type, "sort_field": sort_field, "sort_type": sort_type}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def purchase_report_buyer_list(self, offset: int = None, length: int = None, start_date: str = None, end_date: str = None, time_type: int = None, product_type: list = None) -> list | dict:
+        return self._parse_list(resp.data, FinanceProfitstatisProfitmskuResponse)
+    async def purchase_report_buyer_list(self, offset: int = None, length: int = None, start_date: str = None, end_date: str = None, time_type: int = None, product_type: list = None) -> list[PurchaseBuyerListResponse]:
         """查询采购报表列表 - 采购员.
 
 POST /basicOpen/report/purchase/buyer/list
@@ -229,10 +240,8 @@ Args:
     time_type: 时间类型：1 下单时间，2 到货时间, int.
     product_type: 产品类型： 1 普通产品 2 组合产品 3 辅料, array."""
         resp = await self._post("/basicOpen/report/purchase/buyer/list", {k: v for k, v in {"offset": offset, "length": length, "start_date": start_date, "end_date": end_date, "time_type": time_type, "product_type": product_type}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def purchase_report_product_list(self, offset: int = None, length: int = None, start_date: str = None, end_date: str = None, time_type: int = None, sids: str = None, search_field: str = None, search_value: str = None) -> list | dict:
+        return self._parse_list(resp.data, PurchaseBuyerListResponse)
+    async def purchase_report_product_list(self, offset: int = None, length: int = None, start_date: str = None, end_date: str = None, time_type: int = None, sids: str = None, search_field: str = None, search_value: str = None) -> list[PurchaseProductListResponse]:
         """查询采购报表列表 - 产品.
 
 POST /basicOpen/report/purchase/product/list
@@ -247,10 +256,8 @@ Args:
     search_field: 搜索字段名： product_name 品名 sku SKU msku MSKU fnsku FNSKU spu_name 款名 spu SPU, string.
     search_value: 搜索值, string."""
         resp = await self._post("/basicOpen/report/purchase/product/list", {k: v for k, v in {"offset": offset, "length": length, "start_date": start_date, "end_date": end_date, "time_type": time_type, "sids": sids, "search_field": search_field, "search_value": search_value}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def purchase_report_supplier_list(self, offset: int = None, length: int = None, start_date: str = None, end_date: str = None, time_type: int = None, search_field: str = None, search_value: str = None, product_type: list = None) -> list | dict:
+        return self._parse_list(resp.data, PurchaseProductListResponse)
+    async def purchase_report_supplier_list(self, offset: int = None, length: int = None, start_date: str = None, end_date: str = None, time_type: int = None, search_field: str = None, search_value: str = None, product_type: list = None) -> list[PurchaseSupplierListResponse]:
         """查询采购报表列表 - 供应商.
 
 POST /basicOpen/report/purchase/supplier/list
@@ -265,10 +272,8 @@ Args:
     search_value: 搜索值, string.
     product_type: 产品类型： 1 普通产品 2 组合产品 3 辅料, array."""
         resp = await self._post("/basicOpen/report/purchase/supplier/list", {k: v for k, v in {"offset": offset, "length": length, "start_date": start_date, "end_date": end_date, "time_type": time_type, "search_field": search_field, "search_value": search_value, "product_type": product_type}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def reimbursement_list(self, offset: int = None, length: int = None, search_field: str = None, search_value: str = None, sids: str = None, start_date: str = None, end_date: str = None) -> list | dict:
+        return self._parse_list(resp.data, PurchaseSupplierListResponse)
+    async def reimbursement_list(self, offset: int = None, length: int = None, search_field: str = None, search_value: str = None, sids: str = None, start_date: str = None, end_date: str = None) -> list[OpenapiMwsreportReimbursementlistResponse]:
         """查询亚马逊赔偿报告列表.
 
 POST /basicOpen/openapi/mwsReport/reimbursementList
@@ -282,10 +287,8 @@ Args:
     start_date: 批准日期开始时间【时间间隔最长不得超过90天】，闭区间，格式：Y-m-d, string.
     end_date: 批准日期结束时间【时间间隔最长不得超过90天】，闭区间，格式：Y-m-d, string."""
         resp = await self._post("/basicOpen/openapi/mwsReport/reimbursementList", {k: v for k, v in {"offset": offset, "length": length, "search_field": search_field, "search_value": search_value, "sids": sids, "start_date": start_date, "end_date": end_date}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def return_order_analysis_lists(self, endDate: str = None, length: int = None, offset: int = None, startDate: str = None, asinType: str = None, dateType: int = None, mids: list = None, principalUid: list = None, searchField: str = None, searchValue: list = None, sortField: str = None, sortType: str = None, storeId: list = None) -> list | dict:
+        return self._parse_list(resp.data, OpenapiMwsreportReimbursementlistResponse)
+    async def return_order_analysis_lists(self, endDate: str = None, length: int = None, offset: int = None, startDate: str = None, asinType: str = None, dateType: int = None, mids: list = None, principalUid: list = None, searchField: str = None, searchValue: list = None, sortField: str = None, sortType: str = None, storeId: list = None) -> list[SalesanalysisReturnorderAnalysislistsResponse]:
         """统计-查询退货分析.
 
 POST /basicOpen/salesAnalysis/returnOrder/analysisLists
@@ -305,10 +308,8 @@ Args:
     sortType: 排序类型，枚举值：ASC-升序, DESC-降序, string.
     storeId: 店铺ID列表, array."""
         resp = await self._post("/basicOpen/salesAnalysis/returnOrder/analysisLists", {k: v for k, v in {"endDate": endDate, "length": length, "offset": offset, "startDate": startDate, "asinType": asinType, "dateType": dateType, "mids": mids, "principalUid": principalUid, "searchField": searchField, "searchValue": searchValue, "sortField": sortField, "sortType": sortType, "storeId": storeId}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def store_sales(self, sid: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list | dict:
+        return self._parse_list(resp.data, SalesanalysisReturnorderAnalysislistsResponse)
+    async def store_sales(self, sid: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list[SalesReportSalesResponse]:
         """查询店铺汇总销量.
 
 POST /erp/sc/data/sales_report/sales
@@ -320,10 +321,8 @@ Args:
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认1000, int."""
         resp = await self._post("/erp/sc/data/sales_report/sales", {k: v for k, v in {"sid": sid, "start_date": start_date, "end_date": end_date, "offset": offset, "length": length}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def operate_log_list(self, sids: Any = None, search_field: str = None, search_value: str = None, date_type: str = None, start_date: str = None, end_date: str = None) -> list | dict:
+        return self._parse_list(resp.data, SalesReportSalesResponse)
+    async def operate_log_list(self, sids: Any = None, search_field: str = None, search_value: str = None, date_type: str = None, start_date: str = None, end_date: str = None) -> list[OperatemanageOperatelogListResponse]:
         """查询运营日志.
 
 POST /basicOpen/operateManage/operateLog/list
@@ -336,10 +335,8 @@ Args:
     start_date: 开始时间，闭区间，格式：Y-m-d (required), string.
     end_date: 结束时间，闭区间，格式：Y-m-d (required), string."""
         resp = await self._post("/basicOpen/operateManage/operateLog/list", {k: v for k, v in {"sids": sids, "search_field": search_field, "search_value": search_value, "date_type": date_type, "start_date": start_date, "end_date": end_date}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def operate_log_v2_list(self, offset: float = None, length: float = None, sids: list = None, mids: list = None, start_date: str = None, end_date: str = None, search_field: str = None, search_value: list = None, summary_type: str = None) -> list | dict:
+        return self._parse_list(resp.data, OperatemanageOperatelogListResponse)
+    async def operate_log_v2_list(self, offset: float = None, length: float = None, sids: list = None, mids: list = None, start_date: str = None, end_date: str = None, search_field: str = None, search_value: list = None, summary_type: str = None) -> list[OperatemanageOperatelogListResponse]:
         """查询运营日志(新).
 
 POST /basicOpen/operateManage/operateLog/list/v2
@@ -355,10 +352,8 @@ Args:
     search_value: 搜索值, array.
     summary_type: 日志维度： asin ASIN parent_asin 父ASIN msku MSKU (required), string."""
         resp = await self._post("/basicOpen/operateManage/operateLog/list/v2", {k: v for k, v in {"offset": offset, "length": length, "sids": sids, "mids": mids, "start_date": start_date, "end_date": end_date, "search_field": search_field, "search_value": search_value, "summary_type": summary_type}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def performance_trend_by_hour(self, sids: str = None, date_start: str = None, date_end: str = None, summary_field: str = None, summary_field_value: str = None) -> list | dict:
+        return self._parse_list(resp.data, OperatemanageOperatelogListResponse)
+    async def performance_trend_by_hour(self, sids: str = None, date_start: str = None, date_end: str = None, summary_field: str = None, summary_field_value: str = None) -> list[SalesanalysisProductperformancePerformancetrendbyhourResponse]:
         """查询asin360小时数据.
 
 POST /basicOpen/salesAnalysis/productPerformance/performanceTrendByHour
@@ -370,10 +365,8 @@ Args:
     summary_field: 查询维度： parent_asin asin msku sku spu (required), string.
     summary_field_value: 查询维度值 (required), string."""
         resp = await self._post("/basicOpen/salesAnalysis/productPerformance/performanceTrendByHour", {k: v for k, v in {"sids": sids, "date_start": date_start, "date_end": date_end, "summary_field": summary_field, "summary_field_value": summary_field_value}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def report_create_report_export_task(self, seller_id: str = None, report_type: str = None, data_start_time: str = None, data_end_time: str = None, marketplace_ids: Any = None, region: str = None) -> dict:
+        return self._parse_list(resp.data, SalesanalysisProductperformancePerformancetrendbyhourResponse)
+    async def report_create_report_export_task(self, seller_id: str = None, report_type: str = None, data_start_time: str = None, data_end_time: str = None, marketplace_ids: Any = None, region: str = None) -> ReportCreateReportexporttaskResponse | None:
         """报告导出 - 创建导出任务.
 
 POST /basicOpen/report/create/reportExportTask
@@ -386,8 +379,8 @@ Args:
     marketplace_ids: 亚马逊市场id (required), array.
     region: 店铺所在的地区【对应区域值支持国家见附加说明】： na 北美 eu 欧洲 fe 远东 (required), string."""
         resp = await self._post("/basicOpen/report/create/reportExportTask", {k: v for k, v in {"seller_id": seller_id, "report_type": report_type, "data_start_time": data_start_time, "data_end_time": data_end_time, "marketplace_ids": marketplace_ids, "region": region}.items() if v is not None})
-        return resp.data or {}
-    async def report_query_report_export_task(self, seller_id: str = None, task_id: str = None, region: str = None) -> dict:
+        return self._parse_one(resp.data, ReportCreateReportexporttaskResponse)
+    async def report_query_report_export_task(self, seller_id: str = None, task_id: str = None, region: str = None) -> ReportQueryReportexporttaskResponse | None:
         """报告导出-查询导出任务结果.
 
 POST /basicOpen/report/query/reportExportTask
@@ -397,8 +390,8 @@ Args:
     task_id: 任务id (required), string.
     region: 店铺所在的地区【对应区域值支持国家见附加说明】： na 北美 eu 欧洲 fe 远东 (required), string."""
         resp = await self._post("/basicOpen/report/query/reportExportTask", {k: v for k, v in {"seller_id": seller_id, "task_id": task_id, "region": region}.items() if v is not None})
-        return resp.data or {}
-    async def vc_inventory_list(self, sid: float = None, startDate: str = None, endDate: str = None, offset: float = None, length: float = None, view: str = None, asinList: list = None) -> list | dict:
+        return self._parse_one(resp.data, ReportQueryReportexporttaskResponse)
+    async def vc_inventory_list(self, sid: float = None, startDate: str = None, endDate: str = None, offset: float = None, length: float = None, view: str = None, asinList: list = None) -> list[ReportInventoryListResponse]:
         """VC报表-库存报表.
 
 POST /basicOpen/vc/report/inventory/list
@@ -412,10 +405,8 @@ Args:
     view: 视图： `sourcing` 货源视图 `manufacturing` 生产视图 (required), string.
     asinList: 指定asin列表, array."""
         resp = await self._post("/basicOpen/vc/report/inventory/list", {k: v for k, v in {"sid": sid, "startDate": startDate, "endDate": endDate, "offset": offset, "length": length, "view": view, "asinList": asinList}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def vc_nppm_list(self, sid: int = None, startDate: str = None, endDate: str = None, offset: int = None, length: int = None, asinList: list = None) -> list | dict:
+        return self._parse_list(resp.data, ReportInventoryListResponse)
+    async def vc_nppm_list(self, sid: int = None, startDate: str = None, endDate: str = None, offset: int = None, length: int = None, asinList: list = None) -> list[ReportNppmListResponse]:
         """VC报表-产品利润率报表.
 
 POST /basicOpen/vc/report/nppm/list
@@ -428,10 +419,8 @@ Args:
     length: 长度，最大200 (required), int.
     asinList: 指定asin列表, array."""
         resp = await self._post("/basicOpen/vc/report/nppm/list", {k: v for k, v in {"sid": sid, "startDate": startDate, "endDate": endDate, "offset": offset, "length": length, "asinList": asinList}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def vc_realtime_sales_list(self, sid: int = None, offset: int = None, length: int = None, startDate: str = None, endDate: str = None, dateType: int = None, asinList: list = None) -> list | dict:
+        return self._parse_list(resp.data, ReportNppmListResponse)
+    async def vc_realtime_sales_list(self, sid: int = None, offset: int = None, length: int = None, startDate: str = None, endDate: str = None, dateType: int = None, asinList: list = None) -> list[ReportRealtimesalesListResponse]:
         """VC报表-实时销量报表.
 
 POST /basicOpen/vc/report/realtimeSales/list
@@ -445,10 +434,8 @@ Args:
     dateType: 日期类型： 1=站点时间 2=UTC时间 默认1, int.
     asinList: 指定asin列表, array."""
         resp = await self._post("/basicOpen/vc/report/realtimeSales/list", {k: v for k, v in {"sid": sid, "offset": offset, "length": length, "startDate": startDate, "endDate": endDate, "dateType": dateType, "asinList": asinList}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def vc_sales_list(self, sid: int = None, view: str = None, offset: int = None, length: int = None, startDate: str = None, endDate: str = None, asinList: list = None) -> list | dict:
+        return self._parse_list(resp.data, ReportRealtimesalesListResponse)
+    async def vc_sales_list(self, sid: int = None, view: str = None, offset: int = None, length: int = None, startDate: str = None, endDate: str = None, asinList: list = None) -> list[ReportSalesListResponse]:
         """VC报表-销量报表.
 
 POST /basicOpen/vc/report/sales/list
@@ -462,10 +449,8 @@ Args:
     endDate: 结束时间，yyyy-MM-dd, string.
     asinList: 指定asin列表, array."""
         resp = await self._post("/basicOpen/vc/report/sales/list", {k: v for k, v in {"sid": sid, "view": view, "offset": offset, "length": length, "startDate": startDate, "endDate": endDate, "asinList": asinList}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def vc_traffic_list(self, sid: int = None, startDate: str = None, endDate: str = None, offset: int = None, length: int = None, asinList: list = None) -> list | dict:
+        return self._parse_list(resp.data, ReportSalesListResponse)
+    async def vc_traffic_list(self, sid: int = None, startDate: str = None, endDate: str = None, offset: int = None, length: int = None, asinList: list = None) -> list[ReportTrafficListResponse]:
         """VC报表-流量报表.
 
 POST /basicOpen/vc/report/traffic/list
@@ -478,10 +463,8 @@ Args:
     length: 长度，最大200 (required), int.
     asinList: 指定asin列表, array."""
         resp = await self._post("/basicOpen/vc/report/traffic/list", {k: v for k, v in {"sid": sid, "startDate": startDate, "endDate": endDate, "offset": offset, "length": length, "asinList": asinList}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
-    async def product_performance(self, offset: int, length: int, sort_field: str, sort_type: str, sid: Any, start_date: str, end_date: str, summary_field: str, search_field: str = None, search_value: list = None, mid: int = None, currency_code: str = None, is_recently_enum: bool = None, purchase_status: int = None, extend_search: Any = None) -> list | dict:
+        return self._parse_list(resp.data, ReportTrafficListResponse)
+    async def product_performance(self, offset: int, length: int, sort_field: str, sort_type: str, sid: Any, start_date: str, end_date: str, summary_field: str, search_field: str = None, search_value: list = None, mid: int = None, currency_code: str = None, is_recently_enum: bool = None, purchase_status: int = None, extend_search: Any = None) -> list[ProductperformanceOpenapiAsinlistResponse]:
         """查询产品表现.
 
 POST /bd/productPerformance/openApi/asinList
@@ -506,6 +489,4 @@ Args:
 Note:
     时间范围不能超过92天。单店铺间隔1s，多店铺间隔10s。"""
         resp = await self._post("/bd/productPerformance/openApi/asinList", {k: v for k, v in {"offset": offset, "length": length, "sort_field": sort_field, "sort_type": sort_type, "sid": sid, "start_date": start_date, "end_date": end_date, "summary_field": summary_field, "search_field": search_field, "search_value": search_value, "mid": mid, "currency_code": currency_code, "is_recently_enum": is_recently_enum, "purchase_status": purchase_status, "extend_search": extend_search}.items() if v is not None})
-        if isinstance(resp.data, list):
-            return resp.data
-        return resp.data or {}
+        return self._parse_list(resp.data, ProductperformanceOpenapiAsinlistResponse)

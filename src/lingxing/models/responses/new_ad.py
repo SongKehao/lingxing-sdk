@@ -1273,3 +1273,131 @@ class OpenapiNewadSptargetsResponse(LingXingModel):
     last_updated_date: Optional[float] = Field(None, description="最近更新时间")
     serving_status: Optional[str] = Field(None, description="服务状态")
     resolved_expression: Optional[str] = Field(None, description="已解析的表达式")
+
+
+class OpenapiNewadSpcampaignplacementreportsResponse(LingXingModel):
+    """SP广告位报告."""
+    total: Optional[int] = Field(None, description="总数")
+    campaign_id: Optional[float] = Field(None, description="广告活动id")
+    campaign_name: Optional[str] = Field(None, description="广告活动名称")
+    campaign_status: Optional[str] = Field(None, description="广告活动状态")
+    placement_type: Optional[int] = Field(None, description="广告位类型：1 Other Placements 2 Other on-Amazon 3 Top of Search")
+    impressions: Optional[float] = Field(None, description="展示量")
+    clicks: Optional[float] = Field(None, description="点击量")
+    cost: Optional[float] = Field(None, description="花费")
+    report_date: Optional[str] = Field(None, description="报表日期")
+    profile_id: Optional[float] = Field(None, description="亚马逊店铺数字id")
+
+
+class OpenapiNewadSpasinreportsResponse(LingXingModel):
+    """SP已购买商品报表."""
+    total: Optional[int] = Field(None, description="总数")
+    campaign_id: Optional[float] = Field(None, description="广告活动id")
+    ad_group_id: Optional[float] = Field(None, description="广告组id")
+    asin: Optional[str] = Field(None, description="ASIN")
+    impressions: Optional[float] = Field(None, description="展示量")
+    clicks: Optional[float] = Field(None, description="点击量")
+    cost: Optional[float] = Field(None, description="花费")
+    report_date: Optional[str] = Field(None, description="报表日期")
+    profile_id: Optional[float] = Field(None, description="亚马逊店铺数字id")
+    same_orders: Optional[float] = Field(None, description="直接成交订单数")
+    orders: Optional[float] = Field(None, description="订单数")
+    same_sales: Optional[float] = Field(None, description="直接成交销售额")
+    sales: Optional[float] = Field(None, description="销售额")
+    units: Optional[float] = Field(None, description="销量")
+    same_units: Optional[float] = Field(None, description="直接成交销量")
+
+
+class OpenapiNewadQuerywordreportsResponse(LingXingModel):
+    """SP用户搜索词报表."""
+    total: Optional[int] = Field(None, description="总数")
+    campaign_id: Optional[float] = Field(None, description="广告活动id")
+    ad_group_id: Optional[float] = Field(None, description="广告组id")
+    keyword_id: Optional[float] = Field(None, description="关键词id")
+    keyword_text: Optional[str] = Field(None, description="用户搜索词")
+    match_type: Optional[str] = Field(None, description="匹配类型")
+    impressions: Optional[float] = Field(None, description="展示量")
+    clicks: Optional[float] = Field(None, description="点击量")
+    cost: Optional[float] = Field(None, description="花费")
+    report_date: Optional[str] = Field(None, description="报表日期")
+    profile_id: Optional[float] = Field(None, description="亚马逊店铺数字id")
+    same_orders: Optional[float] = Field(None, description="直接成交订单数")
+    orders: Optional[float] = Field(None, description="订单数")
+    same_sales: Optional[float] = Field(None, description="直接成交销售额")
+    sales: Optional[float] = Field(None, description="销售额")
+    units: Optional[float] = Field(None, description="销量")
+    same_units: Optional[float] = Field(None, description="直接成交销量")
+
+
+class OpenapiNewadHsacampaignplacementreportsResponse(LingXingModel):
+    """SB广告活动-广告位报告."""
+    total: Optional[int] = Field(None, description="总数")
+    campaign_id: Optional[float] = Field(None, description="广告活动id")
+    campaign_name: Optional[str] = Field(None, description="广告活动名称")
+    placement_type: Optional[int] = Field(None, description="广告位类型")
+    impressions: Optional[float] = Field(None, description="展示量")
+    clicks: Optional[float] = Field(None, description="点击量")
+    cost: Optional[float] = Field(None, description="花费")
+    report_date: Optional[str] = Field(None, description="报表日期")
+    profile_id: Optional[float] = Field(None, description="亚马逊店铺数字id")
+
+
+class OpenapiNewadHsaquerywordreportsResponse(LingXingModel):
+    """SB用户搜索词报表."""
+    total: Optional[int] = Field(None, description="总数")
+    campaign_id: Optional[float] = Field(None, description="广告活动id")
+    ad_group_id: Optional[float] = Field(None, description="广告组id")
+    keyword_id: Optional[float] = Field(None, description="关键词id")
+    keyword_text: Optional[str] = Field(None, description="用户搜索词")
+    match_type: Optional[str] = Field(None, description="匹配类型")
+    impressions: Optional[float] = Field(None, description="展示量")
+    clicks: Optional[float] = Field(None, description="点击量")
+    cost: Optional[float] = Field(None, description="花费")
+    report_date: Optional[str] = Field(None, description="报表日期")
+    profile_id: Optional[float] = Field(None, description="亚马逊店铺数字id")
+    same_orders: Optional[float] = Field(None, description="直接成交订单数")
+    orders: Optional[float] = Field(None, description="订单数")
+    same_sales: Optional[float] = Field(None, description="直接成交销售额")
+    sales: Optional[float] = Field(None, description="销售额")
+    units: Optional[float] = Field(None, description="销量")
+    same_units: Optional[float] = Field(None, description="直接成交销量")
+
+
+class OpenapiNewadSdasinreportsResponse(LingXingModel):
+    """SD已购买商品报表."""
+    total: Optional[int] = Field(None, description="总数")
+    campaign_id: Optional[float] = Field(None, description="广告活动id")
+    ad_group_id: Optional[float] = Field(None, description="广告组id")
+    asin: Optional[str] = Field(None, description="ASIN")
+    impressions: Optional[float] = Field(None, description="展示量")
+    clicks: Optional[float] = Field(None, description="点击量")
+    cost: Optional[float] = Field(None, description="花费")
+    report_date: Optional[str] = Field(None, description="报表日期")
+    profile_id: Optional[float] = Field(None, description="亚马逊店铺数字id")
+    same_orders: Optional[float] = Field(None, description="直接成交订单数")
+    orders: Optional[float] = Field(None, description="订单数")
+    same_sales: Optional[float] = Field(None, description="直接成交销售额")
+    sales: Optional[float] = Field(None, description="销售额")
+    units: Optional[float] = Field(None, description="销量")
+    same_units: Optional[float] = Field(None, description="直接成交销量")
+
+
+class OpenapiNewadSdmatchtargetreportsResponse(LingXingModel):
+    """SD匹配的目标报表."""
+    total: Optional[int] = Field(None, description="总数")
+    campaign_id: Optional[float] = Field(None, description="广告活动id")
+    ad_group_id: Optional[float] = Field(None, description="广告组id")
+    target_id: Optional[float] = Field(None, description="投放id")
+    targeting_type: Optional[str] = Field(None, description="投放类别")
+    targeting_expression: Optional[str] = Field(None, description="投放表达式")
+    impressions: Optional[float] = Field(None, description="展示量")
+    clicks: Optional[float] = Field(None, description="点击量")
+    cost: Optional[float] = Field(None, description="花费")
+    report_date: Optional[str] = Field(None, description="报表日期")
+    profile_id: Optional[float] = Field(None, description="亚马逊店铺数字id")
+    same_orders: Optional[float] = Field(None, description="直接成交订单数")
+    orders: Optional[float] = Field(None, description="订单数")
+    same_sales: Optional[float] = Field(None, description="直接成交销售额")
+    sales: Optional[float] = Field(None, description="销售额")
+    units: Optional[float] = Field(None, description="销量")
+    same_units: Optional[float] = Field(None, description="直接成交销量")

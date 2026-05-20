@@ -354,3 +354,11 @@ class PlatformorderVcorderpoDetailResponse(LingXingModel):
     delivery_window_start: Optional[str] = Field(None, description="交货窗口开始时间")
     delivery_window_end: Optional[str] = Field(None, description="交货窗口结束时间")
     items: Optional[List[PlatformorderVcorderpoDetailItems]] = Field(None, description="商品数据")
+
+
+class PlatformorderVcorderdfConfirmshipmentResponse(LingXingModel):
+    """VC订单-确认发货【DF】."""
+
+
+class PlatformorderVcorderdfSubmitsshippinglabelResponse(LingXingModel):
+    """VC订单-请求标签【DF】."""

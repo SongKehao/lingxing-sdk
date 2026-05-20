@@ -5,12 +5,14 @@ from typing import Union
 
 from ..models.responses.basic_data import (
     AccountListsResponse,
+    CommonFileDownloadResponse,
     ConceptSellerListsResponse,
     FinanceCurrencyCurrencymonthResponse,
     ProfitReportStatelistResponse,
     SellerAllmarketplaceResponse,
     SellerBatcheditsellernameResponse,
     SellerListsResponse,
+    SettingsExchangerateUpdateResponse,
     WorldstateListsResponse,
 )
 from ._base import BaseEndpoint
@@ -107,7 +109,7 @@ class BasicEndpoints(BaseEndpoint):
         resp = await self._post("/erp/sc/data/seller/batchEditSellerName", {"sellers": sellers})
         return self._parse_one(resp.data, SellerBatcheditsellernameResponse)
 
-    async def update_exchange_rate(self, my_rate: str = None, date: str = None, code: str = None) -> dict:
+    async def update_exchange_rate(self, my_rate: str = None, date: str = None, code: str = None) -> SettingsExchangerateUpdateResponse | None:
         """
         修改我的汇率.
 
@@ -119,9 +121,9 @@ class BasicEndpoints(BaseEndpoint):
             code: 币种 (required), string.
         """
         resp = await self._post("/basicOpen/settings/exchangeRate/update", {k: v for k, v in {"my_rate": my_rate, "date": date, "code": code}.items() if v is not None})
-        return resp.data or {}
+        return self._parse_one(resp.data, SettingsExchangerateUpdateResponse)
 
-    async def download_attachment(self, file_id: int = None) -> dict:
+    async def download_attachment(self, file_id: int = None) -> CommonFileDownloadResponse | None:
         """
         下载附件.
 
@@ -131,4 +133,4 @@ class BasicEndpoints(BaseEndpoint):
             file_id: 附件id【取对应功能接口返回结果中的附件id值】 (required), int.
         """
         resp = await self._post("/erp/sc/routing/common/file/download", {k: v for k, v in {"file_id": file_id}.items() if v is not None})
-        return resp.data or {}
+        return self._parse_one(resp.data, CommonFileDownloadResponse)

@@ -129,6 +129,14 @@ src/lingxing/
 
 ## Changelog
 
+### 0.7.0
+- **Response Model 绑定**: 434/480 (90%) endpoint 方法绑定类型安全的 Pydantic response model
+- **数据校验**: 所有绑定的方法通过 `_parse_list`/`_parse_one`/`_parse_page` 自动校验 API 返回数据
+- **旧 Model 迁移**: 6 个手写 model 文件 (basic/fba/product/purchase/statistics/warehouse) 合并到 `models/responses/`
+- **字段验证**: 94% 的 response model 字段与真实 API 数据完全匹配 (32/34 fixtures)
+- **覆盖率**: 全部 19 个核心 endpoint 文件完成绑定，包括 multiplatform、restocking、new_ad 等
+- 137 单元测试全部通过
+
 ### 0.6.0
 - **LingXingModel**: 添加 `alias_generator=_to_camel`，自动 camelCase ↔ snake_case 映射
 - **LingXingClient**: 移除重复 token 管理，完全委托 OpenApiBase

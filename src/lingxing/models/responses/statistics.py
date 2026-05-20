@@ -250,7 +250,6 @@ class SalesanalysisProductperformancePerformancetrendbyhourResponse(LingXingMode
     list: Optional[List[SalesanalysisProductperformancePerformancetrendbyhourList]] = Field(None, description="是")
     total: Optional[List[SalesanalysisProductperformancePerformancetrendbyhourTotal]] = Field(None, description="总计")
     currency_icon: Optional[str] = Field(None, description="币种类型")
-    total: Optional[List[SalesanalysisProductperformancePerformancetrendbyhourTotal]] = Field(None, description="总数")
 
 
 class SalesanalysisReturnorderAnalysislistsRecords(LingXingModel):
@@ -291,7 +290,6 @@ class SalesanalysisReturnorderAnalysislistsResponse(LingXingModel):
     """统计-查询退货分析."""
     records: Optional[List[SalesanalysisReturnorderAnalysislistsRecords]] = Field(None, description="退货分析记录列表")
     total: Optional[int] = Field(None, description="总记录数")
-    total: Optional[int] = Field(None, description="总记录数")
 
 
 class ReportInventoryListList(LingXingModel):
@@ -321,11 +319,10 @@ class ReportInventoryListList(LingXingModel):
 
 class ReportInventoryListResponse(LingXingModel):
     """VC报表-库存报表."""
-    total: Optional[float] = Field(None, description="总数")
-    offset: Optional[float] = Field(None, description="偏移量")
-    length: Optional[float] = Field(None, description="长度")
-    list: Optional[List[ReportInventoryListList]] = Field(None, description="列表")
     total: Optional[int] = Field(None, description="总数")
+    offset: Optional[int] = Field(None, description="偏移量")
+    length: Optional[int] = Field(None, description="长度")
+    list: Optional[List[ReportInventoryListList]] = Field(None, description="列表")
 
 
 class ReportNppmListList(LingXingModel):
@@ -341,7 +338,6 @@ class ReportNppmListResponse(LingXingModel):
     offset: Optional[int] = Field(None, description="偏移量")
     length: Optional[int] = Field(None, description="长度")
     list: Optional[List[ReportNppmListList]] = Field(None, description="列表数据")
-    total: Optional[int] = Field(None, description="总数")
 
 
 class ReportRealtimesalesListList(LingXingModel):
@@ -361,7 +357,6 @@ class ReportRealtimesalesListResponse(LingXingModel):
     offset: Optional[int] = Field(None, description="偏移量")
     length: Optional[int] = Field(None, description="长度")
     list: Optional[List[ReportRealtimesalesListList]] = Field(None, description="列表")
-    total: Optional[int] = Field(None, description="总数")
 
 
 class ReportSalesListList(LingXingModel):
@@ -384,7 +379,6 @@ class ReportSalesListResponse(LingXingModel):
     offset: Optional[int] = Field(None, description="偏移量")
     length: Optional[int] = Field(None, description="长度")
     list: Optional[List[ReportSalesListList]] = Field(None, description="列表")
-    total: Optional[int] = Field(None, description="总数")
 
 
 class ReportTrafficListList(LingXingModel):
@@ -400,7 +394,6 @@ class ReportTrafficListResponse(LingXingModel):
     offset: Optional[int] = Field(None, description="偏移量")
     length: Optional[int] = Field(None, description="长度")
     list: Optional[List[ReportTrafficListList]] = Field(None, description="列表数据")
-    total: Optional[int] = Field(None, description="总数")
 
 
 class ProductperformanceOpenapiAsinlistList(LingXingModel):
@@ -895,10 +888,6 @@ class StatisticsMskuListRecords(LingXingModel):
     shared_ads_sbv_sales: Optional[Any] = Field(None, description="sbv广告销售额")
     shared_ads_sb_sales_quantity: Optional[Any] = Field(None, description="sb广告销量")
     shared_ads_sbv_sales_quantity: Optional[Any] = Field(None, description="sbv广告销量")
-    shared_ads_al_cost: Optional[Any] = Field(None, description="Live广告")
-    shared_ads_cc_cost: Optional[Any] = Field(None, description="创作者计划")
-    shared_ads_sspaot_cost: Optional[Any] = Field(None, description="ST广告")
-    shared_ads_sar_cost: Optional[Any] = Field(None, description="零售商赞助广告")
     shared_awd_processing_fee: Optional[Any] = Field(None, description="AWD处理费")
     shared_awd_transportation_fee: Optional[Any] = Field(None, description="AWD运输费")
     shared_awd_storage_fee: Optional[Any] = Field(None, description="AWD仓储费")
@@ -2168,3 +2157,19 @@ class OverseasDetailPageResponse(LingXingModel):
     api_day_end_count: Optional[float] = Field(None, description="第三方期末库存-数量")
     divergence_count: Optional[float] = Field(None, description="库存差异（第三方期末库存 - 期末库存）")
     child_list: Optional[list] = Field(None, description="子项，与外层列表字段一致-库存状态为全部时会有数据")
+
+
+class StatisticRemovalOrderCreateResponse(LingXingModel):
+    """创建移除订单."""
+
+
+class FbaStockReportGetlistResponse(LingXingModel):
+    """库存报表-FBA-历史报表-汇总-明细."""
+
+
+# Migrated from old models/
+class MonthRefundItem(LingXingModel):
+    """Response item for MonthRefund."""
+
+    list: Optional[list] = None
+    total: Optional[int] = None

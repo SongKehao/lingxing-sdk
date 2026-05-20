@@ -192,6 +192,29 @@ class BaseEndpoint(metaclass=SyncWrapperMeta):
                 return None
         return None
 
+    def _parse_one_or_list(self, data: Any, model: type[T]) -> T | list[T]:
+        """Parse response that may be a single object or a list of objects.
+
+        Many LingXing APIs return either a list (of dicts) or a single dict
+        depending on the query parameters.  This helper handles both cases:
+        - If *data* is a list → return ``_parse_list(data, model)``
+        - If *data* is a dict → try ``_parse_list`` first (the dict may wrap
+          a list under ``list``/``data``/``records``), otherwise ``_parse_one``.
+        """
+        if data is None:
+            return []
+        if isinstance(data, list):
+            return self._parse_list(data, model)
+        if isinstance(data, dict):
+            # Check if the dict wraps a list (common pagination pattern)
+            items = data.get("list") or data.get("data") or data.get("records")
+            if isinstance(items, list):
+                return self._parse_list(data, model)
+            # Otherwise treat as a single object
+            result = self._parse_one(data, model)
+            return result if result is not None else model()
+        return []
+
     def _parse_page(self, data: Any, model: type[T]) -> tuple[list[T], int]:
         """Parse paginated response: returns (items, total)."""
         if data is None:

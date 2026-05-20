@@ -1166,6 +1166,12 @@ class ReportAsinListRecords(LingXingModel):
     platform_expense: Optional[Any] = Field(None, description="[number]")
     gross_profit_tax: Optional[Any] = Field(None, description="[number]")
 
+class ReportMskuListResponse(LingXingModel):
+    """查询利润报表-MSKU."""
+    total: Optional[Any] = Field(None, description="[int]")
+    records: Optional[List[ReportAsinListRecords]] = Field(None, description="[array]")
+
+
 class ReportAsinListResponse(LingXingModel):
     """查询利润报表-ASIN."""
     total: Optional[Any] = Field(None, description="[int]")
