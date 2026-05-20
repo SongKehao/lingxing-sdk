@@ -22,7 +22,7 @@ Args:
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}
-    async def product_analysis_list(self, sid: str = None, profile_id: int = None, sku: Any = None, start_date: str = None, end_date: str = None, group_type: str = None, sponsored_type: list = None) -> list | dict:
+    async def product_analysis_list(self, profile_id: int = None, sid: str = None, sku: Any = None, start_date: str = None, end_date: str = None, group_type: str = None, sponsored_type: list = None) -> list | dict:
         """出单时段分析（产品）.
 
 POST /basicOpen/adReport/productOrderAnalysis/list
@@ -70,7 +70,7 @@ Args:
         return resp.data or {}
 
 
-    async def spcampaignreports(self, sid: int, profile_id: int, report_date: str, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
+    async def spcampaignreports(self, sid: int, report_date: str, profile_id: int = None, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
         """SP广告活动报表.
 
 POST /pb/openapi/newad/spCampaignReports
@@ -87,7 +87,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def campaignplacementreports(self, sid: int, profile_id: int, report_date: str, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
+    async def campaignplacementreports(self, sid: int, report_date: str, profile_id: int = None, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
         """SP广告位报告.
 
 POST /pb/openapi/newad/spCampaignPlacementReports
@@ -104,7 +104,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def spadgroupreports(self, sid: int, profile_id: int, report_date: str, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
+    async def spadgroupreports(self, sid: int, report_date: str, profile_id: int = None, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
         """SP广告组报表.
 
 POST /pb/openapi/newad/spAdGroupReports
@@ -121,7 +121,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def spproductadreports(self, sid: int, profile_id: int, report_date: str, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
+    async def spproductadreports(self, sid: int, report_date: str, profile_id: int = None, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
         """SP广告商品报表.
 
 POST /pb/openapi/newad/spProductAdReports
@@ -138,7 +138,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def spkeywordreports(self, sid: int, profile_id: int, report_date: str, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
+    async def spkeywordreports(self, sid: int, report_date: str, profile_id: int = None, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
         """SP关键词报表.
 
 POST /pb/openapi/newad/spKeywordReports
@@ -155,7 +155,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def sptargetreports(self, sid: int, profile_id: int, report_date: str, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
+    async def sptargetreports(self, sid: int, report_date: str, profile_id: int = None, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
         """SP商品定位报表.
 
 POST /pb/openapi/newad/spTargetReports
@@ -172,7 +172,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def asinreports(self, sid: int, profile_id: int, report_date: str, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
+    async def asinreports(self, sid: int, report_date: str, profile_id: int = None, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
         """SP已购买商品报表.
 
 POST /pb/openapi/newad/spAsinReports
@@ -189,7 +189,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def querywordreports(self, sid: int, profile_id: int, report_date: str, target_type: str, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
+    async def querywordreports(self, sid: int, report_date: str, target_type: str, profile_id: int = None, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
         """SP用户搜索词报表.
 
 POST /pb/openapi/newad/spQueryWordReports
@@ -207,7 +207,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def hsacampaignreports(self, sid: int, profile_id: int, report_date: str, offset: int = None, length: int = None) -> list | dict:
+    async def hsacampaignreports(self, sid: int, report_date: str, profile_id: int = None, offset: int = None, length: int = None) -> list | dict:
         """SB广告活动报表.
 
 POST /pb/openapi/newad/hsaCampaignReports
@@ -223,7 +223,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def hsacampaignplacementreports(self, sid: int, profile_id: int, report_date: str, offset: int = None, length: int = None) -> list | dict:
+    async def hsacampaignplacementreports(self, sid: int, report_date: str, profile_id: int = None, offset: int = None, length: int = None) -> list | dict:
         """SB广告活动-广告位报告.
 
 POST /pb/openapi/newad/hsaCampaignPlacementReports
@@ -239,7 +239,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def hsaadgroupreports(self, sid: int, profile_id: int, report_date: str, offset: int = None, length: int = None) -> list | dict:
+    async def hsaadgroupreports(self, sid: int, report_date: str, profile_id: int = None, offset: int = None, length: int = None) -> list | dict:
         """SB广告组报表.
 
 POST /pb/openapi/newad/hsaAdGroupReports
@@ -255,7 +255,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def listhsatargetingreport(self, sid: int, profile_id: int, sponsored_type: str, target_type: str, report_date: str, offset: int = None, length: int = None) -> list | dict:
+    async def listhsatargetingreport(self, sid: int, sponsored_type: str, target_type: str, report_date: str, profile_id: int = None, offset: int = None, length: int = None) -> list | dict:
         """SB广告的投放报告.
 
 POST /pb/openapi/newad/listHsaTargetingReport
@@ -273,7 +273,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def hsaquerywordreports(self, sid: int, profile_id: int, report_date: str, target_type: str, offset: int = None, length: int = None) -> list | dict:
+    async def hsaquerywordreports(self, sid: int, report_date: str, target_type: str, profile_id: int = None, offset: int = None, length: int = None) -> list | dict:
         """SB用户搜索词报表.
 
 POST /pb/openapi/newad/hsaQueryWordReports
@@ -290,7 +290,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def hsapurchasedasinreports(self, sid: int, profile_id: int, report_date: str, offset: int = None, length: int = None) -> list | dict:
+    async def hsapurchasedasinreports(self, sid: int, report_date: str, profile_id: int = None, offset: int = None, length: int = None) -> list | dict:
         """SB广告归因于广告的购买报告.
 
 POST /pb/openapi/newad/hsaPurchasedAsinReports
@@ -306,7 +306,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def listhsakeywordplacementreport(self, sid: int, profile_id: int, sponsored_type: str, target_type: str, report_date: str, offset: int = None, length: int = None) -> list | dict:
+    async def listhsakeywordplacementreport(self, sid: int, sponsored_type: str, target_type: str, report_date: str, profile_id: int = None, offset: int = None, length: int = None) -> list | dict:
         """SB关键词-广告位报告.
 
 POST /pb/openapi/newad/listHsaKeywordPlacementReport
@@ -324,7 +324,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def sdcampaignreports(self, sid: int, profile_id: int, report_date: str, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
+    async def sdcampaignreports(self, sid: int, report_date: str, profile_id: int = None, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
         """SD广告活动报表.
 
 POST /pb/openapi/newad/sdCampaignReports
@@ -341,7 +341,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def sdadgroupreports(self, sid: int, profile_id: int, report_date: str, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
+    async def sdadgroupreports(self, sid: int, report_date: str, profile_id: int = None, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
         """SD广告组报表.
 
 POST /pb/openapi/newad/sdAdGroupReports
@@ -358,7 +358,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def sdproductadreports(self, sid: int, profile_id: int, report_date: str, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
+    async def sdproductadreports(self, sid: int, report_date: str, profile_id: int = None, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
         """SD广告商品报表.
 
 POST /pb/openapi/newad/sdProductAdReports
@@ -375,7 +375,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def sdtargetreports(self, sid: int, profile_id: int, report_date: str, offset: int = None, length: int = None) -> list | dict:
+    async def sdtargetreports(self, sid: int, report_date: str, profile_id: int = None, offset: int = None, length: int = None) -> list | dict:
         """SD商品定位报表.
 
 POST /pb/openapi/newad/sdTargetReports
@@ -391,7 +391,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def sdasinreports(self, sid: int, profile_id: int, report_date: str, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
+    async def sdasinreports(self, sid: int, report_date: str, profile_id: int = None, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
         """SD已购买商品报表.
 
 POST /pb/openapi/newad/sdAsinReports
@@ -408,7 +408,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def sdmatchtargetreports(self, sid: int, profile_id: int, report_date: str, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
+    async def sdmatchtargetreports(self, sid: int, report_date: str, profile_id: int = None, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
         """SD匹配的目标报表.
 
 POST /pb/openapi/newad/sdMatchTargetReports
@@ -586,7 +586,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def sbdivideasinreports(self, profile_id: int, report_date: str, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
+    async def sbdivideasinreports(self, report_date: str, profile_id: int = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
         """SB分摊.
 
 POST /pb/openapi/newad/sbDivideAsinReports
@@ -602,7 +602,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def portfolios(self, sid: int, profile_id: int, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
+    async def portfolios(self, sid: int, profile_id: int = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
         """广告组合.
 
 POST /pb/openapi/newad/portfolios
@@ -618,7 +618,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def spcampaigns(self, sid: int, profile_id: int, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
+    async def spcampaigns(self, sid: int, profile_id: int = None, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
         """SP广告活动.
 
 POST /pb/openapi/newad/spCampaigns
@@ -635,7 +635,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def spadgroups(self, sid: int, profile_id: int, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
+    async def spadgroups(self, sid: int, profile_id: int = None, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
         """SP广告组.
 
 POST /pb/openapi/newad/spAdGroups
@@ -652,7 +652,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def spproductads(self, sid: int, profile_id: int, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
+    async def spproductads(self, sid: int, profile_id: int = None, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
         """SP广告商品.
 
 POST /pb/openapi/newad/spProductAds
@@ -669,7 +669,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def spkeywords(self, sid: int, profile_id: int, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
+    async def spkeywords(self, sid: int, profile_id: int = None, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
         """SP关键词.
 
 POST /pb/openapi/newad/spKeywords
@@ -686,7 +686,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def sptargets(self, sid: int, profile_id: int, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
+    async def sptargets(self, sid: int, profile_id: int = None, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
         """SP商品定位.
 
 POST /pb/openapi/newad/spTargets
@@ -703,7 +703,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def spnegativetargetsorkeywords(self, sid: int, profile_id: int, target_type: str, campaign_id: float = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
+    async def spnegativetargetsorkeywords(self, sid: int, target_type: str, profile_id: int = None, campaign_id: float = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
         """SP否定投放.
 
 POST /pb/openapi/newad/spNegativeTargetsOrKeywords
@@ -721,7 +721,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def hsacampaigns(self, sid: int, profile_id: int, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
+    async def hsacampaigns(self, sid: int, profile_id: int = None, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
         """SB广告活动.
 
 POST /pb/openapi/newad/hsaCampaigns
@@ -738,7 +738,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def hsaadgroups(self, sid: int, profile_id: int, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
+    async def hsaadgroups(self, sid: int, profile_id: int = None, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
         """SB广告组.
 
 POST /pb/openapi/newad/hsaAdGroups
@@ -755,7 +755,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def sbtargeting(self, sid: int, profile_id: int, ads_type: str, targeting_type: str, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
+    async def sbtargeting(self, sid: int, ads_type: str, targeting_type: str, profile_id: int = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
         """SB广告的投放.
 
 POST /pb/openapi/newad/sbTargeting
@@ -773,7 +773,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def hsanegativekeywords(self, sid: int, profile_id: int, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
+    async def hsanegativekeywords(self, sid: int, profile_id: int = None, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
         """SB否定关键词.
 
 POST /pb/openapi/newad/hsaNegativeKeywords
@@ -790,7 +790,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def hsanegativetargets(self, sid: int, profile_id: int, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
+    async def hsanegativetargets(self, sid: int, profile_id: int = None, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
         """SB否定商品投放.
 
 POST /pb/openapi/newad/hsaNegativeTargets
@@ -807,7 +807,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def sdcampaigns(self, sid: int, profile_id: int, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
+    async def sdcampaigns(self, sid: int, profile_id: int = None, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
         """SD广告活动.
 
 POST /pb/openapi/newad/sdCampaigns
@@ -824,7 +824,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def sdadgroups(self, sid: int, profile_id: int, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
+    async def sdadgroups(self, sid: int, profile_id: int = None, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
         """SD广告组.
 
 POST /pb/openapi/newad/sdAdGroups
@@ -841,7 +841,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def sdproductads(self, sid: int, profile_id: int, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
+    async def sdproductads(self, sid: int, profile_id: int = None, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
         """SD广告商品.
 
 POST /pb/openapi/newad/sdProductAds
@@ -858,7 +858,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def sdtargets(self, sid: int, profile_id: int, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
+    async def sdtargets(self, sid: int, profile_id: int = None, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
         """SD商品定位.
 
 POST /pb/openapi/newad/sdTargets
@@ -875,7 +875,7 @@ Args:
             return resp.data
         return resp.data or {}
 
-    async def sdnegativetargets(self, sid: int, profile_id: int, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
+    async def sdnegativetargets(self, sid: int, profile_id: int = None, state: str = None, offset: int = None, length: int = None, next_token: str = None) -> list | dict:
         """SD否定商品定位.
 
 POST /pb/openapi/newad/sdNegativeTargets
