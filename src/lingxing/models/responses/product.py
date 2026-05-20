@@ -645,12 +645,12 @@ class LabelProductListResponse(LingXingModel):
 
 class PublishUpcUpclistList(LingXingModel):
     """list sub-structure."""
-    id: Optional[float] = Field(None, description="记录唯一id")
+    id: Optional[int] = Field(None, description="记录唯一id")
     commodity_code: Optional[str] = Field(None, description="商品编码")
     code_type: Optional[str] = Field(None, description="商品编码类型")
-    is_used: Optional[float] = Field(None, description="商品编码使用状态：0 否 ，1 是")
-    created_user_id: Optional[float] = Field(None, description="创建人uid")
-    use_user_id: Optional[float] = Field(None, description="使用人uid")
+    is_used: Optional[int] = Field(None, description="商品编码使用状态：0 否 ，1 是")
+    created_user_id: Optional[int] = Field(None, description="创建人uid")
+    use_user_id: Optional[int] = Field(None, description="使用人uid")
     use_time: Optional[str] = Field(None, description="商品编码被使用的时间")
     remark: Optional[str] = Field(None, description="备注")
     gmt_create: Optional[str] = Field(None, description="商品编码创建时间")

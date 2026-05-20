@@ -9,7 +9,11 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
 
 from lingxing.endpoints._base import BaseEndpoint
 from lingxing.endpoints.basic import BasicEndpoints
-from lingxing.models.basic import SellerListsItem, AccoutListsItem, AllMarketplaceItem
+from lingxing.models.responses.basic_data import (
+    SellerListsResponse,
+    AccountListsResponse,
+    SellerAllmarketplaceResponse,
+)
 
 import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
@@ -37,7 +41,7 @@ class TestBasicEndpoints:
         )
         sellers = await self.basic.list_sellers()
         assert len(sellers) == 2
-        assert isinstance(sellers[0], SellerListsItem)
+        assert isinstance(sellers[0], SellerListsResponse)
         assert sellers[0].sid == 102
         assert sellers[0].name == "凌羽迪"
 
@@ -99,31 +103,31 @@ class TestBaseEndpoint:
     def test_parse_list_from_list(self):
         """Should parse list of dicts."""
         data = [{"sid": 1, "name": "A"}, {"sid": 2, "name": "B"}]
-        result = self.endpoint._parse_list(data, SellerListsItem)
+        result = self.endpoint._parse_list(data, SellerListsResponse)
         assert len(result) == 2
         assert result[0].sid == 1
 
     def test_parse_list_from_dict_with_list_key(self):
         """Should parse dict with 'list' key."""
         data = {"list": [{"sid": 1}], "total": 1}
-        result = self.endpoint._parse_list(data, SellerListsItem)
+        result = self.endpoint._parse_list(data, SellerListsResponse)
         assert len(result) == 1
 
     def test_parse_list_from_dict_with_data_key(self):
         """Should parse dict with 'data' key."""
         data = {"data": [{"sid": 1}], "total": 1}
-        result = self.endpoint._parse_list(data, SellerListsItem)
+        result = self.endpoint._parse_list(data, SellerListsResponse)
         assert len(result) == 1
 
     def test_parse_list_none(self):
         """Should handle None data."""
-        result = self.endpoint._parse_list(None, SellerListsItem)
+        result = self.endpoint._parse_list(None, SellerListsResponse)
         assert result == []
 
     def test_parse_page(self):
         """Should parse paginated data."""
         data = {"list": [{"sid": 1}], "total": 100}
-        items, total = self.endpoint._parse_page(data, SellerListsItem)
+        items, total = self.endpoint._parse_page(data, SellerListsResponse)
         assert len(items) == 1
         assert total == 100
 
@@ -132,23 +136,23 @@ class TestModels:
     """Tests for Pydantic model parsing."""
 
     def test_seller_lists_item_all_fields(self):
-        item = SellerListsItem(sid=102, name="凌羽迪", country="US", status=1)
+        item = SellerListsResponse(sid=102, name="凌羽迪", country="US", status=1)
         assert item.sid == 102
         assert item.name == "凌羽迪"
 
     def test_seller_lists_item_partial(self):
         """Should allow partial data (all fields Optional)."""
-        item = SellerListsItem(sid=102)
+        item = SellerListsResponse(sid=102)
         assert item.sid == 102
         assert item.name is None
 
     def test_extra_fields_allowed(self):
         """Should accept unknown fields from API."""
-        item = SellerListsItem(sid=102, unknown_field="hello")
+        item = SellerListsResponse(sid=102, unknown_field="hello")
         assert item.sid == 102
 
     def test_account_item(self):
-        item = AccoutListsItem(uid=1, account="admin", realname="Admin")
+        item = AccountListsResponse(uid=1, account="admin", realname="Admin")
         assert item.uid == 1
         assert item.realname == "Admin"
 
@@ -179,7 +183,7 @@ class TestRecordedFixtures:
         sellers = await basic.list_sellers()
 
         assert len(sellers) > 0
-        assert all(isinstance(s, SellerListsItem) for s in sellers)
+        assert all(isinstance(s, SellerListsResponse) for s in sellers)
         # Verify at least one has a sid
         assert any(s.sid is not None for s in sellers)
 
@@ -197,7 +201,7 @@ class TestRecordedFixtures:
         accounts = await basic.list_accounts()
 
         assert len(accounts) > 0
-        assert all(isinstance(a, AccoutListsItem) for a in accounts)
+        assert all(isinstance(a, AccountListsResponse) for a in accounts)
 
     @pytest.mark.asyncio
     async def test_marketplace_from_fixture(self):
@@ -213,4 +217,4 @@ class TestRecordedFixtures:
         markets = await basic.list_marketplaces()
 
         assert len(markets) > 0
-        assert all(isinstance(m, AllMarketplaceItem) for m in markets)
+        assert all(isinstance(m, SellerAllmarketplaceResponse) for m in markets)

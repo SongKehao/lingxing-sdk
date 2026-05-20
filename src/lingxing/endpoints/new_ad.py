@@ -192,7 +192,7 @@ Args:
     async def querywordreports(self, sid: int, report_date: str, target_type: str, profile_id: int = None, show_detail: int = None, offset: int = None, length: int = None) -> list | dict:
         """SP用户搜索词报表.
 
-POST /pb/openapi/newad/spQueryWordReports
+POST /pb/openapi/newad/queryWordReports
 
 Args:
     sid: 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】, int.
@@ -202,7 +202,7 @@ Args:
     show_detail: 是否展示完整归因期信息【默认0】：0 否，1 是, int.
     offset: 分页偏移量，默认0, int.
     length: 分页条数，默认15, int."""
-        resp = await self._post("/pb/openapi/newad/spQueryWordReports", {k: v for k, v in {"sid": sid, "profile_id": profile_id, "report_date": report_date, "target_type": target_type, "show_detail": show_detail, "offset": offset, "length": length}.items() if v is not None})
+        resp = await self._post("/pb/openapi/newad/queryWordReports", {k: v for k, v in {"sid": sid, "profile_id": profile_id, "report_date": report_date, "target_type": target_type, "show_detail": show_detail, "offset": offset, "length": length}.items() if v is not None})
         if isinstance(resp.data, list):
             return resp.data
         return resp.data or {}

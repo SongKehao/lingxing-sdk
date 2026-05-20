@@ -296,7 +296,7 @@ class SalesanalysisReturnorderAnalysislistsResponse(LingXingModel):
 
 class ReportInventoryListList(LingXingModel):
     """list sub-structure."""
-    sid: Optional[float] = Field(None, description="店铺id")
+    sid: Optional[int] = Field(None, description="店铺id")
     asin: Optional[str] = Field(None, description="asin")
     date: Optional[str] = Field(None, description="日期")
     receive_fill_rate: Optional[float] = Field(None, description="收货满足率")

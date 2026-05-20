@@ -90,7 +90,7 @@ class LocalInventoryGetpurchaseplansResponse(LingXingModel):
     product_id: Optional[int] = Field(None, description="商品id")
     sku: Optional[str] = Field(None, description="SKU")
     attribute: Optional[list] = Field(None, description="属性")
-    sid: Optional[float] = Field(None, description="店铺id")
+    sid: Optional[int] = Field(None, description="店铺id")
     seller_name: Optional[str] = Field(None, description="店铺名称")
     marketplace: Optional[str] = Field(None, description="国家")
     fnsku: Optional[str] = Field(None, description="FNSKU")
