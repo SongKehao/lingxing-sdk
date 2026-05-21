@@ -1,3 +1,4 @@
+from __future__ import annotations
 #!/usr/bin/env python3
 """领星ERP业务数据模型"""
 

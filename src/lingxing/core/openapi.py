@@ -1,3 +1,4 @@
+from __future__ import annotations
 #!/usr/bin/python3
 """封装Openapi基础操作
 

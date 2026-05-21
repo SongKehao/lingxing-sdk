@@ -1,3 +1,4 @@
+from __future__ import annotations
 #!/usr/bin/python3
 """
 领星API请求限流器

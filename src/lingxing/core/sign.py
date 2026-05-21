@@ -1,3 +1,4 @@
+from __future__ import annotations
 #!/usr/bin/python3
 """基于 aes文件 基础加密功能 封装 openapi签名算法"""
 

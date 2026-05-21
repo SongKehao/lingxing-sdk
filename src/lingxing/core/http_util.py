@@ -1,3 +1,4 @@
+from __future__ import annotations
 """领星OpenAPI HTTP请求封装"""
 import logging
 import os

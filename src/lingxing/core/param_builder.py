@@ -1,3 +1,4 @@
+from __future__ import annotations
 """领星ERP API参数构建器 - 填充默认请求参数"""
 
 import logging

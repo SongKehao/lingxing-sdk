@@ -1,3 +1,4 @@
+from __future__ import annotations
 """
 领星ERP客户端高级封装
 
