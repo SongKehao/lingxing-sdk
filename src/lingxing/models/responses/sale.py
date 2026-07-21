@@ -904,10 +904,262 @@ class AmazonProductPublishResponse(LingXingModel):
     record_unique_id: Optional[str] = Field(None, description="批次唯一ID")
 
 
+# ==================== Amazon Listings Items API 类型化模型 ====================
+# 对应接口：/listing/publish/openapi/amazon/product/search（查询已有商品信息）
+# 结构特点：attributes 内部用 snake_case；summaries/offers/fulfillmentAvailability 等
+# 顶层用 camelCase。LingXingModel 的 populate_by_name + alias_generator 同时兼容两种。
+
+
+class AmazonProductMainImage(LingXingModel):
+    """summaries>>mainImage 商品主图."""
+    height: Optional[int] = None
+    width: Optional[int] = None
+    link: Optional[str] = None
+
+
+class AmazonProductSummary(LingXingModel):
+    """summaries[] 商品摘要."""
+    asin: Optional[str] = Field(None, description="ASIN")
+    condition_type: Optional[str] = Field(None, description="状况类型")
+    created_date: Optional[str] = Field(None, description="创建时间")
+    fn_sku: Optional[str] = Field(None, description="FNSKU")
+    item_name: Optional[str] = Field(None, description="标题")
+    last_updated_date: Optional[str] = Field(None, description="最后更新时间")
+    main_image: Optional[AmazonProductMainImage] = Field(None, description="主图")
+    marketplace_id: Optional[str] = Field(None, description="市场ID")
+    product_type: Optional[str] = Field(None, description="商品类型")
+    status: Optional[list] = Field(None, description="状态：BUYABLE/DISCOVERABLE 等")
+
+
+# ---- attributes 内的属性值子结构（snake_case）----
+
+class AmazonListingTextValue(LingXingModel):
+    """通用文本属性值：item_name / bullet_point / product_description / generic_keyword /
+    condition_type / merchant_shipping_group / merchant_suggested_asin / product_site_launch_date."""
+    language_tag: Optional[str] = None
+    marketplace_id: Optional[str] = None
+    value: Optional[str] = None
+
+
+class AmazonListingDimension(LingXingModel):
+    """尺寸子结构（height/length/width 的取值）."""
+    unit: Optional[str] = None
+    value: Optional[float] = None
+
+
+class AmazonListingDimensionValue(LingXingModel):
+    """尺寸属性值：item_dimensions / item_package_dimensions."""
+    height: Optional[AmazonListingDimension] = None
+    length: Optional[AmazonListingDimension] = None
+    width: Optional[AmazonListingDimension] = None
+    marketplace_id: Optional[str] = None
+
+
+class AmazonListingWeightValue(LingXingModel):
+    """重量属性值：item_weight / item_package_weight."""
+    marketplace_id: Optional[str] = None
+    unit: Optional[str] = None
+    value: Optional[float] = None
+
+
+class AmazonListingPriceValue(LingXingModel):
+    """价格属性值：list_price."""
+    currency: Optional[str] = None
+    marketplace_id: Optional[str] = None
+    value: Optional[float] = None
+
+
+class AmazonListingImageValue(LingXingModel):
+    """图片属性值：main_product_image_locator / other_product_image_locator_*."""
+    marketplace_id: Optional[str] = None
+    media_location: Optional[str] = None
+
+
+class AmazonListingFulfillmentAvailability(LingXingModel):
+    """attributes.fulfillment_availability 属性值（库存/履约）."""
+    fulfillment_channel_code: Optional[str] = None
+    lead_time_to_ship_max_days: Optional[int] = None
+    quantity: Optional[int] = None
+
+
+class AmazonListingOfferSchedule(LingXingModel):
+    """purchasable_offer 价格 schedule 项."""
+    value_with_tax: Optional[float] = None
+    start_at: Optional[str] = None
+    end_at: Optional[str] = None
+
+
+class AmazonListingOfferPrice(LingXingModel):
+    """purchasable_offer our_price / discounted_price 包装."""
+    schedule: Optional[List[AmazonListingOfferSchedule]] = None
+
+
+class AmazonListingPurchasableOffer(LingXingModel):
+    """attributes.purchasable_offer 属性值（售价/促销/B2B）."""
+    audience: Optional[str] = None
+    currency: Optional[str] = None
+    marketplace_id: Optional[str] = None
+    our_price: Optional[List[AmazonListingOfferPrice]] = None
+    discounted_price: Optional[List[AmazonListingOfferPrice]] = None
+    start_at: Optional[dict] = Field(None, description="开始时间 {value: ...}")
+    end_at: Optional[dict] = Field(None, description="结束时间 {value: ...}")
+    quantity_discount_plan: Optional[List[dict]] = Field(None, description="数量折扣计划")
+
+
+class AmazonProductAttributes(LingXingModel):
+    """info.attributes — Amazon Listings Items API 全属性集.
+
+    extra='allow' 容纳未列出的新属性（Amazon 可能新增字段，不会导致解析失败）。
+    """
+    # 文案类
+    item_name: Optional[List[AmazonListingTextValue]] = Field(None, description="标题")
+    bullet_point: Optional[List[AmazonListingTextValue]] = Field(None, description="五点描述")
+    product_description: Optional[List[AmazonListingTextValue]] = Field(None, description="长描述")
+    generic_keyword: Optional[List[AmazonListingTextValue]] = Field(None, description="后台 search terms")
+    condition_type: Optional[List[AmazonListingTextValue]] = Field(None, description="状况")
+    merchant_shipping_group: Optional[List[AmazonListingTextValue]] = Field(None, description="运费模板")
+    merchant_suggested_asin: Optional[List[AmazonListingTextValue]] = Field(None, description="建议ASIN")
+    product_site_launch_date: Optional[List[AmazonListingTextValue]] = Field(None, description="上架时间")
+    # 尺寸/重量
+    item_dimensions: Optional[List[AmazonListingDimensionValue]] = Field(None, description="商品尺寸")
+    item_package_dimensions: Optional[List[AmazonListingDimensionValue]] = Field(None, description="包装尺寸")
+    item_weight: Optional[List[AmazonListingWeightValue]] = Field(None, description="商品重量")
+    item_package_weight: Optional[List[AmazonListingWeightValue]] = Field(None, description="包装重量")
+    # 价格
+    list_price: Optional[List[AmazonListingPriceValue]] = Field(None, description="标价")
+    purchasable_offer: Optional[List[AmazonListingPurchasableOffer]] = Field(None, description="可售报价（含B2B/促销）")
+    # 图片
+    main_product_image_locator: Optional[List[AmazonListingImageValue]] = Field(None, description="主图")
+    other_product_image_locator_1: Optional[List[AmazonListingImageValue]] = Field(None, description="副图1")
+    other_product_image_locator_2: Optional[List[AmazonListingImageValue]] = Field(None, description="副图2")
+    # 履约/库存
+    fulfillment_availability: Optional[List[AmazonListingFulfillmentAvailability]] = Field(None, description="履约可用性")
+
+
+class AmazonProductIssue(LingXingModel):
+    """info.issues[] 商品问题/告警."""
+    attribute_names: Optional[List[str]] = Field(None, description="相关属性名")
+    categories: Optional[List[str]] = Field(None, description="问题分类：MISSING_ATTRIBUTE/INVALID_ATTRIBUTE 等")
+    code: Optional[str] = Field(None, description="错误码")
+    message: Optional[str] = Field(None, description="信息")
+    severity: Optional[str] = Field(None, description="严重程度：WARNING/ERROR")
+
+
+class AmazonProductOfferAudience(LingXingModel):
+    """offers>>audience."""
+    display_name: Optional[str] = None
+    value: Optional[str] = None
+
+
+class AmazonProductOfferPrice(LingXingModel):
+    """offers>>price."""
+    amount: Optional[str] = None
+    currency: Optional[str] = None
+    currency_code: Optional[str] = None
+
+
+class AmazonProductOffer(LingXingModel):
+    """info.offers[] 报价（B2C/B2B）."""
+    audience: Optional[AmazonProductOfferAudience] = None
+    marketplace_id: Optional[str] = None
+    offer_type: Optional[str] = None
+    price: Optional[AmazonProductOfferPrice] = None
+
+
+class AmazonProductFulfillmentAvailability(LingXingModel):
+    """info.fulfillmentAvailability[] 顶层履约（camelCase）."""
+    fulfillment_channel_code: Optional[str] = None
+    quantity: Optional[int] = None
+
+
+class AmazonProductType(LingXingModel):
+    """info.productTypes[] 商品类型."""
+    marketplace_id: Optional[str] = None
+    product_type: Optional[str] = None
+
+
+class AmazonProductSearchInfo(LingXingModel):
+    """查询已有商品信息的 info 完整结构（Amazon Listings Items API）."""
+    summaries: Optional[List[AmazonProductSummary]] = Field(None, description="商品摘要")
+    attributes: Optional[AmazonProductAttributes] = Field(None, description="商品属性全集")
+    issues: Optional[List[AmazonProductIssue]] = Field(None, description="问题/告警")
+    offers: Optional[List[AmazonProductOffer]] = Field(None, description="报价(B2C/B2B)")
+    fulfillment_availability: Optional[List[AmazonProductFulfillmentAvailability]] = Field(None, description="顶层履约可用性")
+    procurement: Optional[list] = Field(None, description="采购信息")
+    relationships: Optional[list] = Field(None, description="关联关系")
+    product_types: Optional[List[AmazonProductType]] = Field(None, description="商品类型列表")
+
+
 class AmazonProductSearchResponse(LingXingModel):
-    """查询已有商品信息."""
+    """查询已有商品信息（/listing/publish/openapi/amazon/product/search）.
+
+    注意：code=1 表示成功（Amazon 约定，与多数接口 code=0 不同）。
+    info 为类型化的 Amazon Listings Items 结构，可直接用便捷属性取常用文案字段，
+    也可通过 info.attributes / info.summaries / info.offers 访问完整数据。
+    """
     msku: Optional[str] = Field(None, description="msku")
-    info: Optional[dict] = Field(None, description="商品信息")
+    info: Optional[AmazonProductSearchInfo] = Field(None, description="商品信息")
+
+    # ===== 便捷取值属性（自动从嵌套结构提取常用字段）=====
+
+    @property
+    def title(self) -> Optional[str]:
+        """商品标题（优先 attributes.item_name，回退 summaries.item_name）."""
+        if self.info and self.info.attributes and self.info.attributes.item_name:
+            return self.info.attributes.item_name[0].value
+        if self.info and self.info.summaries:
+            return self.info.summaries[0].item_name
+        return None
+
+    @property
+    def bullets(self) -> list[str]:
+        """五点描述（attributes.bullet_point 全部 value，无则空列表）."""
+        attrs = self.info.attributes if self.info else None
+        if attrs and attrs.bullet_point:
+            return [b.value for b in attrs.bullet_point if b.value is not None]
+        return []
+
+    @property
+    def description(self) -> Optional[str]:
+        """长描述（attributes.product_description 首个值）."""
+        attrs = self.info.attributes if self.info else None
+        if attrs and attrs.product_description:
+            return attrs.product_description[0].value
+        return None
+
+    @property
+    def search_terms(self) -> Optional[str]:
+        """后台 search terms（attributes.generic_keyword 首个值）."""
+        attrs = self.info.attributes if self.info else None
+        if attrs and attrs.generic_keyword:
+            return attrs.generic_keyword[0].value
+        return None
+
+    @property
+    def asin(self) -> Optional[str]:
+        """ASIN（summaries 首个）."""
+        if self.info and self.info.summaries:
+            return self.info.summaries[0].asin
+        return None
+
+    @property
+    def main_image(self) -> Optional[str]:
+        """主图 URL（优先 summaries.main_image.link，回退 attributes.main_product_image_locator）."""
+        if self.info and self.info.summaries and self.info.summaries[0].main_image:
+            return self.info.summaries[0].main_image.link
+        attrs = self.info.attributes if self.info else None
+        if attrs and attrs.main_product_image_locator:
+            return attrs.main_product_image_locator[0].media_location
+        return None
+
+    @property
+    def product_type(self) -> Optional[str]:
+        """商品类型（优先 summaries.product_type，回退 product_types）."""
+        if self.info and self.info.summaries:
+            return self.info.summaries[0].product_type
+        if self.info and self.info.product_types:
+            return self.info.product_types[0].product_type
+        return None
 
 
 class AmzodOrderdetailsLogisticsinformationShipmentInfo(LingXingModel):

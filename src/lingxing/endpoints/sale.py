@@ -55,6 +55,12 @@ from ._base import BaseEndpoint
 class SaleEndpoints(BaseEndpoint):
     """领星销售/订单/Listing API (44个接口)."""
 
+    def _check_response(self, resp, route: str) -> None:
+        """/listing/publish/openapi/ 系列接口用 code=1 表示成功（Amazon 约定，区别于多数接口 code=0）。"""
+        if route.startswith("/listing/publish/openapi/") and resp.code == 1:
+            return
+        super()._check_response(resp, route)
+
     async def add_goods_tag(self, tagIds: Any = None, bindDetail: list = None) -> ListingmanageBindlistingandtagResponse | None:
         """Listing新增商品标签.
 
@@ -242,6 +248,31 @@ Args:
     skus: sku列表，最多20个 (required), array."""
         resp = await self._post("/listing/publish/openapi/amazon/product/search", {k: v for k, v in {"store_id": store_id, "skus": skus}.items() if v is not None})
         return self._parse_list(resp.data, AmazonProductSearchResponse)
+
+    async def query_product_list_all(self, store_id: int, skus: list[str]) -> list[AmazonProductSearchResponse]:
+        """查询已有商品信息（自动分片批量版）.
+
+        POST /listing/publish/openapi/amazon/product/search
+
+        query_product_list 单次最多 20 个 SKU，本方法自动按 20 个分片调用并合并结果。
+
+        Args:
+            store_id: 店铺 store_id (required), int.
+            skus: MSKU 列表（无上限，自动分片）, array.
+
+        Returns:
+            所有 SKU 的商品信息列表（AmazonProductSearchResponse）。
+        """
+        results: list[AmazonProductSearchResponse] = []
+        BATCH = 20
+        for i in range(0, len(skus), BATCH):
+            batch = skus[i:i + BATCH]
+            resp = await self._post(
+                "/listing/publish/openapi/amazon/product/search",
+                {"store_id": store_id, "skus": batch},
+            )
+            results.extend(self._parse_list(resp.data, AmazonProductSearchResponse))
+        return results
     async def refund_order(self, sid: float = None, amazonOrderId: str = None, purchaseDateLocal: str = None, data: Any = None) -> SalesorderRefundorderResponse | None:
         """订单退款.
 
