@@ -6,6 +6,98 @@ from pydantic import Field
 from ..common import LingXingModel
 
 
+# ==================== 多渠道订单/标发/促销批量详情（US-002 补全，文档 Sale 分类缺失接口）====================
+# 响应模型采用最小化策略：关键字段类型化 + LingXingModel(extra=allow) 兜底其余字段
+# 接口均返回 code=0 表示成功（标准约定）
+
+
+class OrderAmzodApiOrderListResponse(LingXingModel):
+    """查询亚马逊多渠道订单列表v2 (/order/amzod/api/orderList)."""
+    seller_fulfillment_order_id: Optional[str] = Field(None, description="卖家订单号")
+    sid: Optional[int] = Field(None, description="店铺id")
+    store_name: Optional[str] = Field(None, description="店铺名称")
+    order_status: Optional[str] = Field(None, description="订单状态")
+    total: Optional[int] = Field(None, description="总数")
+
+
+class OrderAmzodProductinformationResponse(LingXingModel):
+    """查询亚马逊多渠道订单详情-商品信息 (/order/amzod/api/orderDetails/productInformation)."""
+    sid: Optional[int] = None
+    seller_fulfillment_order_id: Optional[str] = None
+    remark: Optional[str] = None
+
+
+class OrderAmzodLogisticsinformationResponse(LingXingModel):
+    """查询亚马逊多渠道订单详情-物流信息 (/order/amzod/api/orderDetails/logisticsInformation)."""
+    sid: Optional[int] = None
+    seller_fulfillment_order_id: Optional[str] = None
+    store_name: Optional[str] = None
+
+
+class OrderAmzodReturninformationResponse(LingXingModel):
+    """查询亚马逊多渠道订单详情-退货换货信息 (/order/amzod/api/orderDetails/returnInformation)."""
+    sid: Optional[int] = None
+    seller_fulfillment_order_id: Optional[str] = None
+
+
+class OrderAmzodCreateorderResponse(LingXingModel):
+    """创建亚马逊多渠道订单 (/order/amzod/api/createOrder)."""
+    seller_fulfillment_order_id: Optional[str] = None
+    msg: Optional[str] = Field(None, description="错误信息")
+
+
+class OrderAmzodCancelorderResponse(LingXingModel):
+    """取消多渠道订单 (/order/amzod/api/cancelOrder)."""
+    seller_fulfillment_order_id: Optional[str] = None
+    msg: Optional[str] = None
+
+
+class SalesorderMultiChannelListTransactionResponse(LingXingModel):
+    """查询多渠道订单-交易明细 (/basicOpen/openapi/salesOrder/multi-channel/list/transaction)."""
+    amazon_order_id: Optional[str] = None
+    sid: Optional[int] = None
+    total: Optional[int] = None
+
+
+class PbMpOrderSubmitFulfillmentResponse(LingXingModel):
+    """亚马逊订单提交标发 (/pb/mp/order/submitFulfillment)."""
+    task_id: Optional[str] = Field(None, description="任务id")
+    msg: Optional[str] = None
+
+
+class PbMpOrderGetFulfillmentResultResponse(LingXingModel):
+    """查询亚马逊标发结果 (/pb/mp/order/getFulfillmentResult)."""
+    result: Optional[list] = Field(None, description="多个订单结果集")
+
+
+class PromotionCouponAllDetailBatchResponse(LingXingModel):
+    """查询优惠券详情+listing+订单(批量) (/promotionApi/open/promotion/couponAllDetailBatch)."""
+    promotion_id: Optional[str] = None
+    store_id: Optional[str] = None
+    total: Optional[int] = None
+
+
+class PromotionManagementAllDetailBatchResponse(LingXingModel):
+    """查询管理促销详情+listing+订单(批量) (/promotionApi/open/promotion/managementAllDetailBatch)."""
+    promotion_id: Optional[str] = None
+    store_id: Optional[str] = None
+    total: Optional[int] = None
+
+
+class PromotionPrimeDiscountAllDetailBatchResponse(LingXingModel):
+    """查询会员折扣/价格折扣详情+listing+订单(批量) (/promotionApi/open/promotion/primeDiscountAllDetailBatch)."""
+    promotion_id: Optional[str] = None
+    store_id: Optional[str] = None
+    total: Optional[int] = None
+
+
+class PromotionSecKillAllDetailBatchResponse(LingXingModel):
+    """查询秒杀详情+listing+订单(批量) (/promotionApi/open/promotion/secKillAllDetailBatch)."""
+    promotion_id: Optional[str] = None
+    store_id: Optional[str] = None
+    total: Optional[int] = None
+
+
 class FbmmanagementModifyfbminventoryFailuredetail(LingXingModel):
     """failureDetail sub-structure."""
     store_id: Optional[int] = Field(None, description="店铺id")

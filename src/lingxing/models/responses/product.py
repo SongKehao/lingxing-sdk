@@ -6,6 +6,30 @@ from pydantic import Field
 from ..common import LingXingModel
 
 
+# ==================== 产品标签（US-003 补全）====================
+class LabelProductListResponse(LingXingModel):
+    """查询产品标签 (/label/operation/v1/label/product/list)."""
+    label_id: Optional[str] = Field(None, description="标签id")
+    label: Optional[str] = Field(None, description="标签名称")
+    total: Optional[int] = None
+
+
+class LabelProductCreateResponse(LingXingModel):
+    """创建产品标签 (/label/operation/v1/label/product/create)."""
+    label_id: Optional[str] = None
+    msg: Optional[str] = None
+
+
+class LabelProductMarkResponse(LingXingModel):
+    """标记产品标签 (/label/operation/v1/label/product/mark)."""
+    msg: Optional[str] = None
+
+
+class LabelProductUnmarklabelResponse(LingXingModel):
+    """删除产品标签 (/label/operation/v1/label/product/unmarkLabel)."""
+    msg: Optional[str] = None
+
+
 class ProductGetpagingloglistsResponse(LingXingModel):
     """查询操作日志."""
     action: Optional[str] = Field(None, description="操作类型")

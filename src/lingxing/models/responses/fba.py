@@ -6,6 +6,132 @@ from pydantic import Field
 from ..common import LingXingModel
 
 
+# ==================== STA 货件系列 + 发货计划锁/释放库存（US-004 补全，data 透传模式）===================
+class FbaPlanAllocateStorageResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
+class FbaPlanReleaseStorageResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
+class StaCancelInboundPlanResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
+class StaCommitDeliverTimeResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
+class StaConfirmPlacementResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
+class StaCreateInboundPlanResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
+class StaDetailResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
+class StaGatherInboundPlanResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
+class StaGenerateDeliveryDateResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
+class StaGeneratePlacementResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
+class StaGenerateTransportResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
+class StaGetDeliveryDateResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
+class StaGetPackingBoxInfoResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
+class StaGetPrepDetailsResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
+class StaGetTransportResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
+class StaListGroupPackingResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
+class StaListPackingGroupResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
+class StaOperateResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
+class StaPageResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
+class StaSaveLocalPackingResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
+class StaSetDeliveryServiceResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
+class StaSetPackingResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
+class StaShipmentPreviewResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
+class StaUpdateShipmentPackingResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
+class StaUpdateShipmentTrackResponse(LingXingModel):
+    """STA/FBA 接口响应（最小化，extra=allow 兜底）."""
+    msg: Optional[str] = None
+
+
 class OpenapiInboundPackingGetinboundpackingboxinfoPlacementoptionlist(LingXingModel):
     """placementOptionList sub-structure."""
     placement_option_id: Optional[str] = Field(None, description="货件方案id")

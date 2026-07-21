@@ -5,6 +5,31 @@ from typing import Any
 
 from ..models.responses.fba import GetFbaProductListItem, GetHeadLogisticsFeeTypesItem, GetInboundShipmentListItem, GetSeaTrackSupplierCarriersItem, ShipmentPlanListsItem
 from ..models.responses.fba import (
+    FbaPlanAllocateStorageResponse,
+    FbaPlanReleaseStorageResponse,
+    StaCancelInboundPlanResponse,
+    StaCommitDeliverTimeResponse,
+    StaConfirmPlacementResponse,
+    StaCreateInboundPlanResponse,
+    StaDetailResponse,
+    StaGatherInboundPlanResponse,
+    StaGenerateDeliveryDateResponse,
+    StaGeneratePlacementResponse,
+    StaGenerateTransportResponse,
+    StaGetDeliveryDateResponse,
+    StaGetPackingBoxInfoResponse,
+    StaGetPrepDetailsResponse,
+    StaGetTransportResponse,
+    StaListGroupPackingResponse,
+    StaListPackingGroupResponse,
+    StaOperateResponse,
+    StaPageResponse,
+    StaSaveLocalPackingResponse,
+    StaSetDeliveryServiceResponse,
+    StaSetPackingResponse,
+    StaShipmentPreviewResponse,
+    StaUpdateShipmentPackingResponse,
+    StaUpdateShipmentTrackResponse,
     FbaReportReceivedinventoryResponse,
     FbaReportShipmentlistResponse,
     FbaReportShipmentplanlistsResponse,
@@ -31,7 +56,257 @@ from ._base import BaseEndpoint
 
 
 class FBAEndpoints(BaseEndpoint):
-    """领星FBA发货 API (31个接口)."""
+    """领星FBA发货 API (56个接口)."""
+
+    async def fba_plan_allocate_storage(self, data: dict = None) -> FbaPlanAllocateStorageResponse | None:
+        """FBA仓发货计划锁库存.
+
+POST /basicOpen/openapi/fba/allocateStorage
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/openapi/fba/allocateStorage", data or {})
+        return self._parse_one(resp.data, FbaPlanAllocateStorageResponse)
+
+    async def fba_plan_release_storage(self, data: dict = None) -> FbaPlanReleaseStorageResponse | None:
+        """FBA仓发货计划释放库存.
+
+POST /basicOpen/openapi/fba/releaseStorage
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/openapi/fba/releaseStorage", data or {})
+        return self._parse_one(resp.data, FbaPlanReleaseStorageResponse)
+
+    async def sta_create_inbound_plan(self, data: dict = None) -> StaCreateInboundPlanResponse | None:
+        """创建STA任务.
+
+POST /amzStaServer/openapi/inbound-plan/createInboundPlan
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/inbound-plan/createInboundPlan", data or {})
+        return self._parse_one(resp.data, StaCreateInboundPlanResponse)
+
+    async def sta_list_packing_group(self, data: dict = None) -> list[StaListPackingGroupResponse]:
+        """查询包装组.
+
+POST /amzStaServer/openapi/inbound-packing/listPackingGroupItems
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/inbound-packing/listPackingGroupItems", data or {})
+        return self._parse_list(resp.data, StaListPackingGroupResponse)
+
+    async def sta_save_local_packing(self, data: dict = None) -> StaSaveLocalPackingResponse | None:
+        """保存装箱信息.
+
+POST /amzStaServer/openapi/inbound-packing/setLocalPackingInformation
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/inbound-packing/setLocalPackingInformation", data or {})
+        return self._parse_one(resp.data, StaSaveLocalPackingResponse)
+
+    async def sta_set_packing(self, data: dict = None) -> StaSetPackingResponse | None:
+        """提交装箱信息.
+
+POST /amzStaServer/openapi/inbound-packing/setPackingInformation
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/inbound-packing/setPackingInformation", data or {})
+        return self._parse_one(resp.data, StaSetPackingResponse)
+
+    async def sta_generate_placement(self, data: dict = None) -> StaGeneratePlacementResponse | None:
+        """生成货件方案.
+
+POST /amzStaServer/openapi/inbound-shipment/generatePlacementOptions
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/inbound-shipment/generatePlacementOptions", data or {})
+        return self._parse_one(resp.data, StaGeneratePlacementResponse)
+
+    async def sta_shipment_preview(self, data: dict = None) -> list[StaShipmentPreviewResponse]:
+        """查询货件方案.
+
+POST /amzStaServer/openapi/inbound-shipment/shipmentPreView
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/inbound-shipment/shipmentPreView", data or {})
+        return self._parse_list(resp.data, StaShipmentPreviewResponse)
+
+    async def sta_get_packing_box_info(self, data: dict = None) -> list[StaGetPackingBoxInfoResponse]:
+        """查询货件方案的装箱信息.
+
+POST /amzStaServer/openapi/inbound-packing/getInboundPackingBoxInfo
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/inbound-packing/getInboundPackingBoxInfo", data or {})
+        return self._parse_list(resp.data, StaGetPackingBoxInfoResponse)
+
+    async def sta_confirm_placement(self, data: dict = None) -> StaConfirmPlacementResponse | None:
+        """确认货件方案.
+
+POST /amzStaServer/openapi/inbound-shipment/confirmPlacementOption
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/inbound-shipment/confirmPlacementOption", data or {})
+        return self._parse_one(resp.data, StaConfirmPlacementResponse)
+
+    async def sta_generate_transport(self, data: dict = None) -> StaGenerateTransportResponse | None:
+        """生成承运方式.
+
+POST /amzStaServer/openapi/inbound-shipment/generateTransportList
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/inbound-shipment/generateTransportList", data or {})
+        return self._parse_one(resp.data, StaGenerateTransportResponse)
+
+    async def sta_generate_delivery_date(self, data: dict = None) -> StaGenerateDeliveryDateResponse | None:
+        """生成可选送达时间.
+
+POST /amzStaServer/openapi/inbound-shipment/generateDeliveryDateList
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/inbound-shipment/generateDeliveryDateList", data or {})
+        return self._parse_one(resp.data, StaGenerateDeliveryDateResponse)
+
+    async def sta_get_transport(self, data: dict = None) -> list[StaGetTransportResponse]:
+        """查询承运方式.
+
+POST /amzStaServer/openapi/inbound-shipment/getTransportList
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/inbound-shipment/getTransportList", data or {})
+        return self._parse_list(resp.data, StaGetTransportResponse)
+
+    async def sta_get_delivery_date(self, data: dict = None) -> list[StaGetDeliveryDateResponse]:
+        """查询可选送达时间.
+
+POST /amzStaServer/openapi/inbound-shipment/getDeliveryDateList
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/inbound-shipment/getDeliveryDateList", data or {})
+        return self._parse_list(resp.data, StaGetDeliveryDateResponse)
+
+    async def sta_commit_deliver_time(self, data: dict = None) -> StaCommitDeliverTimeResponse | None:
+        """提交送达时间.
+
+POST /amzStaServer/openapi/inbound-shipment/commitStaDeliverTime
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/inbound-shipment/commitStaDeliverTime", data or {})
+        return self._parse_one(resp.data, StaCommitDeliverTimeResponse)
+
+    async def sta_set_delivery_service(self, data: dict = None) -> StaSetDeliveryServiceResponse | None:
+        """提交货件配送服务.
+
+POST /amzStaServer/openapi/inbound-shipment/setDeliveryService
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/inbound-shipment/setDeliveryService", data or {})
+        return self._parse_one(resp.data, StaSetDeliveryServiceResponse)
+
+    async def sta_update_shipment_packing(self, data: dict = None) -> StaUpdateShipmentPackingResponse | None:
+        """修改货件装箱信息.
+
+POST /amzStaServer/openapi/inbound-packing/updateShipmentPacking
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/inbound-packing/updateShipmentPacking", data or {})
+        return self._parse_one(resp.data, StaUpdateShipmentPackingResponse)
+
+    async def sta_update_shipment_track(self, data: dict = None) -> StaUpdateShipmentTrackResponse | None:
+        """上传货件跟踪号.
+
+POST /amzStaServer/openapi/inbound-shipment/updateShipmentTrack
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/inbound-shipment/updateShipmentTrack", data or {})
+        return self._parse_one(resp.data, StaUpdateShipmentTrackResponse)
+
+    async def sta_cancel_inbound_plan(self, data: dict = None) -> StaCancelInboundPlanResponse | None:
+        """取消STA任务.
+
+POST /amzStaServer/openapi/inbound-plan/cancelInboundPlan
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/inbound-plan/cancelInboundPlan", data or {})
+        return self._parse_one(resp.data, StaCancelInboundPlanResponse)
+
+    async def sta_operate(self, data: dict = None) -> StaOperateResponse | None:
+        """查询异步任务状态.
+
+POST /amzStaServer/openapi/task-plan/operate
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/task-plan/operate", data or {})
+        return self._parse_one(resp.data, StaOperateResponse)
+
+    async def sta_get_prep_details(self, data: dict = None) -> list[StaGetPrepDetailsResponse]:
+        """获取商品预处理信息.
+
+POST /amzStaServer/openapi/inbound-packing/getPrepDetails
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/inbound-packing/getPrepDetails", data or {})
+        return self._parse_list(resp.data, StaGetPrepDetailsResponse)
+
+    async def sta_gather_inbound_plan(self, data: dict = None) -> StaGatherInboundPlanResponse | None:
+        """同步STA任务到ERP.
+
+POST /amzStaServer/openapi/inbound-plan/gatherInboundPlan
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/inbound-plan/gatherInboundPlan", data or {})
+        return self._parse_one(resp.data, StaGatherInboundPlanResponse)
+
+    async def sta_page(self, data: dict = None) -> list[StaPageResponse]:
+        """查询STA任务列表.
+
+POST /amzStaServer/openapi/inbound-plan/page
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/inbound-plan/page", data or {})
+        return self._parse_list(resp.data, StaPageResponse)
+
+    async def sta_detail(self, data: dict = None) -> StaDetailResponse | None:
+        """查询STA任务详情.
+
+POST /amzStaServer/openapi/inbound-plan/detail
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/inbound-plan/detail", data or {})
+        return self._parse_one(resp.data, StaDetailResponse)
+
+    async def sta_list_group_packing(self, data: dict = None) -> list[StaListGroupPackingResponse]:
+        """查询STA任务包装组装箱信息.
+
+POST /amzStaServer/openapi/inbound-plan/listInboundPlanGroupPacking
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/inbound-plan/listInboundPlanGroupPacking", data or {})
+        return self._parse_list(resp.data, StaListGroupPackingResponse)
 
     async def box_info(self, sid: int = None, shipment_id: str = None) -> list[FbaShipmentBoxinfoResponse]:
         """查询货件装箱信息.

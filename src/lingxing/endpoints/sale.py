@@ -5,6 +5,19 @@ from ..models.responses.sale import (
     AmazonProductListResponse,
     AmazonProductPublishResponse,
     AmazonProductSearchResponse,
+    OrderAmzodApiOrderListResponse,
+    OrderAmzodCancelorderResponse,
+    OrderAmzodCreateorderResponse,
+    OrderAmzodLogisticsinformationResponse,
+    OrderAmzodProductinformationResponse,
+    OrderAmzodReturninformationResponse,
+    PbMpOrderGetFulfillmentResultResponse,
+    PbMpOrderSubmitFulfillmentResponse,
+    PromotionCouponAllDetailBatchResponse,
+    PromotionManagementAllDetailBatchResponse,
+    PromotionPrimeDiscountAllDetailBatchResponse,
+    PromotionSecKillAllDetailBatchResponse,
+    SalesorderMultiChannelListTransactionResponse,
     AmzodOrderAftersalelistResponse,
     B2bpriceModifypriceResponse,
     FbafeedifferenceMskuListResponse,
@@ -273,6 +286,167 @@ Args:
             )
             results.extend(self._parse_list(resp.data, AmazonProductSearchResponse))
         return results
+
+    # ==================== 多渠道订单/标发/促销批量详情（US-002 补全，文档 Sale 缺失接口）====================
+
+    async def mcf_order_list(self, sids: list = None, start_date: str = None, end_date: str = None, date_type: int = None, order_status: list = None, offset: int = None, length: int = None) -> list[OrderAmzodApiOrderListResponse]:
+        """查询亚马逊多渠道订单列表v2.
+
+POST /order/amzod/api/orderList
+
+Args:
+    sids: 店铺id列表, array.
+    start_date: 订购时间-开始 Y-m-d, string.
+    end_date: 订购时间-结束 Y-m-d, string.
+    date_type: 查询日期类型 1订购时间【默认】2订单修改时间, int.
+    order_status: 订单状态枚举列表（NEW/RECEIVED/PLANNING/PROCESSING/CANCELLED/COMPLETE/COMPLETE_PARTIALLED/UNFULFILLABLE/INVALID）, array.
+    offset: 分页偏移量 (required), int.
+    length: 分页长度 默认10 上限1000 (required), int."""
+        resp = await self._post("/order/amzod/api/orderList", {k: v for k, v in {"sids": sids, "start_date": start_date, "end_date": end_date, "date_type": date_type, "order_status": order_status, "offset": offset, "length": length}.items() if v is not None})
+        return self._parse_list(resp.data, OrderAmzodApiOrderListResponse)
+
+    async def mcf_order_detail_product(self, order_info: list = None) -> list[OrderAmzodProductinformationResponse]:
+        """查询亚马逊多渠道订单详情-商品信息.
+
+POST /order/amzod/api/orderDetails/productInformation
+
+Args:
+    order_info: 订单信息，上限200 [{sid, seller_fulfillment_order_id}] (required), array."""
+        resp = await self._post("/order/amzod/api/orderDetails/productInformation", {k: v for k, v in {"order_info": order_info}.items() if v is not None})
+        return self._parse_list(resp.data, OrderAmzodProductinformationResponse)
+
+    async def mcf_order_detail_logistics(self, order_info: list = None) -> list[OrderAmzodLogisticsinformationResponse]:
+        """查询亚马逊多渠道订单详情-物流信息.
+
+POST /order/amzod/api/orderDetails/logisticsInformation
+
+Args:
+    order_info: 订单信息，上限200 [{sid, seller_fulfillment_order_id}] (required), array."""
+        resp = await self._post("/order/amzod/api/orderDetails/logisticsInformation", {k: v for k, v in {"order_info": order_info}.items() if v is not None})
+        return self._parse_list(resp.data, OrderAmzodLogisticsinformationResponse)
+
+    async def mcf_order_detail_return(self, order_info: list = None) -> list[OrderAmzodReturninformationResponse]:
+        """查询亚马逊多渠道订单详情-退货换货信息.
+
+POST /order/amzod/api/orderDetails/returnInformation
+
+Args:
+    order_info: 订单信息，上限200 [{sid, seller_fulfillment_order_id}] (required), array."""
+        resp = await self._post("/order/amzod/api/orderDetails/returnInformation", {k: v for k, v in {"order_info": order_info}.items() if v is not None})
+        return self._parse_list(resp.data, OrderAmzodReturninformationResponse)
+
+    async def mcf_create_order(self, store_name: str = None, country: str = None, order_id: str = None, receiver: str = None, country_code: str = None, region: str = None, city: str = None, address1: str = None, address2: str = None, postcode: str = None, phone_number: str = None, buyers_mailbox: str = None, order_id_for_packing: str = None, date_for_packing: str = None, remark_for_packing: str = None, is_blank_box: str = None, is_block_amzl: str = None, items: list = None) -> list[OrderAmzodCreateorderResponse]:
+        """创建亚马逊多渠道订单.
+
+POST /order/amzod/api/createOrder
+
+Args:
+    store_name: 店铺名 (required), string.
+    country: 店铺国家 (required), string.
+    order_id: 订单号 (required), string.
+    receiver: 收件人 (required), string.
+    country_code: 收货国家简码 (required), string.
+    region: 地区 (required), string.
+    city: 城市, string.
+    address1: 地址1 (required), string.
+    address2: 地址2, string.
+    postcode: 邮编 (required), string.
+    phone_number: 电话号码, string.
+    buyers_mailbox: 买家邮箱 (required), string.
+    order_id_for_packing: 装箱单-订单号 (required), string.
+    date_for_packing: 装箱单-订单日期 (required), string.
+    remark_for_packing: 装箱单-备注, string.
+    is_blank_box: 是否无品牌包装箱 是/否, string.
+    is_block_amzl: 是否阻止亚马逊物流 是/否, string.
+    items: 商品行列表, array."""
+        resp = await self._post("/order/amzod/api/createOrder", {k: v for k, v in {"store_name": store_name, "country": country, "order_id": order_id, "receiver": receiver, "country_code": country_code, "region": region, "city": city, "address1": address1, "address2": address2, "postcode": postcode, "phone_number": phone_number, "buyers_mailbox": buyers_mailbox, "order_id_for_packing": order_id_for_packing, "date_for_packing": date_for_packing, "remark_for_packing": remark_for_packing, "is_blank_box": is_blank_box, "is_block_amzl": is_block_amzl, "items": items}.items() if v is not None})
+        return self._parse_list(resp.data, OrderAmzodCreateorderResponse)
+
+    async def mcf_cancel_order(self, sid: int = None, seller_fulfillment_order_id: str = None) -> list[OrderAmzodCancelorderResponse]:
+        """取消多渠道订单.
+
+POST /order/amzod/api/cancelOrder
+
+Args:
+    sid: 店铺id (required), int.
+    seller_fulfillment_order_id: 卖家订单号 (required), string."""
+        resp = await self._post("/order/amzod/api/cancelOrder", {k: v for k, v in {"sid": sid, "seller_fulfillment_order_id": seller_fulfillment_order_id}.items() if v is not None})
+        return self._parse_list(resp.data, OrderAmzodCancelorderResponse)
+
+    async def mcf_transaction_detail(self, sid: int = None, amazon_order_id: str = None) -> list[SalesorderMultiChannelListTransactionResponse]:
+        """查询多渠道订单-交易明细.
+
+POST /basicOpen/openapi/salesOrder/multi-channel/list/transaction
+
+Args:
+    sid: 店铺id (required), int.
+    amazon_order_id: 亚马逊订单ID (required), string."""
+        resp = await self._post("/basicOpen/openapi/salesOrder/multi-channel/list/transaction", {k: v for k, v in {"sid": sid, "amazonOrderId": amazon_order_id}.items() if v is not None})
+        return self._parse_list(resp.data, SalesorderMultiChannelListTransactionResponse)
+
+    async def submit_fulfillment(self, region: str = None, seller_id: str = None, marketplace_id: str = None, order_list: list = None) -> list[PbMpOrderSubmitFulfillmentResponse]:
+        """亚马逊订单提交标发.
+
+POST /pb/mp/order/submitFulfillment
+
+Args:
+    region: 店铺注册区域 NA/EU/FE (required), string.
+    seller_id: 亚马逊店铺id (required), string.
+    marketplace_id: 市场id (required), string.
+    order_list: 提交标发数据列表 [{id,platform_order_no,tracking_no,carrier_code,carrier_name,shipping_service,order_item}] (required), array."""
+        resp = await self._post("/pb/mp/order/submitFulfillment", {k: v for k, v in {"region": region, "seller_id": seller_id, "marketplace_id": marketplace_id, "order_list": order_list}.items() if v is not None})
+        return self._parse_list(resp.data, PbMpOrderSubmitFulfillmentResponse)
+
+    async def get_fulfillment_result(self, seller_id: str = None, task_id: list = None) -> list[PbMpOrderGetFulfillmentResultResponse]:
+        """查询亚马逊标发结果.
+
+POST /pb/mp/order/getFulfillmentResult
+
+Args:
+    seller_id: 亚马逊店铺id (required), string.
+    task_id: 任务id列表，最多10个 (required), array."""
+        resp = await self._post("/pb/mp/order/getFulfillmentResult", {k: v for k, v in {"seller_id": seller_id, "task_id": task_id}.items() if v is not None})
+        return self._parse_list(resp.data, PbMpOrderGetFulfillmentResultResponse)
+
+    async def promotion_coupon_all_detail_batch(self, item_list: list = None) -> list[PromotionCouponAllDetailBatchResponse]:
+        """查询优惠券详情+listing+订单(批量).
+
+POST /promotionApi/open/promotion/couponAllDetailBatch
+
+Args:
+    item_list: 批量请求 1-20个 [{promotionId,storeId,orderPageNum,orderPageSize,listingPageNum,listingPageSize}] (required), array."""
+        resp = await self._post("/promotionApi/open/promotion/couponAllDetailBatch", {k: v for k, v in {"itemList": item_list}.items() if v is not None})
+        return self._parse_list(resp.data, PromotionCouponAllDetailBatchResponse)
+
+    async def promotion_management_all_detail_batch(self, item_list: list = None) -> list[PromotionManagementAllDetailBatchResponse]:
+        """查询管理促销详情+listing+订单(批量).
+
+POST /promotionApi/open/promotion/managementAllDetailBatch
+
+Args:
+    item_list: 批量请求 1-20个 [{promotionId,storeId,orderPageNum,orderPageSize,listingPageNum,listingPageSize}] (required), array."""
+        resp = await self._post("/promotionApi/open/promotion/managementAllDetailBatch", {k: v for k, v in {"itemList": item_list}.items() if v is not None})
+        return self._parse_list(resp.data, PromotionManagementAllDetailBatchResponse)
+
+    async def promotion_prime_discount_all_detail_batch(self, item_list: list = None) -> list[PromotionPrimeDiscountAllDetailBatchResponse]:
+        """查询会员折扣/价格折扣详情+listing+订单(批量).
+
+POST /promotionApi/open/promotion/primeDiscountAllDetailBatch
+
+Args:
+    item_list: 批量请求 1-20个 [{promotionId,storeId,orderPageNum,orderPageSize,listingPageNum,listingPageSize}] (required), array."""
+        resp = await self._post("/promotionApi/open/promotion/primeDiscountAllDetailBatch", {k: v for k, v in {"itemList": item_list}.items() if v is not None})
+        return self._parse_list(resp.data, PromotionPrimeDiscountAllDetailBatchResponse)
+
+    async def promotion_sec_kill_all_detail_batch(self, item_list: list = None) -> list[PromotionSecKillAllDetailBatchResponse]:
+        """查询秒杀详情+listing+订单(批量).
+
+POST /promotionApi/open/promotion/secKillAllDetailBatch
+
+Args:
+    item_list: 批量请求 1-20个 [{promotionId,storeId,orderPageNum,orderPageSize,listingPageNum,listingPageSize}] (required), array."""
+        resp = await self._post("/promotionApi/open/promotion/secKillAllDetailBatch", {k: v for k, v in {"itemList": item_list}.items() if v is not None})
+        return self._parse_list(resp.data, PromotionSecKillAllDetailBatchResponse)
     async def refund_order(self, sid: float = None, amazonOrderId: str = None, purchaseDateLocal: str = None, data: Any = None) -> SalesorderRefundorderResponse | None:
         """订单退款.
 

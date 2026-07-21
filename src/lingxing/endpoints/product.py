@@ -25,6 +25,10 @@ from ..models.responses.product import (
     StorageSpuInfoResponse,
     StorageSpuSetResponse,
     StorageSpuSpulistResponse,
+    LabelProductCreateResponse,
+    LabelProductListResponse,
+    LabelProductMarkResponse,
+    LabelProductUnmarklabelResponse,
 )
 
 from typing import Any
@@ -34,7 +38,50 @@ from ._base import BaseEndpoint
 
 
 class ProductEndpoints(BaseEndpoint):
-    """领星产品 API (23个接口)."""
+    """领星产品 API (27个接口)."""
+
+    async def product_tag_list(self, offset: int = None, length: int = None) -> list[LabelProductListResponse]:
+        """查询产品标签.
+
+POST /label/operation/v1/label/product/list
+
+Args:
+    offset: 分页偏移量, int.
+    length: 分页长度, int."""
+        resp = await self._post("/label/operation/v1/label/product/list", {k: v for k, v in {"offset": offset, "length": length}.items() if v is not None})
+        return self._parse_list(resp.data, LabelProductListResponse)
+
+    async def product_tag_create(self, label: str = None) -> LabelProductCreateResponse | None:
+        """创建产品标签.
+
+POST /label/operation/v1/label/product/create
+
+Args:
+    label: 标签名称，最长15字符，中间不能有空格 (required), string."""
+        resp = await self._post("/label/operation/v1/label/product/create", {k: v for k, v in {"label": label}.items() if v is not None})
+        return self._parse_one(resp.data, LabelProductCreateResponse)
+
+    async def product_tag_mark(self, operate_type: int = None, detail_list: list = None) -> list[LabelProductMarkResponse]:
+        """标记产品标签.
+
+POST /label/operation/v1/label/product/mark
+
+Args:
+    operate_type: 操作类型 1追加 2覆盖 (required), int.
+    detail_list: 标签信息，上限200 (required), array."""
+        resp = await self._post("/label/operation/v1/label/product/mark", {k: v for k, v in {"type": operate_type, "detail_list": detail_list}.items() if v is not None})
+        return self._parse_list(resp.data, LabelProductMarkResponse)
+
+    async def product_tag_unmark(self, operate_type: int = None, detail_list: list = None) -> list[LabelProductUnmarklabelResponse]:
+        """删除产品标签.
+
+POST /label/operation/v1/label/product/unmarkLabel
+
+Args:
+    operate_type: 操作类型 1删除SKU指定标签 2删除SKU全部标签 (required), int.
+    detail_list: 标签信息，上限200 (required), array."""
+        resp = await self._post("/label/operation/v1/label/product/unmarkLabel", {k: v for k, v in {"type": operate_type, "detail_list": detail_list}.items() if v is not None})
+        return self._parse_list(resp.data, LabelProductUnmarklabelResponse)
 
     async def add_commodity_code(self, commodity_codes: Any = None, code_type: str = None) -> PublishUpcAddcommoditycodeResponse | None:
         """创建UPC编码.
