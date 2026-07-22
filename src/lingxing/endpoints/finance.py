@@ -2,6 +2,9 @@
 from __future__ import annotations
 
 from ..models.responses.finance import (
+    FeeManagementOtherFeeTypeResponse,
+    ProfitReportConfigResponse,
+    SettlementProfitListResponse,
     FeemanagementOtherfeeListResponse,
     FinanceMreportOrderprofitResponse,
     FinanceProfitstateProfitasinResponse,
@@ -40,7 +43,49 @@ from ._base import BaseEndpoint
 
 
 class FinanceEndpoints(BaseEndpoint):
-    """领星财务 API (47个接口)."""
+    """领星财务 API (50个接口)."""
+
+    async def fee_management_other_fee_type(self, offset: int = None, length: int = None) -> list[FeeManagementOtherFeeTypeResponse]:
+        """查询费用类型列表.
+
+POST /bd/fee/management/open/feeManagement/otherFee/type
+
+Args:
+    offset: 分页偏移量, int.
+    length: 分页长度, int."""
+        resp = await self._post("/bd/fee/management/open/feeManagement/otherFee/type", {k: v for k, v in {"offset": offset, "length": length}.items() if v is not None})
+        return self._parse_list(resp.data, FeeManagementOtherFeeTypeResponse)
+
+    async def profit_report_config(self) -> ProfitReportConfigResponse | None:
+        """查询利润报表-列表配置.
+
+POST /basicOpen/finance/profitReport/config"""
+        resp = await self._post("/basicOpen/finance/profitReport/config", {})
+        return self._parse_one(resp.data, ProfitReportConfigResponse)
+
+    async def settlement_profit_list(self, summary_field: int = None, summary_type: int = None, page_num: int = None, page_size: int = None, start_date: str = None, end_date: str = None, date_range_type: int = None, sids: list = None, platform_codes: list = None, areas: list = None, countries: list = None, brands: list = None, categories: list = None, developers: list = None, currency: str = None) -> list[SettlementProfitListResponse]:
+        """查询利润报表-明细列表.
+
+POST /basicOpen/finance/settlement/profitList
+
+Args:
+    summary_field: 汇总维度 1订单 2店铺 3MSKU 4SKU 5开发者, int.
+    summary_type: 时间汇总维度（非订单维度生效）, int.
+    page_num: 页码 默认1, int.
+    page_size: 每页大小 默认20 最大200, int.
+    start_date: 开始日期 yyyy-MM-dd, string.
+    end_date: 结束日期 yyyy-MM-dd, string.
+    date_range_type: 日期范围类型 0结算时间 1下单时间 默认0, int.
+    sids: 店铺ID列表, array.
+    platform_codes: 平台代码列表, array.
+    areas: 站点/区域列表, array.
+    countries: 国家列表, array.
+    brands: 品牌ID列表, array.
+    categories: 分类ID列表, array.
+    developers: 开发人UID列表, array.
+    currency: 币种, string."""
+        resp = await self._post("/basicOpen/finance/settlement/profitList", {k: v for k, v in {"summaryField": summary_field, "summaryType": summary_type, "pageNum": page_num, "pageSize": page_size, "startDate": start_date, "endDate": end_date, "dateRangeType": date_range_type, "sids": sids, "platformCodes": platform_codes, "areas": areas, "countries": countries, "brands": brands, "categories": categories, "developers": developers, "currency": currency}.items() if v is not None})
+        return self._parse_list(resp.data, SettlementProfitListResponse)
 
     async def fiance_profit_msku(self, offset: int = None, length: int = None, currency_type: int = None, sids: str = None, month: str = None) -> list[FinanceProfitstateProfitmskuResponse]:
         """查询利润报表（旧） - MSKU.

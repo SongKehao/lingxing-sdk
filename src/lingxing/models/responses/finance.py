@@ -6,6 +6,25 @@ from pydantic import Field
 from ..common import LingXingModel
 
 
+# ==================== US-006 补全：费用类型/利润报表配置/利润报表明细 ====================
+class FeeManagementOtherFeeTypeResponse(LingXingModel):
+    """查询费用类型列表 (/bd/fee/management/open/feeManagement/otherFee/type)."""
+    fee_type_id: Optional[str] = None
+    name: Optional[str] = None
+    total: Optional[int] = None
+
+
+class ProfitReportConfigResponse(LingXingModel):
+    """查询利润报表-列表配置 (/basicOpen/finance/profitReport/config)."""
+    total: Optional[int] = None
+
+
+class SettlementProfitListResponse(LingXingModel):
+    """查询利润报表-明细列表 (/basicOpen/finance/settlement/profitList)."""
+    sid: Optional[int] = None
+    total: Optional[int] = None
+
+
 class LazadaPayoutListTotalsum(LingXingModel):
     """totalSum sub-structure."""
     payout_amount: Optional[str] = Field(None, description="回款金额汇总")
