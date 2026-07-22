@@ -50,7 +50,7 @@ def test_total_method_count():
             and asyncio.iscoroutinefunction(getattr(cls, m))
         ]
         total += len(methods)
-    assert total == 564, f"Expected 564 async methods, got {total}"
+    assert total == 565, f"Expected 565 async methods, got {total}"
 
 
 def test_sync_wrappers_generated():

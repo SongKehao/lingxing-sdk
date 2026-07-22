@@ -12,7 +12,7 @@ from ._base import BaseEndpoint
 
 
 class ToolsEndpoints(BaseEndpoint):
-    """领星工具 API (4个接口)."""
+    """领星工具 API (5个接口)."""
 
     async def competitive_monitor_list(self, levels: list = None, update_time_start: str = None, update_time_end: str = None, search_field: str = None, search_value: str = None, offset: int = None, length: int = None) -> list[ToolCompetitivemonitorListResponse]:
         """查询竞品监控列表.
@@ -42,6 +42,22 @@ Args:
     length: 分页长度，默认20，最大值为2000 (required), int."""
         resp = await self._post("/erp/sc/routing/tool/toolKeywordRank/getKeywordList", {k: v for k, v in {"mid": mid, "start_date": start_date, "end_date": end_date, "offset": offset, "length": length}.items() if v is not None})
         return self._parse_list(resp.data, ToolToolkeywordrankGetkeywordlistResponse)
+
+    async def query_erp_keyword_ranking_asin(self, asin: str, mid: int = None, start_date: str = None, end_date: str = None, length: int = 2000) -> list[ToolToolkeywordrankGetkeywordlistResponse]:
+        """查询指定 ASIN 的关键词排名.
+
+        领星关键词排名接口（/erp/sc/routing/tool/toolKeywordRank/getKeywordList）返回全量监控数据，
+        本方法在其基础上按 asin 过滤，返回该 ASIN 的关键词排名（关键词/排名/页码/PC或移动/广告或自然）。
+
+        Args:
+            asin: 要查询的 ASIN (required), string.
+            mid: 国家id, int.
+            start_date: 开始日期 Y-m-d, string.
+            end_date: 结束日期 Y-m-d, string.
+            length: 拉取条数，默认2000（越大覆盖越全，最大2000）, int."""
+        rows = await self.get_keyword_list(mid=mid, start_date=start_date, end_date=end_date, offset=0, length=length)
+        return [r for r in rows if (r.asin if hasattr(r, "asin") else (r.get("asin") if isinstance(r, dict) else None)) == asin]
+
     async def warning_message_goods_list(self, offset: int = None, length: int = None, model_id_list: list = None, sids: list = None, start_date: str = None, end_date: str = None, search_field: str = None, search_value: str = None, show_status: int = None) -> list[SettingsWarningmessageGoodslistResponse]:
         """查询预警消息列表-商品.
 
