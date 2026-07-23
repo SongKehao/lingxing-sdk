@@ -92,11 +92,11 @@ class CustomerserviceRmamanageListResponse(LingXingModel):
     """查询RMA管理."""
     total: Optional[float] = Field(None, description="总数")
     size: Optional[Any] = Field(None, description="是")
-    page_count: Optional[Any] = Field(None, description="是")
+    page_count: Optional[int] = Field(None, description="是")
     current: Optional[Any] = Field(None, description="是")
     current_size: Optional[Any] = Field(None, description="是")
-    has_next_page: Optional[Any] = Field(None, description="是")
-    has_previous_page: Optional[Any] = Field(None, description="是")
+    has_next_page: Optional[int] = Field(None, description="是")
+    has_previous_page: Optional[int] = Field(None, description="是")
     records: Optional[List[CustomerserviceRmamanageListRecords]] = Field(None, description="返回结果数据")
 
 
@@ -311,7 +311,7 @@ class V3MwsReviewsResponse(LingXingModel):
     author: Optional[str] = Field(None, description="买家信息")
     images: Optional[list] = Field(None, description="评论图片链接")
     videos: Optional[list] = Field(None, description="评论视频链接")
-    is_vp: Optional[Any] = Field(None, description="是")
+    is_vp: Optional[int] = Field(None, description="是")
     seller_name: Optional[list] = Field(None, description="店铺")
     marketplace: Optional[str] = Field(None, description="国家")
     review_date: Optional[str] = Field(None, description="评价时间")

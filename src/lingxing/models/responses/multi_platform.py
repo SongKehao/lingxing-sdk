@@ -2379,8 +2379,8 @@ class MultiplatformEbayListResponse(LingXingModel):
     msku: Optional[str] = Field(None, description="MSKU")
     attribute: Optional[str] = Field(None, description="变体属性")
     title: Optional[str] = Field(None, description="标题")
-    local_name: Optional[Any] = Field(None, description="品名")
-    local_sku: Optional[Any] = Field(None, description="SKU")
+    local_name: Optional[str] = Field(None, description="品名")
+    local_sku: Optional[str] = Field(None, description="SKU")
     listing_status: Optional[int] = Field(None, description="状态值")
     listing_status_name: Optional[str] = Field(None, description="状态")
     store_id: Optional[str] = Field(None, description="店铺id")
@@ -3863,7 +3863,7 @@ class MultiplatformSheinListList(LingXingModel):
     bid: Optional[str] = Field(None, description="品牌id")
     day7_sale_cnt: Optional[int] = Field(None, description="7天销量")
     day30_sale_cnt: Optional[int] = Field(None, description="30天销量")
-    ware_house_data_list: Optional[Any] = Field(None, description="是")
+    ware_house_data_list: Optional[list] = Field(None, description="是")
     notes: Optional[str] = Field(None, description="备注")
     img_small_url: Optional[str] = Field(None, description="图片链接（低质量）")
     img_medium_url: Optional[str] = Field(None, description="图片链接（中质量）")
@@ -3874,7 +3874,7 @@ class MultiplatformSheinListList(LingXingModel):
     spu: Optional[str] = Field(None, description="SPU")
     status: Optional[int] = Field(None, description="状态")
     site: Optional[str] = Field(None, description="站点")
-    site_list: Optional[Any] = Field(None, description="是")
+    site_list: Optional[list] = Field(None, description="是")
     attribute: Optional[str] = Field(None, description="属性")
     category_name: Optional[str] = Field(None, description="大分类名称")
     sale_price: Optional[float] = Field(None, description="售价")
@@ -3885,7 +3885,7 @@ class MultiplatformSheinListList(LingXingModel):
     usable_inventory: Optional[int] = Field(None, description="可用库存")
     bname: Optional[str] = Field(None, description="品牌名称")
     cname: Optional[str] = Field(None, description="细分类名称")
-    supply_price_list: Optional[Any] = Field(None, description="是")
+    supply_price_list: Optional[float] = Field(None, description="是")
 
 class MultiplatformSheinListResponse(LingXingModel):
     """查询Shein在线商品."""
@@ -3971,7 +3971,7 @@ class MultiplatformTemuCargoList(LingXingModel):
     appointment_end_time: Optional[str] = Field(None, description="预约结束时间")
     appointment_start_time: Optional[str] = Field(None, description="预约开始时间")
     cargo_code: Optional[str] = Field(None, description="货件单号")
-    cargo_good_list_responses: Optional[Any] = Field(None, description="是")
+    cargo_good_list_responses: Optional[list] = Field(None, description="是")
     deliver_method: Optional[str] = Field(None, description="配送方式")
     deliver_package_num: Optional[int] = Field(None, description="已发包裹数")
     deliver_receive_package_skc_num: Optional[str] = Field(None, description="已发/实收包裹件数")
@@ -4035,7 +4035,7 @@ class MultiplatformTemuListList(LingXingModel):
     bid: Optional[str] = Field(None, description="品牌id")
     day7_sale_cnt: Optional[int] = Field(None, description="7天销量")
     day30_sale_cnt: Optional[int] = Field(None, description="30天销量")
-    ware_house_data_list: Optional[Any] = Field(None, description="是")
+    ware_house_data_list: Optional[list] = Field(None, description="是")
     notes: Optional[str] = Field(None, description="备注")
     img_url: Optional[str] = Field(None, description="图片链接")
     skc_id: Optional[str] = Field(None, description="SKC ID")
@@ -4050,7 +4050,7 @@ class MultiplatformTemuListList(LingXingModel):
     usable_inventory: Optional[Any] = Field(None, description="可用库存")
     bname: Optional[str] = Field(None, description="品牌名称")
     cname: Optional[str] = Field(None, description="分类名称")
-    supply_price_list: Optional[Any] = Field(None, description="是")
+    supply_price_list: Optional[float] = Field(None, description="是")
 
 class MultiplatformTemuListResponse(LingXingModel):
     """查询Temu在线商品."""
@@ -4191,7 +4191,7 @@ class MultiplatformWayfairStocksearchResponse(LingXingModel):
 class MultiplatformOrderPreshipmentFailureInfo(LingXingModel):
     """failure_info sub-structure."""
     message: Optional[Any] = Field(None, description="失败原因")
-    global_order_no: Optional[Any] = Field(None, description="系统单号")
+    global_order_no: Optional[str] = Field(None, description="系统单号")
 
 class MultiplatformOrderPreshipmentResponse(LingXingModel):
     """预发货."""
@@ -4203,11 +4203,11 @@ class MultiplatformOrderPreshipmentResponse(LingXingModel):
 class MultiplatformOrderReviewFailureInfo(LingXingModel):
     """failure_info sub-structure."""
     message: Optional[Any] = Field(None, description="失败原因")
-    global_order_no: Optional[Any] = Field(None, description="系统单号")
+    global_order_no: Optional[str] = Field(None, description="系统单号")
 
 class MultiplatformOrderReviewSuccessInfo(LingXingModel):
     """success_info sub-structure."""
-    global_order_no: Optional[Any] = Field(None, description="系统单号")
+    global_order_no: Optional[str] = Field(None, description="系统单号")
 
 class MultiplatformOrderReviewResponse(LingXingModel):
     """审核发货."""

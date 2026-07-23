@@ -138,31 +138,31 @@ class FinanceMreportOrderprofitPriceList(LingXingModel):
     local_sku: Optional[str] = Field(None, description="sku")
     item_name: Optional[str] = Field(None, description="标题")
     cate_title: Optional[Any] = Field(None, description="是")
-    local_name: Optional[Any] = Field(None, description="是")
+    local_name: Optional[str] = Field(None, description="是")
     sid: Optional[Any] = Field(None, description="是")
-    is_delete: Optional[Any] = Field(None, description="是")
-    brand_title: Optional[Any] = Field(None, description="是")
+    is_delete: Optional[int] = Field(None, description="是")
+    brand_title: Optional[str] = Field(None, description="是")
     volume: Optional[Any] = Field(None, description="是")
-    small_main_image_url: Optional[Any] = Field(None, description="是")
-    site_url: Optional[Any] = Field(None, description="是")
-    parent_asin: Optional[Any] = Field(None, description="是")
-    seller_sku: Optional[Any] = Field(None, description="是")
-    asin: Optional[Any] = Field(None, description="是")
+    small_main_image_url: Optional[str] = Field(None, description="是")
+    site_url: Optional[str] = Field(None, description="是")
+    parent_asin: Optional[str] = Field(None, description="是")
+    seller_sku: Optional[str] = Field(None, description="是")
+    asin: Optional[str] = Field(None, description="是")
     status: Optional[Any] = Field(None, description="是")
 
 class FinanceMreportOrderprofitLocalInfos(LingXingModel):
     """local_infos sub-structure."""
-    local_sku: Optional[Any] = Field(None, description="是")
-    local_name: Optional[Any] = Field(None, description="是")
+    local_sku: Optional[str] = Field(None, description="是")
+    local_name: Optional[str] = Field(None, description="是")
 
 class FinanceMreportOrderprofitAsins(LingXingModel):
     """asins sub-structure."""
-    asin_url: Optional[Any] = Field(None, description="是")
-    asin: Optional[Any] = Field(None, description="是")
+    asin_url: Optional[str] = Field(None, description="是")
+    asin: Optional[str] = Field(None, description="是")
 
 class FinanceMreportOrderprofitSellerStoreCountries(LingXingModel):
     """seller_store_countries sub-structure."""
-    country: Optional[Any] = Field(None, description="是")
+    country: Optional[str] = Field(None, description="是")
     name: Optional[Any] = Field(None, description="是")
 
 class FinanceMreportOrderprofitResponse(LingXingModel):
@@ -1157,7 +1157,7 @@ class ReportAsinListRecords(LingXingModel):
     transaction_status_code: Optional[str] = Field(None, description="[string]")
     id: Optional[str] = Field(None, description="[string]")
     posted_date_locale: Optional[str] = Field(None, description="[string]")
-    is_display_detail: Optional[Any] = Field(None, description="[boolean]")
+    is_display_detail: Optional[dict] = Field(None, description="[boolean]")
     small_image_url: Optional[str] = Field(None, description="[string]")
     parent_asin: Optional[str] = Field(None, description="[string]")
     asin: Optional[str] = Field(None, description="[string]")
@@ -1426,7 +1426,7 @@ class ParentAsinListRecords(LingXingModel):
     transaction_status_code: Optional[str] = Field(None, description="[string]")
     id: Optional[str] = Field(None, description="[string]")
     posted_date_locale: Optional[str] = Field(None, description="[string]")
-    is_display_detail: Optional[Any] = Field(None, description="[boolean]")
+    is_display_detail: Optional[dict] = Field(None, description="[boolean]")
     small_image_url: Optional[str] = Field(None, description="[string]")
     parent_asin: Optional[str] = Field(None, description="[string]")
     asin: Optional[str] = Field(None, description="[string]")
@@ -2019,7 +2019,7 @@ class ReportSkuListRecords(LingXingModel):
     transaction_status_code: Optional[str] = Field(None, description="[string]")
     id: Optional[str] = Field(None, description="[string]")
     posted_date_locale: Optional[str] = Field(None, description="[string]")
-    is_display_detail: Optional[Any] = Field(None, description="[boolean]")
+    is_display_detail: Optional[dict] = Field(None, description="[boolean]")
     small_image_url: Optional[str] = Field(None, description="[string]")
     store_name: Optional[dict] = Field(None, description="[object]")
     sids: Optional[str] = Field(None, description="[string]")
