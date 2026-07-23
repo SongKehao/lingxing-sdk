@@ -62,6 +62,17 @@ class StaSaveLocalPackingReq(TypedDict, total=False):
     packingGroupId: str
     shipmentId: str
 
+class InboundPlanItemReq(TypedDict, total=False):
+    expiration: str
+    labelOwner: str
+    msku: str
+    prepOwner: str
+    quantity: int
+    prepCategory: str
+    prepTypes: list
+    invoiceSns: list
+
+
 class StaCreateInboundPlanReq(TypedDict, total=False):
     addressLine1: str
     addressLine2: str
@@ -69,7 +80,15 @@ class StaCreateInboundPlanReq(TypedDict, total=False):
     companyName: str
     countryCode: str
     email: str
-    inboundPlanItems: list
+    phoneNumber: str
+    planName: str
+    positionType: str
+    postalCode: str
+    remark: str
+    shipperName: str
+    sid: int
+    stateOrProvinceCode: str
+    inboundPlanItems: list  # List[InboundPlanItemReq]
 
 
 class FBAEndpoints(BaseEndpoint):

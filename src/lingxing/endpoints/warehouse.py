@@ -91,14 +91,65 @@ from ..models.responses.warehouse import (
 from ._base import BaseEndpoint
 
 
+class SingleProductReq(TypedDict, total=False):
+    sku: str
+    fnsku: str
+    sid: int
+    price_scale: float
+    whb_code: str
+    remark: str
+
+
+class ProcessProductReq(TypedDict, total=False):
+    combo_sku: str
+    combo_sid: int
+    combo_fnsku: str
+    quantity_num: int
+    combo_whb_code: str
+    process_fee: float
+    single_product_list: list  # List[SingleProductReq]
+
+
 class ProcessOrderAddReq(TypedDict, total=False):
     type: int
     wid: int
     remark: str
-    product_list: list
+    product_list: list  # List[ProcessProductReq]
+
+
+class AwdDeliveredGoodsBoReq(TypedDict, total=False):
+    boxQuantity: str
+    expiration: str
+    height: float
+    labelOwner: str
+    length: float
+    lengthUnit: str
+    msku: str
+    prepCategory: str
+    prepOwner: str
+    quantityInBox: str
+    weight: float
+    weightUnit: str
+    width: float
+
+
+class AwdShippingAddressBoReq(TypedDict, total=False):
+    addressLine1: str
+    addressLine2: str
+    city: str
+    countryCode: str
+    phoneNumber: str
+    postalCode: str
+    shipperName: str
+    stateOrProvinceCode: str
+    zone: str
+
 
 class AwdCreateInboundPlanReq(TypedDict, total=False):
-    awdDeliveredGoodsBOS: list
+    awdDeliveredGoodsBOS: list  # List[AwdDeliveredGoodsBoReq]
+    awdShippingAddressBO: dict  # AwdShippingAddressBoReq
+    destinationRegion: str
+    sid: int
 
 
 class WarehouseEndpoints(BaseEndpoint):
