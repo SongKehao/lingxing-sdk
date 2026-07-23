@@ -20,6 +20,7 @@ class LingXingModel(BaseModel):
         extra="allow",
         populate_by_name=True,
         alias_generator=_to_camel,
+        coerce_numbers_to_str=True,
     )
 
 

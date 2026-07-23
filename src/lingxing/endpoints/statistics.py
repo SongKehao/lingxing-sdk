@@ -2,10 +2,10 @@
 from __future__ import annotations
 
 from ..models.responses.statistics import (
-    ProfitStatMskuListResponse,
-    ProfitStatAsinListResponse,
-    ProfitStatParentAsinListResponse,
-    ProfitStatSellerListResponse,
+    StatisticsMskuListRecords,
+    StatisticsAsinListRecords,
+    ParentAsinListRecords,
+    StatisticsSellerListRecords,
     InvReportLocalAggregateResponse,
     InvReportLocalDetailResponse,
     InvReportOverseasAggregateResponse,
@@ -53,7 +53,7 @@ from ._base import BaseEndpoint
 class StatisticsEndpoints(BaseEndpoint):
     """领星统计报表 API (31个接口)."""
 
-    async def profit_stat_msku(self, offset: int = None, length: int = None, mids: list = None, sids: list = None, start_date: str = None, end_date: str = None, search_field: str = None, search_value: str = None, currency_code: str = None) -> list[ProfitStatMskuListResponse]:
+    async def profit_stat_msku(self, offset: int = None, length: int = None, mids: list = None, sids: list = None, start_date: str = None, end_date: str = None, search_field: str = None, search_value: str = None, currency_code: str = None) -> list[StatisticsMskuListRecords]:
         """查询利润统计-MSKU.
 
 POST /bd/profit/statistics/open/msku/list
@@ -69,9 +69,9 @@ Args:
     search_value: see API doc.
     currency_code: see API doc."""
         resp = await self._post("/bd/profit/statistics/open/msku/list", {k: v for k, v in {"offset": offset, "length": length, "mids": mids, "sids": sids, "startDate": start_date, "endDate": end_date, "searchField": search_field, "searchValue": search_value, "currencyCode": currency_code}.items() if v is not None})
-        return self._parse_list(resp.data, ProfitStatMskuListResponse)
+        return self._parse_list(resp.data, StatisticsMskuListRecords)
 
-    async def profit_stat_asin(self, offset: int = None, length: int = None, mids: list = None, sids: list = None, start_date: str = None, end_date: str = None, search_field: str = None, search_value: str = None, currency_code: str = None) -> list[ProfitStatAsinListResponse]:
+    async def profit_stat_asin(self, offset: int = None, length: int = None, mids: list = None, sids: list = None, start_date: str = None, end_date: str = None, search_field: str = None, search_value: str = None, currency_code: str = None) -> list[StatisticsAsinListRecords]:
         """查询利润统计-ASIN.
 
 POST /bd/profit/statistics/open/asin/list
@@ -87,9 +87,9 @@ Args:
     search_value: see API doc.
     currency_code: see API doc."""
         resp = await self._post("/bd/profit/statistics/open/asin/list", {k: v for k, v in {"offset": offset, "length": length, "mids": mids, "sids": sids, "startDate": start_date, "endDate": end_date, "searchField": search_field, "searchValue": search_value, "currencyCode": currency_code}.items() if v is not None})
-        return self._parse_list(resp.data, ProfitStatAsinListResponse)
+        return self._parse_list(resp.data, StatisticsAsinListRecords)
 
-    async def profit_stat_parent_asin(self, offset: int = None, length: int = None, mids: list = None, sids: list = None, start_date: str = None, end_date: str = None, search_field: str = None, search_value: str = None, currency_code: str = None) -> list[ProfitStatParentAsinListResponse]:
+    async def profit_stat_parent_asin(self, offset: int = None, length: int = None, mids: list = None, sids: list = None, start_date: str = None, end_date: str = None, search_field: str = None, search_value: str = None, currency_code: str = None) -> list[ParentAsinListRecords]:
         """查询利润统计-父ASIN.
 
 POST /bd/profit/statistics/open/parent/asin/list
@@ -105,9 +105,9 @@ Args:
     search_value: see API doc.
     currency_code: see API doc."""
         resp = await self._post("/bd/profit/statistics/open/parent/asin/list", {k: v for k, v in {"offset": offset, "length": length, "mids": mids, "sids": sids, "startDate": start_date, "endDate": end_date, "searchField": search_field, "searchValue": search_value, "currencyCode": currency_code}.items() if v is not None})
-        return self._parse_list(resp.data, ProfitStatParentAsinListResponse)
+        return self._parse_list(resp.data, ParentAsinListRecords)
 
-    async def profit_stat_seller(self, offset: int = None, length: int = None, mids: list = None, sids: list = None, start_date: str = None, end_date: str = None, currency_code: str = None) -> list[ProfitStatSellerListResponse]:
+    async def profit_stat_seller(self, offset: int = None, length: int = None, mids: list = None, sids: list = None, start_date: str = None, end_date: str = None, currency_code: str = None) -> list[StatisticsSellerListRecords]:
         """查询利润统计-店铺.
 
 POST /bd/profit/statistics/open/seller/list
@@ -121,7 +121,7 @@ Args:
     end_date: see API doc.
     currency_code: see API doc."""
         resp = await self._post("/bd/profit/statistics/open/seller/list", {k: v for k, v in {"offset": offset, "length": length, "mids": mids, "sids": sids, "startDate": start_date, "endDate": end_date, "currencyCode": currency_code}.items() if v is not None})
-        return self._parse_list(resp.data, ProfitStatSellerListResponse)
+        return self._parse_list(resp.data, StatisticsSellerListRecords)
 
     async def inv_report_local_aggregate(self, start_date: str = None, end_date: str = None, sys_wid: int = None) -> list[InvReportLocalAggregateResponse]:
         """库存报表-本地仓-新报表-汇总.

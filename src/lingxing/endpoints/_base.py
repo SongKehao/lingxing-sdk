@@ -165,7 +165,12 @@ class BaseEndpoint(metaclass=SyncWrapperMeta):
                 try:
                     results.append(model(**item))
                 except (ValidationError, Exception):
-                    results.append(item)
+                    # 验证失败时用 model_construct 跳过验证，保留模型对象（字段原始值 + extra 兜底），
+                    # 避免因个别字段类型不匹配就 fallback 成原始 dict（用户拿不到类型化模型）。
+                    try:
+                        results.append(model.model_construct(**item))
+                    except Exception:
+                        results.append(item)
             return results
         if isinstance(data, dict):
             items = data.get("list") or data.get("data") or data.get("records") or []
@@ -177,7 +182,10 @@ class BaseEndpoint(metaclass=SyncWrapperMeta):
                     try:
                         results.append(model(**item))
                     except (ValidationError, Exception):
-                        results.append(item)
+                        try:
+                            results.append(model.model_construct(**item))
+                        except Exception:
+                            results.append(item)
                 return results
         return []
 
@@ -189,7 +197,10 @@ class BaseEndpoint(metaclass=SyncWrapperMeta):
             try:
                 return model(**data)
             except (ValidationError, Exception):
-                return None
+                try:
+                    return model.model_construct(**data)
+                except Exception:
+                    return None
         return None
 
     def _parse_one_or_list(self, data: Any, model: type[T]) -> T | list[T]:
