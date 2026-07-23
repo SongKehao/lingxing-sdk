@@ -123,64 +123,84 @@ Args:
         resp = await self._post("/bd/profit/statistics/open/seller/list", {k: v for k, v in {"offset": offset, "length": length, "mids": mids, "sids": sids, "startDate": start_date, "endDate": end_date, "currencyCode": currency_code}.items() if v is not None})
         return self._parse_list(resp.data, ProfitStatSellerListResponse)
 
-    async def inv_report_local_aggregate(self, data: dict = None) -> list[InvReportLocalAggregateResponse]:
+    async def inv_report_local_aggregate(self, start_date: str = None, end_date: str = None, sys_wid: int = None) -> list[InvReportLocalAggregateResponse]:
         """库存报表-本地仓-新报表-汇总.
 
 POST /inventory/center/openapi/storageReport/local/aggregate/list
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/inventory/center/openapi/storageReport/local/aggregate/list", data or {})
+    start_date: see API doc.
+    end_date: see API doc.
+    sys_wid: see API doc."""
+        resp = await self._post("/inventory/center/openapi/storageReport/local/aggregate/list", {k: v for k, v in {"start_date": start_date, "end_date": end_date, "sys_wid": sys_wid}.items() if v is not None})
         return self._parse_list(resp.data, InvReportLocalAggregateResponse)
 
-    async def inv_report_local_detail(self, data: dict = None) -> list[InvReportLocalDetailResponse]:
+    async def inv_report_local_detail(self, offset: int = None, length: int = None, start_date: str = None, end_date: str = None, sys_wid: int = None) -> list[InvReportLocalDetailResponse]:
         """库存报表-本地仓-新报表-明细.
 
 POST /inventory/center/openapi/storageReport/local/detail/page
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/inventory/center/openapi/storageReport/local/detail/page", data or {})
+    offset: see API doc.
+    length: see API doc.
+    start_date: see API doc.
+    end_date: see API doc.
+    sys_wid: see API doc."""
+        resp = await self._post("/inventory/center/openapi/storageReport/local/detail/page", {k: v for k, v in {"offset": offset, "length": length, "start_date": start_date, "end_date": end_date, "sys_wid": sys_wid}.items() if v is not None})
         return self._parse_list(resp.data, InvReportLocalDetailResponse)
 
-    async def inv_report_overseas_aggregate(self, data: dict = None) -> list[InvReportOverseasAggregateResponse]:
+    async def inv_report_overseas_aggregate(self, start_date: str = None, end_date: str = None, sys_wid: int = None) -> list[InvReportOverseasAggregateResponse]:
         """库存报表-海外仓-新报表-汇总.
 
 POST /inventory/center/openapi/storageReport/overseas/aggregate/list
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/inventory/center/openapi/storageReport/overseas/aggregate/list", data or {})
+    start_date: see API doc.
+    end_date: see API doc.
+    sys_wid: see API doc."""
+        resp = await self._post("/inventory/center/openapi/storageReport/overseas/aggregate/list", {k: v for k, v in {"start_date": start_date, "end_date": end_date, "sys_wid": sys_wid}.items() if v is not None})
         return self._parse_list(resp.data, InvReportOverseasAggregateResponse)
 
-    async def inv_report_overseas_detail(self, data: dict = None) -> list[InvReportOverseasDetailResponse]:
+    async def inv_report_overseas_detail(self, offset: int = None, length: int = None, start_date: str = None, end_date: str = None, sys_wid: int = None) -> list[InvReportOverseasDetailResponse]:
         """库存报表-海外仓-新报表-明细.
 
 POST /inventory/center/openapi/storageReport/overseas/detail/page
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/inventory/center/openapi/storageReport/overseas/detail/page", data or {})
+    offset: see API doc.
+    length: see API doc.
+    start_date: see API doc.
+    end_date: see API doc.
+    sys_wid: see API doc."""
+        resp = await self._post("/inventory/center/openapi/storageReport/overseas/detail/page", {k: v for k, v in {"offset": offset, "length": length, "start_date": start_date, "end_date": end_date, "sys_wid": sys_wid}.items() if v is not None})
         return self._parse_list(resp.data, InvReportOverseasDetailResponse)
 
-    async def inv_report_fba_gather(self, data: dict = None) -> list[InvReportFbaGatherResponse]:
+    async def inv_report_fba_gather(self, offset: int = None, length: int = None, seller_id: str = None, start_date: str = None, end_date: str = None) -> list[InvReportFbaGatherResponse]:
         """库存报表-FBA-新版-汇总.
 
 POST /cost/center/openApi/fba/gather/query
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/cost/center/openApi/fba/gather/query", data or {})
+    offset: see API doc.
+    length: see API doc.
+    seller_id: see API doc.
+    start_date: see API doc.
+    end_date: see API doc."""
+        resp = await self._post("/cost/center/openApi/fba/gather/query", {k: v for k, v in {"offset": offset, "length": length, "seller_id": seller_id, "start_date": start_date, "end_date": end_date}.items() if v is not None})
         return self._parse_list(resp.data, InvReportFbaGatherResponse)
 
-    async def inv_report_fba_detail(self, data: dict = None) -> list[InvReportFbaDetailResponse]:
+    async def inv_report_fba_detail(self, offset: int = None, length: int = None, start_date: str = None, end_date: str = None, seller_id: str = None) -> list[InvReportFbaDetailResponse]:
         """库存报表-FBA-新版-明细.
 
 POST /cost/center/openApi/fba/detail/query
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/cost/center/openApi/fba/detail/query", data or {})
+    offset: see API doc.
+    length: see API doc.
+    start_date: see API doc.
+    end_date: see API doc.
+    seller_id: see API doc."""
+        resp = await self._post("/cost/center/openApi/fba/detail/query", {k: v for k, v in {"offset": offset, "length": length, "start_date": start_date, "end_date": end_date, "seller_id": seller_id}.items() if v is not None})
         return self._parse_list(resp.data, InvReportFbaDetailResponse)
 
     async def amazon_report_export_task(self, region: str = None, seller_id: str = None, report_document_id: str = None) -> ReportAmazonreportexporttaskResponse | None:
