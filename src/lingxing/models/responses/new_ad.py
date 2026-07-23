@@ -1401,3 +1401,8 @@ class OpenapiNewadSdmatchtargetreportsResponse(LingXingModel):
     sales: Optional[float] = Field(None, description="销售额")
     units: Optional[float] = Field(None, description="销量")
     same_units: Optional[float] = Field(None, description="直接成交销量")
+
+
+class AdReportAdvertiserListResponse(LingXingModel):
+    """查询沃尔玛-广告-广告主列表 (/basicOpen/adReport/advertiser/list)."""
+    msg: Optional[str] = None

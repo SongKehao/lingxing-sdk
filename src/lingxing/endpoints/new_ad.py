@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from ..models.responses.new_ad import (
+    AdReportAdvertiserListResponse,
     AdreportAdvertiserListResponse,
     AdreportProductorderanalysisListResponse,
     BasedataAccountListResponse,
@@ -68,6 +69,16 @@ from ._base import BaseEndpoint
 
 class NewAdEndpoints(BaseEndpoint):
     """领星新版广告 API (4个接口)."""
+
+    async def walmart_advertiser_list(self, data: dict = None) -> list[AdReportAdvertiserListResponse]:
+        """查询沃尔玛-广告-广告主列表.
+
+POST /basicOpen/adReport/advertiser/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/adReport/advertiser/list", data or {})
+        return self._parse_list(resp.data, AdReportAdvertiserListResponse)
 
     async def dsp_account_list(self, offset: int = None, length: int = None, type: str = None) -> list[BasedataAccountListResponse]:
         """查询广告账号列表.

@@ -220,7 +220,7 @@ class TestExports:
 
     def test_19_endpoints(self):
         from lingxing.endpoints import __all__ as ep_all
-        assert len(ep_all) == 19
+        assert len(ep_all) == 20
 
     def test_errors_hierarchy(self):
         from lingxing.errors import LingXingError, ApiError, RateLimitError, AuthenticationError

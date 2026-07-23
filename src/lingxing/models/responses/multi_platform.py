@@ -4480,3 +4480,173 @@ class OrderV2SplitorderResponse(LingXingModel):
     num: Optional[int] = Field(None, description="成功数量")
     global_order_no: Optional[list] = Field(None, description="拆分后新的系统单号")
     result: Optional[List[OrderV2SplitorderResult]] = Field(None, description="拆分后形成的所有系统订单号")
+
+
+class MpOrderPreShipmentResponse(LingXingModel):
+    """预发货 (/basicOpen/openapi/multiplatform/order/preShipment)."""
+    msg: Optional[str] = None
+
+
+class MpOrderReviewResponse(LingXingModel):
+    """审核发货 (/basicOpen/openapi/multiplatform/order/review)."""
+    msg: Optional[str] = None
+
+
+class MpOrderCreateResponse(LingXingModel):
+    """创建订单 (/pb/mp/order/v2/create)."""
+    msg: Optional[str] = None
+
+
+class MpOrderMergeResponse(LingXingModel):
+    """合并订单 (/pb/mp/order/v2/mergeOrder)."""
+    msg: Optional[str] = None
+
+
+class MpOrderSplitResponse(LingXingModel):
+    """拆分订单 (/pb/mp/order/v2/splitOrder)."""
+    msg: Optional[str] = None
+
+
+class MpOrderCancelResponse(LingXingModel):
+    """标记订单不发货 (/pb/mp/order/v2/cancelOrder)."""
+    msg: Optional[str] = None
+
+
+class MpOrderDeliveryResponse(LingXingModel):
+    """订单发货 (/basicOpen/selfShipmentOrder/deliveryGoods)."""
+    msg: Optional[str] = None
+
+
+class MpOrderWeighedResponse(LingXingModel):
+    """订单称重 (/erp/sc/routing/wms/order/setOrderWeighed)."""
+    msg: Optional[str] = None
+
+
+class MpOrderEditResponse(LingXingModel):
+    """编辑订单（新版） (/pb/mp/order/editOrder)."""
+    msg: Optional[str] = None
+
+
+class MpOrderUpdateResponse(LingXingModel):
+    """编辑/更新自发货订单 (/pb/mp/order/v2/updateOrder)."""
+    msg: Optional[str] = None
+
+
+class MpOrderSetRemarkResponse(LingXingModel):
+    """更新订单客服备注 (/pb/mp/order/setRemark)."""
+    msg: Optional[str] = None
+
+
+class MpOrderFastOutboundResponse(LingXingModel):
+    """快速出库 (/pb/mp/order/v2/fastOutbound)."""
+    msg: Optional[str] = None
+
+
+class MpOrderGetFastOutboundResultResponse(LingXingModel):
+    """获取快速出库结果 (/pb/mp/order/v2/getFastOutboundResult)."""
+    msg: Optional[str] = None
+
+
+class MpTiktokBillListResponse(LingXingModel):
+    """TikTok账单明细 (/basicOpen/multiplatformFinance/tiktokBill/list)."""
+    msg: Optional[str] = None
+
+
+class MpWalmartBillStatementListResponse(LingXingModel):
+    """Walmart-查询结算账单列表 (/basicOpen/multiplatformFinance/walmart/bill/statement/list)."""
+    msg: Optional[str] = None
+
+
+class MpWalmartBillPayoutListResponse(LingXingModel):
+    """Walmart-查询回款明细列表 (/basicOpen/multiplatformFinance/walmart/bill/payout/list)."""
+    msg: Optional[str] = None
+
+
+class MpShopifyBillStatementListResponse(LingXingModel):
+    """Shopify-查询结算明细列表 (/basicOpen/multiplatformFinance/shopify/bill/statement/list)."""
+    msg: Optional[str] = None
+
+
+class MpShopifyReturnOrderListResponse(LingXingModel):
+    """多平台-Shopify售后订单列表 (/basicOpen/openapi/multiplatform/shopify/returnOrder/list)."""
+    msg: Optional[str] = None
+
+
+class MpTemuReturnOrderListResponse(LingXingModel):
+    """多平台-Temu售后订单列表 (/basicOpen/openapi/multiplatform/temu/returnOrder/list)."""
+    msg: Optional[str] = None
+
+
+class MpTiktokReturnOrderListResponse(LingXingModel):
+    """多平台-TikTok售后订单列表 (/basicOpen/openapi/multiplatform/tiktok/returnOrder/list)."""
+    msg: Optional[str] = None
+
+
+class MpWalmartReturnOrderListResponse(LingXingModel):
+    """多平台-Walmart售后订单列表 (/basicOpen/openapi/multiplatform/walmart/returnOrder/list)."""
+    msg: Optional[str] = None
+
+
+class MpTiktokProductAnalysisResponse(LingXingModel):
+    """查询TikTok产品表现 (/basicOpen/platformStatistics/tiktokProductAnalysis/list)."""
+    msg: Optional[str] = None
+
+
+class MpWalmartProductAnalysisResponse(LingXingModel):
+    """查询Walmart产品表现 (/basicOpen/platformStatistics/walmartProductAnalysis/list)."""
+    msg: Optional[str] = None
+
+
+class MpSellerListResponse(LingXingModel):
+    """查询多平台店铺信息 (/pb/mp/shop/v2/getSellerList)."""
+    msg: Optional[str] = None
+
+
+class MpOrderMgmtListResponse(LingXingModel):
+    """查询订单管理订单列表 (/pb/mp/order/v2/list)."""
+    msg: Optional[str] = None
+
+
+class MpPairListResponse(LingXingModel):
+    """查询多平台配对列表 (/pb/mp/listing/v2/getPairList)."""
+    msg: Optional[str] = None
+
+
+class MpPairMultiPlatformResponse(LingXingModel):
+    """批量添加/编辑多平台配对关系 (/pb/mp/listing/v2/pairMultiPlatform)."""
+    msg: Optional[str] = None
+
+
+class MpWfsCargoListResponse(LingXingModel):
+    """查询WFS货件列表 (/cepf/warehouse/api/openApi/queryWFSCargoPage)."""
+    msg: Optional[str] = None
+
+
+class MpWfsInventoryListResponse(LingXingModel):
+    """查询WFS库存列表 (/cepf/warehouse/api/openApi/queryWFSInventionPage)."""
+    msg: Optional[str] = None
+
+
+class MpFbtCargoListResponse(LingXingModel):
+    """查询FBT货件列表 (/basicOpen/fbtShipment/cargo/list)."""
+    msg: Optional[str] = None
+
+
+class MpFbtCargoSyncResponse(LingXingModel):
+    """手动同步FBT货件 (/basicOpen/fbtShipment/cargo/sync)."""
+    msg: Optional[str] = None
+
+
+class MpAliexpressListSelfResponse(LingXingModel):
+    """查询AliExpress在线商品列表-自运营 (/basicOpen/multiplatform/aliExpress/list)."""
+    msg: Optional[str] = None
+
+
+class MpAliexpressListHostingResponse(LingXingModel):
+    """查询AliExpress在线商品列表-托管模式 (/basicOpen/multiplatform/aliexpress/list/v2)."""
+    msg: Optional[str] = None
+
+
+class MpPlatformOrderListResponse(LingXingModel):
+    """查询平台订单列表 (/cepfPlatformOrder/open-api/newPlatformOrder/list)."""
+    msg: Optional[str] = None

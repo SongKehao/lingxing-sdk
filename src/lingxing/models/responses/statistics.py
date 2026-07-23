@@ -2173,3 +2173,53 @@ class MonthRefundItem(LingXingModel):
 
     list: Optional[list] = None
     total: Optional[int] = None
+
+
+class ProfitStatMskuListResponse(LingXingModel):
+    """查询利润统计-MSKU (/bd/profit/statistics/open/msku/list)."""
+    msg: Optional[str] = None
+
+
+class ProfitStatAsinListResponse(LingXingModel):
+    """查询利润统计-ASIN (/bd/profit/statistics/open/asin/list)."""
+    msg: Optional[str] = None
+
+
+class ProfitStatParentAsinListResponse(LingXingModel):
+    """查询利润统计-父ASIN (/bd/profit/statistics/open/parent/asin/list)."""
+    msg: Optional[str] = None
+
+
+class ProfitStatSellerListResponse(LingXingModel):
+    """查询利润统计-店铺 (/bd/profit/statistics/open/seller/list)."""
+    msg: Optional[str] = None
+
+
+class InvReportLocalAggregateResponse(LingXingModel):
+    """库存报表-本地仓-新报表-汇总 (/inventory/center/openapi/storageReport/local/aggregate/list)."""
+    msg: Optional[str] = None
+
+
+class InvReportLocalDetailResponse(LingXingModel):
+    """库存报表-本地仓-新报表-明细 (/inventory/center/openapi/storageReport/local/detail/page)."""
+    msg: Optional[str] = None
+
+
+class InvReportOverseasAggregateResponse(LingXingModel):
+    """库存报表-海外仓-新报表-汇总 (/inventory/center/openapi/storageReport/overseas/aggregate/list)."""
+    msg: Optional[str] = None
+
+
+class InvReportOverseasDetailResponse(LingXingModel):
+    """库存报表-海外仓-新报表-明细 (/inventory/center/openapi/storageReport/overseas/detail/page)."""
+    msg: Optional[str] = None
+
+
+class InvReportFbaGatherResponse(LingXingModel):
+    """库存报表-FBA-新版-汇总 (/cost/center/openApi/fba/gather/query)."""
+    msg: Optional[str] = None
+
+
+class InvReportFbaDetailResponse(LingXingModel):
+    """库存报表-FBA-新版-明细 (/cost/center/openApi/fba/detail/query)."""
+    msg: Optional[str] = None

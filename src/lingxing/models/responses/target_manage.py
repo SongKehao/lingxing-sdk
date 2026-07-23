@@ -133,3 +133,15 @@ class ManagementUserBatchselectResponse(LingXingModel):
     update_user: Optional[str] = Field(None, description="目标最后更新用户")
     gmt_create: Optional[str] = Field(None, description="创建时间")
     gmt_modified: Optional[str] = Field(None, description="更新时间")
+
+
+class ManagementStoreBatchdeleteResponse(LingXingModel):
+    """店铺维度-批量删除目标 (/bd/goal/management/open/store/batchDelete)."""
+    sid: Optional[float] = Field(None, description="店铺id")
+    reason: Optional[str] = Field(None, description="失败原因")
+
+
+class ManagementUserBatchdeleteResponse(LingXingModel):
+    """组织维度-批量删除目标 (/bd/goal/management/open/user/batchDelete)."""
+    uid: Optional[float] = Field(None, description="用户id")
+    reason: Optional[str] = Field(None, description="失败原因")

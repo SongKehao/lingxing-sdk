@@ -16,6 +16,7 @@ from .restocking import RestockingEndpoints
 from .restocking_limit import RestockingLimitEndpoints
 from .sale import SaleEndpoints
 from .statistics import StatisticsEndpoints
+from .target_manage import TargetManageEndpoints
 from .tools import ToolsEndpoints
 from .vc import VCEndpoints
 from .warehouse import WarehouseEndpoints
@@ -37,6 +38,7 @@ __all__ = [
     "CustomerServiceEndpoints",
     "AmazonSourceEndpoints",
     "StatisticsEndpoints",
+    "TargetManageEndpoints",
     "ToolsEndpoints",
     "VCEndpoints",
     "WarehouseEndpoints",

@@ -2,6 +2,40 @@
 from __future__ import annotations
 
 from ..models.responses.multi_platform import (
+    MpShopifyReturnOrderListResponse,
+    MpTemuReturnOrderListResponse,
+    MpTiktokReturnOrderListResponse,
+    MpWalmartReturnOrderListResponse,
+    MpTiktokProductAnalysisResponse,
+    MpWalmartProductAnalysisResponse,
+    MpSellerListResponse,
+    MpOrderMgmtListResponse,
+    MpPairListResponse,
+    MpPairMultiPlatformResponse,
+    MpWfsCargoListResponse,
+    MpWfsInventoryListResponse,
+    MpFbtCargoListResponse,
+    MpFbtCargoSyncResponse,
+    MpAliexpressListSelfResponse,
+    MpAliexpressListHostingResponse,
+    MpPlatformOrderListResponse,
+    MpOrderPreShipmentResponse,
+    MpOrderReviewResponse,
+    MpOrderCreateResponse,
+    MpOrderMergeResponse,
+    MpOrderSplitResponse,
+    MpOrderCancelResponse,
+    MpOrderDeliveryResponse,
+    MpOrderWeighedResponse,
+    MpOrderEditResponse,
+    MpOrderUpdateResponse,
+    MpOrderSetRemarkResponse,
+    MpOrderFastOutboundResponse,
+    MpOrderGetFastOutboundResultResponse,
+    MpTiktokBillListResponse,
+    MpWalmartBillStatementListResponse,
+    MpWalmartBillPayoutListResponse,
+    MpShopifyBillStatementListResponse,
     AliexpressListV2Response,
     CargoAddcargogoodsListResponse,
     FbtStocksearchV2Response,
@@ -42,6 +76,348 @@ from ._base import BaseEndpoint
 
 
 class MultiplatformPlatformsEndpoints(BaseEndpoint):
+
+    async def mp_shopify_return_order_list(self, data: dict = None) -> list[MpShopifyReturnOrderListResponse]:
+        """多平台-Shopify售后订单列表.
+
+POST /basicOpen/openapi/multiplatform/shopify/returnOrder/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/openapi/multiplatform/shopify/returnOrder/list", data or {})
+        return self._parse_list(resp.data, MpShopifyReturnOrderListResponse)
+
+    async def mp_temu_return_order_list(self, data: dict = None) -> list[MpTemuReturnOrderListResponse]:
+        """多平台-Temu售后订单列表.
+
+POST /basicOpen/openapi/multiplatform/temu/returnOrder/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/openapi/multiplatform/temu/returnOrder/list", data or {})
+        return self._parse_list(resp.data, MpTemuReturnOrderListResponse)
+
+    async def mp_tiktok_return_order_list(self, data: dict = None) -> list[MpTiktokReturnOrderListResponse]:
+        """多平台-TikTok售后订单列表.
+
+POST /basicOpen/openapi/multiplatform/tiktok/returnOrder/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/openapi/multiplatform/tiktok/returnOrder/list", data or {})
+        return self._parse_list(resp.data, MpTiktokReturnOrderListResponse)
+
+    async def mp_walmart_return_order_list(self, data: dict = None) -> list[MpWalmartReturnOrderListResponse]:
+        """多平台-Walmart售后订单列表.
+
+POST /basicOpen/openapi/multiplatform/walmart/returnOrder/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/openapi/multiplatform/walmart/returnOrder/list", data or {})
+        return self._parse_list(resp.data, MpWalmartReturnOrderListResponse)
+
+    async def mp_tiktok_product_analysis(self, data: dict = None) -> list[MpTiktokProductAnalysisResponse]:
+        """查询TikTok产品表现.
+
+POST /basicOpen/platformStatistics/tiktokProductAnalysis/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/platformStatistics/tiktokProductAnalysis/list", data or {})
+        return self._parse_list(resp.data, MpTiktokProductAnalysisResponse)
+
+    async def mp_walmart_product_analysis(self, data: dict = None) -> list[MpWalmartProductAnalysisResponse]:
+        """查询Walmart产品表现.
+
+POST /basicOpen/platformStatistics/walmartProductAnalysis/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/platformStatistics/walmartProductAnalysis/list", data or {})
+        return self._parse_list(resp.data, MpWalmartProductAnalysisResponse)
+
+    async def mp_seller_list(self, data: dict = None) -> list[MpSellerListResponse]:
+        """查询多平台店铺信息.
+
+POST /pb/mp/shop/v2/getSellerList
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/pb/mp/shop/v2/getSellerList", data or {})
+        return self._parse_list(resp.data, MpSellerListResponse)
+
+    async def mp_order_mgmt_list(self, data: dict = None) -> list[MpOrderMgmtListResponse]:
+        """查询订单管理订单列表.
+
+POST /pb/mp/order/v2/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/pb/mp/order/v2/list", data or {})
+        return self._parse_list(resp.data, MpOrderMgmtListResponse)
+
+    async def mp_pair_list(self, data: dict = None) -> list[MpPairListResponse]:
+        """查询多平台配对列表.
+
+POST /pb/mp/listing/v2/getPairList
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/pb/mp/listing/v2/getPairList", data or {})
+        return self._parse_list(resp.data, MpPairListResponse)
+
+    async def mp_pair_multi_platform(self, data: dict = None) -> list[MpPairMultiPlatformResponse]:
+        """批量添加/编辑多平台配对关系.
+
+POST /pb/mp/listing/v2/pairMultiPlatform
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/pb/mp/listing/v2/pairMultiPlatform", data or {})
+        return self._parse_list(resp.data, MpPairMultiPlatformResponse)
+
+    async def mp_wfs_cargo_list(self, data: dict = None) -> list[MpWfsCargoListResponse]:
+        """查询WFS货件列表.
+
+POST /cepf/warehouse/api/openApi/queryWFSCargoPage
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/cepf/warehouse/api/openApi/queryWFSCargoPage", data or {})
+        return self._parse_list(resp.data, MpWfsCargoListResponse)
+
+    async def mp_wfs_inventory_list(self, data: dict = None) -> list[MpWfsInventoryListResponse]:
+        """查询WFS库存列表.
+
+POST /cepf/warehouse/api/openApi/queryWFSInventionPage
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/cepf/warehouse/api/openApi/queryWFSInventionPage", data or {})
+        return self._parse_list(resp.data, MpWfsInventoryListResponse)
+
+    async def mp_fbt_cargo_list(self, data: dict = None) -> list[MpFbtCargoListResponse]:
+        """查询FBT货件列表.
+
+POST /basicOpen/fbtShipment/cargo/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/fbtShipment/cargo/list", data or {})
+        return self._parse_list(resp.data, MpFbtCargoListResponse)
+
+    async def mp_fbt_cargo_sync(self, data: dict = None) -> list[MpFbtCargoSyncResponse]:
+        """手动同步FBT货件.
+
+POST /basicOpen/fbtShipment/cargo/sync
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/fbtShipment/cargo/sync", data or {})
+        return self._parse_list(resp.data, MpFbtCargoSyncResponse)
+
+    async def mp_aliexpress_list_self(self, data: dict = None) -> list[MpAliexpressListSelfResponse]:
+        """查询AliExpress在线商品列表-自运营.
+
+POST /basicOpen/multiplatform/aliExpress/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/multiplatform/aliExpress/list", data or {})
+        return self._parse_list(resp.data, MpAliexpressListSelfResponse)
+
+    async def mp_aliexpress_list_hosting(self, data: dict = None) -> list[MpAliexpressListHostingResponse]:
+        """查询AliExpress在线商品列表-托管模式.
+
+POST /basicOpen/multiplatform/aliexpress/list/v2
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/multiplatform/aliexpress/list/v2", data or {})
+        return self._parse_list(resp.data, MpAliexpressListHostingResponse)
+
+    async def mp_platform_order_list(self, data: dict = None) -> list[MpPlatformOrderListResponse]:
+        """查询平台订单列表.
+
+POST /cepfPlatformOrder/open-api/newPlatformOrder/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/cepfPlatformOrder/open-api/newPlatformOrder/list", data or {})
+        return self._parse_list(resp.data, MpPlatformOrderListResponse)
+
+
+    async def mp_order_pre_shipment(self, data: dict = None) -> list[MpOrderPreShipmentResponse]:
+        """预发货.
+
+POST /basicOpen/openapi/multiplatform/order/preShipment
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/openapi/multiplatform/order/preShipment", data or {})
+        return self._parse_list(resp.data, MpOrderPreShipmentResponse)
+
+    async def mp_order_review(self, data: dict = None) -> list[MpOrderReviewResponse]:
+        """审核发货.
+
+POST /basicOpen/openapi/multiplatform/order/review
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/openapi/multiplatform/order/review", data or {})
+        return self._parse_list(resp.data, MpOrderReviewResponse)
+
+    async def mp_order_create(self, data: dict = None) -> list[MpOrderCreateResponse]:
+        """创建订单.
+
+POST /pb/mp/order/v2/create
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/pb/mp/order/v2/create", data or {})
+        return self._parse_list(resp.data, MpOrderCreateResponse)
+
+    async def mp_order_merge(self, data: dict = None) -> list[MpOrderMergeResponse]:
+        """合并订单.
+
+POST /pb/mp/order/v2/mergeOrder
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/pb/mp/order/v2/mergeOrder", data or {})
+        return self._parse_list(resp.data, MpOrderMergeResponse)
+
+    async def mp_order_split(self, data: dict = None) -> list[MpOrderSplitResponse]:
+        """拆分订单.
+
+POST /pb/mp/order/v2/splitOrder
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/pb/mp/order/v2/splitOrder", data or {})
+        return self._parse_list(resp.data, MpOrderSplitResponse)
+
+    async def mp_order_cancel(self, data: dict = None) -> list[MpOrderCancelResponse]:
+        """标记订单不发货.
+
+POST /pb/mp/order/v2/cancelOrder
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/pb/mp/order/v2/cancelOrder", data or {})
+        return self._parse_list(resp.data, MpOrderCancelResponse)
+
+    async def mp_order_delivery(self, data: dict = None) -> list[MpOrderDeliveryResponse]:
+        """订单发货.
+
+POST /basicOpen/selfShipmentOrder/deliveryGoods
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/selfShipmentOrder/deliveryGoods", data or {})
+        return self._parse_list(resp.data, MpOrderDeliveryResponse)
+
+    async def mp_order_weighed(self, data: dict = None) -> list[MpOrderWeighedResponse]:
+        """订单称重.
+
+POST /erp/sc/routing/wms/order/setOrderWeighed
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/erp/sc/routing/wms/order/setOrderWeighed", data or {})
+        return self._parse_list(resp.data, MpOrderWeighedResponse)
+
+    async def mp_order_edit(self, data: dict = None) -> list[MpOrderEditResponse]:
+        """编辑订单（新版）.
+
+POST /pb/mp/order/editOrder
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/pb/mp/order/editOrder", data or {})
+        return self._parse_list(resp.data, MpOrderEditResponse)
+
+    async def mp_order_update(self, data: dict = None) -> list[MpOrderUpdateResponse]:
+        """编辑/更新自发货订单.
+
+POST /pb/mp/order/v2/updateOrder
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/pb/mp/order/v2/updateOrder", data or {})
+        return self._parse_list(resp.data, MpOrderUpdateResponse)
+
+    async def mp_order_set_remark(self, data: dict = None) -> list[MpOrderSetRemarkResponse]:
+        """更新订单客服备注.
+
+POST /pb/mp/order/setRemark
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/pb/mp/order/setRemark", data or {})
+        return self._parse_list(resp.data, MpOrderSetRemarkResponse)
+
+    async def mp_order_fast_outbound(self, data: dict = None) -> list[MpOrderFastOutboundResponse]:
+        """快速出库.
+
+POST /pb/mp/order/v2/fastOutbound
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/pb/mp/order/v2/fastOutbound", data or {})
+        return self._parse_list(resp.data, MpOrderFastOutboundResponse)
+
+    async def mp_order_get_fast_outbound_result(self, data: dict = None) -> list[MpOrderGetFastOutboundResultResponse]:
+        """获取快速出库结果.
+
+POST /pb/mp/order/v2/getFastOutboundResult
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/pb/mp/order/v2/getFastOutboundResult", data or {})
+        return self._parse_list(resp.data, MpOrderGetFastOutboundResultResponse)
+
+    async def mp_tiktok_bill_list(self, data: dict = None) -> list[MpTiktokBillListResponse]:
+        """TikTok账单明细.
+
+POST /basicOpen/multiplatformFinance/tiktokBill/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/multiplatformFinance/tiktokBill/list", data or {})
+        return self._parse_list(resp.data, MpTiktokBillListResponse)
+
+    async def mp_walmart_bill_statement_list(self, data: dict = None) -> list[MpWalmartBillStatementListResponse]:
+        """Walmart-查询结算账单列表.
+
+POST /basicOpen/multiplatformFinance/walmart/bill/statement/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/multiplatformFinance/walmart/bill/statement/list", data or {})
+        return self._parse_list(resp.data, MpWalmartBillStatementListResponse)
+
+    async def mp_walmart_bill_payout_list(self, data: dict = None) -> list[MpWalmartBillPayoutListResponse]:
+        """Walmart-查询回款明细列表.
+
+POST /basicOpen/multiplatformFinance/walmart/bill/payout/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/multiplatformFinance/walmart/bill/payout/list", data or {})
+        return self._parse_list(resp.data, MpWalmartBillPayoutListResponse)
+
+    async def mp_shopify_bill_statement_list(self, data: dict = None) -> list[MpShopifyBillStatementListResponse]:
+        """Shopify-查询结算明细列表.
+
+POST /basicOpen/multiplatformFinance/shopify/bill/statement/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/multiplatformFinance/shopify/bill/statement/list", data or {})
+        return self._parse_list(resp.data, MpShopifyBillStatementListResponse)
+
     """领星多平台商品 API (33个接口)."""
 
     async def aliexpress_list_v2(self, isParent: int = None, length: int = None, brandIds: list = None, categoryIds: list = None, end: str = None, offset: int = None, pairingStatus: int = None, platformCodeList: list = None, price: int = None, priceCondition: int = None, principalUids: list = None, productTypeList: list = None, productUniqueId: int = None, productUniqueIdList: list = None, quantity: int = None, quantityCondition: int = None, searchField: int = None, searchSingleValue: str = None, searchValues: list = None, sortField: str = None, sortType: str = None, start: str = None, statusList: list = None, storeIds: list = None, storeType: int = None) -> list[AliexpressListV2Response]:

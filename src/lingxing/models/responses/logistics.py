@@ -95,3 +95,18 @@ class TmsFirstvesselAddprovidersResponse(LingXingModel):
     """批量添加头程物流商."""
     id: Optional[int] = Field(None, description="物流商对应的id")
     total: Optional[int] = Field(None, description="总数")
+
+
+class WmsLogisticsListUsedLogisticsTypeResponse(LingXingModel):
+    """查询已启用的自发货物流方式 (/erp/sc/routing/wms/WmsLogistics/listUsedLogisticsType)."""
+    msg: Optional[str] = None
+
+
+class LogisticsHeadReconciliationListResponse(LingXingModel):
+    """头程对账列表 (/basicOpen/logistics/headLogisticsReconciliation/list)."""
+    msg: Optional[str] = None
+
+
+class LogisticsBillConfirmResponse(LingXingModel):
+    """FBM物流对账-确认/批量确认 (/basicOpen/logistics/logisticsBill/confirm)."""
+    msg: Optional[str] = None

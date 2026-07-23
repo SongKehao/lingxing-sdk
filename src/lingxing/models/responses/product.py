@@ -645,23 +645,11 @@ class StorageBrandSetResponse(LingXingModel):
     brand_code: Optional[str] = Field(None, description="品牌简码")
 
 
-class LabelProductCreateResponse(LingXingModel):
-    """创建产品标签."""
-    label_name: Optional[str] = Field(None, description="标签名称")
-    label_id: Optional[str] = Field(None, description="标签id")
-
-
 class LabelProductListList(LingXingModel):
     """list sub-structure."""
     label_id: Optional[str] = Field(None, description="标签id")
     label_name: Optional[str] = Field(None, description="标签名称")
     gmt_created: Optional[int] = Field(None, description="创建时间")
-
-class LabelProductListResponse(LingXingModel):
-    """查询产品标签."""
-    list: Optional[List[LabelProductListList]] = Field(None, description="列表数据")
-    total: Optional[int] = Field(None, description="总数")
-
 
 class PublishUpcUpclistList(LingXingModel):
     """list sub-structure."""

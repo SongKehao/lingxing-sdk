@@ -5,6 +5,36 @@ from typing import Any
 
 from ..models.responses.warehouse import GetProcessOrderListsItem, GetStorageAdjustOrderListItem, InboundGetCustomTypesItem, InboundgetOrdersItem, InventoryBinDetailsItem, InventoryDetailsItem, OutboundGetCustomTypesItem, OutboundgetOrdersItem, PurchaseReceiptOrderListItem, RemovalInboundListItem, WareHouseBinStatementItem, WarehouseListsItem, WarehouseStatementItem, WarehouseStatementNewItem, WmsOrderListItem
 from ..models.responses.warehouse import (
+    OverseaProductUnmatchResponse,
+    WarehouseBinEntryRecommendResponse,
+    OverseaStockOrderDetailResponse,
+    PurchaseReceiptOrderCreateResponse,
+    SalesReturnV2ListResponse,
+    ReceiptOrderQcListResponse,
+    ReturnOrderFastStorageInResponse,
+    AllocationPartlyReceiveResponse,
+    AllocationFinishReceiveResponse,
+    CostChangeFinishResponse,
+    WmsOrderSetPackageSizeResponse,
+    AwdInboundPlanCancelResponse,
+    AwdInboundPlanConfirmResponse,
+    AwdInboundPlanCreateResponse,
+    AwdInboundPlanDetailResponse,
+    AwdInboundPlanPageResponse,
+    AwdInboundPlanUpdateResponse,
+    AwdInboundShipmentDetailResponse,
+    AwdInboundShipmentPageResponse,
+    AwdInboundShipmentUpdateTrackResponse,
+    AwdInboundShipmentPrintLabelResponse,
+    PackingTaskAddResponse,
+    PackingTaskBatchEditResponse,
+    PackingTaskDelResponse,
+    PackingTaskDetailResponse,
+    PackingTaskFinishResponse,
+    PackingTaskListResponse,
+    ProcessPlanListResponse,
+    ProcessOrderAddResponse,
+    ProcessOrderListResponse,
     AdjustorderAdjustGetadjuststatusResponse,
     AdjustorderAdjustSetadjustResponse,
     DeliveryreceiptPurchasereceiptorderGetorderlistResponse,
@@ -61,7 +91,308 @@ from ._base import BaseEndpoint
 
 
 class WarehouseEndpoints(BaseEndpoint):
+
+    async def oversea_sku_unmatch(self, data: dict = None) -> list[OverseaProductUnmatchResponse]:
+        """海外仓sku取消配对.
+
+POST /basicOpen/overseaWarehouseSetting/productMatch
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/overseaWarehouseSetting/productMatch", data or {})
+        return self._parse_list(resp.data, OverseaProductUnmatchResponse)
+
+    async def product_bin_recommend_list(self, data: dict = None) -> list[WarehouseBinEntryRecommendResponse]:
+        """查询产品仓位列表.
+
+POST /basicOpen/warehouseConfig/warehouseBin/getEntryRecommendBinList
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/warehouseConfig/warehouseBin/getEntryRecommendBinList", data or {})
+        return self._parse_list(resp.data, WarehouseBinEntryRecommendResponse)
+
+    async def oversea_stockorder_detail(self, data: dict = None) -> list[OverseaStockOrderDetailResponse]:
+        """查询海外仓备货单详情.
+
+POST /basicOpen/overSeaWarehouse/stockOrder/detail
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/overSeaWarehouse/stockOrder/detail", data or {})
+        return self._parse_list(resp.data, OverseaStockOrderDetailResponse)
+
+    async def create_purchase_receipt_order(self, data: dict = None) -> list[PurchaseReceiptOrderCreateResponse]:
+        """创建待收货的收货单.
+
+POST /erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/createReceiptOrder
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/createReceiptOrder", data or {})
+        return self._parse_list(resp.data, PurchaseReceiptOrderCreateResponse)
+
+    async def sales_return_order_list(self, data: dict = None) -> list[SalesReturnV2ListResponse]:
+        """查询销售退货单列表.
+
+POST /pb/mp/returns/v2/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/pb/mp/returns/v2/list", data or {})
+        return self._parse_list(resp.data, SalesReturnV2ListResponse)
+
+    async def qc_order_list(self, data: dict = None) -> list[ReceiptOrderQcListResponse]:
+        """查询质检单列表.
+
+POST /erp/sc/routing/deliveryReceipt/ReceiptOrderQc/getOrderList
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/erp/sc/routing/deliveryReceipt/ReceiptOrderQc/getOrderList", data or {})
+        return self._parse_list(resp.data, ReceiptOrderQcListResponse)
+
+    async def return_order_fast_storage_in(self, data: dict = None) -> list[ReturnOrderFastStorageInResponse]:
+        """待收货退货单快捷入库.
+
+POST /basicOpen/return/order/fastStorageIn
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/return/order/fastStorageIn", data or {})
+        return self._parse_list(resp.data, ReturnOrderFastStorageInResponse)
+
+    async def allocation_partly_receive(self, data: dict = None) -> list[AllocationPartlyReceiveResponse]:
+        """调拨单分批收货.
+
+POST /erp/sc/routing/inventoryReceipt/StorageAllocation/partlyReceiveAllocationOrder
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAllocation/partlyReceiveAllocationOrder", data or {})
+        return self._parse_list(resp.data, AllocationPartlyReceiveResponse)
+
+    async def allocation_finish_receive(self, data: dict = None) -> list[AllocationFinishReceiveResponse]:
+        """调拨单结束到货.
+
+POST /erp/sc/routing/inventoryReceipt/StorageAllocation/finishReceiveAllocationOrder
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAllocation/finishReceiveAllocationOrder", data or {})
+        return self._parse_list(resp.data, AllocationFinishReceiveResponse)
+
+    async def cost_change_finish(self, data: dict = None) -> list[CostChangeFinishResponse]:
+        """创建已完成的成本补录单.
+
+POST /erp/sc/routing/inventoryReceipt/CostChangeOrder/finishCostChangeOrder
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/erp/sc/routing/inventoryReceipt/CostChangeOrder/finishCostChangeOrder", data or {})
+        return self._parse_list(resp.data, CostChangeFinishResponse)
+
+    async def set_order_package_size(self, data: dict = None) -> list[WmsOrderSetPackageSizeResponse]:
+        """设置包裹尺寸.
+
+POST /erp/sc/routing/wms/order/setOrderPackageSize
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/erp/sc/routing/wms/order/setOrderPackageSize", data or {})
+        return self._parse_list(resp.data, WmsOrderSetPackageSizeResponse)
+
     """领星仓库/库存 API (76个接口)."""
+
+    async def awd_cancel(self, data: dict = None) -> list[AwdInboundPlanCancelResponse]:
+        """取消AWD入库任务.
+
+POST /amzStaServer/openapi/awd/inbound-plan/cancel
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/awd/inbound-plan/cancel", data or {})
+        return self._parse_list(resp.data, AwdInboundPlanCancelResponse)
+
+    async def awd_confirm(self, data: dict = None) -> list[AwdInboundPlanConfirmResponse]:
+        """确认AWD入库任务.
+
+POST /amzStaServer/openapi/awd/inbound-plan/confirmInboundPlan
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/awd/inbound-plan/confirmInboundPlan", data or {})
+        return self._parse_list(resp.data, AwdInboundPlanConfirmResponse)
+
+    async def awd_create(self, data: dict = None) -> list[AwdInboundPlanCreateResponse]:
+        """创建AWD入库任务.
+
+POST /amzStaServer/openapi/awd/inbound-plan/createInboundPlan
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/awd/inbound-plan/createInboundPlan", data or {})
+        return self._parse_list(resp.data, AwdInboundPlanCreateResponse)
+
+    async def awd_detail(self, data: dict = None) -> list[AwdInboundPlanDetailResponse]:
+        """查询AWD入库任务详情.
+
+POST /amzStaServer/openapi/awd/inbound-plan/detail
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/awd/inbound-plan/detail", data or {})
+        return self._parse_list(resp.data, AwdInboundPlanDetailResponse)
+
+    async def awd_list(self, data: dict = None) -> list[AwdInboundPlanPageResponse]:
+        """查询AWD入库任务列表.
+
+POST /amzStaServer/openapi/awd/inbound-plan/page
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/awd/inbound-plan/page", data or {})
+        return self._parse_list(resp.data, AwdInboundPlanPageResponse)
+
+    async def awd_update(self, data: dict = None) -> list[AwdInboundPlanUpdateResponse]:
+        """更新AWD入库任务.
+
+POST /amzStaServer/openapi/awd/inbound-plan/updateInboundPlan
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/awd/inbound-plan/updateInboundPlan", data or {})
+        return self._parse_list(resp.data, AwdInboundPlanUpdateResponse)
+
+    async def awd_shipment_detail(self, data: dict = None) -> list[AwdInboundShipmentDetailResponse]:
+        """查询AWD入库货件详情.
+
+POST /amzStaServer/openapi/awd/inbound-shipment/detail
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/awd/inbound-shipment/detail", data or {})
+        return self._parse_list(resp.data, AwdInboundShipmentDetailResponse)
+
+    async def awd_shipment_list(self, data: dict = None) -> list[AwdInboundShipmentPageResponse]:
+        """查询AWD入库货件列表.
+
+POST /amzStaServer/openapi/awd/inbound-shipment/page
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/awd/inbound-shipment/page", data or {})
+        return self._parse_list(resp.data, AwdInboundShipmentPageResponse)
+
+    async def awd_shipment_update_track(self, data: dict = None) -> list[AwdInboundShipmentUpdateTrackResponse]:
+        """更新AWD货件跟踪编号.
+
+POST /amzStaServer/openapi/awd/inbound-shipment/updateShipmentInfo
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/awd/inbound-shipment/updateShipmentInfo", data or {})
+        return self._parse_list(resp.data, AwdInboundShipmentUpdateTrackResponse)
+
+    async def awd_shipment_print_label(self, data: dict = None) -> list[AwdInboundShipmentPrintLabelResponse]:
+        """打印AWD入库货件箱子标签.
+
+POST /amzStaServer/openapi/awd/inbound-shipment/uploadPacking
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/amzStaServer/openapi/awd/inbound-shipment/uploadPacking", data or {})
+        return self._parse_list(resp.data, AwdInboundShipmentPrintLabelResponse)
+
+    async def packing_task_add(self, data: dict = None) -> list[PackingTaskAddResponse]:
+        """装箱任务-生成装箱任务.
+
+POST /basicOpen/packingTask/addTask
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/packingTask/addTask", data or {})
+        return self._parse_list(resp.data, PackingTaskAddResponse)
+
+    async def packing_task_batch_edit(self, data: dict = None) -> list[PackingTaskBatchEditResponse]:
+        """装箱任务-批量编辑装箱信息.
+
+POST /basicOpen/packingTask/batchEditPackingBox
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/packingTask/batchEditPackingBox", data or {})
+        return self._parse_list(resp.data, PackingTaskBatchEditResponse)
+
+    async def packing_task_del(self, data: dict = None) -> list[PackingTaskDelResponse]:
+        """装箱任务-删除装箱任务.
+
+POST /basicOpen/packingTask/delTask
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/packingTask/delTask", data or {})
+        return self._parse_list(resp.data, PackingTaskDelResponse)
+
+    async def packing_task_detail(self, data: dict = None) -> list[PackingTaskDetailResponse]:
+        """装箱任务-任务详情.
+
+POST /basicOpen/packingTask/taskDetail
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/packingTask/taskDetail", data or {})
+        return self._parse_list(resp.data, PackingTaskDetailResponse)
+
+    async def packing_task_finish(self, data: dict = None) -> list[PackingTaskFinishResponse]:
+        """装箱任务-标记已完成.
+
+POST /basicOpen/packingTask/finishTask
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/packingTask/finishTask", data or {})
+        return self._parse_list(resp.data, PackingTaskFinishResponse)
+
+    async def packing_task_list(self, data: dict = None) -> list[PackingTaskListResponse]:
+        """装箱任务-单据列表.
+
+POST /basicOpen/packingTask/getRelateSnList
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/packingTask/getRelateSnList", data or {})
+        return self._parse_list(resp.data, PackingTaskListResponse)
+
+    async def process_plan_list(self, data: dict = None) -> list[ProcessPlanListResponse]:
+        """查询加工计划列表.
+
+POST /basicOpen/openapi/workOrder/processPlanList
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/openapi/workOrder/processPlanList", data or {})
+        return self._parse_list(resp.data, ProcessPlanListResponse)
+
+    async def process_order_add(self, data: dict = None) -> list[ProcessOrderAddResponse]:
+        """创建加工单/拆分单.
+
+POST /erp/sc/routing/inventoryReceipt/StorageProcess/addStorageProcessOrder
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageProcess/addStorageProcessOrder", data or {})
+        return self._parse_list(resp.data, ProcessOrderAddResponse)
+
+    async def process_order_list(self, data: dict = None) -> list[ProcessOrderListResponse]:
+        """加工单列表.
+
+POST /erp/sc/routing/inventoryReceipt/StorageProcess/getOrderLists
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageProcess/getOrderLists", data or {})
+        return self._parse_list(resp.data, ProcessOrderListResponse)
 
     async def add_allocation_order(self, wid: int = None, sys_wid: int = None, to_wid: int = None, sys_to_wid: int = None, freight_fee: str = None, other_fee: str = None, fee_part_type: int = None, remark: str = None, type: int = None, predict_time: str = None, out_bin_type: str = None, product_list: Any = None, out_available_bin: list = None, out_inferior_bin: list = None, to_available_bin: list = None, to_inferior_bin: list = None) -> InventoryreceiptStorageallocationAddallocationorderResponse | None:
         """创建待收货/已完成的调拨单.

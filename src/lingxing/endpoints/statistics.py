@@ -2,6 +2,16 @@
 from __future__ import annotations
 
 from ..models.responses.statistics import (
+    ProfitStatMskuListResponse,
+    ProfitStatAsinListResponse,
+    ProfitStatParentAsinListResponse,
+    ProfitStatSellerListResponse,
+    InvReportLocalAggregateResponse,
+    InvReportLocalDetailResponse,
+    InvReportOverseasAggregateResponse,
+    InvReportOverseasDetailResponse,
+    InvReportFbaGatherResponse,
+    InvReportFbaDetailResponse,
     FbaReportStoragefeelongtermResponse,
     FbaReportStoragefeemonthResponse,
     FbaStockReportGetlistResponse,
@@ -42,6 +52,106 @@ from ._base import BaseEndpoint
 
 class StatisticsEndpoints(BaseEndpoint):
     """领星统计报表 API (31个接口)."""
+
+    async def profit_stat_msku(self, data: dict = None) -> list[ProfitStatMskuListResponse]:
+        """查询利润统计-MSKU.
+
+POST /bd/profit/statistics/open/msku/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/bd/profit/statistics/open/msku/list", data or {})
+        return self._parse_list(resp.data, ProfitStatMskuListResponse)
+
+    async def profit_stat_asin(self, data: dict = None) -> list[ProfitStatAsinListResponse]:
+        """查询利润统计-ASIN.
+
+POST /bd/profit/statistics/open/asin/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/bd/profit/statistics/open/asin/list", data or {})
+        return self._parse_list(resp.data, ProfitStatAsinListResponse)
+
+    async def profit_stat_parent_asin(self, data: dict = None) -> list[ProfitStatParentAsinListResponse]:
+        """查询利润统计-父ASIN.
+
+POST /bd/profit/statistics/open/parent/asin/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/bd/profit/statistics/open/parent/asin/list", data or {})
+        return self._parse_list(resp.data, ProfitStatParentAsinListResponse)
+
+    async def profit_stat_seller(self, data: dict = None) -> list[ProfitStatSellerListResponse]:
+        """查询利润统计-店铺.
+
+POST /bd/profit/statistics/open/seller/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/bd/profit/statistics/open/seller/list", data or {})
+        return self._parse_list(resp.data, ProfitStatSellerListResponse)
+
+    async def inv_report_local_aggregate(self, data: dict = None) -> list[InvReportLocalAggregateResponse]:
+        """库存报表-本地仓-新报表-汇总.
+
+POST /inventory/center/openapi/storageReport/local/aggregate/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/inventory/center/openapi/storageReport/local/aggregate/list", data or {})
+        return self._parse_list(resp.data, InvReportLocalAggregateResponse)
+
+    async def inv_report_local_detail(self, data: dict = None) -> list[InvReportLocalDetailResponse]:
+        """库存报表-本地仓-新报表-明细.
+
+POST /inventory/center/openapi/storageReport/local/detail/page
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/inventory/center/openapi/storageReport/local/detail/page", data or {})
+        return self._parse_list(resp.data, InvReportLocalDetailResponse)
+
+    async def inv_report_overseas_aggregate(self, data: dict = None) -> list[InvReportOverseasAggregateResponse]:
+        """库存报表-海外仓-新报表-汇总.
+
+POST /inventory/center/openapi/storageReport/overseas/aggregate/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/inventory/center/openapi/storageReport/overseas/aggregate/list", data or {})
+        return self._parse_list(resp.data, InvReportOverseasAggregateResponse)
+
+    async def inv_report_overseas_detail(self, data: dict = None) -> list[InvReportOverseasDetailResponse]:
+        """库存报表-海外仓-新报表-明细.
+
+POST /inventory/center/openapi/storageReport/overseas/detail/page
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/inventory/center/openapi/storageReport/overseas/detail/page", data or {})
+        return self._parse_list(resp.data, InvReportOverseasDetailResponse)
+
+    async def inv_report_fba_gather(self, data: dict = None) -> list[InvReportFbaGatherResponse]:
+        """库存报表-FBA-新版-汇总.
+
+POST /cost/center/openApi/fba/gather/query
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/cost/center/openApi/fba/gather/query", data or {})
+        return self._parse_list(resp.data, InvReportFbaGatherResponse)
+
+    async def inv_report_fba_detail(self, data: dict = None) -> list[InvReportFbaDetailResponse]:
+        """库存报表-FBA-新版-明细.
+
+POST /cost/center/openApi/fba/detail/query
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/cost/center/openApi/fba/detail/query", data or {})
+        return self._parse_list(resp.data, InvReportFbaDetailResponse)
 
     async def amazon_report_export_task(self, region: str = None, seller_id: str = None, report_document_id: str = None) -> ReportAmazonreportexporttaskResponse | None:
         """报告导出 - 报告下载链接续期.

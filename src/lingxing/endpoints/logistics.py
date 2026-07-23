@@ -2,6 +2,9 @@
 from __future__ import annotations
 
 from ..models.responses.logistics import (
+    WmsLogisticsListUsedLogisticsTypeResponse,
+    LogisticsHeadReconciliationListResponse,
+    LogisticsBillConfirmResponse,
     BusinessconfigTransportmethodListResponse,
     HeadlogisticsproviderQueryListResponse,
     LocalInventoryChannellistResponse,
@@ -16,6 +19,36 @@ from ._base import BaseEndpoint
 
 class LogisticsEndpoints(BaseEndpoint):
     """领星物流 API (5个接口)."""
+
+    async def used_logistics_type(self, data: dict = None) -> list[WmsLogisticsListUsedLogisticsTypeResponse]:
+        """查询已启用的自发货物流方式.
+
+POST /erp/sc/routing/wms/WmsLogistics/listUsedLogisticsType
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/erp/sc/routing/wms/WmsLogistics/listUsedLogisticsType", data or {})
+        return self._parse_list(resp.data, WmsLogisticsListUsedLogisticsTypeResponse)
+
+    async def head_reconciliation_list(self, data: dict = None) -> list[LogisticsHeadReconciliationListResponse]:
+        """头程对账列表.
+
+POST /basicOpen/logistics/headLogisticsReconciliation/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/logistics/headLogisticsReconciliation/list", data or {})
+        return self._parse_list(resp.data, LogisticsHeadReconciliationListResponse)
+
+    async def logistics_bill_confirm(self, data: dict = None) -> list[LogisticsBillConfirmResponse]:
+        """FBM物流对账-确认/批量确认.
+
+POST /basicOpen/logistics/logisticsBill/confirm
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/basicOpen/logistics/logisticsBill/confirm", data or {})
+        return self._parse_list(resp.data, LogisticsBillConfirmResponse)
 
     async def add_channels(self, channelsData: list = None) -> TmsFirstvesselAddchannelsResponse | None:
         """批量添加头程物流方式.

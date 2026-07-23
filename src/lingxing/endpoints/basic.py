@@ -1,7 +1,6 @@
 """基础数据 API - 店铺、账户、市场、汇率等基础信息查询."""
 from __future__ import annotations
 
-from typing import Union
 
 from ..models.responses.basic_data import (
     AccountListsResponse,

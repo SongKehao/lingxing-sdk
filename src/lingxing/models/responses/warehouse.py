@@ -2478,3 +2478,128 @@ class WareHouseBinStatementItem(LingXingModel):
     whb_name: Optional[str] = None
     whb_type_name: Optional[str] = None
     wid: Optional[int] = None
+
+
+class AwdInboundPlanConfirmResponse(LingXingModel):
+    """确认AWD入库任务 (/amzStaServer/openapi/awd/inbound-plan/confirmInboundPlan)."""
+    msg: Optional[str] = None
+
+
+class AwdInboundPlanCreateResponse(LingXingModel):
+    """创建AWD入库任务 (/amzStaServer/openapi/awd/inbound-plan/createInboundPlan)."""
+    msg: Optional[str] = None
+
+
+class AwdInboundPlanUpdateResponse(LingXingModel):
+    """更新AWD入库任务 (/amzStaServer/openapi/awd/inbound-plan/updateInboundPlan)."""
+    msg: Optional[str] = None
+
+
+class AwdInboundShipmentUpdateTrackResponse(LingXingModel):
+    """更新AWD货件跟踪编号 (/amzStaServer/openapi/awd/inbound-shipment/updateShipmentInfo)."""
+    msg: Optional[str] = None
+
+
+class AwdInboundShipmentPrintLabelResponse(LingXingModel):
+    """打印AWD入库货件箱子标签 (/amzStaServer/openapi/awd/inbound-shipment/uploadPacking)."""
+    msg: Optional[str] = None
+
+
+class PackingTaskAddResponse(LingXingModel):
+    """装箱任务-生成装箱任务 (/basicOpen/packingTask/addTask)."""
+    msg: Optional[str] = None
+
+
+class PackingTaskBatchEditResponse(LingXingModel):
+    """装箱任务-批量编辑装箱信息 (/basicOpen/packingTask/batchEditPackingBox)."""
+    msg: Optional[str] = None
+
+
+class PackingTaskDelResponse(LingXingModel):
+    """装箱任务-删除装箱任务 (/basicOpen/packingTask/delTask)."""
+    msg: Optional[str] = None
+
+
+class PackingTaskDetailResponse(LingXingModel):
+    """装箱任务-任务详情 (/basicOpen/packingTask/taskDetail)."""
+    msg: Optional[str] = None
+
+
+class PackingTaskFinishResponse(LingXingModel):
+    """装箱任务-标记已完成 (/basicOpen/packingTask/finishTask)."""
+    msg: Optional[str] = None
+
+
+class PackingTaskListResponse(LingXingModel):
+    """装箱任务-单据列表 (/basicOpen/packingTask/getRelateSnList)."""
+    msg: Optional[str] = None
+
+
+class ProcessPlanListResponse(LingXingModel):
+    """查询加工计划列表 (/basicOpen/openapi/workOrder/processPlanList)."""
+    msg: Optional[str] = None
+
+
+class ProcessOrderAddResponse(LingXingModel):
+    """创建加工单/拆分单 (/erp/sc/routing/inventoryReceipt/StorageProcess/addStorageProcessOrder)."""
+    msg: Optional[str] = None
+
+
+class ProcessOrderListResponse(LingXingModel):
+    """加工单列表 (/erp/sc/routing/inventoryReceipt/StorageProcess/getOrderLists)."""
+    msg: Optional[str] = None
+
+
+class OverseaProductUnmatchResponse(LingXingModel):
+    """海外仓sku取消配对 (/basicOpen/overseaWarehouseSetting/productMatch)."""
+    msg: Optional[str] = None
+
+
+class WarehouseBinEntryRecommendResponse(LingXingModel):
+    """查询产品仓位列表 (/basicOpen/warehouseConfig/warehouseBin/getEntryRecommendBinList)."""
+    msg: Optional[str] = None
+
+
+class OverseaStockOrderDetailResponse(LingXingModel):
+    """查询海外仓备货单详情 (/basicOpen/overSeaWarehouse/stockOrder/detail)."""
+    msg: Optional[str] = None
+
+
+class PurchaseReceiptOrderCreateResponse(LingXingModel):
+    """创建待收货的收货单 (/erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/createReceiptOrder)."""
+    msg: Optional[str] = None
+
+
+class SalesReturnV2ListResponse(LingXingModel):
+    """查询销售退货单列表 (/pb/mp/returns/v2/list)."""
+    msg: Optional[str] = None
+
+
+class ReceiptOrderQcListResponse(LingXingModel):
+    """查询质检单列表 (/erp/sc/routing/deliveryReceipt/ReceiptOrderQc/getOrderList)."""
+    msg: Optional[str] = None
+
+
+class ReturnOrderFastStorageInResponse(LingXingModel):
+    """待收货退货单快捷入库 (/basicOpen/return/order/fastStorageIn)."""
+    msg: Optional[str] = None
+
+
+class AllocationPartlyReceiveResponse(LingXingModel):
+    """调拨单分批收货 (/erp/sc/routing/inventoryReceipt/StorageAllocation/partlyReceiveAllocationOrder)."""
+    msg: Optional[str] = None
+
+
+class AllocationFinishReceiveResponse(LingXingModel):
+    """调拨单结束到货 (/erp/sc/routing/inventoryReceipt/StorageAllocation/finishReceiveAllocationOrder)."""
+    msg: Optional[str] = None
+
+
+class CostChangeFinishResponse(LingXingModel):
+    """创建已完成的成本补录单 (/erp/sc/routing/inventoryReceipt/CostChangeOrder/finishCostChangeOrder)."""
+    msg: Optional[str] = None
+
+
+class WmsOrderSetPackageSizeResponse(LingXingModel):
+    """设置包裹尺寸 (/erp/sc/routing/wms/order/setOrderPackageSize)."""
+    msg: Optional[str] = None

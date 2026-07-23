@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 from ..models.responses.service import (
+    CrmCustomerListResponse,
+    ReturnsWorkOrderListResponse,
     CrmCustomerIndexResponse,
     CsFeedbackListResponse,
     CsFeedbackListmwsResponse,
@@ -27,6 +29,26 @@ from ._base import BaseEndpoint
 
 class CustomerServiceEndpoints(BaseEndpoint):
     """领星客服 API (16个接口)."""
+
+    async def customer_list_old(self, data: dict = None) -> list[CrmCustomerListResponse]:
+        """查询客户列表（旧）.
+
+POST /bd/crm/open/api/customer/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/bd/crm/open/api/customer/list", data or {})
+        return self._parse_list(resp.data, CrmCustomerListResponse)
+
+    async def after_sale_workorder_list(self, data: dict = None) -> list[ReturnsWorkOrderListResponse]:
+        """查询售后工单列表.
+
+POST /pb/mp/returns/workOrder/list
+
+Args:
+    data: 请求体，字段参考接口文档, dict."""
+        resp = await self._post("/pb/mp/returns/workOrder/list", data or {})
+        return self._parse_list(resp.data, ReturnsWorkOrderListResponse)
 
     async def feedback_list(self, sid: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list[CsFeedbackListResponse]:
         """查询评价管理 4-5星Feedback列表.

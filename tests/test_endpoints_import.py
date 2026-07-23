@@ -22,6 +22,7 @@ def test_all_endpoints_import():
         RestockingLimitEndpoints,
         SaleEndpoints,
         StatisticsEndpoints,
+        TargetManageEndpoints,
         ToolsEndpoints,
         VCEndpoints,
         WarehouseEndpoints,
@@ -32,10 +33,10 @@ def test_all_endpoints_import():
         MultiplatformAdsEndpoints, MultiplatformOtherEndpoints,
         MultiplatformPlatformsEndpoints, NewAdEndpoints, ProductEndpoints,
         PurchaseEndpoints, RestockingEndpoints, RestockingLimitEndpoints,
-        SaleEndpoints, StatisticsEndpoints, ToolsEndpoints, VCEndpoints,
+        SaleEndpoints, StatisticsEndpoints, TargetManageEndpoints, ToolsEndpoints, VCEndpoints,
         WarehouseEndpoints,
     ]
-    assert len(classes) == 19
+    assert len(classes) == 20
 
 
 def test_total_method_count():
@@ -50,7 +51,7 @@ def test_total_method_count():
             and asyncio.iscoroutinefunction(getattr(cls, m))
         ]
         total += len(methods)
-    assert total == 565, f"Expected 565 async methods, got {total}"
+    assert total == 653, f"Expected 653 async methods, got {total}"
 
 
 def test_sync_wrappers_generated():

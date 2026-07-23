@@ -589,3 +589,8 @@ class ReturnsWorkorderListResponse(LingXingModel):
     """查询售后工单列表."""
     total: Optional[int] = Field(None, description="总数")
     list: Optional[List[ReturnsWorkorderListList]] = Field(None, description="列表信息")
+
+
+class ReturnsWorkOrderListResponse(LingXingModel):
+    """查询售后工单列表 (/pb/mp/returns/workOrder/list)."""
+    msg: Optional[str] = None
