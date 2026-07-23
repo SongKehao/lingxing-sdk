@@ -2593,7 +2593,7 @@ class ProfitReportMskuList(LingXingModel):
     local_sku: Optional[str] = Field(None, description="SKU")
     delivery_date: Optional[str] = Field(None, description="下单时间（废弃字段，仅订单维度返回）")
     country_name: Optional[str] = Field(None, description="国家")
-    bname: Optional[Any] = Field(None, description="分类")
+    bname: Optional[str] = Field(None, description="分类")
     cname: Optional[str] = Field(None, description="品牌")
     developer: Optional[str] = Field(None, description="开发人")
     currency_code: Optional[str] = Field(None, description="币种")
@@ -3390,7 +3390,7 @@ class ProfitReportSkuList(LingXingModel):
     local_sku: Optional[str] = Field(None, description="SKU")
     delivery_date: Optional[str] = Field(None, description="下单时间（废弃字段，仅订单维度返回）")
     country_name: Optional[str] = Field(None, description="国家")
-    bname: Optional[Any] = Field(None, description="分类")
+    bname: Optional[str] = Field(None, description="分类")
     cname: Optional[str] = Field(None, description="品牌")
     developer: Optional[str] = Field(None, description="开发人")
     currency_code: Optional[str] = Field(None, description="币种")
@@ -4195,8 +4195,8 @@ class MultiplatformOrderPreshipmentFailureInfo(LingXingModel):
 
 class MultiplatformOrderPreshipmentResponse(LingXingModel):
     """预发货."""
-    success_num: Optional[Any] = Field(None, description="成功数量")
-    fail_num: Optional[Any] = Field(None, description="失败数量")
+    success_num: Optional[int] = Field(None, description="成功数量")
+    fail_num: Optional[int] = Field(None, description="失败数量")
     failure_info: Optional[List[MultiplatformOrderPreshipmentFailureInfo]] = Field(None, description="失败详情信息")
 
 
@@ -4211,8 +4211,8 @@ class MultiplatformOrderReviewSuccessInfo(LingXingModel):
 
 class MultiplatformOrderReviewResponse(LingXingModel):
     """审核发货."""
-    success_num: Optional[Any] = Field(None, description="成功数量")
-    fail_num: Optional[Any] = Field(None, description="失败数量")
+    success_num: Optional[int] = Field(None, description="成功数量")
+    fail_num: Optional[int] = Field(None, description="失败数量")
     failure_info: Optional[List[MultiplatformOrderReviewFailureInfo]] = Field(None, description="失败详情信息")
     success_info: Optional[List[MultiplatformOrderReviewSuccessInfo]] = Field(None, description="成功详情信息")
 
