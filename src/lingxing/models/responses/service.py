@@ -86,7 +86,7 @@ class CustomerserviceRmamanageListRecords(LingXingModel):
     process_way: Optional[str] = Field(None, description="处理方式id")
     buyer_name: Optional[str] = Field(None, description="买家名")
     buyer_email: Optional[str] = Field(None, description="买家邮箱")
-    purchase_date_local: Optional[Any] = Field(None, description="订购时间")
+    purchase_date_local: Optional[str] = Field(None, description="订购时间")
 
 class CustomerserviceRmamanageListResponse(LingXingModel):
     """查询RMA管理."""

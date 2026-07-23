@@ -333,7 +333,7 @@ class PromotionListingdetailcouponRecords(LingXingModel):
     sales_amount_usd: Optional[float] = Field(None, description="活动总销售额，换算成美元")
     sales_volume: Optional[float] = Field(None, description="活动总销量")
     promotion_start_time: Optional[str] = Field(None, description="活动开始时间")
-    promotion_start_time_utc: Optional[Any] = Field(None, description="活动开始时间UTC时间")
+    promotion_start_time_utc: Optional[str] = Field(None, description="活动开始时间UTC时间")
     promotion_end_time: Optional[str] = Field(None, description="活动结束时间")
     first_sync_time: Optional[str] = Field(None, description="首次同步时间")
     last_sync_time: Optional[str] = Field(None, description="最后同步时间")
@@ -368,7 +368,7 @@ class PromotionListingdetailmanageRecords(LingXingModel):
     promotion_type: Optional[float] = Field(None, description="促销类型")
     promotion_type_text: Optional[str] = Field(None, description="促销类型")
     promotion_code: Optional[str] = Field(None, description="优惠码")
-    promotion_code_type: Optional[Any] = Field(None, description="优惠码类型，1优先型，2无限型")
+    promotion_code_type: Optional[str] = Field(None, description="优惠码类型，1优先型，2无限型")
     sales_amount: Optional[float] = Field(None, description="活动总销售额")
     sales_amount_usd: Optional[float] = Field(None, description="活动总销售额，换算成美元")
     sales_volume: Optional[float] = Field(None, description="活动总销量")
@@ -381,7 +381,7 @@ class PromotionListingdetailmanageRecords(LingXingModel):
     exclude_product: Optional[str] = Field(None, description="排除商品")
     exchange_limit: Optional[float] = Field(None, description="是否限制兑换，1是0否")
     promotion_start_time: Optional[str] = Field(None, description="活动开始时间")
-    promotion_start_time_utc: Optional[Any] = Field(None, description="活动开始时间Utc")
+    promotion_start_time_utc: Optional[str] = Field(None, description="活动开始时间Utc")
     promotion_end_time: Optional[str] = Field(None, description="活动结束时间")
     first_sync_time: Optional[str] = Field(None, description="首次同步时间")
     last_sync_time: Optional[str] = Field(None, description="最后同步时间")
@@ -416,7 +416,7 @@ class PromotionListingdetailprimediscountRecords(LingXingModel):
     origin_status_text: Optional[str] = Field(None, description="促销活动平台状态")
     product_quantity: Optional[float] = Field(None, description="商品数量")
     promotion_start_time: Optional[str] = Field(None, description="活动开始时间（productQuantity）")
-    promotion_start_time_utc: Optional[Any] = Field(None, description="活动开始时间UTC")
+    promotion_start_time_utc: Optional[str] = Field(None, description="活动开始时间UTC")
     promotion_end_time: Optional[str] = Field(None, description="活动结束时间")
     sales_volume: Optional[float] = Field(None, description="活动总销量")
     sales_amount: Optional[float] = Field(None, description="活动总销售额")
@@ -469,7 +469,7 @@ class PromotionListingdetailseckillRecords(LingXingModel):
     exchange_rate: Optional[float] = Field(None, description="转化率")
     pcos: Optional[float] = Field(None, description="费用除以销售额")
     promotion_start_time: Optional[str] = Field(None, description="活动开始时间")
-    promotion_start_time_utc: Optional[Any] = Field(None, description="活动开始时间UTC")
+    promotion_start_time_utc: Optional[str] = Field(None, description="活动开始时间UTC")
     promotion_end_time: Optional[str] = Field(None, description="活动结束时间")
     first_sync_time: Optional[str] = Field(None, description="首次同步时间")
     last_sync_time: Optional[str] = Field(None, description="最后同步时间")
@@ -871,15 +871,15 @@ class MwsOrdersResponse(LingXingModel):
 
 class ListingProductpricingPricingsubmitFailureDetail(LingXingModel):
     """failure_detail sub-structure."""
-    sid: Optional[Any] = Field(None, description="[int]")
-    msku: Optional[Any] = Field(None, description="[string]")
-    asin: Optional[Any] = Field(None, description="[string]")
-    msg: Optional[Any] = Field(None, description="[string]")
+    sid: Optional[int] = Field(None, description="[int]")
+    msku: Optional[str] = Field(None, description="[string]")
+    asin: Optional[str] = Field(None, description="[string]")
+    msg: Optional[str] = Field(None, description="[string]")
 
 class ListingProductpricingPricingsubmitResponse(LingXingModel):
     """批量修改Listing价格."""
-    success_num: Optional[Any] = Field(None, description="[int]")
-    failure_num: Optional[Any] = Field(None, description="[int]")
+    success_num: Optional[int] = Field(None, description="[int]")
+    failure_num: Optional[int] = Field(None, description="[int]")
     failure_detail: Optional[List[ListingProductpricingPricingsubmitFailureDetail]] = Field(None, description="[array]")
     total: Optional[int] = Field(None, description="[int]")
 
@@ -1519,12 +1519,12 @@ class PromotionapiPromotionPrimediscountalldetailbatchPrimediscount(LingXingMode
     status: Optional[float] = Field(None, description="状态 0其他 1进行中 2已过期 3未开始 4已取消")
     status_text: Optional[str] = Field(None, description="状态说明")
     origin_status: Optional[str] = Field(None, description="促销活动平台状态")
-    customer_target: Optional[Any] = Field(None, description="消费群体类型 PRIME_EXCLUSIVE会员折扣 ALL CUSTOMERS价格折扣")
+    customer_target: Optional[float] = Field(None, description="消费群体类型 PRIME_EXCLUSIVE会员折扣 ALL CUSTOMERS价格折扣")
     error_count: Optional[str] = Field(None, description=">0 则 需要注意")
     promotion_start_time: Optional[str] = Field(None, description="活动开始时间")
     promotion_end_time: Optional[str] = Field(None, description="活动结束时间")
-    last_sync_time: Optional[Any] = Field(None, description="最后同步时间")
-    pull_detail_status: Optional[Any] = Field(None, description="获取详情状态 0=未获取（获取失败），1=获取中，2=获取成功")
+    last_sync_time: Optional[str] = Field(None, description="最后同步时间")
+    pull_detail_status: Optional[str] = Field(None, description="获取详情状态 0=未获取（获取失败），1=获取中，2=获取成功")
 
 class PromotionapiPromotionPrimediscountalldetailbatchListingpage(LingXingModel):
     """listingPage sub-structure."""
@@ -1553,7 +1553,7 @@ class PromotionapiPromotionPrimediscountalldetailbatchResponse(LingXingModel):
     total: Optional[int] = Field(None, description="是")
     promotion_id: Optional[str] = Field(None, description="活动id")
     store_id: Optional[str] = Field(None, description="店铺id")
-    customer_target: Optional[Any] = Field(None, description="消费群体类型 PRIME_EXCLUSIVE会员折扣 ALL CUSTOMERS价格折扣")
+    customer_target: Optional[float] = Field(None, description="消费群体类型 PRIME_EXCLUSIVE会员折扣 ALL CUSTOMERS价格折扣")
     prime_discount: Optional[List[PromotionapiPromotionPrimediscountalldetailbatchPrimediscount]] = Field(None, description="会员折扣or价格折扣信息")
     listing_page: Optional[List[PromotionapiPromotionPrimediscountalldetailbatchListingpage]] = Field(None, description="会员折扣or价格折扣涉及的Listing信息")
     order_page: Optional[List[PromotionapiPromotionPrimediscountalldetailbatchOrderpage]] = Field(None, description="会员折扣or价格折扣涉及的订单信息")

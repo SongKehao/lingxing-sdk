@@ -9,17 +9,17 @@ from ..common import LingXingModel
 class OpenapiMwsreportAdjustmentlistResponse(LingXingModel):
     """查询亚马逊源报表-盘存记录."""
     total: Optional[int] = Field(None, description="[int]")
-    sid: Optional[Any] = Field(None, description="[int]")
-    report_date: Optional[Any] = Field(None, description="[string]")
-    transaction_item_id: Optional[Any] = Field(None, description="[string]")
-    fnsku: Optional[Any] = Field(None, description="[string]")
-    msku: Optional[Any] = Field(None, description="[string]")
-    item_name: Optional[Any] = Field(None, description="[string]")
-    fulfillment_center_id: Optional[Any] = Field(None, description="[string]")
-    quantity: Optional[Any] = Field(None, description="[int]")
-    reason: Optional[Any] = Field(None, description="[string]")
-    reason_text: Optional[Any] = Field(None, description="[string]")
-    disposition: Optional[Any] = Field(None, description="[string]")
+    sid: Optional[int] = Field(None, description="[int]")
+    report_date: Optional[str] = Field(None, description="[string]")
+    transaction_item_id: Optional[str] = Field(None, description="[string]")
+    fnsku: Optional[str] = Field(None, description="[string]")
+    msku: Optional[str] = Field(None, description="[string]")
+    item_name: Optional[str] = Field(None, description="[string]")
+    fulfillment_center_id: Optional[str] = Field(None, description="[string]")
+    quantity: Optional[int] = Field(None, description="[int]")
+    reason: Optional[str] = Field(None, description="[string]")
+    reason_text: Optional[str] = Field(None, description="[string]")
+    disposition: Optional[str] = Field(None, description="[string]")
 
 
 class FbaReportRemovallistsResponse(LingXingModel):
