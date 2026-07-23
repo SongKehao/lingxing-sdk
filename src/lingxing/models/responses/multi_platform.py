@@ -2474,7 +2474,7 @@ class MultiplatformFbtStocksearchList(LingXingModel):
 class MultiplatformFbtStocksearchResponse(LingXingModel):
     """查询Temu库存."""
     list: Optional[List[MultiplatformFbtStocksearchList]] = Field(None, description="是")
-    total: Optional[Any] = Field(None, description="是")
+    total: Optional[int] = Field(None, description="是")
 
 
 class FbtStocksearchV2Page(LingXingModel):

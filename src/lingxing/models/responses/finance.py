@@ -134,15 +134,15 @@ class LazadaSettlementListResponse(LingXingModel):
 
 class FinanceMreportOrderprofitPriceList(LingXingModel):
     """price_list sub-structure."""
-    principal_uids: Optional[Any] = Field(None, description="是")
+    principal_uids: Optional[list] = Field(None, description="是")
     local_sku: Optional[str] = Field(None, description="sku")
     item_name: Optional[str] = Field(None, description="标题")
-    cate_title: Optional[Any] = Field(None, description="是")
+    cate_title: Optional[str] = Field(None, description="是")
     local_name: Optional[str] = Field(None, description="是")
     sid: Optional[Any] = Field(None, description="是")
     is_delete: Optional[int] = Field(None, description="是")
     brand_title: Optional[str] = Field(None, description="是")
-    volume: Optional[Any] = Field(None, description="是")
+    volume: Optional[int] = Field(None, description="是")
     small_main_image_url: Optional[str] = Field(None, description="是")
     site_url: Optional[str] = Field(None, description="是")
     parent_asin: Optional[str] = Field(None, description="是")

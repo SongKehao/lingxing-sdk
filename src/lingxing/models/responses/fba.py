@@ -743,7 +743,7 @@ class StorageShipmentGetinboundshipmentlistList(LingXingModel):
 class StorageShipmentGetinboundshipmentlistResponse(LingXingModel):
     """查询发货单列表."""
     list: Optional[List[StorageShipmentGetinboundshipmentlistList]] = Field(None, description="发货单列表")
-    total: Optional[Any] = Field(None, description="是")
+    total: Optional[int] = Field(None, description="是")
 
 
 class StorageShipmentGetinboundshipmentlistmwsdetailItems(LingXingModel):

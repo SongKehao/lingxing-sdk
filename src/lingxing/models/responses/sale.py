@@ -342,10 +342,10 @@ class PromotionListingdetailcouponRecords(LingXingModel):
 class PromotionListingdetailcouponResponse(LingXingModel):
     """查询商品折扣详情-列表-优惠卷."""
     total: Optional[float] = Field(None, description="总数")
-    size: Optional[Any] = Field(None, description="是")
+    size: Optional[int] = Field(None, description="是")
     page_count: Optional[int] = Field(None, description="是")
-    current: Optional[Any] = Field(None, description="是")
-    current_size: Optional[Any] = Field(None, description="是")
+    current: Optional[int] = Field(None, description="是")
+    current_size: Optional[int] = Field(None, description="是")
     has_previous_page: Optional[int] = Field(None, description="是")
     has_next_page: Optional[int] = Field(None, description="是")
     records: Optional[List[PromotionListingdetailcouponRecords]] = Field(None, description="是")
@@ -389,11 +389,11 @@ class PromotionListingdetailmanageRecords(LingXingModel):
 
 class PromotionListingdetailmanageResponse(LingXingModel):
     """查询商品折扣详情-列表-管理促销."""
-    total: Optional[Any] = Field(None, description="是")
-    size: Optional[Any] = Field(None, description="是")
+    total: Optional[int] = Field(None, description="是")
+    size: Optional[int] = Field(None, description="是")
     page_count: Optional[int] = Field(None, description="是")
-    current: Optional[Any] = Field(None, description="是")
-    current_size: Optional[Any] = Field(None, description="是")
+    current: Optional[int] = Field(None, description="是")
+    current_size: Optional[int] = Field(None, description="是")
     has_next_page: Optional[int] = Field(None, description="是")
     has_previous_page: Optional[int] = Field(None, description="是")
     records: Optional[List[PromotionListingdetailmanageRecords]] = Field(None, description="是")
@@ -429,11 +429,11 @@ class PromotionListingdetailprimediscountRecords(LingXingModel):
 
 class PromotionListingdetailprimediscountResponse(LingXingModel):
     """查询商品折扣详情-列表-会员折扣."""
-    total: Optional[Any] = Field(None, description="是")
-    size: Optional[Any] = Field(None, description="是")
+    total: Optional[int] = Field(None, description="是")
+    size: Optional[int] = Field(None, description="是")
     page_count: Optional[int] = Field(None, description="是")
-    current: Optional[Any] = Field(None, description="是")
-    current_size: Optional[Any] = Field(None, description="是")
+    current: Optional[int] = Field(None, description="是")
+    current_size: Optional[int] = Field(None, description="是")
     has_next_page: Optional[int] = Field(None, description="是")
     has_previous_page: Optional[int] = Field(None, description="是")
     records: Optional[List[PromotionListingdetailprimediscountRecords]] = Field(None, description="是")
@@ -477,11 +477,11 @@ class PromotionListingdetailseckillRecords(LingXingModel):
 
 class PromotionListingdetailseckillResponse(LingXingModel):
     """查询商品折扣详情-列表-秒杀."""
-    total: Optional[Any] = Field(None, description="是")
-    size: Optional[Any] = Field(None, description="是")
+    total: Optional[int] = Field(None, description="是")
+    size: Optional[int] = Field(None, description="是")
     page_count: Optional[int] = Field(None, description="是")
-    current: Optional[Any] = Field(None, description="是")
-    current_size: Optional[Any] = Field(None, description="是")
+    current: Optional[int] = Field(None, description="是")
+    current_size: Optional[int] = Field(None, description="是")
     has_next_page: Optional[int] = Field(None, description="是")
     has_previous_page: Optional[int] = Field(None, description="是")
     records: Optional[List[PromotionListingdetailseckillRecords]] = Field(None, description="是")
@@ -1478,25 +1478,25 @@ class PromotionapiPromotionManagementalldetailbatchManagement(LingXingModel):
 
 class PromotionapiPromotionManagementalldetailbatchListingpage(LingXingModel):
     """listingPage sub-structure."""
-    current: Optional[Any] = Field(None, description="是")
-    current_size: Optional[Any] = Field(None, description="是")
+    current: Optional[int] = Field(None, description="是")
+    current_size: Optional[int] = Field(None, description="是")
     has_next_page: Optional[int] = Field(None, description="是")
     has_previous_page: Optional[int] = Field(None, description="是")
     page_count: Optional[int] = Field(None, description="是")
     records: Optional[Any] = Field(None, description="是")
-    size: Optional[Any] = Field(None, description="是")
-    total: Optional[Any] = Field(None, description="是")
+    size: Optional[int] = Field(None, description="是")
+    total: Optional[int] = Field(None, description="是")
 
 class PromotionapiPromotionManagementalldetailbatchOrderpage(LingXingModel):
     """orderPage sub-structure."""
-    current: Optional[Any] = Field(None, description="是")
-    current_size: Optional[Any] = Field(None, description="是")
+    current: Optional[int] = Field(None, description="是")
+    current_size: Optional[int] = Field(None, description="是")
     has_next_page: Optional[int] = Field(None, description="是")
     has_previous_page: Optional[int] = Field(None, description="是")
     page_count: Optional[int] = Field(None, description="是")
     records: Optional[Any] = Field(None, description="是")
-    size: Optional[Any] = Field(None, description="是")
-    total: Optional[Any] = Field(None, description="是")
+    size: Optional[int] = Field(None, description="是")
+    total: Optional[int] = Field(None, description="是")
 
 class PromotionapiPromotionManagementalldetailbatchResponse(LingXingModel):
     """查询管理促销详情+listing+订单(批量)."""
@@ -1588,22 +1588,22 @@ class PromotionapiPromotionSeckillalldetailbatchSeckill(LingXingModel):
 
 class PromotionapiPromotionSeckillalldetailbatchListingpage(LingXingModel):
     """listingPage sub-structure."""
-    total: Optional[Any] = Field(None, description="是")
-    size: Optional[Any] = Field(None, description="是")
+    total: Optional[int] = Field(None, description="是")
+    size: Optional[int] = Field(None, description="是")
     page_count: Optional[int] = Field(None, description="是")
-    current: Optional[Any] = Field(None, description="是")
-    current_size: Optional[Any] = Field(None, description="是")
+    current: Optional[int] = Field(None, description="是")
+    current_size: Optional[int] = Field(None, description="是")
     records: Optional[list] = Field(None, description="当前页数据")
     has_next_page: Optional[int] = Field(None, description="是")
     has_previous_page: Optional[int] = Field(None, description="是")
 
 class PromotionapiPromotionSeckillalldetailbatchOrderpage(LingXingModel):
     """orderPage sub-structure."""
-    total: Optional[Any] = Field(None, description="是")
-    size: Optional[Any] = Field(None, description="是")
+    total: Optional[int] = Field(None, description="是")
+    size: Optional[int] = Field(None, description="是")
     page_count: Optional[int] = Field(None, description="是")
-    current: Optional[Any] = Field(None, description="是")
-    current_size: Optional[Any] = Field(None, description="是")
+    current: Optional[int] = Field(None, description="是")
+    current_size: Optional[int] = Field(None, description="是")
     records: Optional[list] = Field(None, description="当前页数据")
     has_next_page: Optional[int] = Field(None, description="是")
     has_previous_page: Optional[int] = Field(None, description="是")

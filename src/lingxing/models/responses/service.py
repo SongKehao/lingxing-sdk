@@ -91,10 +91,10 @@ class CustomerserviceRmamanageListRecords(LingXingModel):
 class CustomerserviceRmamanageListResponse(LingXingModel):
     """查询RMA管理."""
     total: Optional[float] = Field(None, description="总数")
-    size: Optional[Any] = Field(None, description="是")
+    size: Optional[int] = Field(None, description="是")
     page_count: Optional[int] = Field(None, description="是")
-    current: Optional[Any] = Field(None, description="是")
-    current_size: Optional[Any] = Field(None, description="是")
+    current: Optional[int] = Field(None, description="是")
+    current_size: Optional[int] = Field(None, description="是")
     has_next_page: Optional[int] = Field(None, description="是")
     has_previous_page: Optional[int] = Field(None, description="是")
     records: Optional[List[CustomerserviceRmamanageListRecords]] = Field(None, description="返回结果数据")

@@ -96,8 +96,8 @@ class AwdInboundPlanDetailResponse(LingXingModel):
 
 class AwdInboundPlanPageOrders(LingXingModel):
     """orders sub-structure."""
-    asc: Optional[Any] = Field(None, description="否")
-    column: Optional[Any] = Field(None, description="否")
+    asc: Optional[int] = Field(None, description="否")
+    column: Optional[str] = Field(None, description="否")
 
 class AwdInboundPlanPageRecords(LingXingModel):
     """records sub-structure."""
@@ -117,14 +117,14 @@ class AwdInboundPlanPageRecords(LingXingModel):
 class AwdInboundPlanPageResponse(LingXingModel):
     """查询AWD入库任务列表."""
     count_id: Optional[str] = Field(None, description="否")
-    current: Optional[Any] = Field(None, description="否")
-    max_limit: Optional[Any] = Field(None, description="否")
+    current: Optional[int] = Field(None, description="否")
+    max_limit: Optional[int] = Field(None, description="否")
     optimize_count_sql: Optional[int] = Field(None, description="否")
     orders: Optional[List[AwdInboundPlanPageOrders]] = Field(None, description="否")
-    pages: Optional[Any] = Field(None, description="否")
+    pages: Optional[int] = Field(None, description="否")
     records: Optional[List[AwdInboundPlanPageRecords]] = Field(None, description="否")
     search_count: Optional[int] = Field(None, description="否")
-    size: Optional[Any] = Field(None, description="否")
+    size: Optional[int] = Field(None, description="否")
     total: Optional[int] = Field(None, description="总数")
 
 
@@ -198,8 +198,8 @@ class AwdInboundShipmentDetailResponse(LingXingModel):
 
 class AwdInboundShipmentPageOrders(LingXingModel):
     """orders sub-structure."""
-    asc: Optional[Any] = Field(None, description="否")
-    column: Optional[Any] = Field(None, description="否")
+    asc: Optional[int] = Field(None, description="否")
+    column: Optional[str] = Field(None, description="否")
 
 class AwdInboundShipmentPageRecords(LingXingModel):
     """records sub-structure."""
@@ -222,15 +222,15 @@ class AwdInboundShipmentPageRecords(LingXingModel):
 class AwdInboundShipmentPageResponse(LingXingModel):
     """查询AWD入库货件列表."""
     count_id: Optional[str] = Field(None, description="否")
-    current: Optional[Any] = Field(None, description="否")
-    max_limit: Optional[Any] = Field(None, description="否")
+    current: Optional[int] = Field(None, description="否")
+    max_limit: Optional[int] = Field(None, description="否")
     optimize_count_sql: Optional[int] = Field(None, description="否")
     orders: Optional[List[AwdInboundShipmentPageOrders]] = Field(None, description="否")
-    pages: Optional[Any] = Field(None, description="否")
+    pages: Optional[int] = Field(None, description="否")
     records: Optional[List[AwdInboundShipmentPageRecords]] = Field(None, description="否")
     search_count: Optional[int] = Field(None, description="否")
-    size: Optional[Any] = Field(None, description="否")
-    total: Optional[Any] = Field(None, description="否")
+    size: Optional[int] = Field(None, description="否")
+    total: Optional[int] = Field(None, description="否")
 
 
 class AdjustorderAdjustGetadjuststatusFaillist(LingXingModel):
