@@ -1483,7 +1483,7 @@ class PromotionapiPromotionManagementalldetailbatchListingpage(LingXingModel):
     has_next_page: Optional[int] = Field(None, description="是")
     has_previous_page: Optional[int] = Field(None, description="是")
     page_count: Optional[int] = Field(None, description="是")
-    records: Optional[Any] = Field(None, description="是")
+    records: Optional[list] = Field(None, description="是")
     size: Optional[int] = Field(None, description="是")
     total: Optional[int] = Field(None, description="是")
 
@@ -1494,7 +1494,7 @@ class PromotionapiPromotionManagementalldetailbatchOrderpage(LingXingModel):
     has_next_page: Optional[int] = Field(None, description="是")
     has_previous_page: Optional[int] = Field(None, description="是")
     page_count: Optional[int] = Field(None, description="是")
-    records: Optional[Any] = Field(None, description="是")
+    records: Optional[list] = Field(None, description="是")
     size: Optional[int] = Field(None, description="是")
     total: Optional[int] = Field(None, description="是")
 
@@ -1533,7 +1533,7 @@ class PromotionapiPromotionPrimediscountalldetailbatchListingpage(LingXingModel)
     page_count: Optional[float] = Field(None, description="总页数")
     current: Optional[float] = Field(None, description="当前页数")
     current_size: Optional[float] = Field(None, description="当前页数据条数")
-    records: Optional[Any] = Field(None, description="是")
+    records: Optional[list] = Field(None, description="是")
     has_next_page: Optional[bool] = Field(None, description="是否有下一页")
     has_previous_page: Optional[bool] = Field(None, description="是否有上一页")
 
@@ -1544,7 +1544,7 @@ class PromotionapiPromotionPrimediscountalldetailbatchOrderpage(LingXingModel):
     page_count: Optional[float] = Field(None, description="总页数")
     current: Optional[float] = Field(None, description="当前页数")
     current_size: Optional[float] = Field(None, description="当前页数据条数")
-    records: Optional[Any] = Field(None, description="是")
+    records: Optional[list] = Field(None, description="是")
     has_next_page: Optional[bool] = Field(None, description="是否有下一页")
     has_previous_page: Optional[bool] = Field(None, description="是否有上一页")
 

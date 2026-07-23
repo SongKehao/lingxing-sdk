@@ -139,7 +139,7 @@ class FinanceMreportOrderprofitPriceList(LingXingModel):
     item_name: Optional[str] = Field(None, description="标题")
     cate_title: Optional[str] = Field(None, description="是")
     local_name: Optional[str] = Field(None, description="是")
-    sid: Optional[Any] = Field(None, description="是")
+    sid: Optional[int] = Field(None, description="是")
     is_delete: Optional[int] = Field(None, description="是")
     brand_title: Optional[str] = Field(None, description="是")
     volume: Optional[int] = Field(None, description="是")
@@ -148,7 +148,7 @@ class FinanceMreportOrderprofitPriceList(LingXingModel):
     parent_asin: Optional[str] = Field(None, description="是")
     seller_sku: Optional[str] = Field(None, description="是")
     asin: Optional[str] = Field(None, description="是")
-    status: Optional[Any] = Field(None, description="是")
+    status: Optional[str] = Field(None, description="是")
 
 class FinanceMreportOrderprofitLocalInfos(LingXingModel):
     """local_infos sub-structure."""
@@ -163,7 +163,7 @@ class FinanceMreportOrderprofitAsins(LingXingModel):
 class FinanceMreportOrderprofitSellerStoreCountries(LingXingModel):
     """seller_store_countries sub-structure."""
     country: Optional[str] = Field(None, description="是")
-    name: Optional[Any] = Field(None, description="是")
+    name: Optional[str] = Field(None, description="是")
 
 class FinanceMreportOrderprofitResponse(LingXingModel):
     """查询订单利润-MSKU."""

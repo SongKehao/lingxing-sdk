@@ -869,7 +869,7 @@ class StorageShipmentGetinboundshipmentlistmwsdetailItems(LingXingModel):
 class StorageShipmentGetinboundshipmentlistmwsdetailLogistics(LingXingModel):
     """logistics sub-structure."""
     id: Optional[int] = Field(None, description="物流信息ID")
-    zid: Optional[Any] = Field(None, description="是")
+    zid: Optional[int] = Field(None, description="是")
     inbound_shipment_list_mws_id: Optional[int] = Field(None, description="发货单ID")
     gmt_modified: Optional[str] = Field(None, description="修改时间")
     gmt_create: Optional[str] = Field(None, description="创建时间")
@@ -889,7 +889,7 @@ class StorageShipmentGetinboundshipmentlistmwsdetailLogistics(LingXingModel):
 class StorageShipmentGetinboundshipmentlistmwsdetailAuxs(LingXingModel):
     """auxs sub-structure."""
     isialm_id: Optional[int] = Field(None, description="辅料自增ID")
-    zid: Optional[Any] = Field(None, description="是")
+    zid: Optional[int] = Field(None, description="是")
     company_id: Optional[str] = Field(None, description="是")
     aux_id: Optional[int] = Field(None, description="辅料产品ID")
     pid: Optional[int] = Field(None, description="货件明细ID")
@@ -931,7 +931,7 @@ class StorageShipmentGetinboundshipmentlistmwsdetailPrincipals(LingXingModel):
     isp_id: Optional[str] = Field(None, description="主键ID")
     shipment_sn: Optional[str] = Field(None, description="发货单号")
     company_id: Optional[str] = Field(None, description="是")
-    zid: Optional[Any] = Field(None, description="是")
+    zid: Optional[int] = Field(None, description="是")
     isil_id: Optional[int] = Field(None, description="发货单ID")
     principal_uid: Optional[int] = Field(None, description="权限人UID")
     operate_user: Optional[str] = Field(None, description="操作人")

@@ -189,7 +189,7 @@ class MwsReportGetfbainventoryeventdetaillistResponse(LingXingModel):
     product_name: Optional[str] = Field(None, description="是")
     fulfillment_center_id: Optional[str] = Field(None, description="是")
     quantity: Optional[int] = Field(None, description="是")
-    disposition: Optional[Any] = Field(None, description="是")
+    disposition: Optional[str] = Field(None, description="是")
     total: Optional[int] = Field(None, description="总数")
 
 

@@ -233,7 +233,7 @@ class LocalInventoryProductauxlistPurchaseSupplierQuote(LingXingModel):
     product_id: Optional[int] = Field(None, description="产品ID")
     cg_price: Optional[float] = Field(None, description="采购：采购成本（人民币）")
     has_cg_permission: Optional[int] = Field(None, description="是否有采购成本权限：0-无，1-有")
-    suppliers: Optional[Any] = Field(None, description="是")
+    suppliers: Optional[list] = Field(None, description="是")
 
 class LocalInventoryProductauxlistAuxRelationProduct(LingXingModel):
     """aux_relation_product sub-structure."""

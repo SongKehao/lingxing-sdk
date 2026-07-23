@@ -249,7 +249,7 @@ class AdjustorderAdjustGetadjuststatusResponse(LingXingModel):
 class AdjustorderAdjustSetadjustResponse(LingXingModel):
     """调整单确认调整."""
     task_no: Optional[str] = Field(None, description="异步任务编号")
-    type: Optional[Any] = Field(None, description="是")
+    type: Optional[str] = Field(None, description="是")
     action_type: Optional[str] = Field(None, description="是")
 
 

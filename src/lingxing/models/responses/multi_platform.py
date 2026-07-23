@@ -4047,7 +4047,7 @@ class MultiplatformTemuListList(LingXingModel):
     cat_name: Optional[int] = Field(None, description="叶子类目")
     select_status: Optional[str] = Field(None, description="商品状态 枚举类，详情见附加说明")
     virtual_quantity: Optional[int] = Field(None, description="虚拟库存")
-    usable_inventory: Optional[Any] = Field(None, description="可用库存")
+    usable_inventory: Optional[int] = Field(None, description="可用库存")
     bname: Optional[str] = Field(None, description="品牌名称")
     cname: Optional[str] = Field(None, description="分类名称")
     supply_price_list: Optional[float] = Field(None, description="是")
@@ -4190,7 +4190,7 @@ class MultiplatformWayfairStocksearchResponse(LingXingModel):
 
 class MultiplatformOrderPreshipmentFailureInfo(LingXingModel):
     """failure_info sub-structure."""
-    message: Optional[Any] = Field(None, description="失败原因")
+    message: Optional[str] = Field(None, description="失败原因")
     global_order_no: Optional[str] = Field(None, description="系统单号")
 
 class MultiplatformOrderPreshipmentResponse(LingXingModel):
@@ -4202,7 +4202,7 @@ class MultiplatformOrderPreshipmentResponse(LingXingModel):
 
 class MultiplatformOrderReviewFailureInfo(LingXingModel):
     """failure_info sub-structure."""
-    message: Optional[Any] = Field(None, description="失败原因")
+    message: Optional[str] = Field(None, description="失败原因")
     global_order_no: Optional[str] = Field(None, description="系统单号")
 
 class MultiplatformOrderReviewSuccessInfo(LingXingModel):
