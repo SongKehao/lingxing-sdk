@@ -5,19 +5,19 @@ from ..models.responses.source_data import (
     FbaFbastockGetfbaagelistResponse,
     FbaReportRemovallistsResponse,
     MwsReportAllordersResponse,
-    MwsReportDailyinventoryResponse,
+    DailyinventoryResponse,
     MwsReportFbaordersResponse,
-    MwsReportGetafnfulfillablequantityResponse,
+    GetafnfulfillablequantityResponse,
     MwsReportGetamazonfulfilledshipmentslistResponse,
     MwsReportGetfbainventoryeventdetaillistResponse,
-    MwsReportManageinventoryResponse,
-    MwsReportRefundordersResponse,
-    MwsReportRemovalordersResponse,
-    MwsReportReservedinventoryResponse,
+    ManageinventoryResponse,
+    RefundordersResponse,
+    RemovalordersResponse,
+    ReservedinventoryResponse,
     MwsReportTransactionResponse,
     MwsReportV1GetamazonfulfilledshipmentslistResponse,
     MwsReportV1GetfbainventoryeventdetaillistResponse,
-    OpenapiMwsreportAdjustmentlistResponse,
+    AdjustmentlistResponse,
     OrderFbaexchangeorderlistResponse,
     OrderFbmreturnorderlistResponse,
     OrderRemovalorderlistnewResponse,
@@ -30,7 +30,7 @@ from ._base import BaseEndpoint
 class AmazonSourceEndpoints(BaseEndpoint):
     """领星亚马逊原始数据 API (20个接口)."""
 
-    async def adjustment_list(self, offset: int = None, length: int = None, sids: str = None, search_field: str = None, search_value: str = None, start_date: str = None, end_date: str = None) -> list[OpenapiMwsreportAdjustmentlistResponse]:
+    async def adjustment_list(self, offset: int = None, length: int = None, sids: str = None, search_field: str = None, search_value: str = None, start_date: str = None, end_date: str = None) -> list[AdjustmentlistResponse]:
         """查询亚马逊源报表-盘存记录.
 
 POST /basicOpen/openapi/mwsReport/adjustmentList
@@ -44,8 +44,8 @@ Args:
     start_date: 发货日期开始时间【闭区间】，格式Y-m-d【report_date】 (required), string.
     end_date: 发货日期结束时间【闭区间】，格式Y-m-d【report_date】 (required), string."""
         resp = await self._post("/basicOpen/openapi/mwsReport/adjustmentList", {k: v for k, v in {"offset": offset, "length": length, "sids": sids, "search_field": search_field, "search_value": search_value, "start_date": start_date, "end_date": end_date}.items() if v is not None})
-        return self._parse_list(resp.data, OpenapiMwsreportAdjustmentlistResponse)
-    async def afn_fulfillable_quantity(self, sid: int = None, offset: int = None, length: int = None) -> list[MwsReportGetafnfulfillablequantityResponse]:
+        return self._parse_list(resp.data, AdjustmentlistResponse)
+    async def afn_fulfillable_quantity(self, sid: int = None, offset: int = None, length: int = None) -> list[GetafnfulfillablequantityResponse]:
         """查询亚马逊源报表-FBA可售库存.
 
 POST /erp/sc/data/mws_report/getAfnFulfillableQuantity
@@ -55,7 +55,7 @@ Args:
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认1000, int."""
         resp = await self._post("/erp/sc/data/mws_report/getAfnFulfillableQuantity", {k: v for k, v in {"sid": sid, "offset": offset, "length": length}.items() if v is not None})
-        return self._parse_list(resp.data, MwsReportGetafnfulfillablequantityResponse)
+        return self._parse_list(resp.data, GetafnfulfillablequantityResponse)
     async def all_orders(self, sid: int = None, date_type: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list[MwsReportAllordersResponse]:
         """查询亚马逊源报表-所有订单.
 
@@ -70,7 +70,7 @@ Args:
     length: 分页长度，默认1000, int."""
         resp = await self._post("/erp/sc/data/mws_report/allOrders", {k: v for k, v in {"sid": sid, "date_type": date_type, "start_date": start_date, "end_date": end_date, "offset": offset, "length": length}.items() if v is not None})
         return self._parse_list(resp.data, MwsReportAllordersResponse)
-    async def daily_inventory(self, sid: int = None, event_date: str = None, offset: int = None, length: int = None) -> list[MwsReportDailyinventoryResponse]:
+    async def daily_inventory(self, sid: int = None, event_date: str = None, offset: int = None, length: int = None) -> list[DailyinventoryResponse]:
         """查询亚马逊源报表-每日库存.
 
 POST /erp/sc/data/mws_report/dailyInventory
@@ -81,7 +81,7 @@ Args:
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认1000, int."""
         resp = await self._post("/erp/sc/data/mws_report/dailyInventory", {k: v for k, v in {"sid": sid, "event_date": event_date, "offset": offset, "length": length}.items() if v is not None})
-        return self._parse_list(resp.data, MwsReportDailyinventoryResponse)
+        return self._parse_list(resp.data, DailyinventoryResponse)
     async def fba_orders(self, sid: int = None, date_type: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list[MwsReportFbaordersResponse]:
         """查询亚马逊源报表-FBA订单.
 
@@ -96,7 +96,7 @@ Args:
     length: 分页长度，默认1000, int."""
         resp = await self._post("/erp/sc/data/mws_report/fbaOrders", {k: v for k, v in {"sid": sid, "date_type": date_type, "start_date": start_date, "end_date": end_date, "offset": offset, "length": length}.items() if v is not None})
         return self._parse_list(resp.data, MwsReportFbaordersResponse)
-    async def manage_inventory(self, sid: int = None, offset: int = None, length: int = None) -> list[MwsReportManageinventoryResponse]:
+    async def manage_inventory(self, sid: int = None, offset: int = None, length: int = None) -> list[ManageinventoryResponse]:
         """查询亚马逊源报表-FBA库存.
 
 POST /erp/sc/data/mws_report/manageInventory
@@ -106,8 +106,8 @@ Args:
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认1000, int."""
         resp = await self._post("/erp/sc/data/mws_report/manageInventory", {k: v for k, v in {"sid": sid, "offset": offset, "length": length}.items() if v is not None})
-        return self._parse_list(resp.data, MwsReportManageinventoryResponse)
-    async def refund_orders(self, sid: int = None, date_type: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list[MwsReportRefundordersResponse]:
+        return self._parse_list(resp.data, ManageinventoryResponse)
+    async def refund_orders(self, sid: int = None, date_type: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list[RefundordersResponse]:
         """查询亚马逊源报表-FBA退货订单.
 
 POST /erp/sc/data/mws_report/refundOrders
@@ -120,7 +120,7 @@ Args:
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认1000, int."""
         resp = await self._post("/erp/sc/data/mws_report/refundOrders", {k: v for k, v in {"sid": sid, "date_type": date_type, "start_date": start_date, "end_date": end_date, "offset": offset, "length": length}.items() if v is not None})
-        return self._parse_list(resp.data, MwsReportRefundordersResponse)
+        return self._parse_list(resp.data, RefundordersResponse)
     async def removal_lists(self, sid: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list[FbaReportRemovallistsResponse]:
         """查询亚马逊源报表-移除货件（旧）.
 
@@ -162,7 +162,7 @@ Args:
     length: 分页长度，默认1000, int."""
         resp = await self._post("/erp/sc/statistic/removalShipment/list", {k: v for k, v in {"sid": sid, "seller_id": seller_id, "start_date": start_date, "end_date": end_date, "offset": offset, "length": length}.items() if v is not None})
         return self._parse_list(resp.data, StatisticRemovalshipmentListResponse)
-    async def reserved_inventory(self, sid: int = None, offset: int = None, length: int = None) -> list[MwsReportReservedinventoryResponse]:
+    async def reserved_inventory(self, sid: int = None, offset: int = None, length: int = None) -> list[ReservedinventoryResponse]:
         """查询亚马逊源报表-预留库存.
 
 POST /erp/sc/data/mws_report/reservedInventory
@@ -172,8 +172,8 @@ Args:
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认1000, int."""
         resp = await self._post("/erp/sc/data/mws_report/reservedInventory", {k: v for k, v in {"sid": sid, "offset": offset, "length": length}.items() if v is not None})
-        return self._parse_list(resp.data, MwsReportReservedinventoryResponse)
-    async def source_removal_orders(self, sid: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list[MwsReportRemovalordersResponse]:
+        return self._parse_list(resp.data, ReservedinventoryResponse)
+    async def source_removal_orders(self, sid: int = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list[RemovalordersResponse]:
         """查询亚马逊源报表-移除订单（旧）.
 
 POST /erp/sc/data/mws_report/removalOrders
@@ -185,7 +185,7 @@ Args:
     offset: 分页偏移量，默认0, int.
     length: 分页长度，默认1000, int."""
         resp = await self._post("/erp/sc/data/mws_report/removalOrders", {k: v for k, v in {"sid": sid, "start_date": start_date, "end_date": end_date, "offset": offset, "length": length}.items() if v is not None})
-        return self._parse_list(resp.data, MwsReportRemovalordersResponse)
+        return self._parse_list(resp.data, RemovalordersResponse)
     async def transaction(self, sid: int = None, event_date: str = None, offset: int = None, length: int = None) -> list[MwsReportTransactionResponse]:
         """查询亚马逊源报表-交易明细.
 

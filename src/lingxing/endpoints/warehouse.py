@@ -62,7 +62,7 @@ from ..models.responses.warehouse import (
     LocalInventoryWarehousebinResponse,
     LocalInventoryWarehousebinstatementResponse,
     LocalInventoryWarehousestatementResponse,
-    OpenapiStorageFbawarehousedetailResponse,
+    StorageFbawarehousedetailResponse,
     OutboundorderOutboundDeleteResponse,
     OutboundorderOutboundSetoutboundResponse,
     OverseawarehouseStockorderDetailResponse,
@@ -765,7 +765,7 @@ Args:
     length: 分页长度，默认15, int."""
         resp = await self._post("/erp/sc/routing/fba/fbaStock/fbaList", {k: v for k, v in {"sid": sid, "offset": offset, "length": length}.items() if v is not None})
         return self._parse_list(resp.data, FbaFbastockFbalistResponse)
-    async def fba_stock_v2(self, offset: int = 0, length: int = 20, search_field: str = None, search_value: str = None, cid: str = None, sid: str = None, bid: str = None, attribute: int = None, asin_principal: str = None, status: str = None, senior_search_list: str = None, fulfillment_channel_type: str = None, is_hide_zero_stock: int = 0, is_parant_asin_merge: int = 0, is_contain_del_ls: int = 0, query_fba_storage_quantity_list: bool = None, is_cost_page: int = 0, sort_field: str = "sku", sort_type: str = "asc") -> list[OpenapiStorageFbawarehousedetailResponse]:
+    async def fba_stock_v2(self, offset: int = 0, length: int = 20, search_field: str = None, search_value: str = None, cid: str = None, sid: str = None, bid: str = None, attribute: int = None, asin_principal: str = None, status: str = None, senior_search_list: str = None, fulfillment_channel_type: str = None, is_hide_zero_stock: int = 0, is_parant_asin_merge: int = 0, is_contain_del_ls: int = 0, query_fba_storage_quantity_list: bool = None, is_cost_page: int = 0, sort_field: str = "sku", sort_type: str = "asc") -> list[StorageFbawarehousedetailResponse]:
         """查询FBA库存列表-v2.
 
 POST /basicOpen/openapi/storage/fbaWarehouseDetail
@@ -791,7 +791,7 @@ Args:
     sort_field: 排序字段, 如 sku, string.
     sort_type: 排序方式: asc/desc, string."""
         resp = await self._post("/basicOpen/openapi/storage/fbaWarehouseDetail", {k: v for k, v in {"offset": offset, "length": length, "search_field": search_field, "search_value": search_value, "cid": cid, "sid": sid, "bid": bid, "attribute": attribute, "asin_principal": asin_principal, "status": status, "senior_search_list": senior_search_list, "fulfillment_channel_type": fulfillment_channel_type, "is_hide_zero_stock": is_hide_zero_stock, "is_parant_asin_merge": is_parant_asin_merge, "is_contain_del_ls": is_contain_del_ls, "query_fba_storage_quantity_list": query_fba_storage_quantity_list, "is_cost_page": is_cost_page, "sort_field": sort_field, "sort_type": sort_type}.items() if v is not None})
-        return self._parse_list(resp.data, OpenapiStorageFbawarehousedetailResponse)
+        return self._parse_list(resp.data, StorageFbawarehousedetailResponse)
     async def fast_receive(self, order_sn: str = None, expect_arrival_time: str = None, custom_receive_time: str = None, logistics_company: str = None, logistics_order_no: str = None, shipping_cost: float = None, other_fee: float = None, remark: str = None, item_list: list = None) -> dict:
         """收货单快捷入库.
 

@@ -42,7 +42,7 @@ from ..models.responses.fba import (
     FbaShipmentShipfromaddresslistResponse,
     FbaShipmentSyncshipmentResponse,
     GetinvoiceInvoiceBatchsendgoodsResponse,
-    OpenapiFbashipmentShoppingaddressResponse,
+    FbashipmentShoppingaddressResponse,
     StorageShipmentCreatereadysendorderResponse,
     StorageShipmentCreatesendedorderResponse,
     StorageShipmentCreateshipmentplanResponse,
@@ -690,7 +690,7 @@ Args:
     end_date: 结束日期 如:2021-09-08, string."""
         resp = await self._post("/erp/sc/data/fba_report/shipmentPlanLists", {k: v for k, v in {"sids": sids, "wid": wid, "packing_type": packing_type, "search_field_time": search_field_time, "search_field": search_field, "search_value": search_value, "status": status, "mids": mids, "offset": offset, "length": length, "start_date": start_date, "end_date": end_date}.items() if v is not None})
         return self._parse_list(resp.data, ShipmentPlanListsItem)
-    async def shopping_address(self, id: int = None) -> OpenapiFbashipmentShoppingaddressResponse | None:
+    async def shopping_address(self, id: int = None) -> FbashipmentShoppingaddressResponse | None:
         """地址簿-配送地址详情.
 
 POST /basicOpen/openapi/fbaShipment/shoppingAddress
@@ -698,7 +698,7 @@ POST /basicOpen/openapi/fbaShipment/shoppingAddress
 Args:
     id: 唯一记录id，查询FBA列表接口对应字段【id】 (required), int."""
         resp = await self._post("/basicOpen/openapi/fbaShipment/shoppingAddress", {k: v for k, v in {"id": id}.items() if v is not None})
-        return self._parse_one(resp.data, OpenapiFbashipmentShoppingaddressResponse)
+        return self._parse_one(resp.data, FbashipmentShoppingaddressResponse)
     async def sync_shipment(self, sid: int = None, shipment_ids: Any = None, sync_anyway: int = None) -> FbaShipmentSyncshipmentResponse | None:
         """同步亚马逊货件到ERP.
 

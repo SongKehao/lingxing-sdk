@@ -93,7 +93,7 @@ class DspreportOrderListResponse(LingXingModel):
     ad_units: Optional[str] = Field(None, description="销量")
 
 
-class OpenapiNewadAbareportResponse(LingXingModel):
+class NewadAbareportResponse(LingXingModel):
     """ABA搜索词报告-按周维度."""
     url: Optional[str] = Field(None, description="文件下载地址 【下载的文件为zip格式，常用解压工具解压即可】")
     data_start_time: Optional[str] = Field(None, description="报表日期")
@@ -101,17 +101,17 @@ class OpenapiNewadAbareportResponse(LingXingModel):
     country: Optional[str] = Field(None, description="国家代码")
 
 
-class OpenapiNewadApilogstandardOperateBefore(LingXingModel):
+class NewadApilogstandardOperateBefore(LingXingModel):
     """operate_before sub-structure."""
     code: Optional[str] = Field(None, description="操作类型编码")
     value: Optional[str] = Field(None, description="操作对象值")
 
-class OpenapiNewadApilogstandardOperateAfter(LingXingModel):
+class NewadApilogstandardOperateAfter(LingXingModel):
     """operate_after sub-structure."""
     code: Optional[str] = Field(None, description="操作类型编码")
     value: Optional[str] = Field(None, description="操作对象值")
 
-class OpenapiNewadApilogstandardResponse(LingXingModel):
+class NewadApilogstandardResponse(LingXingModel):
     """操作日志（新）."""
     total: Optional[int] = Field(None, description="总数")
     profile_id: Optional[float] = Field(None, description="亚马逊店铺数字ID")
@@ -125,14 +125,14 @@ class OpenapiNewadApilogstandardResponse(LingXingModel):
     object_name: Optional[str] = Field(None, description="广告对象名称")
     function_name: Optional[str] = Field(None, description="功能来源")
     change_type: Optional[str] = Field(None, description="操作类型：create 创建，update 更新")
-    operate_before: Optional[List[OpenapiNewadApilogstandardOperateBefore]] = Field(None, description="操作前")
-    operate_after: Optional[List[OpenapiNewadApilogstandardOperateAfter]] = Field(None, description="操作后")
+    operate_before: Optional[List[NewadApilogstandardOperateBefore]] = Field(None, description="操作前")
+    operate_after: Optional[List[NewadApilogstandardOperateAfter]] = Field(None, description="操作后")
     user_id: Optional[int] = Field(None, description="用户id")
     user_name: Optional[str] = Field(None, description="用户名")
     operate_time: Optional[str] = Field(None, description="操作时间 - 站点时间")
 
 
-class OpenapiNewadHsaadgroupreportsResponse(LingXingModel):
+class NewadHsaadgroupreportsResponse(LingXingModel):
     """SB广告组报表."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动id")
@@ -157,7 +157,7 @@ class OpenapiNewadHsaadgroupreportsResponse(LingXingModel):
     same_units: Optional[float] = Field(None, description="直接成交量")
 
 
-class OpenapiNewadHsaadgroupsResponse(LingXingModel):
+class NewadHsaadgroupsResponse(LingXingModel):
     """SB广告组."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动id")
@@ -170,7 +170,7 @@ class OpenapiNewadHsaadgroupsResponse(LingXingModel):
     serving_status: Optional[str] = Field(None, description="服务状态")
 
 
-class OpenapiNewadHsacampaignreportsResponse(LingXingModel):
+class NewadHsacampaignreportsResponse(LingXingModel):
     """SB广告活动报表."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动id")
@@ -199,7 +199,7 @@ class OpenapiNewadHsacampaignsTags(LingXingModel):
     parent: Optional[str] = Field(None, description="父标签")
     child: Optional[str] = Field(None, description="子标签")
 
-class OpenapiNewadHsacampaignsResponse(LingXingModel):
+class NewadHsacampaignsResponse(LingXingModel):
     """SB广告活动."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动ID")
@@ -220,7 +220,7 @@ class OpenapiNewadHsacampaignsResponse(LingXingModel):
     tags: Optional[List[OpenapiNewadHsacampaignsTags]] = Field(None, description="标签信息")
 
 
-class OpenapiNewadHsanegativekeywordsResponse(LingXingModel):
+class NewadHsanegativekeywordsResponse(LingXingModel):
     """SB否定关键词."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动ID")
@@ -235,7 +235,7 @@ class OpenapiNewadHsanegativekeywordsResponse(LingXingModel):
     serving_status: Optional[str] = Field(None, description="服务状态")
 
 
-class OpenapiNewadHsanegativetargetsResponse(LingXingModel):
+class NewadHsanegativetargetsResponse(LingXingModel):
     """SB否定商品投放."""
     total: Optional[int] = Field(None, description="总数")
     target_id: Optional[float] = Field(None, description="投放ID")
@@ -251,7 +251,7 @@ class OpenapiNewadHsanegativetargetsResponse(LingXingModel):
     serving_status: Optional[str] = Field(None, description="服务状态")
 
 
-class OpenapiNewadHsapurchasedasinreportsResponse(LingXingModel):
+class NewadHsapurchasedasinreportsResponse(LingXingModel):
     """SB广告归因于广告的购买报告."""
     total: Optional[int] = Field(None, description="总数")
     profile_id: Optional[float] = Field(None, description="亚马逊店铺数字id")
@@ -275,7 +275,7 @@ class OpenapiNewadHsapurchasedasinreportsResponse(LingXingModel):
     same_units: Optional[float] = Field(None, description="直接成交量")
 
 
-class OpenapiNewadListhsakeywordplacementreportResponse(LingXingModel):
+class NewadListhsakeywordplacementreportResponse(LingXingModel):
     """SB关键词-广告位报告."""
     total: Optional[int] = Field(None, description="总数")
     report_date: Optional[str] = Field(None, description="报告日期")
@@ -298,7 +298,7 @@ class OpenapiNewadListhsakeywordplacementreportResponse(LingXingModel):
     placement_type: Optional[int] = Field(None, description="广告位类型： 1 Other Placements 2 Other on-Amazon 3 Top of Search")
 
 
-class OpenapiNewadListhsatargetingreportResponse(LingXingModel):
+class NewadListhsatargetingreportResponse(LingXingModel):
     """SB广告的投放报告."""
     total: Optional[int] = Field(None, description="总数")
     impressions: Optional[int] = Field(None, description="曝光量")
@@ -324,7 +324,7 @@ class OpenapiNewadListhsatargetingreportResponse(LingXingModel):
     same_units: Optional[float] = Field(None, description="直接成交量")
 
 
-class OpenapiNewadPortfoliosResponse(LingXingModel):
+class NewadPortfoliosResponse(LingXingModel):
     """广告组合."""
     total: Optional[int] = Field(None, description="总数")
     portfolio_id: Optional[float] = Field(None, description="广告组合id")
@@ -338,7 +338,7 @@ class OpenapiNewadPortfoliosResponse(LingXingModel):
     serving_status: Optional[str] = Field(None, description="服务状态")
 
 
-class OpenapiNewadSbadgrouphourdataResponse(LingXingModel):
+class NewadSbadgrouphourdataResponse(LingXingModel):
     """SB广告组小时数据."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动id")
@@ -362,7 +362,7 @@ class OpenapiNewadSbadgrouphourdataResponse(LingXingModel):
     group_id: Optional[float] = Field(None, description="广告组id")
 
 
-class OpenapiNewadSbadplacementhourdataResponse(LingXingModel):
+class NewadSbadplacementhourdataResponse(LingXingModel):
     """SB广告位小时数据."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动id")
@@ -386,7 +386,7 @@ class OpenapiNewadSbadplacementhourdataResponse(LingXingModel):
     placement: Optional[str] = Field(None, description="广告位")
 
 
-class OpenapiNewadSbcampaignhourdataResponse(LingXingModel):
+class NewadSbcampaignhourdataResponse(LingXingModel):
     """SB广告活动小时数据."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动id")
@@ -409,7 +409,7 @@ class OpenapiNewadSbcampaignhourdataResponse(LingXingModel):
     roas: Optional[float] = Field(None, description="销售额/花费")
 
 
-class OpenapiNewadSbdivideasinreportsResponse(LingXingModel):
+class NewadSbdivideasinreportsResponse(LingXingModel):
     """SB分摊."""
     total: Optional[int] = Field(None, description="总数")
     report_date: Optional[float] = Field(None, description="报告日期")
@@ -433,7 +433,7 @@ class OpenapiNewadSbdivideasinreportsResponse(LingXingModel):
     percent: Optional[list] = Field(None, description="分摊比例")
 
 
-class OpenapiNewadSbtargethourdataResponse(LingXingModel):
+class NewadSbtargethourdataResponse(LingXingModel):
     """SB投放小时数据."""
     total: Optional[int] = Field(None, description="总数")
     profile_id: Optional[float] = Field(None, description="店铺id")
@@ -459,7 +459,7 @@ class OpenapiNewadSbtargethourdataResponse(LingXingModel):
     targeting: Optional[str] = Field(None, description="投放表达式")
 
 
-class OpenapiNewadSbtargetingResponse(LingXingModel):
+class NewadSbtargetingResponse(LingXingModel):
     """SB广告的投放."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动ID")
@@ -479,7 +479,7 @@ class OpenapiNewadSbtargetingResponse(LingXingModel):
     profile_id: Optional[float] = Field(None, description="亚马逊店铺数字id")
 
 
-class OpenapiNewadSdadgrouphourdataResponse(LingXingModel):
+class NewadSdadgrouphourdataResponse(LingXingModel):
     """SD广告组小时数据."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动id")
@@ -503,7 +503,7 @@ class OpenapiNewadSdadgrouphourdataResponse(LingXingModel):
     group_id: Optional[float] = Field(None, description="广告组id")
 
 
-class OpenapiNewadSdadgroupreportsResponse(LingXingModel):
+class NewadSdadgroupreportsResponse(LingXingModel):
     """SD广告组报表."""
     total: Optional[int] = Field(None, description="总数")
     ad_group_id: Optional[float] = Field(None, description="广告组id")
@@ -542,7 +542,7 @@ class OpenapiNewadSdadgroupreportsResponse(LingXingModel):
     units_30d: Optional[float] = Field(None, description="销量(30d)【show_detail=1时返回字段】")
 
 
-class OpenapiNewadSdadgroupsResponse(LingXingModel):
+class NewadSdadgroupsResponse(LingXingModel):
     """SD广告组."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动ID")
@@ -557,7 +557,7 @@ class OpenapiNewadSdadgroupsResponse(LingXingModel):
     bid_optimization: Optional[str] = Field(None, description="优化建议")
 
 
-class OpenapiNewadSdadvertisehourdataResponse(LingXingModel):
+class NewadSdadvertisehourdataResponse(LingXingModel):
     """SD广告小时数据."""
     total: Optional[int] = Field(None, description="总数")
     profile_id: Optional[float] = Field(None, description="店铺id")
@@ -586,7 +586,7 @@ class OpenapiNewadSdadvertisehourdataResponse(LingXingModel):
     group_id: Optional[float] = Field(None, description="广告组id")
 
 
-class OpenapiNewadSdcampaignhourdataResponse(LingXingModel):
+class NewadSdcampaignhourdataResponse(LingXingModel):
     """SD广告活动小时数据."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动id")
@@ -609,7 +609,7 @@ class OpenapiNewadSdcampaignhourdataResponse(LingXingModel):
     cpc: Optional[float] = Field(None, description="花费/点击")
 
 
-class OpenapiNewadSdcampaignreportsResponse(LingXingModel):
+class NewadSdcampaignreportsResponse(LingXingModel):
     """SD广告活动报表."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动id")
@@ -652,7 +652,7 @@ class OpenapiNewadSdcampaignsTags(LingXingModel):
     parent: Optional[str] = Field(None, description="父标签")
     child: Optional[str] = Field(None, description="子标签")
 
-class OpenapiNewadSdcampaignsResponse(LingXingModel):
+class NewadSdcampaignsResponse(LingXingModel):
     """SD广告活动."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动ID")
@@ -672,7 +672,7 @@ class OpenapiNewadSdcampaignsResponse(LingXingModel):
     tags: Optional[List[OpenapiNewadSdcampaignsTags]] = Field(None, description="标签信息")
 
 
-class OpenapiNewadSdnegativetargetsResponse(LingXingModel):
+class NewadSdnegativetargetsResponse(LingXingModel):
     """SD否定商品定位."""
     total: Optional[int] = Field(None, description="总数")
     target_id: Optional[float] = Field(None, description="商品定位ID")
@@ -688,7 +688,7 @@ class OpenapiNewadSdnegativetargetsResponse(LingXingModel):
     serving_status: Optional[str] = Field(None, description="服务状态")
 
 
-class OpenapiNewadSdproductadreportsResponse(LingXingModel):
+class NewadSdproductadreportsResponse(LingXingModel):
     """SD广告商品报表."""
     total: Optional[int] = Field(None, description="总数")
     ad_id: Optional[float] = Field(None, description="商品广告id")
@@ -730,7 +730,7 @@ class OpenapiNewadSdproductadreportsResponse(LingXingModel):
     units_30d: Optional[float] = Field(None, description="销量(30d)【show_detail=1时返回字段】")
 
 
-class OpenapiNewadSdproductadsResponse(LingXingModel):
+class NewadSdproductadsResponse(LingXingModel):
     """SD广告商品."""
     total: Optional[int] = Field(None, description="总数")
     ad_id: Optional[float] = Field(None, description="商品广告ID")
@@ -745,7 +745,7 @@ class OpenapiNewadSdproductadsResponse(LingXingModel):
     serving_status: Optional[str] = Field(None, description="服务状态")
 
 
-class OpenapiNewadSdtargethourdataResponse(LingXingModel):
+class NewadSdtargethourdataResponse(LingXingModel):
     """SD投放小时数据."""
     total: Optional[int] = Field(None, description="总数")
     profile_id: Optional[float] = Field(None, description="店铺id")
@@ -774,7 +774,7 @@ class OpenapiNewadSdtargethourdataResponse(LingXingModel):
     targeting: Optional[str] = Field(None, description="投放表达式")
 
 
-class OpenapiNewadSdtargetreportsResponse(LingXingModel):
+class NewadSdtargetreportsResponse(LingXingModel):
     """SD商品定位报表."""
     total: Optional[int] = Field(None, description="总数")
     target_id: Optional[float] = Field(None, description="商品定位ID")
@@ -797,7 +797,7 @@ class OpenapiNewadSdtargetreportsResponse(LingXingModel):
     view_impressions: Optional[float] = Field(None, description="可见展示量")
 
 
-class OpenapiNewadSdtargetsResponse(LingXingModel):
+class NewadSdtargetsResponse(LingXingModel):
     """SD商品定位."""
     total: Optional[int] = Field(None, description="总数")
     target_id: Optional[float] = Field(None, description="商品定位ID")
@@ -814,7 +814,7 @@ class OpenapiNewadSdtargetsResponse(LingXingModel):
     resolved_expression: Optional[str] = Field(None, description="解析的表达式")
 
 
-class OpenapiNewadSpadgrouphourdataResponse(LingXingModel):
+class NewadSpadgrouphourdataResponse(LingXingModel):
     """SP广告组小时数据."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动id")
@@ -839,7 +839,7 @@ class OpenapiNewadSpadgrouphourdataResponse(LingXingModel):
     group_id: Optional[float] = Field(None, description="广告组id")
 
 
-class OpenapiNewadSpadgroupreportsResponse(LingXingModel):
+class NewadSpadgroupreportsResponse(LingXingModel):
     """SP广告组报表."""
     total: Optional[int] = Field(None, description="总数")
     ad_group_id: Optional[int] = Field(None, description="广告组id")
@@ -881,7 +881,7 @@ class OpenapiNewadSpadgroupreportsResponse(LingXingModel):
     same_units_30d: Optional[float] = Field(None, description="直接成交量(30d)【show_detail=1时返回字段】")
 
 
-class OpenapiNewadSpadgroupsResponse(LingXingModel):
+class NewadSpadgroupsResponse(LingXingModel):
     """SP广告组."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动ID")
@@ -896,7 +896,7 @@ class OpenapiNewadSpadgroupsResponse(LingXingModel):
     bid_optimization: Optional[str] = Field(None, description="优化建议")
 
 
-class OpenapiNewadSpadplacementhourdataResponse(LingXingModel):
+class NewadSpadplacementhourdataResponse(LingXingModel):
     """SP广告位小时数据."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动id")
@@ -921,7 +921,7 @@ class OpenapiNewadSpadplacementhourdataResponse(LingXingModel):
     ctr: Optional[float] = Field(None, description="点击/曝光")
 
 
-class OpenapiNewadSpadvertisehourdataResponse(LingXingModel):
+class NewadSpadvertisehourdataResponse(LingXingModel):
     """SP广告小时数据."""
     total: Optional[int] = Field(None, description="总数")
     profile_id: Optional[float] = Field(None, description="店铺id")
@@ -952,7 +952,7 @@ class OpenapiNewadSpadvertisehourdataResponse(LingXingModel):
     group_id: Optional[float] = Field(None, description="广告组id")
 
 
-class OpenapiNewadSpcampaignhourdataResponse(LingXingModel):
+class NewadSpcampaignhourdataResponse(LingXingModel):
     """SP广告活动小时数据."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动id")
@@ -976,7 +976,7 @@ class OpenapiNewadSpcampaignhourdataResponse(LingXingModel):
     cpc: Optional[float] = Field(None, description="花费/点击")
 
 
-class OpenapiNewadSpcampaignreportsResponse(LingXingModel):
+class NewadSpcampaignreportsResponse(LingXingModel):
     """SP广告活动报表."""
     total: Optional[int] = Field(None, description="总数")
     targeting_type: Optional[str] = Field(None, description="投放类型")
@@ -1023,7 +1023,7 @@ class OpenapiNewadSpcampaignsTags(LingXingModel):
     parent: Optional[str] = Field(None, description="父标签")
     child: Optional[str] = Field(None, description="子标签")
 
-class OpenapiNewadSpcampaignsResponse(LingXingModel):
+class NewadSpcampaignsResponse(LingXingModel):
     """SP广告活动."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动id")
@@ -1044,7 +1044,7 @@ class OpenapiNewadSpcampaignsResponse(LingXingModel):
     tags: Optional[List[OpenapiNewadSpcampaignsTags]] = Field(None, description="标签信息")
 
 
-class OpenapiNewadSpkeywordreportsResponse(LingXingModel):
+class NewadSpkeywordreportsResponse(LingXingModel):
     """SP关键词报表."""
     total: Optional[int] = Field(None, description="总数")
     keyword_id: Optional[float] = Field(None, description="关键词id")
@@ -1089,7 +1089,7 @@ class OpenapiNewadSpkeywordreportsResponse(LingXingModel):
     same_units_30d: Optional[float] = Field(None, description="直接成交订单数(30d)【show_detail=1时返回字段】")
 
 
-class OpenapiNewadSpkeywordsResponse(LingXingModel):
+class NewadSpkeywordsResponse(LingXingModel):
     """SP关键词."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动id")
@@ -1105,7 +1105,7 @@ class OpenapiNewadSpkeywordsResponse(LingXingModel):
     serving_status: Optional[str] = Field(None, description="服务状态")
 
 
-class OpenapiNewadSpnegativetargetsorkeywordsResponse(LingXingModel):
+class NewadSpnegativetargetsorkeywordsResponse(LingXingModel):
     """SP否定投放."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动id")
@@ -1121,7 +1121,7 @@ class OpenapiNewadSpnegativetargetsorkeywordsResponse(LingXingModel):
     serving_status: Optional[str] = Field(None, description="服务状态")
 
 
-class OpenapiNewadSpproductadreportsResponse(LingXingModel):
+class NewadSpproductadreportsResponse(LingXingModel):
     """SP广告商品报表."""
     total: Optional[int] = Field(None, description="总数")
     ad_id: Optional[float] = Field(None, description="商品广告id")
@@ -1166,7 +1166,7 @@ class OpenapiNewadSpproductadreportsResponse(LingXingModel):
     same_units_30d: Optional[float] = Field(None, description="直接成交量(30d)【show_detail=1时返回字段】")
 
 
-class OpenapiNewadSpproductadsResponse(LingXingModel):
+class NewadSpproductadsResponse(LingXingModel):
     """SP广告商品."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动id")
@@ -1181,7 +1181,7 @@ class OpenapiNewadSpproductadsResponse(LingXingModel):
     serving_status: Optional[str] = Field(None, description="服务状态")
 
 
-class OpenapiNewadSptargethourdataResponse(LingXingModel):
+class NewadSptargethourdataResponse(LingXingModel):
     """SP投放小时数据."""
     total: Optional[int] = Field(None, description="总数")
     profile_id: Optional[float] = Field(None, description="店铺id")
@@ -1213,7 +1213,7 @@ class OpenapiNewadSptargethourdataResponse(LingXingModel):
     group_id: Optional[float] = Field(None, description="广告组id")
 
 
-class OpenapiNewadSptargetreportsResponse(LingXingModel):
+class NewadSptargetreportsResponse(LingXingModel):
     """SP商品定位报表."""
     total: Optional[int] = Field(None, description="总数")
     target_id: Optional[float] = Field(None, description="投放id")
@@ -1258,7 +1258,7 @@ class OpenapiNewadSptargetreportsResponse(LingXingModel):
     same_units_30d: Optional[float] = Field(None, description="直接成交量(30d)【show_detail=1时返回字段】")
 
 
-class OpenapiNewadSptargetsResponse(LingXingModel):
+class NewadSptargetsResponse(LingXingModel):
     """SP商品定位."""
     total: Optional[int] = Field(None, description="总数")
     target_id: Optional[float] = Field(None, description="商品定位id")
@@ -1275,7 +1275,7 @@ class OpenapiNewadSptargetsResponse(LingXingModel):
     resolved_expression: Optional[str] = Field(None, description="已解析的表达式")
 
 
-class OpenapiNewadSpcampaignplacementreportsResponse(LingXingModel):
+class NewadSpcampaignplacementreportsResponse(LingXingModel):
     """SP广告位报告."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动id")
@@ -1289,7 +1289,7 @@ class OpenapiNewadSpcampaignplacementreportsResponse(LingXingModel):
     profile_id: Optional[float] = Field(None, description="亚马逊店铺数字id")
 
 
-class OpenapiNewadSpasinreportsResponse(LingXingModel):
+class NewadSpasinreportsResponse(LingXingModel):
     """SP已购买商品报表."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动id")
@@ -1308,7 +1308,7 @@ class OpenapiNewadSpasinreportsResponse(LingXingModel):
     same_units: Optional[float] = Field(None, description="直接成交销量")
 
 
-class OpenapiNewadQuerywordreportsResponse(LingXingModel):
+class NewadQuerywordreportsResponse(LingXingModel):
     """SP用户搜索词报表."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动id")
@@ -1329,7 +1329,7 @@ class OpenapiNewadQuerywordreportsResponse(LingXingModel):
     same_units: Optional[float] = Field(None, description="直接成交销量")
 
 
-class OpenapiNewadHsacampaignplacementreportsResponse(LingXingModel):
+class NewadHsacampaignplacementreportsResponse(LingXingModel):
     """SB广告活动-广告位报告."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动id")
@@ -1342,7 +1342,7 @@ class OpenapiNewadHsacampaignplacementreportsResponse(LingXingModel):
     profile_id: Optional[float] = Field(None, description="亚马逊店铺数字id")
 
 
-class OpenapiNewadHsaquerywordreportsResponse(LingXingModel):
+class NewadHsaquerywordreportsResponse(LingXingModel):
     """SB用户搜索词报表."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动id")
@@ -1363,7 +1363,7 @@ class OpenapiNewadHsaquerywordreportsResponse(LingXingModel):
     same_units: Optional[float] = Field(None, description="直接成交销量")
 
 
-class OpenapiNewadSdasinreportsResponse(LingXingModel):
+class NewadSdasinreportsResponse(LingXingModel):
     """SD已购买商品报表."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动id")
@@ -1382,7 +1382,7 @@ class OpenapiNewadSdasinreportsResponse(LingXingModel):
     same_units: Optional[float] = Field(None, description="直接成交销量")
 
 
-class OpenapiNewadSdmatchtargetreportsResponse(LingXingModel):
+class NewadSdmatchtargetreportsResponse(LingXingModel):
     """SD匹配的目标报表."""
     total: Optional[int] = Field(None, description="总数")
     campaign_id: Optional[float] = Field(None, description="广告活动id")

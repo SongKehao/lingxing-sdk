@@ -54,7 +54,7 @@ class ListingmanageVclistingPagelistResponse(LingXingModel):
     price_currency_icon: Optional[str] = Field(None, description="优惠金额货币符号")
 
 
-class OpenapiGetinvoiceDetailInvoice(LingXingModel):
+class GetinvoiceDetailInvoice(LingXingModel):
     """invoice sub-structure."""
     order_no: Optional[str] = Field(None, description="发货单号")
     purchase_order_number: Optional[str] = Field(None, description="订单号")
@@ -77,9 +77,9 @@ class OpenapiGetinvoiceDetailInvoice(LingXingModel):
     items: Optional[list] = Field(None, description="发货单明细列表")
     invoice_tracking_list: Optional[list] = Field(None, description="物流信息")
 
-class OpenapiGetinvoiceDetailResponse(LingXingModel):
+class GetinvoiceDetailResponse(LingXingModel):
     """查询VC发货单详情."""
-    invoice: Optional[List[OpenapiGetinvoiceDetailInvoice]] = Field(None, description="发货单信息")
+    invoice: Optional[List[GetinvoiceDetailInvoice]] = Field(None, description="发货单信息")
 
 
 class GetinvoicePageListList(LingXingModel):

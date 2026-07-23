@@ -6,7 +6,7 @@ from pydantic import Field
 from ..common import LingXingModel
 
 
-class OpenapiMwsreportReimbursementlistResponse(LingXingModel):
+class ReimbursementlistResponse(LingXingModel):
     """查询亚马逊赔偿报告列表."""
     total: Optional[int] = Field(None, description="总数")
     sid: Optional[int] = Field(None, description="店铺id")

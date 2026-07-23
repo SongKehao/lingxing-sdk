@@ -4284,7 +4284,7 @@ class TemuTemuaddressdecryptResponse(LingXingModel):
     total: Optional[int] = Field(None, description="成功项总数")
 
 
-class OpenapiWalmartpaymentQuerypageRecords(LingXingModel):
+class WalmartpaymentQuerypageRecords(LingXingModel):
     """records sub-structure."""
     amount: Optional[str] = Field(None, description="金额")
     amount_type: Optional[str] = Field(None, description="金额类型")
@@ -4315,20 +4315,20 @@ class OpenapiWalmartpaymentQuerypageRecords(LingXingModel):
     transaction_reason_description: Optional[str] = Field(None, description="交易原因描述")
     transaction_type: Optional[str] = Field(None, description="交易类型")
 
-class OpenapiWalmartpaymentQuerypageResponse(LingXingModel):
+class WalmartpaymentQuerypageResponse(LingXingModel):
     """查询报告详情 - Walmart Payment."""
     total: Optional[int] = Field(None, description="总数")
-    records: Optional[List[OpenapiWalmartpaymentQuerypageRecords]] = Field(None, description="详细信息列表")
+    records: Optional[List[WalmartpaymentQuerypageRecords]] = Field(None, description="详细信息列表")
 
 
-class OpenapiWalmartpaymentQueryreportList(LingXingModel):
+class WalmartpaymentQueryreportList(LingXingModel):
     """list sub-structure."""
     report_date: Optional[str] = Field(None, description="报告时间")
     report_id: Optional[str] = Field(None, description="报告id")
 
-class OpenapiWalmartpaymentQueryreportResponse(LingXingModel):
+class WalmartpaymentQueryreportResponse(LingXingModel):
     """查询可用报告列表 - Walmart Payment."""
-    list: Optional[List[OpenapiWalmartpaymentQueryreportList]] = Field(None, description="报告详情")
+    list: Optional[List[WalmartpaymentQueryreportList]] = Field(None, description="报告详情")
     store_id: Optional[str] = Field(None, description="店铺id")
 
 

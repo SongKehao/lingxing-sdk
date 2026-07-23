@@ -266,13 +266,13 @@ class InboundorderInboundSetinboundResponse(LingXingModel):
     fail_list: Optional[List[InboundorderInboundSetinboundFaillist]] = Field(None, description="失败明细")
 
 
-class OpenapiStorageFbawarehousedetailFbaStorageQuantityList(LingXingModel):
+class StorageFbawarehousedetailFbaStorageQuantityList(LingXingModel):
     """fba_storage_quantity_list sub-structure."""
     sid: Optional[int] = Field(None, description="店铺id")
     name: Optional[str] = Field(None, description="店铺名称")
     quantity_for_local_fulfillment: Optional[int] = Field(None, description="FBA可售数量")
 
-class OpenapiStorageFbawarehousedetailResponse(LingXingModel):
+class StorageFbawarehousedetailResponse(LingXingModel):
     """查询FBA库存列表-v2."""
     name: Optional[str] = Field(None, description="仓库名")
     seller_group_name: Optional[str] = Field(None, description="共享仓店铺名")
@@ -353,7 +353,7 @@ class OpenapiStorageFbawarehousedetailResponse(LingXingModel):
     distributor_damaged_quantity: Optional[int] = Field(None, description="不可售详情：分销商残损")
     defective_quantity: Optional[int] = Field(None, description="不可售详情：存在瑕疵")
     expired_quantity: Optional[int] = Field(None, description="不可售详情：已过期")
-    fba_storage_quantity_list: Optional[List[OpenapiStorageFbawarehousedetailFbaStorageQuantityList]] = Field(None, description="FBA可售信息列表，当仓库为共享仓库时，该字段才返回")
+    fba_storage_quantity_list: Optional[List[StorageFbawarehousedetailFbaStorageQuantityList]] = Field(None, description="FBA可售信息列表，当仓库为共享仓库时，该字段才返回")
     total: Optional[int] = Field(None, description="总数")
 
 

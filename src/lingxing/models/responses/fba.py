@@ -132,19 +132,19 @@ class StaUpdateShipmentTrackResponse(LingXingModel):
     msg: Optional[str] = None
 
 
-class OpenapiInboundPackingGetinboundpackingboxinfoPlacementoptionlist(LingXingModel):
+class InboundPackingGetinboundpackingboxinfoPlacementoptionlist(LingXingModel):
     """placementOptionList sub-structure."""
     placement_option_id: Optional[str] = Field(None, description="货件方案id")
     placement_status: Optional[str] = Field(None, description="状态：含OFFERED、ACCEPTED、EXPIRED")
     shipment_information_list: Optional[list] = Field(None, description="货件信息")
 
-class OpenapiInboundPackingGetinboundpackingboxinfoResponse(LingXingModel):
+class InboundPackingGetinboundpackingboxinfoResponse(LingXingModel):
     """查询货件方案的装箱信息."""
     inbound_plan_id: Optional[str] = Field(None, description="STA任务编号")
-    placement_option_list: Optional[List[OpenapiInboundPackingGetinboundpackingboxinfoPlacementoptionlist]] = Field(None, description="货件方案id")
+    placement_option_list: Optional[List[InboundPackingGetinboundpackingboxinfoPlacementoptionlist]] = Field(None, description="货件方案id")
 
 
-class OpenapiInboundPackingGetprepdetailsResponse(LingXingModel):
+class InboundPackingGetprepdetailsResponse(LingXingModel):
     """获取商品预处理信息."""
     sid: Optional[str] = Field(None, description="亚马逊店铺sid")
     msku: Optional[str] = Field(None, description="msku")
@@ -154,18 +154,18 @@ class OpenapiInboundPackingGetprepdetailsResponse(LingXingModel):
     prep_types: Optional[list] = Field(None, description="预处理类型集合，具体见附加说明")
 
 
-class OpenapiInboundPackingListpackinggroupitemsPackinggrouplist(LingXingModel):
+class InboundPackingListpackinggroupitemsPackinggrouplist(LingXingModel):
     """packingGroupList sub-structure."""
     packing_group_id: Optional[str] = Field(None, description="包装组ID")
     packing_group_item_list: Optional[list] = Field(None, description="包装组商品信息")
 
-class OpenapiInboundPackingListpackinggroupitemsResponse(LingXingModel):
+class InboundPackingListpackinggroupitemsResponse(LingXingModel):
     """查询包装组."""
     inbound_plan_id: Optional[str] = Field(None, description="STA任务编号")
-    packing_group_list: Optional[List[OpenapiInboundPackingListpackinggroupitemsPackinggrouplist]] = Field(None, description="包装组")
+    packing_group_list: Optional[List[InboundPackingListpackinggroupitemsPackinggrouplist]] = Field(None, description="包装组")
 
 
-class OpenapiInboundPackingSetpackinginformationResponse(LingXingModel):
+class InboundPackingSetpackinginformationResponse(LingXingModel):
     """提交装箱信息."""
     error_msg: Optional[str] = Field(None, description="错误信息")
     inbound_plan_id: Optional[str] = Field(None, description="亚马逊任务编号")
@@ -173,7 +173,7 @@ class OpenapiInboundPackingSetpackinginformationResponse(LingXingModel):
     task_status: Optional[str] = Field(None, description="任务状态 process success failure local_failure")
 
 
-class OpenapiInboundPackingUpdateshipmentpackingResponse(LingXingModel):
+class InboundPackingUpdateshipmentpackingResponse(LingXingModel):
     """修改货件装箱信息."""
     error_msg: Optional[str] = Field(None, description="错误信息")
     inbound_plan_id: Optional[str] = Field(None, description="亚马逊任务编号")
@@ -181,7 +181,7 @@ class OpenapiInboundPackingUpdateshipmentpackingResponse(LingXingModel):
     task_status: Optional[str] = Field(None, description="任务状态 process success failure local_failure")
 
 
-class OpenapiInboundPlanCancelinboundplanResponse(LingXingModel):
+class InboundPlanCancelinboundplanResponse(LingXingModel):
     """取消STA任务."""
     error_msg: Optional[str] = Field(None, description="错误信息")
     inbound_plan_id: Optional[str] = Field(None, description="亚马逊任务编号")
@@ -189,7 +189,7 @@ class OpenapiInboundPlanCancelinboundplanResponse(LingXingModel):
     task_status: Optional[str] = Field(None, description="任务状态 process success failure local_failure")
 
 
-class OpenapiInboundPlanCreateinboundplanResponse(LingXingModel):
+class InboundPlanCreateinboundplanResponse(LingXingModel):
     """创建STA任务."""
     error_msg: Optional[str] = Field(None, description="错误信息")
     inbound_plan_id: Optional[str] = Field(None, description="亚马逊任务编号")
@@ -197,7 +197,7 @@ class OpenapiInboundPlanCreateinboundplanResponse(LingXingModel):
     task_status: Optional[str] = Field(None, description="任务状态 process success failure local_failure")
 
 
-class OpenapiInboundPlanDetailAddressvo(LingXingModel):
+class InboundPlanDetailAddressvo(LingXingModel):
     """addressVO sub-structure."""
     address_line1: Optional[str] = Field(None, description="街道地址1")
     address_line2: Optional[str] = Field(None, description="街道地址2")
@@ -210,7 +210,7 @@ class OpenapiInboundPlanDetailAddressvo(LingXingModel):
     shipper_name: Optional[str] = Field(None, description="发货方名称")
     state_or_province_code: Optional[str] = Field(None, description="州/省/地区")
 
-class OpenapiInboundPlanDetailProductlist(LingXingModel):
+class InboundPlanDetailProductlist(LingXingModel):
     """productList sub-structure."""
     asin: Optional[str] = Field(None, description="asin")
     fnsku: Optional[str] = Field(None, description="fnsku")
@@ -222,28 +222,28 @@ class OpenapiInboundPlanDetailProductlist(LingXingModel):
     title: Optional[str] = Field(None, description="标题(【listing】中的标题)")
     url: Optional[str] = Field(None, description="图片url")
 
-class OpenapiInboundPlanDetailShipmentlist(LingXingModel):
+class InboundPlanDetailShipmentlist(LingXingModel):
     """shipmentList sub-structure."""
     shipment_id: Optional[str] = Field(None, description="货件id")
     shipment_confirmation_id: Optional[str] = Field(None, description="货件单号")
     status: Optional[str] = Field(None, description="货件状态: WORKING READY_TO_SHIP SHIPPED RECEIVING CANCELLED DELETED CLOSED ERROR IN_TRANSIT DELIVERED CHECKED_IN UNCONFIRMED")
 
-class OpenapiInboundPlanDetailResponse(LingXingModel):
+class InboundPlanDetailResponse(LingXingModel):
     """查询STA任务详情."""
-    address_vo: Optional[List[OpenapiInboundPlanDetailAddressvo]] = Field(None, description="发货地址")
+    address_vo: Optional[List[InboundPlanDetailAddressvo]] = Field(None, description="发货地址")
     gmt_create: Optional[str] = Field(None, description="创建时间")
     gmt_modified: Optional[str] = Field(None, description="更新时间")
     inbound_plan_id: Optional[str] = Field(None, description="STA任务编号")
     plan_create_time: Optional[str] = Field(None, description="计划创建时间")
     plan_name: Optional[str] = Field(None, description="STA任务名称")
     plan_update_time: Optional[str] = Field(None, description="计划更新时间")
-    product_list: Optional[List[OpenapiInboundPlanDetailProductlist]] = Field(None, description="商品信息")
-    shipment_list: Optional[List[OpenapiInboundPlanDetailShipmentlist]] = Field(None, description="货件信息")
+    product_list: Optional[List[InboundPlanDetailProductlist]] = Field(None, description="商品信息")
+    shipment_list: Optional[List[InboundPlanDetailShipmentlist]] = Field(None, description="货件信息")
     status: Optional[str] = Field(None, description="STA任务状态： ACTIVE 进行中 VOIDED 已取消 SHIPPED 已发货")
     position_type: Optional[int] = Field(None, description="分仓方式，1-先装箱再分仓，2-先分仓再装箱")
 
 
-class OpenapiInboundPlanGatherinboundplanResponse(LingXingModel):
+class InboundPlanGatherinboundplanResponse(LingXingModel):
     """同步STA任务到ERP."""
     error_msg: Optional[str] = Field(None, description="失败原因")
     fail_inbound_plan_ids: Optional[list] = Field(None, description="同步失败STA任务编号数组")
@@ -252,15 +252,15 @@ class OpenapiInboundPlanGatherinboundplanResponse(LingXingModel):
     success_num: Optional[int] = Field(None, description="同步成功数量")
 
 
-class OpenapiInboundPlanListinboundplangrouppackingPackinggrouplist(LingXingModel):
+class InboundPlanListinboundplangrouppackingPackinggrouplist(LingXingModel):
     """packingGroupList sub-structure."""
     packing_group_id: Optional[str] = Field(None, description="包装组id")
     shipment_packing_list: Optional[list] = Field(None, description="装箱明细")
 
-class OpenapiInboundPlanListinboundplangrouppackingResponse(LingXingModel):
+class InboundPlanListinboundplangrouppackingResponse(LingXingModel):
     """查询STA任务包装组装箱信息."""
     inbound_plan_id: Optional[str] = Field(None, description="STA任务编号")
-    packing_group_list: Optional[List[OpenapiInboundPlanListinboundplangrouppackingPackinggrouplist]] = Field(None, description="包装组")
+    packing_group_list: Optional[List[InboundPlanListinboundplangrouppackingPackinggrouplist]] = Field(None, description="包装组")
 
 
 class OpenapiInboundPlanPageOrders(LingXingModel):
@@ -268,7 +268,7 @@ class OpenapiInboundPlanPageOrders(LingXingModel):
     asc: Optional[bool] = Field(None, description="是否升序排列")
     column: Optional[str] = Field(None, description="排序列")
 
-class OpenapiInboundPlanPageRecords(LingXingModel):
+class InboundPlanPageRecords(LingXingModel):
     """records sub-structure."""
     gmt_create: Optional[str] = Field(None, description="创建时间")
     gmt_modified: Optional[str] = Field(None, description="更新时间")
@@ -281,22 +281,22 @@ class OpenapiInboundPlanPageRecords(LingXingModel):
     plan_create_time: Optional[str] = Field(None, description="计划创建时间")
     plan_update_time: Optional[str] = Field(None, description="计划更新时间")
 
-class OpenapiInboundPlanPageResponse(LingXingModel):
+class InboundPlanPageResponse(LingXingModel):
     """查询STA任务列表."""
     current: Optional[int] = Field(None, description="当前页")
     orders: Optional[List[OpenapiInboundPlanPageOrders]] = Field(None, description="排序")
     pages: Optional[int] = Field(None, description="页数")
-    records: Optional[List[OpenapiInboundPlanPageRecords]] = Field(None, description="记录行")
+    records: Optional[List[InboundPlanPageRecords]] = Field(None, description="记录行")
     search_count: Optional[int] = Field(None, description="是")
     total: Optional[int] = Field(None, description="总记录数")
 
 
-class OpenapiInboundShipmentCommitstadelivertimeResponse(LingXingModel):
+class InboundShipmentCommitstadelivertimeResponse(LingXingModel):
     """提交送达时间."""
     operation_id: Optional[str] = Field(None, description="操作id")
 
 
-class OpenapiInboundShipmentConfirmplacementoptionResponse(LingXingModel):
+class InboundShipmentConfirmplacementoptionResponse(LingXingModel):
     """确认货件方案."""
     error_msg: Optional[str] = Field(None, description="错误信息")
     inbound_plan_id: Optional[str] = Field(None, description="亚马逊任务编号")
@@ -304,12 +304,12 @@ class OpenapiInboundShipmentConfirmplacementoptionResponse(LingXingModel):
     task_status: Optional[str] = Field(None, description="任务状态 process success failure local_failure")
 
 
-class OpenapiInboundShipmentGeneratedeliverydatelistResponse(LingXingModel):
+class InboundShipmentGeneratedeliverydatelistResponse(LingXingModel):
     """生成可选送达时间."""
     operation_id: Optional[str] = Field(None, description="操作id")
 
 
-class OpenapiInboundShipmentGenerateplacementoptionsResponse(LingXingModel):
+class InboundShipmentGenerateplacementoptionsResponse(LingXingModel):
     """生成货件方案."""
     error_msg: Optional[str] = Field(None, description="错误信息")
     inbound_plan_id: Optional[str] = Field(None, description="亚马逊任务编号")
@@ -317,26 +317,26 @@ class OpenapiInboundShipmentGenerateplacementoptionsResponse(LingXingModel):
     task_status: Optional[str] = Field(None, description="任务状态 process success failure local_failure")
 
 
-class OpenapiInboundShipmentGeneratetransportlistResponse(LingXingModel):
+class InboundShipmentGeneratetransportlistResponse(LingXingModel):
     """生成承运方式."""
     operation_id: Optional[str] = Field(None, description="操作id")
 
 
-class OpenapiInboundShipmentGetdeliverydatelistShipmentlist(LingXingModel):
+class InboundShipmentGetdeliverydatelistShipmentlist(LingXingModel):
     """shipmentList sub-structure."""
     delivery_window_option_id: Optional[str] = Field(None, description="选项id")
     end_date: Optional[str] = Field(None, description="结束时间 格式：yyyy-MM-dd HH:mm:ss")
     start_date: Optional[str] = Field(None, description="开始时间 格式：yyyy-MM-dd HH:mm:ss")
     valid_until: Optional[str] = Field(None, description="过期时间 格式：yyyy-MM-dd HH:mm:ss")
 
-class OpenapiInboundShipmentGetdeliverydatelistResponse(LingXingModel):
+class InboundShipmentGetdeliverydatelistResponse(LingXingModel):
     """查询可选送达时间."""
     inbound_plan_id: Optional[str] = Field(None, description="STA任务编号")
     shipment_id: Optional[str] = Field(None, description="货件单号")
-    shipment_list: Optional[List[OpenapiInboundShipmentGetdeliverydatelistShipmentlist]] = Field(None, description="可选送达时间")
+    shipment_list: Optional[List[InboundShipmentGetdeliverydatelistShipmentlist]] = Field(None, description="可选送达时间")
 
 
-class OpenapiInboundShipmentGettransportlistTransportvolist(LingXingModel):
+class InboundShipmentGettransportlistTransportvolist(LingXingModel):
     """transportVOList sub-structure."""
     alpha_code: Optional[str] = Field(None, description="承运方式编码")
     alpha_name: Optional[str] = Field(None, description="承运方式名称")
@@ -345,31 +345,31 @@ class OpenapiInboundShipmentGettransportlistTransportvolist(LingXingModel):
     transportation_option_id: Optional[str] = Field(None, description="承运方式ID")
     alpha_alias_name: Optional[str] = Field(None, description="承运方式别名")
 
-class OpenapiInboundShipmentGettransportlistResponse(LingXingModel):
+class InboundShipmentGettransportlistResponse(LingXingModel):
     """查询承运方式."""
     inbound_plan_id: Optional[str] = Field(None, description="STA任务编号")
     shipment_id: Optional[str] = Field(None, description="货件号")
-    transport_vo_list: Optional[List[OpenapiInboundShipmentGettransportlistTransportvolist]] = Field(None, description="承运方式列表")
+    transport_vo_list: Optional[List[InboundShipmentGettransportlistTransportvolist]] = Field(None, description="承运方式列表")
 
 
-class OpenapiInboundShipmentListshipmentboxesShipmentlist(LingXingModel):
+class InboundShipmentListshipmentboxesShipmentlist(LingXingModel):
     """shipmentList sub-structure."""
     pallet_list: Optional[list] = Field(None, description="托帕明细")
     shipment_id: Optional[str] = Field(None, description="货件id")
     shipment_packing_list: Optional[list] = Field(None, description="装箱明细")
 
-class OpenapiInboundShipmentListshipmentboxesResponse(LingXingModel):
+class InboundShipmentListshipmentboxesResponse(LingXingModel):
     """查询货件装箱信息."""
     inbound_plan_id: Optional[str] = Field(None, description="STA任务编号")
-    shipment_list: Optional[List[OpenapiInboundShipmentListshipmentboxesShipmentlist]] = Field(None, description="货件装箱信息")
+    shipment_list: Optional[List[InboundShipmentListshipmentboxesShipmentlist]] = Field(None, description="货件装箱信息")
 
 
-class OpenapiInboundShipmentSetdeliveryserviceResponse(LingXingModel):
+class InboundShipmentSetdeliveryserviceResponse(LingXingModel):
     """提交货件配送服务."""
     operation_id: Optional[str] = Field(None, description="操作id")
 
 
-class OpenapiInboundShipmentShipmentdetaillistShipmentlist(LingXingModel):
+class InboundShipmentShipmentdetaillistShipmentlist(LingXingModel):
     """shipmentList sub-structure."""
     alpha_code: Optional[str] = Field(None, description="承运方式")
     amazon_reference_id: Optional[str] = Field(None, description="关联号")
@@ -391,13 +391,13 @@ class OpenapiInboundShipmentShipmentdetaillistShipmentlist(LingXingModel):
     tracking_number_list: Optional[list] = Field(None, description="追踪编号")
     warehouse_id: Optional[str] = Field(None, description="物流中心编码")
 
-class OpenapiInboundShipmentShipmentdetaillistResponse(LingXingModel):
+class InboundShipmentShipmentdetaillistResponse(LingXingModel):
     """查询货件详情."""
     inbound_plan_id: Optional[str] = Field(None, description="STA任务编号")
-    shipment_list: Optional[List[OpenapiInboundShipmentShipmentdetaillistShipmentlist]] = Field(None, description="是")
+    shipment_list: Optional[List[InboundShipmentShipmentdetaillistShipmentlist]] = Field(None, description="是")
 
 
-class OpenapiInboundShipmentShipmentpreviewPlacementoptionlist(LingXingModel):
+class InboundShipmentShipmentpreviewPlacementoptionlist(LingXingModel):
     """placementOptionList sub-structure."""
     fee_count: Optional[float] = Field(None, description="费用")
     fees: Optional[list] = Field(None, description="费用明细：array")
@@ -405,13 +405,13 @@ class OpenapiInboundShipmentShipmentpreviewPlacementoptionlist(LingXingModel):
     placement_status: Optional[str] = Field(None, description="状态：含OFFERED、ACCEPTED、EXPIRED")
     shipment_information_list: Optional[list] = Field(None, description="货件信息")
 
-class OpenapiInboundShipmentShipmentpreviewResponse(LingXingModel):
+class InboundShipmentShipmentpreviewResponse(LingXingModel):
     """查询货件方案."""
     inbound_plan_id: Optional[str] = Field(None, description="STA任务编号")
-    placement_option_list: Optional[List[OpenapiInboundShipmentShipmentpreviewPlacementoptionlist]] = Field(None, description="货件方案")
+    placement_option_list: Optional[List[InboundShipmentShipmentpreviewPlacementoptionlist]] = Field(None, description="货件方案")
 
 
-class OpenapiInboundShipmentUpdateshipmenttrackResponse(LingXingModel):
+class InboundShipmentUpdateshipmenttrackResponse(LingXingModel):
     """上传货件跟踪号."""
     error_enums: Optional[list] = Field(None, description="错误编码（让openapi的用户进行后续操作）,OpenApiTypeEnum 枚举值")
     error_msg: Optional[str] = Field(None, description="错误信息")
@@ -420,7 +420,7 @@ class OpenapiInboundShipmentUpdateshipmenttrackResponse(LingXingModel):
     task_status: Optional[str] = Field(None, description="任务状态")
 
 
-class OpenapiTaskPlanOperateResponse(LingXingModel):
+class TaskPlanOperateResponse(LingXingModel):
     """查询异步任务状态."""
     error_msg: Optional[str] = Field(None, description="错误信息")
     inbound_plan_id: Optional[str] = Field(None, description="亚马逊任务编号")
@@ -428,7 +428,7 @@ class OpenapiTaskPlanOperateResponse(LingXingModel):
     task_status: Optional[str] = Field(None, description="任务状态 process success failure local_failure")
 
 
-class OpenapiFbashipmentShoppingaddressResponse(LingXingModel):
+class FbashipmentShoppingaddressResponse(LingXingModel):
     """地址簿-配送地址详情."""
     ship_to_address: Optional[str] = Field(None, description="收件人详细地址")
     ship_to_postal_code: Optional[str] = Field(None, description="收件人邮政编码")

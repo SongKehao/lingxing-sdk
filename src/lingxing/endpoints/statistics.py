@@ -21,7 +21,7 @@ from ..models.responses.statistics import (
     InventorylogWarehousereportGetlocalwarehousesummarylistResponse,
     InventorylogWarehousereportGetoverseadetaillistResponse,
     InventorylogWarehousereportGetoverseasummarylistResponse,
-    OpenapiMwsreportReimbursementlistResponse,
+    ReimbursementlistResponse,
     OperatemanageOperatelogListResponse,
     Platformstatisticsv2SalestatPagelistResponse,
     ProductperformanceOpenapiAsinlistResponse,
@@ -433,7 +433,7 @@ Args:
     product_type: 产品类型： 1 普通产品 2 组合产品 3 辅料, array."""
         resp = await self._post("/basicOpen/report/purchase/supplier/list", {k: v for k, v in {"offset": offset, "length": length, "start_date": start_date, "end_date": end_date, "time_type": time_type, "search_field": search_field, "search_value": search_value, "product_type": product_type}.items() if v is not None})
         return self._parse_list(resp.data, PurchaseSupplierListResponse)
-    async def reimbursement_list(self, offset: int = None, length: int = None, search_field: str = None, search_value: str = None, sids: str = None, start_date: str = None, end_date: str = None) -> list[OpenapiMwsreportReimbursementlistResponse]:
+    async def reimbursement_list(self, offset: int = None, length: int = None, search_field: str = None, search_value: str = None, sids: str = None, start_date: str = None, end_date: str = None) -> list[ReimbursementlistResponse]:
         """查询亚马逊赔偿报告列表.
 
 POST /basicOpen/openapi/mwsReport/reimbursementList
@@ -447,7 +447,7 @@ Args:
     start_date: 批准日期开始时间【时间间隔最长不得超过90天】，闭区间，格式：Y-m-d, string.
     end_date: 批准日期结束时间【时间间隔最长不得超过90天】，闭区间，格式：Y-m-d, string."""
         resp = await self._post("/basicOpen/openapi/mwsReport/reimbursementList", {k: v for k, v in {"offset": offset, "length": length, "search_field": search_field, "search_value": search_value, "sids": sids, "start_date": start_date, "end_date": end_date}.items() if v is not None})
-        return self._parse_list(resp.data, OpenapiMwsreportReimbursementlistResponse)
+        return self._parse_list(resp.data, ReimbursementlistResponse)
     async def return_order_analysis_lists(self, endDate: str = None, length: int = None, offset: int = None, startDate: str = None, asinType: str = None, dateType: int = None, mids: list = None, principalUid: list = None, searchField: str = None, searchValue: list = None, sortField: str = None, sortType: str = None, storeId: list = None) -> list[SalesanalysisReturnorderAnalysislistsResponse]:
         """统计-查询退货分析.
 

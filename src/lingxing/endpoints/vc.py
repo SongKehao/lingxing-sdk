@@ -4,7 +4,7 @@ from __future__ import annotations
 from ..models.responses.vc import (
     GetinvoicePageListResponse,
     ListingmanageVclistingPagelistResponse,
-    OpenapiGetinvoiceDetailResponse,
+    GetinvoiceDetailResponse,
     PlatformauthVcsellerPagelistResponse,
     PlatformorderVcorderdfConfirmshipmentResponse,
     PlatformorderVcorderdfSubmitsshippinglabelResponse,
@@ -43,7 +43,7 @@ Args:
     length: 分页长度，默认20，上限200, int."""
         resp = await self._post("/basicOpen/platformAuth/vcSeller/pageList", {k: v for k, v in {"offset": offset, "length": length}.items() if v is not None})
         return self._parse_list(resp.data, PlatformauthVcsellerPagelistResponse)
-    async def vc_deliver_detail(self, orderNo: str = None) -> list[OpenapiGetinvoiceDetailResponse]:
+    async def vc_deliver_detail(self, orderNo: str = None) -> list[GetinvoiceDetailResponse]:
         """查询VC发货单详情.
 
 POST /basicOpen/openapi/getInvoice/detail
@@ -51,7 +51,7 @@ POST /basicOpen/openapi/getInvoice/detail
 Args:
     orderNo: 订单号 (required), string."""
         resp = await self._post("/basicOpen/openapi/getInvoice/detail", {k: v for k, v in {"orderNo": orderNo}.items() if v is not None})
-        return self._parse_list(resp.data, OpenapiGetinvoiceDetailResponse)
+        return self._parse_list(resp.data, GetinvoiceDetailResponse)
     async def vc_deliver_page_list(self, offset: float = None, length: float = None, sids: list = None, wid: list = None, shipmentType: str = None, status: float = None, createTimeStartTime: str = None, createTimeEndTime: str = None, shipmentTimeStartTime: str = None, shipmentTimeEndTime: str = None) -> list[GetinvoicePageListResponse]:
         """查询VC发货单列表.
 

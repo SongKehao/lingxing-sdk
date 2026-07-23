@@ -6,7 +6,7 @@ from pydantic import Field
 from ..common import LingXingModel
 
 
-class OpenapiMwsreportAdjustmentlistResponse(LingXingModel):
+class AdjustmentlistResponse(LingXingModel):
     """查询亚马逊源报表-盘存记录."""
     total: Optional[int] = Field(None, description="[int]")
     sid: Optional[int] = Field(None, description="[int]")
@@ -79,7 +79,7 @@ class MwsReportAllordersResponse(LingXingModel):
     total: Optional[int] = Field(None, description="总数")
 
 
-class MwsReportDailyinventoryResponse(LingXingModel):
+class DailyinventoryResponse(LingXingModel):
     """查询亚马逊源报表-每日库存."""
     snapshot_date: Optional[str] = Field(None, description="快照时间")
     fnsku: Optional[str] = Field(None, description="FNSKU")
@@ -121,7 +121,7 @@ class MwsReportFbaordersResponse(LingXingModel):
     points_granted: Optional[str] = Field(None, description="亚马逊授予买家的积分")
 
 
-class MwsReportGetafnfulfillablequantityResponse(LingXingModel):
+class GetafnfulfillablequantityResponse(LingXingModel):
     """查询亚马逊源报表-FBA可售库存."""
     sid: Optional[int] = Field(None, description="店铺id")
     seller_sku: Optional[str] = Field(None, description="销售SKU")
@@ -193,7 +193,7 @@ class MwsReportGetfbainventoryeventdetaillistResponse(LingXingModel):
     total: Optional[int] = Field(None, description="总数")
 
 
-class MwsReportManageinventoryResponse(LingXingModel):
+class ManageinventoryResponse(LingXingModel):
     """查询亚马逊源报表-FBA库存."""
     sku: Optional[str] = Field(None, description="MSKU")
     fnsku: Optional[str] = Field(None, description="FNSKU")
@@ -223,7 +223,7 @@ class MwsReportRefundordersTag(LingXingModel):
     tag_name: Optional[str] = Field(None, description="标签名称")
     tag_color: Optional[str] = Field(None, description="标签颜色")
 
-class MwsReportRefundordersResponse(LingXingModel):
+class RefundordersResponse(LingXingModel):
     """查询亚马逊源报表-FBA退货订单."""
     sid: Optional[int] = Field(None, description="店铺id")
     order_id: Optional[str] = Field(None, description="订单号")
@@ -248,7 +248,7 @@ class MwsReportRefundordersResponse(LingXingModel):
     tag: Optional[List[MwsReportRefundordersTag]] = Field(None, description="标签信息")
 
 
-class MwsReportRemovalordersResponse(LingXingModel):
+class RemovalordersResponse(LingXingModel):
     """查询亚马逊源报表-移除订单（旧）."""
     request_date: Optional[str] = Field(None, description="提交移除订单的日期")
     order_id: Optional[str] = Field(None, description="订单编号")
@@ -267,7 +267,7 @@ class MwsReportRemovalordersResponse(LingXingModel):
     currency: Optional[str] = Field(None, description="币种")
 
 
-class MwsReportReservedinventoryResponse(LingXingModel):
+class ReservedinventoryResponse(LingXingModel):
     """查询亚马逊源报表-预留库存."""
     sku: Optional[str] = Field(None, description="SKU")
     fnsku: Optional[str] = Field(None, description="FNSKU")
