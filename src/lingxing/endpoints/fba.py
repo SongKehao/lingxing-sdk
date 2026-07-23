@@ -1,5 +1,6 @@
 """FBA发货 API endpoints."""
 from __future__ import annotations
+from typing import TypedDict
 
 from typing import Any
 
@@ -55,6 +56,22 @@ from ..models.responses.fba import (
 from ._base import BaseEndpoint
 
 
+class StaSaveLocalPackingReq(TypedDict, total=False):
+    boxes: list
+    inboundPlanId: str
+    packingGroupId: str
+    shipmentId: str
+
+class StaCreateInboundPlanReq(TypedDict, total=False):
+    addressLine1: str
+    addressLine2: str
+    city: str
+    companyName: str
+    countryCode: str
+    email: str
+    inboundPlanItems: list
+
+
 class FBAEndpoints(BaseEndpoint):
     """领星FBA发货 API (56个接口)."""
 
@@ -78,7 +95,7 @@ Args:
         resp = await self._post("/basicOpen/openapi/fba/releaseStorage", data or {})
         return self._parse_one(resp.data, FbaPlanReleaseStorageResponse)
 
-    async def sta_create_inbound_plan(self, data: dict = None) -> StaCreateInboundPlanResponse | None:
+    async def sta_create_inbound_plan(self, data: Optional[StaCreateInboundPlanReq] = None) -> StaCreateInboundPlanResponse | None:
         """创建STA任务.
 
 POST /amzStaServer/openapi/inbound-plan/createInboundPlan
@@ -99,7 +116,7 @@ Args:
         resp = await self._post("/amzStaServer/openapi/inbound-packing/listPackingGroupItems", {k: v for k, v in {"inboundPlanId": inbound_plan_id, "sid": sid}.items() if v is not None})
         return self._parse_list(resp.data, StaListPackingGroupResponse)
 
-    async def sta_save_local_packing(self, data: dict = None) -> StaSaveLocalPackingResponse | None:
+    async def sta_save_local_packing(self, data: Optional[StaSaveLocalPackingReq] = None) -> StaSaveLocalPackingResponse | None:
         """保存装箱信息.
 
 POST /amzStaServer/openapi/inbound-packing/setLocalPackingInformation

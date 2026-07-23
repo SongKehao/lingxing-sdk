@@ -1,5 +1,6 @@
 """销售/订单/Listing API endpoints."""
 from __future__ import annotations
+from typing import TypedDict
 
 from ..models.responses.sale import (
     AmazonProductListResponse,
@@ -63,6 +64,11 @@ from ..models.responses.sale import (
 from typing import Any
 
 from ._base import BaseEndpoint
+
+
+class ProductPublishReq(TypedDict, total=False):
+    store_id: float
+    data: list
 
 
 class SaleEndpoints(BaseEndpoint):

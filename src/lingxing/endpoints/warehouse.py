@@ -1,5 +1,6 @@
 """仓库/库存 API endpoints."""
 from __future__ import annotations
+from typing import TypedDict
 
 from typing import Any
 
@@ -88,6 +89,16 @@ from ..models.responses.warehouse import (
     WmsorderGetwmsordersbyordernumbersResponse,
 )
 from ._base import BaseEndpoint
+
+
+class ProcessOrderAddReq(TypedDict, total=False):
+    type: int
+    wid: int
+    remark: str
+    product_list: list
+
+class AwdCreateInboundPlanReq(TypedDict, total=False):
+    awdDeliveredGoodsBOS: list
 
 
 class WarehouseEndpoints(BaseEndpoint):
@@ -240,7 +251,7 @@ Args:
         resp = await self._post("/amzStaServer/openapi/awd/inbound-plan/confirmInboundPlan", data or {})
         return self._parse_list(resp.data, AwdInboundPlanConfirmResponse)
 
-    async def awd_create(self, data: dict = None) -> list[AwdInboundPlanCreateResponse]:
+    async def awd_create(self, data: Optional[AwdCreateInboundPlanReq] = None) -> list[AwdInboundPlanCreateResponse]:
         """创建AWD入库任务.
 
 POST /amzStaServer/openapi/awd/inbound-plan/createInboundPlan
@@ -420,7 +431,7 @@ Args:
         resp = await self._post("/basicOpen/openapi/workOrder/processPlanList", {k: v for k, v in {"offset": offset, "length": length, "processing_step": processing_step, "lock_status": lock_status, "search_key": search_key, "search_value": search_value, "search_time_key": search_time_key, "search_time_start": search_time_start, "search_time_end": search_time_end, "senior_search_list": senior_search_list}.items() if v is not None})
         return self._parse_list(resp.data, ProcessPlanListResponse)
 
-    async def process_order_add(self, data: dict = None) -> list[ProcessOrderAddResponse]:
+    async def process_order_add(self, data: Optional[ProcessOrderAddReq] = None) -> list[ProcessOrderAddResponse]:
         """创建加工单/拆分单.
 
 POST /erp/sc/routing/inventoryReceipt/StorageProcess/addStorageProcessOrder
