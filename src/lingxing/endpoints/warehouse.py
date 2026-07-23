@@ -112,14 +112,14 @@ Args:
         resp = await self._post("/basicOpen/warehouseConfig/warehouseBin/getEntryRecommendBinList", data or {})
         return self._parse_list(resp.data, WarehouseBinEntryRecommendResponse)
 
-    async def oversea_stockorder_detail(self, data: dict = None) -> list[OverseaStockOrderDetailResponse]:
+    async def oversea_stockorder_detail(self, overseas_order_no: str = None) -> list[OverseaStockOrderDetailResponse]:
         """查询海外仓备货单详情.
 
 POST /basicOpen/overSeaWarehouse/stockOrder/detail
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/basicOpen/overSeaWarehouse/stockOrder/detail", data or {})
+    overseas_order_no: see API doc, str."""
+        resp = await self._post("/basicOpen/overSeaWarehouse/stockOrder/detail", {k: v for k, v in {"overseas_order_no": overseas_order_no}.items() if v is not None})
         return self._parse_list(resp.data, OverseaStockOrderDetailResponse)
 
     async def create_purchase_receipt_order(self, data: dict = None) -> list[PurchaseReceiptOrderCreateResponse]:
@@ -132,24 +132,40 @@ Args:
         resp = await self._post("/erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/createReceiptOrder", data or {})
         return self._parse_list(resp.data, PurchaseReceiptOrderCreateResponse)
 
-    async def sales_return_order_list(self, data: dict = None) -> list[SalesReturnV2ListResponse]:
+    async def sales_return_order_list(self, offset: int = None, length: int = None, time_type: int = None, start_time: str = None, end_time: str = None, platform_code: str = None, sales_type: int = None, status: int = None, store_id: int = None, wid: int = None) -> list[SalesReturnV2ListResponse]:
         """查询销售退货单列表.
 
 POST /pb/mp/returns/v2/list
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/pb/mp/returns/v2/list", data or {})
+    offset: see API doc, int.
+    length: see API doc, int.
+    time_type: see API doc, int.
+    start_time: see API doc, str.
+    end_time: see API doc, str.
+    platform_code: see API doc, str.
+    sales_type: see API doc, int.
+    status: see API doc, int.
+    store_id: see API doc, int.
+    wid: see API doc, int."""
+        resp = await self._post("/pb/mp/returns/v2/list", {k: v for k, v in {"offset": offset, "length": length, "time_type": time_type, "start_time": start_time, "end_time": end_time, "platform_code": platform_code, "sales_type": sales_type, "status": status, "store_id": store_id, "wid": wid}.items() if v is not None})
         return self._parse_list(resp.data, SalesReturnV2ListResponse)
 
-    async def qc_order_list(self, data: dict = None) -> list[ReceiptOrderQcListResponse]:
+    async def qc_order_list(self, offset: int = None, length: int = None, date_type: int = None, start_date: str = None, end_date: str = None, qc_sns: list = None, status: int = None, wid: int = None) -> list[ReceiptOrderQcListResponse]:
         """查询质检单列表.
 
 POST /erp/sc/routing/deliveryReceipt/ReceiptOrderQc/getOrderList
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/erp/sc/routing/deliveryReceipt/ReceiptOrderQc/getOrderList", data or {})
+    offset: see API doc, int.
+    length: see API doc, int.
+    date_type: see API doc, int.
+    start_date: see API doc, str.
+    end_date: see API doc, str.
+    qc_sns: see API doc, list.
+    status: see API doc, int.
+    wid: see API doc, int."""
+        resp = await self._post("/erp/sc/routing/deliveryReceipt/ReceiptOrderQc/getOrderList", {k: v for k, v in {"offset": offset, "length": length, "date_type": date_type, "start_date": start_date, "end_date": end_date, "qc_sns": qc_sns, "status": status, "wid": wid}.items() if v is not None})
         return self._parse_list(resp.data, ReceiptOrderQcListResponse)
 
     async def return_order_fast_storage_in(self, data: dict = None) -> list[ReturnOrderFastStorageInResponse]:
@@ -234,24 +250,33 @@ Args:
         resp = await self._post("/amzStaServer/openapi/awd/inbound-plan/createInboundPlan", data or {})
         return self._parse_list(resp.data, AwdInboundPlanCreateResponse)
 
-    async def awd_detail(self, data: dict = None) -> list[AwdInboundPlanDetailResponse]:
+    async def awd_detail(self, order_id: str = None, sid: int = None) -> list[AwdInboundPlanDetailResponse]:
         """查询AWD入库任务详情.
 
 POST /amzStaServer/openapi/awd/inbound-plan/detail
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/amzStaServer/openapi/awd/inbound-plan/detail", data or {})
+    order_id: see API doc, str.
+    sid: see API doc, int."""
+        resp = await self._post("/amzStaServer/openapi/awd/inbound-plan/detail", {k: v for k, v in {"orderId": order_id, "sid": sid}.items() if v is not None})
         return self._parse_list(resp.data, AwdInboundPlanDetailResponse)
 
-    async def awd_list(self, data: dict = None) -> list[AwdInboundPlanPageResponse]:
+    async def awd_list(self, page: int = None, date_type: int = None, start_date_time: str = None, end_date_time: str = None, order_id: str = None, shipment_id: str = None, sid_list: list = None, status_list: list = None, length: int = None) -> list[AwdInboundPlanPageResponse]:
         """查询AWD入库任务列表.
 
 POST /amzStaServer/openapi/awd/inbound-plan/page
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/amzStaServer/openapi/awd/inbound-plan/page", data or {})
+    page: see API doc, int.
+    date_type: see API doc, int.
+    start_date_time: see API doc, str.
+    end_date_time: see API doc, str.
+    order_id: see API doc, str.
+    shipment_id: see API doc, str.
+    sid_list: see API doc, list.
+    status_list: see API doc, list.
+    length: see API doc, int."""
+        resp = await self._post("/amzStaServer/openapi/awd/inbound-plan/page", {k: v for k, v in {"page": page, "dateType": date_type, "startDateTime": start_date_time, "endDateTime": end_date_time, "orderId": order_id, "shipmentId": shipment_id, "sidList": sid_list, "statusList": status_list, "length": length}.items() if v is not None})
         return self._parse_list(resp.data, AwdInboundPlanPageResponse)
 
     async def awd_update(self, data: dict = None) -> list[AwdInboundPlanUpdateResponse]:
@@ -264,24 +289,32 @@ Args:
         resp = await self._post("/amzStaServer/openapi/awd/inbound-plan/updateInboundPlan", data or {})
         return self._parse_list(resp.data, AwdInboundPlanUpdateResponse)
 
-    async def awd_shipment_detail(self, data: dict = None) -> list[AwdInboundShipmentDetailResponse]:
+    async def awd_shipment_detail(self, shipment_id: str = None, sid: int = None) -> list[AwdInboundShipmentDetailResponse]:
         """查询AWD入库货件详情.
 
 POST /amzStaServer/openapi/awd/inbound-shipment/detail
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/amzStaServer/openapi/awd/inbound-shipment/detail", data or {})
+    shipment_id: see API doc, str.
+    sid: see API doc, int."""
+        resp = await self._post("/amzStaServer/openapi/awd/inbound-shipment/detail", {k: v for k, v in {"shipmentId": shipment_id, "sid": sid}.items() if v is not None})
         return self._parse_list(resp.data, AwdInboundShipmentDetailResponse)
 
-    async def awd_shipment_list(self, data: dict = None) -> list[AwdInboundShipmentPageResponse]:
+    async def awd_shipment_list(self, page: int = None, date_type: int = None, start_date_time: str = None, end_date_time: str = None, shipment_id: str = None, sid_list: list = None, status_list: list = None, length: int = None) -> list[AwdInboundShipmentPageResponse]:
         """查询AWD入库货件列表.
 
 POST /amzStaServer/openapi/awd/inbound-shipment/page
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/amzStaServer/openapi/awd/inbound-shipment/page", data or {})
+    page: see API doc, int.
+    date_type: see API doc, int.
+    start_date_time: see API doc, str.
+    end_date_time: see API doc, str.
+    shipment_id: see API doc, str.
+    sid_list: see API doc, list.
+    status_list: see API doc, list.
+    length: see API doc, int."""
+        resp = await self._post("/amzStaServer/openapi/awd/inbound-shipment/page", {k: v for k, v in {"page": page, "dateType": date_type, "startDateTime": start_date_time, "endDateTime": end_date_time, "shipmentId": shipment_id, "sidList": sid_list, "statusList": status_list, "length": length}.items() if v is not None})
         return self._parse_list(resp.data, AwdInboundShipmentPageResponse)
 
     async def awd_shipment_update_track(self, data: dict = None) -> list[AwdInboundShipmentUpdateTrackResponse]:
@@ -334,14 +367,14 @@ Args:
         resp = await self._post("/basicOpen/packingTask/delTask", data or {})
         return self._parse_list(resp.data, PackingTaskDelResponse)
 
-    async def packing_task_detail(self, data: dict = None) -> list[PackingTaskDetailResponse]:
+    async def packing_task_detail(self, pt_id: int = None) -> list[PackingTaskDetailResponse]:
         """装箱任务-任务详情.
 
 POST /basicOpen/packingTask/taskDetail
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/basicOpen/packingTask/taskDetail", data or {})
+    pt_id: see API doc, int."""
+        resp = await self._post("/basicOpen/packingTask/taskDetail", {k: v for k, v in {"ptId": pt_id}.items() if v is not None})
         return self._parse_list(resp.data, PackingTaskDetailResponse)
 
     async def packing_task_finish(self, data: dict = None) -> list[PackingTaskFinishResponse]:
@@ -354,24 +387,37 @@ Args:
         resp = await self._post("/basicOpen/packingTask/finishTask", data or {})
         return self._parse_list(resp.data, PackingTaskFinishResponse)
 
-    async def packing_task_list(self, data: dict = None) -> list[PackingTaskListResponse]:
+    async def packing_task_list(self, relate_sn_type: int = None, start_date: str = None, end_date: str = None, search_field: str = None, search_value: str = None) -> list[PackingTaskListResponse]:
         """装箱任务-单据列表.
 
 POST /basicOpen/packingTask/getRelateSnList
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/basicOpen/packingTask/getRelateSnList", data or {})
+    relate_sn_type: see API doc, int.
+    start_date: see API doc, str.
+    end_date: see API doc, str.
+    search_field: see API doc, str.
+    search_value: see API doc, str."""
+        resp = await self._post("/basicOpen/packingTask/getRelateSnList", {k: v for k, v in {"relateSnType": relate_sn_type, "startDate": start_date, "endDate": end_date, "searchField": search_field, "searchValue": search_value}.items() if v is not None})
         return self._parse_list(resp.data, PackingTaskListResponse)
 
-    async def process_plan_list(self, data: dict = None) -> list[ProcessPlanListResponse]:
+    async def process_plan_list(self, offset: int = None, length: int = None, processing_step: int = None, lock_status: int = None, search_key: str = None, search_value: str = None, search_time_key: str = None, search_time_start: str = None, search_time_end: str = None, senior_search_list: list = None) -> list[ProcessPlanListResponse]:
         """查询加工计划列表.
 
 POST /basicOpen/openapi/workOrder/processPlanList
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/basicOpen/openapi/workOrder/processPlanList", data or {})
+    offset: see API doc, int.
+    length: see API doc, int.
+    processing_step: see API doc, int.
+    lock_status: see API doc, int.
+    search_key: see API doc, str.
+    search_value: see API doc, str.
+    search_time_key: see API doc, str.
+    search_time_start: see API doc, str.
+    search_time_end: see API doc, str.
+    senior_search_list: see API doc, list."""
+        resp = await self._post("/basicOpen/openapi/workOrder/processPlanList", {k: v for k, v in {"offset": offset, "length": length, "processing_step": processing_step, "lock_status": lock_status, "search_key": search_key, "search_value": search_value, "search_time_key": search_time_key, "search_time_start": search_time_start, "search_time_end": search_time_end, "senior_search_list": senior_search_list}.items() if v is not None})
         return self._parse_list(resp.data, ProcessPlanListResponse)
 
     async def process_order_add(self, data: dict = None) -> list[ProcessOrderAddResponse]:
@@ -384,14 +430,22 @@ Args:
         resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageProcess/addStorageProcessOrder", data or {})
         return self._parse_list(resp.data, ProcessOrderAddResponse)
 
-    async def process_order_list(self, data: dict = None) -> list[ProcessOrderListResponse]:
+    async def process_order_list(self, operate_type: int = None, wid: int = None, process_sn: str = None, status: int = None, search_field_time: str = None, start_date: str = None, end_date: str = None, offset: int = None, length: int = None) -> list[ProcessOrderListResponse]:
         """加工单列表.
 
 POST /erp/sc/routing/inventoryReceipt/StorageProcess/getOrderLists
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageProcess/getOrderLists", data or {})
+    operate_type: see API doc, int.
+    wid: see API doc, int.
+    process_sn: see API doc, str.
+    status: see API doc, int.
+    search_field_time: see API doc, str.
+    start_date: see API doc, str.
+    end_date: see API doc, str.
+    offset: see API doc, int.
+    length: see API doc, int."""
+        resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageProcess/getOrderLists", {k: v for k, v in {"type": operate_type, "wid": wid, "process_sn": process_sn, "status": status, "search_field_time": search_field_time, "start_date": start_date, "end_date": end_date, "offset": offset, "length": length}.items() if v is not None})
         return self._parse_list(resp.data, ProcessOrderListResponse)
 
     async def add_allocation_order(self, wid: int = None, sys_wid: int = None, to_wid: int = None, sys_to_wid: int = None, freight_fee: str = None, other_fee: str = None, fee_part_type: int = None, remark: str = None, type: int = None, predict_time: str = None, out_bin_type: str = None, product_list: Any = None, out_available_bin: list = None, out_inferior_bin: list = None, to_available_bin: list = None, to_inferior_bin: list = None) -> InventoryreceiptStorageallocationAddallocationorderResponse | None:
