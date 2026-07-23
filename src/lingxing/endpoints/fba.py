@@ -88,14 +88,15 @@ Args:
         resp = await self._post("/amzStaServer/openapi/inbound-plan/createInboundPlan", data or {})
         return self._parse_one(resp.data, StaCreateInboundPlanResponse)
 
-    async def sta_list_packing_group(self, data: dict = None) -> list[StaListPackingGroupResponse]:
+    async def sta_list_packing_group(self, inbound_plan_id: str = None, sid: int = None) -> list[StaListPackingGroupResponse]:
         """查询包装组.
 
 POST /amzStaServer/openapi/inbound-packing/listPackingGroupItems
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/amzStaServer/openapi/inbound-packing/listPackingGroupItems", data or {})
+    inbound_plan_id: see API doc.
+    sid: see API doc."""
+        resp = await self._post("/amzStaServer/openapi/inbound-packing/listPackingGroupItems", {k: v for k, v in {"inboundPlanId": inbound_plan_id, "sid": sid}.items() if v is not None})
         return self._parse_list(resp.data, StaListPackingGroupResponse)
 
     async def sta_save_local_packing(self, data: dict = None) -> StaSaveLocalPackingResponse | None:
@@ -128,24 +129,26 @@ Args:
         resp = await self._post("/amzStaServer/openapi/inbound-shipment/generatePlacementOptions", data or {})
         return self._parse_one(resp.data, StaGeneratePlacementResponse)
 
-    async def sta_shipment_preview(self, data: dict = None) -> list[StaShipmentPreviewResponse]:
+    async def sta_shipment_preview(self, inbound_plan_id: str = None, sid: int = None) -> list[StaShipmentPreviewResponse]:
         """查询货件方案.
 
 POST /amzStaServer/openapi/inbound-shipment/shipmentPreView
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/amzStaServer/openapi/inbound-shipment/shipmentPreView", data or {})
+    inbound_plan_id: see API doc.
+    sid: see API doc."""
+        resp = await self._post("/amzStaServer/openapi/inbound-shipment/shipmentPreView", {k: v for k, v in {"inboundPlanId": inbound_plan_id, "sid": sid}.items() if v is not None})
         return self._parse_list(resp.data, StaShipmentPreviewResponse)
 
-    async def sta_get_packing_box_info(self, data: dict = None) -> list[StaGetPackingBoxInfoResponse]:
+    async def sta_get_packing_box_info(self, inbound_plan_id: str = None, sid: int = None) -> list[StaGetPackingBoxInfoResponse]:
         """查询货件方案的装箱信息.
 
 POST /amzStaServer/openapi/inbound-packing/getInboundPackingBoxInfo
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/amzStaServer/openapi/inbound-packing/getInboundPackingBoxInfo", data or {})
+    inbound_plan_id: see API doc.
+    sid: see API doc."""
+        resp = await self._post("/amzStaServer/openapi/inbound-packing/getInboundPackingBoxInfo", {k: v for k, v in {"inboundPlanId": inbound_plan_id, "sid": sid}.items() if v is not None})
         return self._parse_list(resp.data, StaGetPackingBoxInfoResponse)
 
     async def sta_confirm_placement(self, data: dict = None) -> StaConfirmPlacementResponse | None:
@@ -178,24 +181,28 @@ Args:
         resp = await self._post("/amzStaServer/openapi/inbound-shipment/generateDeliveryDateList", data or {})
         return self._parse_one(resp.data, StaGenerateDeliveryDateResponse)
 
-    async def sta_get_transport(self, data: dict = None) -> list[StaGetTransportResponse]:
+    async def sta_get_transport(self, inbound_plan_id: str = None, shipment_id: str = None, sid: int = None) -> list[StaGetTransportResponse]:
         """查询承运方式.
 
 POST /amzStaServer/openapi/inbound-shipment/getTransportList
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/amzStaServer/openapi/inbound-shipment/getTransportList", data or {})
+    inbound_plan_id: see API doc.
+    shipment_id: see API doc.
+    sid: see API doc."""
+        resp = await self._post("/amzStaServer/openapi/inbound-shipment/getTransportList", {k: v for k, v in {"inboundPlanId": inbound_plan_id, "shipmentId": shipment_id, "sid": sid}.items() if v is not None})
         return self._parse_list(resp.data, StaGetTransportResponse)
 
-    async def sta_get_delivery_date(self, data: dict = None) -> list[StaGetDeliveryDateResponse]:
+    async def sta_get_delivery_date(self, inbound_plan_id: str = None, shipment_id: str = None, sid: int = None) -> list[StaGetDeliveryDateResponse]:
         """查询可选送达时间.
 
 POST /amzStaServer/openapi/inbound-shipment/getDeliveryDateList
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/amzStaServer/openapi/inbound-shipment/getDeliveryDateList", data or {})
+    inbound_plan_id: see API doc.
+    shipment_id: see API doc.
+    sid: see API doc."""
+        resp = await self._post("/amzStaServer/openapi/inbound-shipment/getDeliveryDateList", {k: v for k, v in {"inboundPlanId": inbound_plan_id, "shipmentId": shipment_id, "sid": sid}.items() if v is not None})
         return self._parse_list(resp.data, StaGetDeliveryDateResponse)
 
     async def sta_commit_deliver_time(self, data: dict = None) -> StaCommitDeliverTimeResponse | None:
@@ -258,14 +265,15 @@ Args:
         resp = await self._post("/amzStaServer/openapi/task-plan/operate", data or {})
         return self._parse_one(resp.data, StaOperateResponse)
 
-    async def sta_get_prep_details(self, data: dict = None) -> list[StaGetPrepDetailsResponse]:
+    async def sta_get_prep_details(self, sid: int = None, msku: str = None) -> list[StaGetPrepDetailsResponse]:
         """获取商品预处理信息.
 
 POST /amzStaServer/openapi/inbound-packing/getPrepDetails
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/amzStaServer/openapi/inbound-packing/getPrepDetails", data or {})
+    sid: see API doc.
+    msku: see API doc."""
+        resp = await self._post("/amzStaServer/openapi/inbound-packing/getPrepDetails", {k: v for k, v in {"sid": sid, "msku": msku}.items() if v is not None})
         return self._parse_list(resp.data, StaGetPrepDetailsResponse)
 
     async def sta_gather_inbound_plan(self, data: dict = None) -> StaGatherInboundPlanResponse | None:
@@ -278,14 +286,23 @@ Args:
         resp = await self._post("/amzStaServer/openapi/inbound-plan/gatherInboundPlan", data or {})
         return self._parse_one(resp.data, StaGatherInboundPlanResponse)
 
-    async def sta_page(self, data: dict = None) -> list[StaPageResponse]:
+    async def sta_page(self, page: int = None, length: int = None, date_begin: str = None, date_end: str = None, date_type: int = None, plan_name: str = None, shipment_id_list: list = None, sids: list = None, sort_field: str = None, sort_type: str = None) -> list[StaPageResponse]:
         """查询STA任务列表.
 
 POST /amzStaServer/openapi/inbound-plan/page
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/amzStaServer/openapi/inbound-plan/page", data or {})
+    page: see API doc.
+    length: see API doc.
+    date_begin: see API doc.
+    date_end: see API doc.
+    date_type: see API doc.
+    plan_name: see API doc.
+    shipment_id_list: see API doc.
+    sids: see API doc.
+    sort_field: see API doc.
+    sort_type: see API doc."""
+        resp = await self._post("/amzStaServer/openapi/inbound-plan/page", {k: v for k, v in {"page": page, "length": length, "dateBegin": date_begin, "dateEnd": date_end, "dateType": date_type, "planName": plan_name, "shipmentIdList": shipment_id_list, "sids": sids, "sortField": sort_field, "sortType": sort_type}.items() if v is not None})
         return self._parse_list(resp.data, StaPageResponse)
 
     async def sta_detail(self, data: dict = None) -> StaDetailResponse | None:
@@ -298,14 +315,16 @@ Args:
         resp = await self._post("/amzStaServer/openapi/inbound-plan/detail", data or {})
         return self._parse_one(resp.data, StaDetailResponse)
 
-    async def sta_list_group_packing(self, data: dict = None) -> list[StaListGroupPackingResponse]:
+    async def sta_list_group_packing(self, inbound_plan_id: str = None, packing_group_id_list: list = None, sid: int = None) -> list[StaListGroupPackingResponse]:
         """查询STA任务包装组装箱信息.
 
 POST /amzStaServer/openapi/inbound-plan/listInboundPlanGroupPacking
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/amzStaServer/openapi/inbound-plan/listInboundPlanGroupPacking", data or {})
+    inbound_plan_id: see API doc.
+    packing_group_id_list: see API doc.
+    sid: see API doc."""
+        resp = await self._post("/amzStaServer/openapi/inbound-plan/listInboundPlanGroupPacking", {k: v for k, v in {"inboundPlanId": inbound_plan_id, "packingGroupIdList": packing_group_id_list, "sid": sid}.items() if v is not None})
         return self._parse_list(resp.data, StaListGroupPackingResponse)
 
     async def box_info(self, sid: int = None, shipment_id: str = None) -> list[FbaShipmentBoxinfoResponse]:

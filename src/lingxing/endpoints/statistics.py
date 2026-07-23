@@ -53,44 +53,74 @@ from ._base import BaseEndpoint
 class StatisticsEndpoints(BaseEndpoint):
     """领星统计报表 API (31个接口)."""
 
-    async def profit_stat_msku(self, data: dict = None) -> list[ProfitStatMskuListResponse]:
+    async def profit_stat_msku(self, offset: int = None, length: int = None, mids: list = None, sids: list = None, start_date: str = None, end_date: str = None, search_field: str = None, search_value: str = None, currency_code: str = None) -> list[ProfitStatMskuListResponse]:
         """查询利润统计-MSKU.
 
 POST /bd/profit/statistics/open/msku/list
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/bd/profit/statistics/open/msku/list", data or {})
+    offset: see API doc.
+    length: see API doc.
+    mids: see API doc.
+    sids: see API doc.
+    start_date: see API doc.
+    end_date: see API doc.
+    search_field: see API doc.
+    search_value: see API doc.
+    currency_code: see API doc."""
+        resp = await self._post("/bd/profit/statistics/open/msku/list", {k: v for k, v in {"offset": offset, "length": length, "mids": mids, "sids": sids, "startDate": start_date, "endDate": end_date, "searchField": search_field, "searchValue": search_value, "currencyCode": currency_code}.items() if v is not None})
         return self._parse_list(resp.data, ProfitStatMskuListResponse)
 
-    async def profit_stat_asin(self, data: dict = None) -> list[ProfitStatAsinListResponse]:
+    async def profit_stat_asin(self, offset: int = None, length: int = None, mids: list = None, sids: list = None, start_date: str = None, end_date: str = None, search_field: str = None, search_value: str = None, currency_code: str = None) -> list[ProfitStatAsinListResponse]:
         """查询利润统计-ASIN.
 
 POST /bd/profit/statistics/open/asin/list
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/bd/profit/statistics/open/asin/list", data or {})
+    offset: see API doc.
+    length: see API doc.
+    mids: see API doc.
+    sids: see API doc.
+    start_date: see API doc.
+    end_date: see API doc.
+    search_field: see API doc.
+    search_value: see API doc.
+    currency_code: see API doc."""
+        resp = await self._post("/bd/profit/statistics/open/asin/list", {k: v for k, v in {"offset": offset, "length": length, "mids": mids, "sids": sids, "startDate": start_date, "endDate": end_date, "searchField": search_field, "searchValue": search_value, "currencyCode": currency_code}.items() if v is not None})
         return self._parse_list(resp.data, ProfitStatAsinListResponse)
 
-    async def profit_stat_parent_asin(self, data: dict = None) -> list[ProfitStatParentAsinListResponse]:
+    async def profit_stat_parent_asin(self, offset: int = None, length: int = None, mids: list = None, sids: list = None, start_date: str = None, end_date: str = None, search_field: str = None, search_value: str = None, currency_code: str = None) -> list[ProfitStatParentAsinListResponse]:
         """查询利润统计-父ASIN.
 
 POST /bd/profit/statistics/open/parent/asin/list
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/bd/profit/statistics/open/parent/asin/list", data or {})
+    offset: see API doc.
+    length: see API doc.
+    mids: see API doc.
+    sids: see API doc.
+    start_date: see API doc.
+    end_date: see API doc.
+    search_field: see API doc.
+    search_value: see API doc.
+    currency_code: see API doc."""
+        resp = await self._post("/bd/profit/statistics/open/parent/asin/list", {k: v for k, v in {"offset": offset, "length": length, "mids": mids, "sids": sids, "startDate": start_date, "endDate": end_date, "searchField": search_field, "searchValue": search_value, "currencyCode": currency_code}.items() if v is not None})
         return self._parse_list(resp.data, ProfitStatParentAsinListResponse)
 
-    async def profit_stat_seller(self, data: dict = None) -> list[ProfitStatSellerListResponse]:
+    async def profit_stat_seller(self, offset: int = None, length: int = None, mids: list = None, sids: list = None, start_date: str = None, end_date: str = None, currency_code: str = None) -> list[ProfitStatSellerListResponse]:
         """查询利润统计-店铺.
 
 POST /bd/profit/statistics/open/seller/list
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/bd/profit/statistics/open/seller/list", data or {})
+    offset: see API doc.
+    length: see API doc.
+    mids: see API doc.
+    sids: see API doc.
+    start_date: see API doc.
+    end_date: see API doc.
+    currency_code: see API doc."""
+        resp = await self._post("/bd/profit/statistics/open/seller/list", {k: v for k, v in {"offset": offset, "length": length, "mids": mids, "sids": sids, "startDate": start_date, "endDate": end_date, "currencyCode": currency_code}.items() if v is not None})
         return self._parse_list(resp.data, ProfitStatSellerListResponse)
 
     async def inv_report_local_aggregate(self, data: dict = None) -> list[InvReportLocalAggregateResponse]:
