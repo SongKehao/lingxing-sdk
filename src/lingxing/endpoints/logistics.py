@@ -30,14 +30,19 @@ Args:
         resp = await self._post("/erp/sc/routing/wms/WmsLogistics/listUsedLogisticsType", data or {})
         return self._parse_list(resp.data, WmsLogisticsListUsedLogisticsTypeResponse)
 
-    async def head_reconciliation_list(self, data: dict = None) -> list[LogisticsHeadReconciliationListResponse]:
+    async def head_reconciliation_list(self, offset: int = None, length: int = None, search_field_time: str = None, search_field: str = None, search_value: str = None, shipping_method_ids: list = None) -> list[LogisticsHeadReconciliationListResponse]:
         """头程对账列表.
 
 POST /basicOpen/logistics/headLogisticsReconciliation/list
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/basicOpen/logistics/headLogisticsReconciliation/list", data or {})
+    offset: see API doc.
+    length: see API doc.
+    search_field_time: see API doc.
+    search_field: see API doc.
+    search_value: see API doc.
+    shipping_method_ids: see API doc."""
+        resp = await self._post("/basicOpen/logistics/headLogisticsReconciliation/list", {k: v for k, v in {"offset": offset, "length": length, "searchFieldTime": search_field_time, "searchField": search_field, "searchValue": search_value, "shippingMethodIds": shipping_method_ids}.items() if v is not None})
         return self._parse_list(resp.data, LogisticsHeadReconciliationListResponse)
 
     async def logistics_bill_confirm(self, data: dict = None) -> list[LogisticsBillConfirmResponse]:

@@ -70,14 +70,16 @@ from ._base import BaseEndpoint
 class NewAdEndpoints(BaseEndpoint):
     """领星新版广告 API (4个接口)."""
 
-    async def walmart_advertiser_list(self, data: dict = None) -> list[AdReportAdvertiserListResponse]:
+    async def walmart_advertiser_list(self, search_text: str = None, page: int = None, limit: int = None) -> list[AdReportAdvertiserListResponse]:
         """查询沃尔玛-广告-广告主列表.
 
 POST /basicOpen/adReport/advertiser/list
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/basicOpen/adReport/advertiser/list", data or {})
+    search_text: see API doc.
+    page: see API doc.
+    limit: see API doc."""
+        resp = await self._post("/basicOpen/adReport/advertiser/list", {k: v for k, v in {"searchText": search_text, "page": page, "limit": limit}.items() if v is not None})
         return self._parse_list(resp.data, AdReportAdvertiserListResponse)
 
     async def dsp_account_list(self, offset: int = None, length: int = None, type: str = None) -> list[BasedataAccountListResponse]:
