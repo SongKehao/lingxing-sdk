@@ -77,94 +77,133 @@ from ._base import BaseEndpoint
 
 class MultiplatformPlatformsEndpoints(BaseEndpoint):
 
-    async def mp_shopify_return_order_list(self, data: dict = None) -> list[MpShopifyReturnOrderListResponse]:
+    async def mp_shopify_return_order_list(self, date_type: int = None, end_date: str = None, page_num: int = None, page_size: int = None, return_status_list: list = None) -> list[MpShopifyReturnOrderListResponse]:
         """多平台-Shopify售后订单列表.
 
 POST /basicOpen/openapi/multiplatform/shopify/returnOrder/list
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/basicOpen/openapi/multiplatform/shopify/returnOrder/list", data or {})
+    date_type: see API doc.
+    end_date: see API doc.
+    page_num: see API doc.
+    page_size: see API doc.
+    return_status_list: see API doc."""
+        resp = await self._post("/basicOpen/openapi/multiplatform/shopify/returnOrder/list", {k: v for k, v in {"dateType": date_type, "endDate": end_date, "pageNum": page_num, "pageSize": page_size, "returnStatusList": return_status_list}.items() if v is not None})
         return self._parse_list(resp.data, MpShopifyReturnOrderListResponse)
 
-    async def mp_temu_return_order_list(self, data: dict = None) -> list[MpTemuReturnOrderListResponse]:
+    async def mp_temu_return_order_list(self, date_type: int = None, end_date: str = None, page_num: int = None, page_size: int = None, return_status_list: list = None, search_single_value: str = None) -> list[MpTemuReturnOrderListResponse]:
         """多平台-Temu售后订单列表.
 
 POST /basicOpen/openapi/multiplatform/temu/returnOrder/list
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/basicOpen/openapi/multiplatform/temu/returnOrder/list", data or {})
+    date_type: see API doc.
+    end_date: see API doc.
+    page_num: see API doc.
+    page_size: see API doc.
+    return_status_list: see API doc.
+    search_single_value: see API doc."""
+        resp = await self._post("/basicOpen/openapi/multiplatform/temu/returnOrder/list", {k: v for k, v in {"dateType": date_type, "endDate": end_date, "pageNum": page_num, "pageSize": page_size, "returnStatusList": return_status_list, "searchSingleValue": search_single_value}.items() if v is not None})
         return self._parse_list(resp.data, MpTemuReturnOrderListResponse)
 
-    async def mp_tiktok_return_order_list(self, data: dict = None) -> list[MpTiktokReturnOrderListResponse]:
+    async def mp_tiktok_return_order_list(self, date_type: int = None, end_date: str = None, page_num: int = None, page_size: int = None, return_status_list: list = None) -> list[MpTiktokReturnOrderListResponse]:
         """多平台-TikTok售后订单列表.
 
 POST /basicOpen/openapi/multiplatform/tiktok/returnOrder/list
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/basicOpen/openapi/multiplatform/tiktok/returnOrder/list", data or {})
+    date_type: see API doc.
+    end_date: see API doc.
+    page_num: see API doc.
+    page_size: see API doc.
+    return_status_list: see API doc."""
+        resp = await self._post("/basicOpen/openapi/multiplatform/tiktok/returnOrder/list", {k: v for k, v in {"dateType": date_type, "endDate": end_date, "pageNum": page_num, "pageSize": page_size, "returnStatusList": return_status_list}.items() if v is not None})
         return self._parse_list(resp.data, MpTiktokReturnOrderListResponse)
 
-    async def mp_walmart_return_order_list(self, data: dict = None) -> list[MpWalmartReturnOrderListResponse]:
+    async def mp_walmart_return_order_list(self, date_type: int = None, end_date: str = None, page_num: int = None, page_size: int = None, return_status_list: list = None) -> list[MpWalmartReturnOrderListResponse]:
         """多平台-Walmart售后订单列表.
 
 POST /basicOpen/openapi/multiplatform/walmart/returnOrder/list
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/basicOpen/openapi/multiplatform/walmart/returnOrder/list", data or {})
+    date_type: see API doc.
+    end_date: see API doc.
+    page_num: see API doc.
+    page_size: see API doc.
+    return_status_list: see API doc."""
+        resp = await self._post("/basicOpen/openapi/multiplatform/walmart/returnOrder/list", {k: v for k, v in {"dateType": date_type, "endDate": end_date, "pageNum": page_num, "pageSize": page_size, "returnStatusList": return_status_list}.items() if v is not None})
         return self._parse_list(resp.data, MpWalmartReturnOrderListResponse)
 
-    async def mp_tiktok_product_analysis(self, data: dict = None) -> list[MpTiktokProductAnalysisResponse]:
+    async def mp_tiktok_product_analysis(self, sids: list = None, site_codes: list = None, start_date: str = None, end_date: str = None, currency_code: str = None) -> list[MpTiktokProductAnalysisResponse]:
         """查询TikTok产品表现.
 
 POST /basicOpen/platformStatistics/tiktokProductAnalysis/list
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/basicOpen/platformStatistics/tiktokProductAnalysis/list", data or {})
+    sids: see API doc.
+    site_codes: see API doc.
+    start_date: see API doc.
+    end_date: see API doc.
+    currency_code: see API doc."""
+        resp = await self._post("/basicOpen/platformStatistics/tiktokProductAnalysis/list", {k: v for k, v in {"sids": sids, "siteCodes": site_codes, "startDate": start_date, "endDate": end_date, "currencyCode": currency_code}.items() if v is not None})
         return self._parse_list(resp.data, MpTiktokProductAnalysisResponse)
 
-    async def mp_walmart_product_analysis(self, data: dict = None) -> list[MpWalmartProductAnalysisResponse]:
+    async def mp_walmart_product_analysis(self, sids: list = None, site_codes: list = None, start_date: str = None, end_date: str = None, currency_code: str = None) -> list[MpWalmartProductAnalysisResponse]:
         """查询Walmart产品表现.
 
 POST /basicOpen/platformStatistics/walmartProductAnalysis/list
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/basicOpen/platformStatistics/walmartProductAnalysis/list", data or {})
+    sids: see API doc.
+    site_codes: see API doc.
+    start_date: see API doc.
+    end_date: see API doc.
+    currency_code: see API doc."""
+        resp = await self._post("/basicOpen/platformStatistics/walmartProductAnalysis/list", {k: v for k, v in {"sids": sids, "siteCodes": site_codes, "startDate": start_date, "endDate": end_date, "currencyCode": currency_code}.items() if v is not None})
         return self._parse_list(resp.data, MpWalmartProductAnalysisResponse)
 
-    async def mp_seller_list(self, data: dict = None) -> list[MpSellerListResponse]:
+    async def mp_seller_list(self, offset: int = None, length: int = None, platform_code: str = None) -> list[MpSellerListResponse]:
         """查询多平台店铺信息.
 
 POST /pb/mp/shop/v2/getSellerList
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/pb/mp/shop/v2/getSellerList", data or {})
+    offset: see API doc.
+    length: see API doc.
+    platform_code: see API doc."""
+        resp = await self._post("/pb/mp/shop/v2/getSellerList", {k: v for k, v in {"offset": offset, "length": length, "platform_code": platform_code}.items() if v is not None})
         return self._parse_list(resp.data, MpSellerListResponse)
 
-    async def mp_order_mgmt_list(self, data: dict = None) -> list[MpOrderMgmtListResponse]:
+    async def mp_order_mgmt_list(self, offset: int = None, length: int = None, date_type: int = None, start_time: str = None, end_time: str = None, store_id: int = None) -> list[MpOrderMgmtListResponse]:
         """查询订单管理订单列表.
 
 POST /pb/mp/order/v2/list
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/pb/mp/order/v2/list", data or {})
+    offset: see API doc.
+    length: see API doc.
+    date_type: see API doc.
+    start_time: see API doc.
+    end_time: see API doc.
+    store_id: see API doc."""
+        resp = await self._post("/pb/mp/order/v2/list", {k: v for k, v in {"offset": offset, "length": length, "date_type": date_type, "start_time": start_time, "end_time": end_time, "store_id": store_id}.items() if v is not None})
         return self._parse_list(resp.data, MpOrderMgmtListResponse)
 
-    async def mp_pair_list(self, data: dict = None) -> list[MpPairListResponse]:
+    async def mp_pair_list(self, offset: int = None, length: int = None, msku: str = None, sku: str = None, start_time: str = None, end_time: str = None, platform_codes: list = None, store_ids: list = None) -> list[MpPairListResponse]:
         """查询多平台配对列表.
 
 POST /pb/mp/listing/v2/getPairList
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/pb/mp/listing/v2/getPairList", data or {})
+    offset: see API doc.
+    length: see API doc.
+    msku: see API doc.
+    sku: see API doc.
+    start_time: see API doc.
+    end_time: see API doc.
+    platform_codes: see API doc.
+    store_ids: see API doc."""
+        resp = await self._post("/pb/mp/listing/v2/getPairList", {k: v for k, v in {"offset": offset, "length": length, "msku": msku, "sku": sku, "start_time": start_time, "end_time": end_time, "platform_codes": platform_codes, "store_ids": store_ids}.items() if v is not None})
         return self._parse_list(resp.data, MpPairListResponse)
 
     async def mp_pair_multi_platform(self, data: dict = None) -> list[MpPairMultiPlatformResponse]:
@@ -177,34 +216,42 @@ Args:
         resp = await self._post("/pb/mp/listing/v2/pairMultiPlatform", data or {})
         return self._parse_list(resp.data, MpPairMultiPlatformResponse)
 
-    async def mp_wfs_cargo_list(self, data: dict = None) -> list[MpWfsCargoListResponse]:
+    async def mp_wfs_cargo_list(self, store_id: int = None, start_time: str = None, end_time: str = None, offset: int = None, length: int = None) -> list[MpWfsCargoListResponse]:
         """查询WFS货件列表.
 
 POST /cepf/warehouse/api/openApi/queryWFSCargoPage
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/cepf/warehouse/api/openApi/queryWFSCargoPage", data or {})
+    store_id: see API doc.
+    start_time: see API doc.
+    end_time: see API doc.
+    offset: see API doc.
+    length: see API doc."""
+        resp = await self._post("/cepf/warehouse/api/openApi/queryWFSCargoPage", {k: v for k, v in {"store_id": store_id, "start_time": start_time, "end_time": end_time, "offset": offset, "length": length}.items() if v is not None})
         return self._parse_list(resp.data, MpWfsCargoListResponse)
 
-    async def mp_wfs_inventory_list(self, data: dict = None) -> list[MpWfsInventoryListResponse]:
+    async def mp_wfs_inventory_list(self, store_id: int = None, offset: int = None, length: int = None) -> list[MpWfsInventoryListResponse]:
         """查询WFS库存列表.
 
 POST /cepf/warehouse/api/openApi/queryWFSInventionPage
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/cepf/warehouse/api/openApi/queryWFSInventionPage", data or {})
+    store_id: see API doc.
+    offset: see API doc.
+    length: see API doc."""
+        resp = await self._post("/cepf/warehouse/api/openApi/queryWFSInventionPage", {k: v for k, v in {"store_id": store_id, "offset": offset, "length": length}.items() if v is not None})
         return self._parse_list(resp.data, MpWfsInventoryListResponse)
 
-    async def mp_fbt_cargo_list(self, data: dict = None) -> list[MpFbtCargoListResponse]:
+    async def mp_fbt_cargo_list(self, offset: int = None, length: int = None, end_time: str = None) -> list[MpFbtCargoListResponse]:
         """查询FBT货件列表.
 
 POST /basicOpen/fbtShipment/cargo/list
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/basicOpen/fbtShipment/cargo/list", data or {})
+    offset: see API doc.
+    length: see API doc.
+    end_time: see API doc."""
+        resp = await self._post("/basicOpen/fbtShipment/cargo/list", {k: v for k, v in {"offset": offset, "length": length, "endTime": end_time}.items() if v is not None})
         return self._parse_list(resp.data, MpFbtCargoListResponse)
 
     async def mp_fbt_cargo_sync(self, data: dict = None) -> list[MpFbtCargoSyncResponse]:
@@ -217,34 +264,44 @@ Args:
         resp = await self._post("/basicOpen/fbtShipment/cargo/sync", data or {})
         return self._parse_list(resp.data, MpFbtCargoSyncResponse)
 
-    async def mp_aliexpress_list_self(self, data: dict = None) -> list[MpAliexpressListSelfResponse]:
+    async def mp_aliexpress_list_self(self, offset: int = None, length: int = None, store_ids: list = None, status: list = None, search_single_value: str = None) -> list[MpAliexpressListSelfResponse]:
         """查询AliExpress在线商品列表-自运营.
 
 POST /basicOpen/multiplatform/aliExpress/list
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/basicOpen/multiplatform/aliExpress/list", data or {})
+    offset: see API doc.
+    length: see API doc.
+    store_ids: see API doc.
+    status: see API doc.
+    search_single_value: see API doc."""
+        resp = await self._post("/basicOpen/multiplatform/aliExpress/list", {k: v for k, v in {"offset": offset, "length": length, "store_ids": store_ids, "status": status, "search_single_value": search_single_value}.items() if v is not None})
         return self._parse_list(resp.data, MpAliexpressListSelfResponse)
 
-    async def mp_aliexpress_list_hosting(self, data: dict = None) -> list[MpAliexpressListHostingResponse]:
+    async def mp_aliexpress_list_hosting(self, offset: int = None, length: int = None, is_parent: int = None) -> list[MpAliexpressListHostingResponse]:
         """查询AliExpress在线商品列表-托管模式.
 
 POST /basicOpen/multiplatform/aliexpress/list/v2
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/basicOpen/multiplatform/aliexpress/list/v2", data or {})
+    offset: see API doc.
+    length: see API doc.
+    is_parent: see API doc."""
+        resp = await self._post("/basicOpen/multiplatform/aliexpress/list/v2", {k: v for k, v in {"offset": offset, "length": length, "isParent": is_parent}.items() if v is not None})
         return self._parse_list(resp.data, MpAliexpressListHostingResponse)
 
-    async def mp_platform_order_list(self, data: dict = None) -> list[MpPlatformOrderListResponse]:
+    async def mp_platform_order_list(self, date_type: int = None, page_num: int = None, page_size: int = None, platform_code_list: list = None, search_single_value: str = None) -> list[MpPlatformOrderListResponse]:
         """查询平台订单列表.
 
 POST /cepfPlatformOrder/open-api/newPlatformOrder/list
 
 Args:
-    data: 请求体，字段参考接口文档, dict."""
-        resp = await self._post("/cepfPlatformOrder/open-api/newPlatformOrder/list", data or {})
+    date_type: see API doc.
+    page_num: see API doc.
+    page_size: see API doc.
+    platform_code_list: see API doc.
+    search_single_value: see API doc."""
+        resp = await self._post("/cepfPlatformOrder/open-api/newPlatformOrder/list", {k: v for k, v in {"dateType": date_type, "pageNum": page_num, "pageSize": page_size, "platformCodeList": platform_code_list, "searchSingleValue": search_single_value}.items() if v is not None})
         return self._parse_list(resp.data, MpPlatformOrderListResponse)
 
 
