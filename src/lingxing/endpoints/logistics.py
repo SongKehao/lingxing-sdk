@@ -1,5 +1,6 @@
 """物流 API endpoints."""
 from __future__ import annotations
+from typing import TypedDict
 
 from ..models.responses.logistics import (
     WmsLogisticsListUsedLogisticsTypeResponse,
@@ -17,10 +18,23 @@ from typing import Any
 from ._base import BaseEndpoint
 
 
+class ParamItemReq(TypedDict, total=False):
+    provider_type: int
+    page: int
+    length: int
+
+class UsedLogisticsTypeReq(TypedDict, total=False):
+    param: dict
+
+class LogisticsBillConfirmReq(TypedDict, total=False):
+    woIds: list
+    isBatchConfirm: int
+
+
 class LogisticsEndpoints(BaseEndpoint):
     """领星物流 API (5个接口)."""
 
-    async def used_logistics_type(self, data: dict = None) -> list[WmsLogisticsListUsedLogisticsTypeResponse]:
+    async def used_logistics_type(self, data: Optional[UsedLogisticsTypeReq] = None) -> list[WmsLogisticsListUsedLogisticsTypeResponse]:
         """查询已启用的自发货物流方式.
 
 POST /erp/sc/routing/wms/WmsLogistics/listUsedLogisticsType
@@ -45,7 +59,7 @@ Args:
         resp = await self._post("/basicOpen/logistics/headLogisticsReconciliation/list", {k: v for k, v in {"offset": offset, "length": length, "searchFieldTime": search_field_time, "searchField": search_field, "searchValue": search_value, "shippingMethodIds": shipping_method_ids}.items() if v is not None})
         return self._parse_list(resp.data, LogisticsHeadReconciliationListResponse)
 
-    async def logistics_bill_confirm(self, data: dict = None) -> list[LogisticsBillConfirmResponse]:
+    async def logistics_bill_confirm(self, data: Optional[LogisticsBillConfirmReq] = None) -> list[LogisticsBillConfirmResponse]:
         """FBM物流对账-确认/批量确认.
 
 POST /basicOpen/logistics/logisticsBill/confirm

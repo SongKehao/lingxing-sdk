@@ -1,5 +1,6 @@
 """多平台商品 API endpoints."""
 from __future__ import annotations
+from typing import TypedDict
 
 from ..models.responses.multi_platform import (
     MpShopifyReturnOrderListResponse,
@@ -73,6 +74,177 @@ from ..models.responses.multi_platform import (
 from typing import Any
 
 from ._base import BaseEndpoint
+
+
+class PairMultiPlatformListItemReq(TypedDict, total=False):
+    msku: str
+    store_id: str
+    sku: str
+
+class MpPairMultiPlatformReq(TypedDict, total=False):
+    pair_multi_platform_list: list
+
+class MpFbtCargoSyncReq(TypedDict, total=False):
+    cargoCodeList: list
+    storeId: int
+
+class MpOrderPreShipmentReq(TypedDict, total=False):
+    global_order_no: list
+
+class MpOrderReviewReq(TypedDict, total=False):
+    global_order_no: list
+
+class OrdersItemReq(TypedDict, total=False):
+    platform_order_no: str
+    site_code: str
+    buyer_note: str
+    receiver_country_code: str
+    customer_shipping_amount: float
+    order_total_amount: float
+    wid: str
+    global_purchase_time: float
+    global_payment_time: float
+    remark: str
+    logistics_type_id: str
+
+class MpOrderCreateReq(TypedDict, total=False):
+    platform_code: int
+    store_id: str
+    orders: list
+
+class MpOrderMergeReq(TypedDict, total=False):
+    platform_code: str
+    order_list: list
+
+class OrderItemItemReq(TypedDict, total=False):
+    item_id: str
+    quantity: str
+    pid: str
+    order_item_no: str
+    msku: str
+    platform_order_no: str
+
+class MpOrderSplitReq(TypedDict, total=False):
+    split_mod: int
+    global_order_no: str
+    order_item: list
+
+class MpOrderCancelReq(TypedDict, total=False):
+    order_list: list
+
+class MpOrderDeliveryReq(TypedDict, total=False):
+    order_number_list: str
+
+class MpOrderWeighedReq(TypedDict, total=False):
+    order_number: str
+    wo_number: str
+    pkg_real_weight: str
+    pkg_real_weight_unit: str
+    sync_product_gross_weight: str
+
+class OrderListItemReq(TypedDict, total=False):
+    global_order_no: int
+    logistics: dict
+
+class MpOrderEditReq(TypedDict, total=False):
+    order_list: list
+
+class OrderListItemReq(TypedDict, total=False):
+    address_info: dict
+
+class MpOrderUpdateReq(TypedDict, total=False):
+    order_list: list
+
+class OrdersItemReq(TypedDict, total=False):
+    global_order_no: str
+    remark: str
+    remark_is_append: str
+
+class MpOrderSetRemarkReq(TypedDict, total=False):
+    orders: list
+
+class PackageItemReq(TypedDict, total=False):
+    global_order_no: str
+    wid: float
+    logistics_type_id: str
+    waybill_no: str
+    tracking_no: str
+    weight_unit: str
+    real_weight: str
+    size_unit: str
+    length: str
+    width: str
+    height: str
+    fee_weight: str
+    logistics_freight: str
+    logistics_freight_currency_code: str
+
+class MpOrderFastOutboundReq(TypedDict, total=False):
+    package: list
+
+class MpOrderGetFastOutboundResultReq(TypedDict, total=False):
+    global_order_no: list
+
+class MpTiktokBillListReq(TypedDict, total=False):
+    sids: list
+    currencyCode: str
+    transactionTypes: list
+    startDate: str
+    endDate: str
+    searchField1: str
+    productSearchValue: str
+    productSearchArr: list
+    searchField2: str
+    orderSearchValue: str
+    orderSearchArr: list
+    sortField: str
+    sortType: str
+    offset: int
+    length: int
+
+class MpWalmartBillStatementListReq(TypedDict, total=False):
+    amountTypes: list
+    currencyCode: str
+    endDate: str
+    fulfillmentTypes: list
+    length: int
+    offset: int
+    searchExactly: bool
+    searchMultiValue: list
+    searchSingleValue: str
+    searchType: int
+    sids: list
+    sortField: str
+    sortType: str
+    startDate: str
+    transactionDescriptions: list
+
+class MpWalmartBillPayoutListReq(TypedDict, total=False):
+    compareLogic: str
+    currencyCode: str
+    endDate: str
+    fieldCompares: list
+    hasDifference: bool
+    length: int
+    offset: int
+    searchExactly: bool
+    searchMultiValue: list
+    searchSingleValue: str
+    searchType: int
+    sids: list
+
+class MpShopifyBillStatementListReq(TypedDict, total=False):
+    currencyCode: str
+    dutiesIncluded: int
+    endDate: str
+    financialStatuses: list
+    fulfillmentStatuses: list
+    length: int
+    offset: int
+    searchExactly: bool
+    searchMultiValue: list
+    searchSingleValue: str
+    searchType: int
 
 
 class MultiplatformPlatformsEndpoints(BaseEndpoint):
@@ -206,7 +378,7 @@ Args:
         resp = await self._post("/pb/mp/listing/v2/getPairList", {k: v for k, v in {"offset": offset, "length": length, "msku": msku, "sku": sku, "start_time": start_time, "end_time": end_time, "platform_codes": platform_codes, "store_ids": store_ids}.items() if v is not None})
         return self._parse_list(resp.data, MpPairListResponse)
 
-    async def mp_pair_multi_platform(self, data: dict = None) -> list[MpPairMultiPlatformResponse]:
+    async def mp_pair_multi_platform(self, data: Optional[MpPairMultiPlatformReq] = None) -> list[MpPairMultiPlatformResponse]:
         """批量添加/编辑多平台配对关系.
 
 POST /pb/mp/listing/v2/pairMultiPlatform
@@ -254,7 +426,7 @@ Args:
         resp = await self._post("/basicOpen/fbtShipment/cargo/list", {k: v for k, v in {"offset": offset, "length": length, "endTime": end_time}.items() if v is not None})
         return self._parse_list(resp.data, MpFbtCargoListResponse)
 
-    async def mp_fbt_cargo_sync(self, data: dict = None) -> list[MpFbtCargoSyncResponse]:
+    async def mp_fbt_cargo_sync(self, data: Optional[MpFbtCargoSyncReq] = None) -> list[MpFbtCargoSyncResponse]:
         """手动同步FBT货件.
 
 POST /basicOpen/fbtShipment/cargo/sync
@@ -305,7 +477,7 @@ Args:
         return self._parse_list(resp.data, MpPlatformOrderListResponse)
 
 
-    async def mp_order_pre_shipment(self, data: dict = None) -> list[MpOrderPreShipmentResponse]:
+    async def mp_order_pre_shipment(self, data: Optional[MpOrderPreShipmentReq] = None) -> list[MpOrderPreShipmentResponse]:
         """预发货.
 
 POST /basicOpen/openapi/multiplatform/order/preShipment
@@ -315,7 +487,7 @@ Args:
         resp = await self._post("/basicOpen/openapi/multiplatform/order/preShipment", data or {})
         return self._parse_list(resp.data, MpOrderPreShipmentResponse)
 
-    async def mp_order_review(self, data: dict = None) -> list[MpOrderReviewResponse]:
+    async def mp_order_review(self, data: Optional[MpOrderReviewReq] = None) -> list[MpOrderReviewResponse]:
         """审核发货.
 
 POST /basicOpen/openapi/multiplatform/order/review
@@ -325,7 +497,7 @@ Args:
         resp = await self._post("/basicOpen/openapi/multiplatform/order/review", data or {})
         return self._parse_list(resp.data, MpOrderReviewResponse)
 
-    async def mp_order_create(self, data: dict = None) -> list[MpOrderCreateResponse]:
+    async def mp_order_create(self, data: Optional[MpOrderCreateReq] = None) -> list[MpOrderCreateResponse]:
         """创建订单.
 
 POST /pb/mp/order/v2/create
@@ -335,7 +507,7 @@ Args:
         resp = await self._post("/pb/mp/order/v2/create", data or {})
         return self._parse_list(resp.data, MpOrderCreateResponse)
 
-    async def mp_order_merge(self, data: dict = None) -> list[MpOrderMergeResponse]:
+    async def mp_order_merge(self, data: Optional[MpOrderMergeReq] = None) -> list[MpOrderMergeResponse]:
         """合并订单.
 
 POST /pb/mp/order/v2/mergeOrder
@@ -345,7 +517,7 @@ Args:
         resp = await self._post("/pb/mp/order/v2/mergeOrder", data or {})
         return self._parse_list(resp.data, MpOrderMergeResponse)
 
-    async def mp_order_split(self, data: dict = None) -> list[MpOrderSplitResponse]:
+    async def mp_order_split(self, data: Optional[MpOrderSplitReq] = None) -> list[MpOrderSplitResponse]:
         """拆分订单.
 
 POST /pb/mp/order/v2/splitOrder
@@ -355,7 +527,7 @@ Args:
         resp = await self._post("/pb/mp/order/v2/splitOrder", data or {})
         return self._parse_list(resp.data, MpOrderSplitResponse)
 
-    async def mp_order_cancel(self, data: dict = None) -> list[MpOrderCancelResponse]:
+    async def mp_order_cancel(self, data: Optional[MpOrderCancelReq] = None) -> list[MpOrderCancelResponse]:
         """标记订单不发货.
 
 POST /pb/mp/order/v2/cancelOrder
@@ -365,7 +537,7 @@ Args:
         resp = await self._post("/pb/mp/order/v2/cancelOrder", data or {})
         return self._parse_list(resp.data, MpOrderCancelResponse)
 
-    async def mp_order_delivery(self, data: dict = None) -> list[MpOrderDeliveryResponse]:
+    async def mp_order_delivery(self, data: Optional[MpOrderDeliveryReq] = None) -> list[MpOrderDeliveryResponse]:
         """订单发货.
 
 POST /basicOpen/selfShipmentOrder/deliveryGoods
@@ -375,7 +547,7 @@ Args:
         resp = await self._post("/basicOpen/selfShipmentOrder/deliveryGoods", data or {})
         return self._parse_list(resp.data, MpOrderDeliveryResponse)
 
-    async def mp_order_weighed(self, data: dict = None) -> list[MpOrderWeighedResponse]:
+    async def mp_order_weighed(self, data: Optional[MpOrderWeighedReq] = None) -> list[MpOrderWeighedResponse]:
         """订单称重.
 
 POST /erp/sc/routing/wms/order/setOrderWeighed
@@ -385,7 +557,7 @@ Args:
         resp = await self._post("/erp/sc/routing/wms/order/setOrderWeighed", data or {})
         return self._parse_list(resp.data, MpOrderWeighedResponse)
 
-    async def mp_order_edit(self, data: dict = None) -> list[MpOrderEditResponse]:
+    async def mp_order_edit(self, data: Optional[MpOrderEditReq] = None) -> list[MpOrderEditResponse]:
         """编辑订单（新版）.
 
 POST /pb/mp/order/editOrder
@@ -395,7 +567,7 @@ Args:
         resp = await self._post("/pb/mp/order/editOrder", data or {})
         return self._parse_list(resp.data, MpOrderEditResponse)
 
-    async def mp_order_update(self, data: dict = None) -> list[MpOrderUpdateResponse]:
+    async def mp_order_update(self, data: Optional[MpOrderUpdateReq] = None) -> list[MpOrderUpdateResponse]:
         """编辑/更新自发货订单.
 
 POST /pb/mp/order/v2/updateOrder
@@ -405,7 +577,7 @@ Args:
         resp = await self._post("/pb/mp/order/v2/updateOrder", data or {})
         return self._parse_list(resp.data, MpOrderUpdateResponse)
 
-    async def mp_order_set_remark(self, data: dict = None) -> list[MpOrderSetRemarkResponse]:
+    async def mp_order_set_remark(self, data: Optional[MpOrderSetRemarkReq] = None) -> list[MpOrderSetRemarkResponse]:
         """更新订单客服备注.
 
 POST /pb/mp/order/setRemark
@@ -415,7 +587,7 @@ Args:
         resp = await self._post("/pb/mp/order/setRemark", data or {})
         return self._parse_list(resp.data, MpOrderSetRemarkResponse)
 
-    async def mp_order_fast_outbound(self, data: dict = None) -> list[MpOrderFastOutboundResponse]:
+    async def mp_order_fast_outbound(self, data: Optional[MpOrderFastOutboundReq] = None) -> list[MpOrderFastOutboundResponse]:
         """快速出库.
 
 POST /pb/mp/order/v2/fastOutbound
@@ -425,7 +597,7 @@ Args:
         resp = await self._post("/pb/mp/order/v2/fastOutbound", data or {})
         return self._parse_list(resp.data, MpOrderFastOutboundResponse)
 
-    async def mp_order_get_fast_outbound_result(self, data: dict = None) -> list[MpOrderGetFastOutboundResultResponse]:
+    async def mp_order_get_fast_outbound_result(self, data: Optional[MpOrderGetFastOutboundResultReq] = None) -> list[MpOrderGetFastOutboundResultResponse]:
         """获取快速出库结果.
 
 POST /pb/mp/order/v2/getFastOutboundResult
@@ -435,7 +607,7 @@ Args:
         resp = await self._post("/pb/mp/order/v2/getFastOutboundResult", data or {})
         return self._parse_list(resp.data, MpOrderGetFastOutboundResultResponse)
 
-    async def mp_tiktok_bill_list(self, data: dict = None) -> list[MpTiktokBillListResponse]:
+    async def mp_tiktok_bill_list(self, data: Optional[MpTiktokBillListReq] = None) -> list[MpTiktokBillListResponse]:
         """TikTok账单明细.
 
 POST /basicOpen/multiplatformFinance/tiktokBill/list
@@ -445,7 +617,7 @@ Args:
         resp = await self._post("/basicOpen/multiplatformFinance/tiktokBill/list", data or {})
         return self._parse_list(resp.data, MpTiktokBillListResponse)
 
-    async def mp_walmart_bill_statement_list(self, data: dict = None) -> list[MpWalmartBillStatementListResponse]:
+    async def mp_walmart_bill_statement_list(self, data: Optional[MpWalmartBillStatementListReq] = None) -> list[MpWalmartBillStatementListResponse]:
         """Walmart-查询结算账单列表.
 
 POST /basicOpen/multiplatformFinance/walmart/bill/statement/list
@@ -455,7 +627,7 @@ Args:
         resp = await self._post("/basicOpen/multiplatformFinance/walmart/bill/statement/list", data or {})
         return self._parse_list(resp.data, MpWalmartBillStatementListResponse)
 
-    async def mp_walmart_bill_payout_list(self, data: dict = None) -> list[MpWalmartBillPayoutListResponse]:
+    async def mp_walmart_bill_payout_list(self, data: Optional[MpWalmartBillPayoutListReq] = None) -> list[MpWalmartBillPayoutListResponse]:
         """Walmart-查询回款明细列表.
 
 POST /basicOpen/multiplatformFinance/walmart/bill/payout/list
@@ -465,7 +637,7 @@ Args:
         resp = await self._post("/basicOpen/multiplatformFinance/walmart/bill/payout/list", data or {})
         return self._parse_list(resp.data, MpWalmartBillPayoutListResponse)
 
-    async def mp_shopify_bill_statement_list(self, data: dict = None) -> list[MpShopifyBillStatementListResponse]:
+    async def mp_shopify_bill_statement_list(self, data: Optional[MpShopifyBillStatementListReq] = None) -> list[MpShopifyBillStatementListResponse]:
         """Shopify-查询结算明细列表.
 
 POST /basicOpen/multiplatformFinance/shopify/bill/statement/list

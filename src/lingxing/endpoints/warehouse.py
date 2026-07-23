@@ -152,9 +152,142 @@ class AwdCreateInboundPlanReq(TypedDict, total=False):
     sid: int
 
 
+class OverseaSkuUnmatchReq(TypedDict, total=False):
+    twId: int
+    twpId: int
+    wpId: int
+    productId: int
+    matchNum: int
+    matchAll: int
+    fnsku: str
+    sellerId: str
+
+class ListItemReq(TypedDict, total=False):
+    wid: str
+    productId: str
+    fnsku: str
+    sid: str
+
+class ProductBinRecommendListReq(TypedDict, total=False):
+    list: list
+    withHistory: bool
+
+class ListItemReq(TypedDict, total=False):
+    business_order_sn: str
+    wid: int
+    order_type: int
+    expect_arrival_time: str
+    logistics_company: str
+    logistics_order_no: str
+    shipping_cost: float
+    other_fee: float
+    remark: str
+    item_list: list
+
+class CreatePurchaseReceiptOrderReq(TypedDict, total=False):
+    list: list
+
+class ReqsItemReq(TypedDict, total=False):
+    rmaOrderNo: str
+    storeId: str
+    wid: str
+    itemReqs: list
+
+class ReturnOrderFastStorageInReq(TypedDict, total=False):
+    reqs: list
+
+class ProductListItemReq(TypedDict, total=False):
+    product_id: int
+    seller_id: str
+    fnsku: str
+    received_good_num: int
+    received_bad_num: int
+
+class AllocationPartlyReceiveReq(TypedDict, total=False):
+    order_sn: str
+    product_list: list
+
+class AllocationFinishReceiveReq(TypedDict, total=False):
+    order_sn: str
+
+class ListItemReq(TypedDict, total=False):
+    product_id: int
+    fnsku: str
+    relation_order_out: str
+    unit_cost_price: float
+    unit_fee_price: float
+
+class CostChangeFinishReq(TypedDict, total=False):
+    type: int
+    wid: int
+    remark: str
+    list: list
+
+class SetOrderPackageSizeReq(TypedDict, total=False):
+    wo_number: str
+    pkg_length: str
+    pkg_width: str
+    pkg_height: str
+
+class AwdCancelReq(TypedDict, total=False):
+    orderId: str
+    sid: int
+
+class AwdConfirmReq(TypedDict, total=False):
+    orderId: str
+    sid: int
+
+class AwdUpdateReq(TypedDict, total=False):
+    awdDeliveredGoodsBOS: list
+
+class AwdShipmentUpdateTrackReq(TypedDict, total=False):
+    orderId: str
+    shipmentId: str
+    sid: int
+    trackingId: str
+
+class ShipmentidinfoItemReq(TypedDict, total=False):
+    pageType: str
+    shipmentId: str
+    sid: int
+
+class AwdShipmentPrintLabelReq(TypedDict, total=False):
+    shipmentIdInfo: list
+
+class DataItemReq(TypedDict, total=False):
+    sid: int
+    relateSn: str
+
+class PackingTaskAddReq(TypedDict, total=False):
+    relateSnType: int
+    wid: int
+    data: list
+
+class ListItemReq(TypedDict, total=False):
+    customBoxId: str
+    boxLength: str
+    boxWidth: str
+    boxHeight: str
+    boxWeight: str
+    boxNum: int
+    ptbId: str
+    boxProduct: list
+
+class PackingTaskBatchEditReq(TypedDict, total=False):
+    snValue: str
+    list: list
+
+class PackingTaskDelReq(TypedDict, total=False):
+    ptIds: list
+
+class PackingTaskFinishReq(TypedDict, total=False):
+    snValue: str
+    needUpdate: bool
+
+
 class WarehouseEndpoints(BaseEndpoint):
 
-    async def oversea_sku_unmatch(self, data: dict = None) -> list[OverseaProductUnmatchResponse]:
+    async def oversea_sku_unmatch(self, data: Optional[OverseaSkuUnmatchReq] = None) -> list[OverseaProductUnmatchResponse]:
         """海外仓sku取消配对.
 
 POST /basicOpen/overseaWarehouseSetting/productMatch
@@ -164,7 +297,7 @@ Args:
         resp = await self._post("/basicOpen/overseaWarehouseSetting/productMatch", data or {})
         return self._parse_list(resp.data, OverseaProductUnmatchResponse)
 
-    async def product_bin_recommend_list(self, data: dict = None) -> list[WarehouseBinEntryRecommendResponse]:
+    async def product_bin_recommend_list(self, data: Optional[ProductBinRecommendListReq] = None) -> list[WarehouseBinEntryRecommendResponse]:
         """查询产品仓位列表.
 
 POST /basicOpen/warehouseConfig/warehouseBin/getEntryRecommendBinList
@@ -184,7 +317,7 @@ Args:
         resp = await self._post("/basicOpen/overSeaWarehouse/stockOrder/detail", {k: v for k, v in {"overseas_order_no": overseas_order_no}.items() if v is not None})
         return self._parse_list(resp.data, OverseaStockOrderDetailResponse)
 
-    async def create_purchase_receipt_order(self, data: dict = None) -> list[PurchaseReceiptOrderCreateResponse]:
+    async def create_purchase_receipt_order(self, data: Optional[CreatePurchaseReceiptOrderReq] = None) -> list[PurchaseReceiptOrderCreateResponse]:
         """创建待收货的收货单.
 
 POST /erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/createReceiptOrder
@@ -230,7 +363,7 @@ Args:
         resp = await self._post("/erp/sc/routing/deliveryReceipt/ReceiptOrderQc/getOrderList", {k: v for k, v in {"offset": offset, "length": length, "date_type": date_type, "start_date": start_date, "end_date": end_date, "qc_sns": qc_sns, "status": status, "wid": wid}.items() if v is not None})
         return self._parse_list(resp.data, ReceiptOrderQcListResponse)
 
-    async def return_order_fast_storage_in(self, data: dict = None) -> list[ReturnOrderFastStorageInResponse]:
+    async def return_order_fast_storage_in(self, data: Optional[ReturnOrderFastStorageInReq] = None) -> list[ReturnOrderFastStorageInResponse]:
         """待收货退货单快捷入库.
 
 POST /basicOpen/return/order/fastStorageIn
@@ -240,7 +373,7 @@ Args:
         resp = await self._post("/basicOpen/return/order/fastStorageIn", data or {})
         return self._parse_list(resp.data, ReturnOrderFastStorageInResponse)
 
-    async def allocation_partly_receive(self, data: dict = None) -> list[AllocationPartlyReceiveResponse]:
+    async def allocation_partly_receive(self, data: Optional[AllocationPartlyReceiveReq] = None) -> list[AllocationPartlyReceiveResponse]:
         """调拨单分批收货.
 
 POST /erp/sc/routing/inventoryReceipt/StorageAllocation/partlyReceiveAllocationOrder
@@ -250,7 +383,7 @@ Args:
         resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAllocation/partlyReceiveAllocationOrder", data or {})
         return self._parse_list(resp.data, AllocationPartlyReceiveResponse)
 
-    async def allocation_finish_receive(self, data: dict = None) -> list[AllocationFinishReceiveResponse]:
+    async def allocation_finish_receive(self, data: Optional[AllocationFinishReceiveReq] = None) -> list[AllocationFinishReceiveResponse]:
         """调拨单结束到货.
 
 POST /erp/sc/routing/inventoryReceipt/StorageAllocation/finishReceiveAllocationOrder
@@ -260,7 +393,7 @@ Args:
         resp = await self._post("/erp/sc/routing/inventoryReceipt/StorageAllocation/finishReceiveAllocationOrder", data or {})
         return self._parse_list(resp.data, AllocationFinishReceiveResponse)
 
-    async def cost_change_finish(self, data: dict = None) -> list[CostChangeFinishResponse]:
+    async def cost_change_finish(self, data: Optional[CostChangeFinishReq] = None) -> list[CostChangeFinishResponse]:
         """创建已完成的成本补录单.
 
 POST /erp/sc/routing/inventoryReceipt/CostChangeOrder/finishCostChangeOrder
@@ -270,7 +403,7 @@ Args:
         resp = await self._post("/erp/sc/routing/inventoryReceipt/CostChangeOrder/finishCostChangeOrder", data or {})
         return self._parse_list(resp.data, CostChangeFinishResponse)
 
-    async def set_order_package_size(self, data: dict = None) -> list[WmsOrderSetPackageSizeResponse]:
+    async def set_order_package_size(self, data: Optional[SetOrderPackageSizeReq] = None) -> list[WmsOrderSetPackageSizeResponse]:
         """设置包裹尺寸.
 
 POST /erp/sc/routing/wms/order/setOrderPackageSize
@@ -282,7 +415,7 @@ Args:
 
     """领星仓库/库存 API (76个接口)."""
 
-    async def awd_cancel(self, data: dict = None) -> list[AwdInboundPlanCancelResponse]:
+    async def awd_cancel(self, data: Optional[AwdCancelReq] = None) -> list[AwdInboundPlanCancelResponse]:
         """取消AWD入库任务.
 
 POST /amzStaServer/openapi/awd/inbound-plan/cancel
@@ -292,7 +425,7 @@ Args:
         resp = await self._post("/amzStaServer/openapi/awd/inbound-plan/cancel", data or {})
         return self._parse_list(resp.data, AwdInboundPlanCancelResponse)
 
-    async def awd_confirm(self, data: dict = None) -> list[AwdInboundPlanConfirmResponse]:
+    async def awd_confirm(self, data: Optional[AwdConfirmReq] = None) -> list[AwdInboundPlanConfirmResponse]:
         """确认AWD入库任务.
 
 POST /amzStaServer/openapi/awd/inbound-plan/confirmInboundPlan
@@ -341,7 +474,7 @@ Args:
         resp = await self._post("/amzStaServer/openapi/awd/inbound-plan/page", {k: v for k, v in {"page": page, "dateType": date_type, "startDateTime": start_date_time, "endDateTime": end_date_time, "orderId": order_id, "shipmentId": shipment_id, "sidList": sid_list, "statusList": status_list, "length": length}.items() if v is not None})
         return self._parse_list(resp.data, AwdInboundPlanPageResponse)
 
-    async def awd_update(self, data: dict = None) -> list[AwdInboundPlanUpdateResponse]:
+    async def awd_update(self, data: Optional[AwdUpdateReq] = None) -> list[AwdInboundPlanUpdateResponse]:
         """更新AWD入库任务.
 
 POST /amzStaServer/openapi/awd/inbound-plan/updateInboundPlan
@@ -379,7 +512,7 @@ Args:
         resp = await self._post("/amzStaServer/openapi/awd/inbound-shipment/page", {k: v for k, v in {"page": page, "dateType": date_type, "startDateTime": start_date_time, "endDateTime": end_date_time, "shipmentId": shipment_id, "sidList": sid_list, "statusList": status_list, "length": length}.items() if v is not None})
         return self._parse_list(resp.data, AwdInboundShipmentPageResponse)
 
-    async def awd_shipment_update_track(self, data: dict = None) -> list[AwdInboundShipmentUpdateTrackResponse]:
+    async def awd_shipment_update_track(self, data: Optional[AwdShipmentUpdateTrackReq] = None) -> list[AwdInboundShipmentUpdateTrackResponse]:
         """更新AWD货件跟踪编号.
 
 POST /amzStaServer/openapi/awd/inbound-shipment/updateShipmentInfo
@@ -389,7 +522,7 @@ Args:
         resp = await self._post("/amzStaServer/openapi/awd/inbound-shipment/updateShipmentInfo", data or {})
         return self._parse_list(resp.data, AwdInboundShipmentUpdateTrackResponse)
 
-    async def awd_shipment_print_label(self, data: dict = None) -> list[AwdInboundShipmentPrintLabelResponse]:
+    async def awd_shipment_print_label(self, data: Optional[AwdShipmentPrintLabelReq] = None) -> list[AwdInboundShipmentPrintLabelResponse]:
         """打印AWD入库货件箱子标签.
 
 POST /amzStaServer/openapi/awd/inbound-shipment/uploadPacking
@@ -399,7 +532,7 @@ Args:
         resp = await self._post("/amzStaServer/openapi/awd/inbound-shipment/uploadPacking", data or {})
         return self._parse_list(resp.data, AwdInboundShipmentPrintLabelResponse)
 
-    async def packing_task_add(self, data: dict = None) -> list[PackingTaskAddResponse]:
+    async def packing_task_add(self, data: Optional[PackingTaskAddReq] = None) -> list[PackingTaskAddResponse]:
         """装箱任务-生成装箱任务.
 
 POST /basicOpen/packingTask/addTask
@@ -409,7 +542,7 @@ Args:
         resp = await self._post("/basicOpen/packingTask/addTask", data or {})
         return self._parse_list(resp.data, PackingTaskAddResponse)
 
-    async def packing_task_batch_edit(self, data: dict = None) -> list[PackingTaskBatchEditResponse]:
+    async def packing_task_batch_edit(self, data: Optional[PackingTaskBatchEditReq] = None) -> list[PackingTaskBatchEditResponse]:
         """装箱任务-批量编辑装箱信息.
 
 POST /basicOpen/packingTask/batchEditPackingBox
@@ -419,7 +552,7 @@ Args:
         resp = await self._post("/basicOpen/packingTask/batchEditPackingBox", data or {})
         return self._parse_list(resp.data, PackingTaskBatchEditResponse)
 
-    async def packing_task_del(self, data: dict = None) -> list[PackingTaskDelResponse]:
+    async def packing_task_del(self, data: Optional[PackingTaskDelReq] = None) -> list[PackingTaskDelResponse]:
         """装箱任务-删除装箱任务.
 
 POST /basicOpen/packingTask/delTask
@@ -439,7 +572,7 @@ Args:
         resp = await self._post("/basicOpen/packingTask/taskDetail", {k: v for k, v in {"ptId": pt_id}.items() if v is not None})
         return self._parse_list(resp.data, PackingTaskDetailResponse)
 
-    async def packing_task_finish(self, data: dict = None) -> list[PackingTaskFinishResponse]:
+    async def packing_task_finish(self, data: Optional[PackingTaskFinishReq] = None) -> list[PackingTaskFinishResponse]:
         """装箱任务-标记已完成.
 
 POST /basicOpen/packingTask/finishTask

@@ -91,10 +91,106 @@ class StaCreateInboundPlanReq(TypedDict, total=False):
     inboundPlanItems: list  # List[InboundPlanItemReq]
 
 
+class FbaPlanAllocateStorageReq(TypedDict, total=False):
+    orderNos: list
+    isComboAutoProcess: int
+
+class FbaPlanReleaseStorageReq(TypedDict, total=False):
+    orderNos: list
+
+class PackagegroupingsItemReq(TypedDict, total=False):
+    boxes: list
+
+class StaSetPackingReq(TypedDict, total=False):
+    inboundPlanId: str
+    packageGroupings: list
+
+class StaGeneratePlacementReq(TypedDict, total=False):
+    inboundPlanId: str
+    sid: int
+
+class StaConfirmPlacementReq(TypedDict, total=False):
+    inboundPlanId: str
+    placementOptionId: str
+    shipmentIds: list
+    sid: int
+
+class ShipmentidlistItemReq(TypedDict, total=False):
+    palletList: list
+
+class StaGenerateTransportReq(TypedDict, total=False):
+    inboundPlanId: str
+    shipmentIdList: list
+
+class StaGenerateDeliveryDateReq(TypedDict, total=False):
+    inboundPlanId: str
+    shipmentId: str
+    sid: int
+
+class StaCommitDeliverTimeReq(TypedDict, total=False):
+    deliveryWindowOptionId: str
+    endDate: str
+    inboundPlanId: str
+    shipmentId: str
+    sid: int
+    startDate: str
+
+class ShipmentdistributioninfoItemReq(TypedDict, total=False):
+    alphaCode: str
+    alphaName: str
+    declaredAmount: float
+    declaredCode: str
+    deliveryWindowOptionId: str
+    endDate: str
+    freightClass: str
+    palletList: list
+
+class StaSetDeliveryServiceReq(TypedDict, total=False):
+    inboundPlanId: str
+    shipmentDistributionInfo: list
+
+class BoxesItemReq(TypedDict, total=False):
+    contentInformationSource: str
+    dimensions: dict
+    items: list
+
+class StaUpdateShipmentPackingReq(TypedDict, total=False):
+    boxes: list
+
+class TrackbolistItemReq(TypedDict, total=False):
+    boxId: str
+    localBoxId: str
+    trackingId: str
+
+class StaUpdateShipmentTrackReq(TypedDict, total=False):
+    billOfLadingNumber: str
+    freightBillNumber: str
+    inboundPlanId: str
+    shipmentConfirmationId: str
+    shipmentId: str
+    sid: int
+    trackBOList: list
+
+class StaCancelInboundPlanReq(TypedDict, total=False):
+    inboundPlanId: str
+    sid: int
+
+class StaOperateReq(TypedDict, total=False):
+    taskId: str
+
+class StaGatherInboundPlanReq(TypedDict, total=False):
+    inboundPlanIdList: list
+    sid: int
+
+class StaDetailReq(TypedDict, total=False):
+    inboundPlanId: str
+    sid: int
+
+
 class FBAEndpoints(BaseEndpoint):
     """领星FBA发货 API (56个接口)."""
 
-    async def fba_plan_allocate_storage(self, data: dict = None) -> FbaPlanAllocateStorageResponse | None:
+    async def fba_plan_allocate_storage(self, data: Optional[FbaPlanAllocateStorageReq] = None) -> FbaPlanAllocateStorageResponse | None:
         """FBA仓发货计划锁库存.
 
 POST /basicOpen/openapi/fba/allocateStorage
@@ -104,7 +200,7 @@ Args:
         resp = await self._post("/basicOpen/openapi/fba/allocateStorage", data or {})
         return self._parse_one(resp.data, FbaPlanAllocateStorageResponse)
 
-    async def fba_plan_release_storage(self, data: dict = None) -> FbaPlanReleaseStorageResponse | None:
+    async def fba_plan_release_storage(self, data: Optional[FbaPlanReleaseStorageReq] = None) -> FbaPlanReleaseStorageResponse | None:
         """FBA仓发货计划释放库存.
 
 POST /basicOpen/openapi/fba/releaseStorage
@@ -145,7 +241,7 @@ Args:
         resp = await self._post("/amzStaServer/openapi/inbound-packing/setLocalPackingInformation", data or {})
         return self._parse_one(resp.data, StaSaveLocalPackingResponse)
 
-    async def sta_set_packing(self, data: dict = None) -> StaSetPackingResponse | None:
+    async def sta_set_packing(self, data: Optional[StaSetPackingReq] = None) -> StaSetPackingResponse | None:
         """提交装箱信息.
 
 POST /amzStaServer/openapi/inbound-packing/setPackingInformation
@@ -155,7 +251,7 @@ Args:
         resp = await self._post("/amzStaServer/openapi/inbound-packing/setPackingInformation", data or {})
         return self._parse_one(resp.data, StaSetPackingResponse)
 
-    async def sta_generate_placement(self, data: dict = None) -> StaGeneratePlacementResponse | None:
+    async def sta_generate_placement(self, data: Optional[StaGeneratePlacementReq] = None) -> StaGeneratePlacementResponse | None:
         """生成货件方案.
 
 POST /amzStaServer/openapi/inbound-shipment/generatePlacementOptions
@@ -187,7 +283,7 @@ Args:
         resp = await self._post("/amzStaServer/openapi/inbound-packing/getInboundPackingBoxInfo", {k: v for k, v in {"inboundPlanId": inbound_plan_id, "sid": sid}.items() if v is not None})
         return self._parse_list(resp.data, StaGetPackingBoxInfoResponse)
 
-    async def sta_confirm_placement(self, data: dict = None) -> StaConfirmPlacementResponse | None:
+    async def sta_confirm_placement(self, data: Optional[StaConfirmPlacementReq] = None) -> StaConfirmPlacementResponse | None:
         """确认货件方案.
 
 POST /amzStaServer/openapi/inbound-shipment/confirmPlacementOption
@@ -197,7 +293,7 @@ Args:
         resp = await self._post("/amzStaServer/openapi/inbound-shipment/confirmPlacementOption", data or {})
         return self._parse_one(resp.data, StaConfirmPlacementResponse)
 
-    async def sta_generate_transport(self, data: dict = None) -> StaGenerateTransportResponse | None:
+    async def sta_generate_transport(self, data: Optional[StaGenerateTransportReq] = None) -> StaGenerateTransportResponse | None:
         """生成承运方式.
 
 POST /amzStaServer/openapi/inbound-shipment/generateTransportList
@@ -207,7 +303,7 @@ Args:
         resp = await self._post("/amzStaServer/openapi/inbound-shipment/generateTransportList", data or {})
         return self._parse_one(resp.data, StaGenerateTransportResponse)
 
-    async def sta_generate_delivery_date(self, data: dict = None) -> StaGenerateDeliveryDateResponse | None:
+    async def sta_generate_delivery_date(self, data: Optional[StaGenerateDeliveryDateReq] = None) -> StaGenerateDeliveryDateResponse | None:
         """生成可选送达时间.
 
 POST /amzStaServer/openapi/inbound-shipment/generateDeliveryDateList
@@ -241,7 +337,7 @@ Args:
         resp = await self._post("/amzStaServer/openapi/inbound-shipment/getDeliveryDateList", {k: v for k, v in {"inboundPlanId": inbound_plan_id, "shipmentId": shipment_id, "sid": sid}.items() if v is not None})
         return self._parse_list(resp.data, StaGetDeliveryDateResponse)
 
-    async def sta_commit_deliver_time(self, data: dict = None) -> StaCommitDeliverTimeResponse | None:
+    async def sta_commit_deliver_time(self, data: Optional[StaCommitDeliverTimeReq] = None) -> StaCommitDeliverTimeResponse | None:
         """提交送达时间.
 
 POST /amzStaServer/openapi/inbound-shipment/commitStaDeliverTime
@@ -251,7 +347,7 @@ Args:
         resp = await self._post("/amzStaServer/openapi/inbound-shipment/commitStaDeliverTime", data or {})
         return self._parse_one(resp.data, StaCommitDeliverTimeResponse)
 
-    async def sta_set_delivery_service(self, data: dict = None) -> StaSetDeliveryServiceResponse | None:
+    async def sta_set_delivery_service(self, data: Optional[StaSetDeliveryServiceReq] = None) -> StaSetDeliveryServiceResponse | None:
         """提交货件配送服务.
 
 POST /amzStaServer/openapi/inbound-shipment/setDeliveryService
@@ -261,7 +357,7 @@ Args:
         resp = await self._post("/amzStaServer/openapi/inbound-shipment/setDeliveryService", data or {})
         return self._parse_one(resp.data, StaSetDeliveryServiceResponse)
 
-    async def sta_update_shipment_packing(self, data: dict = None) -> StaUpdateShipmentPackingResponse | None:
+    async def sta_update_shipment_packing(self, data: Optional[StaUpdateShipmentPackingReq] = None) -> StaUpdateShipmentPackingResponse | None:
         """修改货件装箱信息.
 
 POST /amzStaServer/openapi/inbound-packing/updateShipmentPacking
@@ -271,7 +367,7 @@ Args:
         resp = await self._post("/amzStaServer/openapi/inbound-packing/updateShipmentPacking", data or {})
         return self._parse_one(resp.data, StaUpdateShipmentPackingResponse)
 
-    async def sta_update_shipment_track(self, data: dict = None) -> StaUpdateShipmentTrackResponse | None:
+    async def sta_update_shipment_track(self, data: Optional[StaUpdateShipmentTrackReq] = None) -> StaUpdateShipmentTrackResponse | None:
         """上传货件跟踪号.
 
 POST /amzStaServer/openapi/inbound-shipment/updateShipmentTrack
@@ -281,7 +377,7 @@ Args:
         resp = await self._post("/amzStaServer/openapi/inbound-shipment/updateShipmentTrack", data or {})
         return self._parse_one(resp.data, StaUpdateShipmentTrackResponse)
 
-    async def sta_cancel_inbound_plan(self, data: dict = None) -> StaCancelInboundPlanResponse | None:
+    async def sta_cancel_inbound_plan(self, data: Optional[StaCancelInboundPlanReq] = None) -> StaCancelInboundPlanResponse | None:
         """取消STA任务.
 
 POST /amzStaServer/openapi/inbound-plan/cancelInboundPlan
@@ -291,7 +387,7 @@ Args:
         resp = await self._post("/amzStaServer/openapi/inbound-plan/cancelInboundPlan", data or {})
         return self._parse_one(resp.data, StaCancelInboundPlanResponse)
 
-    async def sta_operate(self, data: dict = None) -> StaOperateResponse | None:
+    async def sta_operate(self, data: Optional[StaOperateReq] = None) -> StaOperateResponse | None:
         """查询异步任务状态.
 
 POST /amzStaServer/openapi/task-plan/operate
@@ -312,7 +408,7 @@ Args:
         resp = await self._post("/amzStaServer/openapi/inbound-packing/getPrepDetails", {k: v for k, v in {"sid": sid, "msku": msku}.items() if v is not None})
         return self._parse_list(resp.data, StaGetPrepDetailsResponse)
 
-    async def sta_gather_inbound_plan(self, data: dict = None) -> StaGatherInboundPlanResponse | None:
+    async def sta_gather_inbound_plan(self, data: Optional[StaGatherInboundPlanReq] = None) -> StaGatherInboundPlanResponse | None:
         """同步STA任务到ERP.
 
 POST /amzStaServer/openapi/inbound-plan/gatherInboundPlan
@@ -341,7 +437,7 @@ Args:
         resp = await self._post("/amzStaServer/openapi/inbound-plan/page", {k: v for k, v in {"page": page, "length": length, "dateBegin": date_begin, "dateEnd": date_end, "dateType": date_type, "planName": plan_name, "shipmentIdList": shipment_id_list, "sids": sids, "sortField": sort_field, "sortType": sort_type}.items() if v is not None})
         return self._parse_list(resp.data, StaPageResponse)
 
-    async def sta_detail(self, data: dict = None) -> StaDetailResponse | None:
+    async def sta_detail(self, data: Optional[StaDetailReq] = None) -> StaDetailResponse | None:
         """查询STA任务详情.
 
 POST /amzStaServer/openapi/inbound-plan/detail
