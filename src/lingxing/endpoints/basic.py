@@ -1,6 +1,6 @@
 """基础数据 API - 店铺、账户、市场、汇率等基础信息查询."""
-from __future__ import annotations
 
+from __future__ import annotations
 
 from ..models.responses.basic_data import (
     AccountListsResponse,
@@ -67,7 +67,9 @@ class BasicEndpoints(BaseEndpoint):
         Args:
             country_code: 国家code，查询亚马逊市场列表 接口对应字段【code】 (required), string.
         """
-        resp = await self._post("/erp/sc/data/worldState/lists", {k: v for k, v in {"country_code": country_code}.items() if v is not None})
+        resp = await self._post(
+            "/erp/sc/data/worldState/lists", {k: v for k, v in {"country_code": country_code}.items() if v is not None}
+        )
         return self._parse_list(resp.data, WorldstateListsResponse)
 
     async def get_currency_rate(self, date: str = None) -> list[FinanceCurrencyCurrencymonthResponse]:
@@ -79,10 +81,12 @@ class BasicEndpoints(BaseEndpoint):
         Args:
             date: 汇率月份 (required), string.
         """
-        resp = await self._post("/erp/sc/routing/finance/currency/currencyMonth", {k: v for k, v in {"date": date}.items() if v is not None})
+        resp = await self._post(
+            "/erp/sc/routing/finance/currency/currencyMonth", {k: v for k, v in {"date": date}.items() if v is not None}
+        )
         return self._parse_list(resp.data, FinanceCurrencyCurrencymonthResponse)
 
-    async def get_profit_state_list(self, countryCode: str = None) -> ProfitReportStatelistResponse:
+    async def get_profit_state_list(self, countryCode: str = None) -> ProfitReportStatelistResponse | None:
         """
         获取国家下的州、省编码.
 
@@ -91,12 +95,15 @@ class BasicEndpoints(BaseEndpoint):
         Args:
             countryCode: 国家编码，二字码 (required), string.
         """
-        resp = await self._post("/basicOpen/multiplatform/profit/report/stateList", {k: v for k, v in {"countryCode": countryCode}.items() if v is not None})
+        resp = await self._post(
+            "/basicOpen/multiplatform/profit/report/stateList",
+            {k: v for k, v in {"countryCode": countryCode}.items() if v is not None},
+        )
         return self._parse_one(resp.data, ProfitReportStatelistResponse)
 
     # ── 写操作（慎用）──
 
-    async def batch_rename_seller(self, sellers: list[dict]) -> SellerBatcheditsellernameResponse:
+    async def batch_rename_seller(self, sellers: list[dict]) -> SellerBatcheditsellernameResponse | None:
         """
         批量修改店铺名称.
 
@@ -108,7 +115,9 @@ class BasicEndpoints(BaseEndpoint):
         resp = await self._post("/erp/sc/data/seller/batchEditSellerName", {"sellers": sellers})
         return self._parse_one(resp.data, SellerBatcheditsellernameResponse)
 
-    async def update_exchange_rate(self, my_rate: str = None, date: str = None, code: str = None) -> SettingsExchangerateUpdateResponse | None:
+    async def update_exchange_rate(
+        self, my_rate: str = None, date: str = None, code: str = None
+    ) -> SettingsExchangerateUpdateResponse | None:
         """
         修改我的汇率.
 
@@ -119,7 +128,10 @@ class BasicEndpoints(BaseEndpoint):
             date: 汇率年月 (required), string.
             code: 币种 (required), string.
         """
-        resp = await self._post("/basicOpen/settings/exchangeRate/update", {k: v for k, v in {"my_rate": my_rate, "date": date, "code": code}.items() if v is not None})
+        resp = await self._post(
+            "/basicOpen/settings/exchangeRate/update",
+            {k: v for k, v in {"my_rate": my_rate, "date": date, "code": code}.items() if v is not None},
+        )
         return self._parse_one(resp.data, SettingsExchangerateUpdateResponse)
 
     async def download_attachment(self, file_id: int = None) -> CommonFileDownloadResponse | None:
@@ -131,5 +143,7 @@ class BasicEndpoints(BaseEndpoint):
         Args:
             file_id: 附件id【取对应功能接口返回结果中的附件id值】 (required), int.
         """
-        resp = await self._post("/erp/sc/routing/common/file/download", {k: v for k, v in {"file_id": file_id}.items() if v is not None})
+        resp = await self._post(
+            "/erp/sc/routing/common/file/download", {k: v for k, v in {"file_id": file_id}.items() if v is not None}
+        )
         return self._parse_one(resp.data, CommonFileDownloadResponse)

@@ -1,4 +1,5 @@
 """Auto-generated response models for VC."""
+
 from typing import List, Optional
 
 from pydantic import Field
@@ -8,25 +9,32 @@ from ..common import LingXingModel
 
 class ListingmanageVclistingPagelistClassificationRank(LingXingModel):
     """classification_rank sub-structure."""
+
     classification_id: Optional[str] = Field(None, description="分类ID")
     title: Optional[str] = Field(None, description="分类名")
     link: Optional[str] = Field(None, description="分类链接")
     rank: Optional[str] = Field(None, description="排名")
 
+
 class ListingmanageVclistingPagelistDisplayGroupRank(LingXingModel):
     """display_group_rank sub-structure."""
+
     website_display_group: Optional[str] = Field(None, description="分类组名")
     title: Optional[str] = Field(None, description="分类名")
     link: Optional[str] = Field(None, description="分类链接")
     rank: Optional[str] = Field(None, description="排名")
 
+
 class ListingmanageVclistingPagelistPrincipalList(LingXingModel):
     """principal_list sub-structure."""
+
     uid: Optional[str] = Field(None, description="负责人uid")
     real_name: Optional[str] = Field(None, description="负责人姓名")
 
+
 class ListingmanageVclistingPagelistResponse(LingXingModel):
     """查询Listing列表."""
+
     total: Optional[int] = Field(None, description="总数")
     vc_store_id: Optional[str] = Field(None, description="VC店铺id")
     small_min_image_url: Optional[str] = Field(None, description="在线商品略缩图地址")
@@ -42,8 +50,12 @@ class ListingmanageVclistingPagelistResponse(LingXingModel):
     category_name: Optional[str] = Field(None, description="本地产品分类名")
     brand_id: Optional[str] = Field(None, description="本地产品品牌ID")
     product_id: Optional[str] = Field(None, description="本地产品ID")
-    classification_rank: Optional[List[ListingmanageVclistingPagelistClassificationRank]] = Field(None, description="小类排名")
-    display_group_rank: Optional[List[ListingmanageVclistingPagelistDisplayGroupRank]] = Field(None, description="大类排名")
+    classification_rank: Optional[List[ListingmanageVclistingPagelistClassificationRank]] = Field(
+        None, description="小类排名"
+    )
+    display_group_rank: Optional[List[ListingmanageVclistingPagelistDisplayGroupRank]] = Field(
+        None, description="大类排名"
+    )
     reviews_num: Optional[str] = Field(None, description="评论数")
     stars: Optional[str] = Field(None, description="星级")
     principal_list: Optional[List[ListingmanageVclistingPagelistPrincipalList]] = Field(None, description="负责人列表")
@@ -56,6 +68,7 @@ class ListingmanageVclistingPagelistResponse(LingXingModel):
 
 class GetinvoiceDetailInvoice(LingXingModel):
     """invoice sub-structure."""
+
     order_no: Optional[str] = Field(None, description="发货单号")
     purchase_order_number: Optional[str] = Field(None, description="订单号")
     remark: Optional[str] = Field(None, description="备注")
@@ -77,13 +90,16 @@ class GetinvoiceDetailInvoice(LingXingModel):
     items: Optional[list] = Field(None, description="发货单明细列表")
     invoice_tracking_list: Optional[list] = Field(None, description="物流信息")
 
+
 class GetinvoiceDetailResponse(LingXingModel):
     """查询VC发货单详情."""
+
     invoice: Optional[List[GetinvoiceDetailInvoice]] = Field(None, description="发货单信息")
 
 
 class GetinvoicePageListList(LingXingModel):
     """list sub-structure."""
+
     gmt_create: Optional[str] = Field(None, description="创建时间")
     gmt_modified: Optional[str] = Field(None, description="修改时间")
     id: Optional[str] = Field(None, description="主键id")
@@ -107,14 +123,17 @@ class GetinvoicePageListList(LingXingModel):
     outbound_date: Optional[str] = Field(None, description="出库日期")
     items: Optional[list] = Field(None, description="发货单明细列表")
 
+
 class GetinvoicePageListResponse(LingXingModel):
     """查询VC发货单列表."""
+
     count: Optional[float] = Field(None, description="总记录数")
     list: Optional[List[GetinvoicePageListList]] = Field(None, description="发货单列表")
 
 
 class PlatformauthVcsellerPagelistResponse(LingXingModel):
     """查询VC店铺列表."""
+
     total: Optional[int] = Field(None, description="总数")
     account_id: Optional[int] = Field(None, description="账号ID")
     seller_id: Optional[str] = Field(None, description="SELLER_ID")
@@ -129,6 +148,7 @@ class PlatformauthVcsellerPagelistResponse(LingXingModel):
 
 class PlatformorderVcorderPagelistPurchaseOrderSkuList(LingXingModel):
     """purchase_order_sku_list sub-structure."""
+
     id: Optional[str] = Field(None, description="ID")
     vc_store_id: Optional[str] = Field(None, description="店铺id")
     seller_name: Optional[str] = Field(None, description="店铺名称")
@@ -170,8 +190,10 @@ class PlatformorderVcorderPagelistPurchaseOrderSkuList(LingXingModel):
     rejected_quantity: Optional[int] = Field(None, description="拒绝量")
     received_quantity: Optional[int] = Field(None, description="签收量")
 
+
 class PlatformorderVcorderPagelistResponse(LingXingModel):
     """查询VC订单列表."""
+
     total: Optional[int] = Field(None, description="总数")
     gmt_create: Optional[str] = Field(None, description="订单创建时间")
     gmt_modified: Optional[str] = Field(None, description="订单更新时间")
@@ -181,11 +203,20 @@ class PlatformorderVcorderPagelistResponse(LingXingModel):
     vc_store_id: Optional[str] = Field(None, description="vc店铺id")
     seller_name: Optional[str] = Field(None, description="店铺名称")
     purchase_order_type: Optional[int] = Field(None, description="订单类型： 0 DF 1 PO")
-    purchase_order_state: Optional[str] = Field(None, description="DF订单状态： New 新的订单 SHIPPED 已发货 ACCEPTED 已确定 CANCELLED 已取消 PO订单状态： Acknowledged 确认 Closed 关闭")
-    purchase_order_process_state: Optional[int] = Field(None, description="订单流转状态： 0 待处理 1 待发货 2 已完成 3 已取消")
+    purchase_order_state: Optional[str] = Field(
+        None,
+        description="DF订单状态： New 新的订单 SHIPPED 已发货 ACCEPTED 已确定 CANCELLED 已取消 PO订单状态： Acknowledged 确认 Closed 关闭",
+    )
+    purchase_order_process_state: Optional[int] = Field(
+        None, description="订单流转状态： 0 待处理 1 待发货 2 已完成 3 已取消"
+    )
     purchase_order_date: Optional[str] = Field(None, description="订单下单时间")
-    ack_status: Optional[int] = Field(None, description="ack状态：0：待确认 1：确认中 2：已确认 3：确认失败 4：平台已确认")
-    ack_status_desc: Optional[str] = Field(None, description="ack状态说明，0：待确认 1：确认中 2：已确认 3：确认失败 4：平台已确认")
+    ack_status: Optional[int] = Field(
+        None, description="ack状态：0：待确认 1：确认中 2：已确认 3：确认失败 4：平台已确认"
+    )
+    ack_status_desc: Optional[str] = Field(
+        None, description="ack状态说明，0：待确认 1：确认中 2：已确认 3：确认失败 4：平台已确认"
+    )
     ack_update_time: Optional[str] = Field(None, description="ack更新时间")
     focus_party_id: Optional[str] = Field(None, description="仓库id")
     erp_warehouse_name: Optional[str] = Field(None, description="配对后的本地仓名称")
@@ -199,14 +230,19 @@ class PlatformorderVcorderPagelistResponse(LingXingModel):
     item_amount: Optional[int] = Field(None, description="货物总数量")
     local_po_number: Optional[str] = Field(None, description="本地po号")
     remark: Optional[str] = Field(None, description="订单备注")
-    shipment_confirm_status: Optional[int] = Field(None, description="确认发货状态： 1 未确认 2 确认中 3 确认失败 4 确认成功 5 平台已确认")
+    shipment_confirm_status: Optional[int] = Field(
+        None, description="确认发货状态： 1 未确认 2 确认中 3 确认失败 4 确认成功 5 平台已确认"
+    )
     shipment_label_status: Optional[int] = Field(None, description="标签状态： 1 未请求 2 请求中 3 请求失败 4 请求成功")
     print_num: Optional[int] = Field(None, description="标签打印次数")
-    purchase_order_sku_list: Optional[List[PlatformorderVcorderPagelistPurchaseOrderSkuList]] = Field(None, description="订单商品明细数据")
+    purchase_order_sku_list: Optional[List[PlatformorderVcorderPagelistPurchaseOrderSkuList]] = Field(
+        None, description="订单商品明细数据"
+    )
 
 
 class PlatformorderVcorderdfDetailShipToPartyAddress(LingXingModel):
     """ship_to_party_address sub-structure."""
+
     name: Optional[str] = Field(None, description="收件人")
     address_line1: Optional[str] = Field(None, description="地址1")
     address_line2: Optional[str] = Field(None, description="地址2")
@@ -219,8 +255,10 @@ class PlatformorderVcorderdfDetailShipToPartyAddress(LingXingModel):
     country_code: Optional[str] = Field(None, description="国家编码")
     phone: Optional[str] = Field(None, description="电话")
 
+
 class PlatformorderVcorderdfDetailItems(LingXingModel):
     """items sub-structure."""
+
     asin: Optional[str] = Field(None, description="ASIN")
     msku: Optional[str] = Field(None, description="MSKU")
     parent_asin: Optional[str] = Field(None, description="父ASIN")
@@ -248,20 +286,26 @@ class PlatformorderVcorderdfDetailItems(LingXingModel):
     deal_total_price: Optional[str] = Field(None, description="成交总价")
     deal_unit_price: Optional[str] = Field(None, description="成交单价")
 
+
 class PlatformorderVcorderdfDetailTrackingNumberList(LingXingModel):
     """tracking_number_List sub-structure."""
+
     box_no: Optional[str] = Field(None, description="箱号")
     tracking_number: Optional[str] = Field(None, description="跟踪号")
 
+
 class PlatformorderVcorderdfDetailResponse(LingXingModel):
     """查询VC订单详情【DF】."""
+
     total: Optional[int] = Field(None, description="总数")
     vc_store_id: Optional[str] = Field(None, description="vc店铺id")
     seller_name: Optional[str] = Field(None, description="店铺名称")
     local_po_number: Optional[str] = Field(None, description="本地po号")
     purchase_order_number: Optional[str] = Field(None, description="订单编号")
     purchase_order_date: Optional[str] = Field(None, description="下单时间")
-    purchase_order_state: Optional[str] = Field(None, description="订单状态： New 新的订单 SHIPPED 已发货 ACCEPTED 已确定 CANCELED 已取消")
+    purchase_order_state: Optional[str] = Field(
+        None, description="订单状态： New 新的订单 SHIPPED 已发货 ACCEPTED 已确定 CANCELED 已取消"
+    )
     purchase_order_type: Optional[str] = Field(None, description="订单类型： 0 DF 1 PO")
     bill_to_party_id: Optional[str] = Field(None, description="结算方式")
     ship_from_party_id: Optional[str] = Field(None, description="供货编码")
@@ -274,7 +318,9 @@ class PlatformorderVcorderdfDetailResponse(LingXingModel):
     is_gift: Optional[str] = Field(None, description="是否包含礼物： 0 否 1 是")
     is_scheduled_delivery_shipment: Optional[str] = Field(None, description="是否预定交付计划： 0 否 1 是")
     is_priority_shipment: Optional[str] = Field(None, description="是否优先发货： 0 否 1 是")
-    ship_to_party_address: Optional[List[PlatformorderVcorderdfDetailShipToPartyAddress]] = Field(None, description="收货方地址")
+    ship_to_party_address: Optional[List[PlatformorderVcorderdfDetailShipToPartyAddress]] = Field(
+        None, description="收货方地址"
+    )
     message_to_customer: Optional[str] = Field(None, description="交易赠言")
     total_price: Optional[str] = Field(None, description="订单总金额")
     currency_code: Optional[str] = Field(None, description="币种")
@@ -282,18 +328,23 @@ class PlatformorderVcorderdfDetailResponse(LingXingModel):
     item_amount: Optional[str] = Field(None, description="货物数量")
     remark: Optional[str] = Field(None, description="备注")
     items: Optional[List[PlatformorderVcorderdfDetailItems]] = Field(None, description="商品列表")
-    tracking_number_list: Optional[List[PlatformorderVcorderdfDetailTrackingNumberList]] = Field(None, description="箱号/跟踪号列表")
+    tracking_number_list: Optional[List[PlatformorderVcorderdfDetailTrackingNumberList]] = Field(
+        None, description="箱号/跟踪号列表"
+    )
 
 
 class PlatformorderVcorderdfGetshippinglabelLabelList(LingXingModel):
     """label_list sub-structure."""
+
     id: Optional[str] = Field(None, description="订单ID")
     purchase_order_number: Optional[str] = Field(None, description="订单编号")
     label_count: Optional[int] = Field(None, description="标签数量")
     error_msg: Optional[str] = Field(None, description="错误信息")
 
+
 class PlatformorderVcorderdfGetshippinglabelResponse(LingXingModel):
     """VC订单-打印标签【DF】."""
+
     total: Optional[int] = Field(None, description="总数")
     label_list: Optional[List[PlatformorderVcorderdfGetshippinglabelLabelList]] = Field(None, description="标签数据")
     pdf_url: Optional[str] = Field(None, description="PDF下载链接")
@@ -302,6 +353,7 @@ class PlatformorderVcorderdfGetshippinglabelResponse(LingXingModel):
 
 class PlatformorderVcorderpoDetailItems(LingXingModel):
     """items sub-structure."""
+
     sequence_number: Optional[str] = Field(None, description="序号")
     asin: Optional[str] = Field(None, description="ASIN")
     asin_url: Optional[str] = Field(None, description="ASIN地址")
@@ -329,8 +381,10 @@ class PlatformorderVcorderpoDetailItems(LingXingModel):
     local_name: Optional[str] = Field(None, description="品名")
     local_sku: Optional[str] = Field(None, description="SKU")
 
+
 class PlatformorderVcorderpoDetailResponse(LingXingModel):
     """查询VC订单详情【PO】."""
+
     total: Optional[int] = Field(None, description="总数")
     vc_store_id: Optional[str] = Field(None, description="店铺id")
     seller_name: Optional[str] = Field(None, description="店铺名称")
@@ -338,7 +392,9 @@ class PlatformorderVcorderpoDetailResponse(LingXingModel):
     local_po_number: Optional[str] = Field(None, description="本地订单编号")
     purchase_order_date: Optional[str] = Field(None, description="下单时间")
     purchase_order_state: Optional[str] = Field(None, description="订单状态： Acknowledged 确认 Closed 关闭")
-    purchase_order_process_state: Optional[int] = Field(None, description="订单流转状态： 0 待处理 1 确认中 2 确认成功 3 确认失败")
+    purchase_order_process_state: Optional[int] = Field(
+        None, description="订单流转状态： 0 待处理 1 确认中 2 确认成功 3 确认失败"
+    )
     payment_method: Optional[str] = Field(None, description="支付类型")
     purchase_order_type: Optional[str] = Field(None, description="订单类型： 0 DF 1 PO")
     remark: Optional[str] = Field(None, description="备注")

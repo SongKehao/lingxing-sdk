@@ -7,9 +7,10 @@ from ..common import LingXingModel
 
 class LogisticsChannelListRequest(LingXingModel):
     """Request for 查询头程物流渠道列表.
-    
+
     POST /erp/sc/data/local_inventory/channelList
     """
+
     offset: int  # 分页偏移量
     length: int  # 分页长度
 
@@ -23,11 +24,13 @@ class LogisticsQueryHeadLogisticsProviderRequestSearchItem(LingXingModel):
     searchField: Optional[str] = None  # 搜索字段，指定搜索的目标字段名称，code 代码 ，name 物流商，默认物流商
     searchValue: Optional[str] = None  # 搜索值，用于模糊搜索物流商名称、编码等
 
+
 class LogisticsQueryHeadLogisticsProviderRequest(LingXingModel):
     """Request for 查询物流-头程物流商.
-    
+
     POST /basicOpen/logistics/headLogisticsProvider/query/list
     """
+
     search: Optional[LogisticsQueryHeadLogisticsProviderRequestSearchItem] = None
 
 
@@ -36,11 +39,13 @@ class LogisticsAddProvidersRequestProvidersdataItem(LingXingModel):
     code: Optional[str] = None  # 物流商代码，限制20个字符
     remark: Optional[str] = None  # 备注，限制200个字符
 
+
 class LogisticsAddProvidersRequest(LingXingModel):
     """Request for 批量添加头程物流商.
-    
+
     POST /erp/sc/routing/tms/FirstVessel/addProviders
     """
+
     providersData: List[LogisticsAddProvidersRequestProvidersdataItem]
 
 
@@ -52,13 +57,17 @@ class LogisticsAddChannelsRequestChannelsdataItem(LingXingModel):
     remark: str  # 备注
     billing_type: Optional[int] = None  # 计费类型：0 重量，1 体积
     logistics_provider_id: Optional[str] = None  # 所属头程物流商id
-    billing: Optional[str] = None  # 运费信息，格式：【注意逗号使用英文逗号，多条运费以竖线分隔】 重量范围开始(kg),重量范围结束(kg),价格(元/kg)
+    billing: Optional[str] = (
+        None  # 运费信息，格式：【注意逗号使用英文逗号，多条运费以竖线分隔】 重量范围开始(kg),重量范围结束(kg),价格(元/kg)
+    )
+
 
 class LogisticsAddChannelsRequest(LingXingModel):
     """Request for 批量添加头程物流方式.
-    
+
     POST /erp/sc/routing/tms/FirstVessel/addChannels
     """
+
     channelsData: List[LogisticsAddChannelsRequestChannelsdataItem]
 
 
@@ -67,9 +76,11 @@ class LogisticsListusedlogisticstypeRequestParamItem(LingXingModel):
     page: Optional[int] = None  # 分页页码
     length: Optional[int] = None  # 分页长度
 
+
 class LogisticsListusedlogisticstypeRequest(LingXingModel):
     """Request for 查询已启用的自发货物流方式.
-    
-    POST 
+
+    POST
     """
+
     param: LogisticsListusedlogisticstypeRequestParamItem

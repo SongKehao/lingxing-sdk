@@ -1,4 +1,5 @@
 """Auto-generated request models for {category} APIs."""
+
 from typing import Optional
 
 from ..common import LingXingModel
@@ -6,14 +7,17 @@ from ..common import LingXingModel
 
 class RequestBase(LingXingModel):
     """Base class for all request models."""
+
     pass
+
 
 class SourcedataFbmreturnorderlistRequest(RequestBase):
     """Request model for 查询亚马逊源报表-FBM退货订单.
 
-API: POST /erp/sc/routing/data/order/fbmReturnOrderList
-Doc: https://apidoc.lingxing.com/#/SourceData/fbmReturnOrderList
-"""
+    API: POST /erp/sc/routing/data/order/fbmReturnOrderList
+    Doc: https://apidoc.lingxing.com/#/SourceData/fbmReturnOrderList
+    """
+
     sid: int
     # 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】
     start_date: str
@@ -27,12 +31,14 @@ Doc: https://apidoc.lingxing.com/#/SourceData/fbmReturnOrderList
     length: Optional[int] = None
     # 分页长度，默认1000
 
+
 class SourcedataRefundordersRequest(RequestBase):
     """Request model for 查询亚马逊源报表-FBA退货订单.
 
-API: POST /erp/sc/data/mws_report/refundOrders
-Doc: https://apidoc.lingxing.com/#/SourceData/RefundOrders
-"""
+    API: POST /erp/sc/data/mws_report/refundOrders
+    Doc: https://apidoc.lingxing.com/#/SourceData/RefundOrders
+    """
+
     sid: int
     # 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】
     date_type: Optional[int] = None
@@ -46,12 +52,14 @@ Doc: https://apidoc.lingxing.com/#/SourceData/RefundOrders
     length: Optional[int] = None
     # 分页长度，默认1000
 
+
 class SourcedataAllordersRequest(RequestBase):
     """Request model for 查询亚马逊源报表-所有订单.
 
-API: POST /erp/sc/data/mws_report/allOrders
-Doc: https://apidoc.lingxing.com/#/SourceData/AllOrders
-"""
+    API: POST /erp/sc/data/mws_report/allOrders
+    Doc: https://apidoc.lingxing.com/#/SourceData/AllOrders
+    """
+
     sid: int
     # 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】
     date_type: Optional[int] = None
@@ -65,12 +73,14 @@ Doc: https://apidoc.lingxing.com/#/SourceData/AllOrders
     length: Optional[int] = None
     # 分页长度，默认1000
 
+
 class SourcedataFbaordersRequest(RequestBase):
     """Request model for 查询亚马逊源报表-FBA订单.
 
-API: POST /erp/sc/data/mws_report/fbaOrders
-Doc: https://apidoc.lingxing.com/#/SourceData/FbaOrders
-"""
+    API: POST /erp/sc/data/mws_report/fbaOrders
+    Doc: https://apidoc.lingxing.com/#/SourceData/FbaOrders
+    """
+
     sid: int
     # 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】
     date_type: Optional[int] = None
@@ -84,12 +94,14 @@ Doc: https://apidoc.lingxing.com/#/SourceData/FbaOrders
     length: Optional[int] = None
     # 分页长度，默认1000
 
+
 class SourcedataFbaexchangeorderlistRequest(RequestBase):
     """Request model for 查询亚马逊源报表-FBA换货订单.
 
-API: POST /erp/sc/routing/data/order/fbaExchangeOrderList
-Doc: https://apidoc.lingxing.com/#/SourceData/fbaExchangeOrderList
-"""
+    API: POST /erp/sc/routing/data/order/fbaExchangeOrderList
+    Doc: https://apidoc.lingxing.com/#/SourceData/fbaExchangeOrderList
+    """
+
     sid: int
     # 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】
     start_date: str
@@ -101,12 +113,14 @@ Doc: https://apidoc.lingxing.com/#/SourceData/fbaExchangeOrderList
     length: Optional[int] = None
     # 分页长度，默认1000
 
+
 class SourcedataRemovalorderlistnewRequest(RequestBase):
     """Request model for 查询亚马逊源报表-移除订单（新）.
 
-API: POST /erp/sc/routing/data/order/removalOrderListNew
-Doc: https://apidoc.lingxing.com/#/SourceData/RemovalOrderListNew
-"""
+    API: POST /erp/sc/routing/data/order/removalOrderListNew
+    Doc: https://apidoc.lingxing.com/#/SourceData/RemovalOrderListNew
+    """
+
     sid: int
     # 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】
     start_date: str
@@ -120,12 +134,14 @@ Doc: https://apidoc.lingxing.com/#/SourceData/RemovalOrderListNew
     search_field_time: str
     # 搜索时间类型：【默认 last_updated_date】 last_updated_date 更新时间 request_date 创建时间
 
+
 class SourcedataSourceremovalordersRequest(RequestBase):
     """Request model for 查询亚马逊源报表-移除订单（旧）.
 
-API: POST /erp/sc/data/mws_report/removalOrders
-Doc: https://apidoc.lingxing.com/#/SourceData/SourceRemovalOrders
-"""
+    API: POST /erp/sc/data/mws_report/removalOrders
+    Doc: https://apidoc.lingxing.com/#/SourceData/SourceRemovalOrders
+    """
+
     sid: int
     # 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】
     start_date: str
@@ -137,12 +153,14 @@ Doc: https://apidoc.lingxing.com/#/SourceData/SourceRemovalOrders
     length: Optional[int] = None
     # 分页长度，默认1000
 
+
 class SourcedataRemovalshipmentlistRequest(RequestBase):
     """Request model for 查询亚马逊源报表-移除货件（新）.
 
-API: POST /erp/sc/statistic/removalShipment/list
-Doc: https://apidoc.lingxing.com/#/SourceData/RemovalShipmentList
-"""
+    API: POST /erp/sc/statistic/removalShipment/list
+    Doc: https://apidoc.lingxing.com/#/SourceData/RemovalShipmentList
+    """
+
     sid: Optional[int] = None
     # 店铺id【seller_id同时传值时，以sid为准】 ，对应查询亚马逊店铺列表接口对应字段【sid】
     seller_id: Optional[str] = None
@@ -156,12 +174,14 @@ Doc: https://apidoc.lingxing.com/#/SourceData/RemovalShipmentList
     length: Optional[int] = None
     # 分页长度，默认1000
 
+
 class SourcedataRemovallistsRequest(RequestBase):
     """Request model for 查询亚马逊源报表-移除货件（旧）.
 
-API: POST /erp/sc/data/fba_report/removalLists
-Doc: https://apidoc.lingxing.com/#/SourceData/RemovalLists
-"""
+    API: POST /erp/sc/data/fba_report/removalLists
+    Doc: https://apidoc.lingxing.com/#/SourceData/RemovalLists
+    """
+
     sid: int
     # 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】
     start_date: str
@@ -173,12 +193,14 @@ Doc: https://apidoc.lingxing.com/#/SourceData/RemovalLists
     length: Optional[int] = None
     # 分页长度，默认1000
 
+
 class SourcedataManageinventoryRequest(RequestBase):
     """Request model for 查询亚马逊源报表-FBA库存.
 
-API: POST /erp/sc/data/mws_report/manageInventory
-Doc: https://apidoc.lingxing.com/#/SourceData/ManageInventory
-"""
+    API: POST /erp/sc/data/mws_report/manageInventory
+    Doc: https://apidoc.lingxing.com/#/SourceData/ManageInventory
+    """
+
     sid: int
     # 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】
     offset: Optional[int] = None
@@ -186,12 +208,14 @@ Doc: https://apidoc.lingxing.com/#/SourceData/ManageInventory
     length: Optional[int] = None
     # 分页长度，默认1000
 
+
 class SourcedataDailyinventoryRequest(RequestBase):
     """Request model for 查询亚马逊源报表-每日库存.
 
-API: POST /erp/sc/data/mws_report/dailyInventory
-Doc: https://apidoc.lingxing.com/#/SourceData/DailyInventory
-"""
+    API: POST /erp/sc/data/mws_report/dailyInventory
+    Doc: https://apidoc.lingxing.com/#/SourceData/DailyInventory
+    """
+
     sid: int
     # 店铺id【欧洲传UK下的店铺，美国传US下的店铺】 ，对应查询亚马逊店铺列表接口对应字段【sid】
     event_date: str
@@ -201,25 +225,29 @@ Doc: https://apidoc.lingxing.com/#/SourceData/DailyInventory
     length: Optional[int] = None
     # 分页长度，默认1000
 
+
 class SourcedataAfnfulfillablequantityRequest(RequestBase):
     """Request model for 查询亚马逊源报表-FBA可售库存.
 
-API: POST /erp/sc/data/mws_report/getAfnFulfillableQuantity
-Doc: https://apidoc.lingxing.com/#/SourceData/AfnFulfillableQuantity
-"""
+    API: POST /erp/sc/data/mws_report/getAfnFulfillableQuantity
+    Doc: https://apidoc.lingxing.com/#/SourceData/AfnFulfillableQuantity
+    """
+
     sid: int
     # 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】
     offset: Optional[int] = None
     # 分页偏移量，默认0
     length: Optional[int] = None
     # 分页长度，默认1000
+
 
 class SourcedataReservedinventoryRequest(RequestBase):
     """Request model for 查询亚马逊源报表-预留库存.
 
-API: POST /erp/sc/data/mws_report/reservedInventory
-Doc: https://apidoc.lingxing.com/#/SourceData/ReservedInventory
-"""
+    API: POST /erp/sc/data/mws_report/reservedInventory
+    Doc: https://apidoc.lingxing.com/#/SourceData/ReservedInventory
+    """
+
     sid: int
     # 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】
     offset: Optional[int] = None
@@ -227,12 +255,14 @@ Doc: https://apidoc.lingxing.com/#/SourceData/ReservedInventory
     length: Optional[int] = None
     # 分页长度，默认1000
 
+
 class SourcedataGetfbaagelistRequest(RequestBase):
     """Request model for 查询亚马逊源报表—库龄表.
 
-API: POST /erp/sc/routing/fba/fbaStock/getFbaAgeList
-Doc: https://apidoc.lingxing.com/#/SourceData/getFbaAgeList
-"""
+    API: POST /erp/sc/routing/fba/fbaStock/getFbaAgeList
+    Doc: https://apidoc.lingxing.com/#/SourceData/getFbaAgeList
+    """
+
     sid: str
     # 店铺id, 多个使用英文逗号分隔 ，对应查询亚马逊店铺列表接口对应字段【sid】
     offset: Optional[int] = None
@@ -240,12 +270,14 @@ Doc: https://apidoc.lingxing.com/#/SourceData/getFbaAgeList
     length: Optional[int] = None
     # 分页长度，默认20
 
+
 class SourcedataTransactionRequest(RequestBase):
     """Request model for 查询亚马逊源报表-交易明细.
 
-API: POST /erp/sc/data/mws_report/transaction
-Doc: https://apidoc.lingxing.com/#/SourceData/Transaction
-"""
+    API: POST /erp/sc/data/mws_report/transaction
+    Doc: https://apidoc.lingxing.com/#/SourceData/Transaction
+    """
+
     sid: int
     # 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】
     event_date: str
@@ -255,12 +287,14 @@ Doc: https://apidoc.lingxing.com/#/SourceData/Transaction
     length: Optional[int] = None
     # 分页长度，默认1000
 
+
 class SourcedataGetamazonfulfilledshipmentslistRequest(RequestBase):
     """Request model for 查询亚马逊源报表—Amazon Fulfilled Shipments.
 
-API: POST /erp/sc/data/mws_report/getAmazonFulfilledShipmentsList
-Doc: https://apidoc.lingxing.com/#/SourceData/getAmazonFulfilledShipmentsList
-"""
+    API: POST /erp/sc/data/mws_report/getAmazonFulfilledShipmentsList
+    Doc: https://apidoc.lingxing.com/#/SourceData/getAmazonFulfilledShipmentsList
+    """
+
     sid: int
     # 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】
     shipment_date_after: str
@@ -271,13 +305,15 @@ Doc: https://apidoc.lingxing.com/#/SourceData/getAmazonFulfilledShipmentsList
     # 分页偏移量，默认0
     length: Optional[int] = None
     # 分页长度，默认1000
+
 
 class SourcedataV1getamazonfulfilledshipmentslistRequest(RequestBase):
     """Request model for 查询亚马逊源报表—Amazon Fulfilled Shipments v1.
 
-API: POST /erp/sc/data/mws_report_v1/getAmazonFulfilledShipmentsList
-Doc: https://apidoc.lingxing.com/#/SourceData/v1getAmazonFulfilledShipmentsList
-"""
+    API: POST /erp/sc/data/mws_report_v1/getAmazonFulfilledShipmentsList
+    Doc: https://apidoc.lingxing.com/#/SourceData/v1getAmazonFulfilledShipmentsList
+    """
+
     sid: int
     # 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】
     shipment_date_after: str
@@ -289,12 +325,14 @@ Doc: https://apidoc.lingxing.com/#/SourceData/v1getAmazonFulfilledShipmentsList
     length: Optional[int] = None
     # 分页长度，默认1000
 
+
 class SourcedataGetfbainventoryeventdetaillistRequest(RequestBase):
     """Request model for 查询亚马逊源报表——Inventory Event Detail.
 
-API: POST /erp/sc/data/mws_report/getFbaInventoryEventDetailList
-Doc: https://apidoc.lingxing.com/#/SourceData/getFbaInventoryEventDetailList
-"""
+    API: POST /erp/sc/data/mws_report/getFbaInventoryEventDetailList
+    Doc: https://apidoc.lingxing.com/#/SourceData/getFbaInventoryEventDetailList
+    """
+
     sid: int
     # 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】
     snapshot_date_after: str
@@ -306,12 +344,14 @@ Doc: https://apidoc.lingxing.com/#/SourceData/getFbaInventoryEventDetailList
     length: Optional[int] = None
     # 分页长度，默认1000
 
+
 class SourcedataV1getfbainventoryeventdetaillistRequest(RequestBase):
     """Request model for 查询亚马逊源表数据--Inventory Event Detail v1.
 
-API: POST /erp/sc/data/mws_report_v1/getFbaInventoryEventDetailList
-Doc: https://apidoc.lingxing.com/#/SourceData/v1getFbaInventoryEventDetailList
-"""
+    API: POST /erp/sc/data/mws_report_v1/getFbaInventoryEventDetailList
+    Doc: https://apidoc.lingxing.com/#/SourceData/v1getFbaInventoryEventDetailList
+    """
+
     sid: int
     # 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】
     snapshot_date_after: str
@@ -323,12 +363,14 @@ Doc: https://apidoc.lingxing.com/#/SourceData/v1getFbaInventoryEventDetailList
     length: Optional[int] = None
     # 分页长度，默认1000，上限10000
 
+
 class SourcedataAdjustmentlistRequest(RequestBase):
     """Request model for 查询亚马逊源报表-盘存记录.
 
-API: POST /basicOpen/openapi/mwsReport/adjustmentList
-Doc: https://apidoc.lingxing.com/#/SourceData/AdjustmentList
-"""
+    API: POST /basicOpen/openapi/mwsReport/adjustmentList
+    Doc: https://apidoc.lingxing.com/#/SourceData/AdjustmentList
+    """
+
     offset: int
     # 分页偏移量，默认0
     length: int

@@ -1,4 +1,5 @@
 """Auto-generated response models for Statistics."""
+
 from typing import Any, List, Optional
 
 from pydantic import Field
@@ -8,6 +9,7 @@ from ..common import LingXingModel
 
 class ReimbursementlistResponse(LingXingModel):
     """查询亚马逊赔偿报告列表."""
+
     total: Optional[int] = Field(None, description="总数")
     sid: Optional[int] = Field(None, description="店铺id")
     approval_date: Optional[str] = Field(None, description="批准日期【站点时间】")
@@ -33,16 +35,21 @@ class ReimbursementlistResponse(LingXingModel):
 
 class OperatemanageOperatelogListLogData(LingXingModel):
     """log_data sub-structure."""
+
     type_name: Optional[str] = Field(None, description="类型名")
     item_log_data: Optional[list] = Field(None, description="子项运营日志数据")
 
+
 class OperatemanageOperatelogListSmallCateRank(LingXingModel):
     """small_cate_rank sub-structure."""
+
     category: Optional[str] = Field(None, description="小类别名")
     rank: Optional[str] = Field(None, description="小类排名")
 
+
 class OperatemanageOperatelogListResponse(LingXingModel):
     """查询运营日志."""
+
     total: Optional[int] = Field(None, description="总数")
     log_data: Optional[List[OperatemanageOperatelogListLogData]] = Field(None, description="运营日志数据")
     small_cate_rank: Optional[List[OperatemanageOperatelogListSmallCateRank]] = Field(None, description="小类数据")
@@ -53,18 +60,22 @@ class OperatemanageOperatelogListResponse(LingXingModel):
 
 class OperatelogListV2Data(LingXingModel):
     """data sub-structure."""
+
     product_info: Optional[dict] = Field(None, description="商品信息")
     log_data: Optional[dict] = Field(None, description="手动日志")
     auto_log_data: Optional[dict] = Field(None, description="自动日志")
 
+
 class OperatelogListV2Response(LingXingModel):
     """查询运营日志(新)."""
+
     data: Optional[List[OperatelogListV2Data]] = Field(None, description="响应数据")
     total: Optional[int] = Field(None, description="是")
 
 
 class Platformstatisticsv2SalestatPagelistResponse(LingXingModel):
     """查询销量统计列表v2."""
+
     pic_url: Optional[str] = Field(None, description="图片地址")
     sku: Optional[list] = Field(None, description="SKU")
     spu: Optional[list] = Field(None, description="SPU")
@@ -93,6 +104,7 @@ class Platformstatisticsv2SalestatPagelistResponse(LingXingModel):
 
 class ReportAmazonreportexporttaskResponse(LingXingModel):
     """报告导出 - 报告下载链接续期."""
+
     url: Optional[str] = Field(None, description="亚马逊报告下载链接")
     report_document_id: Optional[str] = Field(None, description="报告文档Id")
     total: Optional[int] = Field(None, description="总数")
@@ -100,12 +112,14 @@ class ReportAmazonreportexporttaskResponse(LingXingModel):
 
 class ReportCreateReportexporttaskResponse(LingXingModel):
     """报告导出 - 创建导出任务."""
+
     total: Optional[int] = Field(None, description="总数")
     task_id: Optional[str] = Field(None, description="任务id")
 
 
 class PurchaseBuyerListResponse(LingXingModel):
     """查询采购报表列表 - 采购员."""
+
     total: Optional[int] = Field(None, description="总数")
     buyer_name: Optional[str] = Field(None, description="采购员")
     warehouse_name: Optional[list] = Field(None, description="仓库名称")
@@ -134,11 +148,14 @@ class PurchaseBuyerListResponse(LingXingModel):
 
 class PurchaseProductListAttribute(LingXingModel):
     """attribute sub-structure."""
+
     attr_name: Optional[str] = Field(None, description="属性名称")
     attr_value: Optional[str] = Field(None, description="属性值")
 
+
 class PurchaseProductListResponse(LingXingModel):
     """查询采购报表列表 - 产品."""
+
     total: Optional[int] = Field(None, description="总数")
     pic_url: Optional[str] = Field(None, description="图片URL")
     spu: Optional[str] = Field(None, description="SPU")
@@ -178,11 +195,14 @@ class PurchaseProductListResponse(LingXingModel):
 
 class PurchaseSupplierListList(LingXingModel):
     """list sub-structure."""
+
     shipping_fee: Optional[str] = Field(None, description="运费")
     other_fee: Optional[str] = Field(None, description="其它费用")
 
+
 class PurchaseSupplierListResponse(LingXingModel):
     """查询采购报表列表 - 供应商."""
+
     total: Optional[int] = Field(None, description="总数")
     supplier_name: Optional[str] = Field(None, description="供应商名称")
     warehouse_name: Optional[list] = Field(None, description="仓库名称")
@@ -220,15 +240,20 @@ class PurchaseSupplierListResponse(LingXingModel):
 
 class ReportQueryReportexporttaskResponse(LingXingModel):
     """报告导出-查询导出任务结果."""
+
     total: Optional[int] = Field(None, description="总数")
     report_document_id: Optional[str] = Field(None, description="报告文件id")
-    progress_status: Optional[str] = Field(None, description="报表生成状态： IN_PROGRESS 导出中 CANCELLED 已取消 DONE 已完成 FATAL 导出失败 IN_QUEUE 排队中 UNKNOWN 未知")
+    progress_status: Optional[str] = Field(
+        None,
+        description="报表生成状态： IN_PROGRESS 导出中 CANCELLED 已取消 DONE 已完成 FATAL 导出失败 IN_QUEUE 排队中 UNKNOWN 未知",
+    )
     compression_algorithm: Optional[str] = Field(None, description="报表内容压缩方式")
     url: Optional[str] = Field(None, description="报表下载地址【有效期5min】")
 
 
 class SalesanalysisProductperformancePerformancetrendbyhourList(LingXingModel):
     """list sub-structure."""
+
     r_date: Optional[str] = Field(None, description="小时段")
     volume: Optional[int] = Field(None, description="销量")
     order_items: Optional[int] = Field(None, description="订单量")
@@ -236,8 +261,10 @@ class SalesanalysisProductperformancePerformancetrendbyhourList(LingXingModel):
     price: Optional[str] = Field(None, description="价格")
     sales_rank: Optional[str] = Field(None, description="大类排名")
 
+
 class SalesanalysisProductperformancePerformancetrendbyhourTotal(LingXingModel):
     """total sub-structure."""
+
     r_date: Optional[str] = Field(None, description="小时段")
     volume: Optional[int] = Field(None, description="销量")
     order_items: Optional[int] = Field(None, description="订单量")
@@ -245,8 +272,10 @@ class SalesanalysisProductperformancePerformancetrendbyhourTotal(LingXingModel):
     price: Optional[float] = Field(None, description="价格")
     sales_rank: Optional[int] = Field(None, description="大类排名")
 
+
 class SalesanalysisProductperformancePerformancetrendbyhourResponse(LingXingModel):
     """查询asin360小时数据."""
+
     list: Optional[List[SalesanalysisProductperformancePerformancetrendbyhourList]] = Field(None, description="是")
     total: Optional[List[SalesanalysisProductperformancePerformancetrendbyhourTotal]] = Field(None, description="总计")
     currency_icon: Optional[str] = Field(None, description="币种类型")
@@ -254,6 +283,7 @@ class SalesanalysisProductperformancePerformancetrendbyhourResponse(LingXingMode
 
 class SalesanalysisReturnorderAnalysislistsRecords(LingXingModel):
     """records sub-structure."""
+
     asins_list: Optional[list] = Field(None, description="ASIN列表")
     cur_return_goods_count: Optional[int] = Field(None, description="当期退货量")
     cur_return_goods_count_distribution: Optional[dict] = Field(None, description="当期退货量分布明细（FBA/FBM）")
@@ -266,34 +296,43 @@ class SalesanalysisReturnorderAnalysislistsRecords(LingXingModel):
     info_dto_list: Optional[list] = Field(None, description="综合信息列表（包含商品、店铺、分类等详细信息）")
     is_parent: Optional[str] = Field(None, description="是否为父ASIN")
     local_sku_info_list: Optional[list] = Field(None, description="本地SKU信息列表")
-    most_common_return_reason_bucket: Optional[str] = Field(None, description="买家之声-Top NCX Reason，最常见的不满意原因，仅MSKU维度有此字段")
+    most_common_return_reason_bucket: Optional[str] = Field(
+        None, description="买家之声-Top NCX Reason，最常见的不满意原因，仅MSKU维度有此字段"
+    )
     msku: Optional[str] = Field(None, description="MSKU，卖家SKU")
     ncx_count: Optional[int] = Field(None, description="买家之声-不满意订单数，仅MSKU/ASIN/父ASIN维度有此字段")
     ncx_rate: Optional[str] = Field(None, description="买家之声-不满意率，百分比格式，仅MSKU/ASIN/父ASIN维度有此字段")
     order_count: Optional[int] = Field(None, description="买家之声-订单总数，仅MSKU/ASIN/父ASIN维度有此字段")
     parent_asins_list: Optional[list] = Field(None, description="父ASIN列表")
-    pcx_health: Optional[str] = Field(None, description="买家之声-满意度状况，枚举值：Good-良好, Fair-一般, Poor-差，仅MSKU维度有此字段")
+    pcx_health: Optional[str] = Field(
+        None, description="买家之声-满意度状况，枚举值：Good-良好, Fair-一般, Poor-差，仅MSKU维度有此字段"
+    )
     pre_return_goods_count: Optional[int] = Field(None, description="上期退货量")
     pre_return_goods_items: Optional[int] = Field(None, description="上期退货订单数")
     pre_return_goods_volume_ratio: Optional[str] = Field(None, description="上期退货率")
     pre_volume: Optional[int] = Field(None, description="上期销量")
     return_badge: Optional[str] = Field(None, description="退货标记，仅MSKU/ASIN/父ASIN维度有此字段")
     return_goods_count_ratio: Optional[str] = Field(None, description="退货量环比，相对于上期的增长率")
-    return_goods_volume_ratio_diff: Optional[str] = Field(None, description="退货率环比差异，当期退货率与上期退货率的差值")
+    return_goods_volume_ratio_diff: Optional[str] = Field(
+        None, description="退货率环比差异，当期退货率与上期退货率的差值"
+    )
     sel_fnsku_sku_info_list: Optional[list] = Field(None, description="店铺FNSKU+SKU综合信息列表")
     selfnsku_info_list: Optional[list] = Field(None, description="店铺FNSKU信息列表")
     seller_info_list: Optional[list] = Field(None, description="店铺信息列表")
     sid: Optional[int] = Field(None, description="店铺ID")
     spu_info_list: Optional[list] = Field(None, description="SPU信息列表")
 
+
 class SalesanalysisReturnorderAnalysislistsResponse(LingXingModel):
     """统计-查询退货分析."""
+
     records: Optional[List[SalesanalysisReturnorderAnalysislistsRecords]] = Field(None, description="退货分析记录列表")
     total: Optional[int] = Field(None, description="总记录数")
 
 
 class ReportInventoryListList(LingXingModel):
     """list sub-structure."""
+
     sid: Optional[int] = Field(None, description="店铺id")
     asin: Optional[str] = Field(None, description="asin")
     date: Optional[str] = Field(None, description="日期")
@@ -310,15 +349,21 @@ class ReportInventoryListList(LingXingModel):
     net_received_inventory_cost_currency_code: Optional[str] = Field(None, description="净收货库存货值币种代码")
     unsellable_on_hand_inventory_cost_amount: Optional[float] = Field(None, description="不可售库存货值")
     unsellable_on_hand_inventory_cost_currency_code: Optional[str] = Field(None, description="不可售库存货值币种代码")
-    aged90_plus_days_sellable_inventory_cost_amount: Optional[float] = Field(None, description="库龄90天以上可售库存货值")
-    aged90_plus_days_sellable_inventory_cost_currency_code: Optional[str] = Field(None, description="库龄90天以上可售库存货值币种代码")
+    aged90_plus_days_sellable_inventory_cost_amount: Optional[float] = Field(
+        None, description="库龄90天以上可售库存货值"
+    )
+    aged90_plus_days_sellable_inventory_cost_currency_code: Optional[str] = Field(
+        None, description="库龄90天以上可售库存货值币种代码"
+    )
     sellable_on_hand_inventory_cost_amount: Optional[float] = Field(None, description="可售库存货值")
     sellable_on_hand_inventory_cost_currency_code: Optional[str] = Field(None, description="可售库存成本币种代码")
     unhealthy_inventory_cost_amount: Optional[float] = Field(None, description="不良库存货值")
     unhealthy_inventory_cost_currency_code: Optional[str] = Field(None, description="不良库存货值币种代码")
 
+
 class ReportInventoryListResponse(LingXingModel):
     """VC报表-库存报表."""
+
     total: Optional[int] = Field(None, description="总数")
     offset: Optional[int] = Field(None, description="偏移量")
     length: Optional[int] = Field(None, description="长度")
@@ -327,13 +372,16 @@ class ReportInventoryListResponse(LingXingModel):
 
 class ReportNppmListList(LingXingModel):
     """list sub-structure."""
+
     sid: Optional[int] = Field(None, description="店铺id")
     asin: Optional[str] = Field(None, description="asin")
     date: Optional[str] = Field(None, description="日期")
     net_pure_product_margin: Optional[float] = Field(None, description="产品毛利率")
 
+
 class ReportNppmListResponse(LingXingModel):
     """VC报表-产品利润率报表."""
+
     total: Optional[int] = Field(None, description="总数")
     offset: Optional[int] = Field(None, description="偏移量")
     length: Optional[int] = Field(None, description="长度")
@@ -342,6 +390,7 @@ class ReportNppmListResponse(LingXingModel):
 
 class ReportRealtimesalesListList(LingXingModel):
     """list sub-structure."""
+
     start_time: Optional[str] = Field(None, description="开始时间（UTC）")
     end_time: Optional[str] = Field(None, description="结束时间（UTC）")
     asin: Optional[str] = Field(None, description="ASIN")
@@ -351,8 +400,10 @@ class ReportRealtimesalesListList(LingXingModel):
     ordered_revenue: Optional[float] = Field(None, description="销售额")
     ordered_units: Optional[int] = Field(None, description="销量")
 
+
 class ReportRealtimesalesListResponse(LingXingModel):
     """VC报表-实时销量报表."""
+
     total: Optional[int] = Field(None, description="总数")
     offset: Optional[int] = Field(None, description="偏移量")
     length: Optional[int] = Field(None, description="长度")
@@ -361,6 +412,7 @@ class ReportRealtimesalesListResponse(LingXingModel):
 
 class ReportSalesListList(LingXingModel):
     """list sub-structure."""
+
     date: Optional[str] = Field(None, description="日期")
     asin: Optional[str] = Field(None, description="ASIN")
     shipped_units: Optional[int] = Field(None, description="发货销量（销量）")
@@ -373,8 +425,10 @@ class ReportSalesListList(LingXingModel):
     shipped_cogs_amount: Optional[float] = Field(None, description="发货货值")
     shipped_cogs_currency_code: Optional[str] = Field(None, description="发货货值币种")
 
+
 class ReportSalesListResponse(LingXingModel):
     """VC报表-销量报表."""
+
     total: Optional[int] = Field(None, description="总数")
     offset: Optional[int] = Field(None, description="偏移量")
     length: Optional[int] = Field(None, description="长度")
@@ -383,13 +437,16 @@ class ReportSalesListResponse(LingXingModel):
 
 class ReportTrafficListList(LingXingModel):
     """list sub-structure."""
+
     sid: Optional[int] = Field(None, description="店铺id")
     asin: Optional[str] = Field(None, description="asin")
     date: Optional[str] = Field(None, description="日期")
     glance_views: Optional[int] = Field(None, description="浏览量")
 
+
 class ReportTrafficListResponse(LingXingModel):
     """VC报表-流量报表."""
+
     total: Optional[int] = Field(None, description="总数")
     offset: Optional[int] = Field(None, description="偏移量")
     length: Optional[int] = Field(None, description="长度")
@@ -398,6 +455,7 @@ class ReportTrafficListResponse(LingXingModel):
 
 class ProductperformanceOpenapiAsinlistList(LingXingModel):
     """list sub-structure."""
+
     parent_asins: Optional[list] = Field(None, description="父asins信息")
     asins: Optional[list] = Field(None, description="asin列表")
     price_list: Optional[list] = Field(None, description="价格列表")
@@ -497,7 +555,9 @@ class ProductperformanceOpenapiAsinlistList(LingXingModel):
     sku: Optional[str] = Field(None, description="sku【sku维度才有值】")
     local_name: Optional[str] = Field(None, description="品名，【sku维度才有值】")
     spu_spu_names: Optional[list] = Field(None, description="spu数据")
-    attributes: Optional[list] = Field(None, description="属性，注意内部属性与属性值的分隔符是' 001： 001'，存在特殊隐藏字符")
+    attributes: Optional[list] = Field(
+        None, description="属性，注意内部属性与属性值的分隔符是' 001： 001'，存在特殊隐藏字符"
+    )
     cg_price: Optional[float] = Field(None, description="采购成本，sku维度特有")
     whs_value: Optional[float] = Field(None, description="可用货值，sku维度特有")
     cg_price_currency_icon: Optional[str] = Field(None, description="采购成本，可用货值的币种符号")
@@ -517,8 +577,10 @@ class ProductperformanceOpenapiAsinlistList(LingXingModel):
     available_inventory: Optional[dict] = Field(None, description="可用库存数据")
     tag_set: Optional[list] = Field(None, description="Listing标签信息")
 
+
 class ProductperformanceOpenapiAsinlistResponse(LingXingModel):
     """查询产品表现."""
+
     total: Optional[int] = Field(None, description="总数")
     list: Optional[List[ProductperformanceOpenapiAsinlistList]] = Field(None, description="数据列表")
     chain_start_date: Optional[str] = Field(None, description="环比时间")
@@ -528,6 +590,7 @@ class ProductperformanceOpenapiAsinlistResponse(LingXingModel):
 
 class StatisticsAsinListRecords(LingXingModel):
     """records sub-structure."""
+
     total_fba_and_fbm_quantity: Optional[int] = Field(None, description="fba和fbm销量加总，用于计算占比")
     total_fba_and_fbm_amount: Optional[float] = Field(None, description="fba和fbm销售额加总，用于计算占比")
     id: Optional[str] = Field(None, description="记录id【非业务唯一键】")
@@ -704,14 +767,17 @@ class StatisticsAsinListRecords(LingXingModel):
     tax_refunded_product: Optional[float] = Field(None, description="销售税退款-商品价格税")
     alarm_info: Optional[dict] = Field(None, description="监控信息")
 
+
 class StatisticsAsinListResponse(LingXingModel):
     """查询利润统计-ASIN."""
+
     total: Optional[int] = Field(None, description="总数")
     records: Optional[List[StatisticsAsinListRecords]] = Field(None, description="查询数据列表")
 
 
 class StatisticsMskuListRecords(LingXingModel):
     """records sub-structure."""
+
     total_fba_and_fbm_quantity: Optional[int] = Field(None, description="fba和fbm销量加总，用于计算占比")
     total_fba_and_fbm_amount: Optional[float] = Field(None, description="fba和fbm销售额加总，用于计算占比")
     id: Optional[str] = Field(None, description="记录id【非业务唯一键，已废弃不再返回】")
@@ -901,14 +967,17 @@ class StatisticsMskuListRecords(LingXingModel):
     shared_receivables_deductions: Optional[float] = Field(None, description="透明计划标签费")
     shared_amazon_shipping_charge_adjustments: Optional[float] = Field(None, description="亚马逊物流运费调整")
 
+
 class StatisticsMskuListResponse(LingXingModel):
     """查询利润统计-MSKU."""
+
     total: Optional[int] = Field(None, description="总数")
     records: Optional[List[StatisticsMskuListRecords]] = Field(None, description="查询数据列表")
 
 
 class ParentAsinListRecords(LingXingModel):
     """records sub-structure."""
+
     total_fba_and_fbm_quantity: Optional[int] = Field(None, description="fba和fbm销量加总，用于计算占比")
     total_fba_and_fbm_amount: Optional[float] = Field(None, description="fba和fbm销售额加总，用于计算占比")
     id: Optional[str] = Field(None, description="记录id【非业务唯一键】")
@@ -1083,14 +1152,17 @@ class ParentAsinListRecords(LingXingModel):
     tax_refunded_discount: Optional[float] = Field(None, description="销售税退款-促销折扣税")
     tax_refunded_product: Optional[float] = Field(None, description="销售税退款-商品价格税")
 
+
 class ParentAsinListResponse(LingXingModel):
     """."""
+
     total: Optional[int] = Field(None, description="总数")
     records: Optional[List[ParentAsinListRecords]] = Field(None, description="查询数据列表")
 
 
 class StatisticsSellerListRecords(LingXingModel):
     """records sub-structure."""
+
     total_fba_and_fbm_quantity: Optional[int] = Field(None, description="fba和fbm销量加总，用于计算占比")
     total_fba_and_fbm_amount: Optional[float] = Field(None, description="fba和fbm销售额加总，用于计算占比")
     id: Optional[str] = Field(None, description="主键id记录id【非业务唯一键】")
@@ -1259,14 +1331,17 @@ class StatisticsSellerListRecords(LingXingModel):
     tax_refunded_product: Optional[float] = Field(None, description="销售税退款-商品价格税")
     alarm_info: Optional[dict] = Field(None, description="监控信息")
 
+
 class StatisticsSellerListResponse(LingXingModel):
     """查询利润统计-店铺."""
+
     total: Optional[int] = Field(None, description="总数")
     records: Optional[List[StatisticsSellerListRecords]] = Field(None, description="数据列表")
 
 
 class FbaDetailQueryRowData(LingXingModel):
     """row_data sub-structure."""
+
     seller_id: Optional[str] = Field(None, description="亚马逊店铺id")
     sid: Optional[int] = Field(None, description="店铺id")
     wid: Optional[int] = Field(None, description="系统仓库id")
@@ -1358,8 +1433,10 @@ class FbaDetailQueryRowData(LingXingModel):
     valuation_method: Optional[int] = Field(None, description="计价方法： 1 先进先出 2 移动加权 3 月末加权")
     child_data: Optional[list] = Field(None, description="返回字段与上级row_data一致")
 
+
 class FbaDetailQueryResponse(LingXingModel):
     """库存报表-FBA-新版-明细."""
+
     total: Optional[int] = Field(None, description="总数")
     start_date: Optional[str] = Field(None, description="统计开始月份，格式：Y-m-d")
     end_date: Optional[str] = Field(None, description="统计结束月份，格式：Y-m-d")
@@ -1370,6 +1447,7 @@ class FbaDetailQueryResponse(LingXingModel):
 
 class FbaGatherQueryRowData(LingXingModel):
     """row_data sub-structure."""
+
     adjustments_count: Optional[int] = Field(None, description="成本调整-数量")
     adjustments_logistic_amount: Optional[float] = Field(None, description="成本调整-物流成本 (精度：2位小数)")
     adjustments_other_amount: Optional[float] = Field(None, description="成本调整-其他成本 (精度：2位小数)")
@@ -1456,8 +1534,10 @@ class FbaGatherQueryRowData(LingXingModel):
     ware_house_name: Optional[str] = Field(None, description="仓库名称")
     child_data: Optional[list] = Field(None, description="返回字段与上级row_data一致")
 
+
 class FbaGatherQueryResponse(LingXingModel):
     """库存报表-FBA-新版-汇总."""
+
     current: Optional[int] = Field(None, description="当前所在页")
     size: Optional[int] = Field(None, description="单页数据行数")
     total: Optional[int] = Field(None, description="总数")
@@ -1470,6 +1550,7 @@ class FbaGatherQueryResponse(LingXingModel):
 
 class FbaReportStoragefeelongtermResponse(LingXingModel):
     """查询FBA长期仓储费."""
+
     sid: Optional[int] = Field(None, description="店铺id")
     snapshot_date: Optional[str] = Field(None, description="时间")
     sku: Optional[str] = Field(None, description="SKU")
@@ -1491,6 +1572,7 @@ class FbaReportStoragefeelongtermResponse(LingXingModel):
 
 class FbaReportStoragefeemonthResponse(LingXingModel):
     """查询FBA月仓储费."""
+
     sid: Optional[int] = Field(None, description="店铺id")
     asin: Optional[str] = Field(None, description="ASIN")
     fnsku: Optional[str] = Field(None, description="FNSKU")
@@ -1517,6 +1599,7 @@ class FbaReportStoragefeemonthResponse(LingXingModel):
 
 class SalesReportAsindailylistsResponse(LingXingModel):
     """查询亚马逊销量统计."""
+
     sid: Optional[int] = Field(None, description="店铺id")
     r_date: Optional[str] = Field(None, description="报表日期【站点时间】")
     currency_code: Optional[str] = Field(None, description="币种")
@@ -1528,6 +1611,7 @@ class SalesReportAsindailylistsResponse(LingXingModel):
 
 class SalesReportAsinlistResponse(LingXingModel):
     """查询产品表现（旧）."""
+
     sid: Optional[int] = Field(None, description="店铺id")
     id: Optional[int] = Field(None, description="id")
     gmt_modified: Optional[str] = Field(None, description="更新时间")
@@ -1576,11 +1660,14 @@ class SalesReportAsinlistResponse(LingXingModel):
     ad_cvr: Optional[str] = Field(None, description="广告CVR")
     asoas: Optional[str] = Field(None, description="ASOAS")
     remark: Optional[list] = Field(None, description="asin备注数组，格式[{'date': '***', 'content': '***'}]")
-    small_rank_list: Optional[list] = Field(None, description="小类排名数组，格式[{'smallRankName': '***', 'rankValue': '***'}]")
+    small_rank_list: Optional[list] = Field(
+        None, description="小类排名数组，格式[{'smallRankName': '***', 'rankValue': '***'}]"
+    )
 
 
 class SalesReportSalesResponse(LingXingModel):
     """查询店铺汇总销量."""
+
     r_date: Optional[str] = Field(None, description="报表日期")
     seller_sku: Optional[str] = Field(None, description="MSKU")
     asin: Optional[str] = Field(None, description="ASIN")
@@ -1593,6 +1680,7 @@ class SalesReportSalesResponse(LingXingModel):
 
 class FinanceProfitstatisProfitmskuResponse(LingXingModel):
     """查询利润统计（旧）-MSKU."""
+
     msku: Optional[str] = Field(None, description="MSKU")
     asin: Optional[str] = Field(None, description="Asin")
     item_name: Optional[str] = Field(None, description="标题")
@@ -1628,20 +1716,24 @@ class FinanceProfitstatisProfitmskuResponse(LingXingModel):
 
 class FinanceRefundProfitmonthrefundList(LingXingModel):
     """list sub-structure."""
+
     asin_type: Optional[int] = Field(None, description="1:asin 2:父asin")
     asin: Optional[str] = Field(None, description="asin")
     parent_asin: Optional[str] = Field(None, description="父asin asin_type=2的时候会返回")
     refund_num: Optional[str] = Field(None, description="退款量")
     refund_rate: Optional[str] = Field(None, description="退款率")
 
+
 class FinanceRefundProfitmonthrefundResponse(LingXingModel):
     """查询退款量（旧）."""
+
     total: Optional[int] = Field(None, description="总数")
     list: Optional[List[FinanceRefundProfitmonthrefundList]] = Field(None, description="明细")
 
 
 class InventorylogWarehousereportGetlocalwarehousedetaillistResponse(LingXingModel):
     """库存报表-本地仓-历史报表-明细."""
+
     spu: Optional[str] = Field(None, description="SPU")
     spu_name: Optional[str] = Field(None, description="款名")
     sku: Optional[str] = Field(None, description="SKU")
@@ -1702,6 +1794,7 @@ class InventorylogWarehousereportGetlocalwarehousedetaillistResponse(LingXingMod
 
 class InventorylogWarehousereportGetlocalwarehousesummarylistResponse(LingXingModel):
     """库存报表-本地仓-历史报表-汇总."""
+
     sys_wid: Optional[int] = Field(None, description="仓库id")
     ware_house_name: Optional[str] = Field(None, description="仓库名称")
     day_early_count: Optional[float] = Field(None, description="期初库存（数量）")
@@ -1750,6 +1843,7 @@ class InventorylogWarehousereportGetlocalwarehousesummarylistResponse(LingXingMo
 
 class InventorylogWarehousereportGetoverseadetaillistResponse(LingXingModel):
     """库存报表-海外仓-历史报表-明细."""
+
     sku: Optional[str] = Field(None, description="SKU")
     api_sku: Optional[str] = Field(None, description="第三方SKU")
     product_name: Optional[str] = Field(None, description="品名")
@@ -1812,6 +1906,7 @@ class InventorylogWarehousereportGetoverseadetaillistResponse(LingXingModel):
 
 class InventorylogWarehousereportGetoverseasummarylistResponse(LingXingModel):
     """库存报表-海外仓-历史报表-汇总."""
+
     sys_wid: Optional[int] = Field(None, description="仓库id")
     ware_house_name: Optional[str] = Field(None, description="仓库名称")
     ware_house_type: Optional[str] = Field(None, description="仓库类型")
@@ -1865,6 +1960,7 @@ class InventorylogWarehousereportGetoverseasummarylistResponse(LingXingModel):
 
 class LocalAggregateListResponse(LingXingModel):
     """库存报表-本地仓-新报表-汇总."""
+
     sys_wid: Optional[int] = Field(None, description="系统仓库id")
     ware_house_name: Optional[str] = Field(None, description="仓库名称")
     product_count: Optional[float] = Field(None, description="商品数量")
@@ -1930,6 +2026,7 @@ class LocalAggregateListResponse(LingXingModel):
 
 class LocalDetailPageResponse(LingXingModel):
     """库存报表-本地仓-新报表-明细."""
+
     total: Optional[int] = Field(None, description="总数")
     sys_wid: Optional[int] = Field(None, description="系统仓库ID")
     ware_house_name: Optional[str] = Field(None, description="仓库名称")
@@ -2009,6 +2106,7 @@ class LocalDetailPageResponse(LingXingModel):
 
 class OverseasAggregateListResponse(LingXingModel):
     """库存报表-海外仓-新报表-汇总."""
+
     sys_wid: Optional[int] = Field(None, description="系统仓库id")
     ware_house_name: Optional[str] = Field(None, description="仓库名称")
     ware_house_type: Optional[str] = Field(None, description="仓库子类型")
@@ -2078,6 +2176,7 @@ class OverseasAggregateListResponse(LingXingModel):
 
 class OverseasDetailPageResponse(LingXingModel):
     """库存报表-海外仓-新报表-明细."""
+
     total: Optional[int] = Field(None, description="分页总数")
     sys_wid: Optional[int] = Field(None, description="仓库id")
     ware_house_name: Optional[str] = Field(None, description="仓库名称")
@@ -2177,49 +2276,59 @@ class MonthRefundItem(LingXingModel):
 
 class ProfitStatMskuListResponse(LingXingModel):
     """查询利润统计-MSKU (/bd/profit/statistics/open/msku/list)."""
+
     msg: Optional[str] = None
 
 
 class ProfitStatAsinListResponse(LingXingModel):
     """查询利润统计-ASIN (/bd/profit/statistics/open/asin/list)."""
+
     msg: Optional[str] = None
 
 
 class ProfitStatParentAsinListResponse(LingXingModel):
     """查询利润统计-父ASIN (/bd/profit/statistics/open/parent/asin/list)."""
+
     msg: Optional[str] = None
 
 
 class ProfitStatSellerListResponse(LingXingModel):
     """查询利润统计-店铺 (/bd/profit/statistics/open/seller/list)."""
+
     msg: Optional[str] = None
 
 
 class InvReportLocalAggregateResponse(LingXingModel):
     """库存报表-本地仓-新报表-汇总 (/inventory/center/openapi/storageReport/local/aggregate/list)."""
+
     msg: Optional[str] = None
 
 
 class InvReportLocalDetailResponse(LingXingModel):
     """库存报表-本地仓-新报表-明细 (/inventory/center/openapi/storageReport/local/detail/page)."""
+
     msg: Optional[str] = None
 
 
 class InvReportOverseasAggregateResponse(LingXingModel):
     """库存报表-海外仓-新报表-汇总 (/inventory/center/openapi/storageReport/overseas/aggregate/list)."""
+
     msg: Optional[str] = None
 
 
 class InvReportOverseasDetailResponse(LingXingModel):
     """库存报表-海外仓-新报表-明细 (/inventory/center/openapi/storageReport/overseas/detail/page)."""
+
     msg: Optional[str] = None
 
 
 class InvReportFbaGatherResponse(LingXingModel):
     """库存报表-FBA-新版-汇总 (/cost/center/openApi/fba/gather/query)."""
+
     msg: Optional[str] = None
 
 
 class InvReportFbaDetailResponse(LingXingModel):
     """库存报表-FBA-新版-明细 (/cost/center/openApi/fba/detail/query)."""
+
     msg: Optional[str] = None

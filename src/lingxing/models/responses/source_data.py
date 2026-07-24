@@ -1,4 +1,5 @@
 """Auto-generated response models for SourceData."""
+
 from typing import Any, List, Optional
 
 from pydantic import Field
@@ -8,6 +9,7 @@ from ..common import LingXingModel
 
 class AdjustmentlistResponse(LingXingModel):
     """查询亚马逊源报表-盘存记录."""
+
     total: Optional[int] = Field(None, description="[int]")
     sid: Optional[int] = Field(None, description="[int]")
     report_date: Optional[str] = Field(None, description="[string]")
@@ -24,6 +26,7 @@ class AdjustmentlistResponse(LingXingModel):
 
 class FbaReportRemovallistsResponse(LingXingModel):
     """查询亚马逊源报表-移除货件（旧）."""
+
     sid: Optional[int] = Field(None, description="店铺id")
     uuid: Optional[str] = Field(None, description="UUID")
     request_timestamp: Optional[int] = Field(None, description="时间戳")
@@ -44,6 +47,7 @@ class FbaReportRemovallistsResponse(LingXingModel):
 
 class MwsReportAllordersResponse(LingXingModel):
     """查询亚马逊源报表-所有订单."""
+
     amazon_order_id: Optional[str] = Field(None, description="亚马逊订单号")
     merchant_order_id: Optional[str] = Field(None, description="卖家为订单提供的唯一编号")
     last_updated_time: Optional[str] = Field(None, description="订单最近更新时间")
@@ -52,7 +56,9 @@ class MwsReportAllordersResponse(LingXingModel):
     purchase_date_local: Optional[str] = Field(None, description="下单日期-店铺当地时间")
     shipment_date: Optional[str] = Field(None, description="发货时间-UTC时间")
     order_status: Optional[str] = Field(None, description="订单的当前状态")
-    fulfillment_channel: Optional[str] = Field(None, description="订单的配送方式： Amazon 亚马逊配送 (AFN) Merchant 卖家自行配送 (MFN)")
+    fulfillment_channel: Optional[str] = Field(
+        None, description="订单的配送方式： Amazon 亚马逊配送 (AFN) Merchant 卖家自行配送 (MFN)"
+    )
     sales_channel: Optional[str] = Field(None, description="下单渠道")
     order_channel: Optional[str] = Field(None, description="CBA/WBA 订单下单的子渠道")
     url: Optional[str] = Field(None, description="链接")
@@ -81,6 +87,7 @@ class MwsReportAllordersResponse(LingXingModel):
 
 class DailyinventoryResponse(LingXingModel):
     """查询亚马逊源报表-每日库存."""
+
     snapshot_date: Optional[str] = Field(None, description="快照时间")
     fnsku: Optional[str] = Field(None, description="FNSKU")
     sku: Optional[str] = Field(None, description="SKU")
@@ -93,6 +100,7 @@ class DailyinventoryResponse(LingXingModel):
 
 class MwsReportFbaordersResponse(LingXingModel):
     """查询亚马逊源报表-FBA订单."""
+
     amazon_order_id: Optional[str] = Field(None, description="订单号")
     shipment_id: Optional[str] = Field(None, description="配送ID")
     shipment_item_id: Optional[str] = Field(None, description="配送子ID")
@@ -123,6 +131,7 @@ class MwsReportFbaordersResponse(LingXingModel):
 
 class GetafnfulfillablequantityResponse(LingXingModel):
     """查询亚马逊源报表-FBA可售库存."""
+
     sid: Optional[int] = Field(None, description="店铺id")
     seller_sku: Optional[str] = Field(None, description="销售SKU")
     fnsku: Optional[str] = Field(None, description="FNSKU")
@@ -135,6 +144,7 @@ class GetafnfulfillablequantityResponse(LingXingModel):
 
 class MwsReportGetamazonfulfilledshipmentslistResponse(LingXingModel):
     """查询亚马逊源报表—Amazon Fulfilled Shipments."""
+
     sid: Optional[int] = Field(None, description="店铺id")
     amazon_order_id: Optional[str] = Field(None, description="亚马逊为订单提供的可显示的唯一编号")
     merchant_order_id: Optional[str] = Field(None, description="卖家为订单提供的唯一标识")
@@ -160,7 +170,9 @@ class MwsReportGetamazonfulfilledshipmentslistResponse(LingXingModel):
     shipping_tax: Optional[str] = Field(None, description="买家支付的运费税。金额是总金额，不是单价。")
     gift_wrap_price: Optional[str] = Field(None, description="买家为礼品包装支付的金额。金额是总金额，不是单价。")
     gift_wrap_tax: Optional[str] = Field(None, description="买家支付的礼品包装税。金额是总金额，不是单价。")
-    ship_service_level: Optional[str] = Field(None, description="买家期望卖家使用的配送服务类型（例如，标准配送与加急配送）")
+    ship_service_level: Optional[str] = Field(
+        None, description="买家期望卖家使用的配送服务类型（例如，标准配送与加急配送）"
+    )
     ship_country: Optional[str] = Field(None, description="ISO 3166 标准的收件地址的国家/地区二字代码")
     bill_country: Optional[str] = Field(None, description="ISO 3166 标准的账单地址的国家/地区二字代码")
     item_promotion_discount: Optional[str] = Field(None, description="订单商品的促销折扣")
@@ -170,7 +182,9 @@ class MwsReportGetamazonfulfilledshipmentslistResponse(LingXingModel):
     estimated_arrival_date: Optional[str] = Field(None, description="预计送达买家地址的日期（报表时间，含时区）")
     estimated_arrival_date_locale: Optional[str] = Field(None, description="预计送达买家地址的日期（站点时间，含时区）")
     fulfillment_center_id: Optional[str] = Field(None, description="配送订单的运营中心的唯一标识")
-    fulfillment_channel: Optional[str] = Field(None, description="说明订单的配送方式：亚马逊物流网络 (AFN) 或卖家自配送 (MFN)")
+    fulfillment_channel: Optional[str] = Field(
+        None, description="说明订单的配送方式：亚马逊物流网络 (AFN) 或卖家自配送 (MFN)"
+    )
     sales_channel: Optional[str] = Field(None, description="订单来源")
     points_granted: Optional[str] = Field(None, description="积分成本（日本站）")
     total: Optional[int] = Field(None, description="总数")
@@ -178,6 +192,7 @@ class MwsReportGetamazonfulfilledshipmentslistResponse(LingXingModel):
 
 class MwsReportGetfbainventoryeventdetaillistResponse(LingXingModel):
     """查询亚马逊源报表——Inventory Event Detail."""
+
     sid: Optional[int] = Field(None, description="店铺id")
     snapshot_date: Optional[str] = Field(None, description="快照时间")
     snapshot_date_locale: Optional[str] = Field(None, description="快照时间")
@@ -195,6 +210,7 @@ class MwsReportGetfbainventoryeventdetaillistResponse(LingXingModel):
 
 class ManageinventoryResponse(LingXingModel):
     """查询亚马逊源报表-FBA库存."""
+
     sku: Optional[str] = Field(None, description="MSKU")
     fnsku: Optional[str] = Field(None, description="FNSKU")
     asin: Optional[str] = Field(None, description="ASIN")
@@ -204,14 +220,30 @@ class ManageinventoryResponse(LingXingModel):
     mfn_fulfillable_quantity: Optional[float] = Field(None, description="您的配送网络中可取件、包装和配送的商品数量")
     afn_listing_exists: Optional[str] = Field(None, description="商品是否由亚马逊物流配送")
     afn_warehouse_quantity: Optional[float] = Field(None, description="亚马逊运营中心内某个 SKU 的已处理商品数量")
-    afn_fulfillable_quantity: Optional[float] = Field(None, description="亚马逊运营中心内某个 SKU 可取件、包装和配送的商品数量")
-    afn_unsellable_quantity: Optional[float] = Field(None, description="亚马逊运营中心内某个 SKU 处于不可售状况的商品数量")
-    afn_reserved_quantity: Optional[float] = Field(None, description="亚马逊运营中心内某个 SKU 目前正在进行内部处理（如取件、包装和配送或留作测量、取样等）的商品数量")
-    afn_total_quantity: Optional[float] = Field(None, description="入库货件或亚马逊运营中心内某个 SKU 的商品总数量：(afn-total-quantity) = (afn-warehouse-quantity) + (afn-inbound-working-quantity) + (afn-inbound-shipped-quantity) + (afn-inbound-receiving-quantity)")
+    afn_fulfillable_quantity: Optional[float] = Field(
+        None, description="亚马逊运营中心内某个 SKU 可取件、包装和配送的商品数量"
+    )
+    afn_unsellable_quantity: Optional[float] = Field(
+        None, description="亚马逊运营中心内某个 SKU 处于不可售状况的商品数量"
+    )
+    afn_reserved_quantity: Optional[float] = Field(
+        None,
+        description="亚马逊运营中心内某个 SKU 目前正在进行内部处理（如取件、包装和配送或留作测量、取样等）的商品数量",
+    )
+    afn_total_quantity: Optional[float] = Field(
+        None,
+        description="入库货件或亚马逊运营中心内某个 SKU 的商品总数量：(afn-total-quantity) = (afn-warehouse-quantity) + (afn-inbound-working-quantity) + (afn-inbound-shipped-quantity) + (afn-inbound-receiving-quantity)",
+    )
     per_unit_volume: Optional[int] = Field(None, description="是")
-    afn_inbound_working_quantity: Optional[float] = Field(None, description="您已通知亚马逊的入库货件中某个 SKU 的商品数量")
-    afn_inbound_shipped_quantity: Optional[float] = Field(None, description="您已通知亚马逊并提供追踪编码的入库货件中某个 SKU 的商品数量")
-    afn_inbound_receiving_quantity: Optional[float] = Field(None, description="某个 SKU 抵达亚马逊运营中心等待处理的商品数量")
+    afn_inbound_working_quantity: Optional[float] = Field(
+        None, description="您已通知亚马逊的入库货件中某个 SKU 的商品数量"
+    )
+    afn_inbound_shipped_quantity: Optional[float] = Field(
+        None, description="您已通知亚马逊并提供追踪编码的入库货件中某个 SKU 的商品数量"
+    )
+    afn_inbound_receiving_quantity: Optional[float] = Field(
+        None, description="某个 SKU 抵达亚马逊运营中心等待处理的商品数量"
+    )
     your_price: Optional[float] = Field(None, description="您当前的销售价格")
     cg_price: Optional[float] = Field(None, description="采购：采购成本（人民币）")
     landed_price: Optional[float] = Field(None, description="卖家自己产品的销售价格")
@@ -220,11 +252,14 @@ class ManageinventoryResponse(LingXingModel):
 
 class MwsReportRefundordersTag(LingXingModel):
     """tag sub-structure."""
+
     tag_name: Optional[str] = Field(None, description="标签名称")
     tag_color: Optional[str] = Field(None, description="标签颜色")
 
+
 class RefundordersResponse(LingXingModel):
     """查询亚马逊源报表-FBA退货订单."""
+
     sid: Optional[int] = Field(None, description="店铺id")
     order_id: Optional[str] = Field(None, description="订单号")
     local_sku: Optional[str] = Field(None, description="本地产品sku")
@@ -250,6 +285,7 @@ class RefundordersResponse(LingXingModel):
 
 class RemovalordersResponse(LingXingModel):
     """查询亚马逊源报表-移除订单（旧）."""
+
     request_date: Optional[str] = Field(None, description="提交移除订单的日期")
     order_id: Optional[str] = Field(None, description="订单编号")
     order_type: Optional[str] = Field(None, description="移除订单类型（退货或弃置）")
@@ -269,6 +305,7 @@ class RemovalordersResponse(LingXingModel):
 
 class ReservedinventoryResponse(LingXingModel):
     """查询亚马逊源报表-预留库存."""
+
     sku: Optional[str] = Field(None, description="SKU")
     fnsku: Optional[str] = Field(None, description="FNSKU")
     asin: Optional[str] = Field(None, description="ASIN")
@@ -282,6 +319,7 @@ class ReservedinventoryResponse(LingXingModel):
 
 class MwsReportTransactionResponse(LingXingModel):
     """查询亚马逊源报表-交易明细."""
+
     sid: Optional[int] = Field(None, description="店铺id")
     is_to_b: Optional[int] = Field(None, description="是否为B2B订单：0 否【2c】，1 是")
     report_date_month: Optional[str] = Field(None, description="client_task的月份")
@@ -290,7 +328,10 @@ class MwsReportTransactionResponse(LingXingModel):
     date_locale: Optional[str] = Field(None, description="当地日期")
     date_iso: Optional[str] = Field(None, description="ISO时间")
     settlement_id: Optional[str] = Field(None, description="结算编号")
-    type: Optional[int] = Field(None, description="类型： 1 ORDER 2 REFUND 3 ADJUSTMENT 4 A_TO_Z_GUARANTEE_CLAIM 5 CHARGEBACK_REFUND 6 FBA_INVENTORY_FEE 7 SERVICE_FEE 8 LIGHTNING_DEAL_FEE 9 TRANSFER 10 ORDER_RETROCHARGE 11 REFUND_RETROCHARGE 12 CHARGE...")
+    type: Optional[int] = Field(
+        None,
+        description="类型： 1 ORDER 2 REFUND 3 ADJUSTMENT 4 A_TO_Z_GUARANTEE_CLAIM 5 CHARGEBACK_REFUND 6 FBA_INVENTORY_FEE 7 SERVICE_FEE 8 LIGHTNING_DEAL_FEE 9 TRANSFER 10 ORDER_RETROCHARGE 11 REFUND_RETROCHARGE 12 CHARGE...",
+    )
     type_str: Optional[str] = Field(None, description="类型说明")
     order_id: Optional[str] = Field(None, description="订单号")
     sku: Optional[str] = Field(None, description="SKU")
@@ -321,6 +362,7 @@ class MwsReportTransactionResponse(LingXingModel):
 
 class MwsReportV1GetamazonfulfilledshipmentslistResponse(LingXingModel):
     """查询亚马逊源报表—Amazon Fulfilled Shipments v1."""
+
     sid: Optional[int] = Field(None, description="店铺id")
     amazon_order_id: Optional[str] = Field(None, description="亚马逊为订单提供的可显示的唯一编号")
     merchant_order_id: Optional[str] = Field(None, description="卖家为订单提供的唯一标识")
@@ -346,7 +388,9 @@ class MwsReportV1GetamazonfulfilledshipmentslistResponse(LingXingModel):
     shipping_tax: Optional[str] = Field(None, description="买家支付的运费税。金额是总金额，不是单价。")
     gift_wrap_price: Optional[str] = Field(None, description="买家为礼品包装支付的金额。金额是总金额，不是单价。")
     gift_wrap_tax: Optional[str] = Field(None, description="买家支付的礼品包装税。金额是总金额，不是单价。")
-    ship_service_level: Optional[str] = Field(None, description="买家期望卖家使用的配送服务类型（例如，标准配送与加急配送）")
+    ship_service_level: Optional[str] = Field(
+        None, description="买家期望卖家使用的配送服务类型（例如，标准配送与加急配送）"
+    )
     ship_country: Optional[str] = Field(None, description="ISO 3166 标准的收件地址的国家/地区二字代码")
     bill_country: Optional[str] = Field(None, description="ISO 3166 标准的账单地址的国家/地区二字代码")
     item_promotion_discount: Optional[str] = Field(None, description="订单商品的促销折扣")
@@ -356,7 +400,9 @@ class MwsReportV1GetamazonfulfilledshipmentslistResponse(LingXingModel):
     estimated_arrival_date: Optional[str] = Field(None, description="预计送达买家地址的日期（报表时间，含时区）")
     estimated_arrival_date_locale: Optional[str] = Field(None, description="预计送达买家地址的日期（站点时间，含时区）")
     fulfillment_center_id: Optional[str] = Field(None, description="配送订单的运营中心的唯一标识")
-    fulfillment_channel: Optional[str] = Field(None, description="说明订单的配送方式：亚马逊物流网络 (AFN) 或卖家自配送 (MFN)")
+    fulfillment_channel: Optional[str] = Field(
+        None, description="说明订单的配送方式：亚马逊物流网络 (AFN) 或卖家自配送 (MFN)"
+    )
     sales_channel: Optional[str] = Field(None, description="订单来源")
     points_granted: Optional[str] = Field(None, description="积分成本（日本站）")
     local_name: Optional[str] = Field(None, description="品名")
@@ -366,6 +412,7 @@ class MwsReportV1GetamazonfulfilledshipmentslistResponse(LingXingModel):
 
 class MwsReportV1GetfbainventoryeventdetaillistResponse(LingXingModel):
     """查询亚马逊源表数据--Inventory Event Detail v1."""
+
     total: Optional[int] = Field(None, description="总数")
     sid: Optional[int] = Field(None, description="店铺id")
     snapshot_date: Optional[str] = Field(None, description="快照时间")
@@ -385,6 +432,7 @@ class MwsReportV1GetfbainventoryeventdetaillistResponse(LingXingModel):
 
 class OrderFbaexchangeorderlistResponse(LingXingModel):
     """查询亚马逊源报表-FBA换货订单."""
+
     total: Optional[int] = Field(None, description="总数")
     order_hash: Optional[str] = Field(None, description="订单唯一hash【不是唯一键】")
     sid: Optional[int] = Field(None, description="店铺id")
@@ -402,11 +450,14 @@ class OrderFbaexchangeorderlistResponse(LingXingModel):
 
 class OrderFbmreturnorderlistTagTypeIds(LingXingModel):
     """tag_type_ids sub-structure."""
+
     tag_name: Optional[str] = Field(None, description="标签名称")
     tag_color: Optional[str] = Field(None, description="标签颜色")
 
+
 class OrderFbmreturnorderlistResponse(LingXingModel):
     """查询亚马逊源报表-FBM退货订单."""
+
     total: Optional[int] = Field(None, description="总数")
     id: Optional[int] = Field(None, description="订单id")
     order_hash: Optional[str] = Field(None, description="订单唯一hash")
@@ -458,6 +509,7 @@ class OrderFbmreturnorderlistResponse(LingXingModel):
 
 class OrderRemovalorderlistnewResponse(LingXingModel):
     """查询亚马逊源报表-移除订单（新）."""
+
     seller_id: Optional[str] = Field(None, description="亚马逊店铺id")
     sid: Optional[int] = Field(None, description="店铺id【为0代表未确定订单店铺】")
     region: Optional[str] = Field(None, description="地区")
@@ -485,10 +537,13 @@ class OrderRemovalorderlistnewResponse(LingXingModel):
 
 class FbaFbastockGetfbaagelistList(LingXingModel):
     """list sub-structure."""
+
     sid: Optional[int] = Field(None, description="店铺id")
     snapshot_date: Optional[str] = Field(None, description="生成报告的日期")
     sku: Optional[str] = Field(None, description="您分配给所售商品的唯一编码，由字母和数字组成")
-    fnsku: Optional[str] = Field(None, description="亚马逊为存放在亚马逊运营中心并从亚马逊运营中心配送的商品分配的唯一编码，由字母和数字组成")
+    fnsku: Optional[str] = Field(
+        None, description="亚马逊为存放在亚马逊运营中心并从亚马逊运营中心配送的商品分配的唯一编码，由字母和数字组成"
+    )
     asin: Optional[str] = Field(None, description="亚马逊为通过亚马逊销售的商品分配的唯一编码，由 10 个字母或数字组成")
     product_name: Optional[str] = Field(None, description="商品的名称")
     condition: Optional[str] = Field(None, description="商品的状况(例如，新品或二手)")
@@ -500,38 +555,85 @@ class FbaFbastockGetfbaagelistList(LingXingModel):
     inv_age_271_to_365_days: Optional[int] = Field(None, description="已在运营中心存放 271-365 天的可售商品数量")
     inv_age_365_plus_days: Optional[str] = Field(None, description="已在运营中心存放超过 365 天的可售商品数量")
     currency: Optional[str] = Field(None, description="用于支付预计长期仓储费的货币")
-    qty_to_be_charged_ltsf_6_mo: Optional[str] = Field(None, description="截至下一收费日期，已在亚马逊运营中心存放 180 至 365 天且需支付 180 天长期仓储费的可售商品数量")
-    qty_to_be_charged_ltsf_12_mo: Optional[str] = Field(None, description="截至下一收费日期(每月 15 日)，已在运营中心存放超过 365 天的可售 商品数量")
-    projected_ltsf_6_mo: Optional[str] = Field(None, description="在下一收费日期，已在运营中心存放 180 至 365 天的商品预计需要支付的长期仓储费")
-    projected_ltsf_12_mo: Optional[str] = Field(None, description="截至下一收费日期(每月 15 日)，已在运营中心存放超过 365 天的商品的 预计长期仓储费")
-    estimated_ltsf_next_charge: Optional[str] = Field(None, description="截至下一收费日期(每月 15 日)，在亚马逊运行中心存放超过365天的可售商品的数量预计的长期仓储费")
+    qty_to_be_charged_ltsf_6_mo: Optional[str] = Field(
+        None,
+        description="截至下一收费日期，已在亚马逊运营中心存放 180 至 365 天且需支付 180 天长期仓储费的可售商品数量",
+    )
+    qty_to_be_charged_ltsf_12_mo: Optional[str] = Field(
+        None, description="截至下一收费日期(每月 15 日)，已在运营中心存放超过 365 天的可售 商品数量"
+    )
+    projected_ltsf_6_mo: Optional[str] = Field(
+        None, description="在下一收费日期，已在运营中心存放 180 至 365 天的商品预计需要支付的长期仓储费"
+    )
+    projected_ltsf_12_mo: Optional[str] = Field(
+        None, description="截至下一收费日期(每月 15 日)，已在运营中心存放超过 365 天的商品的 预计长期仓储费"
+    )
+    estimated_ltsf_next_charge: Optional[str] = Field(
+        None, description="截至下一收费日期(每月 15 日)，在亚马逊运行中心存放超过365天的可售商品的数量预计的长期仓储费"
+    )
     units_shipped_t7: Optional[str] = Field(None, description="最近 7 天内已发货的商品数量")
     units_shipped_t30: Optional[str] = Field(None, description="最近 30 天内已发货的商品数量")
     units_shipped_t60: Optional[str] = Field(None, description="最近 60 天内已发货的商品数量")
     units_shipped_t90: Optional[str] = Field(None, description="最近 90 天内已发货的商品数量")
-    alert: Optional[str] = Field(None, description="当商品存在低流量或低转化率提醒时会显示，低流量表明只有少数潜在买家查看了该商品信息，低转化率表明潜在买家查看了商品信息但最后并未跟进购买商品")
+    alert: Optional[str] = Field(
+        None,
+        description="当商品存在低流量或低转化率提醒时会显示，低流量表明只有少数潜在买家查看了该商品信息，低转化率表明潜在买家查看了商品信息但最后并未跟进购买商品",
+    )
     your_price: Optional[str] = Field(None, description="您发布的商品价格")
     sales_price: Optional[str] = Field(None, description="您的促销价格(如果您正在促销该商品)")
-    lowest_price_new_plus_shipping: Optional[str] = Field(None, description="此商品的新品在亚马逊商城的最低价格(含运费)")
+    lowest_price_new_plus_shipping: Optional[str] = Field(
+        None, description="此商品的新品在亚马逊商城的最低价格(含运费)"
+    )
     lowest_price_used: Optional[str] = Field(None, description="此商品的二手商品在亚马逊商城的最低价格(含运费)")
-    recommended_action: Optional[str] = Field(None, description="建议您对库存执行的操作。建议的依据是您当前的买家需求，以及相对于不做任何操作，采取措施是否会降低您的成本")
-    healthy_inventory_level: Optional[str] = Field(None, description="根据商品需求和您的成本，不属于冗余库存的库存数量。我们提供建议是为了帮助您达到这一库存水平")
-    recommended_sales_price: Optional[str] = Field(None, description="有助于您根据当前库存设置来售出库存的建议促销价格。该值可能与最低价格或推荐报价价格不同。我们建议您在售出冗余库存之前维持该商品价格")
-    recommended_sale_duration_days: Optional[str] = Field(None, description="如果建议您开展促销活动，则该数值是有助于您售出冗余库存的预计促销持续天数")
+    recommended_action: Optional[str] = Field(
+        None,
+        description="建议您对库存执行的操作。建议的依据是您当前的买家需求，以及相对于不做任何操作，采取措施是否会降低您的成本",
+    )
+    healthy_inventory_level: Optional[str] = Field(
+        None, description="根据商品需求和您的成本，不属于冗余库存的库存数量。我们提供建议是为了帮助您达到这一库存水平"
+    )
+    recommended_sales_price: Optional[str] = Field(
+        None,
+        description="有助于您根据当前库存设置来售出库存的建议促销价格。该值可能与最低价格或推荐报价价格不同。我们建议您在售出冗余库存之前维持该商品价格",
+    )
+    recommended_sale_duration_days: Optional[str] = Field(
+        None, description="如果建议您开展促销活动，则该数值是有助于您售出冗余库存的预计促销持续天数"
+    )
     recommended_removal_quantity: Optional[str] = Field(None, description="可以移除从而避免产生仓储费的预计商品数量")
-    estimated_cost_savings_of_recommended_actions: Optional[str] = Field(None, description="与不采取任何操作(需要为相应库存支付仓储费)相比，采取建议操作预计可以节约的成本")
-    sell_through: Optional[str] = Field(None, description="售出率为在过去 90 天内售出和已发货的商品数量除以此段时间内亚马逊 运营中心的平均可售库存量。追踪售出率可帮助您确定是否需要采取措施 来提高商品的流量或转化率")
-    item_volume: Optional[str] = Field(None, description="商品的体积，计算方法是将最长边、次长边和最短边的值相乘。这些测量值通常是指商品的长度、宽度和高度")
+    estimated_cost_savings_of_recommended_actions: Optional[str] = Field(
+        None, description="与不采取任何操作(需要为相应库存支付仓储费)相比，采取建议操作预计可以节约的成本"
+    )
+    sell_through: Optional[str] = Field(
+        None,
+        description="售出率为在过去 90 天内售出和已发货的商品数量除以此段时间内亚马逊 运营中心的平均可售库存量。追踪售出率可帮助您确定是否需要采取措施 来提高商品的流量或转化率",
+    )
+    item_volume: Optional[str] = Field(
+        None,
+        description="商品的体积，计算方法是将最长边、次长边和最短边的值相乘。这些测量值通常是指商品的长度、宽度和高度",
+    )
     volume_unit_measurement: Optional[str] = Field(None, description="商品体积的计量单位")
     storage_type: Optional[str] = Field(None, description="可设置仓储限制的商品仓储类型分类")
-    storage_volume: Optional[str] = Field(None, description="仓储容量等于此商品在亚马逊运营中心的总仓储使用量减去等待移除的商品的仓储使用量")
+    storage_volume: Optional[str] = Field(
+        None, description="仓储容量等于此商品在亚马逊运营中心的总仓储使用量减去等待移除的商品的仓储使用量"
+    )
     marketplace: Optional[str] = Field(None, description="商品所在的亚马逊商城")
     product_group: Optional[str] = Field(None, description="区分图书和钟表或视频游戏等商品的独特商品分组")
-    sales_rank: Optional[str] = Field(None, description="商品的当前排名。销售排名值的正负变化是过去 7 天排名上升(正)或下 降(负)名次")
+    sales_rank: Optional[str] = Field(
+        None, description="商品的当前排名。销售排名值的正负变化是过去 7 天排名上升(正)或下 降(负)名次"
+    )
     days_of_supply: Optional[str] = Field(None, description="根据商品的预期需求估算的您当前库存能够持续供货的天数")
-    estimated_excess_quantity: Optional[str] = Field(None, description="预计冗余商品数量是根据您当前的销售速度和买家需求预测得出的积压商品数量。保留积压商品并支付仓储费比通过降价售出或移除积压商品来降低库存数量的成本更高")
-    weeks_of_cover_t30: Optional[str] = Field(None, description="过去 30 天现货库存平均数除以同期售出的商品数量除以 4 周。对于某一 商品，如果您在过去 30 天(4 周)内售出 400 件，在亚马逊运营中心还 有 100 件可售，那么您基于过去 30 天销量的可维持周数为 1")
-    weeks_of_cover_t90: Optional[str] = Field(None, description="过去 90 天现货库存平均数除以同期售出的商品数量除以 12 周。对于某一 商品，如果您在过去 90 天(12 周)内售出 400 件，在亚马逊运营中心平 均还有 10 件可售，那么您基于过去 90 天销量的可维持周数为 3.33")
+    estimated_excess_quantity: Optional[str] = Field(
+        None,
+        description="预计冗余商品数量是根据您当前的销售速度和买家需求预测得出的积压商品数量。保留积压商品并支付仓储费比通过降价售出或移除积压商品来降低库存数量的成本更高",
+    )
+    weeks_of_cover_t30: Optional[str] = Field(
+        None,
+        description="过去 30 天现货库存平均数除以同期售出的商品数量除以 4 周。对于某一 商品，如果您在过去 30 天(4 周)内售出 400 件，在亚马逊运营中心还 有 100 件可售，那么您基于过去 30 天销量的可维持周数为 1",
+    )
+    weeks_of_cover_t90: Optional[str] = Field(
+        None,
+        description="过去 90 天现货库存平均数除以同期售出的商品数量除以 12 周。对于某一 商品，如果您在过去 90 天(12 周)内售出 400 件，在亚马逊运营中心平 均还有 10 件可售，那么您基于过去 90 天销量的可维持周数为 3.33",
+    )
     featuredoffer_price: Optional[str] = Field(None, description="在商品详情页面上显示加入购物车按钮的商品")
     sales_shipped_last_7_days: Optional[str] = Field(None, description="最近 7 天的已发货商品销量")
     sales_shipped_last_30_days: Optional[str] = Field(None, description="最近 30 天的已发货商品销量")
@@ -542,33 +644,48 @@ class FbaFbastockGetfbaagelistList(LingXingModel):
     inv_age_61_to_90_days: Optional[int] = Field(None, description="已在运营中心存放 61-90 天的可售商品数量")
     inv_age_181_to_330_days: Optional[int] = Field(None, description="已在运营中心存放 181-330 天的可售商品数量")
     inv_age_331_to_365_days: Optional[int] = Field(None, description="已在运营中心存放 331-365 天的可售商品数量")
-    estimated_storage_cost_next_month: Optional[str] = Field(None, description="根据您当前的销售速度，从今天开始往后 30 天内所产生的预计仓储 费(月度仓储 + 长期仓储)。注意: 库存费用是基于您库存的最新每日快照中的数量得出，可能会 与您的实际库存数量不同")
-    inbound_quantity: Optional[str] = Field(None, description="入库数量 = inbound-working + inbound-shipped + inbound receiving")
+    estimated_storage_cost_next_month: Optional[str] = Field(
+        None,
+        description="根据您当前的销售速度，从今天开始往后 30 天内所产生的预计仓储 费(月度仓储 + 长期仓储)。注意: 库存费用是基于您库存的最新每日快照中的数量得出，可能会 与您的实际库存数量不同",
+    )
+    inbound_quantity: Optional[str] = Field(
+        None, description="入库数量 = inbound-working + inbound-shipped + inbound receiving"
+    )
     inbound_working: Optional[str] = Field(None, description="处于“处理中”状态的货件数量")
     inbound_shipped: Optional[str] = Field(None, description="处于“已发货”状态的货件数量")
     inbound_received: Optional[str] = Field(None, description="处于“正在接收”状态的货件数量")
-    no_sale_last_6_months: Optional[str] = Field(None, description="至少连续 6 个月未售出且在运营中心存放已超过 180 天的库存。如果您启 用可售库存自动移除服务，系统将在下一移除周期自动移除这些商品")
+    no_sale_last_6_months: Optional[str] = Field(
+        None,
+        description="至少连续 6 个月未售出且在运营中心存放已超过 180 天的库存。如果您启 用可售库存自动移除服务，系统将在下一移除周期自动移除这些商品",
+    )
+
 
 class FbaFbastockGetfbaagelistResponse(LingXingModel):
     """查询亚马逊源报表—库龄表."""
+
     list: Optional[List[FbaFbastockGetfbaagelistList]] = Field(None, description="数据列表")
     total: Optional[int] = Field(None, description="总数")
 
 
 class StatisticRemovalshipmentListSellerName(LingXingModel):
     """seller_name sub-structure."""
+
     sid: Optional[str] = Field(None, description="店铺id")
     name: Optional[str] = Field(None, description="店铺名称")
     mid: Optional[str] = Field(None, description="站点id")
     marketplace: Optional[str] = Field(None, description="市场")
 
+
 class StatisticRemovalshipmentListLocalInfo(LingXingModel):
     """local_info sub-structure."""
+
     local_sku: Optional[str] = Field(None, description="sku")
     local_name: Optional[str] = Field(None, description="品名")
 
+
 class StatisticRemovalshipmentListDeliveryInfo(LingXingModel):
     """delivery_info sub-structure."""
+
     ship_postal_code: Optional[str] = Field(None, description="邮编")
     ship_state: Optional[str] = Field(None, description="配送地区")
     ship_city: Optional[str] = Field(None, description="配送城市")
@@ -582,8 +699,10 @@ class StatisticRemovalshipmentListDeliveryInfo(LingXingModel):
     name: Optional[str] = Field(None, description="名称")
     address: Optional[str] = Field(None, description="配送地址")
 
+
 class StatisticRemovalshipmentListResponse(LingXingModel):
     """查询亚马逊源报表-移除货件（新）."""
+
     total: Optional[int] = Field(None, description="总数")
     sid: Optional[int] = Field(None, description="店铺id")
     mid: Optional[int] = Field(None, description="站点id")

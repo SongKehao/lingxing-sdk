@@ -1,13 +1,11 @@
 """领星ERP配置管理模块"""
+
 from __future__ import annotations
 
 import os
+from typing import Any
 
-try:
-    from pydantic_settings import BaseSettings, SettingsConfigDict
-except ImportError:
-    from pydantic import BaseSettings
-    SettingsConfigDict = dict
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class LingXingConfig(BaseSettings):
@@ -38,7 +36,7 @@ class LingXingConfig(BaseSettings):
     # Token管理
     token_refresh_threshold_seconds: int = int(os.getenv("LINGXING_TOKEN_REFRESH_THRESHOLD_SECONDS", "300"))
 
-    def __init__(self, **data):
+    def __init__(self, **data: Any) -> None:
         """初始化配置，验证必填字段"""
         super().__init__(**data)
         # 验证必填字段
@@ -51,11 +49,7 @@ class LingXingConfig(BaseSettings):
 
     def __str__(self) -> str:
         """脱敏显示配置信息"""
-        return (
-            f"LingXingConfig(host={self.host}, "
-            f"app_id={self.app_id}, "
-            f"app_secret=***REDACTED***)"
-        )
+        return f"LingXingConfig(host={self.host}, app_id={self.app_id}, app_secret=***REDACTED***)"
 
     def __repr__(self) -> str:
         """脱敏显示配置信息"""

@@ -7,9 +7,10 @@ from ..common import LingXingModel
 
 class PurchaseSupplierRequest(LingXingModel):
     """Request for 查询供应商列表.
-    
+
     POST /erp/sc/data/local_inventory/supplier
     """
+
     offset: Optional[int] = None  # 分页偏移量，默认0
     length: Optional[int] = None  # 分页长度，默认1000
 
@@ -25,11 +26,13 @@ class PurchaseSupplierEditRequestPaymentAccountGroupItem(LingXingModel):
     key: Optional[str] = None  # 编辑时必须
     version: Optional[str] = None  # 编辑时必须
 
+
 class PurchaseSupplierEditRequest(LingXingModel):
     """Request for 添加/修改供应商.
-    
+
     POST /erp/sc/routing/storage/supplier/edit
     """
+
     supplier_id: Optional[str] = None  # 客户供应商id,为空或者对应的值不存在时，取sys_supplier_id【已停用】
     sys_supplier_id: Optional[int] = None  # 系统供应商id，取该值且该值为空时，新增供应商
     supplier_name: str  # 供应商名称
@@ -58,18 +61,20 @@ class PurchaseSupplierEditRequest(LingXingModel):
 
 class PurchasePurchaserlistsRequest(LingXingModel):
     """Request for 查询采购方列表.
-    
+
     POST /erp/sc/routing/data/purchaser/lists
     """
+
     offset: Optional[int] = None  # 分页偏移量，默认0
     length: Optional[int] = None  # 分页长度，默认500
 
 
 class PurchaseGetpurchaseplansRequest(LingXingModel):
     """Request for 查询采购计划列表.
-    
+
     POST /erp/sc/routing/data/local_inventory/getPurchasePlans
     """
+
     search_field_time: str  # 时间搜索维度： creator_time 创建时间 expect_arrive_time 预计到货时间 update_time 更新时间
     start_date: str  # 开始日期，Y-m-d，闭区间，当筛选update_time时，格式为：Y-m-d H:i:s
     end_date: str  # 结束日期，Y-m-d，闭区间，当筛选update_time时，格式为：Y-m-d H:i:s
@@ -97,23 +102,28 @@ class PurchaseCreatepurchaseplanRequestDataItem(LingXingModel):
     options__is_auto_fill_fnsku: Optional[int] = None  # 是否自动FNSKU：【默认0】 0 否，1 是
     options__is_auto_fill_store: Optional[int] = None  # 是否自动填充店铺：【默认0】 0 否，1 是
 
+
 class PurchaseCreatepurchaseplanRequest(LingXingModel):
     """Request for 创建待采购的采购计划.
-    
+
     POST /erp/sc/routing/data/local_inventory/createPurchasePlan
     """
+
     remark: Optional[str] = None  # 计划备注
     data: List[PurchaseCreatepurchaseplanRequestDataItem]
 
 
 class PurchasePurchaseOrderListRequest(LingXingModel):
     """Request for 查询采购单列表.
-    
+
     POST /erp/sc/routing/data/local_inventory/purchaseOrderList
     """
+
     start_date: str  # 开始时间，格式：Y-m-d，双闭区间 当筛选更新时间时，支持Y-m-d或Y-m-d H:i:s
     end_date: str  # 结束时间，格式：Y-m-d，双闭区间 当筛选更新时间时，支持Y-m-d或Y-m-d H:i:s
-    search_field_time: Optional[str] = None  # 时间搜索维度： create_time 创建时间【默认值】 expect_arrive_time 预计到货时间 update_time 更新时间
+    search_field_time: Optional[str] = (
+        None  # 时间搜索维度： create_time 创建时间【默认值】 expect_arrive_time 预计到货时间 update_time 更新时间
+    )
     order_sn: Optional[list] = None  # 采购单号，上限500
     custom_order_sn: Optional[list] = None  # 自定义采购单号，上限500
     purchase_type: Optional[int] = None  # 采购类型，1：普通采购，2:1688采购
@@ -123,17 +133,19 @@ class PurchasePurchaseOrderListRequest(LingXingModel):
 
 class PurchaseSetOrdersRequest(LingXingModel):
     """Request for 采购单下单.
-    
+
     POST /erp/sc/routing/purchase/purchase/setOrders
     """
+
     order_sn: List  # 采购单，对应查询采购单列表接口字段data>>order_sn
 
 
 class PurchaseCancelRequest(LingXingModel):
     """Request for 作废采购单.
-    
+
     POST /erp/sc/routing/purchase/purchase/cancel
     """
+
     order_sn: str  # 采购单系统单号
     reason: str  # 作废原因，长度不超过80
     is_cancel_relation: int  # 是否取消关联采购计划：0 否【默认】，1 是
@@ -154,15 +166,18 @@ class PurchaseCreatePurchaseOrderRequestProductListItem(LingXingModel):
     remark: Optional[str] = None  # 备注
     plan_sn: Optional[str] = None  # 采购计划编号
 
+
 class PurchaseCreatePurchaseOrderRequestOptionsItem(LingXingModel):
     is_auto_fill_store: Optional[int] = None  # 是否自动填充店铺：【默认0】 0 否，1 是
     is_auto_fill_fnsku: Optional[int] = None  # 是否自动填充fnsku：【默认0】0 否，1 是
 
+
 class PurchaseCreatePurchaseOrderRequest(LingXingModel):
     """Request for 创建待到货的采购单.
-    
+
     POST /erp/sc/routing/purchase/purchase/createPurchaseOrder
     """
+
     wid: Optional[int] = None  # 客户仓库id
     sys_wid: Optional[int] = None  # 系统仓库id【与客户仓库id 二选一必填】
     supplier_id: Optional[int] = None  # 客户供应商id
@@ -192,13 +207,16 @@ class PurchaseCreatePurchaseOrderRequest(LingXingModel):
 
 class PurchaseGetpurchasereturnorderlistRequest(LingXingModel):
     """Request for 查询采购退货单列表.
-    
+
     POST /erp/sc/routing/purchase/purchase_return_order/getPurchaseReturnOrderList
     """
+
     search_field_time: Optional[str] = None  # 时间搜索维度： create_time 创建时间【默认值】 last_time 更新时间
     start_date: Optional[str] = None  # 开始时间，格式：Y-m-d，双闭区间 当筛选更新时间时，支持Y-m-d或Y-m-d H:i:s
     end_date: Optional[str] = None  # 结束时间，格式：Y-m-d，双闭区间 当筛选更新时间时，支持Y-m-d或Y-m-d H:i:s
-    status: Optional[list] = None  # 状态： 121 待审批 122 已驳回 124 已作废（审批作废） 10 已处理 20 已作废（单据作废） 5 待退货
+    status: Optional[list] = (
+        None  # 状态： 121 待审批 122 已驳回 124 已作废（审批作废） 10 已处理 20 已作废（单据作废） 5 待退货
+    )
     offset: int  # 分页偏移量
     length: int  # 分页长度，上限500
 
@@ -211,11 +229,13 @@ class PurchaseCreatepurchasereturnorderRequestItemListItem(LingXingModel):
     deduction_amount: Optional[float] = None  # 退货金额，退货方式为退货扣款时必填，填写值不可大于扣款数量*含税单价
     remark: Optional[str] = None  # 备注
 
+
 class PurchaseCreatepurchasereturnorderRequest(LingXingModel):
     """Request for 创建已完成的采购退货单.
-    
+
     POST /erp/sc/routing/purchase/purchase_return_order/createPurchaseReturnOrder
     """
+
     purchase_order_sn: str  # 采购单号
     return_method: int  # 退货方式，1：退货扣款 2：退货补货
     replenish_method: Optional[int] = None  # 补货方式，1：源单补货【退货方式为2时必填】
@@ -231,19 +251,23 @@ class PurchaseCreatepurchasereturnorderRequest(LingXingModel):
 
 class PurchaseCancelPurchaseReturnOrderRequest(LingXingModel):
     """Request for 作废采购/委外退货单.
-    
+
     POST /basicOpen/purchase/cancelPurchaseReturnOrder
     """
+
     order_sn: List  # 采购/委外退货单号
     cancel_reason: str  # 作废原因
 
 
 class PurchaseChangeorderlistRequest(LingXingModel):
     """Request for 查询采购变更单列表.
-    
+
     POST /erp/sc/routing/purchase/purchaseChangeOrder/changeOrderList
     """
-    search_field_time: Optional[str] = None  # 筛选时间类型，创建时间:create_time, 更新时间：update_time，不填时默认创建时间
+
+    search_field_time: Optional[str] = (
+        None  # 筛选时间类型，创建时间:create_time, 更新时间：update_time，不填时默认创建时间
+    )
     start_date: Optional[str] = None  # 开始时间
     end_date: Optional[str] = None  # 结束时间
     offset: int  # 分页偏移量
@@ -265,6 +289,7 @@ class PurchaseCreatepurchasechangeorderRequestProductListItem(LingXingModel):
     product_id: int  # 产品
     expect_arrive_time: Optional[str] = None  # 预计到货时间，格式："Y-m-d"
 
+
 class PurchaseCreatepurchasechangeorderRequestNewProductListItem(LingXingModel):
     quantity_real: int  # 实际采购量
     remark: Optional[str] = None  # 备注
@@ -276,11 +301,13 @@ class PurchaseCreatepurchasechangeorderRequestNewProductListItem(LingXingModel):
     tax_rate: Optional[float] = None  # 税率
     product_id: int  # 本地产品id
 
+
 class PurchaseCreatepurchasechangeorderRequest(LingXingModel):
     """Request for 创建已完成的采购变更单.
-    
+
     POST /erp/sc/routing/purchase/purchaseChangeOrder/createPurchaseChangeOrder
     """
+
     wid: int  # 系统仓库id
     supplier_id: int  # 系统供应商id
     order_sn: str  # 采购单号
@@ -306,9 +333,10 @@ class PurchaseCreatepurchasechangeorderRequest(LingXingModel):
 
 class PurchaseGetordersRequest(LingXingModel):
     """Request for 查询委外订单列表.
-    
+
     POST /erp/sc/routing/purchase/purchaseOutsourceOrder/getOrders
     """
+
     search_field_time: Optional[str] = None  # 日期搜索类型 create_time:创建日期 expect_arrive_time:结束日期
     start_date: Optional[str] = None  # 开始日期（闭区间）
     end_date: Optional[str] = None  # 结束日期（闭区间）
@@ -320,36 +348,41 @@ class PurchaseAddlogisticsRequestItemsItem(LingXingModel):
     logistics_company: str  # 物流商
     logistics_order_no: str  # 物流单号（支持字母、数字、下划线、短划线）
 
+
 class PurchaseAddlogisticsRequest(LingXingModel):
     """Request for 添加采购单物流信息.
-    
+
     POST /erp/sc/routing/purchase/purchase/addLogistics
     """
+
     order_sn: str  # 采购单号（待到货或已完成状态）
     items: List[PurchaseAddlogisticsRequestItemsItem]
 
 
 class PurchasePurchasePlanCancelRequest(LingXingModel):
     """Request for 作废采购计划.
-    
+
     POST /basicOpen/purchase/planCancel
     """
+
     plan_sn: List  # 计划编号
     reason: str  # 作废原因
 
 
 class PurchaseOrderModifyRemarkRequest(LingXingModel):
     """Request for 编辑采购单备注.
-    
+
     POST /basicOpen/purchase/orderModifyRemark
     """
+
     order_sns: List  # 采购单号
     value: str  # 备注内容
 
 
 class PurchaseSetorderfinishRequest(LingXingModel):
     """Request for 采购单整单结束到货.
-    
+
     POST /basicOpen/purchase/setOrderFinish
     """
+
     orderSn: List  # 仅支持系统单号，不支持自定义采购单号

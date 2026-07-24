@@ -1,8 +1,10 @@
 """Base endpoint mixin - provides typed request/response handling."""
+
 from __future__ import annotations
 
 import asyncio
 import logging
+from collections.abc import Callable, Coroutine, Mapping
 from typing import TYPE_CHECKING, Any, AsyncIterator, TypeVar
 
 from pydantic import BaseModel, ValidationError
@@ -23,7 +25,7 @@ DEFAULT_RETRY_DELAY = 1.0  # seconds
 RATE_LIMIT_ERROR_CODE = 3001008
 
 
-def _run_async(coro):
+def _run_async(coro: Coroutine[Any, Any, Any]) -> Any:
     """Run an async coroutine synchronously, handling event loop edge cases."""
     try:
         loop = asyncio.get_running_loop()
@@ -36,6 +38,7 @@ def _run_async(coro):
     # Loop is already running (Jupyter, etc.)
     try:
         import nest_asyncio
+
         nest_asyncio.apply()
         return loop.run_until_complete(coro)
     except ImportError:
@@ -45,17 +48,23 @@ def _run_async(coro):
         )
 
 
-def _make_sync_wrapper(method_name):
-    def sync_wrapper(self, *args, **kwargs):
+def _make_sync_wrapper(method_name: str) -> Callable[..., Any]:
+    def sync_wrapper(self: Any, *args: Any, **kwargs: Any) -> Any:
         async_method = getattr(self, method_name)
         return _run_async(async_method(*args, **kwargs))
+
     return sync_wrapper
 
 
 class SyncWrapperMeta(type):
     """Metaclass that auto-generates *_sync() mirror methods for public async methods."""
 
-    def __new__(mcs, name, bases, namespace):
+    def __new__(
+        mcs,
+        name: str,
+        bases: tuple[type, ...],
+        namespace: dict[str, Any],
+    ) -> type:
         cls = super().__new__(mcs, name, bases, namespace)
         if name == "BaseEndpoint":
             return cls
@@ -94,26 +103,33 @@ class BaseEndpoint(metaclass=SyncWrapperMeta):
         self._openapi = openapi
 
     async def _post(
-        self, route: str, body: dict | None = None, *, _retry_count: int = 0,
+        self,
+        route: str,
+        body: Mapping[str, Any] | None = None,
+        *,
+        _retry_count: int = 0,
     ) -> ResponseResult:
         """Send POST request with automatic retry on rate limit errors."""
         try:
             resp = await self._openapi.request_with_auto_token(
-                route_name=route, method="POST", req_body=body or {},
+                route_name=route,
+                method="POST",
+                req_body=body or {},
             )
             # Check for rate limit in response
             if resp.code == RATE_LIMIT_ERROR_CODE:
                 if _retry_count < self.max_retries:
-                    delay = self.retry_delay * (2 ** _retry_count)
+                    delay = self.retry_delay * (2**_retry_count)
                     logger.warning(
                         "Rate limited on %s, retrying in %.1fs (attempt %d/%d)",
-                        route, delay, _retry_count + 1, self.max_retries,
+                        route,
+                        delay,
+                        _retry_count + 1,
+                        self.max_retries,
                     )
                     await asyncio.sleep(delay)
                     return await self._post(route, body, _retry_count=_retry_count + 1)
-                raise RateLimitError(
-                    f"Rate limit exceeded for {route} after {self.max_retries} retries"
-                )
+                raise RateLimitError(f"Rate limit exceeded for {route} after {self.max_retries} retries")
             self._check_response(resp, route)
             return resp
         except RateLimitError:
@@ -123,19 +139,25 @@ class BaseEndpoint(metaclass=SyncWrapperMeta):
         except Exception as e:
             # Retry on transient network errors
             if _retry_count < self.max_retries:
-                delay = self.retry_delay * (2 ** _retry_count)
+                delay = self.retry_delay * (2**_retry_count)
                 logger.warning(
                     "Request failed for %s (%s), retrying in %.1fs (attempt %d/%d)",
-                    route, str(e)[:100], delay, _retry_count + 1, self.max_retries,
+                    route,
+                    str(e)[:100],
+                    delay,
+                    _retry_count + 1,
+                    self.max_retries,
                 )
                 await asyncio.sleep(delay)
                 return await self._post(route, body, _retry_count=_retry_count + 1)
             raise
 
-    async def _get(self, route: str, params: dict | None = None) -> ResponseResult:
+    async def _get(self, route: str, params: Mapping[str, Any] | None = None) -> ResponseResult:
         """Send GET request and check for errors."""
         resp = await self._openapi.request_with_auto_token(
-            route_name=route, method="GET", req_params=params,
+            route_name=route,
+            method="GET",
+            req_params=params,
         )
         self._check_response(resp, route)
         return resp
@@ -145,7 +167,7 @@ class BaseEndpoint(metaclass=SyncWrapperMeta):
         if resp.code != 0:
             raise ApiError(
                 message=resp.message or f"API error code {resp.code}",
-                code=resp.code,
+                code=resp.code or 0,
                 request_id=resp.request_id,
                 url=route,
             )
@@ -158,7 +180,7 @@ class BaseEndpoint(metaclass=SyncWrapperMeta):
         if data is None:
             return []
         if isinstance(data, list):
-            results: list = []
+            results: list[Any] = []
             for item in data:
                 if not isinstance(item, dict):
                     continue
@@ -175,7 +197,7 @@ class BaseEndpoint(metaclass=SyncWrapperMeta):
         if isinstance(data, dict):
             items = data.get("list") or data.get("data") or data.get("records") or []
             if isinstance(items, list):
-                results: list = []
+                results = []
                 for item in items:
                     if not isinstance(item, dict):
                         continue
@@ -231,13 +253,13 @@ class BaseEndpoint(metaclass=SyncWrapperMeta):
         if data is None:
             return [], 0
         if isinstance(data, list):
-            items = self._parse_list(data, model)
+            items: list[Any] = self._parse_list(data, model)
             return items, len(items)
         if isinstance(data, dict):
             total = data.get("total", 0) or 0
             items_raw = data.get("list") or data.get("data") or data.get("records") or []
             if isinstance(items_raw, list):
-                items: list = []
+                items = []
                 for item in items_raw:
                     if not isinstance(item, dict):
                         continue
@@ -253,7 +275,7 @@ class BaseEndpoint(metaclass=SyncWrapperMeta):
         route: str,
         model: type[T],
         page_size: int = 100,
-        base_params: dict | None = None,
+        base_params: Mapping[str, Any] | None = None,
         offset_field: str = "offset",
         length_field: str = "length",
         max_pages: int | None = None,
@@ -303,7 +325,7 @@ class BaseEndpoint(metaclass=SyncWrapperMeta):
         route: str,
         model: type[T],
         page_size: int = 100,
-        base_params: dict | None = None,
+        base_params: Mapping[str, Any] | None = None,
         max_items: int | None = None,
     ) -> list[T]:
         """Collect all items from a paginated API endpoint.
@@ -334,7 +356,7 @@ class BaseEndpoint(metaclass=SyncWrapperMeta):
         route: str,
         model: type[T],
         page_size: int = 100,
-        base_params: dict | None = None,
+        base_params: Mapping[str, Any] | None = None,
         max_items: int | None = None,
     ) -> list[T]:
         """Public alias for _collect_all. Collect all items from a paginated endpoint."""
@@ -345,7 +367,7 @@ class BaseEndpoint(metaclass=SyncWrapperMeta):
         route: str,
         model: type[T],
         page_size: int = 100,
-        base_params: dict | None = None,
+        base_params: Mapping[str, Any] | None = None,
         offset_field: str = "offset",
         length_field: str = "length",
         max_pages: int | None = None,
@@ -358,7 +380,7 @@ class BaseEndpoint(metaclass=SyncWrapperMeta):
         self,
         route: str,
         page_size: int = 100,
-        base_params: dict | None = None,
+        base_params: Mapping[str, Any] | None = None,
         offset_field: str = "offset",
         length_field: str = "length",
         max_pages: int | None = None,

@@ -1,4 +1,5 @@
 """Auto-generated request models for {category} APIs."""
+
 from typing import List, Optional
 
 from ..common import LingXingModel
@@ -6,14 +7,17 @@ from ..common import LingXingModel
 
 class RequestBase(LingXingModel):
     """Base class for all request models."""
+
     pass
+
 
 class ServiceListsRequest(RequestBase):
     """Request model for 查询邮件列表.
 
-API: POST /erp/sc/data/mail/lists
-Doc: https://apidoc.lingxing.com/#/Service/lists
-"""
+    API: POST /erp/sc/data/mail/lists
+    Doc: https://apidoc.lingxing.com/#/Service/lists
+    """
+
     flag: str
     # 类型： sent 发件 receive 收件
     email: str
@@ -27,21 +31,25 @@ Doc: https://apidoc.lingxing.com/#/Service/lists
     length: Optional[int] = None
     # 分页长度，默认20
 
+
 class ServiceDetailRequest(RequestBase):
     """Request model for 查询邮件详情.
 
-API: POST /erp/sc/data/mail/detail
-Doc: https://apidoc.lingxing.com/#/Service/detail
-"""
+    API: POST /erp/sc/data/mail/detail
+    Doc: https://apidoc.lingxing.com/#/Service/detail
+    """
+
     webmail_uuid: str
     # 邮件唯一标识
+
 
 class ServiceReviewRequest(RequestBase):
     """Request model for 查询评价管理-Review.
 
-API: POST /erp/sc/v2/data/mws/reviews
-Doc: https://apidoc.lingxing.com/#/Service/review
-"""
+    API: POST /erp/sc/v2/data/mws/reviews
+    Doc: https://apidoc.lingxing.com/#/Service/review
+    """
+
     sid: int
     # 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】
     start_date: str
@@ -55,12 +63,14 @@ Doc: https://apidoc.lingxing.com/#/Service/review
     date_field: Optional[str] = None
     # 时间类型: review_date 评价时间【默认值】 create_time 创建时间
 
+
 class ServiceReviewv2Request(RequestBase):
     """Request model for 查询评论管理 - Review(新).
 
-API: POST /basicOpen/openapi/service/v3/data/mws/reviews
-Doc: https://apidoc.lingxing.com/#/Service/reviewV2
-"""
+    API: POST /basicOpen/openapi/service/v3/data/mws/reviews
+    Doc: https://apidoc.lingxing.com/#/Service/reviewV2
+    """
+
     sort_field: Optional[str] = None
     # 排序类型
     sort_type: Optional[str] = None
@@ -102,12 +112,14 @@ Doc: https://apidoc.lingxing.com/#/Service/reviewV2
     match_types: Optional[str] = None
     # 匹配类型，多个用逗号分隔，默认传空字符串
 
+
 class ServiceFeedbacklistmwsRequest(RequestBase):
     """Request model for 查询评价管理 1-3星Feedback列表.
 
-API: POST /erp/sc/cs/feedback/listMws
-Doc: https://apidoc.lingxing.com/#/Service/FeedbackListMws
-"""
+    API: POST /erp/sc/cs/feedback/listMws
+    Doc: https://apidoc.lingxing.com/#/Service/FeedbackListMws
+    """
+
     sid: int
     # 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】
     start_date: str
@@ -118,13 +130,15 @@ Doc: https://apidoc.lingxing.com/#/Service/FeedbackListMws
     # 分页偏移量，默认0
     length: int
     # 分页长度，默认20
+
 
 class ServiceFeedbacklistRequest(RequestBase):
     """Request model for 查询评价管理 4-5星Feedback列表.
 
-API: POST /erp/sc/cs/feedback/list
-Doc: https://apidoc.lingxing.com/#/Service/FeedbackList
-"""
+    API: POST /erp/sc/cs/feedback/list
+    Doc: https://apidoc.lingxing.com/#/Service/FeedbackList
+    """
+
     sid: int
     # 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】
     start_date: str
@@ -136,12 +150,14 @@ Doc: https://apidoc.lingxing.com/#/Service/FeedbackList
     length: int
     # 分页长度，默认20
 
+
 class ServiceReviewlistsRequest(RequestBase):
     """Request model for 查询评价统计-Review列表.
 
-API: GET /erp/sc/v2/cs/reviewReport/lists
-Doc: https://apidoc.lingxing.com/#/Service/reviewLists
-"""
+    API: GET /erp/sc/v2/cs/reviewReport/lists
+    Doc: https://apidoc.lingxing.com/#/Service/reviewLists
+    """
+
     start_date: str
     # 开始时间【时间间隔不超过1年】，格式：Y-m-d
     end_date: str
@@ -153,12 +169,14 @@ Doc: https://apidoc.lingxing.com/#/Service/reviewLists
     length: Optional[int] = None
     # 分页长度，默认20
 
+
 class ServiceReviewdetailRequest(RequestBase):
     """Request model for 查询评价统计-Review每日新增数.
 
-API: POST /erp/sc/cs/reviewReport/detail
-Doc: https://apidoc.lingxing.com/#/Service/reviewDetail
-"""
+    API: POST /erp/sc/cs/reviewReport/detail
+    Doc: https://apidoc.lingxing.com/#/Service/reviewDetail
+    """
+
     mid: int
     # 国家id
     asin: str
@@ -168,12 +186,14 @@ Doc: https://apidoc.lingxing.com/#/Service/reviewDetail
     end_date: str
     # 结束时间【时间间隔不超过1年】
 
+
 class ServiceFeedbacklistsRequest(RequestBase):
     """Request model for 查询评价统计-Feedback列表.
 
-API: POST /erp/sc/cs/feedbackReport/lists
-Doc: https://apidoc.lingxing.com/#/Service/feedbackLists
-"""
+    API: POST /erp/sc/cs/feedbackReport/lists
+    Doc: https://apidoc.lingxing.com/#/Service/feedbackLists
+    """
+
     offset: Optional[int] = None
     # 分页偏移量，默认0
     length: Optional[int] = None
@@ -183,12 +203,14 @@ Doc: https://apidoc.lingxing.com/#/Service/feedbackLists
     end_date: str
     # 结束时间【时间间隔不超过1年】，格式：Y-m-d
 
+
 class ServiceFeedbackdetailRequest(RequestBase):
     """Request model for 查询评价统计-Feedback每日新增数.
 
-API: POST /erp/sc/cs/feedbackReport/detail
-Doc: https://apidoc.lingxing.com/#/Service/feedbackDetail
-"""
+    API: POST /erp/sc/cs/feedbackReport/detail
+    Doc: https://apidoc.lingxing.com/#/Service/feedbackDetail
+    """
+
     sid: int
     # 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】
     start_date: str
@@ -196,12 +218,14 @@ Doc: https://apidoc.lingxing.com/#/Service/feedbackDetail
     end_date: str
     # 结束时间【时间间隔不超过1年】
 
+
 class ServiceCustomerlistRequest(RequestBase):
     """Request model for 查询客户列表（旧）.
 
-API: POST /bd/crm/open/api/customer/list
-Doc: https://apidoc.lingxing.com/#/Service/CustomerList
-"""
+    API: POST /bd/crm/open/api/customer/list
+    Doc: https://apidoc.lingxing.com/#/Service/CustomerList
+    """
+
     sids: Optional[list] = None
     # 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】
     time_search_type: int
@@ -215,12 +239,14 @@ Doc: https://apidoc.lingxing.com/#/Service/CustomerList
     length: Optional[int] = None
     # 每页条数，默认100
 
+
 class ServiceAftersalesworkorderlistRequest(RequestBase):
     """Request model for 查询售后工单列表.
 
-API: POST /pb/mp/returns/workOrder/list
-Doc: https://apidoc.lingxing.com/#/Service/AfterSalesWorkOrderList
-"""
+    API: POST /pb/mp/returns/workOrder/list
+    Doc: https://apidoc.lingxing.com/#/Service/AfterSalesWorkOrderList
+    """
+
     date_type: str
     # 时间类型： create_time 创建时间 complete_time 完成时间
     start_time: str
@@ -232,12 +258,14 @@ Doc: https://apidoc.lingxing.com/#/Service/AfterSalesWorkOrderList
     length: int
     # 分页长度，上限500
 
+
 class ServiceStoreperformancelistRequest(RequestBase):
     """Request model for 查询店铺绩效列表.
 
-API: POST /basicOpen/customerService/storeTarget/list
-Doc: https://apidoc.lingxing.com/#/Service/storePerformanceList
-"""
+    API: POST /basicOpen/customerService/storeTarget/list
+    Doc: https://apidoc.lingxing.com/#/Service/storePerformanceList
+    """
+
     offset: Optional[int] = None
     # 分页偏移量，默认0
     length: Optional[int] = None
@@ -251,23 +279,27 @@ Doc: https://apidoc.lingxing.com/#/Service/storePerformanceList
     anomaly_indicator: Optional[list] = None
     # 异常指标： commodity_policy_compliance 商品政策合规性 on_time_delivery 准时交货率 valid_tracking 有效追踪率 pre_fulfillmen
 
+
 class ServicePerformancenoticedetailRequest(RequestBase):
     """Request model for 查询店铺绩效详情.
 
-API: POST /basicOpen/customerService/storeTarget/detail
-Doc: https://apidoc.lingxing.com/#/Service/PerformanceNoticeDetail
-"""
+    API: POST /basicOpen/customerService/storeTarget/detail
+    Doc: https://apidoc.lingxing.com/#/Service/PerformanceNoticeDetail
+    """
+
     pullDate: Optional[str] = None
     # 报表更新日期，必填，日期格式：yyyy-MM-dd
     sid: Optional[int] = None
     # 店铺ID，必填
 
+
 class ServiceVoiceofbuyerlistRequest(RequestBase):
     """Request model for 查询买家之声列表.
 
-API: POST /basicOpen/customerService/voiceOfBuyer/list
-Doc: https://apidoc.lingxing.com/#/Service/voiceOfBuyerList
-"""
+    API: POST /basicOpen/customerService/voiceOfBuyer/list
+    Doc: https://apidoc.lingxing.com/#/Service/voiceOfBuyerList
+    """
+
     offset: Optional[int] = None
     # 分页偏移量，默认0
     length: Optional[int] = None
@@ -285,12 +317,14 @@ Doc: https://apidoc.lingxing.com/#/Service/voiceOfBuyerList
     return_badge: Optional[list] = None
     # 退货标记， Yes No At_Risk
 
+
 class ServiceCustomerservicermamanagelistRequest(RequestBase):
     """Request model for 查询RMA管理.
 
-API: POST /basicOpen/customerService/rmaManage/list
-Doc: https://apidoc.lingxing.com/#/Service/customerServiceRmaManageList
-"""
+    API: POST /basicOpen/customerService/rmaManage/list
+    Doc: https://apidoc.lingxing.com/#/Service/customerServiceRmaManageList
+    """
+
     sid: List
     # 店铺id，支持多选，数组
     searchTimeFiled: str
@@ -312,12 +346,14 @@ Doc: https://apidoc.lingxing.com/#/Service/customerServiceRmaManageList
     pageSize: float
     # 每页数量
 
+
 class ServiceCustomerservicecrmcustomerindexRequest(RequestBase):
     """Request model for 查询客户列表（新）.
 
-API: POST /basicOpen/customerService/crm/customer/index
-Doc: https://apidoc.lingxing.com/#/Service/customerServiceCrmcustomerIndex
-"""
+    API: POST /basicOpen/customerService/crm/customer/index
+    Doc: https://apidoc.lingxing.com/#/Service/customerServiceCrmcustomerIndex
+    """
+
     sort_field: Optional[str] = None
     # 结果按字段排序
     sort_type: Optional[str] = None
@@ -341,12 +377,14 @@ Doc: https://apidoc.lingxing.com/#/Service/customerServiceCrmcustomerIndex
     sids: Optional[str] = None
     # 店铺id ，对应查询亚马逊店铺列表接口对应字段【sid】
 
+
 class ServicePerformancenoticelistRequest(RequestBase):
     """Request model for 查询业绩通知列表.
 
-API: POST /basicOpen/customerService/performanceNotice/list
-Doc: https://apidoc.lingxing.com/#/Service/PerformanceNoticeList
-"""
+    API: POST /basicOpen/customerService/performanceNotice/list
+    Doc: https://apidoc.lingxing.com/#/Service/PerformanceNoticeList
+    """
+
     sid: float
     # 店铺id
     status: Optional[list] = None

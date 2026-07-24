@@ -1,10 +1,11 @@
-from __future__ import annotations
 #!/usr/bin/env python3
 """
 领星ERP认证管理器
 
 负责token的获取、刷新和生命周期管理
 """
+
+from __future__ import annotations
 
 import asyncio
 import logging
@@ -19,12 +20,7 @@ logger = logging.getLogger(__name__)
 class AuthManager:
     """认证管理器 - 处理token获取和刷新"""
 
-    def __init__(
-        self,
-        openapi: OpenApiBase,
-        token_refresh_threshold_seconds: int = 300,
-        max_refresh_attempts: int = 3
-    ):
+    def __init__(self, openapi: OpenApiBase, token_refresh_threshold_seconds: int = 300, max_refresh_attempts: int = 3):
         """
         初始化认证管理器
 
@@ -65,6 +61,7 @@ class AuthManager:
             if not self._access_token:
                 await self._get_access_token()
 
+            assert self._access_token is not None
             return self._access_token
 
     def _should_refresh_token(self) -> bool:
@@ -83,9 +80,7 @@ class AuthManager:
 
         self._access_token = token_dto.access_token
         self._refresh_token = token_dto.refresh_token
-        self._token_expires_at = datetime.now() + timedelta(
-            seconds=token_dto.expires_in
-        )
+        self._token_expires_at = datetime.now() + timedelta(seconds=token_dto.expires_in)
 
         logger.debug("Access token obtained, expires at: %s", self._token_expires_at)
         return token_dto
@@ -98,9 +93,7 @@ class AuthManager:
         if self._token_refresh_attempts > self._max_refresh_attempts:
             self._token_refresh_attempts = 0
             msg = f"Token refresh failed after {self._max_refresh_attempts} attempts"
-            raise Exception(
-                msg
-            )
+            raise Exception(msg)
 
         if not self._refresh_token:
             self._token_refresh_attempts = 0
@@ -120,9 +113,7 @@ class AuthManager:
 
             self._access_token = token_dto.access_token
             self._refresh_token = token_dto.refresh_token or self._refresh_token
-            self._token_expires_at = datetime.now() + timedelta(
-                seconds=token_dto.expires_in
-            )
+            self._token_expires_at = datetime.now() + timedelta(seconds=token_dto.expires_in)
             self._token_refresh_attempts = 0
 
             logger.debug("Token refreshed, expires at: %s", self._token_expires_at)
@@ -136,7 +127,7 @@ class AuthManager:
         else:
             return token_dto
 
-    def clear_tokens(self):
+    def clear_tokens(self) -> None:
         """清除所有token"""
         self._access_token = None
         self._refresh_token = None

@@ -1,5 +1,6 @@
-from __future__ import annotations
 """领星ERP API参数构建器 - 填充默认请求参数"""
+
+from __future__ import annotations
 
 import logging
 from datetime import datetime, timedelta
@@ -109,12 +110,20 @@ class APIParamBuilder:
         if "startTime" in param_names or "start_time" in param_names:
             key = "startTime" if "startTime" in param_names else "start_time"
             if key not in body:
-                body[key] = _month if "/rmaManage/" in api_path or "/otherFee/" in api_path else (datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d %H:%M:%S")
+                body[key] = (
+                    _month
+                    if "/rmaManage/" in api_path or "/otherFee/" in api_path
+                    else (datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d %H:%M:%S")
+                )
 
         if "endTime" in param_names or "end_time" in param_names:
             key = "endTime" if "endTime" in param_names else "end_time"
             if key not in body:
-                body[key] = _today if "/rmaManage/" in api_path or "/otherFee/" in api_path else datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                body[key] = (
+                    _today
+                    if "/rmaManage/" in api_path or "/otherFee/" in api_path
+                    else datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                )
 
     def _fill_common_stores(self, body: dict, param_names: set[str], api_path: str) -> None:
         if "sids" in param_names and "sids" not in body:
@@ -135,10 +144,7 @@ class APIParamBuilder:
                 body["sid"] = self.default_sids[0]
 
     def _build_request_funds_params(  # noqa: PLR0912
-        self,
-        api_path: str,
-        body: dict[str, Any],
-        param_names: set[str]
+        self, api_path: str, body: dict[str, Any], param_names: set[str]
     ) -> dict[str, Any]:
         """构建请款单/请款池API参数"""
         # 物流请款
@@ -184,12 +190,7 @@ class APIParamBuilder:
 
         return body
 
-    def _build_receivable_params(
-        self,
-        api_path: str,
-        body: dict[str, Any],
-        param_names: set[str]
-    ) -> dict[str, Any]:
+    def _build_receivable_params(self, api_path: str, body: dict[str, Any], param_names: set[str]) -> dict[str, Any]:
         """构建应收报告API参数"""
         # 结算月格式 - YYYY-MM
         if "settleMonth" in param_names and "settleMonth" not in body:
@@ -205,12 +206,7 @@ class APIParamBuilder:
 
         return body
 
-    def _build_profit_report_params(
-        self,
-        api_path: str,
-        body: dict[str, Any],
-        param_names: set[str]
-    ) -> dict[str, Any]:
+    def _build_profit_report_params(self, api_path: str, body: dict[str, Any], param_names: set[str]) -> dict[str, Any]:
         """构建利润报表API参数"""
         # 订单维度报表使用 snake_case
         if "/order/list" in api_path:
@@ -237,12 +233,7 @@ class APIParamBuilder:
 
         return body
 
-    def _build_ads_invoice_params(
-        self,
-        api_path: str,
-        body: dict[str, Any],
-        param_names: set[str]
-    ) -> dict[str, Any]:
+    def _build_ads_invoice_params(self, api_path: str, body: dict[str, Any], param_names: set[str]) -> dict[str, Any]:
         """构建广告发票API参数"""
         # 广告发票列表
         if "/invoice/list" in api_path:
@@ -268,10 +259,7 @@ class APIParamBuilder:
         return body
 
     def _build_customer_service_params(  # noqa: PLR0915,PLR0912
-        self,
-        api_path: str,
-        body: dict[str, Any],
-        param_names: set[str]
+        self, api_path: str, body: dict[str, Any], param_names: set[str]
     ) -> dict[str, Any]:
         """构建客服API参数"""
         # RMA管理API
@@ -349,10 +337,7 @@ class APIParamBuilder:
         return body
 
     def _build_statistics_params(  # noqa: PLR0912
-        self,
-        api_path: str,
-        body: dict[str, Any],
-        param_names: set[str]
+        self, api_path: str, body: dict[str, Any], param_names: set[str]
     ) -> dict[str, Any]:
         """构建统计类API参数"""
         # 利润统计API - camelCase
@@ -416,12 +401,7 @@ class APIParamBuilder:
         "/queryShippingListPage": "_mp_shipping",
     }
 
-    def _build_multiplatform_params(
-        self,
-        api_path: str,
-        body: dict[str, Any],
-        param_names: set[str]
-    ) -> dict[str, Any]:
+    def _build_multiplatform_params(self, api_path: str, body: dict[str, Any], param_names: set[str]) -> dict[str, Any]:
         """构建多平台API参数"""
         for key, method_name in self._MULTIPLATFORM_DISPATCH.items():
             if key in api_path:
@@ -509,10 +489,7 @@ class APIParamBuilder:
         body.setdefault("length", 15)
 
     def _build_mws_report_params(  # noqa: PLR0915,PLR0912
-        self,
-        api_path: str,
-        body: dict[str, Any],
-        param_names: set[str]
+        self, api_path: str, body: dict[str, Any], param_names: set[str]
     ) -> dict[str, Any]:
         """构建亚马逊源表数据API参数"""
         api_path_lower = api_path.lower()
@@ -597,10 +574,7 @@ class APIParamBuilder:
         return body
 
     def _build_restocking_params(  # noqa: PLR0912
-        self,
-        api_path: str,
-        body: dict[str, Any],
-        param_names: set[str]
+        self, api_path: str, body: dict[str, Any], param_names: set[str]
     ) -> dict[str, Any]:
         """构建补货建议API参数"""
         # 添加店铺参数
@@ -640,10 +614,7 @@ class APIParamBuilder:
         return body
 
     def _build_vc_params(  # noqa: PLR0912
-        self,
-        api_path: str,
-        body: dict[str, Any],
-        param_names: set[str]
+        self, api_path: str, body: dict[str, Any], param_names: set[str]
     ) -> dict[str, Any]:
         """构建VC类API参数"""
         # VC订单列表

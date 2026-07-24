@@ -1,15 +1,19 @@
-from __future__ import annotations
 #!/usr/bin/python3
 """封装Openapi基础操作
 
 Token请求限流（错误码3001008）: generate_access_token 和 refresh_token 共享限流配额
 业务API限流: 100次/分钟
 """
+
+from __future__ import annotations
+
 import asyncio
 import copy
 import logging
 import time
+from collections.abc import Mapping
 from datetime import datetime, timedelta
+from typing import Any
 
 import aiohttp
 
@@ -78,7 +82,8 @@ class OpenApiBase:
         self._token_refresh_attempts = 0  # 重置重试计数
         logger.debug(
             "Token cached, expires at %s, expires_in=%ss",
-            self._token_expires_at.isoformat(), token_dto.expires_in,
+            self._token_expires_at.isoformat(),
+            token_dto.expires_in,
         )
 
     async def get_valid_token(self) -> str:
@@ -101,6 +106,7 @@ class OpenApiBase:
                     token_dto = await self._do_generate_access_token()
                     self._store_token(token_dto)
 
+            assert self._access_token is not None
             return self._access_token
 
     async def clear_token_cache(self) -> None:
@@ -119,23 +125,23 @@ class OpenApiBase:
             return token_dto
 
     async def _do_generate_access_token(self) -> AccessTokenDto:
-        wait_time = await self._rate_limiter.wait_if_needed('token')
+        wait_time = await self._rate_limiter.wait_if_needed("token")
         if wait_time > 0:
             logger.info("Rate limiter: waited %.1fs before token request", wait_time)
 
         # 官方文档: /api/auth-server/oauth/access-token
-        path = '/api/auth-server/oauth/access-token'
+        path = "/api/auth-server/oauth/access-token"
         req_url = self.host + path
 
         # 官方文档: multipart/form-data 格式
         form_data = aiohttp.FormData()
-        form_data.add_field('appId', self.app_id)
-        form_data.add_field('appSecret', self.app_secret)
+        form_data.add_field("appId", self.app_id)
+        form_data.add_field("appSecret", self.app_secret)
 
         try:
             async with (
                 aiohttp.ClientSession() as session,
-                session.post(req_url, data=form_data, timeout=30) as resp,
+                session.post(req_url, data=form_data, timeout=aiohttp.ClientTimeout(total=30)) as resp,
             ):
                 if resp.status != 200:
                     text = await resp.text()
@@ -144,25 +150,24 @@ class OpenApiBase:
                 resp_json = await resp.json()
 
             # 检查响应
-            code = resp_json.get('code')
-            msg = resp_json.get('msg', resp_json.get('message', 'Unknown error'))
-            if code not in [200, '200']:
+            code = resp_json.get("code")
+            msg = resp_json.get("msg", resp_json.get("message", "Unknown error"))
+            if code not in [200, "200"]:
                 error_msg = f"generate_access_token failed: {msg}"
                 raise ValueError(error_msg)
 
-            data = resp_json.get('data', {})
+            data = resp_json.get("data", {})
             return AccessTokenDto(
-                access_token=data.get('access_token'),
-                refresh_token=data.get('refresh_token'),
-                expires_in=data.get('expires_in', 7200),
+                access_token=data.get("access_token"),
+                refresh_token=data.get("refresh_token"),
+                expires_in=data.get("expires_in", 7200),
             )
         except ValueError as e:
             # 检测限流错误并提供友好提示
             error_str = str(e)
             if "too frequently" in error_str.lower() or "3001008" in error_str:
                 logger.exception(
-                    "LingXing API rate limit detected! "
-                    "Please wait before retrying. Error: %s",
+                    "LingXing API rate limit detected! Please wait before retrying. Error: %s",
                     error_str,
                 )
             raise
@@ -175,21 +180,21 @@ class OpenApiBase:
             return token_dto
 
     async def _do_refresh_token(self, refresh_token: str) -> AccessTokenDto:
-        wait_time = await self._rate_limiter.wait_if_needed('token')
+        wait_time = await self._rate_limiter.wait_if_needed("token")
         if wait_time > 0:
             logger.info("Rate limiter: waited %.1fs before refresh request", wait_time)
 
-        path = '/api/auth-server/oauth/refresh'
+        path = "/api/auth-server/oauth/refresh"
         req_url = self.host + path
 
         form_data = aiohttp.FormData()
-        form_data.add_field('appId', self.app_id)
-        form_data.add_field('refreshToken', refresh_token)
+        form_data.add_field("appId", self.app_id)
+        form_data.add_field("refreshToken", refresh_token)
 
         try:
             async with (
                 aiohttp.ClientSession() as session,
-                session.post(req_url, data=form_data, timeout=30) as resp,
+                session.post(req_url, data=form_data, timeout=aiohttp.ClientTimeout(total=30)) as resp,
             ):
                 if resp.status != 200:
                     text = await resp.text()
@@ -197,26 +202,25 @@ class OpenApiBase:
                     raise ValueError(msg)
                 resp_json = await resp.json()
 
-            code = resp_json.get('code')
-            if code not in [200, '200']:
-                msg = resp_json.get('msg')
+            code = resp_json.get("code")
+            if code not in [200, "200"]:
+                msg = resp_json.get("msg")
                 if not msg:
-                    msg = resp_json.get('message', 'Unknown error')
+                    msg = resp_json.get("message", "Unknown error")
                 error_msg = f"refresh_token failed: {msg}"
                 raise ValueError(error_msg)
 
-            data = resp_json.get('data', {})
+            data = resp_json.get("data", {})
             return AccessTokenDto(
-                access_token=data.get('access_token'),
-                refresh_token=data.get('refresh_token'),
-                expires_in=data.get('expires_in', 7200),
+                access_token=data.get("access_token"),
+                refresh_token=data.get("refresh_token"),
+                expires_in=data.get("expires_in", 7200),
             )
         except ValueError as e:
             error_str = str(e)
             if "too frequently" in error_str.lower() or "3001008" in error_str:
                 logger.exception(
-                    "LingXing API rate limit detected! "
-                    "Please wait before retrying. Error: %s",
+                    "LingXing API rate limit detected! Please wait before retrying. Error: %s",
                     error_str,
                 )
             raise
@@ -226,18 +230,19 @@ class OpenApiBase:
         access_token: str,
         route_name: str,
         method: str,
-        req_params: dict | None = None,
-        req_body: dict | None = None,
+        req_params: Mapping[str, Any] | None = None,
+        req_body: Mapping[str, Any] | None = None,
         skip_rate_limit: bool = False,
-        **kwargs
+        **kwargs: Any,
     ) -> ResponseResult:
         """发送业务API请求"""
         if not skip_rate_limit:
-            await self._rate_limiter.wait_if_needed('api')
+            await self._rate_limiter.wait_if_needed("api")
 
         req_url = self.host + route_name
-        headers = kwargs.pop('headers', {})
-        req_params = req_params or {}
+        headers = kwargs.pop("headers", {})
+        req_params = dict(req_params or {})
+        req_body = dict(req_body) if req_body is not None else None
         gen_sign_params = copy.deepcopy(req_body) if req_body else {}
         if req_params:
             gen_sign_params.update(req_params)
@@ -245,7 +250,7 @@ class OpenApiBase:
         sign_params = {
             "app_key": self.app_id,
             "access_token": access_token,
-            "timestamp": f'{int(time.time())}',
+            "timestamp": f"{int(time.time())}",
         }
         gen_sign_params.update(sign_params)
         sign = SignBase.generate_sign(self.app_id, gen_sign_params)
@@ -253,21 +258,18 @@ class OpenApiBase:
         req_params.update(sign_params)
 
         # 对于带有请求体的, 需要设置默认的Content-Type
-        if req_body and 'Content-Type' not in headers:
-            headers['Content-Type'] = 'application/json'
-        return await HttpBase().request(
-            method, req_url, params=req_params,
-            headers=headers, json=req_body, **kwargs
-        )
+        if req_body and "Content-Type" not in headers:
+            headers["Content-Type"] = "application/json"
+        return await HttpBase().request(method, req_url, params=req_params, headers=headers, json=req_body, **kwargs)
 
     async def request_with_auto_token(
         self,
         route_name: str,
         method: str,
-        req_params: dict | None = None,
-        req_body: dict | None = None,
+        req_params: Mapping[str, Any] | None = None,
+        req_body: Mapping[str, Any] | None = None,
         skip_rate_limit: bool = False,
-        **kwargs
+        **kwargs: Any,
     ) -> ResponseResult:
         """发送业务API请求（自动管理Token）"""
         access_token = await self.get_valid_token()
@@ -278,41 +280,37 @@ class OpenApiBase:
             req_params=req_params,
             req_body=req_body,
             skip_rate_limit=skip_rate_limit,
-            **kwargs
+            **kwargs,
         )
 
     async def get(
         self,
         route_name: str,
         access_token: str | None = None,
-        req_params: dict | None = None,
-        **kwargs
+        req_params: Mapping[str, Any] | None = None,
+        **kwargs: Any,
     ) -> ResponseResult:
         if access_token is None:
             access_token = await self.get_valid_token()
         return await self.request(
-            access_token=access_token,
-            route_name=route_name,
-            method='GET',
-            req_params=req_params,
-            **kwargs
+            access_token=access_token, route_name=route_name, method="GET", req_params=req_params, **kwargs
         )
 
     async def post(
         self,
         route_name: str,
         access_token: str | None = None,
-        req_params: dict | None = None,
-        req_body: dict | None = None,
-        **kwargs
+        req_params: Mapping[str, Any] | None = None,
+        req_body: Mapping[str, Any] | None = None,
+        **kwargs: Any,
     ) -> ResponseResult:
         if access_token is None:
             access_token = await self.get_valid_token()
         return await self.request(
             access_token=access_token,
             route_name=route_name,
-            method='POST',
+            method="POST",
             req_params=req_params,
             req_body=req_body,
-            **kwargs
+            **kwargs,
         )

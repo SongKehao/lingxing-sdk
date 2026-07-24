@@ -1,4 +1,5 @@
 """Auto-generated response models for TargetManage."""
+
 from typing import List, Optional
 
 from pydantic import Field
@@ -8,12 +9,14 @@ from ..common import LingXingModel
 
 class StoreBatchoperateResponse(LingXingModel):
     """店铺维度-批量新增/更新目标."""
+
     sid: Optional[float] = Field(None, description="店铺id")
     reason: Optional[str] = Field(None, description="失败原因【返回操作失败对应数据的失败原因】")
 
 
 class StoreBatchselectResponse(LingXingModel):
     """店铺维度-批量查询目标."""
+
     goal_name: Optional[str] = Field(None, description="目标名")
     sid: Optional[float] = Field(None, description="店铺id")
     name: Optional[str] = Field(None, description="店铺名")
@@ -69,17 +72,21 @@ class StoreBatchselectResponse(LingXingModel):
 
 class UserBatchoperateResponse(LingXingModel):
     """组织维度-批量新增/更新目标."""
+
     uid: Optional[float] = Field(None, description="用户名")
     reason: Optional[str] = Field(None, description="失败原因")
 
 
 class UserBatchselectOrgs(LingXingModel):
     """orgs sub-structure."""
+
     org_id: Optional[str] = Field(None, description="部门id")
     org_name: Optional[str] = Field(None, description="部门名称")
 
+
 class UserBatchselectResponse(LingXingModel):
     """组织维度-批量查询目标."""
+
     real_name: Optional[str] = Field(None, description="用户名")
     uid: Optional[str] = Field(None, description="uid")
     default_org: Optional[str] = Field(None, description="默认部门")
@@ -137,11 +144,13 @@ class UserBatchselectResponse(LingXingModel):
 
 class StoreBatchdeleteResponse(LingXingModel):
     """店铺维度-批量删除目标 (/bd/goal/management/open/store/batchDelete)."""
+
     sid: Optional[float] = Field(None, description="店铺id")
     reason: Optional[str] = Field(None, description="失败原因")
 
 
 class UserBatchdeleteResponse(LingXingModel):
     """组织维度-批量删除目标 (/bd/goal/management/open/user/batchDelete)."""
+
     uid: Optional[float] = Field(None, description="用户id")
     reason: Optional[str] = Field(None, description="失败原因")

@@ -1,4 +1,3 @@
-from __future__ import annotations
 #!/usr/bin/python3
 """
 领星API请求限流器
@@ -33,6 +32,9 @@ from __future__ import annotations
     result = await check_ip_whitelist(['219.144.200.230', '221.11.17.222'])
 
 """
+
+from __future__ import annotations
+
 import asyncio
 import logging
 import re
@@ -67,14 +69,14 @@ async def detect_current_ip(use_cache: bool = True) -> str | None:
     try:
         async with (
             aiohttp.ClientSession() as session,
-            session.get(IP_CHECK_URL, timeout=10) as resp,
+            session.get(IP_CHECK_URL, timeout=aiohttp.ClientTimeout(total=10)) as resp,
         ):
             if resp.status == 200:
                 data = await resp.json()
                 if data.get("success") and data.get("data"):
                     # 解析 "真实的Ip是: x.x.x.x" 格式
                     ip_str = data["data"]
-                    match = re.search(r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})', ip_str)
+                    match = re.search(r"(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})", ip_str)
                     if match:
                         _cached_ip = match.group(1)
                         return _cached_ip
@@ -101,26 +103,19 @@ async def check_ip_whitelist(expected_ips: set[str]) -> dict[str, Any]:
     """
     current_ip = await detect_current_ip()
 
-    result = {
-        "current_ip": current_ip,
-        "is_whitelisted": True,
-        "expected_ips": list(expected_ips),
-        "warning": None
-    }
+    result = {"current_ip": current_ip, "is_whitelisted": True, "expected_ips": list(expected_ips), "warning": None}
 
     if current_ip and expected_ips:
         if current_ip not in expected_ips:
             result["is_whitelisted"] = False
             result["warning"] = (
-                f"IP白名单警告: 当前IP {current_ip} 不在预期白名单中! "
-                f"请将此IP加入领星API白名单，否则API调用可能失败。"
+                f"IP白名单警告: 当前IP {current_ip} 不在预期白名单中! 请将此IP加入领星API白名单，否则API调用可能失败。"
             )
             logger.warning(result["warning"])
         else:
             logger.info("IP白名单检查通过: %s", current_ip)
 
     return result
-
 
 
 class RateLimiter:
@@ -132,7 +127,7 @@ class RateLimiter:
 
     # 限流配置
     TOKEN_MIN_INTERVAL = 60.0  # Token请求最小间隔（秒）
-    API_MIN_INTERVAL = 0.6     # 业务API请求最小间隔（秒）
+    API_MIN_INTERVAL = 0.6  # 业务API请求最小间隔（秒）
     API_MAX_REQUESTS_PER_MINUTE = 100  # 每分钟最大请求数
 
     # 全局状态（跨实例共享）
@@ -156,7 +151,7 @@ class RateLimiter:
         self.token_min_interval = token_min_interval or self.TOKEN_MIN_INTERVAL
         self.api_min_interval = api_min_interval or self.API_MIN_INTERVAL
 
-    async def wait_if_needed(self, request_type: str = 'api') -> float:
+    async def wait_if_needed(self, request_type: str = "api") -> float:
         """
         如果需要，等待以满足限流要求
 
@@ -169,7 +164,7 @@ class RateLimiter:
             float: 实际等待的秒数
         """
         async with self._lock:
-            if request_type == 'token':
+            if request_type == "token":
                 return await self._wait_for_token()
             return await self._wait_for_api()
 
@@ -226,14 +221,16 @@ class RateLimiter:
         return {
             "last_token_request": cls._last_token_request,
             "seconds_since_token": now - cls._last_token_request if cls._last_token_request else None,
-            "token_cooldown_remaining": max(0, cls.TOKEN_MIN_INTERVAL - (now - cls._last_token_request)) if cls._last_token_request else 0,
+            "token_cooldown_remaining": max(0, cls.TOKEN_MIN_INTERVAL - (now - cls._last_token_request))
+            if cls._last_token_request
+            else 0,
             "last_api_request": cls._last_api_request,
             "api_requests_last_minute": len(cls._api_requests),
             "api_capacity_remaining": cls.API_MAX_REQUESTS_PER_MINUTE - len(cls._api_requests),
         }
 
     @classmethod
-    def reset(cls):
+    def reset(cls) -> None:
         """重置限流器状态（慎用）"""
         cls._last_token_request = 0.0
         cls._last_api_request = 0.0

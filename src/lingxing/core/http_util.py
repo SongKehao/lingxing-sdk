@@ -1,8 +1,11 @@
-from __future__ import annotations
 """领星OpenAPI HTTP请求封装"""
+
+from __future__ import annotations
+
 import logging
 import os
 import ssl
+from typing import Any
 
 import aiohttp
 import orjson
@@ -22,12 +25,16 @@ class HttpBase:
     def __init__(self, default_timeout: int | None = None):
         self.default_timeout = default_timeout or DEFAULT_TIMEOUT
 
-    async def request(self, method: str, req_url: str,
-                      params: dict | None = None,
-                      json: dict | None = None,
-                      headers: dict | None = None,
-                      **kwargs) -> ResponseResult:
-        timeout = kwargs.pop('timeout', self.default_timeout)
+    async def request(
+        self,
+        method: str,
+        req_url: str,
+        params: dict | None = None,
+        json: dict | None = None,
+        headers: dict | None = None,
+        **kwargs: Any,
+    ) -> ResponseResult:
+        timeout = kwargs.pop("timeout", self.default_timeout)
         data = orjson.dumps(json, option=orjson.OPT_SORT_KEYS) if json else None
 
         if DISABLE_SSL_VERIFY:
@@ -41,8 +48,9 @@ class HttpBase:
 
         async with (
             aiohttp.ClientSession(connector=connector) as aio_session,
-            aio_session.request(method=method, url=req_url, params=params, data=data,
-                                timeout=timeout, headers=headers, **kwargs) as resp,
+            aio_session.request(
+                method=method, url=req_url, params=params, data=data, timeout=timeout, headers=headers, **kwargs
+            ) as resp,
         ):
             if resp.status != 200:
                 error_body = await resp.text()
