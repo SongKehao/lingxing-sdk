@@ -1,4 +1,5 @@
 """Shared test fixtures and mock helpers."""
+
 import json
 import os
 import sys
@@ -6,11 +7,12 @@ from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 
 class MockResponseResult:
     """Mock for ResponseResult."""
+
     def __init__(self, code=0, data=None, message="success", total=None, request_id=None):
         self.code = code
         self.data = data
@@ -33,12 +35,14 @@ class MockOpenApi:
         self._calls = []  # track all calls for assertions
 
     async def request_with_auto_token(self, route_name, method, req_body=None, req_params=None, **kwargs):
-        self._calls.append({
-            'route': route_name,
-            'method': method,
-            'body': req_body,
-            'params': req_params,
-        })
+        self._calls.append(
+            {
+                "route": route_name,
+                "method": method,
+                "body": req_body,
+                "params": req_params,
+            }
+        )
         if route_name in self._responses:
             return self._responses[route_name]
         return self._default_response
@@ -55,7 +59,7 @@ class MockOpenApi:
         return len(self._calls)
 
     def calls_for_route(self, route):
-        return [c for c in self._calls if c['route'] == route]
+        return [c for c in self._calls if c["route"] == route]
 
 
 @pytest.fixture
@@ -67,13 +71,13 @@ def mock_api():
 @pytest.fixture
 def fixtures_dir():
     """Path to recorded API fixtures."""
-    return os.path.join(os.path.dirname(__file__), 'fixtures')
+    return os.path.join(os.path.dirname(__file__), "fixtures")
 
 
 @pytest.fixture
 def api_fixtures(fixtures_dir):
     """Load recorded API fixtures."""
-    path = os.path.join(fixtures_dir, 'api_responses.json')
+    path = os.path.join(fixtures_dir, "api_responses.json")
     if not os.path.exists(path):
         return {}
     with open(path) as f:

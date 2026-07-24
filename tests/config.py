@@ -1,4 +1,5 @@
 import os
+
 from lingxing.config import LingXingConfig
 
 

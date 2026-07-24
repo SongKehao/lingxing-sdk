@@ -7,6 +7,7 @@ Covers:
 - query_product_list parses code=1 response
 - query_product_list_all auto-batches by 20 SKUs
 """
+
 import asyncio
 
 import pytest
@@ -19,53 +20,89 @@ from lingxing.models.responses.sale import AmazonProductSearchResponse
 SAMPLE_ITEM = {
     "msku": "0Z-WQSX-RMWR",
     "info": {
-        "summaries": [{
-            "asin": "B0XXX",
-            "conditionType": "new_new",
-            "createdDate": "2023-07-27T02:53:03.969Z",
-            "fnSku": "FNSKU1",
-            "itemName": "NP Phone Holder",
-            "lastUpdatedDate": "2023-11-23T11:30:22.391Z",
-            "mainImage": {"height": 500, "width": 500, "link": "https://img/main.jpg"},
-            "marketplaceId": "ATVPDKIKX0DA",
-            "productType": "PORTABLE_ELECTRONIC_DEVICE_STAND",
-            "status": ["BUYABLE", "DISCOVERABLE"],
-        }],
+        "summaries": [
+            {
+                "asin": "B0XXX",
+                "conditionType": "new_new",
+                "createdDate": "2023-07-27T02:53:03.969Z",
+                "fnSku": "FNSKU1",
+                "itemName": "NP Phone Holder",
+                "lastUpdatedDate": "2023-11-23T11:30:22.391Z",
+                "mainImage": {"height": 500, "width": 500, "link": "https://img/main.jpg"},
+                "marketplaceId": "ATVPDKIKX0DA",
+                "productType": "PORTABLE_ELECTRONIC_DEVICE_STAND",
+                "status": ["BUYABLE", "DISCOVERABLE"],
+            }
+        ],
         "attributes": {
-            "item_name": [{"language_tag": "en_US", "marketplace_id": "ATVPDKIKX0DA",
-                           "value": "Women's Red Plaid A-Line Mini Skirt"}],
+            "item_name": [
+                {
+                    "language_tag": "en_US",
+                    "marketplace_id": "ATVPDKIKX0DA",
+                    "value": "Women's Red Plaid A-Line Mini Skirt",
+                }
+            ],
             "bullet_point": [
                 {"language_tag": "en_US", "marketplace_id": "ATVPDKIKX0DA", "value": "bullet one"},
                 {"language_tag": "en_US", "marketplace_id": "ATVPDKIKX0DA", "value": "bullet two"},
             ],
-            "product_description": [{"language_tag": "en_US", "marketplace_id": "ATVPDKIKX0DA",
-                                     "value": "<p>long desc</p>"}],
-            "generic_keyword": [{"language_tag": "en_US", "marketplace_id": "ATVPDKIKX0DA",
-                                 "value": "search terms here"}],
+            "product_description": [
+                {"language_tag": "en_US", "marketplace_id": "ATVPDKIKX0DA", "value": "<p>long desc</p>"}
+            ],
+            "generic_keyword": [
+                {"language_tag": "en_US", "marketplace_id": "ATVPDKIKX0DA", "value": "search terms here"}
+            ],
             "condition_type": [{"marketplace_id": "ATVPDKIKX0DA", "value": "new_new"}],
-            "item_dimensions": [{"height": {"unit": "centimeters", "value": 5},
-                                 "length": {"unit": "centimeters", "value": 10},
-                                 "width": {"unit": "centimeters", "value": 8},
-                                 "marketplace_id": "ATVPDKIKX0DA"}],
+            "item_dimensions": [
+                {
+                    "height": {"unit": "centimeters", "value": 5},
+                    "length": {"unit": "centimeters", "value": 10},
+                    "width": {"unit": "centimeters", "value": 8},
+                    "marketplace_id": "ATVPDKIKX0DA",
+                }
+            ],
             "item_weight": [{"marketplace_id": "ATVPDKIKX0DA", "unit": "kilograms", "value": 0.17}],
             "list_price": [{"currency": "USD", "marketplace_id": "ATVPDKIKX0DA", "value": 103}],
-            "main_product_image_locator": [{"marketplace_id": "ATVPDKIKX0DA",
-                                            "media_location": "https://img/main.jpg"}],
-            "fulfillment_availability": [{"fulfillment_channel_code": "DEFAULT",
-                                          "lead_time_to_ship_max_days": 12, "quantity": 333}],
+            "main_product_image_locator": [
+                {"marketplace_id": "ATVPDKIKX0DA", "media_location": "https://img/main.jpg"}
+            ],
+            "fulfillment_availability": [
+                {"fulfillment_channel_code": "DEFAULT", "lead_time_to_ship_max_days": 12, "quantity": 333}
+            ],
             "purchasable_offer": [
-                {"audience": "ALL", "currency": "USD", "marketplace_id": "ATVPDKIKX0DA",
-                 "our_price": [{"schedule": [{"value_with_tax": 15.08}]}],
-                 "start_at": {"value": "2023-07-27T02:51:53.956Z"}, "end_at": {"value": None}},
-                {"audience": "B2B", "currency": "USD", "marketplace_id": "ATVPDKIKX0DA",
-                 "our_price": [{"schedule": [{"value_with_tax": 68}]}]},
+                {
+                    "audience": "ALL",
+                    "currency": "USD",
+                    "marketplace_id": "ATVPDKIKX0DA",
+                    "our_price": [{"schedule": [{"value_with_tax": 15.08}]}],
+                    "start_at": {"value": "2023-07-27T02:51:53.956Z"},
+                    "end_at": {"value": None},
+                },
+                {
+                    "audience": "B2B",
+                    "currency": "USD",
+                    "marketplace_id": "ATVPDKIKX0DA",
+                    "our_price": [{"schedule": [{"value_with_tax": 68}]}],
+                },
             ],
         },
-        "issues": [{"attributeNames": ["form_factor"], "categories": ["MISSING_ATTRIBUTE"],
-                    "code": "18448", "message": "missing", "severity": "WARNING"}],
-        "offers": [{"audience": {"displayName": "Sell on Amazon", "value": "ALL"},
-                    "marketplaceId": "ATVPDKIKX0DA", "offerType": "B2C",
-                    "price": {"amount": "15.08", "currency": "USD", "currencyCode": "USD"}}],
+        "issues": [
+            {
+                "attributeNames": ["form_factor"],
+                "categories": ["MISSING_ATTRIBUTE"],
+                "code": "18448",
+                "message": "missing",
+                "severity": "WARNING",
+            }
+        ],
+        "offers": [
+            {
+                "audience": {"displayName": "Sell on Amazon", "value": "ALL"},
+                "marketplaceId": "ATVPDKIKX0DA",
+                "offerType": "B2C",
+                "price": {"amount": "15.08", "currency": "USD", "currencyCode": "USD"},
+            }
+        ],
         "fulfillmentAvailability": [{"fulfillmentChannelCode": "DEFAULT", "quantity": 333}],
         "productTypes": [{"marketplaceId": "ATVPDKIKX0DA", "productType": "PORTABLE_ELECTRONIC_DEVICE_STAND"}],
         "procurement": [],
@@ -98,6 +135,7 @@ class _FakeOpenApi:
 
 
 # ---- 模型解析 ----
+
 
 def test_parse_full_info():
     item = AmazonProductSearchResponse(**SAMPLE_ITEM)
@@ -156,6 +194,7 @@ def test_title_falls_back_to_summaries():
 
 # ---- _check_response code=1 容忍 ----
 
+
 def test_check_response_accepts_code1_for_listing_publish():
     sale = SaleEndpoints(_FakeOpenApi())
     sale._check_response(_Resp(1, []), "/listing/publish/openapi/amazon/product/search")  # 不抛即通过
@@ -174,6 +213,7 @@ def test_check_response_rejects_nonzero_for_listing_publish():
 
 
 # ---- query_product_list / query_product_list_all ----
+
 
 def test_query_product_list_parses_code1_response():
     api = _FakeOpenApi(default=_Resp(1, [SAMPLE_ITEM]))

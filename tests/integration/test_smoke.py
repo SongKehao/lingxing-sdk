@@ -39,9 +39,7 @@ class PaginatedMockOpenApi(MockOpenApi):
         self._records = records
 
     async def request_with_auto_token(self, route_name, method, req_body=None, req_params=None, **kwargs):
-        self._calls.append(
-            {"route": route_name, "method": method, "body": req_body, "params": req_params}
-        )
+        self._calls.append({"route": route_name, "method": method, "body": req_body, "params": req_params})
         body = req_body or {}
         offset = body.get("offset", 0)
         length = body.get("length", 100)
