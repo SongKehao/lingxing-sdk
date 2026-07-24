@@ -1,0 +1,62 @@
+{
+  "BasicData/AccoutLists": {
+    "url": "/erp/sc/data/account/lists",
+    "name": "BasicData/AccoutLists",
+    "code": 0,
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "uid": 149747,
+          "realname": "REDACTED",
+          "username": "REDACTED",
+          "mobile": "REDACTED",
+          "email": "REDACTED",
+          "login_num": 3,
+          "last_login_time": "2021-10-28 13:13:35",
+          "last_login_ip": "REDACTED",
+          "status": 1,
+          "create_time": "2021-05-15 23:00",
+          "zid": 149747,
+          "role": "REDACTED",
+          "seller": "REDACTED",
+          "is_master": 1
+        },
+        {
+          "uid": 10631467,
+          "realname": "REDACTED",
+          "username": "REDACTED",
+          "mobile": "REDACTED",
+          "email": "REDACTED",
+          "login_num": 0,
+          "last_login_time": "-",
+          "last_login_ip": "REDACTED",
+          "status": 1,
+          "create_time": "2024-09-01 20:44",
+          "zid": 149747,
+          "role": "REDACTED",
+          "seller": "REDACTED",
+          "is_master": 0
+        },
+        {
+          "uid": 10631468,
+          "realname": "REDACTED",
+          "username": "REDACTED",
+          "mobile": "REDACTED",
+          "email": "REDACTED",
+          "login_num": 0,
+          "last_login_time": "-",
+          "last_login_ip": "REDACTED",
+          "status": 0,
+          "create_time": "2024-09-01 20:45",
+          "zid": 149747,
+          "role": "REDACTED",
+          "seller": "REDACTED",
+          "is_master": 0
+        }
+      ],
+      "message": "success",
+      "total": 3
+    }
+  }
+}
