@@ -176,10 +176,53 @@ def infer_py_type(type_str, comment, fname):
     return None
 
 
+def _join_paren_lines(text):
+    """Collapse ruff-format multi-line parenthesized annotations / defaults so
+    each field definition occupies one logical line.
+
+    ruff-format wraps long annotations or default values in parentheses that
+    span several lines, e.g.::
+
+        agg_dimension: (
+            str  # comment
+        )
+        next_token: Optional[str] = (
+            None  # comment
+        )
+
+    The field parser works line-by-line, so join such continuation runs back
+    into a single line (spaces for newlines) before parsing. Only the code part
+    of each line (before a ``#`` comment) is counted for bracket balance, so
+    unbalanced parentheses inside Chinese explanatory comments (e.g.
+    "(第一次分页无需填写") do not confuse the depth tracking. These annotations
+    contain no string literals, so a bare ``#`` always starts a comment.
+    """
+    out = []
+    buf = ""
+    depth = 0
+    for line in text.splitlines():
+        if depth == 0:
+            buf = line
+        else:
+            buf += " " + line.strip()
+        code = line.split("#", 1)[0]
+        depth += code.count("(") + code.count("[") - code.count(")") - code.count("]")
+        if depth <= 0:
+            out.append(buf)
+            buf = ""
+            depth = 0
+    if buf:
+        out.append(buf)
+    return "\n".join(out)
+
+
 def parse_fields(body, route="", cls_name=""):
     """Parse field definitions from class body."""
     required = []
     optional = []
+    # Collapse ruff-format multi-line parenthesized annotations / defaults so
+    # the single-line field regex below sees one logical line per field.
+    body = _join_paren_lines(body)
     for m in re.finditer(
         r'^\s+(\w+):\s+(.+?)(?:\s*#\s*(.+))?$',
         body,
