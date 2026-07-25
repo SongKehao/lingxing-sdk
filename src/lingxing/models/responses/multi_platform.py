@@ -1,4 +1,5 @@
 """Auto-generated response models for MultiPlatform."""
+
 from typing import Any, List, Optional
 
 from pydantic import Field
@@ -8,9 +9,13 @@ from ..common import LingXingModel
 
 class AudienceReportListList(LingXingModel):
     """list sub-structure."""
+
     summary: Optional[str] = Field(None, description="【不参与Openapi转发】是否为汇总行")
     audience_fake_id: Optional[str] = Field(None, description="受众虚拟ID")
-    audience_group: Optional[float] = Field(None, description="受众分组1=过去15天访问, 2=浏览相似商品, 3=店铺触达受众, 4=店铺兴趣受众, 5=DMP受众, 6=性别, 7=年龄")
+    audience_group: Optional[float] = Field(
+        None,
+        description="受众分组1=过去15天访问, 2=浏览相似商品, 3=店铺触达受众, 4=店铺兴趣受众, 5=DMP受众, 6=性别, 7=年龄",
+    )
     audience_group_display_name: Optional[str] = Field(None, description="受众分组显示名称")
     campaign_id: Optional[int] = Field(None, description="广告活动ID")
     campaign_name: Optional[str] = Field(None, description="广告活动名称")
@@ -43,12 +48,17 @@ class AudienceReportListList(LingXingModel):
     product_cvr: Optional[str] = Field(None, description="商品转化率")
     store_roi: Optional[str] = Field(None, description="店铺ROI")
     currency_code: Optional[str] = Field(None, description="币种代码")
+
 
 class AudienceReportListSummary(LingXingModel):
     """summary sub-structure."""
+
     summary: Optional[str] = Field(None, description="【不参与Openapi转发】是否为汇总行")
     audience_fake_id: Optional[str] = Field(None, description="受众虚拟ID")
-    audience_group: Optional[float] = Field(None, description="受众分组1=过去15天访问, 2=浏览相似商品, 3=店铺触达受众, 4=店铺兴趣受众, 5=DMP受众, 6=性别, 7=年龄")
+    audience_group: Optional[float] = Field(
+        None,
+        description="受众分组1=过去15天访问, 2=浏览相似商品, 3=店铺触达受众, 4=店铺兴趣受众, 5=DMP受众, 6=性别, 7=年龄",
+    )
     audience_group_display_name: Optional[str] = Field(None, description="受众分组显示名称")
     campaign_id: Optional[int] = Field(None, description="广告活动ID")
     campaign_name: Optional[str] = Field(None, description="广告活动名称")
@@ -82,8 +92,10 @@ class AudienceReportListSummary(LingXingModel):
     store_roi: Optional[str] = Field(None, description="店铺ROI")
     currency_code: Optional[str] = Field(None, description="币种代码")
 
+
 class AudienceReportListResponse(LingXingModel):
     """Lazada广告-受众报告."""
+
     list: Optional[List[AudienceReportListList]] = Field(None, description="数据列表")
     total: Optional[int] = Field(None, description="总条数")
     page: Optional[float] = Field(None, description="当前页码")
@@ -93,18 +105,23 @@ class AudienceReportListResponse(LingXingModel):
 
 class LazadaadCampaignInfoList(LingXingModel):
     """list sub-structure."""
+
     campaign_id: Optional[str] = Field(None, description="广告活动ID")
     campaign_name: Optional[str] = Field(None, description="广告活动名称")
     campaign_status: Optional[float] = Field(None, description="广告活动状态（1=开启，0=关闭）")
+
 
 class LazadaadCampaignInfoSummary(LingXingModel):
     """summary sub-structure."""
+
     campaign_id: Optional[str] = Field(None, description="广告活动ID")
     campaign_name: Optional[str] = Field(None, description="广告活动名称")
     campaign_status: Optional[float] = Field(None, description="广告活动状态（1=开启，0=关闭）")
 
+
 class LazadaadCampaignInfoResponse(LingXingModel):
     """Lazada广告-获取广告活动信息."""
+
     list: Optional[List[LazadaadCampaignInfoList]] = Field(None, description="数据列表")
     total: Optional[int] = Field(None, description="总条数")
     page: Optional[float] = Field(None, description="当前页码")
@@ -114,6 +131,7 @@ class LazadaadCampaignInfoResponse(LingXingModel):
 
 class CampaignReportListList(LingXingModel):
     """list sub-structure."""
+
     summary: Optional[str] = Field(None, description="【不参与Openapi转发】是否为汇总行")
     campaign_id: Optional[int] = Field(None, description="广告活动ID")
     campaign_name: Optional[str] = Field(None, description="广告活动名称")
@@ -147,8 +165,10 @@ class CampaignReportListList(LingXingModel):
     store_roi: Optional[str] = Field(None, description="店铺ROI")
     currency_code: Optional[str] = Field(None, description="币种代码")
 
+
 class CampaignReportListSummary(LingXingModel):
     """summary sub-structure."""
+
     summary: Optional[str] = Field(None, description="【不参与Openapi转发】是否为汇总行")
     campaign_id: Optional[int] = Field(None, description="广告活动ID")
     campaign_name: Optional[str] = Field(None, description="广告活动名称")
@@ -182,8 +202,10 @@ class CampaignReportListSummary(LingXingModel):
     store_roi: Optional[str] = Field(None, description="店铺ROI")
     currency_code: Optional[str] = Field(None, description="币种代码")
 
+
 class CampaignReportListResponse(LingXingModel):
     """Lazada广告-广告活动报告."""
+
     list: Optional[List[CampaignReportListList]] = Field(None, description="数据列表")
     total: Optional[int] = Field(None, description="总条数")
     page: Optional[float] = Field(None, description="当前页码")
@@ -193,18 +215,23 @@ class CampaignReportListResponse(LingXingModel):
 
 class LazadaadItemInfoList(LingXingModel):
     """list sub-structure."""
+
     adgroup_name: Optional[str] = Field(None, description="广告商品名称")
     image_url: Optional[str] = Field(None, description="商品主图URL")
     item_id: Optional[str] = Field(None, description="商品ID")
+
 
 class LazadaadItemInfoSummary(LingXingModel):
     """summary sub-structure."""
+
     adgroup_name: Optional[str] = Field(None, description="广告商品名称")
     image_url: Optional[str] = Field(None, description="商品主图URL")
     item_id: Optional[str] = Field(None, description="商品ID")
 
+
 class LazadaadItemInfoResponse(LingXingModel):
     """Lazada广告-获取广告商品信息."""
+
     list: Optional[List[LazadaadItemInfoList]] = Field(None, description="数据列表")
     total: Optional[int] = Field(None, description="总条数")
     page: Optional[float] = Field(None, description="当前页码")
@@ -214,6 +241,7 @@ class LazadaadItemInfoResponse(LingXingModel):
 
 class ItemReportListList(LingXingModel):
     """list sub-structure."""
+
     summary: Optional[str] = Field(None, description="【不参与Openapi转发】是否为汇总行")
     adgroup_id: Optional[int] = Field(None, description="广告组ID")
     adgroup_name: Optional[str] = Field(None, description="广告组名称")
@@ -248,9 +276,11 @@ class ItemReportListList(LingXingModel):
     product_cvr: Optional[str] = Field(None, description="商品转化率")
     store_roi: Optional[str] = Field(None, description="店铺ROI")
     currency_code: Optional[str] = Field(None, description="币种代码")
+
 
 class ItemReportListSummary(LingXingModel):
     """summary sub-structure."""
+
     summary: Optional[str] = Field(None, description="【不参与Openapi转发】是否为汇总行")
     adgroup_id: Optional[int] = Field(None, description="广告组ID")
     adgroup_name: Optional[str] = Field(None, description="广告组名称")
@@ -286,8 +316,10 @@ class ItemReportListSummary(LingXingModel):
     store_roi: Optional[str] = Field(None, description="店铺ROI")
     currency_code: Optional[str] = Field(None, description="币种代码")
 
+
 class ItemReportListResponse(LingXingModel):
     """Lazada广告-广告商品报告."""
+
     list: Optional[List[ItemReportListList]] = Field(None, description="数据列表")
     total: Optional[int] = Field(None, description="总条数")
     page: Optional[float] = Field(None, description="当前页码")
@@ -297,6 +329,7 @@ class ItemReportListResponse(LingXingModel):
 
 class KeywordReportListList(LingXingModel):
     """list sub-structure."""
+
     summary: Optional[str] = Field(None, description="【不参与Openapi转发】是否为汇总行")
     keyword_id: Optional[int] = Field(None, description="关键词ID")
     keyword: Optional[str] = Field(None, description="关键词")
@@ -331,9 +364,11 @@ class KeywordReportListList(LingXingModel):
     product_cvr: Optional[str] = Field(None, description="商品转化率")
     store_roi: Optional[str] = Field(None, description="店铺ROI")
     currency_code: Optional[str] = Field(None, description="币种代码")
+
 
 class KeywordReportListSummary(LingXingModel):
     """summary sub-structure."""
+
     summary: Optional[str] = Field(None, description="【不参与Openapi转发】是否为汇总行")
     keyword_id: Optional[int] = Field(None, description="关键词ID")
     keyword: Optional[str] = Field(None, description="关键词")
@@ -369,8 +404,10 @@ class KeywordReportListSummary(LingXingModel):
     store_roi: Optional[str] = Field(None, description="店铺ROI")
     currency_code: Optional[str] = Field(None, description="币种代码")
 
+
 class KeywordReportListResponse(LingXingModel):
     """Lazada广告-关键词报告."""
+
     list: Optional[List[KeywordReportListList]] = Field(None, description="数据列表")
     total: Optional[int] = Field(None, description="总条数")
     page: Optional[float] = Field(None, description="当前页码")
@@ -380,17 +417,23 @@ class KeywordReportListResponse(LingXingModel):
 
 class LazadaadSellerInfoShops(LingXingModel):
     """shops sub-structure."""
+
     shop_id: Optional[str] = Field(None, description="店铺ID")
     lx_name: Optional[str] = Field(None, description="店铺名称")
 
+
 class LazadaadSellerInfoResponse(LingXingModel):
     """Lazada广告-获取店铺信息."""
+
     shops: Optional[List[LazadaadSellerInfoShops]] = Field(None, description="当前用户有权限访问的店铺列表")
-    currency_codes: Optional[list] = Field(None, description="【不参与Openapi转发】币种编码列表（默认包含CNY，且CNY优先展示）")
+    currency_codes: Optional[list] = Field(
+        None, description="【不参与Openapi转发】币种编码列表（默认包含CNY，且CNY优先展示）"
+    )
 
 
 class StoreReportListList(LingXingModel):
     """list sub-structure."""
+
     summary: Optional[str] = Field(None, description="【不参与Openapi转发】是否为汇总行")
     store_id: Optional[int] = Field(None, description="店铺ID")
     store_name: Optional[str] = Field(None, description="店铺名称")
@@ -415,9 +458,11 @@ class StoreReportListList(LingXingModel):
     product_cvr: Optional[str] = Field(None, description="商品转化率")
     store_roi: Optional[str] = Field(None, description="店铺ROI")
     currency_code: Optional[str] = Field(None, description="币种代码")
+
 
 class StoreReportListSummary(LingXingModel):
     """summary sub-structure."""
+
     summary: Optional[str] = Field(None, description="【不参与Openapi转发】是否为汇总行")
     store_id: Optional[int] = Field(None, description="店铺ID")
     store_name: Optional[str] = Field(None, description="店铺名称")
@@ -443,8 +488,10 @@ class StoreReportListSummary(LingXingModel):
     store_roi: Optional[str] = Field(None, description="店铺ROI")
     currency_code: Optional[str] = Field(None, description="币种代码")
 
+
 class StoreReportListResponse(LingXingModel):
     """Lazada广告-店铺报告."""
+
     list: Optional[List[StoreReportListList]] = Field(None, description="数据列表")
     total: Optional[int] = Field(None, description="总条数")
     page: Optional[float] = Field(None, description="当前页码")
@@ -454,6 +501,7 @@ class StoreReportListResponse(LingXingModel):
 
 class MultiplatformAddressReturnaddresslistResponse(LingXingModel):
     """查询退件地址列表."""
+
     total: Optional[int] = Field(None, description="总数")
     address_alias: Optional[str] = Field(None, description="地址别名")
     city: Optional[str] = Field(None, description="城市")
@@ -470,10 +518,13 @@ class MultiplatformAddressReturnaddresslistResponse(LingXingModel):
 
 class MultiplatformAdsQueryadgroupsvlistList(LingXingModel):
     """list sub-structure."""
+
     acos: Optional[str] = Field(None, description="广告成本销售比(ACOS)，计算公式：adSpend / attributedSales")
     ad_group_id: Optional[str] = Field(None, description="广告组ID")
     ad_group_name: Optional[str] = Field(None, description="广告组名称")
-    ad_group_status: Optional[str] = Field(None, description="广告组状态，枚举值：enabled-启用, disabled-禁用, delete-归档")
+    ad_group_status: Optional[str] = Field(
+        None, description="广告组状态，枚举值：enabled-启用, disabled-禁用, delete-归档"
+    )
     ad_spend: Optional[str] = Field(None, description="广告花费")
     advertised_sku_sales: Optional[str] = Field(None, description="广告SKU销售额")
     advertised_sku_units: Optional[str] = Field(None, description="广告SKU销售单元数")
@@ -484,8 +535,13 @@ class MultiplatformAdsQueryadgroupsvlistList(LingXingModel):
     attributed_units: Optional[str] = Field(None, description="归因销售单元数，广告带来的总销售单元数")
     campaign_id: Optional[str] = Field(None, description="广告活动ID")
     campaign_name: Optional[str] = Field(None, description="广告活动名称")
-    campaign_status: Optional[str] = Field(None, description="广告活动状态，枚举值：enabled-启用, disabled-禁用, delete-归档")
-    campaign_type: Optional[str] = Field(None, description="广告活动类型，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告), video(SV视频广告)")
+    campaign_status: Optional[str] = Field(
+        None, description="广告活动状态，枚举值：enabled-启用, disabled-禁用, delete-归档"
+    )
+    campaign_type: Optional[str] = Field(
+        None,
+        description="广告活动类型，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告), video(SV视频广告)",
+    )
     cpa: Optional[str] = Field(None, description="单次转化成本(CPA)，计算公式：adSpend / attributedOrders")
     cpc: Optional[str] = Field(None, description="单次点击成本(CPC)，计算公式：adSpend / numAdsClicks")
     ctr: Optional[str] = Field(None, description="点击率(CTR)，计算公式：numAdsClicks / numAdsShown")
@@ -508,8 +564,10 @@ class MultiplatformAdsQueryadgroupsvlistList(LingXingModel):
     roas: Optional[str] = Field(None, description="广告投入产出比(ROAS)，计算公式：attributedSales / adSpend")
     targeting_type: Optional[str] = Field(None, description="定向类型")
 
+
 class MultiplatformAdsQueryadgroupsvlistResponse(LingXingModel):
     """查询沃尔玛-广告 - SV广告 - 广告组."""
+
     list: Optional[List[MultiplatformAdsQueryadgroupsvlistList]] = Field(None, description="广告组列表数据")
     total: Optional[str] = Field(None, description="总记录数")
     total: Optional[int] = Field(None, description="总记录数")
@@ -517,6 +575,7 @@ class MultiplatformAdsQueryadgroupsvlistResponse(LingXingModel):
 
 class MultiplatformAdsQueryadvertiserlistList(LingXingModel):
     """list sub-structure."""
+
     advertiser_id: Optional[str] = Field(None, description="广告账号Id")
     advertiser_name: Optional[str] = Field(None, description="广告账号名称")
     average_video_play: Optional[float] = Field(None, description="平均视频播放时长（秒）")
@@ -533,9 +592,15 @@ class MultiplatformAdsQueryadvertiserlistList(LingXingModel):
     cny_balance: Optional[float] = Field(None, description="人民币余额")
     cny_billed_cost: Optional[float] = Field(None, description="人民币净消耗")
     cny_cash_spend: Optional[float] = Field(None, description="人民币现金消耗")
-    cny_cost_per_onsite_initiate_checkout_count: Optional[float] = Field(None, description="人民币开始结账平均成本（商店）")
-    cny_cost_per_onsite_initiate_checkout_count_count: Optional[int] = Field(None, description="人民币开始结账平均成本计数")
-    cny_cost_per_onsite_initiate_checkout_count_sum: Optional[float] = Field(None, description="人民币开始结账平均成本汇总")
+    cny_cost_per_onsite_initiate_checkout_count: Optional[float] = Field(
+        None, description="人民币开始结账平均成本（商店）"
+    )
+    cny_cost_per_onsite_initiate_checkout_count_count: Optional[int] = Field(
+        None, description="人民币开始结账平均成本计数"
+    )
+    cny_cost_per_onsite_initiate_checkout_count_sum: Optional[float] = Field(
+        None, description="人民币开始结账平均成本汇总"
+    )
     cny_cost_per_onsite_on_web_cart: Optional[float] = Field(None, description="人民币加入购物车平均成本（商店）")
     cny_cost_per_onsite_on_web_cart_count: Optional[int] = Field(None, description="人民币加入购物车平均成本计数")
     cny_cost_per_onsite_on_web_cart_sum: Optional[float] = Field(None, description="人民币加入购物车平均成本汇总")
@@ -608,7 +673,10 @@ class MultiplatformAdsQueryadvertiserlistList(LingXingModel):
     result_rate: Optional[float] = Field(None, description="成效率")
     service_status: Optional[str] = Field(None, description="服务状态")
     spend: Optional[float] = Field(None, description="花费")
-    status: Optional[str] = Field(None, description="状态，枚举值：STATUS_ENABLE-已启用, SYSTEM_STATUS_IN_REVIEW-审核中, SYSTEM_STATUS_NOT_PASS-未通过, STATUS_LIMIT-惩罚中, STATUS_DISABLE-已关户")
+    status: Optional[str] = Field(
+        None,
+        description="状态，枚举值：STATUS_ENABLE-已启用, SYSTEM_STATUS_IN_REVIEW-审核中, SYSTEM_STATUS_NOT_PASS-未通过, STATUS_LIMIT-惩罚中, STATUS_DISABLE-已关户",
+    )
     total_onsite_initiate_checkout_count_value: Optional[float] = Field(None, description="开始结账价值（商店）")
     total_onsite_on_web_cart_value: Optional[float] = Field(None, description="加入购物车价值（商店）")
     total_onsite_on_web_detail_value: Optional[float] = Field(None, description="商品页浏览价值（商店）")
@@ -639,8 +707,10 @@ class MultiplatformAdsQueryadvertiserlistList(LingXingModel):
     video_watched2s: Optional[int] = Field(None, description="视频播放2秒次数")
     video_watched6s: Optional[int] = Field(None, description="视频播放6秒次数")
 
+
 class MultiplatformAdsQueryadvertiserlistResponse(LingXingModel):
     """查询TikTok-推广广告-广告帐号."""
+
     list: Optional[List[MultiplatformAdsQueryadvertiserlistList]] = Field(None, description="数据列表")
     total: Optional[int] = Field(None, description="总条数")
     total: Optional[int] = Field(None, description="总记录数")
@@ -648,6 +718,7 @@ class MultiplatformAdsQueryadvertiserlistResponse(LingXingModel):
 
 class MultiplatformAdsQuerycampaignsplistList(LingXingModel):
     """list sub-structure."""
+
     acos: Optional[float] = Field(None, description="广告成本占比ACOS，计算公式：广告花费 / 广告销售额 * 100%")
     ad_spend: Optional[float] = Field(None, description="广告花费")
     advertised_sku_sales: Optional[float] = Field(None, description="直接销售额，广告直接点击归因销售额")
@@ -660,11 +731,18 @@ class MultiplatformAdsQuerycampaignsplistList(LingXingModel):
     attributed_units: Optional[int] = Field(None, description="广告销量，归因总销量")
     benchmark_val: Optional[float] = Field(None, description="基准值，分时策略的基准值")
     bidding_strategy: Optional[dict] = Field(None, description="竞价策略，JSON格式字符串")
-    budget_type: Optional[str] = Field(None, description="预算类型，枚举值：daily-每日预算, total-总预算, both-两者都有")
+    budget_type: Optional[str] = Field(
+        None, description="预算类型，枚举值：daily-每日预算, total-总预算, both-两者都有"
+    )
     campaign_id: Optional[int] = Field(None, description="广告活动ID")
     campaign_name: Optional[str] = Field(None, description="广告活动名称")
-    campaign_status: Optional[str] = Field(None, description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成")
-    campaign_type: Optional[str] = Field(None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告")
+    campaign_status: Optional[str] = Field(
+        None,
+        description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成",
+    )
+    campaign_type: Optional[str] = Field(
+        None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告"
+    )
     complete_view_revenue: Optional[float] = Field(None, description="完整观看收入，仅SV视频广告")
     cpa: Optional[float] = Field(None, description="平均订单成本CPA，计算公式：广告花费 / 广告订单")
     cpc: Optional[float] = Field(None, description="点击成本CPC，计算公式：广告花费 / 点击量")
@@ -678,13 +756,21 @@ class MultiplatformAdsQuerycampaignsplistList(LingXingModel):
     key: Optional[int] = Field(None, description="唯一键，用于前端列表展示")
     mp_advertiser_name: Optional[str] = Field(None, description="广告账号名称")
     mp_seller_name: Optional[str] = Field(None, description="店铺名称")
-    ntb_order_rate: Optional[float] = Field(None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%")
+    ntb_order_rate: Optional[float] = Field(
+        None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%"
+    )
     ntb_orders: Optional[int] = Field(None, description="品牌新买家订单数")
-    ntb_orders_percent: Optional[float] = Field(None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%")
+    ntb_orders_percent: Optional[float] = Field(
+        None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%"
+    )
     ntb_revenue: Optional[float] = Field(None, description="品牌新买家销售额")
-    ntb_revenue_percent: Optional[float] = Field(None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%")
+    ntb_revenue_percent: Optional[float] = Field(
+        None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%"
+    )
     ntb_units: Optional[int] = Field(None, description="品牌新买家销量")
-    ntb_units_percent: Optional[float] = Field(None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%")
+    ntb_units_percent: Optional[float] = Field(
+        None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%"
+    )
     num_ads_clicks: Optional[int] = Field(None, description="广告点击量")
     num_ads_shown: Optional[int] = Field(None, description="曝光次数")
     other_sku_sales: Optional[float] = Field(None, description="关联销售额，间接归因销售额")
@@ -709,8 +795,10 @@ class MultiplatformAdsQuerycampaignsplistList(LingXingModel):
     view_through_units_sold: Optional[int] = Field(None, description="浏览销量，仅SV视频广告")
     viewable_impressions: Optional[int] = Field(None, description="可见曝光量，仅SV视频广告")
 
+
 class MultiplatformAdsQuerycampaignsplistResponse(LingXingModel):
     """查询沃尔玛-广告 - SP广告 - 广告活动."""
+
     list: Optional[List[MultiplatformAdsQuerycampaignsplistList]] = Field(None, description="列表数据")
     total: Optional[int] = Field(None, description="总记录数")
     total: Optional[int] = Field(None, description="总记录数")
@@ -718,6 +806,7 @@ class MultiplatformAdsQuerycampaignsplistResponse(LingXingModel):
 
 class MultiplatformAdsQuerycommonadvertiserlistResponse(LingXingModel):
     """查询TikTok-推广广告-广告帐号."""
+
     advertiser_id: Optional[str] = Field(None, description="广告账号id")
     advertiser_name: Optional[str] = Field(None, description="广告账号名称")
     total: Optional[int] = Field(None, description="总记录数")
@@ -725,6 +814,7 @@ class MultiplatformAdsQuerycommonadvertiserlistResponse(LingXingModel):
 
 class MultiplatformAdsQuerygmvadvertiserreportlistList(LingXingModel):
     """list sub-structure."""
+
     advertiser_id: Optional[str] = Field(None, description="广告账号ID")
     advertiser_name: Optional[str] = Field(None, description="广告账号名称")
     balance: Optional[str] = Field(None, description="余额，广告账号当前可用余额")
@@ -738,7 +828,10 @@ class MultiplatformAdsQuerygmvadvertiserreportlistList(LingXingModel):
     orders: Optional[str] = Field(None, description="订单数，广告带来的总订单量")
     roi: Optional[str] = Field(None, description="ROI（投资回报率），计算公式：grossRevenue / cost")
     start_date: Optional[str] = Field(None, description="开始日期，格式：yyyy-MM-dd")
-    status_code: Optional[str] = Field(None, description="状态编码，枚举值：STATUS_DISABLE-已关户, STATUS_PENDING_CONFIRM-审核中, STATUS_PENDING_VERIFIED-审核中, STATUS_CONFIRM_FAIL-未通过, STATUS_ENABLE-已启用, STATUS_CONFIRM_FAIL_END-未通过, STATUS_PENDING_CONFIRM_MODIFY-审核中, STA...")
+    status_code: Optional[str] = Field(
+        None,
+        description="状态编码，枚举值：STATUS_DISABLE-已关户, STATUS_PENDING_CONFIRM-审核中, STATUS_PENDING_VERIFIED-审核中, STATUS_CONFIRM_FAIL-未通过, STATUS_ENABLE-已启用, STATUS_CONFIRM_FAIL_END-未通过, STATUS_PENDING_CONFIRM_MODIFY-审核中, STA...",
+    )
     status_name: Optional[str] = Field(None, description="状态名称，如：已启用、审核中、未通过、惩罚中、已关户")
     stores: Optional[list] = Field(None, description="店铺列表，Store对象数组，包含该广告账号关联的店铺信息")
     stores_display_name: Optional[str] = Field(None, description="店铺显示名称，多个店铺用逗号分隔")
@@ -747,15 +840,20 @@ class MultiplatformAdsQuerygmvadvertiserreportlistList(LingXingModel):
     timezone_name: Optional[str] = Field(None, description="时区名称，广告账号所在时区")
     report_date: Optional[str] = Field(None, description="当startDate与endDate一致时返回")
 
+
 class MultiplatformAdsQuerygmvadvertiserreportlistResponse(LingXingModel):
     """查询TikTok-GMV MAX-广告帐号."""
-    list: Optional[List[MultiplatformAdsQuerygmvadvertiserreportlistList]] = Field(None, description="报告列表，Report对象数组")
+
+    list: Optional[List[MultiplatformAdsQuerygmvadvertiserreportlistList]] = Field(
+        None, description="报告列表，Report对象数组"
+    )
     total: Optional[str] = Field(None, description="总数，返回符合条件的总记录数")
     total: Optional[int] = Field(None, description="总记录数")
 
 
 class MultiplatformAdsQuerygmvcampaignreportlistList(LingXingModel):
     """list sub-structure."""
+
     advertiser_id: Optional[str] = Field(None, description="广告账号ID")
     bid_type_code: Optional[str] = Field(None, description="优化模式编码，枚举值：CUSTOM-目标ROI, NO_BID-最大投放量")
     bid_type_name: Optional[str] = Field(None, description="优化模式名称，如：目标ROI、最大投放量")
@@ -763,12 +861,16 @@ class MultiplatformAdsQuerygmvcampaignreportlistList(LingXingModel):
     campaign_name: Optional[str] = Field(None, description="推广系列名称")
     cost: Optional[str] = Field(None, description="成本，广告花费总金额")
     cost_per_live_view: Optional[str] = Field(None, description="直播播放平均成本，计算公式：cost / liveViews")
-    cost_per_live_view10_second: Optional[str] = Field(None, description="直播播放达10秒平均成本，计算公式：cost / liveViews10Second")
+    cost_per_live_view10_second: Optional[str] = Field(
+        None, description="直播播放达10秒平均成本，计算公式：cost / liveViews10Second"
+    )
     cost_per_order: Optional[str] = Field(None, description="平均下单成本，计算公式：cost / orders")
     currency_code: Optional[str] = Field(None, description="币种编码，如：USD, CNY, EUR")
     currency_rate_missing_count: Optional[str] = Field(None, description="币种汇率缺失计数，标识汇率数据缺失的天数")
     end_date: Optional[str] = Field(None, description="结束日期，格式：yyyy-MM-dd")
-    gmv_max_promotion_type_code: Optional[str] = Field(None, description="GMV Max类型编码，枚举值：PRODUCT-商品GMV, LIVE-直播GMV")
+    gmv_max_promotion_type_code: Optional[str] = Field(
+        None, description="GMV Max类型编码，枚举值：PRODUCT-商品GMV, LIVE-直播GMV"
+    )
     gmv_max_promotion_type_name: Optional[str] = Field(None, description="GMV Max类型名称，如：商品GMV、直播GMV")
     gross_revenue: Optional[str] = Field(None, description="总收入，GMV总金额")
     item_groups: Optional[list] = Field(None, description="商品列表，ItemGroup对象数组，包含该推广系列关联的商品信息")
@@ -777,7 +879,9 @@ class MultiplatformAdsQuerygmvcampaignreportlistList(LingXingModel):
     live_views10_second: Optional[str] = Field(None, description="直播播放达10秒播放量，观看超过10秒的次数")
     max_delivery_budget: Optional[str] = Field(None, description="最大投放量预算，最大投放量模式下的预算限额")
     net_cost: Optional[str] = Field(None, description="净成本，扣除退款等后的实际成本")
-    operation_status_code: Optional[str] = Field(None, description="操作状态编码，枚举值：ENABLE-已开启, DISABLE-已暂停, DELETE-已删除")
+    operation_status_code: Optional[str] = Field(
+        None, description="操作状态编码，枚举值：ENABLE-已开启, DISABLE-已暂停, DELETE-已删除"
+    )
     operation_status_name: Optional[str] = Field(None, description="操作状态名称，如：已开启、已暂停、已删除")
     orders: Optional[str] = Field(None, description="订单数，广告带来的总订单量")
     product_specific_type_code: Optional[str] = Field(None, description="选择商品的维度编码，标识商品选择的维度类型")
@@ -793,15 +897,20 @@ class MultiplatformAdsQuerygmvcampaignreportlistList(LingXingModel):
     target_roi_budget: Optional[str] = Field(None, description="目标ROI预算，目标ROI模式下的预算限额")
     report_date: Optional[str] = Field(None, description="当startDate与endDate一致时返回")
 
+
 class MultiplatformAdsQuerygmvcampaignreportlistResponse(LingXingModel):
     """查询TikTok-GMV MAX-推广系列."""
-    list: Optional[List[MultiplatformAdsQuerygmvcampaignreportlistList]] = Field(None, description="报告列表，Report对象数组")
+
+    list: Optional[List[MultiplatformAdsQuerygmvcampaignreportlistList]] = Field(
+        None, description="报告列表，Report对象数组"
+    )
     total: Optional[str] = Field(None, description="总数，返回符合条件的总记录数")
     total: Optional[int] = Field(None, description="总记录数")
 
 
 class MultiplatformAdsQuerygmvitemgroupreportlistList(LingXingModel):
     """list sub-structure."""
+
     bid_type_code: Optional[str] = Field(None, description="优化模式编码，枚举值：CUSTOM-目标ROI, NO_BID-最大投放量")
     bid_type_name: Optional[str] = Field(None, description="优化模式名称")
     currency_code: Optional[str] = Field(None, description="币种编码")
@@ -813,7 +922,9 @@ class MultiplatformAdsQuerygmvitemgroupreportlistList(LingXingModel):
     item_group_id: Optional[str] = Field(None, description="商品SPU ID")
     orders: Optional[str] = Field(None, description="订单数")
     product_image_url: Optional[str] = Field(None, description="商品图片URL")
-    product_status_code: Optional[str] = Field(None, description="商品状态编码，枚举值：available-可用, unavailable-不可用")
+    product_status_code: Optional[str] = Field(
+        None, description="商品状态编码，枚举值：available-可用, unavailable-不可用"
+    )
     product_status_name: Optional[str] = Field(None, description="商品状态名称")
     start_date: Optional[str] = Field(None, description="开始日期，格式：yyyy-MM-dd")
     store_code: Optional[str] = Field(None, description="店铺编码")
@@ -823,15 +934,20 @@ class MultiplatformAdsQuerygmvitemgroupreportlistList(LingXingModel):
     title: Optional[str] = Field(None, description="商品标题")
     report_date: Optional[str] = Field(None, description="当startDate与endDate一致时返回")
 
+
 class MultiplatformAdsQuerygmvitemgroupreportlistResponse(LingXingModel):
     """查询TikTok-GMV MAX-广告商品."""
-    list: Optional[List[MultiplatformAdsQuerygmvitemgroupreportlistList]] = Field(None, description="报告列表，Report对象数组")
+
+    list: Optional[List[MultiplatformAdsQuerygmvitemgroupreportlistList]] = Field(
+        None, description="报告列表，Report对象数组"
+    )
     total: Optional[str] = Field(None, description="总记录数")
     total: Optional[int] = Field(None, description="总记录数")
 
 
 class MultiplatformAdsQuerygmvstorelistResponse(LingXingModel):
     """查询TikTok-GMV MAX-店铺列表."""
+
     advertiser_id: Optional[int] = Field(None, description="广告账号ID")
     store_authorized_bc_id: Optional[int] = Field(None, description="有权限访问该TikTok Shop的商务中心的ID")
     store_code: Optional[str] = Field(None, description="店铺编码")
@@ -842,10 +958,13 @@ class MultiplatformAdsQuerygmvstorelistResponse(LingXingModel):
 
 class MultiplatformAdsQuerygroupsplistList(LingXingModel):
     """list sub-structure."""
+
     acos: Optional[float] = Field(None, description="广告成本占比ACOS，计算公式: 广告花费 / 广告销售额 * 100%")
     ad_group_id: Optional[int] = Field(None, description="广告组ID")
     ad_group_name: Optional[str] = Field(None, description="广告组名称")
-    ad_group_status: Optional[str] = Field(None, description="广告组状态，枚举值：enabled-启用, disabled-禁用, delete-归档")
+    ad_group_status: Optional[str] = Field(
+        None, description="广告组状态，枚举值：enabled-启用, disabled-禁用, delete-归档"
+    )
     ad_spend: Optional[float] = Field(None, description="广告花费")
     advertised_sku_sales: Optional[float] = Field(None, description="直接销售额，广告直接点击归因销售额")
     advertised_sku_units: Optional[float] = Field(None, description="直接销量，广告直接点击归因销量")
@@ -856,8 +975,13 @@ class MultiplatformAdsQuerygroupsplistList(LingXingModel):
     attributed_units: Optional[int] = Field(None, description="广告销量，归因总销量")
     campaign_id: Optional[int] = Field(None, description="广告活动ID")
     campaign_name: Optional[str] = Field(None, description="广告活动名称")
-    campaign_status: Optional[str] = Field(None, description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成")
-    campaign_type: Optional[str] = Field(None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告")
+    campaign_status: Optional[str] = Field(
+        None,
+        description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成",
+    )
+    campaign_type: Optional[str] = Field(
+        None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告"
+    )
     cpa: Optional[float] = Field(None, description="平均订单成本CPA，计算公式: 广告花费 / 广告订单")
     cpc: Optional[float] = Field(None, description="点击成本CPC，计算公式: 广告花费 / 点击量")
     ctr: Optional[float] = Field(None, description="点击率CTR，计算公式: 点击量 / 曝光量 * 100%")
@@ -866,13 +990,21 @@ class MultiplatformAdsQuerygroupsplistList(LingXingModel):
     key: Optional[int] = Field(None, description="唯一键，用于前端列表展示")
     mp_advertiser_name: Optional[str] = Field(None, description="广告账号名称")
     mp_seller_name: Optional[str] = Field(None, description="店铺名称")
-    ntb_order_rate: Optional[float] = Field(None, description="品牌新买家订单转化率，计算公式: ntbOrders / numAdsClicks * 100%")
+    ntb_order_rate: Optional[float] = Field(
+        None, description="品牌新买家订单转化率，计算公式: ntbOrders / numAdsClicks * 100%"
+    )
     ntb_orders: Optional[int] = Field(None, description="品牌新买家订单数")
-    ntb_orders_percent: Optional[float] = Field(None, description="品牌新买家订单占比，计算公式: ntbOrders / attributedOrders * 100%")
+    ntb_orders_percent: Optional[float] = Field(
+        None, description="品牌新买家订单占比，计算公式: ntbOrders / attributedOrders * 100%"
+    )
     ntb_revenue: Optional[float] = Field(None, description="品牌新买家销售额")
-    ntb_revenue_percent: Optional[float] = Field(None, description="品牌新买家销售额占比，计算公式: ntbRevenue / attributedSales * 100%")
+    ntb_revenue_percent: Optional[float] = Field(
+        None, description="品牌新买家销售额占比，计算公式: ntbRevenue / attributedSales * 100%"
+    )
     ntb_units: Optional[int] = Field(None, description="品牌新买家销量")
-    ntb_units_percent: Optional[float] = Field(None, description="品牌新买家销量占比，计算公式: ntbUnits / attributedUnits * 100%")
+    ntb_units_percent: Optional[float] = Field(
+        None, description="品牌新买家销量占比，计算公式: ntbUnits / attributedUnits * 100%"
+    )
     num_ads_clicks: Optional[int] = Field(None, description="广告点击量")
     num_ads_shown: Optional[int] = Field(None, description="曝光次数")
     other_sku_sales: Optional[float] = Field(None, description="关联销售额，间接归因销售额")
@@ -880,8 +1012,10 @@ class MultiplatformAdsQuerygroupsplistList(LingXingModel):
     roas: Optional[float] = Field(None, description="投入产出比ROAS，计算公式: 广告销售额 / 广告花费")
     targeting_type: Optional[str] = Field(None, description="投放类型，枚举值：manual-手动投放, auto-自动投放")
 
+
 class MultiplatformAdsQuerygroupsplistResponse(LingXingModel):
     """查询沃尔玛-广告 - SP广告 - 广告组."""
+
     list: Optional[List[MultiplatformAdsQuerygroupsplistList]] = Field(None, description="广告组列表数据")
     total: Optional[int] = Field(None, description="总记录数")
     total: Optional[int] = Field(None, description="总记录数")
@@ -889,6 +1023,7 @@ class MultiplatformAdsQuerygroupsplistResponse(LingXingModel):
 
 class MultiplatformAdsQuerypagetypesplistList(LingXingModel):
     """list sub-structure."""
+
     acos: Optional[str] = Field(None, description="acos")
     ad_spend: Optional[int] = Field(None, description="adSpend")
     advertised_sku_sales: Optional[int] = Field(None, description="advertisedSkuSales")
@@ -914,8 +1049,10 @@ class MultiplatformAdsQuerypagetypesplistList(LingXingModel):
     other_sku_units: Optional[int] = Field(None, description="otherSkuUnits")
     roas: Optional[str] = Field(None, description="roas")
 
+
 class MultiplatformAdsQuerypagetypesplistResponse(LingXingModel):
     """查询沃尔玛-广告 - SP广告 - 页面类型."""
+
     list: Optional[List[MultiplatformAdsQuerypagetypesplistList]] = Field(None, description="列表数据")
     total: Optional[int] = Field(None, description="总记录数")
     total: Optional[int] = Field(None, description="总记录数")
@@ -923,6 +1060,7 @@ class MultiplatformAdsQuerypagetypesplistResponse(LingXingModel):
 
 class MultiplatformAdsQueryreportpagetypesvlistList(LingXingModel):
     """list sub-structure."""
+
     acos: Optional[str] = Field(None, description="广告成本销售比(ACoS)，计算公式：adSpend / attributedSales * 100%")
     ad_group_id: Optional[str] = Field(None, description="广告组ID，广告组的唯一标识")
     ad_group_name: Optional[str] = Field(None, description="广告组名称")
@@ -934,11 +1072,19 @@ class MultiplatformAdsQueryreportpagetypesvlistList(LingXingModel):
     attributed_orders: Optional[str] = Field(None, description="归因订单数，广告产生的订单总数")
     attributed_sales: Optional[str] = Field(None, description="归因销售额，广告产生的总销售额")
     attributed_units: Optional[str] = Field(None, description="归因销量，广告产生的总销售数量")
-    campaign_and_targeting_name: Optional[str] = Field(None, description="广告活动和定向名称，广告活动名称和定向条件的组合显示")
+    campaign_and_targeting_name: Optional[str] = Field(
+        None, description="广告活动和定向名称，广告活动名称和定向条件的组合显示"
+    )
     campaign_id: Optional[str] = Field(None, description="广告活动ID，广告活动的唯一标识")
     campaign_name: Optional[str] = Field(None, description="广告活动名称")
-    campaign_status: Optional[str] = Field(None, description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成")
-    campaign_type: Optional[str] = Field(None, description="广告活动类型，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告), video(SV视频广告)")
+    campaign_status: Optional[str] = Field(
+        None,
+        description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成",
+    )
+    campaign_type: Optional[str] = Field(
+        None,
+        description="广告活动类型，枚举值：sponsoredProducts-manual(SP手动), sponsoredProducts-auto(SP自动), sba(SB品牌广告), video(SV视频广告)",
+    )
     cpa: Optional[str] = Field(None, description="单次转化成本(CPA)，计算公式：adSpend / attributedOrders")
     cpc: Optional[str] = Field(None, description="单次点击成本(CPC)，计算公式：adSpend / numAdsClicks")
     ctr: Optional[str] = Field(None, description="点击率(CTR)，计算公式：numAdsClicks / numAdsShown * 100%")
@@ -953,29 +1099,45 @@ class MultiplatformAdsQueryreportpagetypesvlistList(LingXingModel):
     key: Optional[str] = Field(None, description="唯一标识键，用于区分每条记录的唯一键值")
     mp_advertiser_name: Optional[str] = Field(None, description="多平台广告商名称，广告账号的名称")
     mp_seller_name: Optional[str] = Field(None, description="多平台卖家名称，平台上的店铺/卖家名称")
-    ntb_order_rate: Optional[str] = Field(None, description="新品牌买家订单率，与ntbOrdersPercent相同，计算公式：ntbOrders / attributedOrders * 100%")
+    ntb_order_rate: Optional[str] = Field(
+        None, description="新品牌买家订单率，与ntbOrdersPercent相同，计算公式：ntbOrders / attributedOrders * 100%"
+    )
     ntb_orders: Optional[str] = Field(None, description="新品牌买家订单数，首次购买该品牌的买家产生的订单数")
-    ntb_orders_percent: Optional[str] = Field(None, description="新品牌买家订单占比，计算公式：ntbOrders / attributedOrders * 100%")
+    ntb_orders_percent: Optional[str] = Field(
+        None, description="新品牌买家订单占比，计算公式：ntbOrders / attributedOrders * 100%"
+    )
     ntb_revenue: Optional[str] = Field(None, description="新品牌买家销售额，首次购买该品牌的买家产生的销售额")
-    ntb_revenue_percent: Optional[str] = Field(None, description="新品牌买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%")
+    ntb_revenue_percent: Optional[str] = Field(
+        None, description="新品牌买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%"
+    )
     ntb_units: Optional[str] = Field(None, description="新品牌买家销量，首次购买该品牌的买家购买数量")
-    ntb_units_percent: Optional[str] = Field(None, description="新品牌买家销量占比，计算公式：ntbUnits / attributedUnits * 100%")
+    ntb_units_percent: Optional[str] = Field(
+        None, description="新品牌买家销量占比，计算公式：ntbUnits / attributedUnits * 100%"
+    )
     num_ads_clicks: Optional[str] = Field(None, description="广告点击次数，广告被点击的总次数")
     num_ads_shown: Optional[str] = Field(None, description="广告展示次数，广告被展示的总次数")
     other_sku_sales: Optional[str] = Field(None, description="其他SKU销售额，广告带来的非直接关联SKU的销售额")
     other_sku_units: Optional[str] = Field(None, description="其他SKU销量，广告带来的非直接关联SKU的销售数量")
-    page_type: Optional[str] = Field(None, description="页面类型，广告展示的页面类型，枚举值：browse-浏览, item-商品, search-搜索, topic-主题, category-分类, homepage-首页, other-其他")
+    page_type: Optional[str] = Field(
+        None,
+        description="页面类型，广告展示的页面类型，枚举值：browse-浏览, item-商品, search-搜索, topic-主题, category-分类, homepage-首页, other-其他",
+    )
     roas: Optional[str] = Field(None, description="广告支出回报率(ROAS)，计算公式：attributedSales / adSpend")
+
 
 class MultiplatformAdsQueryreportpagetypesvlistResponse(LingXingModel):
     """查询沃尔玛-广告 - SV广告 - 页面类型."""
-    list: Optional[List[MultiplatformAdsQueryreportpagetypesvlistList]] = Field(None, description="列表数据，页面类型报表详细数据列表")
+
+    list: Optional[List[MultiplatformAdsQueryreportpagetypesvlistList]] = Field(
+        None, description="列表数据，页面类型报表详细数据列表"
+    )
     total: Optional[str] = Field(None, description="总记录数，返回符合条件的数据总数")
     total: Optional[int] = Field(None, description="总记录数")
 
 
 class MultiplatformAdsQuerytiktokadgrouplistList(LingXingModel):
     """list sub-structure."""
+
     ad_group_id: Optional[str] = Field(None, description="广告组Id")
     ad_group_name: Optional[str] = Field(None, description="广告组名称")
     advertiser_id: Optional[str] = Field(None, description="广告账号Id")
@@ -986,11 +1148,16 @@ class MultiplatformAdsQuerytiktokadgrouplistList(LingXingModel):
     bid: Optional[str] = Field(None, description="竞价")
     bid_display_mode: Optional[str] = Field(None, description="出价展示模式")
     bid_mode: Optional[str] = Field(None, description="出价模式")
-    bid_strategy: Optional[str] = Field(None, description="竞价策略，枚举值：BID_TYPE_CUSTOM-手动出价, BID_TYPE_NO_BID-最大投放量")
+    bid_strategy: Optional[str] = Field(
+        None, description="竞价策略，枚举值：BID_TYPE_CUSTOM-手动出价, BID_TYPE_NO_BID-最大投放量"
+    )
     billed_cost: Optional[str] = Field(None, description="净消耗")
     billing_event: Optional[str] = Field(None, description="计费事件")
     budget: Optional[str] = Field(None, description="预算")
-    budget_type: Optional[str] = Field(None, description="预算类型，枚举值：BUDGET_MODE_INFINITE-不限预算, BUDGET_MODE_TOTAL-总预算, BUDGET_MODE_DAY-日预算, BUDGET_MODE_DYNAMIC_DAILY_BUDGET-动态日预算")
+    budget_type: Optional[str] = Field(
+        None,
+        description="预算类型，枚举值：BUDGET_MODE_INFINITE-不限预算, BUDGET_MODE_TOTAL-总预算, BUDGET_MODE_DAY-日预算, BUDGET_MODE_DYNAMIC_DAILY_BUDGET-动态日预算",
+    )
     campaign_id: Optional[str] = Field(None, description="推广系列Id")
     campaign_name: Optional[str] = Field(None, description="推广系列名称")
     cash_spend: Optional[int] = Field(None, description="现金消耗（只支持广告组层级）")
@@ -998,7 +1165,9 @@ class MultiplatformAdsQuerytiktokadgrouplistList(LingXingModel):
     clicks: Optional[int] = Field(None, description="点击量")
     cny_billed_cost: Optional[float] = Field(None, description="人民币净消耗")
     cny_cash_spend: Optional[float] = Field(None, description="人民币现金消耗")
-    cny_cost_per_onsite_initiate_checkout_count: Optional[float] = Field(None, description="人民币开始结账平均成本（商店）")
+    cny_cost_per_onsite_initiate_checkout_count: Optional[float] = Field(
+        None, description="人民币开始结账平均成本（商店）"
+    )
     cny_cost_per_onsite_on_web_cart: Optional[float] = Field(None, description="人民币加入购物车平均成本（商店）")
     cny_cost_per_onsite_on_web_detail: Optional[float] = Field(None, description="人民币商品页浏览平均成本（商店）")
     cny_cost_per_onsite_shopping: Optional[float] = Field(None, description="人民币平均付费成本（商店）")
@@ -1035,7 +1204,10 @@ class MultiplatformAdsQuerytiktokadgrouplistList(LingXingModel):
     live_views: Optional[int] = Field(None, description="直播播放量")
     metrics_cny_rate_missing_count: Optional[int] = Field(None, description="指标人民币汇率缺失计数")
     modify_time: Optional[str] = Field(None, description="修改时间")
-    objective_type: Optional[str] = Field(None, description="推广目标，枚举值：REACH-覆盖人数, TRAFFIC-访问量, VIDEO_VIEWS-视频播放量, LEAD_GENERATION-线索收集, ENGAGEMENT-社区互动, APP_PROMOTION-应用推广, WEB_CONVERSIONS-网站转化量, PRODUCT_SALES-商品销量")
+    objective_type: Optional[str] = Field(
+        None,
+        description="推广目标，枚举值：REACH-覆盖人数, TRAFFIC-访问量, VIDEO_VIEWS-视频播放量, LEAD_GENERATION-线索收集, ENGAGEMENT-社区互动, APP_PROMOTION-应用推广, WEB_CONVERSIONS-网站转化量, PRODUCT_SALES-商品销量",
+    )
     onsite_initiate_checkout_count: Optional[int] = Field(None, description="开始结账数（商店）")
     onsite_initiate_checkout_count_rate: Optional[str] = Field(None, description="开始结账率（商店）")
     onsite_on_web_cart: Optional[int] = Field(None, description="加入购物车数（商店）")
@@ -1088,8 +1260,10 @@ class MultiplatformAdsQuerytiktokadgrouplistList(LingXingModel):
     video_watched6s: Optional[int] = Field(None, description="视频播放6秒次数")
     view_attribution_window: Optional[str] = Field(None, description="浏览归因窗口")
 
+
 class MultiplatformAdsQuerytiktokadgrouplistResponse(LingXingModel):
     """查询TikTok-推广广告-广告组."""
+
     list: Optional[List[MultiplatformAdsQuerytiktokadgrouplistList]] = Field(None, description="列表数据")
     total: Optional[int] = Field(None, description="总记录数")
     total: Optional[int] = Field(None, description="总记录数")
@@ -1097,6 +1271,7 @@ class MultiplatformAdsQuerytiktokadgrouplistResponse(LingXingModel):
 
 class MultiplatformAdsQuerytiktokadlistList(LingXingModel):
     """list sub-structure."""
+
     ad_format: Optional[str] = Field(None, description="广告样式")
     ad_group_id: Optional[str] = Field(None, description="广告组Id")
     ad_group_name: Optional[str] = Field(None, description="广告组名称")
@@ -1161,7 +1336,10 @@ class MultiplatformAdsQuerytiktokadlistList(LingXingModel):
     result_rate: Optional[str] = Field(None, description="成效率")
     service_status: Optional[str] = Field(None, description="服务状态")
     spend: Optional[str] = Field(None, description="花费")
-    status: Optional[str] = Field(None, description="状态，枚举值：STATUS_ENABLE-已启用, SYSTEM_STATUS_IN_REVIEW-审核中, SYSTEM_STATUS_NOT_PASS-未通过, STATUS_LIMIT-惩罚中, STATUS_DISABLE-已关户")
+    status: Optional[str] = Field(
+        None,
+        description="状态，枚举值：STATUS_ENABLE-已启用, SYSTEM_STATUS_IN_REVIEW-审核中, SYSTEM_STATUS_NOT_PASS-未通过, STATUS_LIMIT-惩罚中, STATUS_DISABLE-已关户",
+    )
     total_onsite_initiate_checkout_count_value: Optional[str] = Field(None, description="开始结账价值（商店）")
     total_onsite_on_web_cart_value: Optional[str] = Field(None, description="加入购物车价值（商店）")
     total_onsite_on_web_detail_value: Optional[str] = Field(None, description="商品页浏览价值（商店）")
@@ -1186,8 +1364,10 @@ class MultiplatformAdsQuerytiktokadlistList(LingXingModel):
     video_watched2s: Optional[int] = Field(None, description="视频播放2秒次数")
     video_watched6s: Optional[int] = Field(None, description="视频播放6秒次数")
 
+
 class MultiplatformAdsQuerytiktokadlistResponse(LingXingModel):
     """查询TikTok-推广广告-广告."""
+
     list: Optional[List[MultiplatformAdsQuerytiktokadlistList]] = Field(None, description="列表数据")
     total: Optional[int] = Field(None, description="总记录数")
     total: Optional[int] = Field(None, description="总记录数")
@@ -1195,15 +1375,21 @@ class MultiplatformAdsQuerytiktokadlistResponse(LingXingModel):
 
 class MultiplatformAdsQuerytiktokcampaignlistList(LingXingModel):
     """list sub-structure."""
+
     advertiser_id: Optional[str] = Field(None, description="广告账号Id")
     advertiser_name: Optional[str] = Field(None, description="广告账号名称")
     average_video_play: Optional[str] = Field(None, description="平均视频播放时长（秒）")
     average_video_play_per_user: Optional[str] = Field(None, description="用户平均播放时长（秒）")
     bid: Optional[str] = Field(None, description="竞价金额")
-    bid_strategy: Optional[str] = Field(None, description="竞价策略，枚举值：BID_TYPE_CUSTOM-手动出价, BID_TYPE_NO_BID-最大投放量")
+    bid_strategy: Optional[str] = Field(
+        None, description="竞价策略，枚举值：BID_TYPE_CUSTOM-手动出价, BID_TYPE_NO_BID-最大投放量"
+    )
     billed_cost: Optional[str] = Field(None, description="净消耗")
     budget: Optional[str] = Field(None, description="预算金额")
-    budget_type: Optional[str] = Field(None, description="预算类型，枚举值：BUDGET_MODE_INFINITE-不限预算, BUDGET_MODE_TOTAL-总预算, BUDGET_MODE_DAY-日预算, BUDGET_MODE_DYNAMIC_DAILY_BUDGET-动态日预算")
+    budget_type: Optional[str] = Field(
+        None,
+        description="预算类型，枚举值：BUDGET_MODE_INFINITE-不限预算, BUDGET_MODE_TOTAL-总预算, BUDGET_MODE_DAY-日预算, BUDGET_MODE_DYNAMIC_DAILY_BUDGET-动态日预算",
+    )
     campaign_id: Optional[str] = Field(None, description="推广系列Id")
     campaign_name: Optional[str] = Field(None, description="推广系列名称")
     campaign_product_source: Optional[str] = Field(None, description="产品来源")
@@ -1237,7 +1423,10 @@ class MultiplatformAdsQuerytiktokcampaignlistList(LingXingModel):
     live_unique_views: Optional[int] = Field(None, description="直播去重播放量")
     live_views: Optional[int] = Field(None, description="直播播放量")
     modify_time: Optional[str] = Field(None, description="修改时间，格式：yyyy-MM-dd HH:mm:ss")
-    objective_type: Optional[str] = Field(None, description="推广目标，枚举值：REACH-覆盖人数, TRAFFIC-访问量, VIDEO_VIEWS-视频播放量, LEAD_GENERATION-线索收集, ENGAGEMENT-社区互动, APP_PROMOTION-应用推广, WEB_CONVERSIONS-网站转化量, PRODUCT_SALES-商品销量")
+    objective_type: Optional[str] = Field(
+        None,
+        description="推广目标，枚举值：REACH-覆盖人数, TRAFFIC-访问量, VIDEO_VIEWS-视频播放量, LEAD_GENERATION-线索收集, ENGAGEMENT-社区互动, APP_PROMOTION-应用推广, WEB_CONVERSIONS-网站转化量, PRODUCT_SALES-商品销量",
+    )
     onsite_initiate_checkout_count: Optional[int] = Field(None, description="开始结账数（商店）")
     onsite_initiate_checkout_count_rate: Optional[str] = Field(None, description="开始结账率（商店）")
     onsite_on_web_cart: Optional[int] = Field(None, description="加入购物车数（商店）")
@@ -1259,7 +1448,10 @@ class MultiplatformAdsQuerytiktokcampaignlistList(LingXingModel):
     result_rate: Optional[str] = Field(None, description="成效率")
     service_status: Optional[str] = Field(None, description="服务状态")
     spend: Optional[str] = Field(None, description="花费金额")
-    status: Optional[str] = Field(None, description="状态，枚举值：STATUS_ENABLE-已启用, SYSTEM_STATUS_IN_REVIEW-审核中, SYSTEM_STATUS_NOT_PASS-未通过, STATUS_LIMIT-惩罚中, STATUS_DISABLE-已关户")
+    status: Optional[str] = Field(
+        None,
+        description="状态，枚举值：STATUS_ENABLE-已启用, SYSTEM_STATUS_IN_REVIEW-审核中, SYSTEM_STATUS_NOT_PASS-未通过, STATUS_LIMIT-惩罚中, STATUS_DISABLE-已关户",
+    )
     total_onsite_initiate_checkout_count_value: Optional[str] = Field(None, description="开始结账价值（商店）")
     total_onsite_on_web_cart_value: Optional[str] = Field(None, description="加入购物车价值（商店）")
     total_onsite_on_web_detail_value: Optional[str] = Field(None, description="商品页浏览价值（商店）")
@@ -1282,8 +1474,10 @@ class MultiplatformAdsQuerytiktokcampaignlistList(LingXingModel):
     video_watched2s: Optional[int] = Field(None, description="视频播放2秒次数")
     video_watched6s: Optional[int] = Field(None, description="视频播放6秒次数")
 
+
 class MultiplatformAdsQuerytiktokcampaignlistResponse(LingXingModel):
     """查询TikTok-推广广告-广告系列."""
+
     list: Optional[List[MultiplatformAdsQuerytiktokcampaignlistList]] = Field(None, description="列表数据")
     total: Optional[int] = Field(None, description="总记录数")
     total: Optional[int] = Field(None, description="总记录数")
@@ -1291,10 +1485,13 @@ class MultiplatformAdsQuerytiktokcampaignlistResponse(LingXingModel):
 
 class MultiplatformAdsReportadgroupsblistList(LingXingModel):
     """list sub-structure."""
+
     acos: Optional[str] = Field(None, description="广告成本占比(ACoS)，计算公式：广告花费 / 广告销售额 * 100%")
     ad_group_id: Optional[str] = Field(None, description="广告组ID")
     ad_group_name: Optional[str] = Field(None, description="广告组名称")
-    ad_group_status: Optional[str] = Field(None, description="广告组状态，枚举值：enabled-启用, disabled-禁用，delete-归档")
+    ad_group_status: Optional[str] = Field(
+        None, description="广告组状态，枚举值：enabled-启用, disabled-禁用，delete-归档"
+    )
     ad_spend: Optional[str] = Field(None, description="广告花费，广告投放的总花费金额")
     advertised_sku_sales: Optional[str] = Field(None, description="直接销售额，广告直接点击归因销售额")
     advertised_sku_units: Optional[str] = Field(None, description="直接销量，广告直接点击归因销量")
@@ -1305,8 +1502,13 @@ class MultiplatformAdsReportadgroupsblistList(LingXingModel):
     attributed_units: Optional[str] = Field(None, description="广告销量，归因总销量")
     campaign_id: Optional[str] = Field(None, description="广告活动ID")
     campaign_name: Optional[str] = Field(None, description="广告活动名称")
-    campaign_status: Optional[str] = Field(None, description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成")
-    campaign_type: Optional[str] = Field(None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告")
+    campaign_status: Optional[str] = Field(
+        None,
+        description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成",
+    )
+    campaign_type: Optional[str] = Field(
+        None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告"
+    )
     cpa: Optional[str] = Field(None, description="平均订单成本(CPA)，计算公式：广告花费 / 广告订单")
     cpc: Optional[str] = Field(None, description="点击成本(CPC)，计算公式：广告花费 / 点击量")
     ctr: Optional[str] = Field(None, description="点击率(CTR)，计算公式：点击量 / 曝光量 * 100%")
@@ -1315,13 +1517,21 @@ class MultiplatformAdsReportadgroupsblistList(LingXingModel):
     key: Optional[str] = Field(None, description="唯一键，用于前端列表展示")
     mp_advertiser_name: Optional[str] = Field(None, description="广告账号名称")
     mp_seller_name: Optional[str] = Field(None, description="店铺名称")
-    ntb_order_rate: Optional[str] = Field(None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%")
+    ntb_order_rate: Optional[str] = Field(
+        None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%"
+    )
     ntb_orders: Optional[str] = Field(None, description="品牌新买家订单数，首次购买该品牌的买家产生的订单数")
-    ntb_orders_percent: Optional[str] = Field(None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%")
+    ntb_orders_percent: Optional[str] = Field(
+        None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%"
+    )
     ntb_revenue: Optional[str] = Field(None, description="品牌新买家销售额，首次购买该品牌的买家产生的销售额")
-    ntb_revenue_percent: Optional[str] = Field(None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%")
+    ntb_revenue_percent: Optional[str] = Field(
+        None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%"
+    )
     ntb_units: Optional[str] = Field(None, description="品牌新买家销量，首次购买该品牌的买家购买数量")
-    ntb_units_percent: Optional[str] = Field(None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%")
+    ntb_units_percent: Optional[str] = Field(
+        None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%"
+    )
     num_ads_clicks: Optional[str] = Field(None, description="广告点击量，广告被点击的总次数")
     num_ads_shown: Optional[str] = Field(None, description="曝光次数，广告被展示的总次数")
     other_sku_sales: Optional[str] = Field(None, description="关联销售额，间接归因销售额")
@@ -1329,19 +1539,26 @@ class MultiplatformAdsReportadgroupsblistList(LingXingModel):
     roas: Optional[str] = Field(None, description="投入产出比(ROAS)，计算公式：广告销售额 / 广告花费")
     targeting_type: Optional[str] = Field(None, description="投放类型，枚举值：manual-手动投放, auto-自动投放")
 
+
 class MultiplatformAdsReportadgroupsblistResponse(LingXingModel):
     """查询沃尔玛-广告 - SB广告 - 广告组."""
-    list: Optional[List[MultiplatformAdsReportadgroupsblistList]] = Field(None, description="列表数据，广告组报表详细数据列表")
+
+    list: Optional[List[MultiplatformAdsReportadgroupsblistList]] = Field(
+        None, description="列表数据，广告组报表详细数据列表"
+    )
     total: Optional[str] = Field(None, description="总记录数，返回符合条件的数据总数")
     total: Optional[int] = Field(None, description="总记录数")
 
 
 class MultiplatformAdsReportaditemsblistList(LingXingModel):
     """list sub-structure."""
+
     acos: Optional[str] = Field(None, description="广告成本占比(ACoS)，计算公式：广告花费 / 广告销售额 * 100%")
     ad_group_id: Optional[str] = Field(None, description="广告组ID")
     ad_group_name: Optional[str] = Field(None, description="广告组名称")
-    ad_group_status: Optional[str] = Field(None, description="广告组状态，枚举值：enabled-启用, disabled-禁用, delete-归档")
+    ad_group_status: Optional[str] = Field(
+        None, description="广告组状态，枚举值：enabled-启用, disabled-禁用, delete-归档"
+    )
     ad_item_id: Optional[str] = Field(None, description="广告项ID，广告项的唯一标识")
     ad_name: Optional[str] = Field(None, description="广告名称")
     ad_spend: Optional[str] = Field(None, description="广告花费，广告投放的总花费金额")
@@ -1357,11 +1574,18 @@ class MultiplatformAdsReportaditemsblistList(LingXingModel):
     attributed_units: Optional[str] = Field(None, description="广告销量，归因总销量")
     benchmark_val: Optional[str] = Field(None, description="基准值，分时策略的基准值")
     bid: Optional[str] = Field(None, description="竞价，当前广告项的竞价")
-    campaign_and_targeting_type: Optional[str] = Field(None, description="广告活动和投放类型组合，格式：campaignType+targetingType")
+    campaign_and_targeting_type: Optional[str] = Field(
+        None, description="广告活动和投放类型组合，格式：campaignType+targetingType"
+    )
     campaign_id: Optional[str] = Field(None, description="广告活动ID")
     campaign_name: Optional[str] = Field(None, description="广告活动名称")
-    campaign_status: Optional[str] = Field(None, description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成")
-    campaign_type: Optional[str] = Field(None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告")
+    campaign_status: Optional[str] = Field(
+        None,
+        description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成",
+    )
+    campaign_type: Optional[str] = Field(
+        None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告"
+    )
     cpa: Optional[str] = Field(None, description="平均订单成本(CPA)，计算公式：广告花费 / 广告订单")
     cpc: Optional[str] = Field(None, description="点击成本(CPC)，计算公式：广告花费 / 点击量")
     ctr: Optional[str] = Field(None, description="点击率(CTR)，计算公式：点击量 / 曝光量 * 100%")
@@ -1374,13 +1598,21 @@ class MultiplatformAdsReportaditemsblistList(LingXingModel):
     key: Optional[str] = Field(None, description="唯一键，用于前端列表展示，取值为adItemId或itemId")
     mp_advertiser_name: Optional[str] = Field(None, description="广告账号名称")
     mp_seller_name: Optional[str] = Field(None, description="店铺名称")
-    ntb_order_rate: Optional[str] = Field(None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%")
+    ntb_order_rate: Optional[str] = Field(
+        None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%"
+    )
     ntb_orders: Optional[str] = Field(None, description="品牌新买家订单数，首次购买该品牌的买家产生的订单数")
-    ntb_orders_percent: Optional[str] = Field(None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%")
+    ntb_orders_percent: Optional[str] = Field(
+        None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%"
+    )
     ntb_revenue: Optional[str] = Field(None, description="品牌新买家销售额，首次购买该品牌的买家产生的销售额")
-    ntb_revenue_percent: Optional[str] = Field(None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%")
+    ntb_revenue_percent: Optional[str] = Field(
+        None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%"
+    )
     ntb_units: Optional[str] = Field(None, description="品牌新买家销量，首次购买该品牌的买家购买数量")
-    ntb_units_percent: Optional[str] = Field(None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%")
+    ntb_units_percent: Optional[str] = Field(
+        None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%"
+    )
     num_ads_clicks: Optional[str] = Field(None, description="广告点击量，广告被点击的总次数")
     num_ads_shown: Optional[str] = Field(None, description="曝光次数，广告被展示的总次数")
     other_sku_sales: Optional[str] = Field(None, description="关联销售额，间接归因销售额")
@@ -1390,19 +1622,26 @@ class MultiplatformAdsReportaditemsblistList(LingXingModel):
     roas: Optional[str] = Field(None, description="投入产出比(ROAS)，计算公式：广告销售额 / 广告花费")
     suggested_bid: Optional[str] = Field(None, description="建议竞价，系统推荐的竞价值")
 
+
 class MultiplatformAdsReportaditemsblistResponse(LingXingModel):
     """查询沃尔玛-广告 - SB广告 - 广告."""
-    list: Optional[List[MultiplatformAdsReportaditemsblistList]] = Field(None, description="列表数据，广告项报表详细数据列表")
+
+    list: Optional[List[MultiplatformAdsReportaditemsblistList]] = Field(
+        None, description="列表数据，广告项报表详细数据列表"
+    )
     total: Optional[str] = Field(None, description="总记录数，返回符合条件的数据总数")
     total: Optional[int] = Field(None, description="总记录数")
 
 
 class MultiplatformAdsReportaditemsplistList(LingXingModel):
     """list sub-structure."""
+
     acos: Optional[str] = Field(None, description="广告成本占比(ACoS)，计算公式：广告花费 / 广告销售额 * 100%")
     ad_group_id: Optional[str] = Field(None, description="广告组ID")
     ad_group_name: Optional[str] = Field(None, description="广告组名称")
-    ad_group_status: Optional[str] = Field(None, description="广告组状态，枚举值：enabled-启用, disabled-禁用，delete-归档")
+    ad_group_status: Optional[str] = Field(
+        None, description="广告组状态，枚举值：enabled-启用, disabled-禁用，delete-归档"
+    )
     ad_item_id: Optional[str] = Field(None, description="广告项ID")
     ad_name: Optional[str] = Field(None, description="广告名称")
     ad_spend: Optional[str] = Field(None, description="广告花费，广告投放的总花费金额")
@@ -1418,11 +1657,18 @@ class MultiplatformAdsReportaditemsplistList(LingXingModel):
     attributed_units: Optional[str] = Field(None, description="广告销量，归因总销量")
     benchmark_val: Optional[str] = Field(None, description="基准值，分时策略的基准值")
     bid: Optional[str] = Field(None, description="竞价，当前出价金额")
-    campaign_and_targeting_type: Optional[str] = Field(None, description="广告活动和投放类型组合，格式：campaignType+targetingType")
+    campaign_and_targeting_type: Optional[str] = Field(
+        None, description="广告活动和投放类型组合，格式：campaignType+targetingType"
+    )
     campaign_id: Optional[str] = Field(None, description="广告活动ID")
     campaign_name: Optional[str] = Field(None, description="广告活动名称")
-    campaign_status: Optional[str] = Field(None, description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成")
-    campaign_type: Optional[str] = Field(None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告")
+    campaign_status: Optional[str] = Field(
+        None,
+        description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成",
+    )
+    campaign_type: Optional[str] = Field(
+        None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告"
+    )
     cpa: Optional[str] = Field(None, description="平均订单成本(CPA)，计算公式：广告花费 / 广告订单")
     cpc: Optional[str] = Field(None, description="点击成本(CPC)，计算公式：广告花费 / 点击量")
     ctr: Optional[str] = Field(None, description="点击率(CTR)，计算公式：点击量 / 曝光量 * 100%")
@@ -1435,13 +1681,21 @@ class MultiplatformAdsReportaditemsplistList(LingXingModel):
     key: Optional[str] = Field(None, description="唯一键，用于前端列表展示，取值为adItemId或itemId")
     mp_advertiser_name: Optional[str] = Field(None, description="广告账号名称")
     mp_seller_name: Optional[str] = Field(None, description="店铺名称")
-    ntb_order_rate: Optional[str] = Field(None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%")
+    ntb_order_rate: Optional[str] = Field(
+        None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%"
+    )
     ntb_orders: Optional[str] = Field(None, description="品牌新买家订单数，首次购买该品牌的买家产生的订单数")
-    ntb_orders_percent: Optional[str] = Field(None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%")
+    ntb_orders_percent: Optional[str] = Field(
+        None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%"
+    )
     ntb_revenue: Optional[str] = Field(None, description="品牌新买家销售额，首次购买该品牌的买家产生的销售额")
-    ntb_revenue_percent: Optional[str] = Field(None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%")
+    ntb_revenue_percent: Optional[str] = Field(
+        None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%"
+    )
     ntb_units: Optional[str] = Field(None, description="品牌新买家销量，首次购买该品牌的买家购买数量")
-    ntb_units_percent: Optional[str] = Field(None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%")
+    ntb_units_percent: Optional[str] = Field(
+        None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%"
+    )
     num_ads_clicks: Optional[str] = Field(None, description="广告点击量，广告被点击的总次数")
     num_ads_shown: Optional[str] = Field(None, description="曝光次数，广告被展示的总次数")
     other_sku_sales: Optional[str] = Field(None, description="关联销售额，间接归因销售额")
@@ -1451,19 +1705,26 @@ class MultiplatformAdsReportaditemsplistList(LingXingModel):
     roas: Optional[str] = Field(None, description="投入产出比(ROAS)，计算公式：广告销售额 / 广告花费")
     suggested_bid: Optional[str] = Field(None, description="建议竞价，系统推荐的竞价金额")
 
+
 class MultiplatformAdsReportaditemsplistResponse(LingXingModel):
     """查询沃尔玛-广告 - SP广告 - 广告."""
-    list: Optional[List[MultiplatformAdsReportaditemsplistList]] = Field(None, description="列表数据，广告项报表详细数据列表")
+
+    list: Optional[List[MultiplatformAdsReportaditemsplistList]] = Field(
+        None, description="列表数据，广告项报表详细数据列表"
+    )
     total: Optional[str] = Field(None, description="总记录数，返回符合条件的数据总数")
     total: Optional[int] = Field(None, description="总记录数")
 
 
 class MultiplatformAdsReportaditemsvlistList(LingXingModel):
     """list sub-structure."""
+
     acos: Optional[str] = Field(None, description="广告成本占比(ACoS)，计算公式：广告花费 / 广告销售额 * 100%")
     ad_group_id: Optional[str] = Field(None, description="广告组ID")
     ad_group_name: Optional[str] = Field(None, description="广告组名称")
-    ad_group_status: Optional[str] = Field(None, description="广告组状态，枚举值：enabled-启用, disabled-禁用，delete-归档")
+    ad_group_status: Optional[str] = Field(
+        None, description="广告组状态，枚举值：enabled-启用, disabled-禁用，delete-归档"
+    )
     ad_item_id: Optional[str] = Field(None, description="广告项ID")
     ad_name: Optional[str] = Field(None, description="广告名称")
     ad_spend: Optional[str] = Field(None, description="广告花费，广告投放的总花费金额")
@@ -1479,11 +1740,18 @@ class MultiplatformAdsReportaditemsvlistList(LingXingModel):
     attributed_units: Optional[str] = Field(None, description="广告销量，归因总销量")
     benchmark_val: Optional[str] = Field(None, description="基准值，分时策略的基准值")
     bid: Optional[str] = Field(None, description="竞价，当前出价金额")
-    campaign_and_targeting_type: Optional[str] = Field(None, description="广告活动和投放类型组合，格式：campaignType+targetingType")
+    campaign_and_targeting_type: Optional[str] = Field(
+        None, description="广告活动和投放类型组合，格式：campaignType+targetingType"
+    )
     campaign_id: Optional[str] = Field(None, description="广告活动ID")
     campaign_name: Optional[str] = Field(None, description="广告活动名称")
-    campaign_status: Optional[str] = Field(None, description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成")
-    campaign_type: Optional[str] = Field(None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告")
+    campaign_status: Optional[str] = Field(
+        None,
+        description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成",
+    )
+    campaign_type: Optional[str] = Field(
+        None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告"
+    )
     cpa: Optional[str] = Field(None, description="平均订单成本(CPA)，计算公式：广告花费 / 广告订单")
     cpc: Optional[str] = Field(None, description="点击成本(CPC)，计算公式：广告花费 / 点击量")
     ctr: Optional[str] = Field(None, description="点击率(CTR)，计算公式：点击量 / 曝光量 * 100%")
@@ -1496,13 +1764,21 @@ class MultiplatformAdsReportaditemsvlistList(LingXingModel):
     key: Optional[str] = Field(None, description="唯一键，用于前端列表展示，取值为adItemId或itemId")
     mp_advertiser_name: Optional[str] = Field(None, description="广告账号名称")
     mp_seller_name: Optional[str] = Field(None, description="店铺名称")
-    ntb_order_rate: Optional[str] = Field(None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%")
+    ntb_order_rate: Optional[str] = Field(
+        None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%"
+    )
     ntb_orders: Optional[str] = Field(None, description="品牌新买家订单数，首次购买该品牌的买家产生的订单数")
-    ntb_orders_percent: Optional[str] = Field(None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%")
+    ntb_orders_percent: Optional[str] = Field(
+        None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%"
+    )
     ntb_revenue: Optional[str] = Field(None, description="品牌新买家销售额，首次购买该品牌的买家产生的销售额")
-    ntb_revenue_percent: Optional[str] = Field(None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%")
+    ntb_revenue_percent: Optional[str] = Field(
+        None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%"
+    )
     ntb_units: Optional[str] = Field(None, description="品牌新买家销量，首次购买该品牌的买家购买数量")
-    ntb_units_percent: Optional[str] = Field(None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%")
+    ntb_units_percent: Optional[str] = Field(
+        None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%"
+    )
     num_ads_clicks: Optional[str] = Field(None, description="广告点击量，广告被点击的总次数")
     num_ads_shown: Optional[str] = Field(None, description="曝光次数，广告被展示的总次数")
     other_sku_sales: Optional[str] = Field(None, description="关联销售额，间接归因销售额")
@@ -1512,15 +1788,20 @@ class MultiplatformAdsReportaditemsvlistList(LingXingModel):
     roas: Optional[str] = Field(None, description="投入产出比(ROAS)，计算公式：广告销售额 / 广告花费")
     suggested_bid: Optional[str] = Field(None, description="建议竞价，系统推荐的竞价金额")
 
+
 class MultiplatformAdsReportaditemsvlistResponse(LingXingModel):
     """查询沃尔玛-广告 - SV广告 - 广告."""
-    list: Optional[List[MultiplatformAdsReportaditemsvlistList]] = Field(None, description="列表数据，广告项报表详细数据列表")
+
+    list: Optional[List[MultiplatformAdsReportaditemsvlistList]] = Field(
+        None, description="列表数据，广告项报表详细数据列表"
+    )
     total: Optional[str] = Field(None, description="总记录数，返回符合条件的数据总数")
     total: Optional[int] = Field(None, description="总记录数")
 
 
 class MultiplatformAdsReportcampaignsblistList(LingXingModel):
     """list sub-structure."""
+
     acos: Optional[str] = Field(None, description="广告成本占比(ACoS)，计算公式：广告花费 / 广告销售额 * 100%")
     ad_spend: Optional[str] = Field(None, description="广告花费，广告投放的总花费金额")
     advertised_sku_sales: Optional[str] = Field(None, description="直接销售额，广告直接点击归因销售额")
@@ -1533,11 +1814,18 @@ class MultiplatformAdsReportcampaignsblistList(LingXingModel):
     attributed_units: Optional[str] = Field(None, description="广告销量，归因总销量")
     benchmark_val: Optional[str] = Field(None, description="基准值，分时策略的基准值")
     bidding_strategy: Optional[dict] = Field(None, description="竞价策略，JSON格式字符串")
-    budget_type: Optional[str] = Field(None, description="预算类型，枚举值：daily-每日预算, total-总预算, both-两者都有")
+    budget_type: Optional[str] = Field(
+        None, description="预算类型，枚举值：daily-每日预算, total-总预算, both-两者都有"
+    )
     campaign_id: Optional[str] = Field(None, description="广告活动ID")
     campaign_name: Optional[str] = Field(None, description="广告活动名称")
-    campaign_status: Optional[str] = Field(None, description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成")
-    campaign_type: Optional[str] = Field(None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告")
+    campaign_status: Optional[str] = Field(
+        None,
+        description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成",
+    )
+    campaign_type: Optional[str] = Field(
+        None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告"
+    )
     complete_view_revenue: Optional[str] = Field(None, description="完整观看收入，【仅SV视频广告】")
     cpa: Optional[str] = Field(None, description="平均订单成本(CPA)，计算公式：广告花费 / 广告订单")
     cpc: Optional[str] = Field(None, description="点击成本(CPC)，计算公式：广告花费 / 点击量")
@@ -1551,13 +1839,21 @@ class MultiplatformAdsReportcampaignsblistList(LingXingModel):
     key: Optional[str] = Field(None, description="唯一键，用于前端列表展示")
     mp_advertiser_name: Optional[str] = Field(None, description="广告账号名称")
     mp_seller_name: Optional[str] = Field(None, description="店铺名称")
-    ntb_order_rate: Optional[str] = Field(None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%")
+    ntb_order_rate: Optional[str] = Field(
+        None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%"
+    )
     ntb_orders: Optional[str] = Field(None, description="品牌新买家订单数，首次购买该品牌的买家产生的订单数")
-    ntb_orders_percent: Optional[str] = Field(None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%")
+    ntb_orders_percent: Optional[str] = Field(
+        None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%"
+    )
     ntb_revenue: Optional[str] = Field(None, description="品牌新买家销售额，首次购买该品牌的买家产生的销售额")
-    ntb_revenue_percent: Optional[str] = Field(None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%")
+    ntb_revenue_percent: Optional[str] = Field(
+        None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%"
+    )
     ntb_units: Optional[str] = Field(None, description="品牌新买家销量，首次购买该品牌的买家购买数量")
-    ntb_units_percent: Optional[str] = Field(None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%")
+    ntb_units_percent: Optional[str] = Field(
+        None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%"
+    )
     num_ads_clicks: Optional[str] = Field(None, description="广告点击量，广告被点击的总次数")
     num_ads_shown: Optional[str] = Field(None, description="曝光次数，广告被展示的总次数")
     other_sku_sales: Optional[str] = Field(None, description="关联销售额，间接归因销售额")
@@ -1582,15 +1878,20 @@ class MultiplatformAdsReportcampaignsblistList(LingXingModel):
     view_through_units_sold: Optional[str] = Field(None, description="浏览销量，【仅SV视频广告】")
     viewable_impressions: Optional[str] = Field(None, description="可见曝光量，【仅SV视频广告】")
 
+
 class MultiplatformAdsReportcampaignsblistResponse(LingXingModel):
     """查询沃尔玛-广告 - SB广告 - 广告活动."""
-    list: Optional[List[MultiplatformAdsReportcampaignsblistList]] = Field(None, description="列表数据，广告活动报表详细数据列表")
+
+    list: Optional[List[MultiplatformAdsReportcampaignsblistList]] = Field(
+        None, description="列表数据，广告活动报表详细数据列表"
+    )
     total: Optional[str] = Field(None, description="总记录数，返回符合条件的数据总数")
     total: Optional[int] = Field(None, description="总记录数")
 
 
 class MultiplatformAdsReportcampaignsvlistList(LingXingModel):
     """list sub-structure."""
+
     acos: Optional[str] = Field(None, description="广告成本占比ACOS，计算公式: 广告花费 / 广告销售额 * 100%")
     ad_spend: Optional[str] = Field(None, description="广告花费")
     advertised_sku_sales: Optional[str] = Field(None, description="直接销售额，广告直接点击归因销售额")
@@ -1603,11 +1904,18 @@ class MultiplatformAdsReportcampaignsvlistList(LingXingModel):
     attributed_units: Optional[str] = Field(None, description="广告销量，归因总销量")
     benchmark_val: Optional[str] = Field(None, description="基准值，分时策略的基准值")
     bidding_strategy: Optional[dict] = Field(None, description="竞价策略，JSON格式字符串")
-    budget_type: Optional[str] = Field(None, description="预算类型，枚举值：daily-每日预算, total-总预算, both-两者都有")
+    budget_type: Optional[str] = Field(
+        None, description="预算类型，枚举值：daily-每日预算, total-总预算, both-两者都有"
+    )
     campaign_id: Optional[str] = Field(None, description="广告活动ID")
     campaign_name: Optional[str] = Field(None, description="广告活动名称")
-    campaign_status: Optional[str] = Field(None, description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成")
-    campaign_type: Optional[str] = Field(None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告")
+    campaign_status: Optional[str] = Field(
+        None,
+        description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成",
+    )
+    campaign_type: Optional[str] = Field(
+        None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告"
+    )
     complete_view_revenue: Optional[str] = Field(None, description="完整观看收入，【仅SV视频广告】")
     cpa: Optional[str] = Field(None, description="平均订单成本CPA，计算公式: 广告花费 / 广告订单")
     cpc: Optional[str] = Field(None, description="点击成本CPC，计算公式: 广告花费 / 点击量")
@@ -1621,13 +1929,21 @@ class MultiplatformAdsReportcampaignsvlistList(LingXingModel):
     key: Optional[str] = Field(None, description="唯一键，用于前端列表展示")
     mp_advertiser_name: Optional[str] = Field(None, description="广告账号名称")
     mp_seller_name: Optional[str] = Field(None, description="店铺名称")
-    ntb_order_rate: Optional[str] = Field(None, description="品牌新买家订单转化率，计算公式: ntbOrders / numAdsClicks * 100%")
+    ntb_order_rate: Optional[str] = Field(
+        None, description="品牌新买家订单转化率，计算公式: ntbOrders / numAdsClicks * 100%"
+    )
     ntb_orders: Optional[str] = Field(None, description="品牌新买家订单数")
-    ntb_orders_percent: Optional[str] = Field(None, description="品牌新买家订单占比，计算公式: ntbOrders / attributedOrders * 100%")
+    ntb_orders_percent: Optional[str] = Field(
+        None, description="品牌新买家订单占比，计算公式: ntbOrders / attributedOrders * 100%"
+    )
     ntb_revenue: Optional[str] = Field(None, description="品牌新买家销售额")
-    ntb_revenue_percent: Optional[str] = Field(None, description="品牌新买家销售额占比，计算公式: ntbRevenue / attributedSales * 100%")
+    ntb_revenue_percent: Optional[str] = Field(
+        None, description="品牌新买家销售额占比，计算公式: ntbRevenue / attributedSales * 100%"
+    )
     ntb_units: Optional[str] = Field(None, description="品牌新买家销量")
-    ntb_units_percent: Optional[str] = Field(None, description="品牌新买家销量占比，计算公式: ntbUnits / attributedUnits * 100%")
+    ntb_units_percent: Optional[str] = Field(
+        None, description="品牌新买家销量占比，计算公式: ntbUnits / attributedUnits * 100%"
+    )
     num_ads_clicks: Optional[str] = Field(None, description="广告点击量")
     num_ads_shown: Optional[str] = Field(None, description="曝光次数")
     other_sku_sales: Optional[str] = Field(None, description="关联销售额，间接归因销售额")
@@ -1652,19 +1968,26 @@ class MultiplatformAdsReportcampaignsvlistList(LingXingModel):
     view_through_units_sold: Optional[str] = Field(None, description="浏览销量，【仅SV视频广告】")
     viewable_impressions: Optional[str] = Field(None, description="可见曝光量，【仅SV视频广告】")
 
+
 class MultiplatformAdsReportcampaignsvlistResponse(LingXingModel):
     """查询沃尔玛-广告 - SV广告 - 广告活动."""
-    list: Optional[List[MultiplatformAdsReportcampaignsvlistList]] = Field(None, description="列表数据，ReportAllCampaignListRecordDTO数组，包含广告活动的详细报表信息")
+
+    list: Optional[List[MultiplatformAdsReportcampaignsvlistList]] = Field(
+        None, description="列表数据，ReportAllCampaignListRecordDTO数组，包含广告活动的详细报表信息"
+    )
     total: Optional[str] = Field(None, description="总记录数，返回符合查询条件的数据总数")
     total: Optional[int] = Field(None, description="总记录数")
 
 
 class MultiplatformAdsReportkeywordsblistList(LingXingModel):
     """list sub-structure."""
+
     acos: Optional[str] = Field(None, description="广告成本占比(ACoS)，计算公式：广告花费 / 广告销售额 * 100%")
     ad_group_id: Optional[str] = Field(None, description="广告组ID")
     ad_group_name: Optional[str] = Field(None, description="广告组名称")
-    ad_group_status: Optional[str] = Field(None, description="广告组状态，枚举值：enabled-启用, disabled-禁用, delete-归档")
+    ad_group_status: Optional[str] = Field(
+        None, description="广告组状态，枚举值：enabled-启用, disabled-禁用, delete-归档"
+    )
     ad_spend: Optional[str] = Field(None, description="广告花费，广告投放的总花费金额")
     advertised_sku_sales: Optional[str] = Field(None, description="直接销售额，广告直接点击归因销售额")
     advertised_sku_units: Optional[str] = Field(None, description="直接销量，广告直接点击归因销量")
@@ -1677,8 +2000,13 @@ class MultiplatformAdsReportkeywordsblistList(LingXingModel):
     benchmark_val: Optional[str] = Field(None, description="基准值，分时策略的基准值")
     campaign_id: Optional[str] = Field(None, description="广告活动ID")
     campaign_name: Optional[str] = Field(None, description="广告活动名称")
-    campaign_status: Optional[str] = Field(None, description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成")
-    campaign_type: Optional[str] = Field(None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告")
+    campaign_status: Optional[str] = Field(
+        None,
+        description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成",
+    )
+    campaign_type: Optional[str] = Field(
+        None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告"
+    )
     complete_view_revenue: Optional[str] = Field(None, description="完整观看收入--【仅SV视频广告】")
     cpa: Optional[str] = Field(None, description="平均订单成本(CPA)，计算公式：广告花费 / 广告订单")
     cpc: Optional[str] = Field(None, description="点击成本(CPC)，计算公式：广告花费 / 点击量")
@@ -1697,17 +2025,29 @@ class MultiplatformAdsReportkeywordsblistList(LingXingModel):
     keyword_id: Optional[str] = Field(None, description="关键词ID，关键词的唯一标识")
     keyword_name: Optional[str] = Field(None, description="关键词文本，关键词内容")
     keyword_state: Optional[str] = Field(None, description="关键词状态（旧字段），已废弃，使用keywordStatus")
-    keyword_status: Optional[str] = Field(None, description="关键词状态，枚举值：enabled-启用, paused-暂停, deleted-已删除")
-    match_type: Optional[str] = Field(None, description="匹配类型，枚举值：exact-精确匹配, phrase-短语匹配, broad-广泛匹配")
+    keyword_status: Optional[str] = Field(
+        None, description="关键词状态，枚举值：enabled-启用, paused-暂停, deleted-已删除"
+    )
+    match_type: Optional[str] = Field(
+        None, description="匹配类型，枚举值：exact-精确匹配, phrase-短语匹配, broad-广泛匹配"
+    )
     mp_advertiser_name: Optional[str] = Field(None, description="广告账号名称")
     mp_seller_name: Optional[str] = Field(None, description="店铺名称")
-    ntb_order_rate: Optional[str] = Field(None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%")
+    ntb_order_rate: Optional[str] = Field(
+        None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%"
+    )
     ntb_orders: Optional[str] = Field(None, description="品牌新买家订单数，首次购买该品牌的买家产生的订单数")
-    ntb_orders_percent: Optional[str] = Field(None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%")
+    ntb_orders_percent: Optional[str] = Field(
+        None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%"
+    )
     ntb_revenue: Optional[str] = Field(None, description="品牌新买家销售额，首次购买该品牌的买家产生的销售额")
-    ntb_revenue_percent: Optional[str] = Field(None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%")
+    ntb_revenue_percent: Optional[str] = Field(
+        None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%"
+    )
     ntb_units: Optional[str] = Field(None, description="品牌新买家销量，首次购买该品牌的买家购买数量")
-    ntb_units_percent: Optional[str] = Field(None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%")
+    ntb_units_percent: Optional[str] = Field(
+        None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%"
+    )
     num_ads_clicks: Optional[str] = Field(None, description="广告点击量，广告被点击的总次数")
     num_ads_shown: Optional[str] = Field(None, description="曝光次数，广告被展示的总次数")
     other_sku_sales: Optional[str] = Field(None, description="关联销售额，间接归因销售额")
@@ -1728,19 +2068,26 @@ class MultiplatformAdsReportkeywordsblistList(LingXingModel):
     view_through_units_sold: Optional[str] = Field(None, description="浏览销量--【仅SV视频广告】")
     viewable_impressions: Optional[str] = Field(None, description="可见曝光量--【仅SV视频广告】")
 
+
 class MultiplatformAdsReportkeywordsblistResponse(LingXingModel):
     """查询沃尔玛-广告 - SB广告 - 关键词."""
-    list: Optional[List[MultiplatformAdsReportkeywordsblistList]] = Field(None, description="列表数据，关键词报表详细数据列表")
+
+    list: Optional[List[MultiplatformAdsReportkeywordsblistList]] = Field(
+        None, description="列表数据，关键词报表详细数据列表"
+    )
     total: Optional[str] = Field(None, description="总记录数，返回符合条件的数据总数")
     total: Optional[int] = Field(None, description="总记录数")
 
 
 class MultiplatformAdsReportkeywordsplistList(LingXingModel):
     """list sub-structure."""
+
     acos: Optional[str] = Field(None, description="广告成本占比(ACoS)，计算公式：广告花费 / 广告销售额 * 100%")
     ad_group_id: Optional[str] = Field(None, description="广告组ID")
     ad_group_name: Optional[str] = Field(None, description="广告组名称")
-    ad_group_status: Optional[str] = Field(None, description="广告组状态，枚举值：enabled-启用, disabled-禁用，delete-归档")
+    ad_group_status: Optional[str] = Field(
+        None, description="广告组状态，枚举值：enabled-启用, disabled-禁用，delete-归档"
+    )
     ad_spend: Optional[str] = Field(None, description="广告花费，广告投放的总花费金额")
     advertised_sku_sales: Optional[str] = Field(None, description="直接销售额，广告直接点击归因销售额")
     advertised_sku_units: Optional[str] = Field(None, description="直接销量，广告直接点击归因销量")
@@ -1753,8 +2100,13 @@ class MultiplatformAdsReportkeywordsplistList(LingXingModel):
     benchmark_val: Optional[str] = Field(None, description="基准值，分时策略的基准值")
     campaign_id: Optional[str] = Field(None, description="广告活动ID")
     campaign_name: Optional[str] = Field(None, description="广告活动名称")
-    campaign_status: Optional[str] = Field(None, description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成")
-    campaign_type: Optional[str] = Field(None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告")
+    campaign_status: Optional[str] = Field(
+        None,
+        description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成",
+    )
+    campaign_type: Optional[str] = Field(
+        None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告"
+    )
     complete_view_revenue: Optional[str] = Field(None, description="完整观看收入，【仅SV视频广告】")
     cpa: Optional[str] = Field(None, description="平均订单成本(CPA)，计算公式：广告花费 / 广告订单")
     cpc: Optional[str] = Field(None, description="点击成本(CPC)，计算公式：广告花费 / 点击量")
@@ -1773,17 +2125,29 @@ class MultiplatformAdsReportkeywordsplistList(LingXingModel):
     keyword_id: Optional[str] = Field(None, description="关键词ID")
     keyword_name: Optional[str] = Field(None, description="关键词文本")
     keyword_state: Optional[str] = Field(None, description="关键词状态（旧字段）")
-    keyword_status: Optional[str] = Field(None, description="关键词状态，枚举值：enabled-启用, paused-暂停, deleted-已删除")
-    match_type: Optional[str] = Field(None, description="匹配类型，枚举值：exact-精确匹配, phrase-短语匹配, broad-广泛匹配")
+    keyword_status: Optional[str] = Field(
+        None, description="关键词状态，枚举值：enabled-启用, paused-暂停, deleted-已删除"
+    )
+    match_type: Optional[str] = Field(
+        None, description="匹配类型，枚举值：exact-精确匹配, phrase-短语匹配, broad-广泛匹配"
+    )
     mp_advertiser_name: Optional[str] = Field(None, description="广告账号名称")
     mp_seller_name: Optional[str] = Field(None, description="店铺名称")
-    ntb_order_rate: Optional[str] = Field(None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%")
+    ntb_order_rate: Optional[str] = Field(
+        None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%"
+    )
     ntb_orders: Optional[str] = Field(None, description="品牌新买家订单数，首次购买该品牌的买家产生的订单数")
-    ntb_orders_percent: Optional[str] = Field(None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%")
+    ntb_orders_percent: Optional[str] = Field(
+        None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%"
+    )
     ntb_revenue: Optional[str] = Field(None, description="品牌新买家销售额，首次购买该品牌的买家产生的销售额")
-    ntb_revenue_percent: Optional[str] = Field(None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%")
+    ntb_revenue_percent: Optional[str] = Field(
+        None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%"
+    )
     ntb_units: Optional[str] = Field(None, description="品牌新买家销量，首次购买该品牌的买家购买数量")
-    ntb_units_percent: Optional[str] = Field(None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%")
+    ntb_units_percent: Optional[str] = Field(
+        None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%"
+    )
     num_ads_clicks: Optional[str] = Field(None, description="广告点击量，广告被点击的总次数")
     num_ads_shown: Optional[str] = Field(None, description="曝光次数，广告被展示的总次数")
     other_sku_sales: Optional[str] = Field(None, description="关联销售额，间接归因销售额")
@@ -1804,19 +2168,26 @@ class MultiplatformAdsReportkeywordsplistList(LingXingModel):
     view_through_units_sold: Optional[str] = Field(None, description="浏览销量，【仅SV视频广告】")
     viewable_impressions: Optional[str] = Field(None, description="可见曝光量，【仅SV视频广告】")
 
+
 class MultiplatformAdsReportkeywordsplistResponse(LingXingModel):
     """查询沃尔玛-广告 - SP广告 - 关键词."""
-    list: Optional[List[MultiplatformAdsReportkeywordsplistList]] = Field(None, description="列表数据，关键词报表详细数据列表")
+
+    list: Optional[List[MultiplatformAdsReportkeywordsplistList]] = Field(
+        None, description="列表数据，关键词报表详细数据列表"
+    )
     total: Optional[str] = Field(None, description="总记录数，返回符合条件的数据总数")
     total: Optional[int] = Field(None, description="总记录数")
 
 
 class MultiplatformAdsReportkeywordsvlistList(LingXingModel):
     """list sub-structure."""
+
     acos: Optional[str] = Field(None, description="广告成本占比(ACoS)，计算公式：广告花费 / 广告销售额 * 100%")
     ad_group_id: Optional[str] = Field(None, description="广告组ID")
     ad_group_name: Optional[str] = Field(None, description="广告组名称")
-    ad_group_status: Optional[str] = Field(None, description="广告组状态，枚举值：enabled-启用, disabled-禁用，delete-归档")
+    ad_group_status: Optional[str] = Field(
+        None, description="广告组状态，枚举值：enabled-启用, disabled-禁用，delete-归档"
+    )
     ad_spend: Optional[str] = Field(None, description="广告花费，广告投放的总花费金额")
     advertised_sku_sales: Optional[str] = Field(None, description="直接销售额，广告直接点击归因销售额")
     advertised_sku_units: Optional[str] = Field(None, description="直接销量，广告直接点击归因销量")
@@ -1829,8 +2200,13 @@ class MultiplatformAdsReportkeywordsvlistList(LingXingModel):
     benchmark_val: Optional[str] = Field(None, description="基准值，分时策略的基准值")
     campaign_id: Optional[str] = Field(None, description="广告活动ID")
     campaign_name: Optional[str] = Field(None, description="广告活动名称")
-    campaign_status: Optional[str] = Field(None, description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成")
-    campaign_type: Optional[str] = Field(None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告")
+    campaign_status: Optional[str] = Field(
+        None,
+        description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成",
+    )
+    campaign_type: Optional[str] = Field(
+        None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告"
+    )
     complete_view_revenue: Optional[str] = Field(None, description="完整观看收入，【仅SV视频广告】")
     cpa: Optional[str] = Field(None, description="平均订单成本(CPA)，计算公式：广告花费 / 广告订单")
     cpc: Optional[str] = Field(None, description="点击成本(CPC)，计算公式：广告花费 / 点击量")
@@ -1849,17 +2225,29 @@ class MultiplatformAdsReportkeywordsvlistList(LingXingModel):
     keyword_id: Optional[str] = Field(None, description="关键词ID")
     keyword_name: Optional[str] = Field(None, description="关键词文本")
     keyword_state: Optional[str] = Field(None, description="关键词状态（旧字段）")
-    keyword_status: Optional[str] = Field(None, description="关键词状态，枚举值：enabled-启用, paused-暂停, deleted-已删除")
-    match_type: Optional[str] = Field(None, description="匹配类型，枚举值：exact-精确匹配, phrase-短语匹配, broad-广泛匹配")
+    keyword_status: Optional[str] = Field(
+        None, description="关键词状态，枚举值：enabled-启用, paused-暂停, deleted-已删除"
+    )
+    match_type: Optional[str] = Field(
+        None, description="匹配类型，枚举值：exact-精确匹配, phrase-短语匹配, broad-广泛匹配"
+    )
     mp_advertiser_name: Optional[str] = Field(None, description="广告账号名称")
     mp_seller_name: Optional[str] = Field(None, description="店铺名称")
-    ntb_order_rate: Optional[str] = Field(None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%")
+    ntb_order_rate: Optional[str] = Field(
+        None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%"
+    )
     ntb_orders: Optional[str] = Field(None, description="品牌新买家订单数，首次购买该品牌的买家产生的订单数")
-    ntb_orders_percent: Optional[str] = Field(None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%")
+    ntb_orders_percent: Optional[str] = Field(
+        None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%"
+    )
     ntb_revenue: Optional[str] = Field(None, description="品牌新买家销售额，首次购买该品牌的买家产生的销售额")
-    ntb_revenue_percent: Optional[str] = Field(None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%")
+    ntb_revenue_percent: Optional[str] = Field(
+        None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%"
+    )
     ntb_units: Optional[str] = Field(None, description="品牌新买家销量，首次购买该品牌的买家购买数量")
-    ntb_units_percent: Optional[str] = Field(None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%")
+    ntb_units_percent: Optional[str] = Field(
+        None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%"
+    )
     num_ads_clicks: Optional[str] = Field(None, description="广告点击量，广告被点击的总次数")
     num_ads_shown: Optional[str] = Field(None, description="曝光次数，广告被展示的总次数")
     other_sku_sales: Optional[str] = Field(None, description="关联销售额，间接归因销售额")
@@ -1880,15 +2268,20 @@ class MultiplatformAdsReportkeywordsvlistList(LingXingModel):
     view_through_units_sold: Optional[str] = Field(None, description="浏览销量，【仅SV视频广告】")
     viewable_impressions: Optional[str] = Field(None, description="可见曝光量，【仅SV视频广告】")
 
+
 class MultiplatformAdsReportkeywordsvlistResponse(LingXingModel):
     """查询沃尔玛-广告 - SV广告 - 关键词."""
-    list: Optional[List[MultiplatformAdsReportkeywordsvlistList]] = Field(None, description="列表数据，关键词报表详细数据列表")
+
+    list: Optional[List[MultiplatformAdsReportkeywordsvlistList]] = Field(
+        None, description="列表数据，关键词报表详细数据列表"
+    )
     total: Optional[str] = Field(None, description="总记录数，返回符合条件的数据总数")
     total: Optional[int] = Field(None, description="总记录数")
 
 
 class MultiplatformAdsReportpagetypesblistList(LingXingModel):
     """list sub-structure."""
+
     acos: Optional[str] = Field(None, description="广告成本占比(ACoS)，计算公式：广告花费 / 广告销售额 * 100%")
     ad_group_id: Optional[str] = Field(None, description="广告组ID")
     ad_group_name: Optional[str] = Field(None, description="广告组名称")
@@ -1900,11 +2293,18 @@ class MultiplatformAdsReportpagetypesblistList(LingXingModel):
     attributed_orders: Optional[str] = Field(None, description="广告订单数，归因总订单数")
     attributed_sales: Optional[str] = Field(None, description="广告销售额，归因总销售额")
     attributed_units: Optional[str] = Field(None, description="广告销量，归因总销量")
-    campaign_and_targeting_name: Optional[str] = Field(None, description="广告活动和投放类型组合，格式：campaignType+targetingType")
+    campaign_and_targeting_name: Optional[str] = Field(
+        None, description="广告活动和投放类型组合，格式：campaignType+targetingType"
+    )
     campaign_id: Optional[str] = Field(None, description="广告活动ID")
     campaign_name: Optional[str] = Field(None, description="广告活动名称")
-    campaign_status: Optional[str] = Field(None, description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成")
-    campaign_type: Optional[str] = Field(None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告")
+    campaign_status: Optional[str] = Field(
+        None,
+        description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成",
+    )
+    campaign_type: Optional[str] = Field(
+        None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告"
+    )
     cpa: Optional[str] = Field(None, description="平均订单成本(CPA)，计算公式：广告花费 / 广告订单")
     cpc: Optional[str] = Field(None, description="点击成本(CPC)，计算公式：广告花费 / 点击量")
     ctr: Optional[str] = Field(None, description="点击率(CTR)，计算公式：点击量 / 曝光量 * 100%")
@@ -1919,29 +2319,45 @@ class MultiplatformAdsReportpagetypesblistList(LingXingModel):
     key: Optional[str] = Field(None, description="唯一键，用于前端列表展示")
     mp_advertiser_name: Optional[str] = Field(None, description="广告账号名称")
     mp_seller_name: Optional[str] = Field(None, description="店铺名称")
-    ntb_order_rate: Optional[str] = Field(None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%")
+    ntb_order_rate: Optional[str] = Field(
+        None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%"
+    )
     ntb_orders: Optional[str] = Field(None, description="品牌新买家订单数，首次购买该品牌的买家产生的订单数")
-    ntb_orders_percent: Optional[str] = Field(None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%")
+    ntb_orders_percent: Optional[str] = Field(
+        None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%"
+    )
     ntb_revenue: Optional[str] = Field(None, description="品牌新买家销售额，首次购买该品牌的买家产生的销售额")
-    ntb_revenue_percent: Optional[str] = Field(None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%")
+    ntb_revenue_percent: Optional[str] = Field(
+        None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%"
+    )
     ntb_units: Optional[str] = Field(None, description="品牌新买家销量，首次购买该品牌的买家购买数量")
-    ntb_units_percent: Optional[str] = Field(None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%")
+    ntb_units_percent: Optional[str] = Field(
+        None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%"
+    )
     num_ads_clicks: Optional[str] = Field(None, description="广告点击量，广告被点击的总次数")
     num_ads_shown: Optional[str] = Field(None, description="曝光次数，广告被展示的总次数")
     other_sku_sales: Optional[str] = Field(None, description="关联销售额，间接归因销售额")
     other_sku_units: Optional[str] = Field(None, description="关联销量，间接归因销量")
-    page_type: Optional[str] = Field(None, description="页面类型，枚举值：browse-浏览, item-商品, search-搜索, topic-主题, category-分类, homepage-首页, other-其他")
+    page_type: Optional[str] = Field(
+        None,
+        description="页面类型，枚举值：browse-浏览, item-商品, search-搜索, topic-主题, category-分类, homepage-首页, other-其他",
+    )
     roas: Optional[str] = Field(None, description="投入产出比(ROAS)，计算公式：广告销售额 / 广告花费")
+
 
 class MultiplatformAdsReportpagetypesblistResponse(LingXingModel):
     """查询沃尔玛-广告 - SB广告 - 页面类型."""
-    list: Optional[List[MultiplatformAdsReportpagetypesblistList]] = Field(None, description="列表数据，页面类型报表详细数据列表")
+
+    list: Optional[List[MultiplatformAdsReportpagetypesblistList]] = Field(
+        None, description="列表数据，页面类型报表详细数据列表"
+    )
     total: Optional[str] = Field(None, description="总记录数，返回符合条件的数据总数")
     total: Optional[int] = Field(None, description="总记录数")
 
 
 class MultiplatformAdsReportplatformsblistList(LingXingModel):
     """list sub-structure."""
+
     acos: Optional[str] = Field(None, description="广告成本占比(ACoS)，计算公式：广告花费 / 广告销售额 * 100%")
     ad_group_id: Optional[str] = Field(None, description="广告组ID")
     ad_group_name: Optional[str] = Field(None, description="广告组名称")
@@ -1954,11 +2370,18 @@ class MultiplatformAdsReportplatformsblistList(LingXingModel):
     attributed_sales: Optional[str] = Field(None, description="广告销售额，归因总销售额")
     attributed_units: Optional[str] = Field(None, description="广告销量，归因总销量")
     bid: Optional[str] = Field(None, description="竞价，当前未使用")
-    campaign_and_targeting_name: Optional[str] = Field(None, description="广告活动和投放类型组合，格式：campaignType+targetingType")
+    campaign_and_targeting_name: Optional[str] = Field(
+        None, description="广告活动和投放类型组合，格式：campaignType+targetingType"
+    )
     campaign_id: Optional[str] = Field(None, description="广告活动ID")
     campaign_name: Optional[str] = Field(None, description="广告活动名称")
-    campaign_status: Optional[str] = Field(None, description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成")
-    campaign_type: Optional[str] = Field(None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告")
+    campaign_status: Optional[str] = Field(
+        None,
+        description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成",
+    )
+    campaign_type: Optional[str] = Field(
+        None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告"
+    )
     cpa: Optional[str] = Field(None, description="平均订单成本(CPA)，计算公式：广告花费 / 广告订单")
     cpc: Optional[str] = Field(None, description="点击成本(CPC)，计算公式：广告花费 / 点击量")
     ctr: Optional[str] = Field(None, description="点击率(CTR)，计算公式：点击量 / 曝光量 * 100%")
@@ -1973,13 +2396,21 @@ class MultiplatformAdsReportplatformsblistList(LingXingModel):
     key: Optional[str] = Field(None, description="唯一键，用于前端列表展示")
     mp_advertiser_name: Optional[str] = Field(None, description="广告账号名称")
     mp_seller_name: Optional[str] = Field(None, description="店铺名称")
-    ntb_order_rate: Optional[str] = Field(None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%")
+    ntb_order_rate: Optional[str] = Field(
+        None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%"
+    )
     ntb_orders: Optional[str] = Field(None, description="品牌新买家订单数，首次购买该品牌的买家产生的订单数")
-    ntb_orders_percent: Optional[str] = Field(None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%")
+    ntb_orders_percent: Optional[str] = Field(
+        None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%"
+    )
     ntb_revenue: Optional[str] = Field(None, description="品牌新买家销售额，首次购买该品牌的买家产生的销售额")
-    ntb_revenue_percent: Optional[str] = Field(None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%")
+    ntb_revenue_percent: Optional[str] = Field(
+        None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%"
+    )
     ntb_units: Optional[str] = Field(None, description="品牌新买家销量，首次购买该品牌的买家购买数量")
-    ntb_units_percent: Optional[str] = Field(None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%")
+    ntb_units_percent: Optional[str] = Field(
+        None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%"
+    )
     num_ads_clicks: Optional[str] = Field(None, description="广告点击量，广告被点击的总次数")
     num_ads_shown: Optional[str] = Field(None, description="曝光次数，广告被展示的总次数")
     other_sku_sales: Optional[str] = Field(None, description="关联销售额，间接归因销售额")
@@ -1987,15 +2418,20 @@ class MultiplatformAdsReportplatformsblistList(LingXingModel):
     platform: Optional[str] = Field(None, description="平台，枚举值：Desktop-桌面端, Mobile-移动端")
     roas: Optional[str] = Field(None, description="投入产出比(ROAS)，计算公式：广告销售额 / 广告花费")
 
+
 class MultiplatformAdsReportplatformsblistResponse(LingXingModel):
     """查询沃尔玛-广告 - SB广告 - 平台."""
-    list: Optional[List[MultiplatformAdsReportplatformsblistList]] = Field(None, description="列表数据，平台报表详细数据列表")
+
+    list: Optional[List[MultiplatformAdsReportplatformsblistList]] = Field(
+        None, description="列表数据，平台报表详细数据列表"
+    )
     total: Optional[str] = Field(None, description="总记录数，返回符合条件的数据总数")
     total: Optional[int] = Field(None, description="总记录数")
 
 
 class MultiplatformAdsReportplatformsplistList(LingXingModel):
     """list sub-structure."""
+
     acos: Optional[str] = Field(None, description="广告成本占比(ACoS)，计算公式：广告花费 / 广告销售额 * 100%")
     ad_group_id: Optional[str] = Field(None, description="广告组ID")
     ad_group_name: Optional[str] = Field(None, description="广告组名称")
@@ -2008,11 +2444,18 @@ class MultiplatformAdsReportplatformsplistList(LingXingModel):
     attributed_sales: Optional[str] = Field(None, description="广告销售额，归因总销售额")
     attributed_units: Optional[str] = Field(None, description="广告销量，归因总销量")
     bid: Optional[str] = Field(None, description="竞价，当前出价金额")
-    campaign_and_targeting_name: Optional[str] = Field(None, description="广告活动和投放类型组合，格式：campaignType+targetingType")
+    campaign_and_targeting_name: Optional[str] = Field(
+        None, description="广告活动和投放类型组合，格式：campaignType+targetingType"
+    )
     campaign_id: Optional[str] = Field(None, description="广告活动ID")
     campaign_name: Optional[str] = Field(None, description="广告活动名称")
-    campaign_status: Optional[str] = Field(None, description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成")
-    campaign_type: Optional[str] = Field(None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告")
+    campaign_status: Optional[str] = Field(
+        None,
+        description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成",
+    )
+    campaign_type: Optional[str] = Field(
+        None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告"
+    )
     cpa: Optional[str] = Field(None, description="平均订单成本(CPA)，计算公式：广告花费 / 广告订单")
     cpc: Optional[str] = Field(None, description="点击成本(CPC)，计算公式：广告花费 / 点击量")
     ctr: Optional[str] = Field(None, description="点击率(CTR)，计算公式：点击量 / 曝光量 * 100%")
@@ -2027,13 +2470,21 @@ class MultiplatformAdsReportplatformsplistList(LingXingModel):
     key: Optional[str] = Field(None, description="唯一键，用于前端列表展示的唯一标识")
     mp_advertiser_name: Optional[str] = Field(None, description="广告账号名称")
     mp_seller_name: Optional[str] = Field(None, description="店铺名称")
-    ntb_order_rate: Optional[str] = Field(None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%")
+    ntb_order_rate: Optional[str] = Field(
+        None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%"
+    )
     ntb_orders: Optional[str] = Field(None, description="品牌新买家订单数，首次购买该品牌的买家产生的订单数")
-    ntb_orders_percent: Optional[str] = Field(None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%")
+    ntb_orders_percent: Optional[str] = Field(
+        None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%"
+    )
     ntb_revenue: Optional[str] = Field(None, description="品牌新买家销售额，首次购买该品牌的买家产生的销售额")
-    ntb_revenue_percent: Optional[str] = Field(None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%")
+    ntb_revenue_percent: Optional[str] = Field(
+        None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%"
+    )
     ntb_units: Optional[str] = Field(None, description="品牌新买家销量，首次购买该品牌的买家购买数量")
-    ntb_units_percent: Optional[str] = Field(None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%")
+    ntb_units_percent: Optional[str] = Field(
+        None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%"
+    )
     num_ads_clicks: Optional[str] = Field(None, description="广告点击量，广告被点击的总次数")
     num_ads_shown: Optional[str] = Field(None, description="曝光次数，广告被展示的总次数")
     other_sku_sales: Optional[str] = Field(None, description="关联销售额，间接归因销售额")
@@ -2041,15 +2492,20 @@ class MultiplatformAdsReportplatformsplistList(LingXingModel):
     platform: Optional[str] = Field(None, description="平台，枚举值：Desktop-桌面端, Mobile-移动端")
     roas: Optional[str] = Field(None, description="投入产出比(ROAS)，计算公式：广告销售额 / 广告花费")
 
+
 class MultiplatformAdsReportplatformsplistResponse(LingXingModel):
     """查询沃尔玛-广告 - SP广告 - 平台."""
-    list: Optional[List[MultiplatformAdsReportplatformsplistList]] = Field(None, description="列表数据，平台报表详细数据列表")
+
+    list: Optional[List[MultiplatformAdsReportplatformsplistList]] = Field(
+        None, description="列表数据，平台报表详细数据列表"
+    )
     total: Optional[str] = Field(None, description="总记录数，返回符合条件的数据总数")
     total: Optional[int] = Field(None, description="总记录数")
 
 
 class MultiplatformAdsReportplatformsvlistList(LingXingModel):
     """list sub-structure."""
+
     acos: Optional[str] = Field(None, description="广告成本占比(ACoS)，计算公式：广告花费 / 广告销售额 * 100%")
     ad_group_id: Optional[str] = Field(None, description="广告组ID")
     ad_group_name: Optional[str] = Field(None, description="广告组名称")
@@ -2062,11 +2518,18 @@ class MultiplatformAdsReportplatformsvlistList(LingXingModel):
     attributed_sales: Optional[str] = Field(None, description="广告销售额，归因总销售额")
     attributed_units: Optional[str] = Field(None, description="广告销量，归因总销量")
     bid: Optional[str] = Field(None, description="竞价，当前未使用")
-    campaign_and_targeting_name: Optional[str] = Field(None, description="广告活动和投放类型组合，格式：campaignType+targetingType")
+    campaign_and_targeting_name: Optional[str] = Field(
+        None, description="广告活动和投放类型组合，格式：campaignType+targetingType"
+    )
     campaign_id: Optional[str] = Field(None, description="广告活动ID")
     campaign_name: Optional[str] = Field(None, description="广告活动名称")
-    campaign_status: Optional[str] = Field(None, description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成")
-    campaign_type: Optional[str] = Field(None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告")
+    campaign_status: Optional[str] = Field(
+        None,
+        description="广告活动状态，枚举值：enabled-启用, paused-暂停, scheduled-已安排, rescheduled-重新安排, live-运行中, proposal-提议, completed-已完成",
+    )
+    campaign_type: Optional[str] = Field(
+        None, description="广告活动类型，枚举值：sponsoredProducts-SP广告, sba-SB品牌广告, video-SV视频广告"
+    )
     cpa: Optional[str] = Field(None, description="平均订单成本(CPA)，计算公式：广告花费 / 广告订单")
     cpc: Optional[str] = Field(None, description="点击成本(CPC)，计算公式：广告花费 / 点击量")
     ctr: Optional[str] = Field(None, description="点击率(CTR)，计算公式：点击量 / 曝光量 * 100%")
@@ -2081,13 +2544,21 @@ class MultiplatformAdsReportplatformsvlistList(LingXingModel):
     key: Optional[str] = Field(None, description="唯一键，用于前端列表展示的唯一标识")
     mp_advertiser_name: Optional[str] = Field(None, description="广告账号名称")
     mp_seller_name: Optional[str] = Field(None, description="店铺名称")
-    ntb_order_rate: Optional[str] = Field(None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%")
+    ntb_order_rate: Optional[str] = Field(
+        None, description="品牌新买家订单转化率，计算公式：ntbOrders / numAdsClicks * 100%"
+    )
     ntb_orders: Optional[str] = Field(None, description="品牌新买家订单数，首次购买该品牌的买家产生的订单数")
-    ntb_orders_percent: Optional[str] = Field(None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%")
+    ntb_orders_percent: Optional[str] = Field(
+        None, description="品牌新买家订单占比，计算公式：ntbOrders / attributedOrders * 100%"
+    )
     ntb_revenue: Optional[str] = Field(None, description="品牌新买家销售额，首次购买该品牌的买家产生的销售额")
-    ntb_revenue_percent: Optional[str] = Field(None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%")
+    ntb_revenue_percent: Optional[str] = Field(
+        None, description="品牌新买家销售额占比，计算公式：ntbRevenue / attributedSales * 100%"
+    )
     ntb_units: Optional[str] = Field(None, description="品牌新买家销量，首次购买该品牌的买家购买数量")
-    ntb_units_percent: Optional[str] = Field(None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%")
+    ntb_units_percent: Optional[str] = Field(
+        None, description="品牌新买家销量占比，计算公式：ntbUnits / attributedUnits * 100%"
+    )
     num_ads_clicks: Optional[str] = Field(None, description="广告点击量，广告被点击的总次数")
     num_ads_shown: Optional[str] = Field(None, description="曝光次数，广告被展示的总次数")
     other_sku_sales: Optional[str] = Field(None, description="关联销售额，间接归因销售额")
@@ -2095,15 +2566,20 @@ class MultiplatformAdsReportplatformsvlistList(LingXingModel):
     platform: Optional[str] = Field(None, description="平台，枚举值：Desktop-桌面端, Mobile-移动端")
     roas: Optional[str] = Field(None, description="投入产出比(ROAS)，计算公式：广告销售额 / 广告花费")
 
+
 class MultiplatformAdsReportplatformsvlistResponse(LingXingModel):
     """查询沃尔玛-广告 - SV广告 - 平台."""
-    list: Optional[List[MultiplatformAdsReportplatformsvlistList]] = Field(None, description="列表数据，平台报表详细数据列表")
+
+    list: Optional[List[MultiplatformAdsReportplatformsvlistList]] = Field(
+        None, description="列表数据，平台报表详细数据列表"
+    )
     total: Optional[str] = Field(None, description="总记录数，返回符合条件的数据总数")
     total: Optional[int] = Field(None, description="总记录数")
 
 
 class MultiplatformAdsReportsearchtrendslistList(LingXingModel):
     """list sub-structure."""
+
     item_brand1: Optional[str] = Field(None, description="销量排名第1的商品品牌名")
     item_brand2: Optional[str] = Field(None, description="销量排名第2的商品品牌名")
     item_brand3: Optional[str] = Field(None, description="销量排名第3的商品品牌名")
@@ -2127,8 +2603,10 @@ class MultiplatformAdsReportsearchtrendslistList(LingXingModel):
     total_pct_conv_share: Optional[str] = Field(None, description="前3商品转化占比总和")
     trend_data: Optional[list] = Field(None, description="最近7天的趋势数据，按日期顺序，包含日期和排名信息")
 
+
 class MultiplatformAdsReportsearchtrendslistResponse(LingXingModel):
     """查询沃尔玛-词 - 沃尔玛热门搜索词."""
+
     list: Optional[List[MultiplatformAdsReportsearchtrendslistList]] = Field(None, description="列表数据")
     total: Optional[str] = Field(None, description="总记录数")
     total: Optional[int] = Field(None, description="总记录数")
@@ -2136,6 +2614,7 @@ class MultiplatformAdsReportsearchtrendslistResponse(LingXingModel):
 
 class CampaignReportList2List(LingXingModel):
     """list sub-structure."""
+
     dimension: Optional[str] = Field(None, description="唯一标识")
     currency_code: Optional[str] = Field(None, description="币种代码")
     campaign_id: Optional[float] = Field(None, description="广告活动ID")
@@ -2143,7 +2622,10 @@ class CampaignReportList2List(LingXingModel):
     store_id: Optional[float] = Field(None, description="店铺ID")
     shop_id: Optional[float] = Field(None, description="Shopee 店铺ID")
     lx_name: Optional[str] = Field(None, description="店铺展示名称")
-    status_code: Optional[str] = Field(None, description="广告活动状态编码： `ongoing` 进行中 `scheduled` 已计划 `ended` 已结束 `paused` 已暂停 `deleted` 已删除 `closed` 已关闭")
+    status_code: Optional[str] = Field(
+        None,
+        description="广告活动状态编码： `ongoing` 进行中 `scheduled` 已计划 `ended` 已结束 `paused` 已暂停 `deleted` 已删除 `closed` 已关闭",
+    )
     status_display_name: Optional[str] = Field(None, description="状态显示名称（国际化）")
     start_time: Optional[str] = Field(None, description="广告活动开始时间")
     end_time: Optional[str] = Field(None, description="广告活动结束时间")
@@ -2151,13 +2633,17 @@ class CampaignReportList2List(LingXingModel):
     target_type_display_name: Optional[str] = Field(None, description="预算类型显示名称（国际化）")
     bidding_type: Optional[str] = Field(None, description="竞价类型： `auto` 自动 `manual` 手动")
     bidding_type_display_name: Optional[str] = Field(None, description="竞价类型显示名称（国际化）")
-    placement_category: Optional[str] = Field(None, description="广告位类别： `search` 搜索 `discovery` 展示 `all` 全部")
+    placement_category: Optional[str] = Field(
+        None, description="广告位类别： `search` 搜索 `discovery` 展示 `all` 全部"
+    )
     placement_category_display_name: Optional[str] = Field(None, description="广告位类别显示名称（国际化）")
     campaign_budget: Optional[float] = Field(None, description="广告活动预算")
     roas_target: Optional[float] = Field(None, description="目标ROAS")
     daily_discover_status: Optional[str] = Field(None, description="每日发现广告位状态： `active` 启用 `inactive` 停用")
     daily_discover_bid: Optional[float] = Field(None, description="每日发现广告位竞价")
-    you_may_also_like_status: Optional[str] = Field(None, description="猜你喜欢广告位状态： `active` 启用 `inactive` 停用")
+    you_may_also_like_status: Optional[str] = Field(
+        None, description="猜你喜欢广告位状态： `active` 启用 `inactive` 停用"
+    )
     you_may_also_like_bid: Optional[float] = Field(None, description="猜你喜欢广告位竞价")
     impression: Optional[float] = Field(None, description="曝光量")
     clicks: Optional[float] = Field(None, description="点击量")
@@ -2180,8 +2666,10 @@ class CampaignReportList2List(LingXingModel):
     direct_acos: Optional[float] = Field(None, description="广告ACoS - 广告销售成本（广告花费/广告GMV * 100%）")
     broad_acos: Optional[float] = Field(None, description="间接ACoS - 间接广告销售成本（广告花费/间接GMV * 100%）")
 
+
 class CampaignReportList2Response(LingXingModel):
     """分页查询广告活动报告列表."""
+
     total: Optional[float] = Field(None, description="总记录数")
     page: Optional[float] = Field(None, description="当前页码")
     length: Optional[float] = Field(None, description="每页大小")
@@ -2190,6 +2678,7 @@ class CampaignReportList2Response(LingXingModel):
 
 class StoreReportList2List(LingXingModel):
     """list sub-structure."""
+
     dimension: Optional[str] = Field(None, description="唯一标识，数据行为店铺ID的字符串形式")
     currency_code: Optional[str] = Field(None, description="币种代码")
     store_id: Optional[float] = Field(None, description="店铺ID")
@@ -2219,8 +2708,10 @@ class StoreReportList2List(LingXingModel):
     direct_acos: Optional[float] = Field(None, description="广告ACoS - 广告销售成本（广告花费/广告GMV * 100%）")
     broad_acos: Optional[float] = Field(None, description="间接ACoS - 间接广告销售成本（广告花费/间接GMV * 100%）")
 
+
 class StoreReportList2Response(LingXingModel):
     """分页查询店铺报告列表."""
+
     total: Optional[float] = Field(None, description="总记录数")
     page: Optional[float] = Field(None, description="当前页码")
     length: Optional[float] = Field(None, description="每页大小")
@@ -2229,6 +2720,7 @@ class StoreReportList2Response(LingXingModel):
 
 class MultiplatformAliexpressListResponse(LingXingModel):
     """查询AliExpress在线商品 - 自运营."""
+
     item_url: Optional[str] = Field(None, description="图片")
     item_id: Optional[str] = Field(None, description="商品ID")
     msku: Optional[str] = Field(None, description="MSKU")
@@ -2250,6 +2742,7 @@ class MultiplatformAliexpressListResponse(LingXingModel):
 
 class AliexpressListV2List(LingXingModel):
     """list sub-structure."""
+
     attribute_name: Optional[str] = Field(None, description="变体属性名")
     attribute_value: Optional[str] = Field(None, description="变体属性值")
     attributes: Optional[str] = Field(None, description="变体属性JSON")
@@ -2301,8 +2794,10 @@ class AliexpressListV2List(LingXingModel):
     ware_house_data_list: Optional[list] = Field(None, description="仓库详情列表")
     warehouse_stock: Optional[str] = Field(None, description="仓库库存")
 
+
 class AliexpressListV2Response(LingXingModel):
     """查询AliExpress在线商品 - 托管模式."""
+
     count: Optional[int] = Field(None, description="总条数")
     list: Optional[List[AliexpressListV2List]] = Field(None, description="商品详细信息列表")
     total: Optional[int] = Field(None, description="总记录数")
@@ -2310,11 +2805,14 @@ class AliexpressListV2Response(LingXingModel):
 
 class MultiplatformAllocateStockFaillist(LingXingModel):
     """failList sub-structure."""
+
     shipping_list_code: Optional[str] = Field(None, description="失败单号")
     fail_reason: Optional[str] = Field(None, description="失败原因")
 
+
 class MultiplatformAllocateStockResponse(LingXingModel):
     """平台仓发货单分配库存."""
+
     success: Optional[str] = Field(None, description="成功数量")
     fail: Optional[str] = Field(None, description="失败数量")
     total: Optional[str] = Field(None, description="总单数")
@@ -2323,6 +2821,7 @@ class MultiplatformAllocateStockResponse(LingXingModel):
 
 class CargoAddcargogoodsListResponse(LingXingModel):
     """查询WFS货件可添加商品列表."""
+
     total: Optional[int] = Field(None, description="总数")
     gtin: Optional[str] = Field(None, description="GTIN")
     item_id: Optional[str] = Field(None, description="商品id")
@@ -2334,17 +2833,21 @@ class CargoAddcargogoodsListResponse(LingXingModel):
 
 class MultiplatformCargoStorageResponse(LingXingModel):
     """WFS货件暂存."""
+
     total: Optional[int] = Field(None, description="总数")
     inbound_order_id: Optional[str] = Field(None, description="入库订单编号")
 
 
 class MultiplatformCoupangStocksearchStockpage(LingXingModel):
     """stockPage sub-structure."""
+
     records: Optional[list] = Field(None, description="列表数据")
     total: Optional[int] = Field(None, description="总数")
 
+
 class MultiplatformCoupangStocksearchResponse(LingXingModel):
     """多平台-查询Coupang库存."""
+
     stock_page: Optional[List[MultiplatformCoupangStocksearchStockpage]] = Field(None, description="分页数据")
     sync_time: Optional[str] = Field(None, description="最新同步时间，格式：yyyy-MM-dd HH:mm:ss")
     total: Optional[int] = Field(None, description="总记录数")
@@ -2352,17 +2855,23 @@ class MultiplatformCoupangStocksearchResponse(LingXingModel):
 
 class MultiplatformDeletecargostorageResponse(LingXingModel):
     """删除暂存货件."""
+
     total: Optional[int] = Field(None, description="总数")
     is_success: Optional[bool] = Field(None, description="是否删除成功： true 删除成功 false 删除失败")
 
 
 class MultiplatformEbayListProductAutoRestockResponse(LingXingModel):
     """product_auto_restock_response sub-structure."""
+
     variant_unique_id: Optional[str] = Field(None, description="商品变体唯一ID(雪花ID)")
     type: Optional[int] = Field(None, description="补货类型: 1 固定值 2 指定仓库")
     type_name: Optional[str] = Field(None, description="补货类型: 1 固定值 2 指定仓库")
-    sync_interval_time: Optional[int] = Field(None, description="同步间隔时间: 1 每30分钟 2 每1小时 3 每6小时 4 每12小时 5 每24小时")
-    sync_interval_time_name: Optional[str] = Field(None, description="同步间隔时间: 1 每30分钟 2 每1小时 3 每6小时 4 每12小时 5 每24小时")
+    sync_interval_time: Optional[int] = Field(
+        None, description="同步间隔时间: 1 每30分钟 2 每1小时 3 每6小时 4 每12小时 5 每24小时"
+    )
+    sync_interval_time_name: Optional[str] = Field(
+        None, description="同步间隔时间: 1 每30分钟 2 每1小时 3 每6小时 4 每12小时 5 每24小时"
+    )
     auto_restock: Optional[int] = Field(None, description="是否自动补货: 0 未设置补货规则 1 启用 2 停用")
     auto_restock_name: Optional[str] = Field(None, description="是否自动补货: 0 未设置补货规则 1 启用 2 停用")
     disable_reason: Optional[int] = Field(None, description="停用原因: 1 手动停用 2 自动停用")
@@ -2371,8 +2880,10 @@ class MultiplatformEbayListProductAutoRestockResponse(LingXingModel):
     restock_quantity: Optional[str] = Field(None, description="补货数量")
     restock_warehouse_id: Optional[str] = Field(None, description="补货仓库ID")
 
+
 class MultiplatformEbayListResponse(LingXingModel):
     """查询eBay在线商品列表."""
+
     item_url: Optional[str] = Field(None, description="商品跳转链接")
     picture_url: Optional[str] = Field(None, description="图片链接")
     item_id: Optional[str] = Field(None, description="商品ID")
@@ -2394,7 +2905,9 @@ class MultiplatformEbayListResponse(LingXingModel):
     accept_price: Optional[str] = Field(None, description="一口价")
     quantity: Optional[int] = Field(None, description="库存")
     auto_restock: Optional[str] = Field(None, description="是否自动补货")
-    product_auto_restock_response: Optional[List[MultiplatformEbayListProductAutoRestockResponse]] = Field(None, description="自动补货响应")
+    product_auto_restock_response: Optional[List[MultiplatformEbayListProductAutoRestockResponse]] = Field(
+        None, description="自动补货响应"
+    )
     location: Optional[str] = Field(None, description="物品所在地")
     dispatch_time_max: Optional[int] = Field(None, description="处理时间")
     listing_start_time: Optional[str] = Field(None, description="创建时间")
@@ -2404,9 +2917,12 @@ class MultiplatformEbayListResponse(LingXingModel):
 
 class MultiplatformFbsStocksearchRecords(LingXingModel):
     """records sub-structure."""
+
     coverage_days: Optional[str] = Field(None, description="周转天数")
     excess_stock: Optional[int] = Field(None, description="超量数量")
-    fulfill_mapping_mode: Optional[str] = Field(None, description="Fulfill Mapping Mode，枚举值：0-空，1-Bundle SKU，2-Parent SKU")
+    fulfill_mapping_mode: Optional[str] = Field(
+        None, description="Fulfill Mapping Mode，枚举值：0-空，1-Bundle SKU，2-Parent SKU"
+    )
     gmt_create: Optional[int] = Field(None, description="数据创建时间")
     gmt_modified: Optional[int] = Field(None, description="数据更新时间")
     id: Optional[int] = Field(None, description="id")
@@ -2428,14 +2944,18 @@ class MultiplatformFbsStocksearchRecords(LingXingModel):
     sellable_qty: Optional[int] = Field(None, description="可销售")
     selling_speed: Optional[str] = Field(None, description="销售速度")
     shop_sku_id: Optional[str] = Field(None, description="店铺SKU ID")
-    stock_level: Optional[str] = Field(None, description="库存级别，枚举值：-1-正常，0-空，1-库存不足和无可售库存，2-低库存(待补货)，3-已补货，4-超量")
+    stock_level: Optional[str] = Field(
+        None, description="库存级别，枚举值：-1-正常，0-空，1-库存不足和无可售库存，2-低库存(待补货)，3-已补货，4-超量"
+    )
     store_id: Optional[int] = Field(None, description="店铺ID")
     store_name: Optional[str] = Field(None, description="店铺名称")
     unsellable_qty: Optional[int] = Field(None, description="不可销售")
     whs_id: Optional[str] = Field(None, description="仓库")
 
+
 class MultiplatformFbsStocksearchResponse(LingXingModel):
     """多平台-查询FBS库存."""
+
     records: Optional[List[MultiplatformFbsStocksearchRecords]] = Field(None, description="列表数据")
     total: Optional[int] = Field(None, description="计数")
     total: Optional[int] = Field(None, description="总记录数")
@@ -2443,6 +2963,7 @@ class MultiplatformFbsStocksearchResponse(LingXingModel):
 
 class MultiplatformFbtStocksearchList(LingXingModel):
     """list sub-structure."""
+
     advice_quantity: Optional[int] = Field(None, description="建议备货量")
     available_sale_days: Optional[int] = Field(None, description="可售天数")
     child_list: Optional[list] = Field(None, description="子行数据")
@@ -2471,19 +2992,24 @@ class MultiplatformFbtStocksearchList(LingXingModel):
     warehouse_inventory_num: Optional[int] = Field(None, description="仓内可用")
     warehouse_sale_days: Optional[int] = Field(None, description="仓内库存可售天数")
 
+
 class MultiplatformFbtStocksearchResponse(LingXingModel):
     """查询Temu库存."""
+
     list: Optional[List[MultiplatformFbtStocksearchList]] = Field(None, description="是")
     total: Optional[int] = Field(None, description="是")
 
 
 class FbtStocksearchV2Page(LingXingModel):
     """page sub-structure."""
+
     records: Optional[list] = Field(None, description="列表数据")
     total: Optional[int] = Field(None, description="总数")
 
+
 class FbtStocksearchV2Response(LingXingModel):
     """多平台-查询FBT库存."""
+
     page: Optional[List[FbtStocksearchV2Page]] = Field(None, description="分页信息")
     sync_time: Optional[str] = Field(None, description="最新同步时间，格式：yyyy-MM-dd HH:mm:ss")
     total: Optional[int] = Field(None, description="总记录数")
@@ -2491,11 +3017,14 @@ class FbtStocksearchV2Response(LingXingModel):
 
 class MultiplatformFullStocksearchPage(LingXingModel):
     """page sub-structure."""
+
     records: Optional[list] = Field(None, description="库存记录列表")
     total: Optional[str] = Field(None, description="总数")
 
+
 class MultiplatformFullStocksearchResponse(LingXingModel):
     """查询FULL库存."""
+
     page: Optional[List[MultiplatformFullStocksearchPage]] = Field(None, description="分页信息")
     sync_time: Optional[str] = Field(None, description="最新同步时间")
     total: Optional[int] = Field(None, description="总记录数")
@@ -2503,6 +3032,7 @@ class MultiplatformFullStocksearchResponse(LingXingModel):
 
 class MultiplatformLineListList(LingXingModel):
     """list sub-structure."""
+
     attributes: Optional[str] = Field(None, description="变体属性")
     available_number: Optional[int] = Field(None, description="可用库存数")
     bid: Optional[int] = Field(None, description="品牌ID")
@@ -2538,8 +3068,10 @@ class MultiplatformLineListList(LingXingModel):
     title: Optional[str] = Field(None, description="商品标题")
     ware_house_data_list: Optional[list] = Field(None, description="商品仓库详情列表")
 
+
 class MultiplatformLineListResponse(LingXingModel):
     """多平台-查询Line在线商品."""
+
     count: Optional[int] = Field(None, description="总条数")
     list: Optional[List[MultiplatformLineListList]] = Field(None, description="商品详细信息列表")
     total: Optional[int] = Field(None, description="总记录数")
@@ -2547,6 +3079,7 @@ class MultiplatformLineListResponse(LingXingModel):
 
 class ProfitReportMskuTotalsum(LingXingModel):
     """totalSum sub-structure."""
+
     currency_code: Optional[str] = Field(None, description="币种")
     currency_icon: Optional[str] = Field(None, description="货币图标")
     sales_num: Optional[float] = Field(None, description="销量")
@@ -2582,8 +3115,10 @@ class ProfitReportMskuTotalsum(LingXingModel):
     gross_profit: Optional[float] = Field(None, description="毛利润")
     gross_profit_rate: Optional[float] = Field(None, description="毛利率")
 
+
 class ProfitReportMskuList(LingXingModel):
     """list sub-structure."""
+
     store_id: Optional[float] = Field(None, description="店铺id")
     store_name: Optional[str] = Field(None, description="店铺")
     platform_code: Optional[str] = Field(None, description="平台编码")
@@ -2681,8 +3216,12 @@ class ProfitReportMskuList(LingXingModel):
     prorated_coins_value_offset_return_items: Optional[float] = Field(None, description="Shopee币抵消退款")
     prorated_shopee_voucher_offset_return_items: Optional[float] = Field(None, description="Shopee优惠券抵消退款")
     prorated_seller_voucher_offset_return_items: Optional[float] = Field(None, description="卖家优惠券抵消退款")
-    prorated_payment_channel_promo_bank_offset_return_items: Optional[float] = Field(None, description="银行支付促销抵消退款")
-    prorated_payment_channel_promo_shopee_offset_return_items: Optional[float] = Field(None, description="Shopee支付促销抵消退款")
+    prorated_payment_channel_promo_bank_offset_return_items: Optional[float] = Field(
+        None, description="银行支付促销抵消退款"
+    )
+    prorated_payment_channel_promo_shopee_offset_return_items: Optional[float] = Field(
+        None, description="Shopee支付促销抵消退款"
+    )
     seller_protection_fee_claim_amount: Optional[float] = Field(None, description="退货运费平台退款")
     commission_fee: Optional[float] = Field(None, description="平台佣金")
     ams_commission_fee: Optional[float] = Field(None, description="联盟营销佣金")
@@ -2815,8 +3354,10 @@ class ProfitReportMskuList(LingXingModel):
     external_affiliate_marketing_fee_amount: Optional[float] = Field(None, description="EAMS项目服务费")
     fbt_fulfillment_fee_reimbursement_amount: Optional[float] = Field(None, description="FBT发货费补偿款")
 
+
 class ProfitReportMskuResponse(LingXingModel):
     """查询结算利润（利润报表）-msku."""
+
     total_sum: Optional[List[ProfitReportMskuTotalsum]] = Field(None, description="总计")
     list: Optional[List[ProfitReportMskuList]] = Field(None, description="列表")
     total: Optional[int] = Field(None, description="总数")
@@ -2824,6 +3365,7 @@ class ProfitReportMskuResponse(LingXingModel):
 
 class ProfitReportOrderTotalsum(LingXingModel):
     """totalSum sub-structure."""
+
     currency_code: Optional[str] = Field(None, description="币种")
     currency_icon: Optional[str] = Field(None, description="货币图标")
     sales_num: Optional[float] = Field(None, description="销量")
@@ -2859,9 +3401,13 @@ class ProfitReportOrderTotalsum(LingXingModel):
     gross_profit: Optional[float] = Field(None, description="毛利润")
     gross_profit_rate: Optional[float] = Field(None, description="毛利率")
 
+
 class ProfitReportOrderList(LingXingModel):
     """list sub-structure."""
-    id: Optional[str] = Field(None, description="id，单次获取数据的唯一标识（多次获取同一数据时，返回的id会不相同，不可用于数据判重）")
+
+    id: Optional[str] = Field(
+        None, description="id，单次获取数据的唯一标识（多次获取同一数据时，返回的id会不相同，不可用于数据判重）"
+    )
     row_index: Optional[str] = Field(None, description="与 uniqueId 组合可唯一标识每一条数据")
     unique_id: Optional[str] = Field(None, description="与 rowIndex 组合可唯一标识每一条数据")
     platform_order_no: Optional[str] = Field(None, description="平台单号")
@@ -2963,8 +3509,12 @@ class ProfitReportOrderList(LingXingModel):
     prorated_coins_value_offset_return_items: Optional[float] = Field(None, description="Shopee币抵消退款")
     prorated_shopee_voucher_offset_return_items: Optional[float] = Field(None, description="Shopee优惠券抵消退款")
     prorated_seller_voucher_offset_return_items: Optional[float] = Field(None, description="卖家优惠券抵消退款")
-    prorated_payment_channel_promo_bank_offset_return_items: Optional[float] = Field(None, description="银行支付促销抵消退款")
-    prorated_payment_channel_promo_shopee_offset_return_items: Optional[float] = Field(None, description="Shopee支付促销抵消退款")
+    prorated_payment_channel_promo_bank_offset_return_items: Optional[float] = Field(
+        None, description="银行支付促销抵消退款"
+    )
+    prorated_payment_channel_promo_shopee_offset_return_items: Optional[float] = Field(
+        None, description="Shopee支付促销抵消退款"
+    )
     seller_protection_fee_claim_amount: Optional[float] = Field(None, description="退货运费平台退款")
     commission_fee: Optional[float] = Field(None, description="平台佣金")
     ams_commission_fee: Optional[float] = Field(None, description="联盟营销佣金")
@@ -3081,8 +3631,10 @@ class ProfitReportOrderList(LingXingModel):
     external_affiliate_marketing_fee_amount: Optional[float] = Field(None, description="EAMS项目服务费")
     fbt_fulfillment_fee_reimbursement_amount: Optional[float] = Field(None, description="FBT发货费补偿款")
 
+
 class ProfitReportOrderResponse(LingXingModel):
     """查询结算利润（利润报表）-订单."""
+
     total_sum: Optional[List[ProfitReportOrderTotalsum]] = Field(None, description="总计")
     list: Optional[List[ProfitReportOrderList]] = Field(None, description="列表")
     total: Optional[int] = Field(None, description="总数")
@@ -3090,6 +3642,7 @@ class ProfitReportOrderResponse(LingXingModel):
 
 class ProfitReportSellerTotalsum(LingXingModel):
     """totalSum sub-structure."""
+
     currency_code: Optional[str] = Field(None, description="币种")
     currency_icon: Optional[str] = Field(None, description="货币图标")
     sales_num: Optional[float] = Field(None, description="销量")
@@ -3125,8 +3678,10 @@ class ProfitReportSellerTotalsum(LingXingModel):
     gross_profit: Optional[float] = Field(None, description="毛利润")
     gross_profit_rate: Optional[float] = Field(None, description="毛利率")
 
+
 class ProfitReportSellerList(LingXingModel):
     """list sub-structure."""
+
     platform_code: Optional[str] = Field(None, description="平台编码")
     platform_name: Optional[str] = Field(None, description="平台")
     store_id: Optional[dict] = Field(None, description="店铺id")
@@ -3218,8 +3773,12 @@ class ProfitReportSellerList(LingXingModel):
     prorated_coins_value_offset_return_items: Optional[float] = Field(None, description="Shopee币抵消退款")
     prorated_shopee_voucher_offset_return_items: Optional[float] = Field(None, description="Shopee优惠券抵消退款")
     prorated_seller_voucher_offset_return_items: Optional[float] = Field(None, description="卖家优惠券抵消退款")
-    prorated_payment_channel_promo_bank_offset_return_items: Optional[float] = Field(None, description="银行支付促销抵消退款")
-    prorated_payment_channel_promo_shopee_offset_return_items: Optional[float] = Field(None, description="Shopee支付促销抵消退款")
+    prorated_payment_channel_promo_bank_offset_return_items: Optional[float] = Field(
+        None, description="银行支付促销抵消退款"
+    )
+    prorated_payment_channel_promo_shopee_offset_return_items: Optional[float] = Field(
+        None, description="Shopee支付促销抵消退款"
+    )
     seller_protection_fee_claim_amount: Optional[float] = Field(None, description="退货运费平台退款")
     commission_fee: Optional[float] = Field(None, description="平台佣金")
     ams_commission_fee: Optional[float] = Field(None, description="联盟营销佣金")
@@ -3336,8 +3895,10 @@ class ProfitReportSellerList(LingXingModel):
     external_affiliate_marketing_fee_amount: Optional[float] = Field(None, description="EAMS项目服务费")
     fbt_fulfillment_fee_reimbursement_amount: Optional[float] = Field(None, description="FBT发货费补偿款")
 
+
 class ProfitReportSellerResponse(LingXingModel):
     """查询结算利润（利润报表）-店铺."""
+
     total_sum: Optional[List[ProfitReportSellerTotalsum]] = Field(None, description="总计")
     list: Optional[List[ProfitReportSellerList]] = Field(None, description="列表")
     total: Optional[int] = Field(None, description="总数")
@@ -3345,6 +3906,7 @@ class ProfitReportSellerResponse(LingXingModel):
 
 class ProfitReportSkuTotalsum(LingXingModel):
     """totalSum sub-structure."""
+
     currency_code: Optional[str] = Field(None, description="币种")
     currency_icon: Optional[str] = Field(None, description="货币图标")
     sales_num: Optional[float] = Field(None, description="销量")
@@ -3380,8 +3942,10 @@ class ProfitReportSkuTotalsum(LingXingModel):
     gross_profit: Optional[float] = Field(None, description="毛利润")
     gross_profit_rate: Optional[float] = Field(None, description="毛利率")
 
+
 class ProfitReportSkuList(LingXingModel):
     """list sub-structure."""
+
     store_id: Optional[float] = Field(None, description="店铺id")
     store_name: Optional[str] = Field(None, description="店铺")
     platform_code: Optional[str] = Field(None, description="平台编码")
@@ -3478,8 +4042,12 @@ class ProfitReportSkuList(LingXingModel):
     prorated_coins_value_offset_return_items: Optional[float] = Field(None, description="Shopee币抵消退款")
     prorated_shopee_voucher_offset_return_items: Optional[float] = Field(None, description="Shopee优惠券抵消退款")
     prorated_seller_voucher_offset_return_items: Optional[float] = Field(None, description="卖家优惠券抵消退款")
-    prorated_payment_channel_promo_bank_offset_return_items: Optional[float] = Field(None, description="银行支付促销抵消退款")
-    prorated_payment_channel_promo_shopee_offset_return_items: Optional[float] = Field(None, description="Shopee支付促销抵消退款")
+    prorated_payment_channel_promo_bank_offset_return_items: Optional[float] = Field(
+        None, description="银行支付促销抵消退款"
+    )
+    prorated_payment_channel_promo_shopee_offset_return_items: Optional[float] = Field(
+        None, description="Shopee支付促销抵消退款"
+    )
     seller_protection_fee_claim_amount: Optional[float] = Field(None, description="退货运费平台退款")
     commission_fee: Optional[float] = Field(None, description="平台佣金")
     ams_commission_fee: Optional[float] = Field(None, description="联盟营销佣金")
@@ -3596,8 +4164,10 @@ class ProfitReportSkuList(LingXingModel):
     external_affiliate_marketing_fee_amount: Optional[float] = Field(None, description="EAMS项目服务费")
     fbt_fulfillment_fee_reimbursement_amount: Optional[float] = Field(None, description="FBT发货费补偿款")
 
+
 class ProfitReportSkuResponse(LingXingModel):
     """查询结算利润（利润报表）-sku."""
+
     total_sum: Optional[List[ProfitReportSkuTotalsum]] = Field(None, description="总计")
     list: Optional[List[ProfitReportSkuList]] = Field(None, description="列表")
     total: Optional[int] = Field(None, description="总数")
@@ -3605,17 +4175,22 @@ class ProfitReportSkuResponse(LingXingModel):
 
 class MultiplatformQueryShippingdetailShippinglistfiles(LingXingModel):
     """shippingListFiles sub-structure."""
+
     shipping_list_file_url: Optional[str] = Field(None, description="附件 URL")
     shipping_list_file_key: Optional[str] = Field(None, description="附件存储 key")
     shipping_list_file_name: Optional[str] = Field(None, description="文件名称")
 
+
 class MultiplatformQueryShippingdetailPrincipals(LingXingModel):
     """principals sub-structure."""
+
     principal_user_id: Optional[float] = Field(None, description="负责人编号")
     principal_user_name: Optional[str] = Field(None, description="负责人名称")
 
+
 class MultiplatformQueryShippingdetailGoodstotaldata(LingXingModel):
     """goodsTotalData sub-structure."""
+
     msku_count: Optional[float] = Field(None, description="商品数量总计")
     total_nw: Optional[str] = Field(None, description="总净重")
     total_gw: Optional[str] = Field(None, description="总毛重")
@@ -3623,8 +4198,10 @@ class MultiplatformQueryShippingdetailGoodstotaldata(LingXingModel):
     tax_amount: Optional[str] = Field(None, description="总税费")
     shipments_num: Optional[float] = Field(None, description="总发货量")
 
+
 class MultiplatformQueryShippingdetailAccessoriesdetails(LingXingModel):
     """accessoriesDetails sub-structure."""
+
     id: Optional[float] = Field(None, description="辅料主键")
     shipping_list_id: Optional[float] = Field(None, description="发货单主键")
     aux_name: Optional[str] = Field(None, description="辅料品名")
@@ -3644,8 +4221,10 @@ class MultiplatformQueryShippingdetailAccessoriesdetails(LingXingModel):
     company_id: Optional[float] = Field(None, description="企业 ID")
     price_version: Optional[float] = Field(None, description="成本版本号")
 
+
 class MultiplatformQueryShippingdetailLogisticsdetails(LingXingModel):
     """logisticsDetails sub-structure."""
+
     id: Optional[float] = Field(None, description="物流信息主键")
     shipping_list_id: Optional[float] = Field(None, description="发货单主键")
     logistics_number: Optional[str] = Field(None, description="物流商单号")
@@ -3665,8 +4244,10 @@ class MultiplatformQueryShippingdetailLogisticsdetails(LingXingModel):
     expected_other_icon: Optional[str] = Field(None, description="预估其他费用币种符号")
     expected_other_cost_remark: Optional[str] = Field(None, description="预估其他费用备注")
 
+
 class MultiplatformQueryShippingdetailGoodsextdetails(LingXingModel):
     """goodsExtDetails sub-structure."""
+
     id: Optional[float] = Field(None, description="发货单商品主键")
     shipping_list_id: Optional[float] = Field(None, description="发货单主键")
     goods_url: Optional[str] = Field(None, description="商品图片")
@@ -3720,8 +4301,10 @@ class MultiplatformQueryShippingdetailGoodsextdetails(LingXingModel):
     cg_price: Optional[float] = Field(None, description="采购成本")
     whb_code_info: Optional[list] = Field(None, description="仓位信息列表")
 
+
 class MultiplatformQueryShippingdetailFirstletlistresponselist(LingXingModel):
     """firstLetListResponseList sub-structure."""
+
     delivery_time: Optional[str] = Field(None, description="发货时间，格式 `yyyy-MM-dd HH:mm:ss`")
     shipping_list_code: Optional[str] = Field(None, description="发货单号")
     platform_code: Optional[str] = Field(None, description="平台编号")
@@ -3765,8 +4348,10 @@ class MultiplatformQueryShippingdetailFirstletlistresponselist(LingXingModel):
     per_firstlet_actual: Optional[str] = Field(None, description="单位头程费用（实际）")
     wfs_stock_price: Optional[str] = Field(None, description="WFS 单位库存成本")
 
+
 class MultiplatformQueryShippingdetailResponse(LingXingModel):
     """查询平台仓发货单详情."""
+
     id: Optional[float] = Field(None, description="发货单主键")
     platform_code: Optional[str] = Field(None, description="平台编号")
     shipping_list_code: Optional[str] = Field(None, description="发货单编号")
@@ -3778,7 +4363,9 @@ class MultiplatformQueryShippingdetailResponse(LingXingModel):
     logistics_provider_id: Optional[float] = Field(None, description="物流商信息编号")
     logistics_channel_id: Optional[float] = Field(None, description="物流渠道编号")
     arrival_time: Optional[str] = Field(None, description="到货时间，格式 `yyyy-MM-dd`")
-    head_fee_type: Optional[float] = Field(None, description="头程费分配方式。 1 按计费重 2 按实重 3 按体积重 4 按 SKU 数量 5 按箱子体积 6 自定义")
+    head_fee_type: Optional[float] = Field(
+        None, description="头程费分配方式。 1 按计费重 2 按实重 3 按体积重 4 按 SKU 数量 5 按箱子体积 6 自定义"
+    )
     head_fee_type_name: Optional[str] = Field(None, description="头程费分配方式名称")
     logistics_code: Optional[str] = Field(None, description="物流中心编码，多个值时使用英文冒号拼接")
     appointment_pickup_time: Optional[str] = Field(None, description="预约取件时间")
@@ -3793,20 +4380,33 @@ class MultiplatformQueryShippingdetailResponse(LingXingModel):
     actual_due_time: Optional[str] = Field(None, description="实际妥投时间，格式 `yyyy-MM-dd`")
     order_logistics_status: Optional[str] = Field(None, description="订单物流状态")
     actual_delivery_time: Optional[str] = Field(None, description="实际发货时间，格式 `yyyy-MM-dd`")
-    shipping_list_files: Optional[List[MultiplatformQueryShippingdetailShippinglistfiles]] = Field(None, description="附件信息列表")
+    shipping_list_files: Optional[List[MultiplatformQueryShippingdetailShippinglistfiles]] = Field(
+        None, description="附件信息列表"
+    )
     shipping_list_remark: Optional[str] = Field(None, description="备注")
     has_auto_deduction: Optional[bool] = Field(None, description="是否组合商品自动扣减单品库存")
     has_hand_check_space: Optional[bool] = Field(None, description="是否手动选择出库仓位")
     principals: Optional[List[MultiplatformQueryShippingdetailPrincipals]] = Field(None, description="发货单负责人列表")
-    goods_ext_details: Optional[List[MultiplatformQueryShippingdetailGoodsextdetails]] = Field(None, description="发货商品明细列表")
-    goods_total_data: Optional[List[MultiplatformQueryShippingdetailGoodstotaldata]] = Field(None, description="发货商品汇总信息")
-    accessories_details: Optional[List[MultiplatformQueryShippingdetailAccessoriesdetails]] = Field(None, description="关联辅料信息")
-    logistics_details: Optional[List[MultiplatformQueryShippingdetailLogisticsdetails]] = Field(None, description="物流信息列表")
-    first_let_list_response_list: Optional[List[MultiplatformQueryShippingdetailFirstletlistresponselist]] = Field(None, description="头程分摊信息列表")
+    goods_ext_details: Optional[List[MultiplatformQueryShippingdetailGoodsextdetails]] = Field(
+        None, description="发货商品明细列表"
+    )
+    goods_total_data: Optional[List[MultiplatformQueryShippingdetailGoodstotaldata]] = Field(
+        None, description="发货商品汇总信息"
+    )
+    accessories_details: Optional[List[MultiplatformQueryShippingdetailAccessoriesdetails]] = Field(
+        None, description="关联辅料信息"
+    )
+    logistics_details: Optional[List[MultiplatformQueryShippingdetailLogisticsdetails]] = Field(
+        None, description="物流信息列表"
+    )
+    first_let_list_response_list: Optional[List[MultiplatformQueryShippingdetailFirstletlistresponselist]] = Field(
+        None, description="头程分摊信息列表"
+    )
 
 
 class MultiplatformQueryShippinglistList(LingXingModel):
     """list sub-structure."""
+
     id: Optional[str] = Field(None, description="id")
     shipping_list_code: Optional[str] = Field(None, description="货件单号")
     warehouse_id: Optional[int] = Field(None, description="仓库ID")
@@ -3836,8 +4436,10 @@ class MultiplatformQueryShippinglistList(LingXingModel):
     good_ext_details: Optional[list] = Field(None, description="商品详细列表")
     logistics_details: Optional[list] = Field(None, description="物流详细列表")
 
+
 class MultiplatformQueryShippinglistResponse(LingXingModel):
     """查询平台仓发货单列表v2."""
+
     total: Optional[str] = Field(None, description="总数")
     list: Optional[List[MultiplatformQueryShippinglistList]] = Field(None, description="是")
     total: Optional[int] = Field(None, description="总数")
@@ -3845,6 +4447,7 @@ class MultiplatformQueryShippinglistResponse(LingXingModel):
 
 class MultiplatformSheinListList(LingXingModel):
     """list sub-structure."""
+
     id: Optional[str] = Field(None, description="id")
     product_unique_id: Optional[str] = Field(None, description="商品uid")
     principal_uids: Optional[list] = Field(None, description="负责人uid列表")
@@ -3887,8 +4490,10 @@ class MultiplatformSheinListList(LingXingModel):
     cname: Optional[str] = Field(None, description="细分类名称")
     supply_price_list: Optional[float] = Field(None, description="是")
 
+
 class MultiplatformSheinListResponse(LingXingModel):
     """查询Shein在线商品."""
+
     count: Optional[int] = Field(None, description="总数")
     list: Optional[List[MultiplatformSheinListList]] = Field(None, description="是")
     total: Optional[int] = Field(None, description="总数")
@@ -3896,11 +4501,14 @@ class MultiplatformSheinListResponse(LingXingModel):
 
 class MultiplatformShippinglistDeliveryFaillist(LingXingModel):
     """failList sub-structure."""
+
     shipping_list_code: Optional[str] = Field(None, description="失败单号")
     fail_reason: Optional[str] = Field(None, description="失败原因")
 
+
 class MultiplatformShippinglistDeliveryResponse(LingXingModel):
     """平台仓发货单发货."""
+
     success: Optional[str] = Field(None, description="成功数量")
     fail: Optional[str] = Field(None, description="失败数量")
     total: Optional[str] = Field(None, description="总单数")
@@ -3909,11 +4517,14 @@ class MultiplatformShippinglistDeliveryResponse(LingXingModel):
 
 class MultiplatformShippinglistPickingFaillist(LingXingModel):
     """failList sub-structure."""
+
     shipping_list_code: Optional[str] = Field(None, description="失败单号")
     fail_reason: Optional[str] = Field(None, description="失败原因")
 
+
 class MultiplatformShippinglistPickingResponse(LingXingModel):
     """平台仓发货单拣货."""
+
     success: Optional[str] = Field(None, description="成功数量")
     fail: Optional[str] = Field(None, description="失败数量")
     total: Optional[str] = Field(None, description="总单数")
@@ -3922,6 +4533,7 @@ class MultiplatformShippinglistPickingResponse(LingXingModel):
 
 class MultiplatformShopifyVariantlistList(LingXingModel):
     """list sub-structure."""
+
     weight: Optional[str] = Field(None, description="重量")
     item_id: Optional[str] = Field(None, description="商品Id")
     item_url: Optional[str] = Field(None, description="商品链接")
@@ -3959,8 +4571,10 @@ class MultiplatformShopifyVariantlistList(LingXingModel):
     weight_unit: Optional[str] = Field(None, description="重量单位")
     location_infos: Optional[list] = Field(None, description="商品所在地详细信息")
 
+
 class MultiplatformShopifyVariantlistResponse(LingXingModel):
     """查询Shopify在线商品."""
+
     count: Optional[float] = Field(None, description="总数")
     list: Optional[List[MultiplatformShopifyVariantlistList]] = Field(None, description="是")
     total: Optional[int] = Field(None, description="总数")
@@ -3968,6 +4582,7 @@ class MultiplatformShopifyVariantlistResponse(LingXingModel):
 
 class MultiplatformTemuCargoList(LingXingModel):
     """list sub-structure."""
+
     appointment_end_time: Optional[str] = Field(None, description="预约结束时间")
     appointment_start_time: Optional[str] = Field(None, description="预约开始时间")
     cargo_code: Optional[str] = Field(None, description="货件单号")
@@ -4007,8 +4622,10 @@ class MultiplatformTemuCargoList(LingXingModel):
     urgency_type: Optional[int] = Field(None, description="是否是紧急发货单，0-普通 1-急采")
     weight_delivered_cargo: Optional[str] = Field(None, description="发货重量")
 
+
 class MultiplatformTemuCargoResponse(LingXingModel):
     """查询Temu货件."""
+
     count: Optional[int] = Field(None, description="总条数（不再使用，用于兼容其他系统）")
     length: Optional[int] = Field(None, description="每页条数")
     list: Optional[List[MultiplatformTemuCargoList]] = Field(None, description="详细信息列表")
@@ -4017,6 +4634,7 @@ class MultiplatformTemuCargoResponse(LingXingModel):
 
 class MultiplatformTemuListList(LingXingModel):
     """list sub-structure."""
+
     id: Optional[str] = Field(None, description="id")
     product_unique_id: Optional[str] = Field(None, description="商品uid")
     principal_uids: Optional[list] = Field(None, description="负责人uid列表")
@@ -4052,8 +4670,10 @@ class MultiplatformTemuListList(LingXingModel):
     cname: Optional[str] = Field(None, description="分类名称")
     supply_price_list: Optional[float] = Field(None, description="是")
 
+
 class MultiplatformTemuListResponse(LingXingModel):
     """查询Temu在线商品."""
+
     count: Optional[int] = Field(None, description="总数")
     list: Optional[List[MultiplatformTemuListList]] = Field(None, description="是")
     total: Optional[int] = Field(None, description="总数")
@@ -4061,6 +4681,7 @@ class MultiplatformTemuListResponse(LingXingModel):
 
 class MultiplatformTiktokListList(LingXingModel):
     """list sub-structure."""
+
     id: Optional[str] = Field(None, description="id")
     product_unique_id: Optional[str] = Field(None, description="商品uid")
     principal_uids: Optional[list] = Field(None, description="负责人uid列表")
@@ -4092,8 +4713,10 @@ class MultiplatformTiktokListList(LingXingModel):
     bname: Optional[str] = Field(None, description="品牌名称")
     cname: Optional[str] = Field(None, description="叶子类目")
 
+
 class MultiplatformTiktokListResponse(LingXingModel):
     """查询TikTok在线商品."""
+
     count: Optional[int] = Field(None, description="总数")
     list: Optional[List[MultiplatformTiktokListList]] = Field(None, description="是")
     total: Optional[int] = Field(None, description="是")
@@ -4101,6 +4724,7 @@ class MultiplatformTiktokListResponse(LingXingModel):
 
 class MultiplatformWalmartListList(LingXingModel):
     """list sub-structure."""
+
     item_url: Optional[str] = Field(None, description="产品跳转链接")
     item_id: Optional[str] = Field(None, description="商品ID")
     picture_url: Optional[str] = Field(None, description="图片链接")
@@ -4129,22 +4753,29 @@ class MultiplatformWalmartListList(LingXingModel):
     review_count: Optional[str] = Field(None, description="评论数")
     average_rating: Optional[str] = Field(None, description="评分")
     brand: Optional[str] = Field(None, description="品牌")
-    fulfillment_type: Optional[int] = Field(None, description="发货方式: 0 WFS Eligible 1 Walmart Fulfilled 2 Seller Fulfilled")
-    fulfillment_type_name: Optional[str] = Field(None, description="发货方式: 0 WFS Eligible 1 Walmart Fulfilled 2 Seller Fulfilled")
+    fulfillment_type: Optional[int] = Field(
+        None, description="发货方式: 0 WFS Eligible 1 Walmart Fulfilled 2 Seller Fulfilled"
+    )
+    fulfillment_type_name: Optional[str] = Field(
+        None, description="发货方式: 0 WFS Eligible 1 Walmart Fulfilled 2 Seller Fulfilled"
+    )
     competitor_price: Optional[str] = Field(None, description="竞品价格")
     competitor_ship_price: Optional[str] = Field(None, description="竞品运费")
     listing_start_time: Optional[str] = Field(None, description="创建时间")
     listing_end_time: Optional[str] = Field(None, description="结束时间")
     variant_unique_id: Optional[str] = Field(None, description="变体唯一id")
 
+
 class MultiplatformWalmartListResponse(LingXingModel):
     """查询Walmart在线商品."""
+
     list: Optional[List[MultiplatformWalmartListList]] = Field(None, description="是")
     total: Optional[int] = Field(None, description="总数")
 
 
 class MultiplatformWalmartQuerycommentlistRecords(LingXingModel):
     """records sub-structure."""
+
     buyer_name: Optional[str] = Field(None, description="买家名称")
     comment_content: Optional[str] = Field(None, description="评论内容")
     comment_date: Optional[str] = Field(None, description="评论日期")
@@ -4163,8 +4794,10 @@ class MultiplatformWalmartQuerycommentlistRecords(LingXingModel):
     tags: Optional[list] = Field(None, description="标签列表")
     title: Optional[str] = Field(None, description="商品标题")
 
+
 class MultiplatformWalmartQuerycommentlistResponse(LingXingModel):
     """查询Walmart Review列表."""
+
     current: Optional[int] = Field(None, description="当前页码")
     current_size: Optional[int] = Field(None, description="当前页记录数")
     has_next_page: Optional[bool] = Field(None, description="是否有下一页")
@@ -4178,11 +4811,14 @@ class MultiplatformWalmartQuerycommentlistResponse(LingXingModel):
 
 class MultiplatformWayfairStocksearchPage(LingXingModel):
     """page sub-structure."""
+
     records: Optional[list] = Field(None, description="记录列表")
     total: Optional[int] = Field(None, description="总记录数")
 
+
 class MultiplatformWayfairStocksearchResponse(LingXingModel):
     """多平台-查询wayfair库存."""
+
     page: Optional[List[MultiplatformWayfairStocksearchPage]] = Field(None, description="page")
     sync_time: Optional[str] = Field(None, description="最新同步时间")
     total: Optional[int] = Field(None, description="总记录数")
@@ -4190,11 +4826,14 @@ class MultiplatformWayfairStocksearchResponse(LingXingModel):
 
 class MultiplatformOrderPreshipmentFailureInfo(LingXingModel):
     """failure_info sub-structure."""
+
     message: Optional[str] = Field(None, description="失败原因")
     global_order_no: Optional[str] = Field(None, description="系统单号")
 
+
 class MultiplatformOrderPreshipmentResponse(LingXingModel):
     """预发货."""
+
     success_num: Optional[int] = Field(None, description="成功数量")
     fail_num: Optional[int] = Field(None, description="失败数量")
     failure_info: Optional[List[MultiplatformOrderPreshipmentFailureInfo]] = Field(None, description="失败详情信息")
@@ -4202,15 +4841,20 @@ class MultiplatformOrderPreshipmentResponse(LingXingModel):
 
 class MultiplatformOrderReviewFailureInfo(LingXingModel):
     """failure_info sub-structure."""
+
     message: Optional[str] = Field(None, description="失败原因")
     global_order_no: Optional[str] = Field(None, description="系统单号")
 
+
 class MultiplatformOrderReviewSuccessInfo(LingXingModel):
     """success_info sub-structure."""
+
     global_order_no: Optional[str] = Field(None, description="系统单号")
+
 
 class MultiplatformOrderReviewResponse(LingXingModel):
     """审核发货."""
+
     success_num: Optional[int] = Field(None, description="成功数量")
     fail_num: Optional[int] = Field(None, description="失败数量")
     failure_info: Optional[List[MultiplatformOrderReviewFailureInfo]] = Field(None, description="失败详情信息")
@@ -4219,16 +4863,21 @@ class MultiplatformOrderReviewResponse(LingXingModel):
 
 class SelfshipmentorderDeliverygoodsSuccessList(LingXingModel):
     """success_list sub-structure."""
+
     order_number: Optional[str] = Field(None, description="系统单号")
     status_name: Optional[str] = Field(None, description="订单状态说明")
 
+
 class SelfshipmentorderDeliverygoodsFailList(LingXingModel):
     """fail_list sub-structure."""
+
     order_number: Optional[str] = Field(None, description="系统单号")
     err_msg: Optional[str] = Field(None, description="错误信息")
 
+
 class SelfshipmentorderDeliverygoodsResponse(LingXingModel):
     """订单发货."""
+
     total: Optional[int] = Field(None, description="总数")
     success_list: Optional[List[SelfshipmentorderDeliverygoodsSuccessList]] = Field(None, description="发货成功列表")
     fail_list: Optional[List[SelfshipmentorderDeliverygoodsFailList]] = Field(None, description="发货失败列表")
@@ -4236,6 +4885,7 @@ class SelfshipmentorderDeliverygoodsResponse(LingXingModel):
 
 class StockorderTemuQuerypageRecords(LingXingModel):
     """records sub-structure."""
+
     id: Optional[float] = Field(None, description="主键 ID")
     distributed_id: Optional[float] = Field(None, description="父行 ID")
     company_id: Optional[float] = Field(None, description="企业 ID")
@@ -4262,8 +4912,10 @@ class StockorderTemuQuerypageRecords(LingXingModel):
     receive_address_info: Optional[dict] = Field(None, description="收货地址信息")
     temu_stock_order_item_responses: Optional[list] = Field(None, description="子项明细列表")
 
+
 class StockorderTemuQuerypageResponse(LingXingModel):
     """查询Temu平台仓备货单列表."""
+
     total: Optional[int] = Field(None, description="外层总记录数，等于 `data>>total`")
     records: Optional[List[StockorderTemuQuerypageRecords]] = Field(None, description="当前页数据列表")
     total: Optional[float] = Field(None, description="总记录数")
@@ -4274,11 +4926,14 @@ class StockorderTemuQuerypageResponse(LingXingModel):
 
 class TemuTemuaddressdecryptFailurelist(LingXingModel):
     """failureList sub-structure."""
+
     global_order_no: Optional[str] = Field(None, description="失败单号")
     msg: Optional[str] = Field(None, description="失败原因")
 
+
 class TemuTemuaddressdecryptResponse(LingXingModel):
     """批量TEMU地址解密."""
+
     success_list: Optional[list] = Field(None, description="成功单号列表(不存在的单号默认解密成功)")
     failure_list: Optional[List[TemuTemuaddressdecryptFailurelist]] = Field(None, description="失败列表")
     total: Optional[int] = Field(None, description="成功项总数")
@@ -4286,6 +4941,7 @@ class TemuTemuaddressdecryptResponse(LingXingModel):
 
 class WalmartpaymentQuerypageRecords(LingXingModel):
     """records sub-structure."""
+
     amount: Optional[str] = Field(None, description="金额")
     amount_type: Optional[str] = Field(None, description="金额类型")
     commission_rate: Optional[str] = Field(None, description="佣金率")
@@ -4315,25 +4971,31 @@ class WalmartpaymentQuerypageRecords(LingXingModel):
     transaction_reason_description: Optional[str] = Field(None, description="交易原因描述")
     transaction_type: Optional[str] = Field(None, description="交易类型")
 
+
 class WalmartpaymentQuerypageResponse(LingXingModel):
     """查询报告详情 - Walmart Payment."""
+
     total: Optional[int] = Field(None, description="总数")
     records: Optional[List[WalmartpaymentQuerypageRecords]] = Field(None, description="详细信息列表")
 
 
 class WalmartpaymentQueryreportList(LingXingModel):
     """list sub-structure."""
+
     report_date: Optional[str] = Field(None, description="报告时间")
     report_id: Optional[str] = Field(None, description="报告id")
 
+
 class WalmartpaymentQueryreportResponse(LingXingModel):
     """查询可用报告列表 - Walmart Payment."""
+
     list: Optional[List[WalmartpaymentQueryreportList]] = Field(None, description="报告详情")
     store_id: Optional[str] = Field(None, description="店铺id")
 
 
 class WarehouseOpenapiQueryshippinglistpageRecords(LingXingModel):
     """records sub-structure."""
+
     actual_delivery_time: Optional[str] = Field(None, description="实际发货时间")
     actual_due_ime: Optional[str] = Field(None, description="实际妥投时间")
     arrival_time: Optional[str] = Field(None, description="到货时间")
@@ -4358,14 +5020,17 @@ class WarehouseOpenapiQueryshippinglistpageRecords(LingXingModel):
     warehouse_id: Optional[int] = Field(None, description="发货仓库id")
     logistics_channel_id: Optional[str] = Field(None, description="物流渠道id")
 
+
 class WarehouseOpenapiQueryshippinglistpageResponse(LingXingModel):
     """查询平台仓发货单列表."""
+
     total: Optional[str] = Field(None, description="总数")
     records: Optional[List[WarehouseOpenapiQueryshippinglistpageRecords]] = Field(None, description="详细信息列表")
 
 
 class WarehouseOpenapiQuerywfscargopageRecords(LingXingModel):
     """records sub-structure."""
+
     id: Optional[str] = Field(None, description="WFS货件id")
     cargo_code: Optional[str] = Field(None, description="货件单号")
     cargo_create_date: Optional[str] = Field(None, description="货件创建时间")
@@ -4374,7 +5039,9 @@ class WarehouseOpenapiQuerywfscargopageRecords(LingXingModel):
     cargo_sync_status: Optional[str] = Field(None, description="货件本地状态")
     country_name: Optional[str] = Field(None, description="国家")
     creator: Optional[str] = Field(None, description="创建者")
-    distribution_addresses: Optional[str] = Field(None, description="配送地址(街道,城市，省/区，国家，国家编码,邮编)拼接")
+    distribution_addresses: Optional[str] = Field(
+        None, description="配送地址(街道,城市，省/区，国家，国家编码,邮编)拼接"
+    )
     in_bound_order_id: Optional[str] = Field(None, description="入库订单编号")
     logistics_code: Optional[str] = Field(None, description="物流编号")
     return_addresses: Optional[str] = Field(None, description="退货地址（街道,城市，省/区，国家，国家编码)拼接）")
@@ -4382,7 +5049,10 @@ class WarehouseOpenapiQuerywfscargopageRecords(LingXingModel):
     store_name: Optional[str] = Field(None, description="店铺名称")
     shipping_list_codes: Optional[list] = Field(None, description="发货单号")
     update_date: Optional[str] = Field(None, description="更新时间")
-    status: Optional[int] = Field(None, description="货件状态： 0 PENDING_SHIPMENT_DETAILS (等待发货详情) ， 表示系统正在等待发货的详细信息 1 AWAITING_DELIVERY (等待送达) ，表示货物已发出，正在等待送达 2 RECEIVING_IN_PROGRESS (接收中) ， 表示货物正在被接收处理中 3 CLOSED (已关闭) ， 表示物流过程已完成并关闭 4 CANCELLED (已取消) ，...")
+    status: Optional[int] = Field(
+        None,
+        description="货件状态： 0 PENDING_SHIPMENT_DETAILS (等待发货详情) ， 表示系统正在等待发货的详细信息 1 AWAITING_DELIVERY (等待送达) ，表示货物已发出，正在等待送达 2 RECEIVING_IN_PROGRESS (接收中) ， 表示货物正在被接收处理中 3 CLOSED (已关闭) ， 表示物流过程已完成并关闭 4 CANCELLED (已取消) ，...",
+    )
     status_name: Optional[str] = Field(None, description="货件状态说明")
     to_pending_time: Optional[str] = Field(None, description="更新为Pending Shipment Details状态的时间戳")
     to_await_time: Optional[str] = Field(None, description="更新为Awaiting Delivery状态的时间戳")
@@ -4390,21 +5060,26 @@ class WarehouseOpenapiQuerywfscargopageRecords(LingXingModel):
     to_closed_time: Optional[str] = Field(None, description="更新为CLOSED状态的时间戳")
     to_cancelled_time: Optional[str] = Field(None, description="更新为Cancelled状态的时间戳")
 
+
 class WarehouseOpenapiQuerywfscargopageResponse(LingXingModel):
     """查询WFS货件列表."""
+
     total: Optional[str] = Field(None, description="总数")
     records: Optional[List[WarehouseOpenapiQuerywfscargopageRecords]] = Field(None, description="列表数据")
 
 
 class WarehouseOpenapiQuerywfsinventionpageRecords(LingXingModel):
     """records sub-structure."""
+
     ats03_months: Optional[str] = Field(None, description="3个月内库龄")
     ats1_years: Optional[str] = Field(None, description="12个月以上库龄")
     ats36_months: Optional[str] = Field(None, description="3-6个月库龄")
     ats69_months: Optional[str] = Field(None, description="6-9个月库龄")
     ats912_months: Optional[str] = Field(None, description="9-12个月库龄")
     available_quantity: Optional[str] = Field(None, description="WFS可售")
-    available_quantity_v2: Optional[str] = Field(None, description="WFS可售（实时），从接口获取的实时可售库存，每10分钟更新一次")
+    available_quantity_v2: Optional[str] = Field(
+        None, description="WFS可售（实时），从接口获取的实时可售库存，每10分钟更新一次"
+    )
     gtin: Optional[str] = Field(None, description="GTIN码")
     inbound_quantity: Optional[str] = Field(None, description="标发在途")
     item_id: Optional[str] = Field(None, description="平台商品id")
@@ -4423,48 +5098,63 @@ class WarehouseOpenapiQuerywfsinventionpageRecords(LingXingModel):
     warehouse_unique_id: Optional[str] = Field(None, description="仓库id【雪花id】")
     pic_url: Optional[str] = Field(None, description="图片url")
 
+
 class WarehouseOpenapiQuerywfsinventionpageResponse(LingXingModel):
     """查询WFS库存列表."""
+
     records: Optional[List[WarehouseOpenapiQuerywfsinventionpageRecords]] = Field(None, description="列表数据")
     total: Optional[str] = Field(None, description="总数")
 
 
 class OrderV2CancelorderFailureInfo(LingXingModel):
     """failure_info sub-structure."""
+
     global_order_no: Optional[str] = Field(None, description="系统单号")
     message: Optional[str] = Field(None, description="失败原因")
 
+
 class OrderV2CancelorderResponse(LingXingModel):
     """标记订单不发货."""
+
     success_num: Optional[int] = Field(None, description="成功数量")
     fail_num: Optional[int] = Field(None, description="失败数量")
     process_code: Optional[int] = Field(None, description="处理状态code： 10000 全部失败 10001 部分成功 0002 全部成功")
-    failure_info: Optional[List[OrderV2CancelorderFailureInfo]] = Field(None, description="失败明细，全部成功返回空数组")
+    failure_info: Optional[List[OrderV2CancelorderFailureInfo]] = Field(
+        None, description="失败明细，全部成功返回空数组"
+    )
 
 
 class OrderV2GetfastoutboundresultSuccess(LingXingModel):
     """success sub-structure."""
+
     global_order_no: Optional[str] = Field(None, description="订单号")
     wo_number: Optional[str] = Field(None, description="销售出库单号")
 
+
 class OrderV2GetfastoutboundresultFailure(LingXingModel):
     """failure sub-structure."""
+
     global_order_no: Optional[str] = Field(None, description="订单号")
     error_message: Optional[str] = Field(None, description="失败原因")
 
+
 class OrderV2GetfastoutboundresultResponse(LingXingModel):
     """获取快速出库结果."""
+
     success: Optional[List[OrderV2GetfastoutboundresultSuccess]] = Field(None, description="快速出库成功")
     failure: Optional[List[OrderV2GetfastoutboundresultFailure]] = Field(None, description="快速出库失败")
 
 
 class OrderV2MergeorderFailureInfo(LingXingModel):
     """failure_info sub-structure."""
+
     global_order_no: Optional[list] = Field(None, description="系统单号")
     message: Optional[str] = Field(None, description="失败原因")
 
+
 class OrderV2MergeorderResponse(LingXingModel):
     """合并订单."""
+
     fail_num: Optional[int] = Field(None, description="失败数量")
     failure_info: Optional[List[OrderV2MergeorderFailureInfo]] = Field(None, description="失败明细")
     success_num: Optional[int] = Field(None, description="成功数量")
@@ -4473,10 +5163,13 @@ class OrderV2MergeorderResponse(LingXingModel):
 
 class OrderV2SplitorderResult(LingXingModel):
     """result sub-structure."""
+
     global_order_no: Optional[str] = Field(None, description="系统单号")
+
 
 class OrderV2SplitorderResponse(LingXingModel):
     """拆分订单."""
+
     num: Optional[int] = Field(None, description="成功数量")
     global_order_no: Optional[list] = Field(None, description="拆分后新的系统单号")
     result: Optional[List[OrderV2SplitorderResult]] = Field(None, description="拆分后形成的所有系统订单号")
@@ -4484,169 +5177,203 @@ class OrderV2SplitorderResponse(LingXingModel):
 
 class MpOrderPreShipmentResponse(LingXingModel):
     """预发货 (/basicOpen/openapi/multiplatform/order/preShipment)."""
+
     msg: Optional[str] = None
 
 
 class MpOrderReviewResponse(LingXingModel):
     """审核发货 (/basicOpen/openapi/multiplatform/order/review)."""
+
     msg: Optional[str] = None
 
 
 class MpOrderCreateResponse(LingXingModel):
     """创建订单 (/pb/mp/order/v2/create)."""
+
     msg: Optional[str] = None
 
 
 class MpOrderMergeResponse(LingXingModel):
     """合并订单 (/pb/mp/order/v2/mergeOrder)."""
+
     msg: Optional[str] = None
 
 
 class MpOrderSplitResponse(LingXingModel):
     """拆分订单 (/pb/mp/order/v2/splitOrder)."""
+
     msg: Optional[str] = None
 
 
 class MpOrderCancelResponse(LingXingModel):
     """标记订单不发货 (/pb/mp/order/v2/cancelOrder)."""
+
     msg: Optional[str] = None
 
 
 class MpOrderDeliveryResponse(LingXingModel):
     """订单发货 (/basicOpen/selfShipmentOrder/deliveryGoods)."""
+
     msg: Optional[str] = None
 
 
 class MpOrderWeighedResponse(LingXingModel):
     """订单称重 (/erp/sc/routing/wms/order/setOrderWeighed)."""
+
     msg: Optional[str] = None
 
 
 class MpOrderEditResponse(LingXingModel):
     """编辑订单（新版） (/pb/mp/order/editOrder)."""
+
     msg: Optional[str] = None
 
 
 class MpOrderUpdateResponse(LingXingModel):
     """编辑/更新自发货订单 (/pb/mp/order/v2/updateOrder)."""
+
     msg: Optional[str] = None
 
 
 class MpOrderSetRemarkResponse(LingXingModel):
     """更新订单客服备注 (/pb/mp/order/setRemark)."""
+
     msg: Optional[str] = None
 
 
 class MpOrderFastOutboundResponse(LingXingModel):
     """快速出库 (/pb/mp/order/v2/fastOutbound)."""
+
     msg: Optional[str] = None
 
 
 class MpOrderGetFastOutboundResultResponse(LingXingModel):
     """获取快速出库结果 (/pb/mp/order/v2/getFastOutboundResult)."""
+
     msg: Optional[str] = None
 
 
 class MpTiktokBillListResponse(LingXingModel):
     """TikTok账单明细 (/basicOpen/multiplatformFinance/tiktokBill/list)."""
+
     msg: Optional[str] = None
 
 
 class MpWalmartBillStatementListResponse(LingXingModel):
     """Walmart-查询结算账单列表 (/basicOpen/multiplatformFinance/walmart/bill/statement/list)."""
+
     msg: Optional[str] = None
 
 
 class MpWalmartBillPayoutListResponse(LingXingModel):
     """Walmart-查询回款明细列表 (/basicOpen/multiplatformFinance/walmart/bill/payout/list)."""
+
     msg: Optional[str] = None
 
 
 class MpShopifyBillStatementListResponse(LingXingModel):
     """Shopify-查询结算明细列表 (/basicOpen/multiplatformFinance/shopify/bill/statement/list)."""
+
     msg: Optional[str] = None
 
 
 class MpShopifyReturnOrderListResponse(LingXingModel):
     """多平台-Shopify售后订单列表 (/basicOpen/openapi/multiplatform/shopify/returnOrder/list)."""
+
     msg: Optional[str] = None
 
 
 class MpTemuReturnOrderListResponse(LingXingModel):
     """多平台-Temu售后订单列表 (/basicOpen/openapi/multiplatform/temu/returnOrder/list)."""
+
     msg: Optional[str] = None
 
 
 class MpTiktokReturnOrderListResponse(LingXingModel):
     """多平台-TikTok售后订单列表 (/basicOpen/openapi/multiplatform/tiktok/returnOrder/list)."""
+
     msg: Optional[str] = None
 
 
 class MpWalmartReturnOrderListResponse(LingXingModel):
     """多平台-Walmart售后订单列表 (/basicOpen/openapi/multiplatform/walmart/returnOrder/list)."""
+
     msg: Optional[str] = None
 
 
 class MpTiktokProductAnalysisResponse(LingXingModel):
     """查询TikTok产品表现 (/basicOpen/platformStatistics/tiktokProductAnalysis/list)."""
+
     msg: Optional[str] = None
 
 
 class MpWalmartProductAnalysisResponse(LingXingModel):
     """查询Walmart产品表现 (/basicOpen/platformStatistics/walmartProductAnalysis/list)."""
+
     msg: Optional[str] = None
 
 
 class MpSellerListResponse(LingXingModel):
     """查询多平台店铺信息 (/pb/mp/shop/v2/getSellerList)."""
+
     msg: Optional[str] = None
 
 
 class MpOrderMgmtListResponse(LingXingModel):
     """查询订单管理订单列表 (/pb/mp/order/v2/list)."""
+
     msg: Optional[str] = None
 
 
 class MpPairListResponse(LingXingModel):
     """查询多平台配对列表 (/pb/mp/listing/v2/getPairList)."""
+
     msg: Optional[str] = None
 
 
 class MpPairMultiPlatformResponse(LingXingModel):
     """批量添加/编辑多平台配对关系 (/pb/mp/listing/v2/pairMultiPlatform)."""
+
     msg: Optional[str] = None
 
 
 class MpWfsCargoListResponse(LingXingModel):
     """查询WFS货件列表 (/cepf/warehouse/api/openApi/queryWFSCargoPage)."""
+
     msg: Optional[str] = None
 
 
 class MpWfsInventoryListResponse(LingXingModel):
     """查询WFS库存列表 (/cepf/warehouse/api/openApi/queryWFSInventionPage)."""
+
     msg: Optional[str] = None
 
 
 class MpFbtCargoListResponse(LingXingModel):
     """查询FBT货件列表 (/basicOpen/fbtShipment/cargo/list)."""
+
     msg: Optional[str] = None
 
 
 class MpFbtCargoSyncResponse(LingXingModel):
     """手动同步FBT货件 (/basicOpen/fbtShipment/cargo/sync)."""
+
     msg: Optional[str] = None
 
 
 class MpAliexpressListSelfResponse(LingXingModel):
     """查询AliExpress在线商品列表-自运营 (/basicOpen/multiplatform/aliExpress/list)."""
+
     msg: Optional[str] = None
 
 
 class MpAliexpressListHostingResponse(LingXingModel):
     """查询AliExpress在线商品列表-托管模式 (/basicOpen/multiplatform/aliexpress/list/v2)."""
+
     msg: Optional[str] = None
 
 
 class MpPlatformOrderListResponse(LingXingModel):
     """查询平台订单列表 (/cepfPlatformOrder/open-api/newPlatformOrder/list)."""
+
     msg: Optional[str] = None

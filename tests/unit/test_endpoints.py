@@ -1,26 +1,29 @@
 """Unit tests for endpoint request construction and response parsing."""
+
+import glob
 import json
 import os
 import sys
 
 import pytest
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
+
+import sys
 
 from lingxing.endpoints._base import BaseEndpoint
 from lingxing.endpoints.basic import BasicEndpoints
 from lingxing.models.responses.basic_data import (
-    SellerListsResponse,
     AccountListsResponse,
     SellerAllmarketplaceResponse,
+    SellerListsResponse,
 )
 
-import sys
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from conftest import MockOpenApi, MockResponseResult
 
-
 # ── BasicEndpoints ──
+
 
 class TestBasicEndpoints:
     """Tests for basic data API endpoints."""
@@ -71,10 +74,10 @@ class TestBasicEndpoints:
     @pytest.mark.asyncio
     async def test_list_sellers_sends_correct_route(self):
         """Should call the correct API route."""
-        sellers = await self.basic.list_sellers()
+        await self.basic.list_sellers()
         assert self.api.call_count == 1
-        assert self.api.last_call['route'] == '/erp/sc/data/seller/lists'
-        assert self.api.last_call['method'] == 'POST'
+        assert self.api.last_call["route"] == "/erp/sc/data/seller/lists"
+        assert self.api.last_call["method"] == "POST"
 
     @pytest.mark.asyncio
     async def test_empty_response(self):
@@ -87,6 +90,7 @@ class TestBasicEndpoints:
     async def test_error_response_raises(self):
         """Should raise ApiError for non-zero response code."""
         from lingxing.errors import ApiError
+
         self.api._default_response = MockResponseResult(code=400, message="参数有误")
         with pytest.raises(ApiError) as exc_info:
             await self.basic.list_sellers()
@@ -158,25 +162,27 @@ class TestModels:
 
 
 class TestRecordedFixtures:
-    """Replay recorded API responses to verify parsing."""
+    """Replay committed, desensitized API responses (tests/api_responses/) to verify parsing."""
 
     @pytest.fixture(autouse=True)
     def load_fixtures(self):
-        fixtures_path = os.path.join(os.path.dirname(__file__), '..', 'fixtures', 'api_responses.json')
-        if os.path.exists(fixtures_path):
-            with open(fixtures_path) as f:
-                self.fixtures = json.load(f)
-        else:
-            self.fixtures = {}
+        # Merge the committed desensitized samples in tests/api_responses/.
+        # Replaces the gitignored 8MB tests/fixtures/api_responses.json that
+        # caused these tests to skip silently on CI.
+        api_dir = os.path.join(os.path.dirname(__file__), "..", "api_responses")
+        self.fixtures = {}
+        for path in sorted(glob.glob(os.path.join(api_dir, "*.json"))):
+            with open(path) as f:
+                self.fixtures.update(json.load(f))
 
     @pytest.mark.asyncio
     async def test_seller_lists_from_fixture(self):
         """Should parse real seller lists response."""
-        if 'BasicData/SellerLists' not in self.fixtures:
-            pytest.skip("No fixture for SellerLists")
+        if "BasicData/SellerLists" not in self.fixtures:
+            pytest.fail("Missing committed fixture BasicData/SellerLists in tests/api_responses/")
 
-        fixture = self.fixtures['BasicData/SellerLists']
-        data = fixture['response']['data']
+        fixture = self.fixtures["BasicData/SellerLists"]
+        data = fixture["response"]["data"]
 
         api = MockOpenApi(response=MockResponseResult(code=0, data=data))
         basic = BasicEndpoints(api)
@@ -190,11 +196,11 @@ class TestRecordedFixtures:
     @pytest.mark.asyncio
     async def test_account_lists_from_fixture(self):
         """Should parse real account lists response."""
-        if 'BasicData/AccoutLists' not in self.fixtures:
-            pytest.skip("No fixture for AccoutLists")
+        if "BasicData/AccoutLists" not in self.fixtures:
+            pytest.fail("Missing committed fixture BasicData/AccoutLists in tests/api_responses/")
 
-        fixture = self.fixtures['BasicData/AccoutLists']
-        data = fixture['response']['data']
+        fixture = self.fixtures["BasicData/AccoutLists"]
+        data = fixture["response"]["data"]
 
         api = MockOpenApi(response=MockResponseResult(code=0, data=data))
         basic = BasicEndpoints(api)
@@ -206,11 +212,11 @@ class TestRecordedFixtures:
     @pytest.mark.asyncio
     async def test_marketplace_from_fixture(self):
         """Should parse real marketplace response."""
-        if 'BasicData/AllMarketplace' not in self.fixtures:
-            pytest.skip("No fixture for AllMarketplace")
+        if "BasicData/AllMarketplace" not in self.fixtures:
+            pytest.fail("Missing committed fixture BasicData/AllMarketplace in tests/api_responses/")
 
-        fixture = self.fixtures['BasicData/AllMarketplace']
-        data = fixture['response']['data']
+        fixture = self.fixtures["BasicData/AllMarketplace"]
+        data = fixture["response"]["data"]
 
         api = MockOpenApi(response=MockResponseResult(code=0, data=data))
         basic = BasicEndpoints(api)

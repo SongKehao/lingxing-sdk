@@ -1,4 +1,5 @@
 """Auto-generated response models for Product."""
+
 from typing import Any, List, Optional
 
 from pydantic import Field
@@ -9,6 +10,7 @@ from ..common import LingXingModel
 # ==================== 产品标签（US-003 补全）====================
 class LabelProductListResponse(LingXingModel):
     """查询产品标签 (/label/operation/v1/label/product/list)."""
+
     label_id: Optional[str] = Field(None, description="标签id")
     label: Optional[str] = Field(None, description="标签名称")
     total: Optional[int] = None
@@ -16,22 +18,26 @@ class LabelProductListResponse(LingXingModel):
 
 class LabelProductCreateResponse(LingXingModel):
     """创建产品标签 (/label/operation/v1/label/product/create)."""
+
     label_id: Optional[str] = None
     msg: Optional[str] = None
 
 
 class LabelProductMarkResponse(LingXingModel):
     """标记产品标签 (/label/operation/v1/label/product/mark)."""
+
     msg: Optional[str] = None
 
 
 class LabelProductUnmarklabelResponse(LingXingModel):
     """删除产品标签 (/label/operation/v1/label/product/unmarkLabel)."""
+
     msg: Optional[str] = None
 
 
 class ProductGetpagingloglistsResponse(LingXingModel):
     """查询操作日志."""
+
     action: Optional[str] = Field(None, description="操作类型")
     datetime: Optional[str] = Field(None, description="datetime（日期格式：yyyy-MM-dd hh:mm:ss）")
     detail: Optional[str] = Field(None, description="操作详情")
@@ -42,6 +48,7 @@ class ProductGetpagingloglistsResponse(LingXingModel):
 
 class ProductGettransparencyproductlistPagelist(LingXingModel):
     """pageList sub-structure."""
+
     account_name: Optional[str] = Field(None, description="账号名称")
     asin: Optional[str] = Field(None, description="asin")
     brand_name: Optional[str] = Field(None, description="品牌名称")
@@ -56,14 +63,17 @@ class ProductGettransparencyproductlistPagelist(LingXingModel):
     tcode_total: Optional[int] = Field(None, description="合计tcode")
     title: Optional[str] = Field(None, description="标题")
 
+
 class ProductGettransparencyproductlistResponse(LingXingModel):
     """产品管理-查询透明计划商品列表."""
+
     page_list: Optional[List[ProductGettransparencyproductlistPagelist]] = Field(None, description="分页列表")
     total: Optional[int] = Field(None, description="总记录数")
 
 
 class LocalInventoryBrandResponse(LingXingModel):
     """查询产品品牌列表."""
+
     bid: Optional[int] = Field(None, description="品牌id")
     title: Optional[str] = Field(None, description="品牌名称")
     brand_code: Optional[str] = Field(None, description="品牌简码")
@@ -71,32 +81,43 @@ class LocalInventoryBrandResponse(LingXingModel):
 
 class LocalInventoryBatchgetproductinfoPictureList(LingXingModel):
     """picture_list sub-structure."""
+
     pic_url: Optional[str] = Field(None, description="图片链接")
     is_primary: Optional[int] = Field(None, description="是否产品主图：0 否，1 是")
 
+
 class LocalInventoryBatchgetproductinfoPermissionUserInfo(LingXingModel):
     """permission_user_info sub-structure."""
+
     permission_uid: Optional[int] = Field(None, description="负责人id")
     permission_user_name: Optional[str] = Field(None, description="负责人名称")
 
+
 class LocalInventoryBatchgetproductinfoGlobalTags(LingXingModel):
     """global_tags sub-structure."""
+
     global_tag_id: Optional[str] = Field(None, description="标签id")
     tag_name: Optional[str] = Field(None, description="标签名称")
     color: Optional[str] = Field(None, description="标签颜色")
 
+
 class LocalInventoryBatchgetproductinfoCustomFields(LingXingModel):
     """custom_fields sub-structure."""
+
     id: Optional[str] = Field(None, description="字段ID")
     name: Optional[str] = Field(None, description="字段名")
     val_text: Optional[str] = Field(None, description="字段值")
 
+
 class LocalInventoryBatchgetproductinfoQcStandard(LingXingModel):
     """qc_standard sub-structure."""
+
     custom_qc_template: Optional[dict] = Field(None, description="自定义质检标准")
+
 
 class LocalInventoryBatchgetproductinfoSupplierQuote(LingXingModel):
     """supplier_quote sub-structure."""
+
     psq_id: Optional[str] = Field(None, description="供应商报价id")
     product_id: Optional[int] = Field(None, description="产品id")
     supplier_id: Optional[int] = Field(None, description="供应商id")
@@ -106,14 +127,18 @@ class LocalInventoryBatchgetproductinfoSupplierQuote(LingXingModel):
     supplier_product_url: Optional[list] = Field(None, description="采购链接")
     quotes: Optional[list] = Field(None, description="报价数据")
 
+
 class LocalInventoryBatchgetproductinfoComboProductList(LingXingModel):
     """combo_product_list sub-structure."""
+
     product_id: Optional[int] = Field(None, description="本地产品id")
     quantity: Optional[int] = Field(None, description="数量")
     sku: Optional[str] = Field(None, description="SKU")
 
+
 class LocalInventoryBatchgetproductinfoProductLogisticsRelation(LingXingModel):
     """product_logistics_relation sub-structure."""
+
     xx_cg_transport_costs: Optional[float] = Field(None, description="默认头程成本(含税)")
     xx_currency: Optional[str] = Field(None, description="官方汇率code")
     xx_clearance_price: Optional[float] = Field(None, description="清关价格")
@@ -121,8 +146,10 @@ class LocalInventoryBatchgetproductinfoProductLogisticsRelation(LingXingModel):
     xx_bg_import_hs_code: Optional[str] = Field(None, description="报关：HSCode（进口国）")
     xx_bg_tax_rate: Optional[float] = Field(None, description="报关：税率")
 
+
 class LocalInventoryBatchgetproductinfoDeclaration(LingXingModel):
     """declaration sub-structure."""
+
     customs_declaration_unit: Optional[str] = Field(None, description="报关单位")
     customs_declaration_spec: Optional[str] = Field(None, description="规格型号")
     customs_declaration_origin_produce: Optional[str] = Field(None, description="报关：原厂国（地区）")
@@ -130,13 +157,20 @@ class LocalInventoryBatchgetproductinfoDeclaration(LingXingModel):
     other_declare_element: Optional[str] = Field(None, description="报关：其他申报要素")
     customs_declaration_exempt: Optional[str] = Field(None, description="报关：征免")
 
+
 class LocalInventoryBatchgetproductinfoClearance(LingXingModel):
     """clearance sub-structure."""
+
     customs_clearance_material: Optional[str] = Field(None, description="清关：材质")
     customs_clearance_usage: Optional[str] = Field(None, description="清关：用途")
     customs_clearance_internal_code: Optional[str] = Field(None, description="清关：内部编码")
-    customs_clearance_preferential: Optional[int] = Field(None, description="清关：出口享惠情况： 1 不享惠 2 享惠 3 不确定享惠情况")
-    customs_clearance_brand_type: Optional[int] = Field(None, description="清关：品牌类型： 1 无品牌 2 境内自主品牌 3 境内收购品牌 4 境外品牌（贴牌生产） 5 境外品牌（其他）")
+    customs_clearance_preferential: Optional[int] = Field(
+        None, description="清关：出口享惠情况： 1 不享惠 2 享惠 3 不确定享惠情况"
+    )
+    customs_clearance_brand_type: Optional[int] = Field(
+        None,
+        description="清关：品牌类型： 1 无品牌 2 境内自主品牌 3 境内收购品牌 4 境外品牌（贴牌生产） 5 境外品牌（其他）",
+    )
     customs_clearance_product_pattern: Optional[str] = Field(None, description="清关：产品型号")
     customs_clearance_pic_url: Optional[str] = Field(None, description="清关：清关图片")
     allocation_remark: Optional[str] = Field(None, description="清关：配货备注")
@@ -147,8 +181,10 @@ class LocalInventoryBatchgetproductinfoClearance(LingXingModel):
     customs_clearance_tax_rate: Optional[str] = Field(None, description="默认清关税率")
     customs_clearance_remark: Optional[str] = Field(None, description="默认清关备注")
 
+
 class LocalInventoryBatchgetproductinfoResponse(LingXingModel):
     """批量查询本地产品详情."""
+
     id: Optional[int] = Field(None, description="本地产品id")
     product_name: Optional[str] = Field(None, description="产品名称")
     sku: Optional[str] = Field(None, description="产品sku")
@@ -161,7 +197,9 @@ class LocalInventoryBatchgetproductinfoResponse(LingXingModel):
     bid: Optional[int] = Field(None, description="品牌id")
     product_developer: Optional[str] = Field(None, description="开发者")
     product_developer_uid: Optional[int] = Field(None, description="开发人")
-    permission_user_info: Optional[List[LocalInventoryBatchgetproductinfoPermissionUserInfo]] = Field(None, description="负责人信息")
+    permission_user_info: Optional[List[LocalInventoryBatchgetproductinfoPermissionUserInfo]] = Field(
+        None, description="负责人信息"
+    )
     global_tags: Optional[List[LocalInventoryBatchgetproductinfoGlobalTags]] = Field(None, description="产品标签信息")
     description: Optional[str] = Field(None, description="产品描述")
     is_combo: Optional[int] = Field(None, description="是否组合产品：0否，1是")
@@ -196,32 +234,44 @@ class LocalInventoryBatchgetproductinfoResponse(LingXingModel):
     bg_import_hs_code: Optional[str] = Field(None, description="报关：HSCode（进口国）【美国HSCode】")
     bg_tax_rate: Optional[float] = Field(None, description="【已废弃字段】报关：税率【美国税率】")
     qc_standard: Optional[List[LocalInventoryBatchgetproductinfoQcStandard]] = Field(None, description="质检标准")
-    supplier_quote: Optional[List[LocalInventoryBatchgetproductinfoSupplierQuote]] = Field(None, description="供应商报价数据")
-    combo_product_list: Optional[List[LocalInventoryBatchgetproductinfoComboProductList]] = Field(None, description="组合商品列表")
-    product_logistics_relation: Optional[List[LocalInventoryBatchgetproductinfoProductLogisticsRelation]] = Field(None, description="物料关联【XX为国家简码，比如美国 US】")
+    supplier_quote: Optional[List[LocalInventoryBatchgetproductinfoSupplierQuote]] = Field(
+        None, description="供应商报价数据"
+    )
+    combo_product_list: Optional[List[LocalInventoryBatchgetproductinfoComboProductList]] = Field(
+        None, description="组合商品列表"
+    )
+    product_logistics_relation: Optional[List[LocalInventoryBatchgetproductinfoProductLogisticsRelation]] = Field(
+        None, description="物料关联【XX为国家简码，比如美国 US】"
+    )
     declaration: Optional[List[LocalInventoryBatchgetproductinfoDeclaration]] = Field(None, description="报关数据")
     clearance: Optional[List[LocalInventoryBatchgetproductinfoClearance]] = Field(None, description="清关数据")
 
 
 class LocalInventoryBundledproductlistBundledProducts(LingXingModel):
     """bundled_products sub-structure."""
+
     product_id: Optional[int] = Field(None, description="子产品ID")
     sku: Optional[str] = Field(None, description="子产品SKU")
     bundled_qty: Optional[int] = Field(None, description="捆绑数量")
     cost_ratio: Optional[int] = Field(None, description="费用比例")
 
+
 class LocalInventoryBundledproductlistResponse(LingXingModel):
     """查询捆绑产品关系列表."""
+
     id: Optional[int] = Field(None, description="捆绑产品ID")
     sku: Optional[str] = Field(None, description="捆绑产品SKU")
     product_name: Optional[str] = Field(None, description="捆绑产品名")
     cg_price: Optional[float] = Field(None, description="捆绑产品采购成本")
     status_text: Optional[str] = Field(None, description="产品状态：停售、在售、开发中、清仓")
-    bundled_products: Optional[List[LocalInventoryBundledproductlistBundledProducts]] = Field(None, description="捆绑产品关系")
+    bundled_products: Optional[List[LocalInventoryBundledproductlistBundledProducts]] = Field(
+        None, description="捆绑产品关系"
+    )
 
 
 class LocalInventoryCategoryResponse(LingXingModel):
     """查询产品分类列表."""
+
     cid: Optional[int] = Field(None, description="分类ID")
     parent_cid: Optional[int] = Field(None, description="父级分类ID")
     title: Optional[str] = Field(None, description="分类名称")
@@ -230,20 +280,25 @@ class LocalInventoryCategoryResponse(LingXingModel):
 
 class LocalInventoryProductauxlistPurchaseSupplierQuote(LingXingModel):
     """purchase_supplier_quote sub-structure."""
+
     product_id: Optional[int] = Field(None, description="产品ID")
     cg_price: Optional[float] = Field(None, description="采购：采购成本（人民币）")
     has_cg_permission: Optional[int] = Field(None, description="是否有采购成本权限：0-无，1-有")
     suppliers: Optional[list] = Field(None, description="是")
 
+
 class LocalInventoryProductauxlistAuxRelationProduct(LingXingModel):
     """aux_relation_product sub-structure."""
+
     pid: Optional[int] = Field(None, description="产品id")
     product_name: Optional[str] = Field(None, description="产品名称")
     sku: Optional[str] = Field(None, description="sku")
     quantity: Optional[int] = Field(None, description="关联辅料的数量")
 
+
 class LocalInventoryProductauxlistResponse(LingXingModel):
     """查询产品辅料列表."""
+
     id: Optional[int] = Field(None, description="辅料id")
     sku: Optional[str] = Field(None, description="SKU")
     product_name: Optional[str] = Field(None, description="品名")
@@ -252,38 +307,53 @@ class LocalInventoryProductauxlistResponse(LingXingModel):
     cg_product_width: Optional[float] = Field(None, description="单品规格宽（CM）")
     cg_product_height: Optional[float] = Field(None, description="单品规格高（CM）")
     cg_product_net_weight: Optional[float] = Field(None, description="单品净重（G）")
-    purchase_supplier_quote: Optional[List[LocalInventoryProductauxlistPurchaseSupplierQuote]] = Field(None, description="供应商报价信息")
-    aux_relation_product: Optional[List[LocalInventoryProductauxlistAuxRelationProduct]] = Field(None, description="关联产品")
+    purchase_supplier_quote: Optional[List[LocalInventoryProductauxlistPurchaseSupplierQuote]] = Field(
+        None, description="供应商报价信息"
+    )
+    aux_relation_product: Optional[List[LocalInventoryProductauxlistAuxRelationProduct]] = Field(
+        None, description="关联产品"
+    )
 
 
 class LocalInventoryProductinfoPictureList(LingXingModel):
     """picture_list sub-structure."""
+
     pic_url: Optional[str] = Field(None, description="图片链接")
     is_primary: Optional[int] = Field(None, description="是否产品主图：0-否 1-是")
 
+
 class LocalInventoryProductinfoPermissionUserInfo(LingXingModel):
     """permission_user_info sub-structure."""
+
     permission_uid: Optional[int] = Field(None, description="负责人id")
     permission_user_name: Optional[str] = Field(None, description="负责人名称")
 
+
 class LocalInventoryProductinfoGlobalTags(LingXingModel):
     """global_tags sub-structure."""
+
     global_tag_id: Optional[str] = Field(None, description="标签id")
     tag_name: Optional[str] = Field(None, description="标签名称")
     color: Optional[str] = Field(None, description="标签颜色")
 
+
 class LocalInventoryProductinfoCustomFields(LingXingModel):
     """custom_fields sub-structure."""
+
     id: Optional[str] = Field(None, description="字段ID")
     name: Optional[str] = Field(None, description="字段名")
     val_text: Optional[str] = Field(None, description="字段值")
 
+
 class LocalInventoryProductinfoQcStandard(LingXingModel):
     """qc_standard sub-structure."""
+
     custom_qc_template: Optional[dict] = Field(None, description="自定义质检标准")
+
 
 class LocalInventoryProductinfoSupplierQuote(LingXingModel):
     """supplier_quote sub-structure."""
+
     psq_id: Optional[str] = Field(None, description="供应商报价id")
     product_id: Optional[int] = Field(None, description="产品id")
     supplier_id: Optional[int] = Field(None, description="供应商id")
@@ -294,14 +364,18 @@ class LocalInventoryProductinfoSupplierQuote(LingXingModel):
     quote_cg_delivery: Optional[int] = Field(None, description="交期")
     quotes: Optional[list] = Field(None, description="报价数据")
 
+
 class LocalInventoryProductinfoComboProductList(LingXingModel):
     """combo_product_list sub-structure."""
+
     product_id: Optional[int] = Field(None, description="本地产品id")
     quantity: Optional[int] = Field(None, description="数量")
     sku: Optional[str] = Field(None, description="SKU")
 
+
 class LocalInventoryProductinfoProductLogisticsRelation(LingXingModel):
     """product_logistics_relation sub-structure."""
+
     xx_cg_transport_costs: Optional[float] = Field(None, description="默认头程成本(含税)")
     xx_currency: Optional[str] = Field(None, description="官方汇率code")
     xx_clearance_price: Optional[float] = Field(None, description="清关价格")
@@ -309,8 +383,10 @@ class LocalInventoryProductinfoProductLogisticsRelation(LingXingModel):
     xx_bg_import_hs_code: Optional[str] = Field(None, description="报关：HSCode（进口国）")
     xx_bg_tax_rate: Optional[float] = Field(None, description="报关：税率")
 
+
 class LocalInventoryProductinfoDeclaration(LingXingModel):
     """declaration sub-structure."""
+
     customs_declaration_unit: Optional[str] = Field(None, description="报关单位")
     customs_declaration_spec: Optional[str] = Field(None, description="规格型号")
     customs_declaration_origin_produce: Optional[str] = Field(None, description="报关：原厂国（地区）")
@@ -320,13 +396,20 @@ class LocalInventoryProductinfoDeclaration(LingXingModel):
     customs_import_price: Optional[str] = Field(None, description="报关单价")
     customs_import_price_currency: Optional[str] = Field(None, description="报关单价单位")
 
+
 class LocalInventoryProductinfoClearance(LingXingModel):
     """clearance sub-structure."""
+
     customs_clearance_material: Optional[str] = Field(None, description="清关：材质")
     customs_clearance_usage: Optional[str] = Field(None, description="清关：用途")
     customs_clearance_internal_code: Optional[str] = Field(None, description="清关：内部编码")
-    customs_clearance_preferential: Optional[int] = Field(None, description="清关：出口享惠情况： 1 不享惠 2 享惠 3 不确定享惠情况")
-    customs_clearance_brand_type: Optional[int] = Field(None, description="清关：品牌类型： 1 无品牌 2 境内自主品牌 3 境内收购品牌 4 境外品牌（贴牌生产） 5 境外品牌（其他）")
+    customs_clearance_preferential: Optional[int] = Field(
+        None, description="清关：出口享惠情况： 1 不享惠 2 享惠 3 不确定享惠情况"
+    )
+    customs_clearance_brand_type: Optional[int] = Field(
+        None,
+        description="清关：品牌类型： 1 无品牌 2 境内自主品牌 3 境内收购品牌 4 境外品牌（贴牌生产） 5 境外品牌（其他）",
+    )
     customs_clearance_product_pattern: Optional[str] = Field(None, description="清关：产品型号")
     customs_clearance_pic_url: Optional[str] = Field(None, description="清关：清关图片")
     allocation_remark: Optional[str] = Field(None, description="清关：配货备注")
@@ -337,15 +420,19 @@ class LocalInventoryProductinfoClearance(LingXingModel):
     customs_clearance_tax_rate: Optional[str] = Field(None, description="默认清关税率")
     customs_clearance_remark: Optional[str] = Field(None, description="默认清关备注")
 
+
 class LocalInventoryProductinfoAuxRelationList(LingXingModel):
     """aux_relation_list sub-structure."""
+
     aux_sku: Optional[str] = Field(None, description="辅料sku")
     aux_name: Optional[str] = Field(None, description="辅料名称")
     sku_qty: Optional[str] = Field(None, description="辅料比例（主料）")
     aux_qty: Optional[str] = Field(None, description="辅料比例（辅料）")
 
+
 class LocalInventoryProductinfoResponse(LingXingModel):
     """查询本地产品详情."""
+
     id: Optional[int] = Field(None, description="本地产品id")
     product_name: Optional[str] = Field(None, description="产品名称")
     sku: Optional[str] = Field(None, description="产品sku")
@@ -359,7 +446,9 @@ class LocalInventoryProductinfoResponse(LingXingModel):
     bid: Optional[int] = Field(None, description="品牌id")
     product_developer: Optional[str] = Field(None, description="开发者")
     product_developer_uid: Optional[int] = Field(None, description="开发人")
-    permission_user_info: Optional[List[LocalInventoryProductinfoPermissionUserInfo]] = Field(None, description="负责人数组")
+    permission_user_info: Optional[List[LocalInventoryProductinfoPermissionUserInfo]] = Field(
+        None, description="负责人数组"
+    )
     global_tags: Optional[List[LocalInventoryProductinfoGlobalTags]] = Field(None, description="产品标签信息")
     description: Optional[str] = Field(None, description="产品描述")
     is_combo: Optional[int] = Field(None, description="是否为组合产品：0 否，1 是")
@@ -395,8 +484,12 @@ class LocalInventoryProductinfoResponse(LingXingModel):
     bg_tax_rate: Optional[float] = Field(None, description="【已废弃字段】报关：税率【美国税率】")
     qc_standard: Optional[List[LocalInventoryProductinfoQcStandard]] = Field(None, description="质检标准")
     supplier_quote: Optional[List[LocalInventoryProductinfoSupplierQuote]] = Field(None, description="供应商报价数据")
-    combo_product_list: Optional[List[LocalInventoryProductinfoComboProductList]] = Field(None, description="组合产品列表")
-    product_logistics_relation: Optional[List[LocalInventoryProductinfoProductLogisticsRelation]] = Field(None, description="物流关联【XX为国家简码，比如美国 US】")
+    combo_product_list: Optional[List[LocalInventoryProductinfoComboProductList]] = Field(
+        None, description="组合产品列表"
+    )
+    product_logistics_relation: Optional[List[LocalInventoryProductinfoProductLogisticsRelation]] = Field(
+        None, description="物流关联【XX为国家简码，比如美国 US】"
+    )
     declaration: Optional[List[LocalInventoryProductinfoDeclaration]] = Field(None, description="报关数据")
     clearance: Optional[List[LocalInventoryProductinfoClearance]] = Field(None, description="清关数据")
     aux_relation_list: Optional[List[LocalInventoryProductinfoAuxRelationList]] = Field(None, description="辅料列表")
@@ -405,12 +498,15 @@ class LocalInventoryProductinfoResponse(LingXingModel):
 
 class LocalInventoryProductlistGlobalTags(LingXingModel):
     """global_tags sub-structure."""
+
     global_tag_id: Optional[str] = Field(None, description="标签id")
     tag_name: Optional[str] = Field(None, description="标签名称")
     color: Optional[str] = Field(None, description="标签颜色")
 
+
 class LocalInventoryProductlistSupplierQuote(LingXingModel):
     """supplier_quote sub-structure."""
+
     psq_id: Optional[str] = Field(None, description="供应商报价id")
     product_id: Optional[int] = Field(None, description="产品id")
     supplier_id: Optional[int] = Field(None, description="供应商id")
@@ -426,20 +522,26 @@ class LocalInventoryProductlistSupplierQuote(LingXingModel):
     supplier_name: Optional[str] = Field(None, description="供应商名称")
     quotes: Optional[list] = Field(None, description="报价数据")
 
+
 class LocalInventoryProductlistCustomFields(LingXingModel):
     """custom_fields sub-structure."""
+
     id: Optional[str] = Field(None, description="字段ID")
     name: Optional[str] = Field(None, description="字段名")
     val_text: Optional[str] = Field(None, description="字段值")
 
+
 class LocalInventoryProductlistAttribute(LingXingModel):
     """attribute sub-structure."""
+
     attr_id: Optional[str] = Field(None, description="属性ID")
     attr_name: Optional[str] = Field(None, description="属性名称")
     attr_value: Optional[str] = Field(None, description="属性值")
 
+
 class LocalInventoryProductlistResponse(LingXingModel):
     """查询本地产品列表."""
+
     total: Optional[int] = Field(None, description="总数")
     id: Optional[int] = Field(None, description="本地产品id")
     cid: Optional[int] = Field(None, description="类别id")
@@ -475,31 +577,37 @@ class LocalInventoryProductlistResponse(LingXingModel):
 
 class StorageAttributeAttributelistList(LingXingModel):
     """list sub-structure."""
+
     pa_id: Optional[int] = Field(None, description="属性id")
     attr_name: Optional[str] = Field(None, description="属性名称")
     create_time: Optional[str] = Field(None, description="属性创建时间")
     item_list: Optional[list] = Field(None, description="属性值列表")
 
+
 class StorageAttributeAttributelistResponse(LingXingModel):
     """查询产品属性列表."""
+
     total: Optional[int] = Field(None, description="总数")
     list: Optional[List[StorageAttributeAttributelistList]] = Field(None, description="数据列表")
 
 
 class StorageAttributeSetResponse(LingXingModel):
     """添加 / 编辑产品属性."""
+
     pa_id: Optional[int] = Field(None, description="属性名")
     pai_id: Optional[int] = Field(None, description="属性值")
 
 
 class StorageCategorySetResponse(LingXingModel):
     """添加 / 编辑产品分类."""
+
     id: Optional[str] = Field(None, description="分类id")
     title: Optional[str] = Field(None, description="分类名称")
 
 
 class StorageProductSetResponse(LingXingModel):
     """添加/编辑本地产品."""
+
     product_id: Optional[int] = Field(None, description="本地产品id")
     sku: Optional[str] = Field(None, description="本地产品sku")
     sku_identifier: Optional[str] = Field(None, description="SKU识别码")
@@ -507,33 +615,41 @@ class StorageProductSetResponse(LingXingModel):
 
 class StorageProductSetauxResponse(LingXingModel):
     """添加 / 编辑辅料."""
+
     product_id: Optional[int] = Field(None, description="辅料产品id")
 
 
 class StorageProductSetbundledResponse(LingXingModel):
     """添加 / 编辑捆绑产品."""
+
     product_id: Optional[int] = Field(None, description="本地产品id")
 
 
 class StorageProductUploadpicturesPictureList(LingXingModel):
     """picture_list sub-structure."""
+
     pic_url: Optional[str] = Field(None, description="已上传到领星的图片链接")
     customer_url: Optional[str] = Field(None, description="客户提交的的图片链接")
 
+
 class StorageProductUploadpicturesResponse(LingXingModel):
     """上传本地产品图片."""
+
     sku: Optional[str] = Field(None, description="本地产品SKU")
     picture_list: Optional[List[StorageProductUploadpicturesPictureList]] = Field(None, description="产品图片信息")
 
 
 class StorageSpuInfoAttachmentfiles(LingXingModel):
     """attachmentFiles sub-structure."""
+
     file_id: Optional[str] = Field(None, description="附件id")
     file_name: Optional[str] = Field(None, description="附件名称")
     file_url: Optional[str] = Field(None, description="附件url")
 
+
 class StorageSpuInfoPurchaseInfo(LingXingModel):
     """purchase_info sub-structure."""
+
     cg_uid: Optional[int] = Field(None, description="采购：采购员id")
     purchase_remark: Optional[str] = Field(None, description="采购：采购备注")
     cg_delivery: Optional[int] = Field(None, description="采购：采购交期（天）")
@@ -552,8 +668,10 @@ class StorageSpuInfoPurchaseInfo(LingXingModel):
     cg_box_pcs: Optional[int] = Field(None, description="采购：单箱数量（包装数量）")
     cg_product_material: Optional[str] = Field(None, description="采购：产品材质")
 
+
 class StorageSpuInfoAuxRelationList(LingXingModel):
     """aux_relation_list sub-structure."""
+
     aux_id: Optional[int] = Field(None, description="辅料id")
     aux_name: Optional[str] = Field(None, description="辅料品名")
     aux_sku: Optional[str] = Field(None, description="辅料SKU")
@@ -563,28 +681,39 @@ class StorageSpuInfoAuxRelationList(LingXingModel):
     sku_qty: Optional[str] = Field(None, description="辅料比例（主料）")
     aux_qty: Optional[str] = Field(None, description="辅料比例（辅料）")
 
+
 class StorageSpuInfoLogistics(LingXingModel):
     """logistics sub-structure."""
+
     declaration: Optional[dict] = Field(None, description="报关数据")
     clearance: Optional[dict] = Field(None, description="清关数据")
     base: Optional[dict] = Field(None, description="物流基础信息")
-    fee: Optional[dict] = Field(None, description="头程费用，支持国家：US、CA、MX、JP、UK、DE、FR、ES、IT、NL、AU、SG、IN、AE、SA、BR、SE、PL、BE、TR、UA、HU、PK、LB、AT、CH、CZ、DK、IE、LU、NO、PT、SK、RU、KZ、BY、CL、KR")
+    fee: Optional[dict] = Field(
+        None,
+        description="头程费用，支持国家：US、CA、MX、JP、UK、DE、FR、ES、IT、NL、AU、SG、IN、AE、SA、BR、SE、PL、BE、TR、UA、HU、PK、LB、AT、CH、CZ、DK、IE、LU、NO、PT、SK、RU、KZ、BY、CL、KR",
+    )
+
 
 class StorageSpuInfoSkuList(LingXingModel):
     """sku_list sub-structure."""
+
     sku: Optional[str] = Field(None, description="产品SKU")
     product_name: Optional[str] = Field(None, description="产品名称")
     attribute: Optional[list] = Field(None, description="属性列表")
     picture_list: Optional[list] = Field(None, description="产品图片链接")
 
+
 class StorageSpuInfoAttributeSkcList(LingXingModel):
     """attribute_skc_list sub-structure."""
+
     pa_id: Optional[int] = Field(None, description="属性id")
     skc: Optional[str] = Field(None, description="skc编码（全局唯一）")
     can_edit: Optional[bool] = Field(None, description="是否允许编辑：true 允许编辑，false 不允许编辑")
 
+
 class StorageSpuInfoResponse(LingXingModel):
     """查询多属性产品详情."""
+
     total: Optional[int] = Field(None, description="总数")
     ps_id: Optional[int] = Field(None, description="spu 唯一id")
     spu: Optional[str] = Field(None, description="SPU（添加时必填）")
@@ -609,11 +738,14 @@ class StorageSpuInfoResponse(LingXingModel):
 
 class StorageSpuSetSkuList(LingXingModel):
     """sku_list sub-structure."""
+
     product_id: Optional[int] = Field(None, description="本地产品id")
     sku: Optional[str] = Field(None, description="本地产品sku")
 
+
 class StorageSpuSetResponse(LingXingModel):
     """添加/编辑多属性产品."""
+
     total: Optional[int] = Field(None, description="总数")
     ps_id: Optional[int] = Field(None, description="spu唯一id")
     sku_list: Optional[List[StorageSpuSetSkuList]] = Field(None, description="spu下对应的sku数据")
@@ -621,6 +753,7 @@ class StorageSpuSetResponse(LingXingModel):
 
 class StorageSpuSpulistResponse(LingXingModel):
     """查询多属性产品列表."""
+
     total: Optional[int] = Field(None, description="总数")
     ps_id: Optional[int] = Field(None, description="SPU 唯一id")
     spu: Optional[str] = Field(None, description="SPU")
@@ -640,6 +773,7 @@ class StorageSpuSpulistResponse(LingXingModel):
 
 class StorageBrandSetResponse(LingXingModel):
     """添加/编辑产品品牌."""
+
     id: Optional[str] = Field(None, description="品牌id")
     title: Optional[str] = Field(None, description="品牌名称")
     brand_code: Optional[str] = Field(None, description="品牌简码")
@@ -647,12 +781,15 @@ class StorageBrandSetResponse(LingXingModel):
 
 class LabelProductListList(LingXingModel):
     """list sub-structure."""
+
     label_id: Optional[str] = Field(None, description="标签id")
     label_name: Optional[str] = Field(None, description="标签名称")
     gmt_created: Optional[int] = Field(None, description="创建时间")
 
+
 class PublishUpcUpclistList(LingXingModel):
     """list sub-structure."""
+
     id: Optional[int] = Field(None, description="记录唯一id")
     commodity_code: Optional[str] = Field(None, description="商品编码")
     code_type: Optional[str] = Field(None, description="商品编码类型")
@@ -664,8 +801,10 @@ class PublishUpcUpclistList(LingXingModel):
     gmt_create: Optional[str] = Field(None, description="商品编码创建时间")
     is_used_desc: Optional[str] = Field(None, description="商品编码使用状态说明")
 
+
 class PublishUpcUpclistResponse(LingXingModel):
     """获取UPC编码列表."""
+
     total: Optional[int] = Field(None, description="商品编码总数")
     list: Optional[List[PublishUpcUpclistList]] = Field(None, description="商品编码数据列表")
 

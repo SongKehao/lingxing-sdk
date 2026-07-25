@@ -1,0 +1,53 @@
+{
+  "BasicData/SellerLists": {
+    "url": "/erp/sc/data/seller/lists",
+    "name": "BasicData/SellerLists",
+    "code": 0,
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "sid": 4726,
+          "mid": 1,
+          "name": "RedactedShop-US",
+          "seller_id": "REDACTED_SELLER_ID",
+          "account_name": "RedactedBrand",
+          "seller_account_id": 1245,
+          "region": "NA",
+          "country": "美国",
+          "marketplace_id": "ATVPDKIKX0DER",
+          "status": 1,
+          "has_ads_setting": 1
+        },
+        {
+          "sid": 4727,
+          "mid": 2,
+          "name": "RedactedShop-CA",
+          "seller_id": "REDACTED_SELLER_ID",
+          "account_name": "RedactedBrand",
+          "seller_account_id": 1245,
+          "region": "NA",
+          "country": "加拿大",
+          "marketplace_id": "A2EUQ1WTGCTBG2",
+          "status": 1,
+          "has_ads_setting": 1
+        },
+        {
+          "sid": 5211,
+          "mid": 3,
+          "name": "RedactedShop-MX",
+          "seller_id": "REDACTED_SELLER_ID",
+          "account_name": "RedactedBrand",
+          "seller_account_id": 1245,
+          "region": "NA",
+          "country": "墨西哥",
+          "marketplace_id": "A1AM78C64UM0Y8",
+          "status": 1,
+          "has_ads_setting": 1
+        }
+      ],
+      "message": "success",
+      "total": 3
+    }
+  }
+}

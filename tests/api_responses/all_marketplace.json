@@ -1,0 +1,38 @@
+{
+  "BasicData/AllMarketplace": {
+    "url": "/erp/sc/data/seller/allMarketplace",
+    "name": "BasicData/AllMarketplace",
+    "code": 0,
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "mid": 1,
+          "region": "NA",
+          "aws_region": "NA",
+          "country": "美国",
+          "code": "US",
+          "marketplace_id": "ATVPDKIKX0DER"
+        },
+        {
+          "mid": 2,
+          "region": "NA",
+          "aws_region": "NA",
+          "country": "加拿大",
+          "code": "CA",
+          "marketplace_id": "A2EUQ1WTGCTBG2"
+        },
+        {
+          "mid": 3,
+          "region": "NA",
+          "aws_region": "NA",
+          "country": "墨西哥",
+          "code": "MX",
+          "marketplace_id": "A1AM78C64UM0Y8"
+        }
+      ],
+      "message": "success",
+      "total": 3
+    }
+  }
+}

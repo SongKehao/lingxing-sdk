@@ -1,4 +1,5 @@
 """Request models for all LingXing API categories."""
+
 from .amazon_source import *  # noqa: F401,F403
 from .authorization import *  # noqa: F401,F403
 from .basic_data import *  # noqa: F401,F403

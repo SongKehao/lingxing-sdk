@@ -1,5 +1,6 @@
 """One-time script to generate Amazon SP/SB/SD ad endpoint methods by parsing source."""
 import re
+import sys
 
 SOURCE_PATH = "src/lingxing/models/requests/new_ad.py"
 
@@ -67,7 +68,64 @@ def get_description(docstring):
     return ""
 
 
-def parse_fields(body):
+# Fields whose type could not be confidently inferred and fell back to Any.
+# Collected so codegen surfaces the debt instead of silently emitting Any
+# (see production-grade-roadmap Phase 4 / success criterion #7).
+_ANY_WARNINGS = []
+
+
+def infer_py_type(type_str, comment, fname):
+    """Infer a Python type hint from the annotation, API-doc comment markers,
+    or well-known field names.
+
+    Returns the inferred type string (e.g. "int"), or None when no confident
+    inference can be made -- the caller then falls back to Any and records a
+    warning so the debt stays visible.
+    """
+    # 1) Annotation tokens (word-bounded to avoid substring false-positives,
+    #    e.g. "Point" erroneously matching a bare "int" substring).
+    if re.search(r"\b(int|Integer|long|Long)\b", type_str):
+        return "int"
+    if re.search(r"\b(float|Float|double|Double|Decimal|number|Number)\b", type_str):
+        return "float"
+    if re.search(r"\b(bool|Boolean)\b", type_str):
+        return "bool"
+    # Dates/times/datetimes travel as strings over the wire.
+    if re.search(r"\b(str|String|date|Date|datetime|DateTime|time|Time)\b", type_str):
+        return "str"
+    if re.search(r"\b(List|list|Array|array|Sequence|Tuple)\b", type_str):
+        return "list"
+    if re.search(r"\b(Dict|dict|Map|map|Object|object)\b", type_str):
+        return "dict"
+
+    # 2) API-doc bracket markers in the comment, e.g. [number], [string], [date].
+    bracket = re.search(
+        r"\[(int|integer|long|number|float|double|decimal|string|str|date|datetime|"
+        r"boolean|bool|array|list|object|map)\]",
+        comment,
+        re.IGNORECASE,
+    )
+    if bracket:
+        return {
+            "int": "int", "integer": "int", "long": "int",
+            "number": "float", "float": "float", "double": "float", "decimal": "float",
+            "string": "str", "str": "str", "date": "str", "datetime": "str",
+            "boolean": "bool", "bool": "bool",
+            "array": "list", "list": "list", "object": "dict", "map": "dict",
+        }[bracket.group(1).lower()]
+
+    # 3) Conservative field-name conventions. Pagination is universally int in
+    #    this SDK; date/time-named fields travel as Y-m-d / Y-m-d H:M:S strings.
+    if fname in {"offset", "length", "page", "pageSize", "pageNum", "limit", "current"}:
+        return "int"
+    lname = fname.lower()
+    if lname.endswith("date") or lname.endswith("_date") or lname.endswith("time") or lname.endswith("_time"):
+        return "str"
+
+    return None
+
+
+def parse_fields(body, route="", cls_name=""):
     """Parse field definitions from class body."""
     required = []
     optional = []
@@ -81,19 +139,10 @@ def parse_fields(body):
         type_str = m.group(2).strip()
         comment = (m.group(3) or "").strip()
 
-        # Determine Python type hint
-        if 'int' in type_str:
-            py_type = "int"
-        elif 'float' in type_str:
-            py_type = "float"
-        elif 'bool' in type_str or 'Boolean' in type_str:
-            py_type = "bool"
-        elif 'str' in type_str:
-            py_type = "str"
-        elif 'List' in type_str or 'list' in type_str:
-            py_type = "list"
-        else:
+        py_type = infer_py_type(type_str, comment, fname)
+        if py_type is None:
             py_type = "Any"
+            _ANY_WARNINGS.append((route, cls_name, fname, type_str, comment))
 
         is_required = 'Optional' not in type_str and '= None' not in type_str
 
@@ -116,7 +165,7 @@ def generate_method(cls_name, docstring, body):
         return None
 
     desc = get_description(docstring)
-    required, optional = parse_fields(body)
+    required, optional = parse_fields(body, route, cls_name)
     all_fields = required + optional
 
     # Build params: required first, then optional
@@ -165,7 +214,20 @@ for full_match, cls_name, docstring, *rest in classes:
 
 if errors:
     for e in errors:
-        print(f"# ERROR: {e}", file=__import__('sys').stderr)
+        print(f"# ERROR: {e}", file=sys.stderr)
+
+if _ANY_WARNINGS:
+    print(
+        f"# [codegen] {len(_ANY_WARNINGS)} field(s) could not be typed and fell "
+        f"back to Any (production-grade-roadmap Phase 4):",
+        file=sys.stderr,
+    )
+    for route, cls, fname, tstr, comment in _ANY_WARNINGS:
+        print(
+            f"# [codegen] -> Any | route={route} model={cls} field={fname} "
+            f"annotation={tstr!r} comment={comment!r}",
+            file=sys.stderr,
+        )
 
 # Output
 print(f"# Generated {len(methods)} methods")

@@ -1,4 +1,5 @@
 """Auto-generated response models for Logistics."""
+
 from typing import List, Optional
 
 from pydantic import Field
@@ -8,6 +9,7 @@ from ..common import LingXingModel
 
 class BusinessconfigTransportmethodListResponse(LingXingModel):
     """查询运输方式列表."""
+
     total: Optional[int] = Field(None, description="总数")
     method_id: Optional[str] = Field(None, description="运输方式id")
     code: Optional[str] = Field(None, description="序号")
@@ -25,11 +27,14 @@ class BusinessconfigTransportmethodListResponse(LingXingModel):
 
 class HeadlogisticsproviderQueryListProviders(LingXingModel):
     """providers sub-structure."""
+
     provider_id: Optional[str] = Field(None, description="物流商id")
     name: Optional[str] = Field(None, description="物流商名")
     code: Optional[str] = Field(None, description="物流商代码")
     enabled: Optional[int] = Field(None, description="是否启用 0禁用 1 启用")
-    logistics_type: Optional[int] = Field(None, description="类型 0 API物流 1 自定义物流 2 第三方仓物流 3 头程物流 4 平台物流")
+    logistics_type: Optional[int] = Field(
+        None, description="类型 0 API物流 1 自定义物流 2 第三方仓物流 3 头程物流 4 平台物流"
+    )
     is_auth: Optional[int] = Field(None, description="是否api对接 0 否 1 是")
     supplier_code: Optional[int] = Field(None, description="授权方code")
     supplier_name: Optional[str] = Field(None, description="授权方")
@@ -42,8 +47,10 @@ class HeadlogisticsproviderQueryListProviders(LingXingModel):
     creator_name: Optional[str] = Field(None, description="创建人名")
     created_at: Optional[int] = Field(None, description="创建时间，Unix时间戳（秒）")
 
+
 class HeadlogisticsproviderQueryListResponse(LingXingModel):
     """查询物流-头程物流商."""
+
     total: Optional[int] = Field(None, description="总记录数")
     providers: Optional[List[HeadlogisticsproviderQueryListProviders]] = Field(None, description="物流商列表")
     total: Optional[int] = Field(None, description="总记录数")
@@ -51,18 +58,23 @@ class HeadlogisticsproviderQueryListResponse(LingXingModel):
 
 class LocalInventoryChannellistProvider(LingXingModel):
     """provider sub-structure."""
+
     id: Optional[str] = Field(None, description="所属头程物流商id")
     logistics_provider_name: Optional[str] = Field(None, description="所属头程物流商名称")
 
+
 class LocalInventoryChannellistFreight(LingXingModel):
     """freight sub-structure."""
+
     country_code: Optional[str] = Field(None, description="国家")
     region_code: Optional[str] = Field(None, description="分区")
     billing_weight_start: Optional[float] = Field(None, description="计费重量范围开始")
     billing_price: Optional[float] = Field(None, description="计费价格")
 
+
 class LocalInventoryChannellistResponse(LingXingModel):
     """查询头程物流渠道列表."""
+
     total: Optional[int] = Field(None, description="总数")
     id: Optional[int] = Field(None, description="物流渠道id【对应ERP页面“物流方案代码”】")
     channel_name: Optional[str] = Field(None, description="物流渠道")
@@ -87,26 +99,31 @@ class LocalInventoryChannellistResponse(LingXingModel):
 
 class TmsFirstvesselAddchannelsResponse(LingXingModel):
     """批量添加头程物流方式."""
+
     id: Optional[int] = Field(None, description="物流方式对应的id")
     total: Optional[int] = Field(None, description="总数")
 
 
 class TmsFirstvesselAddprovidersResponse(LingXingModel):
     """批量添加头程物流商."""
+
     id: Optional[int] = Field(None, description="物流商对应的id")
     total: Optional[int] = Field(None, description="总数")
 
 
 class WmsLogisticsListUsedLogisticsTypeResponse(LingXingModel):
     """查询已启用的自发货物流方式 (/erp/sc/routing/wms/WmsLogistics/listUsedLogisticsType)."""
+
     msg: Optional[str] = None
 
 
 class LogisticsHeadReconciliationListResponse(LingXingModel):
     """头程对账列表 (/basicOpen/logistics/headLogisticsReconciliation/list)."""
+
     msg: Optional[str] = None
 
 
 class LogisticsBillConfirmResponse(LingXingModel):
     """FBM物流对账-确认/批量确认 (/basicOpen/logistics/logisticsBill/confirm)."""
+
     msg: Optional[str] = None

@@ -1,4 +1,5 @@
 """Auto-generated response models for Tools."""
+
 from typing import Any, List, Optional
 
 from pydantic import Field
@@ -8,15 +9,20 @@ from ..common import LingXingModel
 
 class SettingsWarningmessageGoodslistMskuList(LingXingModel):
     """msku_list sub-structure."""
+
     msku: Optional[str] = Field(None, description="MSKU")
+
 
 class SettingsWarningmessageGoodslistSkuList(LingXingModel):
     """sku_list sub-structure."""
+
     local_sku: Optional[str] = Field(None, description="本地产品SKU")
     local_name: Optional[str] = Field(None, description="品名")
 
+
 class SettingsWarningmessageGoodslistResponse(LingXingModel):
     """查询预警消息列表-商品."""
+
     total: Optional[int] = Field(None, description="总数")
     message_id: Optional[str] = Field(None, description="用户消息id")
     image_url: Optional[str] = Field(None, description="图片地址")
@@ -44,6 +50,7 @@ class SettingsWarningmessageGoodslistResponse(LingXingModel):
 
 class SettingsWarningmessageInventorylistResponse(LingXingModel):
     """查询预警消息列表-库存."""
+
     total: Optional[int] = Field(None, description="总数")
     message_id: Optional[str] = Field(None, description="用户消息id")
     model_id: Optional[int] = Field(None, description="预警模型id")
@@ -64,16 +71,21 @@ class SettingsWarningmessageInventorylistResponse(LingXingModel):
 
 class ToolCompetitivemonitorListCategoryList(LingXingModel):
     """category_list sub-structure."""
+
     category_name: Optional[str] = Field(None, description="[string]")
+
 
 class ToolCompetitivemonitorListSmallRanks(LingXingModel):
     """small_ranks sub-structure."""
+
     small_rank: Optional[int] = Field(None, description="[int]")
     init_small_rank: Optional[int] = Field(None, description="[int]")
     small_category_text: Optional[str] = Field(None, description="[string]")
 
+
 class ToolCompetitivemonitorListResponse(LingXingModel):
     """查询竞品监控列表."""
+
     total: Optional[int] = Field(None, description="[int]")
     mid: Optional[int] = Field(None, description="[int]")
     title: Optional[str] = Field(None, description="[string]")
@@ -115,6 +127,7 @@ class ToolCompetitivemonitorListResponse(LingXingModel):
 
 class ToolToolkeywordrankGetkeywordlistResponse(LingXingModel):
     """关键词列表."""
+
     id: Optional[int] = Field(None, description="记录唯一id")
     key_word: Optional[str] = Field(None, description="关键词")
     rank: Optional[float] = Field(None, description="排名")

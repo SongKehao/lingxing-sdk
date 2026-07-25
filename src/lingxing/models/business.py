@@ -1,6 +1,7 @@
-from __future__ import annotations
 #!/usr/bin/env python3
 """领星ERP业务数据模型"""
+
+from __future__ import annotations
 
 from datetime import datetime
 from decimal import Decimal
@@ -233,9 +234,7 @@ class FBAShipment(LingXingBaseModel):
 
     shipment_id: str | None = Field(None, description="发货计划ID")
     shipment_name: str | None = Field(None, description="发货计划名称")
-    destination_fulfillment_center: str | None = Field(
-        None, description="目的仓库"
-    )
+    destination_fulfillment_center: str | None = Field(None, description="目的仓库")
     shipment_status: str | None = Field(None, description="发货状态")
     create_time: datetime | None = Field(None, description="创建时间")
     update_time: datetime | None = Field(None, description="更新时间")
@@ -253,7 +252,6 @@ class FBAInventory(LingXingBaseModel):
     afn_warehouse_quantity: int | None = Field(None, description="AFN仓库数量")
 
 
-
 class InboundShipmentInfo(LingXingBaseModel):
     """FBA发货单信息 - 包含头程费用"""
 
@@ -261,7 +259,9 @@ class InboundShipmentInfo(LingXingBaseModel):
     shipment_no: str | None = Field(None, alias="shipment_sn", description="发货单编号")
     store_id: int | None = Field(None, alias="sid", description="店铺ID")
     store_name: str | None = Field(None, alias="sname", description="店铺名称")
-    destination_fulfillment_center: str | None = Field(None, alias="destination_fulfillment_center_id", description="目的FBA仓库")
+    destination_fulfillment_center: str | None = Field(
+        None, alias="destination_fulfillment_center_id", description="目的FBA仓库"
+    )
     status: int | None = Field(None, description="发货单状态: -1待配货, 0待发货, 1已发货, 2已完成, 3已作废")
     status_name: str | None = Field(None, description="状态名称")
     total_quantity: int | None = Field(None, description="总数量")
@@ -282,14 +282,14 @@ class InboundShipmentInfo(LingXingBaseModel):
 
     model_config = ConfigDict(populate_by_name=True)
 
-    @model_validator(mode='before')
+    @model_validator(mode="before")
     @classmethod
     def handle_empty_datetime(cls, data: dict) -> dict:
         """处理空字符串的日期时间字段"""
         if isinstance(data, dict):
-            datetime_fields = ['shipment_time', 'eta_date', 'create_time', 'update_time']
+            datetime_fields = ["shipment_time", "eta_date", "create_time", "update_time"]
             for field in datetime_fields:
-                if field in data and data[field] == '':
+                if field in data and data[field] == "":
                     data[field] = None
         return data
 
@@ -347,23 +347,22 @@ class LogisticsChannelInfo(LingXingBaseModel):
 
     model_config = ConfigDict(populate_by_name=True)
 
-    @model_validator(mode='before')
+    @model_validator(mode="before")
     @classmethod
     def extract_provider_info(cls, data: dict) -> dict:
         """从嵌套的 provider 对象中提取信息"""
         if isinstance(data, dict):
             # 提取 provider 信息
-            provider = data.get('provider', {})
+            provider = data.get("provider", {})
             if isinstance(provider, dict):
-                if 'provider_id' not in data:
-                    data['provider_id'] = provider.get('id')
-                if 'provider_name' not in data:
-                    data['provider_name'] = provider.get('logistics_provider_name')
+                if "provider_id" not in data:
+                    data["provider_id"] = provider.get("id")
+                if "provider_name" not in data:
+                    data["provider_name"] = provider.get("logistics_provider_name")
             # 使用 method_name 作为 shipping_method
-            if 'shipping_method' not in data and data.get('method_name'):
-                data['shipping_method'] = data['method_name']
+            if "shipping_method" not in data and data.get("method_name"):
+                data["shipping_method"] = data["method_name"]
         return data
-
 
 
 class StoreInfo(LingXingBaseModel):
@@ -520,6 +519,7 @@ class LingXingResponse(LingXingBaseModel):
 
 class StockoutRiskAlert(LingXingBaseModel):
     """缺货风险预警"""
+
     sku: str | None = Field(None, description="SKU")
     product_name: str | None = Field(None, description="产品名称")
     available_days: int | None = Field(None, description="可售天数")
@@ -528,6 +528,7 @@ class StockoutRiskAlert(LingXingBaseModel):
 
 class SlowMovingAlert(LingXingBaseModel):
     """滞销预警"""
+
     sku: str | None = Field(None, description="SKU")
     product_name: str | None = Field(None, description="产品名称")
     available_sale_days: int | None = Field(None, description="可售天数")
@@ -536,6 +537,7 @@ class SlowMovingAlert(LingXingBaseModel):
 
 class ReplenishmentRecommendation(LingXingBaseModel):
     """补货推荐"""
+
     sku: str | None = Field(None, description="SKU")
     product_name: str | None = Field(None, description="产品名称")
     quantity_sug_purchase: int | None = Field(None, description="建议采购数量")

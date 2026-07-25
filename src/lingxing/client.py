@@ -1,4 +1,3 @@
-from __future__ import annotations
 """
 领星ERP客户端高级封装
 
@@ -6,6 +5,8 @@ from __future__ import annotations
 Author: AI Platform Team
 Date: 2026-02-17
 """
+
+from __future__ import annotations
 
 import logging
 from datetime import datetime
@@ -123,11 +124,7 @@ class LingXingClient:
             logger.debug("Health check failed: %s", e)
             return False
 
-    async def execute(
-        self,
-        operation: str,
-        **kwargs
-    ) -> dict[str, Any]:
+    async def execute(self, operation: str, **kwargs) -> list[Any]:
         """
         执行操作
 
@@ -159,7 +156,7 @@ class LingXingClient:
         method: str = "GET",
         req_params: dict[str, Any] | None = None,
         req_body: dict[str, Any] | None = None,
-        **kwargs
+        **kwargs,
     ) -> LingXingResponse:
         """
         发起API请求 — 委托 OpenApiBase 处理token和限流
@@ -188,14 +185,13 @@ class LingXingClient:
             request_id=resp_result.request_id,
         )
 
-
     async def call_api(
         self,
         api_path: str,
         method: str = "POST",
         params: dict[str, Any] | None = None,
         param_names: set | None = None,
-        **kwargs
+        **kwargs,
     ) -> LingXingResponse:
         """
         调用API（使用参数构建器自动补全参数）
@@ -226,27 +222,12 @@ class LingXingClient:
 
         # 根据方法类型选择参数位置
         if method.upper() == "GET":
-            return await self._request(
-                route_name=api_path,
-                method="GET",
-                req_params=params,
-                **kwargs
-            )
-        return await self._request(
-            route_name=api_path,
-            method="POST",
-            req_body=params,
-            **kwargs
-        )
+            return await self._request(route_name=api_path, method="GET", req_params=params, **kwargs)
+        return await self._request(route_name=api_path, method="POST", req_body=params, **kwargs)
 
     # ==================== 产品API ====================
 
-    async def get_products(
-        self,
-        page: int = 1,
-        page_size: int = 100,
-        **kwargs
-    ) -> list[ProductInfo]:
+    async def get_products(self, page: int = 1, page_size: int = 100, **kwargs) -> list[ProductInfo]:
         """
         获取产品列表
 
@@ -264,11 +245,7 @@ class LingXingClient:
         response = await self._request(
             route_name="/erp/sc/routing/data/local_inventory/productList",
             method="POST",
-            req_body={
-                "offset": (page - 1) * page_size,
-                "length": page_size,
-                **kwargs
-            }
+            req_body={"offset": (page - 1) * page_size, "length": page_size, **kwargs},
         )
 
         if not response.is_success:
@@ -295,7 +272,7 @@ class LingXingClient:
         page_size: int = 100,
         start_date: datetime | None = None,
         end_date: datetime | None = None,
-        **kwargs
+        **kwargs,
     ) -> list[OrderInfo]:
         """
         获取订单列表
@@ -312,22 +289,14 @@ class LingXingClient:
         """
         logger.debug("Fetching orders: page=%s, page_size=%s", page, page_size)
 
-        req_params = {
-            "page": page,
-            "pageSize": page_size,
-            **kwargs
-        }
+        req_params = {"page": page, "pageSize": page_size, **kwargs}
 
         if start_date:
             req_params["startDate"] = start_date.isoformat()
         if end_date:
             req_params["endDate"] = end_date.isoformat()
 
-        response = await self._request(
-            route_name="/erp/sc/data/order/lists",
-            method="GET",
-            req_params=req_params
-        )
+        response = await self._request(route_name="/erp/sc/data/order/lists", method="GET", req_params=req_params)
 
         if not response.is_success:
             logger.error("Failed to fetch orders: %s", response.message)
@@ -347,12 +316,7 @@ class LingXingClient:
 
     # ==================== 库存API ====================
 
-    async def get_inventory(
-        self,
-        page: int = 1,
-        page_size: int = 100,
-        **kwargs
-    ) -> list[InventoryInfo]:
+    async def get_inventory(self, page: int = 1, page_size: int = 100, **kwargs) -> list[InventoryInfo]:
         """
         获取库存列表
 
@@ -369,11 +333,7 @@ class LingXingClient:
         response = await self._request(
             route_name="/erp/sc/data/local_inventory/lists",
             method="GET",
-            req_params={
-                "page": page,
-                "pageSize": page_size,
-                **kwargs
-            }
+            req_params={"page": page, "pageSize": page_size, **kwargs},
         )
 
         if not response.is_success:
@@ -394,12 +354,7 @@ class LingXingClient:
 
     # ==================== FBA API ====================
 
-    async def get_fba_shipments(
-        self,
-        page: int = 1,
-        page_size: int = 100,
-        **kwargs
-    ) -> list[FBAShipment]:
+    async def get_fba_shipments(self, page: int = 1, page_size: int = 100, **kwargs) -> list[FBAShipment]:
         """
         获取FBA发货计划列表
 
@@ -416,11 +371,7 @@ class LingXingClient:
         response = await self._request(
             route_name="/basicOpen/openapi/storage/fbaWarehouseDetail",
             method="POST",
-            req_body={
-                "page": page,
-                "pageSize": page_size,
-                **kwargs
-            }
+            req_body={"page": page, "pageSize": page_size, **kwargs},
         )
 
         if not response.is_success:
@@ -441,12 +392,7 @@ class LingXingClient:
 
     # ==================== 店铺API ====================
 
-    async def get_stores(
-        self,
-        page: int = 1,
-        page_size: int = 100,
-        **kwargs
-    ) -> list[StoreInfo]:
+    async def get_stores(self, page: int = 1, page_size: int = 100, **kwargs) -> list[StoreInfo]:
         """
         获取店铺列表
 
@@ -463,11 +409,7 @@ class LingXingClient:
         response = await self._request(
             route_name="/erp/sc/data/seller/lists",
             method="GET",
-            req_params={
-                "page": page,
-                "pageSize": page_size,
-                **kwargs
-            }
+            req_params={"page": page, "pageSize": page_size, **kwargs},
         )
 
         if not response.is_success:
@@ -486,12 +428,7 @@ class LingXingClient:
 
         return stores
 
-    async def get_sellers(
-        self,
-        page: int = 1,
-        page_size: int = 100,
-        **kwargs
-    ) -> list[dict[str, Any]]:
+    async def get_sellers(self, page: int = 1, page_size: int = 100, **kwargs) -> list[dict[str, Any]]:
         """
         获取店铺列表（返回原始字典，用于ETL）
 
@@ -510,11 +447,7 @@ class LingXingClient:
         response = await self._request(
             route_name="/erp/sc/data/seller/lists",
             method="GET",
-            req_params={
-                "page": page,
-                "pageSize": page_size,
-                **kwargs
-            }
+            req_params={"page": page, "pageSize": page_size, **kwargs},
         )
 
         if not response.is_success:
@@ -528,18 +461,15 @@ class LingXingClient:
         if isinstance(data, list):
             return data
         if isinstance(data, dict) and "data" in data:
-            return data["data"]
+            nested = data["data"]
+            if isinstance(nested, list):
+                return nested
 
         return []
 
     # ==================== 仓库/本地库存API ====================
 
-    async def get_warehouse_list(
-        self,
-        page: int = 1,
-        page_size: int = 100,
-        **kwargs
-    ) -> list[WarehouseInfo]:
+    async def get_warehouse_list(self, page: int = 1, page_size: int = 100, **kwargs) -> list[WarehouseInfo]:
         """
         获取仓库列表
 
@@ -558,11 +488,7 @@ class LingXingClient:
         response = await self._request(
             route_name="/erp/sc/data/local_inventory/warehouse",
             method="POST",
-            req_body={
-                "offset": (page - 1) * page_size,
-                "length": page_size,
-                **kwargs
-            }
+            req_body={"offset": (page - 1) * page_size, "length": page_size, **kwargs},
         )
 
         if not response.is_success:
@@ -584,11 +510,7 @@ class LingXingClient:
         return warehouses
 
     async def get_warehouse_inventory(
-        self,
-        warehouse_id: str | None = None,
-        page: int = 1,
-        page_size: int = 100,
-        **kwargs
+        self, warehouse_id: str | None = None, page: int = 1, page_size: int = 100, **kwargs
     ) -> list[WarehouseInventoryInfo]:
         """
         获取仓库库存明细
@@ -604,20 +526,16 @@ class LingXingClient:
         Returns:
             List[WarehouseInventoryInfo]: 仓库库存明细列表
         """
-        logger.debug("Fetching warehouse inventory: warehouse_id=%s, page=%s, page_size=%s", warehouse_id, page, page_size)
+        logger.debug(
+            "Fetching warehouse inventory: warehouse_id=%s, page=%s, page_size=%s", warehouse_id, page, page_size
+        )
 
-        req_body = {
-            "offset": (page - 1) * page_size,
-            "length": page_size,
-            **kwargs
-        }
+        req_body = {"offset": (page - 1) * page_size, "length": page_size, **kwargs}
         if warehouse_id:
             req_body["wid"] = warehouse_id
 
         response = await self._request(
-            route_name="/erp/sc/routing/data/local_inventory/inventoryDetails",
-            method="POST",
-            req_body=req_body
+            route_name="/erp/sc/routing/data/local_inventory/inventoryDetails", method="POST", req_body=req_body
         )
 
         if not response.is_success:
@@ -645,7 +563,7 @@ class LingXingClient:
         warehouse_id: str | None = None,
         page: int = 1,
         page_size: int = 100,
-        **kwargs
+        **kwargs,
     ) -> list[WarehouseStatementInfo]:
         """
         获取库存流水
@@ -670,15 +588,13 @@ class LingXingClient:
             "end_date": end_date.strftime("%Y-%m-%d"),
             "offset": (page - 1) * page_size,
             "length": page_size,
-            **kwargs
+            **kwargs,
         }
         if warehouse_id:
             req_body["wid"] = warehouse_id
 
         response = await self._request(
-            route_name="/erp/sc/routing/data/local_inventory/getBatchStatementList",
-            method="POST",
-            req_body=req_body
+            route_name="/erp/sc/routing/data/local_inventory/getBatchStatementList", method="POST", req_body=req_body
         )
 
         if not response.is_success:
@@ -700,12 +616,7 @@ class LingXingClient:
         return statements
 
     async def get_allocation_orders(
-        self,
-        start_date: datetime,
-        end_date: datetime,
-        page: int = 1,
-        page_size: int = 100,
-        **kwargs
+        self, start_date: datetime, end_date: datetime, page: int = 1, page_size: int = 100, **kwargs
     ) -> list[AllocationOrderInfo]:
         """
         获取调拨单列表
@@ -732,8 +643,8 @@ class LingXingClient:
                 "end_date": end_date.strftime("%Y-%m-%d"),
                 "page": page,
                 "page_size": page_size,
-                **kwargs
-            }
+                **kwargs,
+            },
         )
 
         if not response.is_success:
@@ -757,12 +668,7 @@ class LingXingClient:
     # ==================== 头程物流API ====================
 
     async def get_inbound_shipments(
-        self,
-        start_date: datetime,
-        end_date: datetime,
-        page: int = 1,
-        page_size: int = 100,
-        **kwargs
+        self, start_date: datetime, end_date: datetime, page: int = 1, page_size: int = 100, **kwargs
     ) -> list[InboundShipmentInfo]:
         """
         获取FBA发货单列表 - 包含头程费用信息
@@ -791,8 +697,8 @@ class LingXingClient:
                 "end_date": end_date.strftime("%Y-%m-%d"),
                 "offset": offset,
                 "length": page_size,
-                **kwargs
-            }
+                **kwargs,
+            },
         )
 
         if not response.is_success:
@@ -814,11 +720,7 @@ class LingXingClient:
         return shipments
 
     async def get_shipment_details(
-        self,
-        shipment_id: str,
-        page: int = 1,
-        page_size: int = 100,
-        **kwargs
+        self, shipment_id: str, page: int = 1, page_size: int = 100, **kwargs
     ) -> list[ShipmentDetailInfo]:
         """
         获取发货单详情 - SKU级别的运费分配
@@ -839,12 +741,7 @@ class LingXingClient:
         response = await self._request(
             route_name="/basicOpen/openapi/fba/getInboundShipmentListMwsDetail",
             method="POST",
-            req_body={
-                "shipment_id": shipment_id,
-                "page": page,
-                "page_size": page_size,
-                **kwargs
-            }
+            req_body={"shipment_id": shipment_id, "page": page, "page_size": page_size, **kwargs},
         )
 
         if not response.is_success:
@@ -866,10 +763,7 @@ class LingXingClient:
         return details
 
     async def get_logistics_providers(
-        self,
-        page: int = 1,
-        page_size: int = 100,
-        **kwargs
+        self, page: int = 1, page_size: int = 100, **kwargs
     ) -> list[LogisticsProviderInfo]:
         """
         获取头程物流商列表
@@ -889,13 +783,7 @@ class LingXingClient:
         response = await self._request(
             route_name="/basicOpen/logistics/headLogisticsProvider/query/list",
             method="POST",
-            req_body={
-                "search": {
-                    "page": page,
-                    "length": page_size,
-                    **kwargs
-                }
-            }
+            req_body={"search": {"page": page, "length": page_size, **kwargs}},
         )
 
         if not response.is_success:
@@ -920,11 +808,7 @@ class LingXingClient:
         return providers
 
     async def get_logistics_channels(
-        self,
-        provider_id: str | None = None,
-        page: int = 1,
-        page_size: int = 100,
-        **kwargs
+        self, provider_id: str | None = None, page: int = 1, page_size: int = 100, **kwargs
     ) -> list[LogisticsChannelInfo]:
         """
         获取头程物流渠道列表
@@ -943,18 +827,12 @@ class LingXingClient:
         logger.debug("Fetching logistics channels: provider_id=%s, page=%s", provider_id, page)
 
         offset = (page - 1) * page_size
-        req_body = {
-            "offset": offset,
-            "length": page_size,
-            **kwargs
-        }
+        req_body = {"offset": offset, "length": page_size, **kwargs}
         if provider_id:
             req_body["provider_id"] = provider_id
 
         response = await self._request(
-            route_name="/erp/sc/data/local_inventory/channelList",
-            method="POST",
-            req_body=req_body
+            route_name="/erp/sc/data/local_inventory/channelList", method="POST", req_body=req_body
         )
 
         if not response.is_success:
@@ -978,12 +856,7 @@ class LingXingClient:
     # ==================== 采购/1688 API ====================
 
     async def get_purchase_orders(
-        self,
-        start_date: datetime,
-        end_date: datetime,
-        page: int = 1,
-        page_size: int = 100,
-        **kwargs
+        self, start_date: datetime, end_date: datetime, page: int = 1, page_size: int = 100, **kwargs
     ) -> list[PurchaseOrderInfo]:
         """
         获取采购单列表 - 包含1688采购订单
@@ -1010,8 +883,8 @@ class LingXingClient:
                 "end_date": end_date.strftime("%Y-%m-%d"),
                 "page": page,
                 "page_size": page_size,
-                **kwargs
-            }
+                **kwargs,
+            },
         )
 
         if not response.is_success:
@@ -1032,12 +905,7 @@ class LingXingClient:
 
         return orders
 
-    async def get_suppliers(
-        self,
-        page: int = 1,
-        page_size: int = 100,
-        **kwargs
-    ) -> list[SupplierInfo]:
+    async def get_suppliers(self, page: int = 1, page_size: int = 100, **kwargs) -> list[SupplierInfo]:
         """
         获取供应商列表
 
@@ -1056,11 +924,7 @@ class LingXingClient:
         response = await self._request(
             route_name="/erp/sc/purchase/supplier/lists",
             method="GET",
-            req_params={
-                "page": page,
-                "page_size": page_size,
-                **kwargs
-            }
+            req_params={"page": page, "page_size": page_size, **kwargs},
         )
 
         if not response.is_success:
@@ -1081,12 +945,7 @@ class LingXingClient:
 
         return suppliers
 
-    async def get_purchase_plans(
-        self,
-        page: int = 1,
-        page_size: int = 100,
-        **kwargs
-    ) -> list[PurchasePlanInfo]:
+    async def get_purchase_plans(self, page: int = 1, page_size: int = 100, **kwargs) -> list[PurchasePlanInfo]:
         """
         获取采购计划列表
 
@@ -1105,11 +964,7 @@ class LingXingClient:
         response = await self._request(
             route_name="/erp/sc/purchase/plan/getPurchasePlans",
             method="GET",
-            req_params={
-                "page": page,
-                "page_size": page_size,
-                **kwargs
-            }
+            req_params={"page": page, "page_size": page_size, **kwargs},
         )
 
         if not response.is_success:
@@ -1131,12 +986,7 @@ class LingXingClient:
         return plans
 
     async def get_purchase_returns(
-        self,
-        start_date: datetime,
-        end_date: datetime,
-        page: int = 1,
-        page_size: int = 100,
-        **kwargs
+        self, start_date: datetime, end_date: datetime, page: int = 1, page_size: int = 100, **kwargs
     ) -> list[PurchaseReturnInfo]:
         """
         获取采购退货单列表
@@ -1163,8 +1013,8 @@ class LingXingClient:
                 "end_date": end_date.strftime("%Y-%m-%d"),
                 "page": page,
                 "page_size": page_size,
-                **kwargs
-            }
+                **kwargs,
+            },
         )
 
         if not response.is_success:
@@ -1188,12 +1038,7 @@ class LingXingClient:
     # ==================== 财务利润API ====================
 
     async def get_order_profit(
-        self,
-        start_date: datetime,
-        end_date: datetime,
-        page: int = 1,
-        page_size: int = 100,
-        **kwargs
+        self, start_date: datetime, end_date: datetime, page: int = 1, page_size: int = 100, **kwargs
     ) -> list[OrderProfitInfo]:
         """
         获取订单维度利润数据
@@ -1213,25 +1058,17 @@ class LingXingClient:
         logger.debug("Fetching order profit: start=%s, end=%s, page=%s", start_date, end_date, page)
 
         # 使用参数构建器构建请求参数
-        param_names: set[str] = {'start_date', 'end_date', 'page', 'page_size'}
+        param_names: set[str] = {"start_date", "end_date", "page", "page_size"}
         params = {
-            'start_date': start_date.strftime("%Y-%m-%d"),
-            'end_date': end_date.strftime("%Y-%m-%d"),
-            'page': page,
-            'page_size': page_size,
-            **kwargs
+            "start_date": start_date.strftime("%Y-%m-%d"),
+            "end_date": end_date.strftime("%Y-%m-%d"),
+            "page": page,
+            "page_size": page_size,
+            **kwargs,
         }
-        req_body = self._param_builder.build_params(
-            "/erp/sc/data/finance/bdOrder",
-            params,
-            param_names
-        )
+        req_body = self._param_builder.build_params("/erp/sc/data/finance/bdOrder", params, param_names)
 
-        response = await self._request(
-            route_name="/erp/sc/data/finance/bdOrder",
-            method="POST",
-            req_body=req_body
-        )
+        response = await self._request(route_name="/erp/sc/data/finance/bdOrder", method="POST", req_body=req_body)
 
         if not response.is_success:
             logger.error("Failed to fetch order profit: %s", response.message)
@@ -1252,12 +1089,7 @@ class LingXingClient:
         return profits
 
     async def get_msku_profit(
-        self,
-        start_date: datetime,
-        end_date: datetime,
-        page: int = 1,
-        page_size: int = 100,
-        **kwargs
+        self, start_date: datetime, end_date: datetime, page: int = 1, page_size: int = 100, **kwargs
     ) -> list[MSKUProfitInfo]:
         """
         获取MSKU维度利润数据
@@ -1277,25 +1109,17 @@ class LingXingClient:
         logger.debug("Fetching MSKU profit: start=%s, end=%s, page=%s", start_date, end_date, page)
 
         # 使用参数构建器构建请求参数
-        param_names: set[str] = {'start_date', 'end_date', 'page', 'page_size'}
+        param_names: set[str] = {"start_date", "end_date", "page", "page_size"}
         params = {
-            'start_date': start_date.strftime("%Y-%m-%d"),
-            'end_date': end_date.strftime("%Y-%m-%d"),
-            'page': page,
-            'page_size': page_size,
-            **kwargs
+            "start_date": start_date.strftime("%Y-%m-%d"),
+            "end_date": end_date.strftime("%Y-%m-%d"),
+            "page": page,
+            "page_size": page_size,
+            **kwargs,
         }
-        req_body = self._param_builder.build_params(
-            "/erp/sc/data/finance/bdMSKU",
-            params,
-            param_names
-        )
+        req_body = self._param_builder.build_params("/erp/sc/data/finance/bdMSKU", params, param_names)
 
-        response = await self._request(
-            route_name="/erp/sc/data/finance/bdMSKU",
-            method="POST",
-            req_body=req_body
-        )
+        response = await self._request(route_name="/erp/sc/data/finance/bdMSKU", method="POST", req_body=req_body)
 
         if not response.is_success:
             logger.error("Failed to fetch MSKU profit: %s", response.message)
@@ -1316,12 +1140,7 @@ class LingXingClient:
         return profits
 
     async def get_settlement_detail(
-        self,
-        start_date: datetime,
-        end_date: datetime,
-        page: int = 1,
-        page_size: int = 100,
-        **kwargs
+        self, start_date: datetime, end_date: datetime, page: int = 1, page_size: int = 100, **kwargs
     ) -> list[SettlementInfo]:
         """
         获取结算明细/亚马逊回款数据
@@ -1341,24 +1160,20 @@ class LingXingClient:
         logger.debug("Fetching settlement detail: start=%s, end=%s, page=%s", start_date, end_date, page)
 
         # 使用参数构建器构建请求参数
-        param_names: set[str] = {'start_date', 'end_date', 'page', 'page_size'}
+        param_names: set[str] = {"start_date", "end_date", "page", "page_size"}
         params = {
-            'start_date': start_date.strftime("%Y-%m-%d"),
-            'end_date': end_date.strftime("%Y-%m-%d"),
-            'page': page,
-            'page_size': page_size,
-            **kwargs
+            "start_date": start_date.strftime("%Y-%m-%d"),
+            "end_date": end_date.strftime("%Y-%m-%d"),
+            "page": page,
+            "page_size": page_size,
+            **kwargs,
         }
         req_body = self._param_builder.build_params(
-            "/erp/sc/data/finance/settlementTransactionList",
-            params,
-            param_names
+            "/erp/sc/data/finance/settlementTransactionList", params, param_names
         )
 
         response = await self._request(
-            route_name="/erp/sc/data/finance/settlementTransactionList",
-            method="POST",
-            req_body=req_body
+            route_name="/erp/sc/data/finance/settlementTransactionList", method="POST", req_body=req_body
         )
 
         if not response.is_success:
@@ -1380,12 +1195,7 @@ class LingXingClient:
         return settlements
 
     async def get_settlement_summary(
-        self,
-        start_date: datetime,
-        end_date: datetime,
-        page: int = 1,
-        page_size: int = 100,
-        **kwargs
+        self, start_date: datetime, end_date: datetime, page: int = 1, page_size: int = 100, **kwargs
     ) -> list[SettlementSummaryInfo]:
         """
         获取结算汇总数据
@@ -1405,24 +1215,18 @@ class LingXingClient:
         logger.debug("Fetching settlement summary: start=%s, end=%s, page=%s", start_date, end_date, page)
 
         # 使用参数构建器构建请求参数
-        param_names: set[str] = {'start_date', 'end_date', 'page', 'page_size'}
+        param_names: set[str] = {"start_date", "end_date", "page", "page_size"}
         params = {
-            'start_date': start_date.strftime("%Y-%m-%d"),
-            'end_date': end_date.strftime("%Y-%m-%d"),
-            'page': page,
-            'page_size': page_size,
-            **kwargs
+            "start_date": start_date.strftime("%Y-%m-%d"),
+            "end_date": end_date.strftime("%Y-%m-%d"),
+            "page": page,
+            "page_size": page_size,
+            **kwargs,
         }
-        req_body = self._param_builder.build_params(
-            "/erp/sc/data/finance/settlementSummaryList",
-            params,
-            param_names
-        )
+        req_body = self._param_builder.build_params("/erp/sc/data/finance/settlementSummaryList", params, param_names)
 
         response = await self._request(
-            route_name="/erp/sc/data/finance/settlementSummaryList",
-            method="POST",
-            req_body=req_body
+            route_name="/erp/sc/data/finance/settlementSummaryList", method="POST", req_body=req_body
         )
 
         if not response.is_success:
@@ -1454,7 +1258,7 @@ class LingXingClient:
         sort_field: str = "volume",
         sort_type: str = "desc",
         is_recently_enum: bool = True,
-        **kwargs
+        **kwargs,
     ) -> dict[str, Any]:
         """
         获取产品表现数据
@@ -1485,32 +1289,40 @@ class LingXingClient:
 
         # 构建请求参数
         params = {
-            'offset': offset,
-            'length': length,
-            'sort_field': sort_field,
-            'sort_type': sort_type,
-            'sid': sid,
-            'start_date': start_date,
-            'end_date': end_date,
-            'summary_field': summary_field,
-            'is_recently_enum': is_recently_enum,
-            **kwargs
+            "offset": offset,
+            "length": length,
+            "sort_field": sort_field,
+            "sort_type": sort_type,
+            "sid": sid,
+            "start_date": start_date,
+            "end_date": end_date,
+            "summary_field": summary_field,
+            "is_recently_enum": is_recently_enum,
+            **kwargs,
         }
 
         # 定义参数名称集合（用于参数构建器）
         param_names = {
-            'offset', 'length', 'sort_field', 'sort_type', 'sid',
-            'start_date', 'end_date', 'summary_field', 'is_recently_enum',
-            'search_field', 'search_value', 'mid', 'extend_search',
-            'currency_code', 'purchase_status'
+            "offset",
+            "length",
+            "sort_field",
+            "sort_type",
+            "sid",
+            "start_date",
+            "end_date",
+            "summary_field",
+            "is_recently_enum",
+            "search_field",
+            "search_value",
+            "mid",
+            "extend_search",
+            "currency_code",
+            "purchase_status",
         }
 
         # 调用API（使用参数构建器）
         response = await self.call_api(
-            api_path='/bd/productPerformance/openApi/asinList',
-            method='POST',
-            params=params,
-            param_names=param_names
+            api_path="/bd/productPerformance/openApi/asinList", method="POST", params=params, param_names=param_names
         )
 
         # 检查响应

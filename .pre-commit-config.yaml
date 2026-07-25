@@ -1,0 +1,21 @@
+# Pre-commit hooks for lingxing-sdk.
+# Enforces ruff lint (with auto-fix) and ruff format on every commit,
+# preventing F821/E402/import-style regressions.
+#
+# Local setup:
+#   pip install pre-commit
+#   pre-commit install
+#
+# Ruff reads its rule config (line-length, select, ignore) from pyproject.toml [tool.ruff].
+# NOTE: hooks are scoped to src/ and tests/ (the production code covered by the
+# lint gate). Dev/example scripts under scripts/, examples/, and the repo root
+# are excluded — they are tracked separately and linting them is out of scope.
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.16.0
+    hooks:
+      - id: ruff
+        args: [--fix]
+        files: ^(src|tests)/
+      - id: ruff-format
+        files: ^(src|tests)/

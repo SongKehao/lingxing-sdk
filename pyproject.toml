@@ -24,6 +24,7 @@ dev = [
     "pytest>=8.0",
     "pytest-asyncio>=0.23",
     "ruff>=0.4",
+    "mypy>=1.10",
     "nest-asyncio>=1.5.0",
 ]
 
@@ -51,3 +52,24 @@ ignore = ["E501"]
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.11"
+plugins = ["pydantic.mypy"]
+disallow_untyped_defs = true
+implicit_optional = true
+check_untyped_defs = true
+warn_return_any = true
+warn_unused_ignores = true
+ignore_missing_imports = true
+
+# codegen 生成的模型层：允许缺失注解 + 字段重名（codegen 固有，运行时无害）
+[[tool.mypy.overrides]]
+module = "lingxing.models.*"
+disallow_untyped_defs = false
+disable_error_code = ["no-redef"]
+
+# 历史代码参数标注债务（渐进补齐，登记 open-questions）：高层客户端薄封装 + 加密工具
+[[tool.mypy.overrides]]
+module = ["lingxing.client", "lingxing.core.aes"]
+disallow_untyped_defs = false

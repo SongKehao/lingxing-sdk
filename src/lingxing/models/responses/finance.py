@@ -1,4 +1,5 @@
 """Auto-generated response models for Finance."""
+
 from typing import Any, List, Optional
 
 from pydantic import Field
@@ -9,6 +10,7 @@ from ..common import LingXingModel
 # ==================== US-006 补全：费用类型/利润报表配置/利润报表明细 ====================
 class FeeManagementOtherFeeTypeResponse(LingXingModel):
     """查询费用类型列表 (/bd/fee/management/open/feeManagement/otherFee/type)."""
+
     fee_type_id: Optional[str] = None
     name: Optional[str] = None
     total: Optional[int] = None
@@ -16,25 +18,30 @@ class FeeManagementOtherFeeTypeResponse(LingXingModel):
 
 class ProfitReportConfigResponse(LingXingModel):
     """查询利润报表-列表配置 (/basicOpen/finance/profitReport/config)."""
+
     total: Optional[int] = None
 
 
 class SettlementProfitListResponse(LingXingModel):
     """查询利润报表-明细列表 (/basicOpen/finance/settlement/profitList)."""
+
     sid: Optional[int] = None
     total: Optional[int] = None
 
 
 class LazadaPayoutListTotalsum(LingXingModel):
     """totalSum sub-structure."""
+
     payout_amount: Optional[str] = Field(None, description="回款金额汇总")
     settlement_difference: Optional[str] = Field(None, description="结算明细差额汇总")
     total_count: Optional[float] = Field(None, description="总记录数")
     currency_code: Optional[str] = Field(None, description="币种代码")
     currency_icon: Optional[str] = Field(None, description="币种图标")
 
+
 class LazadaPayoutListList(LingXingModel):
     """list sub-structure."""
+
     payout_amount: Optional[str] = Field(None, description="回款金额（数值部分）")
     settlement_difference: Optional[str] = Field(None, description="结算明细差额（回款金额-结算明细汇总金额）")
     gmt_modified: Optional[str] = Field(None, description="修改时间")
@@ -62,8 +69,10 @@ class LazadaPayoutListList(LingXingModel):
     currency_code: Optional[str] = Field(None, description="币种")
     platform_code: Optional[str] = Field(None, description="平台码")
 
+
 class LazadaPayoutListResponse(LingXingModel):
     """回款明细-LazadaPayout."""
+
     total_count: Optional[float] = Field(None, description="总记录数")
     total_sum: Optional[List[LazadaPayoutListTotalsum]] = Field(None, description="汇总数据")
     list: Optional[List[LazadaPayoutListList]] = Field(None, description="列表数据")
@@ -71,6 +80,7 @@ class LazadaPayoutListResponse(LingXingModel):
 
 class LazadaSettlementListTotalsum(LingXingModel):
     """totalSum sub-structure."""
+
     amount: Optional[str] = Field(None, description="结算金额汇总")
     currency_code: Optional[str] = Field(None, description="币种代码")
     currency_icon: Optional[str] = Field(None, description="币种图标")
@@ -80,8 +90,10 @@ class LazadaSettlementListTotalsum(LingXingModel):
     vat_in_amount: Optional[str] = Field(None, description="增值税金额汇总")
     wht_amount: Optional[str] = Field(None, description="预提税金额汇总")
 
+
 class LazadaSettlementListList(LingXingModel):
     """list sub-structure."""
+
     unique_no: Optional[str] = Field(None, description="业务唯一键")
     is_in_settlement: Optional[float] = Field(None, description="是否计入结算")
     wht_amount: Optional[str] = Field(None, description="预提税金额")
@@ -125,8 +137,10 @@ class LazadaSettlementListList(LingXingModel):
     platform_code: Optional[str] = Field(None, description="平台码")
     statement_end_time: Optional[str] = Field(None, description="结算周期结束时间")
 
+
 class LazadaSettlementListResponse(LingXingModel):
     """账单明细-LazadaSettlement."""
+
     total_count: Optional[float] = Field(None, description="总记录数")
     total_sum: Optional[List[LazadaSettlementListTotalsum]] = Field(None, description="汇总数据")
     list: Optional[List[LazadaSettlementListList]] = Field(None, description="列表数据")
@@ -134,6 +148,7 @@ class LazadaSettlementListResponse(LingXingModel):
 
 class FinanceMreportOrderprofitPriceList(LingXingModel):
     """price_list sub-structure."""
+
     principal_uids: Optional[list] = Field(None, description="是")
     local_sku: Optional[str] = Field(None, description="sku")
     item_name: Optional[str] = Field(None, description="标题")
@@ -150,23 +165,31 @@ class FinanceMreportOrderprofitPriceList(LingXingModel):
     asin: Optional[str] = Field(None, description="是")
     status: Optional[str] = Field(None, description="是")
 
+
 class FinanceMreportOrderprofitLocalInfos(LingXingModel):
     """local_infos sub-structure."""
+
     local_sku: Optional[str] = Field(None, description="是")
     local_name: Optional[str] = Field(None, description="是")
 
+
 class FinanceMreportOrderprofitAsins(LingXingModel):
     """asins sub-structure."""
+
     asin_url: Optional[str] = Field(None, description="是")
     asin: Optional[str] = Field(None, description="是")
 
+
 class FinanceMreportOrderprofitSellerStoreCountries(LingXingModel):
     """seller_store_countries sub-structure."""
+
     country: Optional[str] = Field(None, description="是")
     name: Optional[str] = Field(None, description="是")
 
+
 class FinanceMreportOrderprofitResponse(LingXingModel):
     """查询订单利润-MSKU."""
+
     total: Optional[int] = Field(None, description="总数")
     currency_code: Optional[str] = Field(None, description="币种")
     currency_icon: Optional[str] = Field(None, description="币种符号")
@@ -210,7 +233,9 @@ class FinanceMreportOrderprofitResponse(LingXingModel):
     sids: Optional[list] = Field(None, description="店铺id，在msku维度数组中只有一条数据")
     item_name: Optional[str] = Field(None, description="品名")
     categories: Optional[list] = Field(None, description="分类")
-    seller_store_countries: Optional[List[FinanceMreportOrderprofitSellerStoreCountries]] = Field(None, description="国家")
+    seller_store_countries: Optional[List[FinanceMreportOrderprofitSellerStoreCountries]] = Field(
+        None, description="国家"
+    )
     brands: Optional[list] = Field(None, description="品牌")
     refund_quantity: Optional[str] = Field(None, description="退款量")
     principal_names: Optional[str] = Field(None, description="listing负责人")
@@ -286,6 +311,7 @@ class FinanceMreportOrderprofitResponse(LingXingModel):
 
 class OrderTranscationListRecords(LingXingModel):
     """records sub-structure."""
+
     id: Optional[str] = Field(None, description="id")
     sid: Optional[str] = Field(None, description="店铺id")
     transaction_id: Optional[str] = Field(None, description="transactionId")
@@ -349,16 +375,23 @@ class OrderTranscationListRecords(LingXingModel):
     promotion_id: Optional[str] = Field(None, description="促销编码")
     transaction_status: Optional[str] = Field(None, description="交易状态")
     transaction_status_code: Optional[str] = Field(None, description="交易状态码")
-    deferred_sub_status: Optional[str] = Field(None, description="已推迟订单状态： 已推迟 预结算 当月结算 估实差异 入账冲销")
-    deferred_sub_status_code: Optional[str] = Field(None, description="已推迟订单状态码： Deferred PreSettlement RegularSettlement PreSettlementReversal deferredReversal Disbursed")
+    deferred_sub_status: Optional[str] = Field(
+        None, description="已推迟订单状态： 已推迟 预结算 当月结算 估实差异 入账冲销"
+    )
+    deferred_sub_status_code: Optional[str] = Field(
+        None,
+        description="已推迟订单状态码： Deferred PreSettlement RegularSettlement PreSettlementReversal deferredReversal Disbursed",
+    )
     ship_promotion_discount: Optional[float] = Field(None, description="配送促销折扣")
     item_promotion_discount: Optional[float] = Field(None, description="商品促销折扣")
     ods_event_type: Optional[str] = Field(None, description="odsEventType")
     row_index: Optional[float] = Field(None, description="rowIndex")
     accounting_time: Optional[str] = Field(None, description="入账时间")
 
+
 class OrderTranscationListResponse(LingXingModel):
     """查询利润报表 - 订单维度transaction视图."""
+
     records: Optional[List[OrderTranscationListRecords]] = Field(None, description="是")
     total: Optional[float] = Field(None, description="总数")
     total: Optional[int] = Field(None, description="总数")
@@ -366,6 +399,7 @@ class OrderTranscationListResponse(LingXingModel):
 
 class FinanceQueryreceiptfundslistList(LingXingModel):
     """list sub-structure."""
+
     amount: Optional[str] = Field(None, description="收款金额")
     create_time: Optional[str] = Field(None, description="创建时间，格式：yyyy-MM-dd HH:mm:ss")
     create_user: Optional[str] = Field(None, description="创建人")
@@ -378,13 +412,17 @@ class FinanceQueryreceiptfundslistList(LingXingModel):
     order_sn: Optional[str] = Field(None, description="收款单号")
     receipt_time: Optional[str] = Field(None, description="收款时间，格式：yyyy-MM-dd HH:mm:ss")
     remark: Optional[str] = Field(None, description="备注信息")
-    status: Optional[int] = Field(None, description="状态，枚举值：1-待收款, 2-已完成, 3-已作废, 121-待审批, 122-已驳回, 124-已作废")
+    status: Optional[int] = Field(
+        None, description="状态，枚举值：1-待收款, 2-已完成, 3-已作废, 121-待审批, 122-已驳回, 124-已作废"
+    )
     status_text: Optional[str] = Field(None, description="状态文本")
     type: Optional[int] = Field(None, description="收款类型，枚举值：1-采购退款")
     type_text: Optional[str] = Field(None, description="收款类型文本")
 
+
 class FinanceQueryreceiptfundslistResponse(LingXingModel):
     """查询收款单列表."""
+
     list: Optional[List[FinanceQueryreceiptfundslistList]] = Field(None, description="列表数据")
     total: Optional[int] = Field(None, description="总记录数")
     total: Optional[int] = Field(None, description="总记录数")
@@ -392,11 +430,14 @@ class FinanceQueryreceiptfundslistResponse(LingXingModel):
 
 class RequestfundsOrderListItems(LingXingModel):
     """items sub-structure."""
+
     business_sn: Optional[str] = Field(None, description="业务单号")
     custom_order_sn: Optional[str] = Field(None, description="自定义单号")
 
+
 class RequestfundsOrderListResponse(LingXingModel):
     """查询请款单列表."""
+
     total: Optional[int] = Field(None, description="总数")
     order_sn: Optional[str] = Field(None, description="请款单号")
     type: Optional[int] = Field(None, description="费用类型： 1 采购货款 2 物流款 3 采购预付款 4 其他应付款")
@@ -408,7 +449,9 @@ class RequestfundsOrderListResponse(LingXingModel):
     amount_paid: Optional[str] = Field(None, description="已付金额")
     amount_unpaid: Optional[str] = Field(None, description="未付金额")
     prepay_time: Optional[str] = Field(None, description="预计付款日期")
-    status: Optional[int] = Field(None, description="状态： 1 待付款 2 已完成 3 已作废 121 待审批 122 已驳回 124 审批流作废")
+    status: Optional[int] = Field(
+        None, description="状态： 1 待付款 2 已完成 3 已作废 121 待审批 122 已驳回 124 审批流作废"
+    )
     apply_user: Optional[str] = Field(None, description="申请人")
     remark: Optional[str] = Field(None, description="申请备注")
     apply_time: Optional[str] = Field(None, description="申请时间")
@@ -431,6 +474,7 @@ class RequestfundsOrderListResponse(LingXingModel):
 
 class RequestfundspoolCustomfeeListApplyingOrders(LingXingModel):
     """applying_orders sub-structure."""
+
     order_sn: Optional[str] = Field(None, description="请款单号")
     status: Optional[int] = Field(None, description="请款单状态")
     status_text: Optional[str] = Field(None, description="请款单状态说明")
@@ -440,18 +484,24 @@ class RequestfundspoolCustomfeeListApplyingOrders(LingXingModel):
     currency_icon: Optional[str] = Field(None, description="币种")
     type: Optional[str] = Field(None, description="请款单标识")
 
+
 class RequestfundspoolCustomfeeListPaidOrders(LingXingModel):
     """paid_orders sub-structure."""
+
     order_sn: Optional[str] = Field(None, description="请款单号")
-    status_text: Optional[str] = Field(None, description="请款单状态： 1 待付款 2 已完成 3 已作废 121 待审批 122 已驳回 124 已作废（审批）")
+    status_text: Optional[str] = Field(
+        None, description="请款单状态： 1 待付款 2 已完成 3 已作废 121 待审批 122 已驳回 124 已作废（审批）"
+    )
     apply_username: Optional[str] = Field(None, description="申请人名称")
     apply_amount: Optional[str] = Field(None, description="申请金额")
     apply_time: Optional[str] = Field(None, description="申请时间")
     currency_icon: Optional[str] = Field(None, description="币种")
     type: Optional[str] = Field(None, description="请款单标识")
 
+
 class RequestfundspoolCustomfeeListResponse(LingXingModel):
     """查询请款池-其他应付款."""
+
     total: Optional[int] = Field(None, description="总数")
     custom_fee_sn: Optional[str] = Field(None, description="其他应付单号")
     business_sn: Optional[str] = Field(None, description="费用单号")
@@ -470,12 +520,15 @@ class RequestfundspoolCustomfeeListResponse(LingXingModel):
     create_uid: Optional[str] = Field(None, description="创建人id")
     create_user: Optional[str] = Field(None, description="创建人名称")
     create_time: Optional[str] = Field(None, description="创建时间")
-    applying_orders: Optional[List[RequestfundspoolCustomfeeListApplyingOrders]] = Field(None, description="申请中关联单据")
+    applying_orders: Optional[List[RequestfundspoolCustomfeeListApplyingOrders]] = Field(
+        None, description="申请中关联单据"
+    )
     paid_orders: Optional[List[RequestfundspoolCustomfeeListPaidOrders]] = Field(None, description="已付关联单据")
 
 
 class RequestfundspoolInboundListResponse(LingXingModel):
     """查询请款池 - 货款月结."""
+
     total: Optional[int] = Field(None, description="总数")
     supplier_id: Optional[str] = Field(None, description="供应商id")
     supplier_name: Optional[str] = Field(None, description="供应商")
@@ -506,37 +559,50 @@ class RequestfundspoolInboundListResponse(LingXingModel):
 
 class RequestfundspoolLogisticsListUnpaidRequestFunds(LingXingModel):
     """unpaid_request_funds sub-structure."""
+
     order_sn: Optional[str] = Field(None, description="请款单单号")
     goods_value: Optional[str] = Field(None, description="请款金额")
     paid_fee: Optional[str] = Field(None, description="已付金额")
     apply_user: Optional[str] = Field(None, description="申请人")
     apply_time: Optional[str] = Field(None, description="申请时间")
-    status: Optional[int] = Field(None, description="状态： 1 待付款 2 已完成 3 已作废 121 待审批 122 已驳回 124 已作废（审批流）")
+    status: Optional[int] = Field(
+        None, description="状态： 1 待付款 2 已完成 3 已作废 121 待审批 122 已驳回 124 已作废（审批流）"
+    )
     status_text: Optional[str] = Field(None, description="状态说明")
+
 
 class RequestfundspoolLogisticsListPaidRequestFunds(LingXingModel):
     """paid_request_funds sub-structure."""
+
     order_sn: Optional[str] = Field(None, description="请款单单号")
     goods_value: Optional[str] = Field(None, description="请款金额")
     paid_fee: Optional[str] = Field(None, description="已付金额")
     apply_user: Optional[str] = Field(None, description="申请人名称")
     apply_time: Optional[str] = Field(None, description="申请时间")
-    status: Optional[int] = Field(None, description="状态： 1 待付款 2 已完成 3 已作废 121 待审批 122 已驳回 124 已作废（审批流）")
+    status: Optional[int] = Field(
+        None, description="状态： 1 待付款 2 已完成 3 已作废 121 待审批 122 已驳回 124 已作废（审批流）"
+    )
     status_text: Optional[str] = Field(None, description="状态说明")
+
 
 class RequestfundspoolLogisticsListShipmentIds(LingXingModel):
     """shipment_ids sub-structure."""
+
     shipment_id: Optional[str] = Field(None, description="FBA 货件号")
     inbound_shipment_item_mws_id: Optional[str] = Field(None, description="FBA 货件ID")
 
+
 class RequestfundspoolLogisticsListWarehouseList(LingXingModel):
     """warehouse_list sub-structure."""
+
     rfpl_id: Optional[str] = Field(None, description="请款池单据 ID")
     wid: Optional[str] = Field(None, description="发货仓库 ID")
     warehouse_name: Optional[str] = Field(None, description="发货仓库名称")
 
+
 class RequestfundspoolLogisticsListResponse(LingXingModel):
     """查询请款池-物流请款."""
+
     total: Optional[int] = Field(None, description="总数")
     delivery_order_sn: Optional[str] = Field(None, description="发货单号")
     source_type: Optional[int] = Field(None, description="来源类型： 1 发货单 2 海外仓备货单")
@@ -559,8 +625,12 @@ class RequestfundspoolLogisticsListResponse(LingXingModel):
     apply_fee: Optional[str] = Field(None, description="申请中")
     unapply_fee: Optional[str] = Field(None, description="未申请")
     delivery_create_time: Optional[str] = Field(None, description="发货单创建时间")
-    unpaid_request_funds: Optional[List[RequestfundspoolLogisticsListUnpaidRequestFunds]] = Field(None, description="未支付请款单")
-    paid_request_funds: Optional[List[RequestfundspoolLogisticsListPaidRequestFunds]] = Field(None, description="已付清请款单")
+    unpaid_request_funds: Optional[List[RequestfundspoolLogisticsListUnpaidRequestFunds]] = Field(
+        None, description="未支付请款单"
+    )
+    paid_request_funds: Optional[List[RequestfundspoolLogisticsListPaidRequestFunds]] = Field(
+        None, description="已付清请款单"
+    )
     shipment_ids: Optional[List[RequestfundspoolLogisticsListShipmentIds]] = Field(None, description="FBA 货件信息")
     provide_ids: Optional[list] = Field(None, description="物流商单号")
     shipment_date: Optional[str] = Field(None, description="发货时间")
@@ -569,6 +639,7 @@ class RequestfundspoolLogisticsListResponse(LingXingModel):
 
 class RequestfundspoolOtherfeeListList(LingXingModel):
     """list sub-structure."""
+
     amount_not_paid: Optional[str] = Field(None, description="未付金额，还需支付的金额")
     amount_paid: Optional[str] = Field(None, description="已付金额，已完成支付的金额")
     applyed_amount: Optional[str] = Field(None, description="已请款金额，已完成请款的金额")
@@ -609,8 +680,10 @@ class RequestfundspoolOtherfeeListList(LingXingModel):
     ware_house_name: Optional[str] = Field(None, description="仓库名称，关联的仓库名称")
     wid: Optional[int] = Field(None, description="仓库ID，关联的仓库唯一标识")
 
+
 class RequestfundspoolOtherfeeListResponse(LingXingModel):
     """查询请款池-其他费用."""
+
     list: Optional[List[RequestfundspoolOtherfeeListList]] = Field(None, description="列表数据")
     total: Optional[int] = Field(None, description="总记录数")
     total: Optional[int] = Field(None, description="总记录数")
@@ -618,6 +691,7 @@ class RequestfundspoolOtherfeeListResponse(LingXingModel):
 
 class RequestfundspoolPrepayListResponse(LingXingModel):
     """查询请款池 - 货款预付款."""
+
     total: Optional[int] = Field(None, description="总数")
     purchase_order_sn: Optional[str] = Field(None, description="采购单号")
     order_sn: Optional[str] = Field(None, description="预付款单号")
@@ -642,6 +716,7 @@ class RequestfundspoolPrepayListResponse(LingXingModel):
 
 class RequestfundspoolPurchaseListResponse(LingXingModel):
     """查询请款池 - 货款现结."""
+
     total: Optional[int] = Field(None, description="总数")
     supplier_id: Optional[str] = Field(None, description="供应商ID")
     supplier_name: Optional[str] = Field(None, description="供应商名称")
@@ -677,7 +752,9 @@ class RequestfundspoolPurchaseListResponse(LingXingModel):
     request_funds_type_text: Optional[str] = Field(None, description="请款类型文本")
     purchaser_id: Optional[str] = Field(None, description="采购方ID")
     purchaser_name: Optional[str] = Field(None, description="采购方名称")
-    status: Optional[int] = Field(None, description="状态： -1 作废 0 待审核 - 草稿 1 待下单 - 已审核 2 待签收 - 已下单 9 完成")
+    status: Optional[int] = Field(
+        None, description="状态： -1 作废 0 待审核 - 草稿 1 待下单 - 已审核 2 待签收 - 已下单 9 完成"
+    )
     status_text: Optional[str] = Field(None, description="状态说明")
     pay_status: Optional[int] = Field(None, description="请款状态： 0 未申请 1 已申请 2 部分付款 3 已付款")
     pay_status_text: Optional[str] = Field(None, description="请款状态说明")
@@ -685,13 +762,16 @@ class RequestfundspoolPurchaseListResponse(LingXingModel):
 
 class ShopeeAdjustmentListTotalsum(LingXingModel):
     """totalSum sub-structure."""
+
     amount: Optional[str] = Field(None, description="调整金额汇总")
     currency: Optional[str] = Field(None, description="币种代码")
     currency_icon: Optional[str] = Field(None, description="币种图标")
     total_count: Optional[float] = Field(None, description="总记录数")
 
+
 class ShopeeAdjustmentListList(LingXingModel):
     """list sub-structure."""
+
     unique_no: Optional[str] = Field(None, description="业务唯一键")
     original_payout_time: Optional[float] = Field(None, description="原始结算时间戳")
     store_type: Optional[float] = Field(None, description="店铺类型：1-跨境店, 2-本土店")
@@ -718,8 +798,10 @@ class ShopeeAdjustmentListList(LingXingModel):
     platform_code: Optional[str] = Field(None, description="平台码")
     adj_type: Optional[str] = Field(None, description="调整类型")
 
+
 class ShopeeAdjustmentListResponse(LingXingModel):
     """账单明细-ShopeeAdjustment."""
+
     total_count: Optional[float] = Field(None, description="总记录数")
     total_sum: Optional[List[ShopeeAdjustmentListTotalsum]] = Field(None, description="汇总数据")
     list: Optional[List[ShopeeAdjustmentListList]] = Field(None, description="列表数据")
@@ -727,6 +809,7 @@ class ShopeeAdjustmentListResponse(LingXingModel):
 
 class ShopeeIncomeListTotalsum(LingXingModel):
     """totalSum sub-structure."""
+
     actual_commission_fee: Optional[str] = Field(None, description="实际佣金汇总")
     actual_installation_fee: Optional[str] = Field(None, description="实际安装费汇总")
     actual_service_fee: Optional[str] = Field(None, description="实际服务费汇总")
@@ -760,11 +843,21 @@ class ShopeeIncomeListTotalsum(LingXingModel):
     other_fee: Optional[str] = Field(None, description="其他费用汇总")
     other_order_fee: Optional[str] = Field(None, description="其他订单费汇总")
     overseas_return_service_fee: Optional[str] = Field(None, description="海外免退服务费汇总")
-    prorated_coins_value_offset_return_items: Optional[str] = Field(None, description="退款/退货商品的按比例Shopee币抵消汇总")
-    prorated_payment_channel_promo_bank_offset_return_items: Optional[str] = Field(None, description="退货退款商品的按比例银行支付渠道优惠汇总")
-    prorated_payment_channel_promo_shopee_offset_return_items: Optional[str] = Field(None, description="退货退款商品的按比例Shopee支付渠道优惠汇总")
-    prorated_seller_voucher_offset_return_items: Optional[str] = Field(None, description="退货退款商品的按比例卖家优惠券抵消汇总")
-    prorated_shopee_voucher_offset_return_items: Optional[str] = Field(None, description="退货商品的按比例Shopee优惠券抵消汇总")
+    prorated_coins_value_offset_return_items: Optional[str] = Field(
+        None, description="退款/退货商品的按比例Shopee币抵消汇总"
+    )
+    prorated_payment_channel_promo_bank_offset_return_items: Optional[str] = Field(
+        None, description="退货退款商品的按比例银行支付渠道优惠汇总"
+    )
+    prorated_payment_channel_promo_shopee_offset_return_items: Optional[str] = Field(
+        None, description="退货退款商品的按比例Shopee支付渠道优惠汇总"
+    )
+    prorated_seller_voucher_offset_return_items: Optional[str] = Field(
+        None, description="退货退款商品的按比例卖家优惠券抵消汇总"
+    )
+    prorated_shopee_voucher_offset_return_items: Optional[str] = Field(
+        None, description="退货商品的按比例Shopee优惠券抵消汇总"
+    )
     quantity: Optional[float] = Field(None, description="销售数量汇总")
     refund_amount: Optional[str] = Field(None, description="商品小计退款金额汇总")
     reverse_shipping_fee: Optional[str] = Field(None, description="退货运费汇总")
@@ -798,8 +891,10 @@ class ShopeeIncomeListTotalsum(LingXingModel):
     withholding_tax: Optional[str] = Field(None, description="收入预提税汇总")
     withholding_vat_tax: Optional[str] = Field(None, description="增值税预提汇总")
 
+
 class ShopeeIncomeListList(LingXingModel):
     """list sub-structure."""
+
     actual_commission_fee: Optional[str] = Field(None, description="实际佣金")
     actual_installation_fee: Optional[str] = Field(None, description="实际安装费")
     actual_service_fee: Optional[str] = Field(None, description="实际服务费")
@@ -846,11 +941,21 @@ class ShopeeIncomeListList(LingXingModel):
     payout_sn: Optional[str] = Field(None, description="账期ID")
     payout_time: Optional[str] = Field(None, description="结算时间")
     platform_code: Optional[str] = Field(None, description="平台码")
-    prorated_coins_value_offset_return_items: Optional[str] = Field(None, description="退款/退货商品的按比例Shopee币抵消")
-    prorated_payment_channel_promo_bank_offset_return_items: Optional[str] = Field(None, description="退货退款商品的按比例银行支付渠道优惠")
-    prorated_payment_channel_promo_shopee_offset_return_items: Optional[str] = Field(None, description="退货退款商品的按比例Shopee支付渠道优惠")
-    prorated_seller_voucher_offset_return_items: Optional[str] = Field(None, description="退货退款商品的按比例卖家优惠券抵消")
-    prorated_shopee_voucher_offset_return_items: Optional[str] = Field(None, description="退货商品的按比例Shopee优惠券抵消")
+    prorated_coins_value_offset_return_items: Optional[str] = Field(
+        None, description="退款/退货商品的按比例Shopee币抵消"
+    )
+    prorated_payment_channel_promo_bank_offset_return_items: Optional[str] = Field(
+        None, description="退货退款商品的按比例银行支付渠道优惠"
+    )
+    prorated_payment_channel_promo_shopee_offset_return_items: Optional[str] = Field(
+        None, description="退货退款商品的按比例Shopee支付渠道优惠"
+    )
+    prorated_seller_voucher_offset_return_items: Optional[str] = Field(
+        None, description="退货退款商品的按比例卖家优惠券抵消"
+    )
+    prorated_shopee_voucher_offset_return_items: Optional[str] = Field(
+        None, description="退货商品的按比例Shopee优惠券抵消"
+    )
     refund_amount: Optional[str] = Field(None, description="商品小计-退款金额")
     reverse_shipping_fee: Optional[str] = Field(None, description="退货运费")
     reverse_shipping_fee_sst: Optional[str] = Field(None, description="退货运费SST")
@@ -891,8 +996,10 @@ class ShopeeIncomeListList(LingXingModel):
     withholding_tax: Optional[str] = Field(None, description="收入预提税")
     withholding_vat_tax: Optional[str] = Field(None, description="增值税预提")
 
+
 class ShopeeIncomeListResponse(LingXingModel):
     """账单明细-ShopeeIncome."""
+
     total_count: Optional[float] = Field(None, description="总记录数")
     total_sum: Optional[List[ShopeeIncomeListTotalsum]] = Field(None, description="汇总数据")
     list: Optional[List[ShopeeIncomeListList]] = Field(None, description="列表数据")
@@ -900,6 +1007,7 @@ class ShopeeIncomeListResponse(LingXingModel):
 
 class ShopeePayoutListTotalsum(LingXingModel):
     """totalSum sub-structure."""
+
     difference: Optional[str] = Field(None, description="差额汇总")
     from_amount: Optional[str] = Field(None, description="结算金额汇总")
     from_currency: Optional[str] = Field(None, description="结算币种代码")
@@ -912,8 +1020,10 @@ class ShopeePayoutListTotalsum(LingXingModel):
     settlement_total: Optional[str] = Field(None, description="结算明细总和汇总")
     total_count: Optional[float] = Field(None, description="总记录数")
 
+
 class ShopeePayoutListList(LingXingModel):
     """list sub-structure."""
+
     unique_no: Optional[str] = Field(None, description="业务唯一键")
     payout_amount: Optional[str] = Field(None, description="拨款金额（拨款币种）")
     payout_currency_icon: Optional[str] = Field(None, description="拨款币种图标")
@@ -940,8 +1050,10 @@ class ShopeePayoutListList(LingXingModel):
     difference: Optional[str] = Field(None, description="差额（总拨款金额（结算）-总订单收入-总调整费）")
     platform_code: Optional[str] = Field(None, description="平台码")
 
+
 class ShopeePayoutListResponse(LingXingModel):
     """回款明细-ShopeePayout."""
+
     total_count: Optional[float] = Field(None, description="总记录数")
     total_sum: Optional[List[ShopeePayoutListTotalsum]] = Field(None, description="汇总数据")
     list: Optional[List[ShopeePayoutListList]] = Field(None, description="列表数据")
@@ -949,11 +1061,14 @@ class ShopeePayoutListResponse(LingXingModel):
 
 class FeemanagementOtherfeeListRecords(LingXingModel):
     """records sub-structure."""
+
     id: Optional[str] = Field(None, description="费用单id")
     number: Optional[str] = Field(None, description="单据编号")
     dimension_id: Optional[int] = Field(None, description="分摊维度id： 1 msku 2 asin 3 店铺 4 父asin 5 sku 6 企业")
     dimension: Optional[str] = Field(None, description="分摊维度说明")
-    apportion_rule_id: Optional[int] = Field(None, description="分摊规则id： 1 按销售额占比 2 按销量 3 店铺均摊后按销售额占比 4 店铺均摊后按销量占比")
+    apportion_rule_id: Optional[int] = Field(
+        None, description="分摊规则id： 1 按销售额占比 2 按销量 3 店铺均摊后按销售额占比 4 店铺均摊后按销量占比"
+    )
     apportion_rule: Optional[str] = Field(None, description="分摊规则描述【msku场景下无】")
     date: Optional[str] = Field(None, description="分摊日期")
     fee: Optional[float] = Field(None, description="单据总费用金额")
@@ -963,7 +1078,9 @@ class FeemanagementOtherfeeListRecords(LingXingModel):
     currency_code: Optional[str] = Field(None, description="单据总费用(原始币种)币种")
     currency_icon: Optional[str] = Field(None, description="单据总费用(原始币种)币符")
     allocation_status: Optional[str] = Field(None, description="分摊状态说明： 未分摊 已分摊 已分摊-新 已分摊-旧")
-    status_order_id: Optional[int] = Field(None, description="单据状态id： 1 待提交 2 待审批 3 已处理 4 已驳回 5 已作废")
+    status_order_id: Optional[int] = Field(
+        None, description="单据状态id： 1 待提交 2 待审批 3 已处理 4 已驳回 5 已作废"
+    )
     status_order: Optional[str] = Field(None, description="单据状态说明")
     create_name: Optional[str] = Field(None, description="创建人名称")
     create_time: Optional[str] = Field(None, description="创建时间")
@@ -971,14 +1088,17 @@ class FeemanagementOtherfeeListRecords(LingXingModel):
     is_request_pool: Optional[int] = Field(None, description="是否请款：0 否，1 是")
     details: Optional[list] = Field(None, description="费用项明细")
 
+
 class FeemanagementOtherfeeListResponse(LingXingModel):
     """查询费用明细列表."""
+
     total: Optional[int] = Field(None, description="总数")
     records: Optional[List[FeemanagementOtherfeeListRecords]] = Field(None, description="列表数据")
 
 
 class FeemanagementOtherfeeTypeResponse(LingXingModel):
     """查询费用类型列表."""
+
     id: Optional[int] = Field(None, description="费用类型id")
     sort: Optional[int] = Field(None, description="排序")
     name: Optional[str] = Field(None, description="费用名称")
@@ -987,6 +1107,7 @@ class FeemanagementOtherfeeTypeResponse(LingXingModel):
 
 class ReportAsinListRecords(LingXingModel):
     """records sub-structure."""
+
     total_fba_and_fbm_quantity: Optional[int] = Field(None, description="[int]")
     total_fba_and_fbm_amount: Optional[float] = Field(None, description="[number]")
     total_sales_quantity: Optional[int] = Field(None, description="[int]")
@@ -1185,20 +1306,24 @@ class ReportAsinListRecords(LingXingModel):
     platform_expense: Optional[float] = Field(None, description="[number]")
     gross_profit_tax: Optional[float] = Field(None, description="[number]")
 
+
 class ReportMskuListResponse(LingXingModel):
     """查询利润报表-MSKU."""
+
     total: Optional[int] = Field(None, description="[int]")
     records: Optional[List[ReportAsinListRecords]] = Field(None, description="[array]")
 
 
 class ReportAsinListResponse(LingXingModel):
     """查询利润报表-ASIN."""
+
     total: Optional[int] = Field(None, description="[int]")
     records: Optional[List[ReportAsinListRecords]] = Field(None, description="[array]")
 
 
 class ReportOrderListResponse(LingXingModel):
     """查询利润报表-订单."""
+
     total: Optional[int] = Field(None, description="总数")
     id: Optional[str] = Field(None, description="记录id【非唯一值】,[唯一键参考](docs/Finance/bdOrder?id=附加说明)")
     sid: Optional[int] = Field(None, description="店铺id")
@@ -1256,6 +1381,7 @@ class ReportOrderListResponse(LingXingModel):
 
 class ParentAsinListRecords(LingXingModel):
     """records sub-structure."""
+
     total_fba_and_fbm_quantity: Optional[int] = Field(None, description="[int]")
     total_fba_and_fbm_amount: Optional[float] = Field(None, description="[number]")
     total_sales_quantity: Optional[int] = Field(None, description="[int]")
@@ -1453,14 +1579,17 @@ class ParentAsinListRecords(LingXingModel):
     platform_expense: Optional[float] = Field(None, description="[number]")
     gross_profit_tax: Optional[float] = Field(None, description="[number]")
 
+
 class ParentAsinListResponse(LingXingModel):
     """查询利润报表-父ASIN."""
+
     total: Optional[int] = Field(None, description="[int]")
     records: Optional[List[ParentAsinListRecords]] = Field(None, description="[array]")
 
 
 class ReportSellerListRecords(LingXingModel):
     """records sub-structure."""
+
     total_fba_and_fbm_quantity: Optional[int] = Field(None, description="[int]")
     total_fba_and_fbm_amount: Optional[float] = Field(None, description="[number]")
     total_sales_quantity: Optional[int] = Field(None, description="[int]")
@@ -1646,14 +1775,17 @@ class ReportSellerListRecords(LingXingModel):
     platform_expense: Optional[float] = Field(None, description="[number]")
     gross_profit_tax: Optional[float] = Field(None, description="[number]")
 
+
 class ReportSellerListResponse(LingXingModel):
     """查询利润报表-店铺."""
+
     total: Optional[int] = Field(None, description="[int]")
     records: Optional[List[ReportSellerListRecords]] = Field(None, description="[array]")
 
 
 class SellerSummaryListRecords(LingXingModel):
     """records sub-structure."""
+
     mc_fba_delivery_fee: Optional[float] = Field(None, description="[number]")
     total_fba_delivery_fee: Optional[float] = Field(None, description="[number]")
     shared_ads_al_cost: Optional[float] = Field(None, description="[number]")
@@ -1668,14 +1800,18 @@ class SellerSummaryListRecords(LingXingModel):
     transaction_status_code: Optional[str] = Field(None, description="[string]")
     others: Optional[float] = Field(None, description="[number]")
 
+
 class SellerSummaryListOtherfeestr(LingXingModel):
     """otherFeeStr sub-structure."""
+
     other_fee_type_id: Optional[float] = Field(None, description="[number]")
     other_fee_name: Optional[str] = Field(None, description="[string]")
     fee_allocation: Optional[float] = Field(None, description="[number]")
 
+
 class SellerSummaryListResponse(LingXingModel):
     """查询利润报表-店铺月度汇总."""
+
     total_fba_and_fbm_quantity: Optional[int] = Field(None, description="[int]")
     total_fba_and_fbm_amount: Optional[float] = Field(None, description="[number]")
     total_sales_quantity: Optional[int] = Field(None, description="[int]")
@@ -1848,6 +1984,7 @@ class SellerSummaryListResponse(LingXingModel):
 
 class ReportSkuListRecords(LingXingModel):
     """records sub-structure."""
+
     total_fba_and_fbm_quantity: Optional[int] = Field(None, description="[int]")
     total_fba_and_fbm_amount: Optional[float] = Field(None, description="[number]")
     total_sales_quantity: Optional[int] = Field(None, description="[int]")
@@ -2041,14 +2178,17 @@ class ReportSkuListRecords(LingXingModel):
     others: Optional[float] = Field(None, description="[number]")
     listing_tag_ids: Optional[str] = Field(None, description="[string]")
 
+
 class ReportSkuListResponse(LingXingModel):
     """查询利润报表-SKU."""
+
     total: Optional[int] = Field(None, description="[int]")
     records: Optional[List[ReportSkuListRecords]] = Field(None, description="[array]")
 
 
 class ReceivableReportListResponse(LingXingModel):
     """应收报告-列表查询."""
+
     store_name: Optional[str] = Field(None, description="店铺名称")
     sid: Optional[int] = Field(None, description="店铺id")
     country: Optional[str] = Field(None, description="站点")
@@ -2074,6 +2214,7 @@ class ReceivableReportListResponse(LingXingModel):
 
 class ReportListDetailResponse(LingXingModel):
     """应收报告-详情-列表."""
+
     total: Optional[int] = Field(None, description="总数")
     id: Optional[int] = Field(None, description="序号")
     posted_date_locale: Optional[str] = Field(None, description="日期")
@@ -2092,6 +2233,7 @@ class ReportListDetailResponse(LingXingModel):
 
 class ListDetailInfoResponse(LingXingModel):
     """应收报告-详情-基础信息."""
+
     store_name: Optional[str] = Field(None, description="店铺名称")
     sid: Optional[int] = Field(None, description="店铺id")
     country: Optional[str] = Field(None, description="国家")
@@ -2110,6 +2252,7 @@ class ListDetailInfoResponse(LingXingModel):
 
 class SettlementSummaryListRecords(LingXingModel):
     """records sub-structure."""
+
     id: Optional[str] = Field(None, description="结算编号")
     sid: Optional[int] = Field(None, description="店铺")
     store_name: Optional[str] = Field(None, description="店铺名")
@@ -2118,7 +2261,9 @@ class SettlementSummaryListRecords(LingXingModel):
     seller_id: Optional[str] = Field(None, description="亚马逊账号id")
     account_type: Optional[str] = Field(None, description="报告类型")
     processing_status: Optional[str] = Field(None, description="结算状态： Open 待结算 Pending 结算中 Closed 已结算")
-    fund_transfer_status: Optional[str] = Field(None, description="转账状态： Succeeded 已转账 Failed 失败 Processing 转账中 Unknown 未知")
+    fund_transfer_status: Optional[str] = Field(
+        None, description="转账状态： Succeeded 已转账 Failed 失败 Processing 转账中 Unknown 未知"
+    )
     reconciliation_result: Optional[str] = Field(None, description="对账结果")
     reconciliation_result_map: Optional[dict] = Field(None, description="对账详情")
     original_total_currency_code: Optional[str] = Field(None, description="应收币种")
@@ -2143,15 +2288,20 @@ class SettlementSummaryListRecords(LingXingModel):
     origin_currency_icon: Optional[str] = Field(None, description="应收币种符号")
     convert_currency_icon: Optional[str] = Field(None, description="转账币种符号")
 
+
 class SettlementSummaryListResponse(LingXingModel):
     """查询结算中心 - 结算汇总."""
+
     total: Optional[int] = Field(None, description="总数")
     records: Optional[List[SettlementSummaryListRecords]] = Field(None, description="列表")
 
 
 class TransactionDetailListRecords(LingXingModel):
     """records sub-structure."""
-    unique_key: Optional[str] = Field(None, description="交易明细唯一标识 备注：eventType=servicefeeeventlist时，uniqueKey会变动")
+
+    unique_key: Optional[str] = Field(
+        None, description="交易明细唯一标识 备注：eventType=servicefeeeventlist时，uniqueKey会变动"
+    )
     amazon_order_id: Optional[str] = Field(None, description="订单号")
     sid: Optional[int] = Field(None, description="店铺id")
     store_name: Optional[str] = Field(None, description="店铺名")
@@ -2167,7 +2317,9 @@ class TransactionDetailListRecords(LingXingModel):
     currency_amount: Optional[float] = Field(None, description="金额")
     quantity: Optional[int] = Field(None, description="数量")
     processing_status: Optional[str] = Field(None, description="结算状态： Open 未结算 Closed 已结算 Reconciled 已对账")
-    fund_transfer_status: Optional[str] = Field(None, description="转账状态： Succeeded 已转账 Processing 转账中 Failed 失败 Unknown 未知")
+    fund_transfer_status: Optional[str] = Field(
+        None, description="转账状态： Succeeded 已转账 Processing 转账中 Failed 失败 Unknown 未知"
+    )
     fid: Optional[str] = Field(None, description="结算编号")
     settlement_id: Optional[str] = Field(None, description="settlement_id")
     local_sku: Optional[str] = Field(None, description="sku")
@@ -2222,14 +2374,17 @@ class TransactionDetailListRecords(LingXingModel):
     level1_index: Optional[int] = Field(None, description="层级1索引")
     level2_index: Optional[int] = Field(None, description="层级2索引")
 
+
 class TransactionDetailListResponse(LingXingModel):
     """查询结算中心 - 交易明细."""
+
     records: Optional[List[TransactionDetailListRecords]] = Field(None, description="是")
     total: Optional[int] = Field(None, description="总数")
 
 
 class FinanceProfitstateProfitasinResponse(LingXingModel):
     """查询利润报表（旧） - ASIN（父级）."""
+
     total: Optional[int] = Field(None, description="总数")
     sid: Optional[str] = Field(None, description="店铺id")
     parent_asin: Optional[str] = Field(None, description="父asin")
@@ -2358,6 +2513,7 @@ class FinanceProfitstateProfitasinResponse(LingXingModel):
 
 class FinanceProfitstateProfitasinsonResponse(LingXingModel):
     """查询利润报表（旧） - ASIN（子级）."""
+
     total: Optional[int] = Field(None, description="总数")
     sid: Optional[str] = Field(None, description="店铺id")
     parent_asin: Optional[str] = Field(None, description="父asin")
@@ -2486,20 +2642,25 @@ class FinanceProfitstateProfitasinsonResponse(LingXingModel):
 
 class FinanceProfitstateProfitmskuOtherFeeGoodsDetail(LingXingModel):
     """other_fee_goods_detail sub-structure."""
+
     sid: Optional[str] = Field(None, description="店铺id")
     other_fee_type_id: Optional[float] = Field(None, description="费用类型ID")
     name: Optional[str] = Field(None, description="费用名称")
     other_fee: Optional[float] = Field(None, description="金额")
+
 
 class FinanceProfitstateProfitmskuOtherFeeSellerDetail(LingXingModel):
     """other_fee_seller_detail sub-structure."""
+
     sid: Optional[str] = Field(None, description="店铺id")
     other_fee_type_id: Optional[float] = Field(None, description="费用类型ID")
     name: Optional[str] = Field(None, description="费用名称")
     other_fee: Optional[float] = Field(None, description="金额")
 
+
 class FinanceProfitstateProfitmskuResponse(LingXingModel):
     """查询利润报表（旧） - MSKU."""
+
     total: Optional[int] = Field(None, description="总数")
     date: Optional[str] = Field(None, description="请求时间")
     date_locale: Optional[str] = Field(None, description="年月")
@@ -2610,10 +2771,15 @@ class FinanceProfitstateProfitmskuResponse(LingXingModel):
     seller_name: Optional[str] = Field(None, description="店铺名")
     marketplace: Optional[str] = Field(None, description="国家")
     icon: Optional[str] = Field(None, description="货币符号")
-    other_fee_goods_detail: Optional[List[FinanceProfitstateProfitmskuOtherFeeGoodsDetail]] = Field(None, description="商品其他费详情")
-    other_fee_seller_detail: Optional[List[FinanceProfitstateProfitmskuOtherFeeSellerDetail]] = Field(None, description="店铺其他费详情")
+    other_fee_goods_detail: Optional[List[FinanceProfitstateProfitmskuOtherFeeGoodsDetail]] = Field(
+        None, description="商品其他费详情"
+    )
+    other_fee_seller_detail: Optional[List[FinanceProfitstateProfitmskuOtherFeeSellerDetail]] = Field(
+        None, description="店铺其他费详情"
+    )
 
 
 class FinanceProfitstateProfitsettlementResponse(LingXingModel):
     """查询利润报表（旧）-结算明细."""
+
     total: Optional[int] = Field(None, description="是")

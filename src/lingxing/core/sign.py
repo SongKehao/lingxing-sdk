@@ -1,6 +1,7 @@
-from __future__ import annotations
 #!/usr/bin/python3
 """基于 aes文件 基础加密功能 封装 openapi签名算法"""
+
+from __future__ import annotations
 
 import orjson
 
@@ -8,7 +9,6 @@ from .aes import aes_encrypt, md5_encrypt
 
 
 class SignBase:
-
     @classmethod
     def generate_sign(cls, encrypt_key: str, request_params: dict) -> str:
         """
@@ -24,7 +24,7 @@ class SignBase:
         格式化 params
         """
         if not request_params or not isinstance(request_params, dict):
-            return ''
+            return ""
 
         canonical_strs = []
         sort_keys = sorted(request_params.keys())

@@ -1,4 +1,5 @@
 """Auto-generated response models for Warehouse."""
+
 from typing import Any, List, Optional
 
 from pydantic import Field
@@ -8,16 +9,19 @@ from ..common import LingXingModel
 
 class AwdInboundPlanCancelResponse(LingXingModel):
     """取消AWD入库任务."""
+
     order_id: Optional[str] = Field(None, description="AWD任务编号")
 
 
 class AwdInboundPlanCreateinboundplanResponse(LingXingModel):
     """创建AWD入库任务."""
+
     order_id: Optional[str] = Field(None, description="AWD任务编号")
 
 
 class AwdInboundPlanDetailAwddeliveredgoodsbo(LingXingModel):
     """awdDeliveredGoodsBO sub-structure."""
+
     destination_address_line1: Optional[str] = Field(None, description="配送地址-详细街道地址1")
     destination_address_line2: Optional[str] = Field(None, description="配送地址-详细街道地址2")
     destination_city: Optional[str] = Field(None, description="配送地址-城市")
@@ -25,8 +29,10 @@ class AwdInboundPlanDetailAwddeliveredgoodsbo(LingXingModel):
     destination_postal_code: Optional[str] = Field(None, description="配送地址-邮政编码")
     destination_state_or_region: Optional[str] = Field(None, description="配送地址-州/省/地区编码")
 
+
 class AwdInboundPlanDetailAwddeliveredgoodsitembos(LingXingModel):
     """awdDeliveredGoodsItemBOS sub-structure."""
+
     asin: Optional[str] = Field(None, description="asin")
     box_quantity: Optional[str] = Field(None, description="箱数")
     expiration: Optional[str] = Field(None, description="有效期（yyyy-MM-dd）")
@@ -37,7 +43,10 @@ class AwdInboundPlanDetailAwddeliveredgoodsitembos(LingXingModel):
     length_unit: Optional[str] = Field(None, description="长度单位(INCHES-英制, CENTIMETERS-公制)")
     msku: Optional[str] = Field(None, description="msku")
     parent_asin: Optional[str] = Field(None, description="父asin")
-    prep_category: Optional[str] = Field(None, description="预处理类别：ADULT：成人；HANGER：悬挂在衣架上的服装；TEXTILE：服装、面料、毛绒玩具和纺织品；BABY：母婴用品；FRAGILE：易碎品；LIQUID：液体（未存放在玻璃容器中）；PERFORATED：打孔包装；GRANULAR：粉末、球状或颗粒状物品；SHARP：尖利物品；SMALL：小号；SET：套装销售；NONE：无需进行预处理；FC_Provided：亚马逊指定分类（...")
+    prep_category: Optional[str] = Field(
+        None,
+        description="预处理类别：ADULT：成人；HANGER：悬挂在衣架上的服装；TEXTILE：服装、面料、毛绒玩具和纺织品；BABY：母婴用品；FRAGILE：易碎品；LIQUID：液体（未存放在玻璃容器中）；PERFORATED：打孔包装；GRANULAR：粉末、球状或颗粒状物品；SHARP：尖利物品；SMALL：小号；SET：套装销售；NONE：无需进行预处理；FC_Provided：亚马逊指定分类（...",
+    )
     prep_owner: Optional[str] = Field(None, description="预处理提供方（AMAZON,SELF）")
     product_name: Optional[str] = Field(None, description="品名")
     quantity_in_box: Optional[str] = Field(None, description="单箱数量")
@@ -48,8 +57,10 @@ class AwdInboundPlanDetailAwddeliveredgoodsitembos(LingXingModel):
     weight_unit: Optional[str] = Field(None, description="重量单位（（POUNDS-磅，KILOGRAMS-千克））")
     width: Optional[float] = Field(None, description="箱子宽")
 
+
 class AwdInboundPlanDetailAwdshipmentvos(LingXingModel):
     """awdShipmentVOS sub-structure."""
+
     shipment_id: Optional[str] = Field(None, description="AWD货件单号")
     awd_delivered_goods_bo: Optional[dict] = Field(None, description="配送地址")
     awd_delivered_goods_item_bos: Optional[list] = Field(None, description="发货商品")
@@ -62,12 +73,17 @@ class AwdInboundPlanDetailAwdshipmentvos(LingXingModel):
     remark: Optional[str] = Field(None, description="备注")
     ship_by: Optional[str] = Field(None, description="发货时间")
     sid: Optional[int] = Field(None, description="领星店铺ID")
-    status: Optional[str] = Field(None, description="货件状态：CREATED：已创建；SHIPPED：已发货；IN_TRANSIT：运输中；RECEIVING：接收中；DELIVERED：已送达；CLOSED：已关闭；CANCELLED：已取消")
+    status: Optional[str] = Field(
+        None,
+        description="货件状态：CREATED：已创建；SHIPPED：已发货；IN_TRANSIT：运输中；RECEIVING：接收中；DELIVERED：已送达；CLOSED：已关闭；CANCELLED：已取消",
+    )
     tracking_id: Optional[str] = Field(None, description="跟踪编码")
     warehouse_reference_id: Optional[str] = Field(None, description="物流中心编码")
 
+
 class AwdInboundPlanDetailAwdshippingaddressbo(LingXingModel):
     """awdShippingAddressBO sub-structure."""
+
     address_line1: Optional[str] = Field(None, description="发货地址-详细街道地址1")
     address_line2: Optional[str] = Field(None, description="发货地址-详细街道地址2")
     city: Optional[str] = Field(None, description="发货地址-城市")
@@ -78,44 +94,69 @@ class AwdInboundPlanDetailAwdshippingaddressbo(LingXingModel):
     state_or_province_code: Optional[str] = Field(None, description="发货地址-州/省/地区编码")
     zone: Optional[str] = Field(None, description="发货地址-区")
 
+
 class AwdInboundPlanDetailResponse(LingXingModel):
     """查询AWD入库任务详情."""
-    awd_delivered_goods_bo: Optional[List[AwdInboundPlanDetailAwddeliveredgoodsbo]] = Field(None, description="配送地址")
-    awd_delivered_goods_item_bos: Optional[List[AwdInboundPlanDetailAwddeliveredgoodsitembos]] = Field(None, description="发货商品")
+
+    awd_delivered_goods_bo: Optional[List[AwdInboundPlanDetailAwddeliveredgoodsbo]] = Field(
+        None, description="配送地址"
+    )
+    awd_delivered_goods_item_bos: Optional[List[AwdInboundPlanDetailAwddeliveredgoodsitembos]] = Field(
+        None, description="发货商品"
+    )
     awd_shipment_vos: Optional[List[AwdInboundPlanDetailAwdshipmentvos]] = Field(None, description="AWD货件")
-    awd_shipping_address_bo: Optional[List[AwdInboundPlanDetailAwdshippingaddressbo]] = Field(None, description="发货地址")
+    awd_shipping_address_bo: Optional[List[AwdInboundPlanDetailAwdshippingaddressbo]] = Field(
+        None, description="发货地址"
+    )
     create_by_name: Optional[str] = Field(None, description="创建人名称")
-    destination_region: Optional[str] = Field(None, description="地区偏好：us-east：美国东海岸（马里兰州和宾夕法尼亚分拨中心）；us-west：美国西海岸（加利福尼亚州分拨中心）；us-southcentral：美国中南部（德克萨斯州分拨中心）；us-southeast：美国东南部（南卡罗来纳州分拨中心）；null：亚马逊分配（亚马逊将为您的货件分配最佳分拨中心）")
+    destination_region: Optional[str] = Field(
+        None,
+        description="地区偏好：us-east：美国东海岸（马里兰州和宾夕法尼亚分拨中心）；us-west：美国西海岸（加利福尼亚州分拨中心）；us-southcentral：美国中南部（德克萨斯州分拨中心）；us-southeast：美国东南部（南卡罗来纳州分拨中心）；null：亚马逊分配（亚马逊将为您的货件分配最佳分拨中心）",
+    )
     gmt_create: Optional[str] = Field(None, description="创建时间（yyyy-MM-dd HH:mm:ss）")
     gmt_modified: Optional[str] = Field(None, description="更新时间（yyyy-MM-dd HH:mm:ss）")
     order_id: Optional[str] = Field(None, description="AWD入库任务号")
     remark: Optional[str] = Field(None, description="备注")
     sid: Optional[int] = Field(None, description="店铺id")
-    status: Optional[str] = Field(None, description="任务状态：LOCALDRAFT：草稿；DRAFT：待确认；VALIDATING：更新中；CONFIRMED：已确认；CLOSED： 已关闭；EXPIRED：已过期；CANCELLED：已取消")
+    status: Optional[str] = Field(
+        None,
+        description="任务状态：LOCALDRAFT：草稿；DRAFT：待确认；VALIDATING：更新中；CONFIRMED：已确认；CLOSED： 已关闭；EXPIRED：已过期；CANCELLED：已取消",
+    )
 
 
 class AwdInboundPlanPageOrders(LingXingModel):
     """orders sub-structure."""
+
     asc: Optional[int] = Field(None, description="否")
     column: Optional[str] = Field(None, description="否")
 
+
 class AwdInboundPlanPageRecords(LingXingModel):
     """records sub-structure."""
+
     awd_delivered_goods_bo: Optional[dict] = Field(None, description="配送地址")
     awd_delivered_goods_item_bos: Optional[list] = Field(None, description="发货商品")
     awd_shipment_vos: Optional[list] = Field(None, description="AWD货件")
     awd_shipping_address_bo: Optional[dict] = Field(None, description="发货地址")
     create_by_name: Optional[str] = Field(None, description="创建人名称")
-    destination_region: Optional[str] = Field(None, description="地区偏好：us-east：美国东海岸（马里兰州和宾夕法尼亚分拨中心）；us-west：美国西海岸（加利福尼亚州分拨中心）；us-southcentral：美国中南部（德克萨斯州分拨中心）；us-southeast：美国东南部（南卡罗来纳州分拨中心）；null：亚马逊分配（亚马逊将为您的货件分配最佳分拨中心）")
+    destination_region: Optional[str] = Field(
+        None,
+        description="地区偏好：us-east：美国东海岸（马里兰州和宾夕法尼亚分拨中心）；us-west：美国西海岸（加利福尼亚州分拨中心）；us-southcentral：美国中南部（德克萨斯州分拨中心）；us-southeast：美国东南部（南卡罗来纳州分拨中心）；null：亚马逊分配（亚马逊将为您的货件分配最佳分拨中心）",
+    )
     gmt_create: Optional[str] = Field(None, description="创建时间")
     gmt_modified: Optional[str] = Field(None, description="更新时间")
     order_id: Optional[str] = Field(None, description="AWD入库任务号")
     remark: Optional[str] = Field(None, description="备注")
     sid: Optional[int] = Field(None, description="店铺id")
-    status: Optional[str] = Field(None, description="任务状态：LOCALDRAFT：草稿；DRAFT：待确认；VALIDATING：更新中；CONFIRMED：已确认；CLOSED： 已关闭；EXPIRED：已过期；CANCELLED：已取消")
+    status: Optional[str] = Field(
+        None,
+        description="任务状态：LOCALDRAFT：草稿；DRAFT：待确认；VALIDATING：更新中；CONFIRMED：已确认；CLOSED： 已关闭；EXPIRED：已过期；CANCELLED：已取消",
+    )
+
 
 class AwdInboundPlanPageResponse(LingXingModel):
     """查询AWD入库任务列表."""
+
     count_id: Optional[str] = Field(None, description="否")
     current: Optional[int] = Field(None, description="否")
     max_limit: Optional[int] = Field(None, description="否")
@@ -130,11 +171,13 @@ class AwdInboundPlanPageResponse(LingXingModel):
 
 class AwdInboundPlanUpdateinboundplanResponse(LingXingModel):
     """更新AWD入库任务."""
+
     order_id: Optional[str] = Field(None, description="AWD任务编号")
 
 
 class AwdInboundShipmentDetailAwddeliveredgoodsbo(LingXingModel):
     """awdDeliveredGoodsBO sub-structure."""
+
     destination_address_line1: Optional[str] = Field(None, description="配送地址-详细街道地址1")
     destination_address_line2: Optional[str] = Field(None, description="配送地址-详细街道地址2")
     destination_city: Optional[str] = Field(None, description="配送地址-城市")
@@ -142,8 +185,10 @@ class AwdInboundShipmentDetailAwddeliveredgoodsbo(LingXingModel):
     destination_postal_code: Optional[str] = Field(None, description="配送地址-邮政编码")
     destination_state_or_region: Optional[str] = Field(None, description="配送地址-州/省/地区编码")
 
+
 class AwdInboundShipmentDetailAwddeliveredgoodsitembos(LingXingModel):
     """awdDeliveredGoodsItemBOS sub-structure."""
+
     asin: Optional[str] = Field(None, description="asin")
     box_quantity: Optional[str] = Field(None, description="箱数")
     expiration: Optional[str] = Field(None, description="有效期（yyyy-MM-dd）")
@@ -154,7 +199,10 @@ class AwdInboundShipmentDetailAwddeliveredgoodsitembos(LingXingModel):
     length_unit: Optional[str] = Field(None, description="长度单位(INCHES-英制, CENTIMETERS-公制)")
     msku: Optional[str] = Field(None, description="msku")
     parent_asin: Optional[str] = Field(None, description="父asin")
-    prep_category: Optional[str] = Field(None, description="预处理类别：ADULT：成人；HANGER：悬挂在衣架上的服装；TEXTILE：服装、面料、毛绒玩具和纺织品；BABY：母婴用品；FRAGILE：易碎品；LIQUID：液体（未存放在玻璃容器中）；PERFORATED：打孔包装；GRANULAR：粉末、球状或颗粒状物品；SHARP：尖利物品；SMALL：小号；SET：套装销售；NONE：无需进行预处理；FC_Provided：亚马逊指定分类（...")
+    prep_category: Optional[str] = Field(
+        None,
+        description="预处理类别：ADULT：成人；HANGER：悬挂在衣架上的服装；TEXTILE：服装、面料、毛绒玩具和纺织品；BABY：母婴用品；FRAGILE：易碎品；LIQUID：液体（未存放在玻璃容器中）；PERFORATED：打孔包装；GRANULAR：粉末、球状或颗粒状物品；SHARP：尖利物品；SMALL：小号；SET：套装销售；NONE：无需进行预处理；FC_Provided：亚马逊指定分类（...",
+    )
     prep_owner: Optional[str] = Field(None, description="预处理提供方（AMAZON,SELF,NULL）")
     product_name: Optional[str] = Field(None, description="品名")
     quantity_in_box: Optional[str] = Field(None, description="单箱数量")
@@ -165,8 +213,10 @@ class AwdInboundShipmentDetailAwddeliveredgoodsitembos(LingXingModel):
     weight_unit: Optional[str] = Field(None, description="重量单位（POUNDS-磅，KILOGRAMS-千克）")
     width: Optional[float] = Field(None, description="箱子宽")
 
+
 class AwdInboundShipmentDetailAwdshippingaddressbo(LingXingModel):
     """awdShippingAddressBO sub-structure."""
+
     address_line1: Optional[str] = Field(None, description="发货地址-详细街道地址1")
     address_line2: Optional[str] = Field(None, description="发货地址-详细街道地址2")
     city: Optional[str] = Field(None, description="发货地址-城市")
@@ -177,11 +227,19 @@ class AwdInboundShipmentDetailAwdshippingaddressbo(LingXingModel):
     state_or_province_code: Optional[str] = Field(None, description="发货地址-州/省/地区编码")
     zone: Optional[str] = Field(None, description="发货地址-区")
 
+
 class AwdInboundShipmentDetailResponse(LingXingModel):
     """查询AWD入库货件详情."""
-    awd_delivered_goods_bo: Optional[List[AwdInboundShipmentDetailAwddeliveredgoodsbo]] = Field(None, description="配送地址")
-    awd_delivered_goods_item_bos: Optional[List[AwdInboundShipmentDetailAwddeliveredgoodsitembos]] = Field(None, description="发货商品")
-    awd_shipping_address_bo: Optional[List[AwdInboundShipmentDetailAwdshippingaddressbo]] = Field(None, description="发货地址")
+
+    awd_delivered_goods_bo: Optional[List[AwdInboundShipmentDetailAwddeliveredgoodsbo]] = Field(
+        None, description="配送地址"
+    )
+    awd_delivered_goods_item_bos: Optional[List[AwdInboundShipmentDetailAwddeliveredgoodsitembos]] = Field(
+        None, description="发货商品"
+    )
+    awd_shipping_address_bo: Optional[List[AwdInboundShipmentDetailAwdshippingaddressbo]] = Field(
+        None, description="发货地址"
+    )
     carrier_code: Optional[str] = Field(None, description="承运方式")
     create_by_name: Optional[str] = Field(None, description="创建人名称")
     gmt_create: Optional[str] = Field(None, description="创建时间")
@@ -191,18 +249,24 @@ class AwdInboundShipmentDetailResponse(LingXingModel):
     remark: Optional[str] = Field(None, description="备注")
     ship_by: Optional[str] = Field(None, description="发货时间")
     sid: Optional[int] = Field(None, description="领星店铺ID")
-    status: Optional[str] = Field(None, description="货件状态：CREATED：已创建；SHIPPED：已发货；IN_TRANSIT：运输中；RECEIVING：接收中；DELIVERED：已送达；CLOSED：已关闭；CANCELLED：已取消")
+    status: Optional[str] = Field(
+        None,
+        description="货件状态：CREATED：已创建；SHIPPED：已发货；IN_TRANSIT：运输中；RECEIVING：接收中；DELIVERED：已送达；CLOSED：已关闭；CANCELLED：已取消",
+    )
     tracking_id: Optional[str] = Field(None, description="跟踪编码")
     warehouse_reference_id: Optional[str] = Field(None, description="物流中心编码")
 
 
 class AwdInboundShipmentPageOrders(LingXingModel):
     """orders sub-structure."""
+
     asc: Optional[int] = Field(None, description="否")
     column: Optional[str] = Field(None, description="否")
 
+
 class AwdInboundShipmentPageRecords(LingXingModel):
     """records sub-structure."""
+
     awd_delivered_goods_bo: Optional[dict] = Field(None, description="配送地址")
     awd_delivered_goods_item_bos: Optional[list] = Field(None, description="发货商品")
     awd_shipping_address_bo: Optional[dict] = Field(None, description="发货地址")
@@ -215,12 +279,17 @@ class AwdInboundShipmentPageRecords(LingXingModel):
     remark: Optional[str] = Field(None, description="备注")
     ship_by: Optional[str] = Field(None, description="发货时间")
     sid: Optional[int] = Field(None, description="领星店铺ID")
-    status: Optional[str] = Field(None, description="货件状态：CREATED：已创建；SHIPPED：已发货；IN_TRANSIT：运输中；RECEIVING：接收中；DELIVERED：已送达；CLOSED：已关闭；CANCELLED：已取消")
+    status: Optional[str] = Field(
+        None,
+        description="货件状态：CREATED：已创建；SHIPPED：已发货；IN_TRANSIT：运输中；RECEIVING：接收中；DELIVERED：已送达；CLOSED：已关闭；CANCELLED：已取消",
+    )
     tracking_id: Optional[str] = Field(None, description="跟踪编码")
     warehouse_reference_id: Optional[str] = Field(None, description="物流中心编码")
 
+
 class AwdInboundShipmentPageResponse(LingXingModel):
     """查询AWD入库货件列表."""
+
     count_id: Optional[str] = Field(None, description="否")
     current: Optional[int] = Field(None, description="否")
     max_limit: Optional[int] = Field(None, description="否")
@@ -235,11 +304,14 @@ class AwdInboundShipmentPageResponse(LingXingModel):
 
 class AdjustorderAdjustGetadjuststatusFaillist(LingXingModel):
     """failList sub-structure."""
+
     order_sn: Optional[str] = Field(None, description="单号")
     detail: Optional[str] = Field(None, description="失败原因")
 
+
 class AdjustorderAdjustGetadjuststatusResponse(LingXingModel):
     """查询调整单确认调整异步结果."""
+
     success: Optional[str] = Field(None, description="成功数量")
     fail: Optional[str] = Field(None, description="失败数量")
     total: Optional[str] = Field(None, description="总单数")
@@ -248,6 +320,7 @@ class AdjustorderAdjustGetadjuststatusResponse(LingXingModel):
 
 class AdjustorderAdjustSetadjustResponse(LingXingModel):
     """调整单确认调整."""
+
     task_no: Optional[str] = Field(None, description="异步任务编号")
     type: Optional[str] = Field(None, description="是")
     action_type: Optional[str] = Field(None, description="是")
@@ -255,11 +328,14 @@ class AdjustorderAdjustSetadjustResponse(LingXingModel):
 
 class InboundorderInboundSetinboundFaillist(LingXingModel):
     """failList sub-structure."""
+
     order_sn: Optional[str] = Field(None, description="单号")
     detail: Optional[str] = Field(None, description="失败原因")
 
+
 class InboundorderInboundSetinboundResponse(LingXingModel):
     """入库单确认入库."""
+
     success: Optional[str] = Field(None, description="成功数量")
     fail: Optional[str] = Field(None, description="失败数量")
     total: Optional[str] = Field(None, description="总单数")
@@ -268,12 +344,15 @@ class InboundorderInboundSetinboundResponse(LingXingModel):
 
 class StorageFbawarehousedetailFbaStorageQuantityList(LingXingModel):
     """fba_storage_quantity_list sub-structure."""
+
     sid: Optional[int] = Field(None, description="店铺id")
     name: Optional[str] = Field(None, description="店铺名称")
     quantity_for_local_fulfillment: Optional[int] = Field(None, description="FBA可售数量")
 
+
 class StorageFbawarehousedetailResponse(LingXingModel):
     """查询FBA库存列表-v2."""
+
     name: Optional[str] = Field(None, description="仓库名")
     seller_group_name: Optional[str] = Field(None, description="共享仓店铺名")
     sid: Optional[int] = Field(None, description="店铺id【当仓库为共享仓时，sid为0返回】")
@@ -314,7 +393,9 @@ class StorageFbawarehousedetailResponse(LingXingModel):
     stock_up_num_price: Optional[str] = Field(None, description="实际在途成本价")
     afn_researching_quantity: Optional[int] = Field(None, description="调查中数量")
     afn_researching_quantity_price: Optional[str] = Field(None, description="调查中数量成本价")
-    total_fulfillable_quantity: Optional[int] = Field(None, description="总可用库存: 可售+待调仓+调仓中 【非ERP页面对应总库存】")
+    total_fulfillable_quantity: Optional[int] = Field(
+        None, description="总可用库存: 可售+待调仓+调仓中 【非ERP页面对应总库存】"
+    )
     inv_age_0_to_30_days: Optional[int] = Field(None, description="0-1个月库龄")
     inv_age_0_to_30_price: Optional[str] = Field(None, description="0-1个月库龄成本价")
     inv_age_31_to_60_days: Optional[int] = Field(None, description="1-2个月库龄")
@@ -353,17 +434,22 @@ class StorageFbawarehousedetailResponse(LingXingModel):
     distributor_damaged_quantity: Optional[int] = Field(None, description="不可售详情：分销商残损")
     defective_quantity: Optional[int] = Field(None, description="不可售详情：存在瑕疵")
     expired_quantity: Optional[int] = Field(None, description="不可售详情：已过期")
-    fba_storage_quantity_list: Optional[List[StorageFbawarehousedetailFbaStorageQuantityList]] = Field(None, description="FBA可售信息列表，当仓库为共享仓库时，该字段才返回")
+    fba_storage_quantity_list: Optional[List[StorageFbawarehousedetailFbaStorageQuantityList]] = Field(
+        None, description="FBA可售信息列表，当仓库为共享仓库时，该字段才返回"
+    )
     total: Optional[int] = Field(None, description="总数")
 
 
 class OutboundorderOutboundDeleteFaillist(LingXingModel):
     """failList sub-structure."""
+
     order_sn: Optional[str] = Field(None, description="失败单号")
     detail: Optional[str] = Field(None, description="失败原因")
 
+
 class OutboundorderOutboundDeleteResponse(LingXingModel):
     """删除出库单."""
+
     success: Optional[str] = Field(None, description="成功数量")
     fail: Optional[str] = Field(None, description="失败数量")
     total: Optional[str] = Field(None, description="总单数")
@@ -372,11 +458,14 @@ class OutboundorderOutboundDeleteResponse(LingXingModel):
 
 class OutboundorderOutboundSetoutboundFaillist(LingXingModel):
     """failList sub-structure."""
+
     order_sn: Optional[str] = Field(None, description="单号")
     detail: Optional[str] = Field(None, description="失败原因")
 
+
 class OutboundorderOutboundSetoutboundResponse(LingXingModel):
     """出库单确认出库."""
+
     success: Optional[str] = Field(None, description="成功数量")
     fail: Optional[str] = Field(None, description="失败数量")
     total: Optional[str] = Field(None, description="总单数")
@@ -385,12 +474,15 @@ class OutboundorderOutboundSetoutboundResponse(LingXingModel):
 
 class OverseawarehouseStockorderDetailTotal(LingXingModel):
     """total sub-structure."""
+
     product_count: Optional[float] = Field(None, description="产品总数")
     package_num: Optional[str] = Field(None, description="装箱数量")
     stock_num: Optional[str] = Field(None, description="备货数量")
 
+
 class OverseawarehouseStockorderDetailProducts(LingXingModel):
     """products sub-structure."""
+
     product_code: Optional[str] = Field(None, description="第三方sku")
     twp_name: Optional[str] = Field(None, description="第三方产品名")
     product_id: Optional[float] = Field(None, description="产品id")
@@ -423,8 +515,10 @@ class OverseawarehouseStockorderDetailProducts(LingXingModel):
     awd_shipment_id: Optional[str] = Field(None, description="AWD货件")
     warehouse_items: Optional[list] = Field(None, description="备货产品列表")
 
+
 class OverseawarehouseStockorderDetailPurchaseinfo(LingXingModel):
     """purchaseInfo sub-structure."""
+
     product_id: Optional[float] = Field(None, description="产品ID")
     product_name: Optional[str] = Field(None, description="产品名称")
     sku: Optional[str] = Field(None, description="SKU")
@@ -434,16 +528,20 @@ class OverseawarehouseStockorderDetailPurchaseinfo(LingXingModel):
     stock_num: Optional[float] = Field(None, description="可用总出库量")
     batch_record_list: Optional[list] = Field(None, description="批次记录列表")
 
+
 class OverseawarehouseStockorderDetailLogisticsinfo(LingXingModel):
     """logisticsInfo sub-structure."""
+
     head_logistics_info: Optional[dict] = Field(None, description="物流信息")
     head_logistics_fee_info: Optional[list] = Field(None, description="新版费用明细列表")
     logistics_list: Optional[list] = Field(None, description="旧版费用明细列表")
     head_logistics_tracking_info: Optional[list] = Field(None, description="轨迹信息")
     head_logistics_fee_provider_info: Optional[list] = Field(None, description="多物流商列表")
 
+
 class OverseawarehouseStockorderDetailBoxData(LingXingModel):
     """box_data sub-structure."""
+
     box_type: Optional[float] = Field(None, description="装箱方式")
     box_content: Optional[list] = Field(None, description="装箱内容列表")
     box_remark: Optional[str] = Field(None, description="装箱备注")
@@ -452,12 +550,16 @@ class OverseawarehouseStockorderDetailBoxData(LingXingModel):
     total_box_volume: Optional[float] = Field(None, description="总体积（m³）")
     total_box_volume_weight: Optional[float] = Field(None, description="总体积重（kg）")
 
+
 class OverseawarehouseStockorderDetailHeadLogisticsList(LingXingModel):
     """head_logistics_list sub-structure."""
+
     actual_expenses_list: Optional[dict] = Field(None, description="实际费用列表")
+
 
 class OverseawarehouseStockorderDetailResponse(LingXingModel):
     """查询备货单详情."""
+
     overseas_order_no: Optional[str] = Field(None, description="备货单号")
     inbound_order_no: Optional[str] = Field(None, description="第三方单号")
     s_wid: Optional[float] = Field(None, description="发货仓库id")
@@ -478,15 +580,20 @@ class OverseawarehouseStockorderDetailResponse(LingXingModel):
     remark: Optional[str] = Field(None, description="备注")
     total: Optional[List[OverseawarehouseStockorderDetailTotal]] = Field(None, description="总计信息")
     products: Optional[List[OverseawarehouseStockorderDetailProducts]] = Field(None, description="备货产品列表")
-    purchase_info: Optional[List[OverseawarehouseStockorderDetailPurchaseinfo]] = Field(None, description="采购信息列表")
+    purchase_info: Optional[List[OverseawarehouseStockorderDetailPurchaseinfo]] = Field(
+        None, description="采购信息列表"
+    )
     logistics_info: Optional[List[OverseawarehouseStockorderDetailLogisticsinfo]] = Field(None, description="物流信息")
     box_data: Optional[List[OverseawarehouseStockorderDetailBoxData]] = Field(None, description="装箱信息")
     custom_fields: Optional[dict] = Field(None, description="自定义字段，返回格式见附加说明")
-    head_logistics_list: Optional[List[OverseawarehouseStockorderDetailHeadLogisticsList]] = Field(None, description="头程物流列表")
+    head_logistics_list: Optional[List[OverseawarehouseStockorderDetailHeadLogisticsList]] = Field(
+        None, description="头程物流列表"
+    )
 
 
 class OverseawarehousesettingMatchlistResponse(LingXingModel):
     """查询海外仓sku配对列表."""
+
     total: Optional[int] = Field(None, description="总数")
     country_name: Optional[str] = Field(None, description="国家")
     fnsku: Optional[str] = Field(None, description="fnsku")
@@ -515,12 +622,15 @@ class OverseawarehousesettingMatchlistResponse(LingXingModel):
 
 class QualityinspectionorderDetailImage(LingXingModel):
     """image sub-structure."""
+
     file_id: Optional[str] = Field(None, description="图片ID")
     name: Optional[str] = Field(None, description="图片名称")
     url: Optional[str] = Field(None, description="链接")
 
+
 class QualityinspectionorderDetailQcStandard(LingXingModel):
     """qc_standard sub-structure."""
+
     pqs_id: Optional[str] = Field(None, description="质检标准id")
     qc_id: Optional[str] = Field(None, description="质检单id")
     qc_sn: Optional[str] = Field(None, description="质检单号")
@@ -528,18 +638,24 @@ class QualityinspectionorderDetailQcStandard(LingXingModel):
     qc_item: Optional[str] = Field(None, description="质检项")
     qc_content: Optional[str] = Field(None, description="质检内容")
 
+
 class QualityinspectionorderDetailWhbCodeGoodList(LingXingModel):
     """whb_code_good_list sub-structure."""
+
     whb_num: Optional[int] = Field(None, description="仓位数量")
     whb_code: Optional[str] = Field(None, description="仓位编码")
+
 
 class QualityinspectionorderDetailWhbCodeBadList(LingXingModel):
     """whb_code_bad_list sub-structure."""
+
     whb_num: Optional[int] = Field(None, description="仓位数量")
     whb_code: Optional[str] = Field(None, description="仓位编码")
 
+
 class QualityinspectionorderDetailResponse(LingXingModel):
     """查询质检单详情."""
+
     total: Optional[int] = Field(None, description="总数")
     qc_id: Optional[str] = Field(None, description="质检单id")
     qc_sn: Optional[str] = Field(None, description="质检单号")
@@ -556,7 +672,9 @@ class QualityinspectionorderDetailResponse(LingXingModel):
     product_good_num: Optional[int] = Field(None, description="良品量")
     product_bad_num: Optional[int] = Field(None, description="次品量")
     qc_time: Optional[str] = Field(None, description="质检时间")
-    status: Optional[str] = Field(None, description="质检状态： 0 待质检(质检中) 1 已质检 2 已免检 10 已质检(已撤销) 20 已免检(已撤销)")
+    status: Optional[str] = Field(
+        None, description="质检状态： 0 待质检(质检中) 1 已质检 2 已免检 10 已质检(已撤销) 20 已免检(已撤销)"
+    )
     status_text: Optional[str] = Field(None, description="质检状态说明")
     price: Optional[str] = Field(None, description="单价")
     product_id: Optional[str] = Field(None, description="本地产品id")
@@ -594,17 +712,22 @@ class QualityinspectionorderDetailResponse(LingXingModel):
     custom_qc_time: Optional[str] = Field(None, description="质检时间")
     delivery_order_sn: Optional[str] = Field(None, description="收货单号")
     source_custom_order_sn: Optional[str] = Field(None, description="自定义单号")
-    whb_code_good_list: Optional[List[QualityinspectionorderDetailWhbCodeGoodList]] = Field(None, description="良品仓位")
+    whb_code_good_list: Optional[List[QualityinspectionorderDetailWhbCodeGoodList]] = Field(
+        None, description="良品仓位"
+    )
     whb_code_bad_list: Optional[List[QualityinspectionorderDetailWhbCodeBadList]] = Field(None, description="次品仓位")
 
 
 class WmsorderCancelFailedreason(LingXingModel):
     """failedReason sub-structure."""
+
     order_number: Optional[str] = Field(None, description="失败的单号")
     message: Optional[str] = Field(None, description="失败的原因")
 
+
 class WmsorderCancelResponse(LingXingModel):
     """销售出库单截单."""
+
     success_num: Optional[int] = Field(None, description="成功的数量")
     failed_num: Optional[int] = Field(None, description="失败的数量")
     failed_reason: Optional[List[WmsorderCancelFailedreason]] = Field(None, description="失败的原因列表")
@@ -612,6 +735,7 @@ class WmsorderCancelResponse(LingXingModel):
 
 class WmsorderGetwmsordersbyordernumbersOrderlist(LingXingModel):
     """orderList sub-structure."""
+
     actual_carrier: Optional[str] = Field(None, description="实际承运商")
     amazon_order_id: Optional[str] = Field(None, description="平台单号")
     auto_complete: Optional[int] = Field(None, description="是否快速出库，枚举值：1-是, 0-否")
@@ -647,8 +771,10 @@ class WmsorderGetwmsordersbyordernumbersOrderlist(LingXingModel):
     wo_number: Optional[str] = Field(None, description="销售出库单号")
     zid: Optional[int] = Field(None, description="企业ID")
 
+
 class WmsorderGetwmsordersbyordernumbersResponse(LingXingModel):
     """查询销售出库单详情."""
+
     order_count: Optional[int] = Field(None, description="订单数量")
     order_list: Optional[List[WmsorderGetwmsordersbyordernumbersOrderlist]] = Field(None, description="订单列表")
     total: Optional[int] = Field(None, description="总记录数")
@@ -656,6 +782,7 @@ class WmsorderGetwmsordersbyordernumbersResponse(LingXingModel):
 
 class LocalInventoryWarehouseResponse(LingXingModel):
     """查询仓库列表."""
+
     total: Optional[int] = Field(None, description="总数")
     wid: Optional[int] = Field(None, description="系统仓库id")
     name: Optional[str] = Field(None, description="仓库名")
@@ -672,6 +799,7 @@ class LocalInventoryWarehouseResponse(LingXingModel):
 
 class LocalInventoryGetbatchdetaillistResponse(LingXingModel):
     """查询批次明细."""
+
     total: Optional[int] = Field(None, description="总数")
     batch_no: Optional[str] = Field(None, description="批次号")
     source_batch_no: Optional[str] = Field(None, description="源头批次号")
@@ -708,6 +836,7 @@ class LocalInventoryGetbatchdetaillistResponse(LingXingModel):
 
 class LocalInventoryGetbatchstatementlistResponse(LingXingModel):
     """查询批次流水."""
+
     total: Optional[int] = Field(None, description="总数")
     batch_state_id: Optional[str] = Field(None, description="批次流水id")
     type: Optional[int] = Field(None, description="批次流水子类型id")
@@ -745,13 +874,16 @@ class LocalInventoryGetbatchstatementlistResponse(LingXingModel):
 
 class LocalInventoryInventorybindetailsThirdInventory(LingXingModel):
     """third_inventory sub-structure."""
+
     qty_sellable: Optional[int] = Field(None, description="可用量")
     qty_pending: Optional[int] = Field(None, description="待上架库存")
     qty_reserved: Optional[int] = Field(None, description="锁定量")
     qty_onway: Optional[int] = Field(None, description="备货在途")
 
+
 class LocalInventoryInventorybindetailsResponse(LingXingModel):
     """查询仓位库存明细."""
+
     wid: Optional[int] = Field(None, description="仓库id")
     wh_name: Optional[str] = Field(None, description="仓库名称")
     whb_id: Optional[int] = Field(None, description="仓位id")
@@ -765,25 +897,32 @@ class LocalInventoryInventorybindetailsResponse(LingXingModel):
     total: Optional[int] = Field(None, description="总量")
     lock_num: Optional[int] = Field(None, description="锁定量")
     valid_num: Optional[str] = Field(None, description="未锁定量")
-    third_inventory: Optional[List[LocalInventoryInventorybindetailsThirdInventory]] = Field(None, description="海外仓第三方库存信息")
+    third_inventory: Optional[List[LocalInventoryInventorybindetailsThirdInventory]] = Field(
+        None, description="海外仓第三方库存信息"
+    )
     total: Optional[int] = Field(None, description="总条数")
 
 
 class LocalInventoryInventorydetailsThirdInventory(LingXingModel):
     """third_inventory sub-structure."""
+
     qty_sellable: Optional[int] = Field(None, description="可用量")
     qty_pending: Optional[int] = Field(None, description="待上架库存")
     qty_reserved: Optional[int] = Field(None, description="锁定量")
     qty_onway: Optional[int] = Field(None, description="第三方海外仓备货在途")
     third_inventory_data: Optional[list] = Field(None, description="海外仓子产品库存明细")
 
+
 class LocalInventoryInventorydetailsStockAgeList(LingXingModel):
     """stock_age_list sub-structure."""
+
     name: Optional[str] = Field(None, description="标题")
     qty: Optional[int] = Field(None, description="数量")
 
+
 class LocalInventoryInventorydetailsResponse(LingXingModel):
     """查询仓库库存明细."""
+
     total: Optional[int] = Field(None, description="总数")
     wid: Optional[int] = Field(None, description="仓库id")
     product_id: Optional[int] = Field(None, description="本地产品id")
@@ -801,7 +940,9 @@ class LocalInventoryInventorydetailsResponse(LingXingModel):
     product_onway: Optional[int] = Field(None, description="调拨在途")
     transit_head_cost: Optional[str] = Field(None, description="调拨在途头程成本")
     average_age: Optional[int] = Field(None, description="平均库龄")
-    third_inventory: Optional[List[LocalInventoryInventorydetailsThirdInventory]] = Field(None, description="海外仓第三方库存信息")
+    third_inventory: Optional[List[LocalInventoryInventorydetailsThirdInventory]] = Field(
+        None, description="海外仓第三方库存信息"
+    )
     stock_age_list: Optional[List[LocalInventoryInventorydetailsStockAgeList]] = Field(None, description="库龄信息")
     purchase_price: Optional[str] = Field(None, description="采购单价")
     price: Optional[str] = Field(None, description="单位费用")
@@ -811,6 +952,7 @@ class LocalInventoryInventorydetailsResponse(LingXingModel):
 
 class LocalInventoryWarehousebinstatementResponse(LingXingModel):
     """查询仓位流水."""
+
     wid: Optional[int] = Field(None, description="仓库ID")
     ware_house_name: Optional[str] = Field(None, description="仓库名")
     whb_id: Optional[str] = Field(None, description="仓位id")
@@ -833,6 +975,7 @@ class LocalInventoryWarehousebinstatementResponse(LingXingModel):
 
 class LocalInventoryWarehousestatementResponse(LingXingModel):
     """查询库存流水（旧）."""
+
     statement_id: Optional[str] = Field(None, description="流水ID")
     wid: Optional[int] = Field(None, description="仓库ID")
     ware_house_name: Optional[str] = Field(None, description="仓库名")
@@ -849,7 +992,10 @@ class LocalInventoryWarehousestatementResponse(LingXingModel):
     product_lock_num: Optional[float] = Field(None, description="锁定量")
     price: Optional[float] = Field(None, description="单价")
     amount: Optional[float] = Field(None, description="金额")
-    type: Optional[str] = Field(None, description="流水类型： 1 其他入库 2 采购入库 3 调拨入库 10 其它入库（已撤销） 11 其他出库 12 FBA出库 13 调拨出库 14 退货出库 15 FBM退货 16 换标入库 17 加工入库 18 拆分入库 20 采购入库（已撤销） 21 库存调整 23 委外入库 25 盘盈入库 32 委外出库 33 盘亏出库 34 换标出库 35 加工出库 36 拆分出库 43 FBM出库 50 成本...")
+    type: Optional[str] = Field(
+        None,
+        description="流水类型： 1 其他入库 2 采购入库 3 调拨入库 10 其它入库（已撤销） 11 其他出库 12 FBA出库 13 调拨出库 14 退货出库 15 FBM退货 16 换标入库 17 加工入库 18 拆分入库 20 采购入库（已撤销） 21 库存调整 23 委外入库 25 盘盈入库 32 委外出库 33 盘亏出库 34 换标出库 35 加工出库 36 拆分出库 43 FBM出库 50 成本...",
+    )
     remark: Optional[str] = Field(None, description="备注")
     opt_uid: Optional[int] = Field(None, description="操作人员ID")
     opt_time: Optional[str] = Field(None, description="操作时间")
@@ -866,11 +1012,14 @@ class LocalInventoryWarehousestatementResponse(LingXingModel):
 
 class LocalInventoryWarehousebinSkuFnsku(LingXingModel):
     """sku_fnsku sub-structure."""
+
     sku: Optional[str] = Field(None, description="sku")
     fnsku: Optional[str] = Field(None, description="fnsku")
 
+
 class LocalInventoryWarehousebinResponse(LingXingModel):
     """查询本地仓位列表."""
+
     id: Optional[int] = Field(None, description="仓位id")
     wid: Optional[int] = Field(None, description="仓库ID")
     ware_house_name: Optional[str] = Field(None, description="仓库名")
@@ -883,6 +1032,7 @@ class LocalInventoryWarehousebinResponse(LingXingModel):
 
 class DeliveryreceiptPurchasereceiptorderGetorderlistList(LingXingModel):
     """list sub-structure."""
+
     order_sn: Optional[str] = Field(None, description="收货单号")
     status: Optional[int] = Field(None, description="状态：10 待收货，40 已完成")
     create_time: Optional[str] = Field(None, description="创建时间")
@@ -910,14 +1060,17 @@ class DeliveryreceiptPurchasereceiptorderGetorderlistList(LingXingModel):
     remark: Optional[str] = Field(None, description="单据备注")
     item_list: Optional[list] = Field(None, description="产品列表")
 
+
 class DeliveryreceiptPurchasereceiptorderGetorderlistResponse(LingXingModel):
     """查询收货单列表."""
+
     total: Optional[int] = Field(None, description="总数")
     list: Optional[List[DeliveryreceiptPurchasereceiptorderGetorderlistList]] = Field(None, description="列表")
 
 
 class FbaFbastockFbalistList(LingXingModel):
     """list sub-structure."""
+
     wname: Optional[str] = Field(None, description="仓库名称")
     name: Optional[str] = Field(None, description="仓库名称【同wname】")
     sid: Optional[int] = Field(None, description="店铺id")
@@ -938,7 +1091,9 @@ class FbaFbastockFbalistList(LingXingModel):
     reserved_fc_transfers: Optional[str] = Field(None, description="待调仓")
     reserved_fc_processing: Optional[str] = Field(None, description="调仓中")
     reserved_customerorders: Optional[str] = Field(None, description="待发货")
-    total_fulfillable_quantity: Optional[int] = Field(None, description="总可用库存：可售+待调仓+调仓中 【非ERP页面对应总库存】")
+    total_fulfillable_quantity: Optional[int] = Field(
+        None, description="总可用库存：可售+待调仓+调仓中 【非ERP页面对应总库存】"
+    )
     afn_unsellable_quantity: Optional[int] = Field(None, description="不可售")
     afn_inbound_working_quantity: Optional[int] = Field(None, description="计划入库")
     afn_inbound_shipped_quantity: Optional[int] = Field(None, description="在途")
@@ -958,14 +1113,17 @@ class FbaFbastockFbalistList(LingXingModel):
     fulfillment_channel_name: Optional[str] = Field(None, description="配送方式")
     afn_fulfillable_quantity_multi: Optional[list] = Field(None, description="欧洲共享的多国店铺列表")
 
+
 class FbaFbastockFbalistResponse(LingXingModel):
     """查询FBA库存列表."""
+
     total: Optional[int] = Field(None, description="总数")
     list: Optional[List[FbaFbastockFbalistList]] = Field(None, description="列表数据")
 
 
 class InventorylogWarehouseinventoryWarehousecenterstatementResponse(LingXingModel):
     """查询库存流水（新）."""
+
     wid: Optional[int] = Field(None, description="仓库id")
     ware_house_name: Optional[str] = Field(None, description="仓库名称")
     order_sn: Optional[str] = Field(None, description="操作单据号")
@@ -1013,18 +1171,22 @@ class InventorylogWarehouseinventoryWarehousecenterstatementResponse(LingXingMod
 
 class InventoryreceiptInventorycheckAddorderResponse(LingXingModel):
     """创建已完成的盘点单."""
+
     total: Optional[int] = Field(None, description="总数")
     order_sn: Optional[str] = Field(None, description="盘点单号")
 
 
 class InventoryreceiptInventorycheckGetorderdetailFile(LingXingModel):
     """file sub-structure."""
+
     file_id: Optional[int] = Field(None, description="附件id")
     file_name: Optional[str] = Field(None, description="附件名称")
     file_url: Optional[str] = Field(None, description="附件URL")
 
+
 class InventoryreceiptInventorycheckGetorderdetailProductList(LingXingModel):
     """product_list sub-structure."""
+
     product_id: Optional[int] = Field(None, description="本地产品id")
     product_name: Optional[str] = Field(None, description="品名")
     sku: Optional[str] = Field(None, description="SKU")
@@ -1035,7 +1197,9 @@ class InventoryreceiptInventorycheckGetorderdetailProductList(LingXingModel):
     whb_id: Optional[int] = Field(None, description="仓位id")
     whb_code: Optional[str] = Field(None, description="仓位")
     whb_code_text: Optional[str] = Field(None, description="仓位名称")
-    whb_type: Optional[int] = Field(None, description="仓位类型： 1 待检暂存 2 可用暂存 3 次品暂存 4 拣货暂存 5 可用 6 次品 7 可用在途 8 次品在途")
+    whb_type: Optional[int] = Field(
+        None, description="仓位类型： 1 待检暂存 2 可用暂存 3 次品暂存 4 拣货暂存 5 可用 6 次品 7 可用在途 8 次品在途"
+    )
     whb_type_text: Optional[str] = Field(None, description="仓位类型文本")
     book_inventory: Optional[int] = Field(None, description="账面库存")
     actual_inventory: Optional[int] = Field(None, description="实盘库存")
@@ -1045,16 +1209,22 @@ class InventoryreceiptInventorycheckGetorderdetailProductList(LingXingModel):
     is_combo: Optional[int] = Field(None, description="是否组合产品：0 否，1 是")
     is_aux: Optional[int] = Field(None, description="是否辅料：0 否，1 是")
 
+
 class InventoryreceiptInventorycheckGetorderdetailItemTotal(LingXingModel):
     """item_total sub-structure."""
+
     book_inventory: Optional[int] = Field(None, description="账面库存总数")
     actual_inventory: Optional[int] = Field(None, description="实盘库存总数")
     different_count: Optional[int] = Field(None, description="盘点差异总数")
 
+
 class InventoryreceiptInventorycheckGetorderdetailResponse(LingXingModel):
     """查询盘点单详情."""
+
     order_sn: Optional[str] = Field(None, description="盘点单号")
-    status: Optional[int] = Field(None, description="盘点状态： 10 待盘点 20 预锁 30 盘点中 40 已盘点 121 待审核 122 已驳回 123 通过 124 作废")
+    status: Optional[int] = Field(
+        None, description="盘点状态： 10 待盘点 20 预锁 30 盘点中 40 已盘点 121 待审核 122 已驳回 123 通过 124 作废"
+    )
     status_text: Optional[str] = Field(None, description="状态文本")
     wid: Optional[int] = Field(None, description="盘点仓库id")
     ware_house_name: Optional[str] = Field(None, description="盘点仓库名称")
@@ -1082,22 +1252,31 @@ class InventoryreceiptInventorycheckGetorderdetailResponse(LingXingModel):
     remark: Optional[str] = Field(None, description="备注")
     request_status: Optional[int] = Field(None, description="单据状态：0 正常，1 处理中")
     file: Optional[List[InventoryreceiptInventorycheckGetorderdetailFile]] = Field(None, description="上传附件信息")
-    product_list: Optional[List[InventoryreceiptInventorycheckGetorderdetailProductList]] = Field(None, description="盘点明细列表")
+    product_list: Optional[List[InventoryreceiptInventorycheckGetorderdetailProductList]] = Field(
+        None, description="盘点明细列表"
+    )
     total: Optional[int] = Field(None, description="盘点明细总数")
-    item_total: Optional[List[InventoryreceiptInventorycheckGetorderdetailItemTotal]] = Field(None, description="盘点明细信息")
+    item_total: Optional[List[InventoryreceiptInventorycheckGetorderdetailItemTotal]] = Field(
+        None, description="盘点明细信息"
+    )
 
 
 class InventoryreceiptInventorycheckGetorderlistFile(LingXingModel):
     """file sub-structure."""
+
     file_id: Optional[int] = Field(None, description="附件id")
     file_name: Optional[str] = Field(None, description="附件名称")
     file_url: Optional[str] = Field(None, description="附件URL")
 
+
 class InventoryreceiptInventorycheckGetorderlistResponse(LingXingModel):
     """查询盘点单列表."""
+
     total: Optional[int] = Field(None, description="总数")
     order_sn: Optional[str] = Field(None, description="盘点单号")
-    status: Optional[int] = Field(None, description="盘点状态： 10 待盘点 20 预锁 30 盘点中 40 已盘点 121 待审核 122 已驳回 123 通过 124 作废")
+    status: Optional[int] = Field(
+        None, description="盘点状态： 10 待盘点 20 预锁 30 盘点中 40 已盘点 121 待审核 122 已驳回 123 通过 124 作废"
+    )
     status_text: Optional[str] = Field(None, description="状态文本")
     wid: Optional[int] = Field(None, description="盘点仓库id")
     ware_house_name: Optional[str] = Field(None, description="盘点仓库名称")
@@ -1129,21 +1308,25 @@ class InventoryreceiptInventorycheckGetorderlistResponse(LingXingModel):
 
 class InventoryreceiptStorageadjustmentAddadjustmentorderResponse(LingXingModel):
     """创建已完成的数量调整单."""
+
     order_sn: Optional[str] = Field(None, description="生成的调整单的单据号")
 
 
 class InventoryreceiptStorageadjustmentAddrebrandadjustmentorderResponse(LingXingModel):
     """创建已完成的换标调整单."""
+
     order_sn: Optional[str] = Field(None, description="生成的调整单的单据号")
 
 
 class InventoryreceiptStorageadjustmentAddskuadjustmentorderResponse(LingXingModel):
     """创建已完成的SKU调整单."""
+
     order_sn: Optional[str] = Field(None, description="生成的调整单的单据号")
 
 
 class InventoryreceiptStorageadjustmentGetstorageadjustorderlistItemList(LingXingModel):
     """item_list sub-structure."""
+
     sku: Optional[str] = Field(None, description="本地产品sku")
     product_id: Optional[int] = Field(None, description="本地产品id")
     product_name: Optional[str] = Field(None, description="品名")
@@ -1162,7 +1345,9 @@ class InventoryreceiptStorageadjustmentGetstorageadjustorderlistItemList(LingXin
     to_seller_name: Optional[str] = Field(None, description="调整的店铺名称【数量调整没有该字段】")
     to_country_name: Optional[str] = Field(None, description="调整的店铺所属国家【数量调整没有该字段】")
     to_available_bin: Optional[str] = Field(None, description="【废弃字段】换标的入库仓位【只有换标调整才有该字段】")
-    to_available_bin_name: Optional[str] = Field(None, description="【废弃字段】换标的入库仓位名称【只有换标调整才有该字段】")
+    to_available_bin_name: Optional[str] = Field(
+        None, description="【废弃字段】换标的入库仓位名称【只有换标调整才有该字段】"
+    )
     available_bin: Optional[str] = Field(None, description="可用仓位【只有数量调整有该字段】")
     available_bin_name: Optional[str] = Field(None, description="可用仓位名称【只有数量调整有该字段】")
     inferior_bin: Optional[str] = Field(None, description="次品仓位【只有数量调整有该字段】")
@@ -1170,15 +1355,19 @@ class InventoryreceiptStorageadjustmentGetstorageadjustorderlistItemList(LingXin
     adjustment_bad_num: Optional[int] = Field(None, description="次品调整量【只有数量调整有该字段】")
     to_available_bin_list: Optional[list] = Field(None, description="换标的入库仓位列表")
 
+
 class InventoryreceiptStorageadjustmentGetstorageadjustorderlistResponse(LingXingModel):
     """查询调整单列表."""
+
     total: Optional[int] = Field(None, description="查询总数")
     order_sn: Optional[str] = Field(None, description="单据号")
     wid: Optional[int] = Field(None, description="仓库id")
     ware_house_name: Optional[str] = Field(None, description="仓库名称")
     type: Optional[int] = Field(None, description="调整类型： 0 数量调整 1 换标调整 2 sku调整")
     type_text: Optional[str] = Field(None, description="调整类型文本")
-    status: Optional[int] = Field(None, description="单据状态： 5 待提交 10 待调整 20 已完成 30 已删除 121 待审批 122 已驳回")
+    status: Optional[int] = Field(
+        None, description="单据状态： 5 待提交 10 待调整 20 已完成 30 已删除 121 待审批 122 已驳回"
+    )
     status_text: Optional[str] = Field(None, description="单据状态说明")
     remark: Optional[str] = Field(None, description="单据备注")
     create_uid: Optional[int] = Field(None, description="创建人id")
@@ -1194,17 +1383,21 @@ class InventoryreceiptStorageadjustmentGetstorageadjustorderlistResponse(LingXin
     opt_realname: Optional[str] = Field(None, description="单据最后操作人名称")
     opt_time: Optional[str] = Field(None, description="单据最后操作时间")
     increment_time: Optional[str] = Field(None, description="单据增量时间")
-    item_list: Optional[List[InventoryreceiptStorageadjustmentGetstorageadjustorderlistItemList]] = Field(None, description="单据明细列表")
+    item_list: Optional[List[InventoryreceiptStorageadjustmentGetstorageadjustorderlistItemList]] = Field(
+        None, description="单据明细列表"
+    )
 
 
 class InventoryreceiptStorageallocationAddallocationorderResponse(LingXingModel):
     """创建待收货/已完成的调拨单."""
+
     order_sn: Optional[str] = Field(None, description="调拨单号")
     total: Optional[int] = Field(None, description="总数")
 
 
 class InventoryreceiptStorageallocationGetstorageallocationlistItemList(LingXingModel):
     """item_list sub-structure."""
+
     product_id: Optional[int] = Field(None, description="产品id")
     sku: Optional[str] = Field(None, description="SKU")
     fnsku: Optional[str] = Field(None, description="FNSKU")
@@ -1236,8 +1429,10 @@ class InventoryreceiptStorageallocationGetstorageallocationlistItemList(LingXing
     in_available_bin_list: Optional[list] = Field(None, description="入库可用仓位列表")
     in_inferior_bin_list: Optional[list] = Field(None, description="入库次品仓位列表")
 
+
 class InventoryreceiptStorageallocationGetstorageallocationlistResponse(LingXingModel):
     """查询调拨单列表."""
+
     order_sn: Optional[str] = Field(None, description="单据号")
     wid: Optional[int] = Field(None, description="出库仓库id")
     to_wid: Optional[int] = Field(None, description="入库仓库id")
@@ -1247,7 +1442,9 @@ class InventoryreceiptStorageallocationGetstorageallocationlistResponse(LingXing
     out_bin_type: Optional[int] = Field(None, description="出仓类型： 0 不指定仓位 1 指定仓位")
     ware_house_bak_name: Optional[str] = Field(None, description="出库仓库名称")
     to_ware_house_bak_name: Optional[str] = Field(None, description="入库仓库名称")
-    status: Optional[int] = Field(None, description="单据状态： 5-待提交 10 待调拨 19 待收货 20 已完成 30 已删除 121 待审批 122 已驳回")
+    status: Optional[int] = Field(
+        None, description="单据状态： 5-待提交 10 待调拨 19 待收货 20 已完成 30 已删除 121 待审批 122 已驳回"
+    )
     status_text: Optional[str] = Field(None, description="单据状态文本")
     create_time: Optional[str] = Field(None, description="创建时间")
     create_uid: Optional[int] = Field(None, description="创建人（用户id）")
@@ -1256,7 +1453,9 @@ class InventoryreceiptStorageallocationGetstorageallocationlistResponse(LingXing
     remark: Optional[str] = Field(None, description="单据备注")
     freight_fee: Optional[float] = Field(None, description="运费")
     other_fee: Optional[float] = Field(None, description="其他费用")
-    fee_part_type: Optional[int] = Field(None, description="费用分摊方式： 0 不分摊 1 按金额分摊 2 按sku数量分摊 3 按重量 4 按体积 5 按自定义")
+    fee_part_type: Optional[int] = Field(
+        None, description="费用分摊方式： 0 不分摊 1 按金额分摊 2 按sku数量分摊 3 按重量 4 按体积 5 按自定义"
+    )
     type: Optional[int] = Field(None, description="调拨类型：1-简易调拨；2-完整调拨")
     receive_uid: Optional[int] = Field(None, description="确认收货操作人（用户id）")
     receive_time: Optional[str] = Field(None, description="确认收货收货时间")
@@ -1272,7 +1471,9 @@ class InventoryreceiptStorageallocationGetstorageallocationlistResponse(LingXing
     finish_realname: Optional[str] = Field(None, description="单据完成操作人姓名")
     fee_part_type_text: Optional[str] = Field(None, description="费用分摊方式文本")
     out_bin_type_text: Optional[str] = Field(None, description="出仓方式文本")
-    item_list: Optional[List[InventoryreceiptStorageallocationGetstorageallocationlistItemList]] = Field(None, description="产品明细列表")
+    item_list: Optional[List[InventoryreceiptStorageallocationGetstorageallocationlistItemList]] = Field(
+        None, description="产品明细列表"
+    )
     good_total_num: Optional[int] = Field(None, description="订单可用调拨总量")
     bad_total_num: Optional[int] = Field(None, description="订单次品调拨总量")
     total: Optional[int] = Field(None, description="查询总数")
@@ -1280,17 +1481,20 @@ class InventoryreceiptStorageallocationGetstorageallocationlistResponse(LingXing
 
 class InventoryreceiptStorageallocationSubmitallocationorderResponse(LingXingModel):
     """创建待调拨的调拨单."""
+
     order_sn: Optional[str] = Field(None, description="调拨单号")
 
 
 class InventoryreceiptStorageprocessAddstorageprocessorderResponse(LingXingModel):
     """创建加工单 / 拆分单."""
+
     order_sn: Optional[str] = Field(None, description="加工单/拆分单 单号")
     total: Optional[int] = Field(None, description="总数")
 
 
 class InventoryreceiptStorageprocessGetorderlistsProductList(LingXingModel):
     """product_list sub-structure."""
+
     sku: Optional[str] = Field(None, description="组合品sku")
     product_name: Optional[str] = Field(None, description="组合品产品名称")
     fnsku: Optional[str] = Field(None, description="组合品fnksu")
@@ -1303,8 +1507,10 @@ class InventoryreceiptStorageprocessGetorderlistsProductList(LingXingModel):
     quantity: Optional[int] = Field(None, description="加工量/拆分量")
     item_list: Optional[list] = Field(None, description="单品明细项")
 
+
 class InventoryreceiptStorageprocessGetorderlistsResponse(LingXingModel):
     """加工单列表."""
+
     total: Optional[int] = Field(None, description="单据总数")
     process_sn: Optional[str] = Field(None, description="加工/拆分单号")
     status: Optional[int] = Field(None, description="订单状态： 0 待配货 1 待完成 2 已完成")
@@ -1319,17 +1525,21 @@ class InventoryreceiptStorageprocessGetorderlistsResponse(LingXingModel):
     finish_uid: Optional[int] = Field(None, description="最后操作人id")
     remark: Optional[str] = Field(None, description="备注")
     update_time: Optional[str] = Field(None, description="更新时间")
-    product_list: Optional[List[InventoryreceiptStorageprocessGetorderlistsProductList]] = Field(None, description="组合品项")
+    product_list: Optional[List[InventoryreceiptStorageprocessGetorderlistsProductList]] = Field(
+        None, description="组合品项"
+    )
 
 
 class OwmsInboundCreateinboundResponse(LingXingModel):
     """创建待发货/待收货/已完成的备货单."""
+
     overseas_order_no: Optional[str] = Field(None, description="系统备货单号")
     total: Optional[int] = Field(None, description="数据总量")
 
 
 class OwmsInboundGetpackingdataBoxList(LingXingModel):
     """box_list sub-structure."""
+
     box_no: Optional[int] = Field(None, description="箱号")
     height: Optional[float] = Field(None, description="箱子高(CM)")
     length: Optional[float] = Field(None, description="箱子长(CM)")
@@ -1337,8 +1547,10 @@ class OwmsInboundGetpackingdataBoxList(LingXingModel):
     weight: Optional[float] = Field(None, description="箱子重(KG)")
     items: Optional[list] = Field(None, description="商品详情")
 
+
 class OwmsInboundGetpackingdataResponse(LingXingModel):
     """查询备货单装箱信息."""
+
     overseas_order_no: Optional[str] = Field(None, description="备货单号")
     packaging_type: Optional[float] = Field(None, description="装箱类型：1 每箱多个sku，2 每箱一个sku")
     box_count: Optional[float] = Field(None, description="总箱数")
@@ -1348,6 +1560,7 @@ class OwmsInboundGetpackingdataResponse(LingXingModel):
 
 class OwmsInboundGetreceivegoodrecordsResponse(LingXingModel):
     """查询备货单收货记录."""
+
     woop_id: Optional[int] = Field(None, description="订单商品id")
     overseas_order_no: Optional[str] = Field(None, description="备货单单号")
     inbound_order_no: Optional[str] = Field(None, description="入库单号")
@@ -1371,6 +1584,7 @@ class OwmsInboundGetreceivegoodrecordsResponse(LingXingModel):
 
 class OwmsInboundListinboundProducts(LingXingModel):
     """products sub-structure."""
+
     product_id: Optional[int] = Field(None, description="产品id")
     sku: Optional[str] = Field(None, description="sku")
     product_name: Optional[str] = Field(None, description="产品名")
@@ -1385,8 +1599,10 @@ class OwmsInboundListinboundProducts(LingXingModel):
     remark: Optional[str] = Field(None, description="商品备注")
     batch_record_list: Optional[list] = Field(None, description="采购信息")
 
+
 class OwmsInboundListinboundLogistics(LingXingModel):
     """logistics sub-structure."""
+
     logistics_order_no: Optional[str] = Field(None, description="物流单号")
     logistics_money: Optional[str] = Field(None, description="预估物流费用")
     logistics_money_unit: Optional[str] = Field(None, description="预估物流费用币种")
@@ -1401,14 +1617,18 @@ class OwmsInboundListinboundLogistics(LingXingModel):
     real_other_money_remark: Optional[str] = Field(None, description="实际其他费用备注")
     wool_id: Optional[str] = Field(None, description="物流记录id")
 
+
 class OwmsInboundListinboundHeadLogisticsList(LingXingModel):
     """head_logistics_list sub-structure."""
+
     tracking_list: Optional[list] = Field(None, description="轨迹信息数组")
     estimate_expenses_list: Optional[dict] = Field(None, description="费用明细-预估费用")
     actual_expenses_list: Optional[dict] = Field(None, description="费用明细-实际费用")
 
+
 class OwmsInboundListinboundResponse(LingXingModel):
     """查询海外仓备货单列表."""
+
     overseas_order_no: Optional[str] = Field(None, description="备货单号")
     inbound_order_no: Optional[str] = Field(None, description="三方入库单号")
     customer_reference_no: Optional[str] = Field(None, description="客户提交参考号")
@@ -1419,7 +1639,9 @@ class OwmsInboundListinboundResponse(LingXingModel):
     logistics_id: Optional[int] = Field(None, description="物流方式id")
     logistics_name: Optional[str] = Field(None, description="物流方式")
     remark: Optional[str] = Field(None, description="备注")
-    status: Optional[int] = Field(None, description="状态： 10 待审核 20 已驳回 30 待配货 40 待发货 50 待收货 51 已撤销 60 已完成")
+    status: Optional[int] = Field(
+        None, description="状态： 10 待审核 20 已驳回 30 待配货 40 待发货 50 待收货 51 已撤销 60 已完成"
+    )
     rollback_remark: Optional[str] = Field(None, description="驳回备注")
     is_delete: Optional[int] = Field(None, description="是否已删除： 0 正常 1 已删除")
     transportation_mode: Optional[str] = Field(None, description="运输方式ID")
@@ -1437,12 +1659,16 @@ class OwmsInboundListinboundResponse(LingXingModel):
     products: Optional[List[OwmsInboundListinboundProducts]] = Field(None, description="商品信息")
     logistics: Optional[List[OwmsInboundListinboundLogistics]] = Field(None, description="物流数据")
     logistics_list_type: Optional[int] = Field(None, description="物流信息版本：【默认0】 0 旧版 1 新版")
-    head_logistics_list: Optional[List[OwmsInboundListinboundHeadLogisticsList]] = Field(None, description="新版头程物流信息 【对应 logistics_list_type = 1】 【注意：新版头程物流数据为覆盖式更新，包括tracking_list、estimate_expenses_list、actual_expenses_list，不传或者传空也会置空】")
+    head_logistics_list: Optional[List[OwmsInboundListinboundHeadLogisticsList]] = Field(
+        None,
+        description="新版头程物流信息 【对应 logistics_list_type = 1】 【注意：新版头程物流数据为覆盖式更新，包括tracking_list、estimate_expenses_list、actual_expenses_list，不传或者传空也会置空】",
+    )
     total: Optional[int] = Field(None, description="总数")
 
 
 class OwmsInboundListordernosResponse(LingXingModel):
     """获取备货单号."""
+
     overseas_order_no: Optional[str] = Field(None, description="备货单号")
     inbound_order_no: Optional[str] = Field(None, description="客户参考号")
     create_time: Optional[str] = Field(None, description="创建时间")
@@ -1450,6 +1676,7 @@ class OwmsInboundListordernosResponse(LingXingModel):
 
 class OwmsInboundMatchskulistResponse(LingXingModel):
     """查询系统产品与第三方海外仓产品映射列表."""
+
     warehouse_name: Optional[str] = Field(None, description="仓库名称")
     warehouse_code: Optional[str] = Field(None, description="仓库代码code")
     wid: Optional[int] = Field(None, description="仓库id")
@@ -1468,12 +1695,14 @@ class OwmsInboundMatchskulistResponse(LingXingModel):
 
 class OwmsInboundPackagelabelResponse(LingXingModel):
     """获取第三方箱唛."""
+
     file_type: Optional[str] = Field(None, description="标签数据类型，目前仅支持pdf")
     file_contents: Optional[list] = Field(None, description="base64字符串数组")
 
 
 class OwmsRemovalinboundListAddress(LingXingModel):
     """address sub-structure."""
+
     sid: Optional[int] = Field(None, description="店铺id")
     order_id: Optional[int] = Field(None, description="移除入库单id")
     order_no: Optional[str] = Field(None, description="移除入库单号")
@@ -1489,8 +1718,10 @@ class OwmsRemovalinboundListAddress(LingXingModel):
     name: Optional[str] = Field(None, description="收件人名称")
     address_str: Optional[str] = Field(None, description="格式化地址")
 
+
 class OwmsRemovalinboundListProduct(LingXingModel):
     """product sub-structure."""
+
     id: Optional[int] = Field(None, description="子项记录id")
     sid: Optional[int] = Field(None, description="店铺id")
     order_id: Optional[int] = Field(None, description="移除入库单id")
@@ -1511,8 +1742,10 @@ class OwmsRemovalinboundListProduct(LingXingModel):
     recieve_num: Optional[int] = Field(None, description="收货数量")
     differences: Optional[int] = Field(None, description="待收货量")
 
+
 class OwmsRemovalinboundListResponse(LingXingModel):
     """查询移除入库单列表."""
+
     total: Optional[int] = Field(None, description="总数")
     id: Optional[int] = Field(None, description="记录id")
     sid: Optional[int] = Field(None, description="店铺id")
@@ -1525,7 +1758,10 @@ class OwmsRemovalinboundListResponse(LingXingModel):
     shippment_time: Optional[str] = Field(None, description="发货时间")
     shipper: Optional[str] = Field(None, description="承运商")
     delivery_no: Optional[str] = Field(None, description="跟踪号")
-    order_status: Optional[int] = Field(None, description="订单状态： 1 待提交-未提交 2 待提交-提交中 3 待提交-失败 4 待收货-未收货 5 待收货-异常 6 已完成 7 已作废")
+    order_status: Optional[int] = Field(
+        None,
+        description="订单状态： 1 待提交-未提交 2 待提交-提交中 3 待提交-失败 4 待收货-未收货 5 待收货-异常 6 已完成 7 已作废",
+    )
     remark: Optional[str] = Field(None, description="备注")
     uid: Optional[int] = Field(None, description="提交人id")
     uid_name: Optional[str] = Field(None, description="提交人姓名【同submiter】")
@@ -1538,13 +1774,16 @@ class OwmsRemovalinboundListResponse(LingXingModel):
 
 class StorageInboundGetcustomtypesList(LingXingModel):
     """list sub-structure."""
+
     id: Optional[int] = Field(None, description="类型ID")
     name: Optional[str] = Field(None, description="类型名称")
     is_delete: Optional[str] = Field(None, description="是否删除： 0 否 1 是")
     status: Optional[str] = Field(None, description="状态： 0 关闭 1 开启")
 
+
 class StorageInboundGetcustomtypesResponse(LingXingModel):
     """获取自定义入库类型."""
+
     total: Optional[int] = Field(None, description="总数")
     list: Optional[List[StorageInboundGetcustomtypesList]] = Field(None, description="类型列表")
     total: Optional[int] = Field(None, description="行数")
@@ -1552,12 +1791,15 @@ class StorageInboundGetcustomtypesResponse(LingXingModel):
 
 class StorageInboundGetordersCustomFields(LingXingModel):
     """custom_fields sub-structure."""
+
     id: Optional[str] = Field(None, description="字段ID")
     name: Optional[str] = Field(None, description="字段名")
     val_text: Optional[str] = Field(None, description="字段值")
 
+
 class StorageInboundGetordersItemList(LingXingModel):
     """item_list sub-structure."""
+
     product_name: Optional[str] = Field(None, description="品名")
     sku: Optional[str] = Field(None, description="sku")
     fnsku: Optional[str] = Field(None, description="fnsku")
@@ -1576,8 +1818,10 @@ class StorageInboundGetordersItemList(LingXingModel):
     product_remark: Optional[str] = Field(None, description="产品备注")
     custom_fields: Optional[list] = Field(None, description="自定义字段")
 
+
 class StorageInboundGetordersResponse(LingXingModel):
     """查询入库单列表."""
+
     total: Optional[int] = Field(None, description="总数")
     increment_time: Optional[str] = Field(None, description="单据数据更新时间")
     custom_fields: Optional[List[StorageInboundGetordersCustomFields]] = Field(None, description="自定义字段")
@@ -1623,13 +1867,16 @@ class StorageInboundGetordersResponse(LingXingModel):
 
 class StorageOutboundGetcustomtypesList(LingXingModel):
     """list sub-structure."""
+
     id: Optional[int] = Field(None, description="类型ID")
     name: Optional[str] = Field(None, description="类型名称")
     is_delete: Optional[str] = Field(None, description="是否删除： 0 否 1 是")
     status: Optional[str] = Field(None, description="状态： 0 关闭 1 开启")
 
+
 class StorageOutboundGetcustomtypesResponse(LingXingModel):
     """获取自定义出库类型."""
+
     total: Optional[int] = Field(None, description="总数")
     list: Optional[List[StorageOutboundGetcustomtypesList]] = Field(None, description="类型列表")
     total: Optional[int] = Field(None, description="行数")
@@ -1637,12 +1884,15 @@ class StorageOutboundGetcustomtypesResponse(LingXingModel):
 
 class StorageOutboundGetordersCustomFields(LingXingModel):
     """custom_fields sub-structure."""
+
     id: Optional[str] = Field(None, description="字段ID")
     name: Optional[str] = Field(None, description="字段名")
     val_text: Optional[str] = Field(None, description="字段值")
 
+
 class StorageOutboundGetordersItemList(LingXingModel):
     """item_list sub-structure."""
+
     product_name: Optional[str] = Field(None, description="品名")
     sku: Optional[str] = Field(None, description="sku")
     fnsku: Optional[str] = Field(None, description="fnsku")
@@ -1662,8 +1912,10 @@ class StorageOutboundGetordersItemList(LingXingModel):
     out_inferior_bin: Optional[str] = Field(None, description="次品仓位列表")
     custom_fields: Optional[list] = Field(None, description="自定义字段")
 
+
 class StorageOutboundGetordersResponse(LingXingModel):
     """查询出库单列表."""
+
     total: Optional[int] = Field(None, description="总数")
     increment_time: Optional[str] = Field(None, description="单据数据更新时间")
     custom_fields: Optional[List[StorageOutboundGetordersCustomFields]] = Field(None, description="自定义字段")
@@ -1710,22 +1962,26 @@ class StorageOutboundGetordersResponse(LingXingModel):
 
 class StorageStorageOrderaddResponse(LingXingModel):
     """添加入库单."""
+
     order_sn_arr: Optional[list] = Field(None, description="入库单号数组【兼容多个单号情况】")
     order_sn: Optional[str] = Field(None, description="入库单号【多个单号情况下值为order_sn_arr里的第一个】")
 
 
 class StorageStorageOrderaddoutResponse(LingXingModel):
     """添加出库单."""
+
     order_sn: Optional[str] = Field(None, description="出库单号")
 
 
 class StorageWarehousebinSwitchstatusResponse(LingXingModel):
     """启用、禁用仓位."""
+
     success_msg: Optional[str] = Field(None, description="成功信息")
 
 
 class WmsOrderGetwmslogisticslabelsResponse(LingXingModel):
     """查询销售出库单物流面单."""
+
     wo_number: Optional[str] = Field(None, description="销售出库单号")
     order_number: Optional[str] = Field(None, description="系统单号")
     logistics_provider_id: Optional[float] = Field(None, description="物流服务商id")
@@ -1738,17 +1994,22 @@ class WmsOrderGetwmslogisticslabelsResponse(LingXingModel):
 
 class WmsOrderWmsorderlistSurfaceFile(LingXingModel):
     """surface_file sub-structure."""
+
     uri: Optional[str] = Field(None, description="链接")
     ext: Optional[str] = Field(None, description="文件后缀")
     size: Optional[str] = Field(None, description="文件尺寸")
 
+
 class WmsOrderWmsorderlistProductInfo(LingXingModel):
     """product_info sub-structure."""
+
     wod_id: Optional[int] = Field(None, description="出库单明细id")
     product_id: Optional[int] = Field(None, description="商品id")
     sku: Optional[str] = Field(None, description="SKU")
     count: Optional[int] = Field(None, description="数量")
-    bundle_type: Optional[int] = Field(None, description="捆绑类型： 0 普通商品 - 含组合产品、子产品 1 捆绑产品 2 捆绑产品拆分子产品")
+    bundle_type: Optional[int] = Field(
+        None, description="捆绑类型： 0 普通商品 - 含组合产品、子产品 1 捆绑产品 2 捆绑产品拆分子产品"
+    )
     bundle_wod_id: Optional[int] = Field(None, description="捆绑产品wod_id【只有拆分子产品才有】")
     product_name: Optional[str] = Field(None, description="商品名")
     seller_sku: Optional[str] = Field(None, description="MSKU")
@@ -1772,8 +2033,10 @@ class WmsOrderWmsorderlistProductInfo(LingXingModel):
     volume_weight_total: Optional[str] = Field(None, description="费用分摊-总体集中")
     declared_currency_icon: Optional[str] = Field(None, description="申报比重图标")
 
+
 class WmsOrderWmsorderlistResponse(LingXingModel):
     """查询销售出库单列表."""
+
     total: Optional[int] = Field(None, description="总数")
     wo_id: Optional[int] = Field(None, description="出库单id")
     wo_number: Optional[str] = Field(None, description="销售出库单号")
@@ -1800,12 +2063,17 @@ class WmsOrderWmsorderlistResponse(LingXingModel):
     order_buyer_notes: Optional[str] = Field(None, description="买家留言")
     status: Optional[int] = Field(None, description="状态： 1 物流下单 2 待出库 3 已出库 4 已截单")
     status_name: Optional[str] = Field(None, description="状态名称")
-    logistics_status: Optional[int] = Field(None, description="物流下单状态： 1 待导入 2 物流待下单 3 物流下单中 4 下单异常 5 下单完成 6 待海外仓下单 7 海外仓下单中 11 待导入国内物流 41 物流取消中 42 物流取消异常 43 物流取消完成")
+    logistics_status: Optional[int] = Field(
+        None,
+        description="物流下单状态： 1 待导入 2 物流待下单 3 物流下单中 4 下单异常 5 下单完成 6 待海外仓下单 7 海外仓下单中 11 待导入国内物流 41 物流取消中 42 物流取消异常 43 物流取消完成",
+    )
     logistics_status_name: Optional[str] = Field(None, description="物流下单状态名称")
     logistics_message: Optional[str] = Field(None, description="物流下单消息")
     cancel_status: Optional[int] = Field(None, description="第三方仓取消状态：0无需处理、1取消中、2取消异常、3取消成功")
     cancel_message: Optional[str] = Field(None, description="第三方仓取消返回消息")
-    delivery_status: Optional[int] = Field(None, description="第三方仓发货状态：20待发货、21发货中、22发货异常、23发货成功")
+    delivery_status: Optional[int] = Field(
+        None, description="第三方仓发货状态：20待发货、21发货中、22发货异常、23发货成功"
+    )
     delivery_message: Optional[str] = Field(None, description="第三方仓发货异常消息")
     logistics_provider_id: Optional[int] = Field(None, description="物流服务商id")
     logistics_provider_name: Optional[str] = Field(None, description="物流服务商名称")
@@ -1868,6 +2136,7 @@ class WmsOrderWmsorderlistResponse(LingXingModel):
 
 class ReturnsV2ListList(LingXingModel):
     """list sub-structure."""
+
     complete_time: Optional[str] = Field(None, description="完成时间")
     global_order_no: Optional[int] = Field(None, description="系统单号")
     gmt_create: Optional[str] = Field(None, description="创建时间")
@@ -1892,8 +2161,10 @@ class ReturnsV2ListList(LingXingModel):
     relation_order_info: Optional[dict] = Field(None, description="关联单据")
     items: Optional[list] = Field(None, description="商品信息")
 
+
 class ReturnsV2ListResponse(LingXingModel):
     """查询销售退货单列表."""
+
     total: Optional[int] = Field(None, description="总条数")
     list: Optional[List[ReturnsV2ListList]] = Field(None, description="详细列表")
 
@@ -2482,124 +2753,149 @@ class WareHouseBinStatementItem(LingXingModel):
 
 class AwdInboundPlanConfirmResponse(LingXingModel):
     """确认AWD入库任务 (/amzStaServer/openapi/awd/inbound-plan/confirmInboundPlan)."""
+
     msg: Optional[str] = None
 
 
 class AwdInboundPlanCreateResponse(LingXingModel):
     """创建AWD入库任务 (/amzStaServer/openapi/awd/inbound-plan/createInboundPlan)."""
+
     msg: Optional[str] = None
 
 
 class AwdInboundPlanUpdateResponse(LingXingModel):
     """更新AWD入库任务 (/amzStaServer/openapi/awd/inbound-plan/updateInboundPlan)."""
+
     msg: Optional[str] = None
 
 
 class AwdInboundShipmentUpdateTrackResponse(LingXingModel):
     """更新AWD货件跟踪编号 (/amzStaServer/openapi/awd/inbound-shipment/updateShipmentInfo)."""
+
     msg: Optional[str] = None
 
 
 class AwdInboundShipmentPrintLabelResponse(LingXingModel):
     """打印AWD入库货件箱子标签 (/amzStaServer/openapi/awd/inbound-shipment/uploadPacking)."""
+
     msg: Optional[str] = None
 
 
 class PackingTaskAddResponse(LingXingModel):
     """装箱任务-生成装箱任务 (/basicOpen/packingTask/addTask)."""
+
     msg: Optional[str] = None
 
 
 class PackingTaskBatchEditResponse(LingXingModel):
     """装箱任务-批量编辑装箱信息 (/basicOpen/packingTask/batchEditPackingBox)."""
+
     msg: Optional[str] = None
 
 
 class PackingTaskDelResponse(LingXingModel):
     """装箱任务-删除装箱任务 (/basicOpen/packingTask/delTask)."""
+
     msg: Optional[str] = None
 
 
 class PackingTaskDetailResponse(LingXingModel):
     """装箱任务-任务详情 (/basicOpen/packingTask/taskDetail)."""
+
     msg: Optional[str] = None
 
 
 class PackingTaskFinishResponse(LingXingModel):
     """装箱任务-标记已完成 (/basicOpen/packingTask/finishTask)."""
+
     msg: Optional[str] = None
 
 
 class PackingTaskListResponse(LingXingModel):
     """装箱任务-单据列表 (/basicOpen/packingTask/getRelateSnList)."""
+
     msg: Optional[str] = None
 
 
 class ProcessPlanListResponse(LingXingModel):
     """查询加工计划列表 (/basicOpen/openapi/workOrder/processPlanList)."""
+
     msg: Optional[str] = None
 
 
 class ProcessOrderAddResponse(LingXingModel):
     """创建加工单/拆分单 (/erp/sc/routing/inventoryReceipt/StorageProcess/addStorageProcessOrder)."""
+
     msg: Optional[str] = None
 
 
 class ProcessOrderListResponse(LingXingModel):
     """加工单列表 (/erp/sc/routing/inventoryReceipt/StorageProcess/getOrderLists)."""
+
     msg: Optional[str] = None
 
 
 class OverseaProductUnmatchResponse(LingXingModel):
     """海外仓sku取消配对 (/basicOpen/overseaWarehouseSetting/productMatch)."""
+
     msg: Optional[str] = None
 
 
 class WarehouseBinEntryRecommendResponse(LingXingModel):
     """查询产品仓位列表 (/basicOpen/warehouseConfig/warehouseBin/getEntryRecommendBinList)."""
+
     msg: Optional[str] = None
 
 
 class OverseaStockOrderDetailResponse(LingXingModel):
     """查询海外仓备货单详情 (/basicOpen/overSeaWarehouse/stockOrder/detail)."""
+
     msg: Optional[str] = None
 
 
 class PurchaseReceiptOrderCreateResponse(LingXingModel):
     """创建待收货的收货单 (/erp/sc/routing/deliveryReceipt/PurchaseReceiptOrder/createReceiptOrder)."""
+
     msg: Optional[str] = None
 
 
 class SalesReturnV2ListResponse(LingXingModel):
     """查询销售退货单列表 (/pb/mp/returns/v2/list)."""
+
     msg: Optional[str] = None
 
 
 class ReceiptOrderQcListResponse(LingXingModel):
     """查询质检单列表 (/erp/sc/routing/deliveryReceipt/ReceiptOrderQc/getOrderList)."""
+
     msg: Optional[str] = None
 
 
 class ReturnOrderFastStorageInResponse(LingXingModel):
     """待收货退货单快捷入库 (/basicOpen/return/order/fastStorageIn)."""
+
     msg: Optional[str] = None
 
 
 class AllocationPartlyReceiveResponse(LingXingModel):
     """调拨单分批收货 (/erp/sc/routing/inventoryReceipt/StorageAllocation/partlyReceiveAllocationOrder)."""
+
     msg: Optional[str] = None
 
 
 class AllocationFinishReceiveResponse(LingXingModel):
     """调拨单结束到货 (/erp/sc/routing/inventoryReceipt/StorageAllocation/finishReceiveAllocationOrder)."""
+
     msg: Optional[str] = None
 
 
 class CostChangeFinishResponse(LingXingModel):
     """创建已完成的成本补录单 (/erp/sc/routing/inventoryReceipt/CostChangeOrder/finishCostChangeOrder)."""
+
     msg: Optional[str] = None
 
 
 class WmsOrderSetPackageSizeResponse(LingXingModel):
     """设置包裹尺寸 (/erp/sc/routing/wms/order/setOrderPackageSize)."""
+
     msg: Optional[str] = None

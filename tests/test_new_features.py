@@ -1,4 +1,5 @@
 """Tests for new SDK features: retry, pagination, response models, exports."""
+
 import asyncio
 from unittest.mock import AsyncMock, MagicMock
 
@@ -16,6 +17,7 @@ def _make_resp(code=0, message="ok", data=None, request_id=""):
 # ===================================================================
 # Retry
 # ===================================================================
+
 
 class TestAutoRetry:
     @pytest.fixture
@@ -76,6 +78,7 @@ class TestAutoRetry:
 # Pagination
 # ===================================================================
 
+
 class TestPagination:
     @pytest.fixture
     def ep(self):
@@ -86,12 +89,11 @@ class TestPagination:
     @pytest.mark.asyncio
     async def test_iter_single_page(self, ep):
         from pydantic import BaseModel
+
         class Item(BaseModel):
             id: int
 
-        ep._openapi.request_with_auto_token.return_value = _make_resp(
-            data={"list": [{"id": 1}, {"id": 2}], "total": 2}
-        )
+        ep._openapi.request_with_auto_token.return_value = _make_resp(data={"list": [{"id": 1}, {"id": 2}], "total": 2})
         pages = []
         async for p in ep._iter_pages("/t", Item, page_size=100):
             pages.append(p)
@@ -101,6 +103,7 @@ class TestPagination:
     @pytest.mark.asyncio
     async def test_iter_multi_page(self, ep):
         from pydantic import BaseModel
+
         class Item(BaseModel):
             id: int
 
@@ -118,12 +121,11 @@ class TestPagination:
     @pytest.mark.asyncio
     async def test_iter_empty(self, ep):
         from pydantic import BaseModel
+
         class Item(BaseModel):
             id: int
 
-        ep._openapi.request_with_auto_token.return_value = _make_resp(
-            data={"list": [], "total": 0}
-        )
+        ep._openapi.request_with_auto_token.return_value = _make_resp(data={"list": [], "total": 0})
         pages = []
         async for p in ep._iter_pages("/t", Item):
             pages.append(p)
@@ -132,6 +134,7 @@ class TestPagination:
     @pytest.mark.asyncio
     async def test_iter_max_pages(self, ep):
         from pydantic import BaseModel
+
         class Item(BaseModel):
             id: int
 
@@ -146,6 +149,7 @@ class TestPagination:
     @pytest.mark.asyncio
     async def test_collect_all(self, ep):
         from pydantic import BaseModel
+
         class Item(BaseModel):
             id: int
 
@@ -159,6 +163,7 @@ class TestPagination:
     @pytest.mark.asyncio
     async def test_collect_max_items(self, ep):
         from pydantic import BaseModel
+
         class Item(BaseModel):
             id: int
 
@@ -173,21 +178,25 @@ class TestPagination:
 # Response Models
 # ===================================================================
 
+
 class TestResponseModels:
     def test_sale_listing_model(self):
         from lingxing.models.responses.sale import MwsListingResponse
+
         m = MwsListingResponse(sid=123, asin="B00TEST", marketplace="US")
         assert m.sid == 123
         assert m.asin == "B00TEST"
 
     def test_optional_fields_default_none(self):
         from lingxing.models.responses.sale import MwsListingResponse
+
         m = MwsListingResponse()
         assert m.sid is None
         assert m.asin is None
 
     def test_extra_fields_allowed(self):
         from lingxing.models.responses.sale import MwsListingResponse
+
         m = MwsListingResponse(sid=1, future_field="hello")
         assert m.sid == 1
 
@@ -196,9 +205,11 @@ class TestResponseModels:
 # Request Models
 # ===================================================================
 
+
 class TestRequestModels:
     def test_request_model_fields(self):
         from lingxing.models.requests.sale import SaleListingRequest
+
         req = SaleListingRequest(sid="123", offset=0, length=20)
         assert req.sid == "123"
         assert req.offset == 0
@@ -208,28 +219,34 @@ class TestRequestModels:
 # Exports
 # ===================================================================
 
+
 class TestExports:
     def test_version(self):
         import lingxing
+
         assert lingxing.__version__ >= "0.4.0"
 
     def test_all_importable(self):
         import lingxing
+
         for name in lingxing.__all__:
             assert getattr(lingxing, name) is not None
 
     def test_19_endpoints(self):
         from lingxing.endpoints import __all__ as ep_all
+
         assert len(ep_all) == 20
 
     def test_errors_hierarchy(self):
-        from lingxing.errors import LingXingError, ApiError, RateLimitError, AuthenticationError
+        from lingxing.errors import ApiError, AuthenticationError, LingXingError, RateLimitError
+
         assert issubclass(ApiError, LingXingError)
         assert issubclass(RateLimitError, LingXingError)
         assert issubclass(AuthenticationError, LingXingError)
 
     def test_types(self):
         from lingxing.types import PageRequest, PageResult
+
         pr = PageRequest()
         assert pr.page == 1
         assert pr.offset == 0

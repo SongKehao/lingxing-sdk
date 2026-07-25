@@ -1,4 +1,5 @@
 """Common shared models."""
+
 from __future__ import annotations
 
 from pydantic import BaseModel, ConfigDict
@@ -16,6 +17,7 @@ class LingXingModel(BaseModel):
     Supports both camelCase (from API) and snake_case (Python) field names.
     API responses use camelCase which gets automatically mapped to snake_case.
     """
+
     model_config = ConfigDict(
         extra="allow",
         populate_by_name=True,
@@ -26,6 +28,7 @@ class LingXingModel(BaseModel):
 
 class PageResult(LingXingModel):
     """通用分页结果."""
+
     total: int = 0
     page: int = 1
     page_size: int = 50
