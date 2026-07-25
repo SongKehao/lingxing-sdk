@@ -39,13 +39,25 @@ FIXTURE_MODULE_MAP = {
         "BasicEndpoints",
         "lingxing.models.responses.basic_data",
     ),
-    "FBA": ("lingxing.endpoints.fba", "FBAEndpoints", "lingxing.models.fba"),
-    "Product": ("lingxing.endpoints.product", "ProductEndpoints", "lingxing.models.product"),
-    "Purchase": ("lingxing.endpoints.purchase", "PurchaseEndpoints", "lingxing.models.purchase"),
+    "FBA": (
+        "lingxing.endpoints.fba",
+        "FBAEndpoints",
+        "lingxing.models.responses.fba",
+    ),
+    "Product": (
+        "lingxing.endpoints.product",
+        "ProductEndpoints",
+        "lingxing.models.responses.product",
+    ),
+    "Purchase": (
+        "lingxing.endpoints.purchase",
+        "PurchaseEndpoints",
+        "lingxing.models.responses.purchase",
+    ),
     "Warehouse": (
         "lingxing.endpoints.warehouse",
         "WarehouseEndpoints",
-        "lingxing.models.warehouse",
+        "lingxing.models.responses.warehouse",
     ),
     "Statistics": (
         "lingxing.endpoints.statistics",

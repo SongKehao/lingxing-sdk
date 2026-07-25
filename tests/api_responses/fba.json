@@ -1,0 +1,146 @@
+{
+  "FBA/GetFbaProductList": {
+    "url": "/erp/sc/routing/fba/shipment/getFbaProductList",
+    "name": "FBA/GetFbaProductList",
+    "code": 0,
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "image": "https://example.com/redacted/20260414/98a7fc4f84984feREDACTEDb43ca8.jpg",
+          "msku": "7A-DVIP-8V3R",
+          "fnsku": "X004829DP5",
+          "asin": "B0CX5HQFV4",
+          "asin_url": "https://www.amazon.com/dp/B0CX5HQFV4",
+          "parent_asin": "B0CX5HQFV4",
+          "title": "BeyondmLap Portable 7-Ring Stretch and Resistance Exercise Band Back/Foot/Leg/Hand Stretcher Fitness Programme Exercise Band for Home or Fitness Centre Workouts (Green)",
+          "local_name": "REDACTED",
+          "sku": "7A-DVIP-8V3R",
+          "product_id": "78465",
+          "sid": "4583"
+        },
+        {
+          "image": "https://example.com/redacted/20260414/a1a77ec207084e0a8a9c3247aec9c7ba.jpg",
+          "msku": "5V-NXXG-YRK6",
+          "fnsku": "X0047UNEZ3",
+          "asin": "B0CW11L1SC",
+          "asin_url": "https://www.amazon.com/dp/B0CW11L1SC",
+          "parent_asin": "B0CW11L1SC",
+          "title": "BeyondmLap Black Girl Religious Butterfly Wall Decal Sticker, You Are Beautiful Wall Decor Decal, African American Nursery Decor Positive Sayings Religious Bedroom Art For Room Home Decorations, Red",
+          "local_name": "REDACTED",
+          "sku": "5V-NXXG-YRK6",
+          "product_id": "85201",
+          "sid": "4583"
+        },
+        {
+          "image": "https://example.com/redacted/20260414/e28cfe3a051a4b809ad5f1bb120d7d13.jpg",
+          "msku": "P6-OKM0-9NO0",
+          "fnsku": "X004DC0X09",
+          "asin": "B0DF2CD373",
+          "asin_url": "https://www.amazon.ca/dp/B0DF2CD373",
+          "parent_asin": "B0DQV1VR35",
+          "title": "Capybara Pencil Case,Cute Clear Pencil CaseAesthetic Multi-Layer Transparent Pencil Pouch,Capybara Large Capacity Multi-Layers Pouch,Wide Opening Pencil Pouch with Stickers,Capybara School Supplies",
+          "local_name": "REDACTED",
+          "sku": "P6-OKM0-9NO0",
+          "product_id": "78460",
+          "sid": "4584"
+        }
+      ],
+      "message": "success",
+      "total": 3
+    }
+  },
+  "FBA/GetHeadLogisticsFeeTypes": {
+    "url": "/erp/sc/routing/fba/shipment/getHeadLogisticsFeeTypes",
+    "name": "FBA/GetHeadLogisticsFeeTypes",
+    "code": 0,
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "fee_type_id": "0",
+          "name": "REDACTED",
+          "remark": "",
+          "created_at": "REDACTED:00:00"
+        }
+      ],
+      "message": "success",
+      "total": 1
+    }
+  },
+  "FBA/ShipFromAddressList": {
+    "url": "/erp/sc/routing/fba/shipment/shipFromAddressList",
+    "name": "FBA/ShipFromAddressList",
+    "code": 0,
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "id": 1611,
+          "sid": 4727,
+          "alias_name": "REDACTED",
+          "country_code": "CN",
+          "sender_name": "REDACTED",
+          "province": "Fujian",
+          "city": "Putian",
+          "region": "",
+          "street_detail1": "REDACTED",
+          "street_detail2": "",
+          "zip_code": "351100",
+          "phone": "REDACTED",
+          "is_default": 1,
+          "email": "",
+          "company_name": "",
+          "type": 0,
+          "seller_name": "REDACTED",
+          "seller_country_name": "加拿大",
+          "country_name": "中国 内地"
+        },
+        {
+          "id": 1610,
+          "sid": 4782,
+          "alias_name": "REDACTED",
+          "country_code": "CN",
+          "sender_name": "REDACTED",
+          "province": "Shaanxi",
+          "city": "Xian",
+          "region": "",
+          "street_detail1": "REDACTED",
+          "street_detail2": "",
+          "zip_code": "710000",
+          "phone": "REDACTED",
+          "is_default": 1,
+          "email": "",
+          "company_name": "",
+          "type": 0,
+          "seller_name": "REDACTED",
+          "seller_country_name": "加拿大",
+          "country_name": "中国 内地"
+        },
+        {
+          "id": 1609,
+          "sid": 4725,
+          "alias_name": "REDACTED",
+          "country_code": "CN",
+          "sender_name": "REDACTED",
+          "province": "Shaanxi",
+          "city": "Xian",
+          "region": "",
+          "street_detail1": "REDACTED",
+          "street_detail2": "",
+          "zip_code": "710002",
+          "phone": "REDACTED",
+          "is_default": 1,
+          "email": "",
+          "company_name": "",
+          "type": 0,
+          "seller_name": "REDACTED",
+          "seller_country_name": "加拿大",
+          "country_name": "中国 内地"
+        }
+      ],
+      "message": "success",
+      "total": 3
+    }
+  }
+}

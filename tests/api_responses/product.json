@@ -1,0 +1,301 @@
+{
+  "Product/Brand": {
+    "url": "/erp/sc/data/local_inventory/brand",
+    "name": "Product/Brand",
+    "code": 0,
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "bid": 1565,
+          "title": "BeyondmLap",
+          "brand_code": ""
+        },
+        {
+          "bid": 1566,
+          "title": "Muselap",
+          "brand_code": ""
+        },
+        {
+          "bid": 1567,
+          "title": "Fromulu",
+          "brand_code": ""
+        }
+      ],
+      "message": "success",
+      "total": 3
+    }
+  },
+  "Product/Category": {
+    "url": "/erp/sc/routing/data/local_inventory/category",
+    "name": "Product/Category",
+    "code": 0,
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "cid": 2124,
+          "title": "节日性产品",
+          "parent_cid": 0,
+          "category_code": "jrx"
+        },
+        {
+          "cid": 2125,
+          "title": "毕业季",
+          "parent_cid": 0,
+          "category_code": ""
+        },
+        {
+          "cid": 2126,
+          "title": "季节性产品",
+          "parent_cid": 0,
+          "category_code": ""
+        }
+      ],
+      "message": "success",
+      "total": 3
+    }
+  },
+  "Product/ProductLists": {
+    "url": "/erp/sc/routing/data/local_inventory/productList",
+    "name": "Product/ProductLists",
+    "code": 0,
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "id": 77866,
+          "cid": 2132,
+          "bid": 0,
+          "sku": "JM-M0KB-JRSX",
+          "sku_identifier": "",
+          "product_name": "REDACTED",
+          "pic_url": "https://example.com/redacted/20260414/5a9d3b3b420b4d92a419701bbeaad629.jpg",
+          "cg_delivery": 0,
+          "cg_transport_costs": "0.00",
+          "purchase_remark": "",
+          "cg_price": "12.7800",
+          "status": 1,
+          "open_status": 1,
+          "is_combo": 0,
+          "create_time": 1725191506,
+          "update_time": 1776156245,
+          "product_developer_uid": 10631473,
+          "cg_opt_uid": 10631473,
+          "cg_opt_username": "REDACTED",
+          "spu": "",
+          "ps_id": 0,
+          "attribute": [],
+          "brand_name": "",
+          "category_name": "万圣节",
+          "status_text": "在售",
+          "product_developer": "REDACTED",
+          "supplier_quote": [
+            {
+              "psq_id": 210500668234827265,
+              "product_id": 77866,
+              "supplier_id": 2343,
+              "is_primary": 1,
+              "supplier_product_url": [
+                "https://detail.1688.com/offer/REDACTED.html"
+              ],
+              "quote_remark": "",
+              "quote_cg_delivery": 0,
+              "cg_price": "12.7800",
+              "cg_currency_icon": "￥",
+              "supplier_name": "REDACTED",
+              "supplier_code": "REDACTED",
+              "level_text": "",
+              "employees_text": "",
+              "remark": "",
+              "quotes": [
+                {
+                  "currency": "CNY",
+                  "currency_icon": "￥",
+                  "is_tax": 0,
+                  "tax_rate": "0.00",
+                  "step_prices": [
+                    {
+                      "moq": 2,
+                      "price": "11.0000",
+                      "price_with_tax": "11.0000"
+                    },
+                    {
+                      "moq": 20,
+                      "price": "10.0000",
+                      "price_with_tax": "10.0000"
+                    },
+                    {
+                      "moq": 200,
+                      "price": "9.0000",
+                      "price_with_tax": "9.0000"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "aux_relation_list": [],
+          "custom_fields": [],
+          "global_tags": []
+        },
+        {
+          "id": 77868,
+          "cid": 2130,
+          "bid": 0,
+          "sku": "QZ-M7UZ-BLRQ-1",
+          "sku_identifier": "",
+          "product_name": "REDACTED",
+          "pic_url": "https://example.com/redacted/20260414/80c01e7d5ef245a79cafbc128bb002ae.jpg",
+          "cg_delivery": 0,
+          "cg_transport_costs": "0.00",
+          "purchase_remark": "",
+          "cg_price": "3.6000",
+          "status": 1,
+          "open_status": 1,
+          "is_combo": 0,
+          "create_time": 1725193254,
+          "update_time": 1776156245,
+          "product_developer_uid": 10631467,
+          "cg_opt_uid": 0,
+          "cg_opt_username": "",
+          "spu": "",
+          "ps_id": 0,
+          "attribute": [],
+          "brand_name": "",
+          "category_name": "四季产品",
+          "status_text": "在售",
+          "product_developer": "REDACTED",
+          "supplier_quote": [
+            {
+              "psq_id": 210688910919942132,
+              "product_id": 77868,
+              "supplier_id": 2338,
+              "is_primary": 1,
+              "supplier_product_url": [],
+              "quote_remark": "",
+              "quote_cg_delivery": 0,
+              "cg_price": "3.6000",
+              "cg_currency_icon": "￥",
+              "supplier_name": "REDACTED",
+              "supplier_code": "REDACTED",
+              "level_text": "",
+              "employees_text": "",
+              "remark": "",
+              "quotes": [
+                {
+                  "currency": "CNY",
+                  "currency_icon": "￥",
+                  "is_tax": 0,
+                  "tax_rate": "0.00",
+                  "step_prices": [
+                    {
+                      "moq": 1,
+                      "price": "3.6000",
+                      "price_with_tax": "3.6000"
+                    }
+                  ]
+                },
+                {
+                  "currency": "CNY",
+                  "currency_icon": "￥",
+                  "is_tax": 1,
+                  "tax_rate": "0.00",
+                  "step_prices": [
+                    {
+                      "moq": 2,
+                      "price": "3.6000",
+                      "price_with_tax": "3.6000"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "aux_relation_list": [],
+          "custom_fields": [],
+          "global_tags": []
+        },
+        {
+          "id": 77869,
+          "cid": 2130,
+          "bid": 0,
+          "sku": "QZ-M7UZ-BLRQ-2",
+          "sku_identifier": "",
+          "product_name": "REDACTED",
+          "pic_url": "https://example.com/redacted/20260414/f8bbd01dced44c6a98f6672b674804ac.jpg",
+          "cg_delivery": 0,
+          "cg_transport_costs": "0.00",
+          "purchase_remark": "",
+          "cg_price": "1.7500",
+          "status": 1,
+          "open_status": 1,
+          "is_combo": 0,
+          "create_time": 1725193344,
+          "update_time": 1776156245,
+          "product_developer_uid": 10631467,
+          "cg_opt_uid": 0,
+          "cg_opt_username": "",
+          "spu": "",
+          "ps_id": 0,
+          "attribute": [],
+          "brand_name": "",
+          "category_name": "四季产品",
+          "status_text": "在售",
+          "product_developer": "REDACTED",
+          "supplier_quote": [
+            {
+              "psq_id": 210688910919942134,
+              "product_id": 77869,
+              "supplier_id": 2338,
+              "is_primary": 1,
+              "supplier_product_url": [],
+              "quote_remark": "",
+              "quote_cg_delivery": 0,
+              "cg_price": "1.7500",
+              "cg_currency_icon": "￥",
+              "supplier_name": "REDACTED",
+              "supplier_code": "REDACTED",
+              "level_text": "",
+              "employees_text": "",
+              "remark": "",
+              "quotes": [
+                {
+                  "currency": "CNY",
+                  "currency_icon": "￥",
+                  "is_tax": 0,
+                  "tax_rate": "0.00",
+                  "step_prices": [
+                    {
+                      "moq": 1,
+                      "price": "1.7500",
+                      "price_with_tax": "1.7500"
+                    }
+                  ]
+                },
+                {
+                  "currency": "CNY",
+                  "currency_icon": "￥",
+                  "is_tax": 1,
+                  "tax_rate": "0.00",
+                  "step_prices": [
+                    {
+                      "moq": 2,
+                      "price": "1.7500",
+                      "price_with_tax": "1.7500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "aux_relation_list": [],
+          "custom_fields": [],
+          "global_tags": []
+        }
+      ],
+      "message": "success",
+      "total": 3
+    }
+  }
+}
