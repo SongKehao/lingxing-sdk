@@ -9,19 +9,20 @@ CI 无凭证时整个模块 skip（pytestmark）；本地配 LINGXING_APP_ID/SEC
 """
 
 import os
+from collections.abc import AsyncGenerator
 
 import pytest
+
+from lingxing import LingXingClient
 
 pytestmark = pytest.mark.skipif(
     not (os.getenv("LINGXING_APP_ID") and os.getenv("LINGXING_APP_SECRET")),
     reason="需 LINGXING_APP_ID/SECRET（本地手动跑，CI skip）",
 )
 
-from lingxing import LingXingClient
-
 
 @pytest.fixture
-async def client():
+async def client() -> AsyncGenerator[LingXingClient, None]:
     c = LingXingClient()
     await c.connect()
     yield c
@@ -29,7 +30,7 @@ async def client():
 
 
 @pytest.mark.asyncio
-async def test_real_get_stores(client):
+async def test_real_get_stores(client: LingXingClient) -> None:
     """token 获取 + MD5 签名 + StoreInfo 解析端到端。"""
     stores = await client.get_stores()
     assert isinstance(stores, list)
@@ -37,14 +38,14 @@ async def test_real_get_stores(client):
 
 
 @pytest.mark.asyncio
-async def test_real_get_products_paginated(client):
+async def test_real_get_products_paginated(client: LingXingClient) -> None:
     """分页参数 page/page_size 生效 + ProductInfo 解析。"""
     products = await client.get_products(page=1, page_size=5)
     assert len(products) <= 5  # page_size 生效
 
 
 @pytest.mark.asyncio
-async def test_real_get_sellers(client):
+async def test_real_get_sellers(client: LingXingClient) -> None:
     """原始 dict 返回路径（get_sellers 返回 list[dict]）。"""
     sellers = await client.get_sellers(page=1, page_size=5)
     assert isinstance(sellers, list)
